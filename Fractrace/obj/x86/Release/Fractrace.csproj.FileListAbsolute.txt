@@ -1,0 +1,16 @@
+C:\Sandbox\fractrace\Fractrace\bin\x86\Release\Fractrace.exe
+C:\Sandbox\fractrace\Fractrace\bin\x86\Release\Fractrace.pdb
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.Animation.AnimationControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.Basic.ParameterDictControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.Form1.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.FormulaEditor.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.NavigateControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.ParameterInput.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.RenderImage.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.Properties.Resources.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.StereoForm.resources
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.exe
+C:\Sandbox\fractrace\Fractrace\obj\x86\Release\Fractrace.pdb

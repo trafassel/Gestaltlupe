@@ -1,0 +1,16 @@
+C:\Sandbox\fractrace\Fractrace\bin\Debug\Fractrace.exe
+C:\Sandbox\fractrace\Fractrace\bin\Debug\Fractrace.pdb
+C:\Sandbox\fractrace\Fractrace\obj\Debug\ResolveAssemblyReference.cache
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.Animation.AnimationControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.Basic.ParameterDictControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.Form1.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.FormulaEditor.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.NavigateControl.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.ParameterInput.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.RenderImage.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.Properties.Resources.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.StereoForm.resources
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.exe
+C:\Sandbox\fractrace\Fractrace\obj\Debug\Fractrace.pdb
+C:\Sandbox\fractrace\Fractrace\obj\Debug\GenerateResource.read.1.tlog
+C:\Sandbox\fractrace\Fractrace\obj\Debug\GenerateResource.write.1.tlog
