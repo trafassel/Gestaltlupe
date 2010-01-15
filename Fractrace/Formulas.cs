@@ -545,6 +545,17 @@ namespace Fractrace {
                 y = projPoint.Y;
                 z = projPoint.Z;
             }
+
+            if (mTransforms.Count > 0) {
+              Vec3 vec = new Vec3(x, y, z);
+              foreach (Transform3D trans in mTransforms) {
+                vec = trans.Transform(vec);
+              }
+              x = vec.X;
+              y = vec.Y;
+              z = vec.Z;
+            }
+
             /* Einbeziehung des Winkels  */
             f = Math.PI / 180.0;
             /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
@@ -569,15 +580,6 @@ namespace Fractrace {
 
             // Weitere Transformationen:
 
-            if (mTransforms.Count > 0) {
-                Vec3 vec = new Vec3(x, y, z);
-                foreach (Transform3D trans in mTransforms) {
-                    vec = trans.Transform(vec);
-                }
-                x = vec.X;
-                y = vec.Y;
-                z = vec.Z;
-            }
 
             /*
           if (mProjection != null) {

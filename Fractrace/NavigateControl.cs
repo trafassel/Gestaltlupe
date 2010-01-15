@@ -254,7 +254,7 @@ namespace Fractrace {
         }
 
 
-        protected double mAngle = 6;
+        protected double mAngle = 1;
 
 
         /// <summary>

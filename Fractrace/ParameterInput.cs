@@ -703,6 +703,10 @@ namespace Fractrace {
          mPosterStep++;
        }
 
+       private void navigateControl1_Load_1(object sender, EventArgs e) {
+
+       }
+
 
     }
 }
