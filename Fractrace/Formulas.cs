@@ -155,35 +155,58 @@ namespace Fractrace {
 
 
         //static int minCycle = 100;
-        long Mandelbulb3DLinear(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
-          double aar, aai, aaj;
+
+
+      /// <summary>
+      /// Quadratische Version (ohne Winkel)
+      /// </summary>
+      /// <param name="ar"></param>
+      /// <param name="ai"></param>
+      /// <param name="aj"></param>
+      /// <param name="ak"></param>
+      /// <param name="br"></param>
+      /// <param name="bi"></param>
+      /// <param name="bj"></param>
+      /// <param name="bk"></param>
+      /// <param name="zkl"></param>
+      /// <param name="invers"></param>
+      /// <returns></returns>
+        long Mandelbulb3DPow2(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
+          
+      
+
+          // Umbenennen in Mandelbulb3D Pow2 (sollte eigentlich die Erweiterung des Mandelbulb sein). 
+double xx, yy, zz;
           long tw;
           int n;
-          int pow = 8; // n=8 entspricht dem Mandelbulb
-          double theta, phi;
+          ai = 0; aj = 0; ak = 0;
 
+          double x=ai,y=aj,z=ak;
           double r_n = 0;
-          aar = ar * ar; aai = ai * ai; aaj = aj * aj; //aak = ak * ak; 
+
+          xx = x * x; yy = y * y; zz = z * z; 
           tw = 0L;
-          double r = Math.Sqrt(aar + aai + aaj);
+          double r = Math.Sqrt(xx + yy + zz);
 
           for (n = 1; n < zkl; n++) {
+            double r_xy=Math.Sqrt(xx+yy);
+            double a = 1;
+            
+            if(r_xy!=0.0)
+             a= 1 - zz / r_xy;
 
-            theta = Math.Atan2(Math.Sqrt(aar + aai), aj);
-            phi = Math.Atan2(ai, ar);
-            r_n = Math.Pow(r, pow);
-            ar = r_n * LinearSin(theta * pow) * LinearCos(phi * pow);
-            ai = r_n * LinearSin(theta * pow) * LinearSin(phi * pow);
-            aj = r_n * LinearCos(theta * pow);
+            y=2 *x*y*a+br;
+            x = (xx - yy) * a+bi;
+            z = 2 * z * r_xy+bj;
 
-            ar += br;
-            ai += bi;
-            aj += bj;
+            xx = x * x; yy = y * y; zz = z * z;// aak = ak * ak;
+            r = Math.Sqrt(xx + yy + zz);
+            
 
-            aar = ar * ar; aai = ai * ai; aaj = aj * aj;// aak = ak * ak;
-            r = Math.Sqrt(aar + aai + aaj);
 
-            if (r > gr) { tw = n; break; }
+            if (r > gr) { 
+              tw = n; break; 
+            }
 
           }
 
@@ -194,8 +217,58 @@ namespace Fractrace {
               tw = 0;
           }
           return (tw);
+
         }
 
+
+        long Mandelbulb3DPow8(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+
+
+          // Umbenennen in Mandelbulb3D Pow2 (sollte eigentlich die Erweiterung des Mandelbulb sein). 
+          double xx, yy, zz;
+          long tw;
+          int n;
+          ai = 0; aj = 0; ak = 0;
+
+          double x = ai, y = aj, z = ak;
+          double r_n = 0;
+
+          xx = x * x; yy = y * y; zz = z * z;
+          tw = 0L;
+          double r = Math.Sqrt(xx + yy + zz);
+
+          for (n = 1; n < zkl; n++) {
+            double r_xy = Math.Sqrt(xx + yy);
+            double a = 1;
+
+            if (r_xy != 0.0)
+              a = 1 - zz / r_xy;
+
+            y = 2 * x * y * a + br;
+            x = (xx - yy) * a + bi;
+            z = 2 * z * r_xy + bj;
+
+            xx = x * x; yy = y * y; zz = z * z;// aak = ak * ak;
+            r = Math.Sqrt(xx + yy + zz);
+
+
+
+            if (r > gr) {
+              tw = n; break;
+            }
+
+          }
+
+          if (invers) {
+            if (tw == 0)
+              tw = 1;
+            else
+              tw = 0;
+          }
+          return (tw);
+
+        }
 
 
         long Mandelbulb3D(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
@@ -744,16 +817,24 @@ namespace Fractrace {
 
                     we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
                       break;
-                case 32:   /* Mandelbulb3D  */
-                      //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
-
-                      we = Mandelbulb3DLinear(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                case 32:   /* Mandelbulb3D pow2 */
+                      we = Mandelbulb3DPow2(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
                       break;
 
-                case 33:   /* Mandelbulb3D  */
+                case 33:   /* Mandelbulb3D  pow 2*/
+                      we = Mandelbulb3DPow2(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                      break;
+
+                case 34:   /* Mandelbulb3D  */
                       //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                      we = Mandelbulb3DLinear(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                      we = Mandelbulb3DPow8(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                      break;
+
+                case 35:   /* Mandelbulb3D  */
+                      //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+
+                      we = Mandelbulb3DPow8(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
                       break;
 
 

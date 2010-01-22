@@ -278,7 +278,7 @@ namespace Fractrace {
         minCycle = 100;
 
       // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
-      int cycleAdd = 56;
+      int cycleAdd = 1056;
 
       Pen p = new Pen(Color.FromArgb(100, 200, 50));
       SolidBrush brush = new SolidBrush(Color.FromArgb(0, 0, 0));
@@ -308,7 +308,8 @@ namespace Fractrace {
       Vec3 camera = new Vec3(xcenter, act_val.end_tupel.y + cameraDeph, zcenter);
       Vec3 viewPoint = new Vec3(xcenter, act_val.end_tupel.y, zcenter);
       Projection proj = new Projection(camera, viewPoint);
-      formulas.Projection = proj;
+      if( ParameterDict.Exemplar.GetBool("View.Perspective"))
+         formulas.Projection = proj;
 
       // Bei der Postererstellung werden die Parameter der räumlichen Projektion auf das mittlere Bild 
       // ausgerichtet und anschließend die Grenzen verschoben
@@ -409,7 +410,7 @@ namespace Fractrace {
                        jx, jy, jz, jzz, formula, false);
 
                       if (fa1 == 0) {
-                        if (minCycle < 45) {
+                        if (minCycle != 51) {
                           fa1 = -1;
                           (GData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
                         } else {
