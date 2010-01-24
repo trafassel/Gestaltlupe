@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Fractrace.Basic;
+
 namespace Fractrace.TomoGeometry {
     public class TomoFormula {
 
@@ -34,6 +36,28 @@ namespace Fractrace.TomoGeometry {
             return retVal;
         }
 
+
+        public void Set(string id, int value) {
+          ParameterDict.Exemplar.SetInt(id,value);
+        }
+
+        public void Set(string id, double value) {
+          ParameterDict.Exemplar.SetDouble(id, value);
+        }
+
+
+        public void Set(string id, bool value) {
+          ParameterDict.Exemplar.SetBool(id, value);
+        }
+
+        public double GetDouble(string id) {
+          return ParameterDict.Exemplar.GetDouble(id);
+        }
+
+        public void AddValue(string id, double value) {
+          ParameterDict.Exemplar[id] = "";
+          ParameterDict.Exemplar.SetDouble(id, value);
+        }
 
         /// <summary>
         /// Wird aufgerufen, kurz bevor der Scanalgorithmus beginnt. Zu diesem Zeitpunkt sind alle festen Parameter der

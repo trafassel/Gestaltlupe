@@ -83,19 +83,29 @@ namespace Fractrace.Animation {
 
 
         protected double mPictureSize = 1;
-        
+
+      /// <summary>
+      /// Enthält die Formel des ersten Eintrages
+      /// </summary>
+        protected string mFormula = "";
+
         /// <summary>
         /// Start der Animation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e) {
-        
+          if (mAnimationSteps.Steps.Count == 0)
+            return;
           btnStart.Enabled = false;
           btnStop.Enabled = true;
           btnStop.Visible = true;
           animationAbort = false;
           lblAnimationProgress.Text = "startet...";
+          
+     //     AnimationPoint apStart = mAnimationSteps.Steps[0];
+     //     dataPerTime.Load(apStart.Time);
+          mFormula = ParameterDict.Exemplar["Intern.Formula.Source"];
           for (int i = 1; i < mAnimationSteps.Steps.Count; i++) {
             if (animationAbort)
               break;
@@ -121,9 +131,11 @@ namespace Fractrace.Animation {
           dataPerTime.Load(from);
           // Größe festlegen:
           ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
+          ParameterDict.Exemplar["Intern.Formula.Source"]=mFormula;
           animationHistory.Save();
           dataPerTime.Load(to);
           ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
+          ParameterDict.Exemplar["Intern.Formula.Source"] = mFormula;
           animationHistory.Save();
           lblAnimationProgress.Text = "compute: "+from.ToString()+" "+to.ToString();
           for (int i = 0; i < steps && !animationAbort; i++) {
