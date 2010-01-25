@@ -23,6 +23,10 @@ namespace Fractrace.DataTypes {
         /// </summary>
         public Vec3 Coord = new Vec3(0,0,0);
 
+        /// <summary>
+        /// Oberflächennormale der Gestalt bei diesem Pixel.
+        /// </summary>
+        public Vec3 Normal = new Vec3(0, 0, 0);
 
         /// <summary>
         /// Intensität der Lichteinstrahlung von vorne.

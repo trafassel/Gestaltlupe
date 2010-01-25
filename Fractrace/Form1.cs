@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Fractrace.Basic;
+using Fractrace.PictureArt;
 
 namespace Fractrace {
 
@@ -355,7 +356,7 @@ namespace Fractrace {
             btnRepaint.Enabled = false;
             try {
                 if (iter != null) {
-                    PictureArt pArt = new PictureArt(iter.PictureData);
+                    Renderer pArt = new ScienceRenderer(iter.PictureData);
                     pArt.Paint(grLabel);
                     Application.DoEvents();
                     this.Refresh();

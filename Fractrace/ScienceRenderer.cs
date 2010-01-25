@@ -6,9 +6,12 @@ using System.Drawing;
 
 using Fractrace.DataTypes;
 using Fractrace.Basic;
+using Fractrace.PictureArt;
 
 namespace Fractrace {
-    public class PictureArt {
+
+
+    public class ScienceRenderer : Renderer {
 
 
         protected PictureData pData = null;
@@ -18,7 +21,7 @@ namespace Fractrace {
         /// Initialisierung
         /// </summary>
         /// <param name="pData"></param>
-        public PictureArt(PictureData pData) {
+        public ScienceRenderer(PictureData pData) {
             this.pData = pData;
         }
 
@@ -31,7 +34,7 @@ namespace Fractrace {
         /// Erstellt das fertige Bild
         /// </summary>
         /// <param name="grLabel"></param>
-        public void Paint(Graphics grLabel) {
+        public override void Paint(Graphics grLabel) {
             width = pData.Width;
             height = pData.Height;
             PreCalculate();

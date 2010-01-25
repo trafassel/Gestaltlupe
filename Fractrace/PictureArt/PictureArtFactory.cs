@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 
 using Fractrace;
+using Fractrace.DataTypes;
 
 namespace Fractrace.PictureArt {
     class PictureArtFactory {
 
-        public static PictureArt Create() {
-            
-            return new PictureArt();
+        /// <summary>
+        /// Hier können eigene Renderer zugeschaltet werden:
+        /// </summary>
+        /// <returns></returns>
+        public static Renderer Create(PictureData pdata) {
+
+            return new ScienceRenderer(pdata);
 
         }
     }

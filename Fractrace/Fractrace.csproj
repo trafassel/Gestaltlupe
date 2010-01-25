@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{47C650AF-34E4-48D2-B797-343E8942172B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -133,6 +133,8 @@
     <Compile Include="Formulas.cs" />
     <Compile Include="Geometry\Rotation.cs" />
     <Compile Include="Geometry\Transform3D.cs" />
+    <Compile Include="PictureArt\PictureArtFactory.cs" />
+    <Compile Include="PictureArt\Renderer.cs" />
     <Compile Include="PreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,7 +165,7 @@
     <Compile Include="ParameterInput.Designer.cs">
       <DependentUpon>ParameterInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="PictureArt.cs" />
+    <Compile Include="ScienceRenderer.cs" />
     <Compile Include="RenderImage.cs">
       <SubType>UserControl</SubType>
     </Compile>

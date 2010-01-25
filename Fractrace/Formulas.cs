@@ -911,7 +911,8 @@ double xx, yy, zz;
         /// <param name="jz"></param>
         /// <param name="jzz"></param>
         /// <param name="formula"></param>
-        /// <param name="use4Points"> </param>
+        /// <param name="use4Points">Hier wird unterschieden, ob nur dieser Punkt, oder auch seine Nachbarpixel 
+        /// betrachtet werden.</param>
         /// <returns></returns>
         public double WinkelPerspective(long zykl, double x, double y, double z, double zz,
         double xd, double yd, double zd, double zzd,
@@ -1149,8 +1150,9 @@ double xx, yy, zz;
                       } else {
                         pInfo = pData.Points[pixelX, pixelY]; 
                       }
-                        
+                      pInfo.Normal = normals[k];
                         pInfo.frontLight += winkel/4.0;
+                        // TODO: Auch die Normalen übertragen
                       }
 
                     
@@ -1214,6 +1216,9 @@ double xx, yy, zz;
                 ycenter = ycenter / ((double)pointsCount);
 
               double maxdiff = Math.Max((yd + xd + zd) / 2.0, ymax - ymin);
+
+                // derivation soll eigentlich die lokale Erhöhung anzeigen,
+                // wird aber zur Zeit nicht mehr in PictureArt verwendet
               derivation = 2.0 * (ypos[4] - ycenter) / (maxdiff);
 
               // Dasselbe über die Normalen:
