@@ -80,8 +80,34 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public Vec3 Add(Vec3 other) {
+        public Vec3 Sum(Vec3 other) {
             return new Vec3(X +other.X, Y +other.Y, Z+other.Z);
+        }
+
+
+        /// <summary>
+        /// Ein anderer Vektor wird zu diesem addiert.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public void Add(Vec3 other) {
+          X += other.X;
+          Y += other.Y;
+          Z += other.Z;
+        }
+
+
+      /// <summary>
+      /// Alle Einträge werden nornmiert.
+      /// </summary>
+        public void Normalize() {
+          double d = X * X + Y * Y + Z * Z;
+          if (d != 0) {
+            d = Math.Sqrt(d);
+            X /= d;
+            Y /= d;
+            Z /= d;
+          }
         }
 
     }

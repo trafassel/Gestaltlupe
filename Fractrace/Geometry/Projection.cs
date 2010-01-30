@@ -43,7 +43,7 @@ namespace Fractrace.Geometry {
             double dp = p1.Norm;
             double fac = dp / d;
             Vec3 p1_p = p1.Mult(fac);
-            return (p1_p.Add(camera));
+            return (p1_p.Sum(camera));
         }
 
     }

@@ -37,6 +37,19 @@ namespace Fractrace.PictureArt {
     protected override void PreCalculate() {
       normalesSmooth1=new Vec3[pData.Width,pData.Height];
       normalesSmooth2 = new Vec3[pData.Width, pData.Height];
+
+
+      // Normieren
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 center = null;
+          PixelInfo pInfo = pData.Points[i, j];
+          if (pInfo != null) {
+            pInfo.Normal.Normalize();
+          }
+        }
+      }
+
       for(int i=0;i<pData.Width;i++) {
         for (int j = 0; j < pData.Height;j++ ) {
           Vec3 center = null;
@@ -45,14 +58,57 @@ namespace Fractrace.PictureArt {
                center = pInfo.Normal;
               }
           // Test ohne smooth-Factor
-             normalesSmooth1[i, j] = center;
+          // Nachbarelemente zusammenrechnen
+             Vec3 neighbors = new Vec3();
+             int neighborFound = 0;
+          
+             for (int k = -1; k <= 1; k++) {
+               for (int l = -1; l <= 1; l++) {
+                 int posX = i + k;
+                 int posY = j + l;
+                 if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                   PixelInfo pInfoBorder = pData.Points[posX, posY];
+                   if (pInfoBorder != null) {
+                     neighbors.Add(pInfoBorder.Normal);
+                     neighborFound++;
+                   }
+                 }
+               }
+             }
+          neighbors.Normalize();
+          if (center != null) {
+            normalesSmooth1[i, j] = center;
+            if (center != null || neighborFound > 4) {
+              neighbors.Add(center.Mult(1.1));
+              neighbors.Normalize();
+              normalesSmooth1[i, j] = neighbors;
+            }
+          } else {
+            if (neighborFound > 4) {
+              normalesSmooth1[i, j] = neighbors;
+            }
+          }
+
         }
 
       }
     }
 
+
+    /// <summary>
+    /// Liefert die Farbe zum Punkt x,y
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     protected override Vec3 GetRgbAt(int x, int y) {
       Vec3 retVal = new Vec3(0, 0, 1); // rot
+      /*
+           PixelInfo pInfo = pData.Points[x, y];
+           if (pInfo == null) {
+             return retVal;
+           }
+       */
       Vec3 normal = normalesSmooth1[x, y];
       if (normal == null) {
         return new Vec3(0, 0, 0);

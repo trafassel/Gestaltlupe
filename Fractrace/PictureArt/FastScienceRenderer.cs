@@ -62,9 +62,12 @@ namespace Fractrace.PictureArt {
     protected Vec3 GetLight(Vec3 normal) {
       Vec3 retVal = new Vec3(0, 0, 0);
 
+      double norm= Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z*normal.Z);
       /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
       /* mit Vergleichsvektor (Beide nachträglich normiert )             */
-      double winkel = Math.Acos((normal.Y) / (Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z*normal.Z)));
+      double winkel = 0;
+      if(norm!=0) 
+      winkel=Math.Acos((normal.Y) /norm);
       winkel = 1 - winkel;
 
       if (winkel < 0)
