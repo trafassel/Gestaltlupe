@@ -1256,6 +1256,7 @@ double xx, yy, zz;
                           pInfo.Coord.Y = ypos[k] + tief[k] * yd;
                           pInfo.Coord.Z = zpos[k];
                           pInfo.frontLight = winkel;
+                          pInfo.Normal = normals[k];
                           pData.Points[indexX, indexY] = pInfo;
                         }
                       }

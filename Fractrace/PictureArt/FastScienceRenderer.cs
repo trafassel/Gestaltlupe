@@ -7,48 +7,78 @@ using System.Drawing;
 using Fractrace.DataTypes;
 using Fractrace.Basic;
 using Fractrace.PictureArt;
+using Fractrace.Geometry;
 
 namespace Fractrace.PictureArt {
 
   /// <summary>
   /// Ein auf ein gutes Verhältnis zwischen der Bildqualität und der Berechnungszeit ausgelegter Renderer.
   /// </summary>
-  public class FastScienceRenderer: ScienceRendererBase {
+  public class FastScienceRenderer : ScienceRendererBase {
 
-       /// <summary>
-        /// Initialisierung
-        /// </summary>
-        /// <param name="pData"></param>
+    /// <summary>
+    /// Initialisierung
+    /// </summary>
+    /// <param name="pData"></param>
     public FastScienceRenderer(PictureData pData)
       : base(pData) {
-        }
+    }
 
-     /// <summary>
-        /// Allgemeine Informationen werden erzeugt
-        /// </summary>
+    /// <summary>
+    /// Allgemeine Informationen werden erzeugt
+    /// </summary>
     protected override void PreCalculate() {
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <returns></returns>
-    protected override Color GetColor(int x, int y) {
-      double red = 0;
-      double green = 0;
-      double blue = 0;
+
+
+    protected override Vec3 GetRgbAt(int x, int y) {
+      Vec3 retVal = new Vec3(0, 0, 1); // rot
       PixelInfo pInfo = pData.Points[x, y];
       if (pInfo == null) {
-        return Color.Black;
-
+        return new Vec3(0, 0, 0);
       }
-      return Color.Gray;
+
+      Vec3 light = new Vec3(0, 0, 0);
+      
+      if (pInfo.Normal != null) {
+        light = GetLight(pInfo.Normal);
+      }
+
+      retVal.X = light.X;
+      retVal.Y = light.Y;
+      retVal.Z = light.Z;
+
+      return retVal;
     }
 
-              
+
+    /// <summary>
+    /// Liefert die Farbe der Oberfläche entsprechend der Normalen.
+    /// </summary>
+    /// <param name="normal"></param>
+    /// <returns></returns>
+    protected Vec3 GetLight(Vec3 normal) {
+      Vec3 retVal = new Vec3(0, 0, 0);
+
+      /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
+      /* mit Vergleichsvektor (Beide nachträglich normiert )             */
+      double winkel = Math.Acos((normal.Y) / (Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z*normal.Z)));
+      winkel = 1 - winkel;
+
+      if (winkel < 0)
+        winkel = 0;
+      if (winkel > 1)
+        winkel = 1;
+
+      retVal.X = winkel;
+      retVal.Y = winkel;
+      retVal.Z = winkel;
+
+      return retVal;
+    }
+
 
   }
 }

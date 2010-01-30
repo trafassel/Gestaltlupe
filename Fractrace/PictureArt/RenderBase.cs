@@ -7,6 +7,7 @@ using System.Drawing;
 using Fractrace.DataTypes;
 using Fractrace.Basic;
 using Fractrace.PictureArt;
+using Fractrace.Geometry;
 
 namespace Fractrace.PictureArt {
   public class RenderBase : Renderer {
@@ -49,7 +50,20 @@ namespace Fractrace.PictureArt {
         /// <param name="y"></param>
         /// <returns></returns>
         protected virtual Color GetColor(int x, int y) {
-          return Color.Red;
+         Vec3 col=GetRgbAt(x,y);
+
+          try {
+            return Color.FromArgb((int)(255.0*col.X), (int)(255.0*col.Y), (int)(255.0*col.Z));
+          } catch (Exception ex) {
+            Console.WriteLine(ex.ToString());
+          }
+          return Color.Black;
+        }
+
+
+        protected virtual Vec3 GetRgbAt(int x, int y) {
+          Vec3 retVal = new Vec3(1, 0, 0); // rot
+          return retVal;
         }
 
 
