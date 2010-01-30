@@ -28,6 +28,12 @@ namespace Fractrace.PictureArt {
 
     private Vec3[,] colorAmbient2 = null;
 
+    private double[,] smoothDeph1 = null;
+
+    private double[,] smoothDeph2 = null;
+
+    private double[,] smoothDeph3 = null;
+
 
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
@@ -36,6 +42,7 @@ namespace Fractrace.PictureArt {
     /// </summary>
     protected override void PreCalculate() {
       CreateSmoothNormales();
+      CreateSmoothDeph();
     }
 
     protected void CreateSmoothNormales() {
@@ -140,6 +147,61 @@ namespace Fractrace.PictureArt {
 
 
     /// <summary>
+    /// Lokale Tiefeninformationen werden erzeugt.
+    /// </summary>
+    protected void CreateSmoothDeph() {
+      smoothDeph1 = new double[pData.Width, pData.Height];
+      smoothDeph2 = new double[pData.Width, pData.Height];
+      smoothDeph3 = new double[pData.Width, pData.Height];
+
+      // Normieren
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          PixelInfo pInfo = pData.Points[i, j];
+          if (pInfo != null) {
+            smoothDeph1[i, j] = pInfo.Coord.Y;
+          } else smoothDeph1[i, j] = double.MinValue;
+        }
+      }
+
+      SetSmoothDeph(smoothDeph1, smoothDeph2);
+      SetSmoothDeph(smoothDeph2, smoothDeph3);
+      SetSmoothDeph(smoothDeph3, smoothDeph1);
+      SetSmoothDeph(smoothDeph1, smoothDeph3);
+      SetSmoothDeph(smoothDeph3, smoothDeph1);
+
+    }
+
+
+    protected void SetSmoothDeph(double[,] sdeph1,double[,] sdeph2) {
+
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          int neighborFound = 0;
+          double smoothDeph = 0;
+          sdeph2[i, j] = double.MinValue;
+          for (int k = -1; k <= 1; k++) {
+            for (int l = -1; l <= 1; l++) {
+              int posX = i + k;
+              int posY = j + l;
+              if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                double newDeph = sdeph1[posX, posY];
+                if (newDeph != double.MinValue) {
+                  smoothDeph += newDeph;
+                  neighborFound++;
+                }
+              }
+            }
+          }
+          if (neighborFound > 0) {
+            smoothDeph /= (double)neighborFound;
+            sdeph2[i, j] = smoothDeph;
+          }
+        }
+      }
+    }
+
+    /// <summary>
     /// Liefert die Farbe zum Punkt x,y
     /// </summary>
     /// <param name="x"></param>
@@ -164,6 +226,19 @@ namespace Fractrace.PictureArt {
       retVal.X = light.X;
       retVal.Y = light.Y;
       retVal.Z = light.Z;
+
+      // Lokale Tiefeninfo hinzurechnen
+      if(smoothDeph2[x, y]!=double.MinValue && smoothDeph1[x, y]!=double.MinValue ) {
+        double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
+        double testVar = 0.1;
+        localDeph = localDeph * testVar;
+        if (localDeph > 1)
+          localDeph = 1;
+        if (localDeph < -1)
+          localDeph = -1;
+
+        retVal.Z = 0.5 * light.Z + 0.5 *localDeph* light.Z;
+      }
 
       return retVal;
     }
