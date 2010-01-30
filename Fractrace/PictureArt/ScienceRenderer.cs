@@ -11,40 +11,18 @@ using Fractrace.PictureArt;
 namespace Fractrace {
 
 
-    public class ScienceRenderer : Renderer {
-
-
-        protected PictureData pData = null;
+  public class ScienceRenderer : ScienceRendererBase {
 
 
         /// <summary>
         /// Initialisierung
         /// </summary>
         /// <param name="pData"></param>
-        public ScienceRenderer(PictureData pData) {
-            this.pData = pData;
+        public ScienceRenderer(PictureData pData):base(pData) {
         }
 
 
-        int width = 0;
-        int height = 0;
 
-
-        /// <summary>
-        /// Erstellt das fertige Bild
-        /// </summary>
-        /// <param name="grLabel"></param>
-        public override void Paint(Graphics grLabel) {
-            width = pData.Width;
-            height = pData.Height;
-            PreCalculate();
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    Pen p = new Pen(GetColor(i, j));
-                    grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
-                }
-            }
-        }
 
 
         protected double minY = 0;
@@ -79,7 +57,7 @@ namespace Fractrace {
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
-        protected void PreCalculate() {
+        protected override void PreCalculate() {
             useAmbient = ParameterDict.Exemplar.GetBool("Composite.UseAmbient");
             useDarken = ParameterDict.Exemplar.GetBool("Composite.UseDarken");
             useMedian = ParameterDict.Exemplar.GetBool("Composite.UseMedian");
@@ -315,7 +293,7 @@ namespace Fractrace {
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        protected Color GetColor(int x, int y) {
+        protected override Color GetColor(int x, int y) {
             double red = 0;
             double green = 0;
             double blue = 0;

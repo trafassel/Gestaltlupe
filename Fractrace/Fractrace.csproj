@@ -133,6 +133,11 @@
     <Compile Include="Formulas.cs" />
     <Compile Include="Geometry\Rotation.cs" />
     <Compile Include="Geometry\Transform3D.cs" />
+    <Compile Include="Geometry\VecRotation.cs" />
+    <Compile Include="PictureArt\FastScienceRenderer.cs" />
+    <Compile Include="PictureArt\RenderBase.cs" />
+    <Compile Include="PictureArt\ScienceRendererBase.cs" />
+    <Compile Include="PictureArt\SmallRenderer.cs" />
     <Compile Include="PictureArt\PictureArtFactory.cs" />
     <Compile Include="PictureArt\Renderer.cs" />
     <Compile Include="PreviewControl.cs">
@@ -165,7 +170,7 @@
     <Compile Include="ParameterInput.Designer.cs">
       <DependentUpon>ParameterInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScienceRenderer.cs" />
+    <Compile Include="PictureArt\ScienceRenderer.cs" />
     <Compile Include="RenderImage.cs">
       <SubType>UserControl</SubType>
     </Compile>

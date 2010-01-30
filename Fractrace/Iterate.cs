@@ -247,6 +247,8 @@ namespace Fractrace {
       Formulas formulas = new Formulas(PData);
       Fractrace.TomoGeometry.TomoFormulaFactory fac = new Fractrace.TomoGeometry.TomoFormulaFactory();
       formulas.InternFormula = fac.CreateFromString(ParameterDict.Exemplar["Intern.Formula.Source"]);
+      if (formulas.InternFormula == null)
+        return;
       formulas.InternFormula.Init();
 
       Rotation rot = new Rotation();

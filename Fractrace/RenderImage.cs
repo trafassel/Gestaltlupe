@@ -179,7 +179,7 @@ namespace Fractrace
         /// </summary>
         protected virtual void OneStepEnds() {
             if (iter != null) {
-               Fractrace.PictureArt.Renderer pArt = new ScienceRenderer(iter.PictureData);
+               Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
                 pArt.Paint(grLabel);
                 Application.DoEvents();
                 this.Refresh();

@@ -221,6 +221,20 @@ double xx, yy, zz;
         }
 
 
+        /// <summary>
+        /// Quadratische Version (ohne Winkel)
+        /// </summary>
+        /// <param name="ar"></param>
+        /// <param name="ai"></param>
+        /// <param name="aj"></param>
+        /// <param name="ak"></param>
+        /// <param name="br"></param>
+        /// <param name="bi"></param>
+        /// <param name="bj"></param>
+        /// <param name="bk"></param>
+        /// <param name="zkl"></param>
+        /// <param name="invers"></param>
+        /// <returns></returns>
         long Mandelbulb3DPow8(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
 
 
@@ -254,6 +268,98 @@ double xx, yy, zz;
 
 
 
+            if (r > gr) {
+              tw = n; break;
+            }
+
+          }
+
+          if (invers) {
+            if (tw == 0)
+              tw = 1;
+            else
+              tw = 0;
+          }
+          return (tw);
+
+        }
+
+
+      
+      /// <summary>
+      /// Benutzung der Vektorrotation.
+      /// </summary>
+      /// <param name="ar"></param>
+      /// <param name="ai"></param>
+      /// <param name="aj"></param>
+      /// <param name="ak"></param>
+      /// <param name="br"></param>
+      /// <param name="bi"></param>
+      /// <param name="bj"></param>
+      /// <param name="bk"></param>
+      /// <param name="zkl"></param>
+      /// <param name="invers"></param>
+      /// <returns></returns>
+      long H7(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+          double xx, yy, zz;
+          long tw;
+          int n;
+          ai = 0; aj = 0; ak = 0;
+
+          double x = 1, y = 0, z = 0;
+          double r_n = 0;
+
+          xx = x * x; yy = y * y; zz = z * z;
+          tw = 0;
+          double r = Math.Sqrt(xx + yy + zz);
+          VecRotation vecRot = new VecRotation();
+
+          x = 1; // Um den Startwinkel eindeutig zu definieren.
+          for (n = 1; n < zkl; n++) {
+            double r_xy = Math.Sqrt(xx + yy);
+            /*
+            vecRot.x = x;
+            vecRot.y = y;
+            vecRot.z = z;
+            vecRot.angle = x;
+             * */
+
+            double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
+            double phi = Math.Atan2(y, x);
+
+            vecRot.x = y;
+            vecRot.y = x;
+            vecRot.z = z;
+            vecRot.angle = theta;
+         //   vecRot.angle = 0.03;
+            vecRot.x = x;
+            vecRot.y = z;
+            vecRot.z = y;
+            vecRot.angle = phi;
+
+            /*
+            vecRot.x = 0.4;
+            vecRot.y = 0.2;
+            vecRot.z = 0.8;
+            vecRot.angle = phi;
+            */
+            y += bj;
+            x += bi;
+            z += br;
+            Vec3 pos=new Vec3(x,y,z);
+            Vec3 newPos= vecRot.getTransform(pos);
+
+            x = newPos.X;
+            y = newPos.Y;
+            z = newPos.Z;
+
+            xx = x * x; yy = y * y; zz = z * z;// aak = ak * ak;
+            r = Math.Sqrt(xx + yy + zz);
+
+            x *= r;
+            y *= r;
+            z *= r;
             if (r > gr) {
               tw = n; break;
             }
@@ -612,236 +718,251 @@ double xx, yy, zz;
             long we = 0;
             double a, f, re, im, xmi, ymi, zmi;
 
+            try {
+              if (mProjection != null) {
+                Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
+                x = projPoint.X;
+                y = projPoint.Y;
+                z = projPoint.Z;
+              }
+
+              if (mTransforms.Count > 0) {
+                Vec3 vec = new Vec3(x, y, z);
+                foreach (Transform3D trans in mTransforms) {
+                  vec = trans.Transform(vec);
+                }
+                x = vec.X;
+                y = vec.Y;
+                z = vec.Z;
+              }
+
+              /* Einbeziehung des Winkels  */
+              f = Math.PI / 180.0;
+              /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
+              // Drehung
+              xmi = 0; ymi = 0; zmi = 0;
+              x -= xmi; y -= ymi; z -= zmi;
+              re = Math.Cos(wiz * f); im = Math.Sin(wiz * f);
+              a = re * x - im * y;
+              y = re * y + im * x;
+              x = a;
+              // Neigung
+              re = Math.Cos(wiy * f); im = Math.Sin(wiy * f);
+              a = re * z - im * x;
+              x = re * x + im * z;
+              z = a;
+              // Kippen
+              re = Math.Cos(wix * f); im = Math.Sin(wix * f);
+              a = re * y - im * z;
+              z = re * z + im * y;
+              y = a;
+              x += xmi; y += ymi; z += zmi;
+
+              // Weitere Transformationen:
+
+
+              /*
             if (mProjection != null) {
                 Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
                 x = projPoint.X;
                 y = projPoint.Y;
                 z = projPoint.Z;
-            }
+            }*/
 
-            if (mTransforms.Count > 0) {
-              Vec3 vec = new Vec3(x, y, z);
-              foreach (Transform3D trans in mTransforms) {
-                vec = trans.Transform(vec);
-              }
-              x = vec.X;
-              y = vec.Y;
-              z = vec.Z;
-            }
-
-            /* Einbeziehung des Winkels  */
-            f = Math.PI / 180.0;
-            /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
-            // Drehung
-            xmi = 0; ymi = 0; zmi = 0;
-            x -= xmi; y -= ymi; z -= zmi;
-            re = Math.Cos(wiz * f); im = Math.Sin(wiz * f);
-            a = re * x - im * y;
-            y = re * y + im * x;
-            x = a;
-            // Neigung
-            re = Math.Cos(wiy * f); im = Math.Sin(wiy * f);
-            a = re * z - im * x;
-            x = re * x + im * z;
-            z = a;
-            // Kippen
-            re = Math.Cos(wix * f); im = Math.Sin(wix * f);
-            a = re * y - im * z;
-            z = re * z + im * y;
-            y = a;
-            x += xmi; y += ymi; z += zmi;
-
-            // Weitere Transformationen:
-
-
-            /*
-          if (mProjection != null) {
-              Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
-              x = projPoint.X;
-              y = projPoint.Y;
-              z = projPoint.Z;
-          }*/
-
-            switch (formula) {
+              switch (formula) {
                 case -2: /* Interne Formel verwenden: als Jula-Menge */
-                    we = 1;
-                    if (mInternFormula != null)
-                        we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
-                    break;
+                  we = 1;
+                  if (mInternFormula != null)
+                    we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
+                  break;
 
 
                 case -1: /* Interne Formel verwenden: als Mandelbrotmenge */
-                    we = 1;
-                    if(mInternFormula!=null)
-                        we=mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
-                    break;
+                  we = 1;
+                  if (mInternFormula != null)
+                    we = mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
+                  break;
 
 
                 case 0:   /* Apfel k  */
-                    //we= Komp(z,zz,x,y,zykl);    
-                    we = 1;
-                    if ((x * x + y * y + z * z) < zykl / 100.0)
-                        we = 0L;
-                    break;
+                  //we= Komp(z,zz,x,y,zykl);    
+                  we = 1;
+                  if ((x * x + y * y + z * z) < zykl / 100.0)
+                    we = 0L;
+                  break;
 
                 case 1:  /* Julia k   */
-                    we = Komp(x, y, z, zz, zykl);
-                    break;
+                  we = Komp(x, y, z, zz, zykl);
+                  break;
 
                 case 2:  /* Misch_a k */
-                    we = Komp(x, z, y, zz, zykl);
-                    break;
+                  we = Komp(x, z, y, zz, zykl);
+                  break;
 
                 case 3:  /* Misch_b k */
-                    we = Komp(zz, y, z, x, zykl);
-                    break;
+                  we = Komp(zz, y, z, x, zykl);
+                  break;
 
                 case 4:  /* Drachen_a  */
-                    we = Dra(z, zz, x, y, zykl);
-                    break;
+                  we = Dra(z, zz, x, y, zykl);
+                  break;
 
                 case 5:  /* Drachen_b  */
-                    we = Dra(x, y, z, zz, zykl);
-                    break;
+                  we = Dra(x, y, z, zz, zykl);
+                  break;
 
                 case 6:  /* Drachen_c   */
-                    we = Dra(x, z, y, zz, zykl);
-                    break;
+                  we = Dra(x, z, y, zz, zykl);
+                  break;
 
                 case 7:  /* Drachen_d     */
-                    we = Dra(zz, y, z, x, zykl);
-                    break;
+                  we = Dra(zz, y, z, x, zykl);
+                  break;
 
                 case 8:   /* Julia Qu    */
-                    we = Qu(x, y, z, zz, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = Qu(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 9:   /* Misch_a Qu  */
-                    we = Qu(x, y, z, zz, y, z, zz, x, zykl);
-                    break;
+                  we = Qu(x, y, z, zz, y, z, zz, x, zykl);
+                  break;
 
                 case 10:  /* Misch_b Qu   */
-                    we = Qu(y, zz, z, x, x, y, z, zz, zykl);
-                    break;
+                  we = Qu(y, zz, z, x, x, y, z, zz, zykl);
+                  break;
 
                 case 11:  /* Misch_c Qu    */
-                    we = Qu(x, y, z, zz, y, x, z, zz, zykl);
-                    break;
+                  we = Qu(x, y, z, zz, y, x, z, zz, zykl);
+                  break;
 
                 case 12:  /* Apfel_a H1  */
-                    we = H1(jx, jy, jz, jzz, x, y, z, zz, zykl);
-                    break;
+                  we = H1(jx, jy, jz, jzz, x, y, z, zz, zykl);
+                  break;
 
                 case 13:  /* Apfel_b H1  */
-                    we = H1(zz, x, y, z, jzz, jx, jy, jz, zykl);
-                    break;
+                  we = H1(zz, x, y, z, jzz, jx, jy, jz, zykl);
+                  break;
 
                 case 14:  /* Julia_a H1 */
-                    we = H1(x, y, z, zz, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = H1(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 15:  /* Julia_b H1 */
-                    we = H1(zz, x, y, z, jzz, jx, jy, jz, zykl);
-                    break;
+                  we = H1(zz, x, y, z, jzz, jx, jy, jz, zykl);
+                  break;
 
                 case 16:  /* Apfel_a H2 */
-                    we = H2(jx, jy, jz, jzz, x, y, z, zz, zykl);
-                    break;
+                  we = H2(jx, jy, jz, jzz, x, y, z, zz, zykl);
+                  break;
 
                 case 17:   /* Apfel_b H2 */
-                    we = H2(jzz, jx, jy, jz, zz, x, y, z, zykl);
-                    break;
+                  we = H2(jzz, jx, jy, jz, zz, x, y, z, zykl);
+                  break;
 
                 case 18:  /* Julia_a H2  */
-                    we = H2(x, y, z, zz, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = H2(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 19:  /* Julia_b H2  */
-                    we = H2(zz, x, y, z, jzz, jx, jy, jz, zykl);
-                    break;
+                  we = H2(zz, x, y, z, jzz, jx, jy, jz, zykl);
+                  break;
 
                 case 20:  /* Apfel H3    */
-                    we = H3(jx, jy, jz, jzz, x, y, z, zz, zykl);
-                    break;
+                  we = H3(jx, jy, jz, jzz, x, y, z, zz, zykl);
+                  break;
 
                 case 21:  /* Julia H3 (Ides Fraktal)   */
-                    we = H3(x, y, z, zz, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = H3(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 22:  /* Misch_a H3   */
-                    we = H3(x, y, z, zz, y, z, zz, x, zykl);
-                    break;
+                  we = H3(x, y, z, zz, y, z, zz, x, zykl);
+                  break;
 
                 case 23:  /* Misch_b H3   */
-                    we = H3(y, zz, z, x, x, y, z, zz, zykl);
-                    break;
+                  we = H3(y, zz, z, x, x, y, z, zz, zykl);
+                  break;
 
                 case 24:   /* Mandelbulb3D  */
-                    //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                    we = Mandelbulb3D(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  we = Mandelbulb3D(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
 
-                    break;
+                  break;
 
                 case 25:   /* Würfel  */
-                    //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                    we = Wuerfel(jx, jy, jz, jzz, x, y, z, zz, zykl);
+                  we = Wuerfel(jx, jy, jz, jzz, x, y, z, zz, zykl);
 
-                    break;
+                  break;
 
                 case 26:  /* Julia H3 (Ides Fraktal)   */
-                    we = H3(x, y, zz, z, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = H3(x, y, zz, z, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 27:  /* Julia H4 (Ides Fraktal, verändert)   */
-                    we = H4(x, y, z, zz, jx, jy, jz, jzz, zykl);
-                    break;
+                  we = H4(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  break;
 
                 case 28:  /* Mandelbulb 3D Julia */
-                    we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
-                    break;
+                  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                  break;
 
                 case 29:  /* Abgeändertes Mandelbulb 3D */
-                    we = H6(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
-                    break;
+                  we = H6(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  break;
 
                 case 30:   /* Mandelbulb3D  */
-                    //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                    we = Mandelbulb3D(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
-                    break;
+                  we = Mandelbulb3D(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  break;
 
                 case 31:   /* Mandelbulb3D  */
-                    //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                    we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
-                      break;
+                  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                  break;
                 case 32:   /* Mandelbulb3D pow2 */
-                      we = Mandelbulb3DPow2(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
-                      break;
+                  we = Mandelbulb3DPow2(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  break;
 
                 case 33:   /* Mandelbulb3D  pow 2*/
-                      we = Mandelbulb3DPow2(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
-                      break;
+                  we = Mandelbulb3DPow2(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                  break;
 
                 case 34:   /* Mandelbulb3D  */
-                      //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                      we = Mandelbulb3DPow8(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
-                      break;
+                  we = Mandelbulb3DPow8(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  break;
 
                 case 35:   /* Mandelbulb3D  */
-                      //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
+                  //  we = Mandelbulb3D(x, y, z, zz, jx, jy, jz, jzz, zykl);
 
-                      we = Mandelbulb3DPow8(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
-                      break;
+                  we = Mandelbulb3DPow8(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                  break;
+
+                case 36: // Mandel mit Vektorrotation
+                  we = H7(jx, jy, jz, jzz, x, y, z, zz, zykl, invers);
+                  break;
+
+                case 37: // Julia mit Vektorrotation
+                  we = H7(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
+                  break;
 
 
 
 
+
+              }
+              return ((int)we);
+            } catch (Exception ex) {
+              System.Diagnostics.Debug.WriteLine(ex.ToString());
+              return 0;
             }
-            return ((int)we);
+
         }
 
 
