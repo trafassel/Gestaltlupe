@@ -16,7 +16,8 @@ namespace Fractrace.PictureArt {
 
            // return new ScienceRenderer(pdata);
           //return new SmallRenderer(pdata);
-            return new FastScienceRenderer(pdata);
+         //   return new FastScienceRenderer(pdata);
+          return new NiceRenderer(pdata);
 
         }
     }

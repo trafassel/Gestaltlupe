@@ -135,6 +135,7 @@
     <Compile Include="Geometry\Transform3D.cs" />
     <Compile Include="Geometry\VecRotation.cs" />
     <Compile Include="PictureArt\FastScienceRenderer.cs" />
+    <Compile Include="PictureArt\NiceRenderer.cs" />
     <Compile Include="PictureArt\RenderBase.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
     <Compile Include="PictureArt\SmallRenderer.cs" />
