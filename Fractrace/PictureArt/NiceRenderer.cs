@@ -34,6 +34,16 @@ namespace Fractrace.PictureArt {
 
     private double[,] smoothDeph3 = null;
 
+
+    /// <summary>
+    /// Tiefe, wenn Schatten von unten rechts kommt.
+    /// </summary>
+    private double[,] shadowInfo11 = null;
+    private double[,] shadowInfo10 = null;
+    private double[,] shadowInfo01 = null;
+    private double[,] shadowInfo00 = null;
+
+
     private double minY = double.MaxValue;
 
     private double maxY = double.MinValue;
@@ -46,6 +56,7 @@ namespace Fractrace.PictureArt {
     protected override void PreCalculate() {
       CreateSmoothNormales();
       CreateSmoothDeph();
+      CreateShadowInfo();
     }
 
     protected void CreateSmoothNormales() {
@@ -210,6 +221,64 @@ namespace Fractrace.PictureArt {
     }
 
     /// <summary>
+    /// Schatteninformationen, wenn das Licht von oben rechts kommen, werden erzeugt.
+    /// </summary>
+    protected void CreateShadowInfo() {
+      // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
+      shadowInfo11 = new double[pData.Width, pData.Height];
+      shadowInfo01 = new double[pData.Width, pData.Height]; 
+      shadowInfo10 = new double[pData.Width, pData.Height]; 
+      shadowInfo00 = new double[pData.Width, pData.Height];
+      double diffy = maxY - minY;
+      double yd = diffy / ((double)(pData.Width + pData.Height));
+      yd *= 4.0;
+        for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          shadowInfo11[i, j] = smoothDeph2[i, j];
+          shadowInfo10[i, j] = smoothDeph2[i, j];
+          shadowInfo01[i, j] = smoothDeph2[i, j];
+          shadowInfo00[i, j] = smoothDeph2[i, j];
+        }
+         }
+        for (int k = 0; k < 200; k++) {
+          for (int i = 0; i < pData.Width; i++) {
+            for (int j = 0; j < pData.Height; j++) {
+
+              // Licht von unten rechts
+              if (i < pData.Width - 1 && j < pData.Height - 1) {
+                double localShadow = shadowInfo11[i + 1, j + 1] - yd;
+                if (localShadow > shadowInfo11[i, j])
+                  shadowInfo11[i, j] = localShadow;
+              }
+
+              // Licht von oben rechts
+              if (i < pData.Width - 1 && j > 0) {
+                double localShadow = shadowInfo10[i + 1, j - 1] - yd;
+                if (localShadow > shadowInfo10[i, j])
+                  shadowInfo10[i, j] = localShadow;
+              }
+
+              // Licht von unten links
+              if (i >0 && j < pData.Height - 1) {
+                double localShadow = shadowInfo01[i - 1, j + 1] - yd;
+                if (localShadow > shadowInfo01[i, j])
+                  shadowInfo01[i, j] = localShadow;
+              }
+
+              // Licht von oben links
+              if (i >0 && j >0) {
+                double localShadow = shadowInfo00[i - 1, j - 1] - yd;
+                if (localShadow > shadowInfo00[i, j])
+                  shadowInfo00[i, j] = localShadow;
+              }
+
+            }
+          }
+        }
+
+    }
+
+    /// <summary>
     /// Liefert die Farbe zum Punkt x,y
     /// </summary>
     /// <param name="x"></param>
@@ -235,10 +304,13 @@ namespace Fractrace.PictureArt {
       retVal.Y = light.Y;
       retVal.Z = light.Z;
 
+      double ydiff = maxY - minY;
       // Lokale Tiefeninfo hinzurechnen
+      double localDeph = 0;
       if(smoothDeph2[x, y]!=double.MinValue && smoothDeph1[x, y]!=double.MinValue ) {
-        double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
-        double testVar = 100;
+        localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
+     
+        double testVar = 50.0/ydiff;
         localDeph = localDeph * testVar;
         if (localDeph > 1)
           localDeph = 1;
@@ -252,6 +324,42 @@ namespace Fractrace.PictureArt {
         retVal.X = 0.5 * light.X + 0.5 * localDeph * light.X;
         retVal.Y = 0.5 * light.Y + 0.5 * localDeph * light.Y;
       }
+
+      if(smoothDeph2[x, y]!=double.MinValue) {
+        double yd = ydiff / ((double)(pData.Width + pData.Height));
+        yd *= 4.0;
+        double shadowfactor = 0;
+        double tempdiff = 0;
+        
+        if (smoothDeph2[x, y] < shadowInfo11[x, y]) {
+          tempdiff++;
+        }
+        
+        
+        if (smoothDeph2[x, y] < shadowInfo01[x, y]) {
+          tempdiff++;
+        }
+        
+          if (smoothDeph2[x, y] < shadowInfo10[x, y]) {
+          tempdiff++;
+          }
+          if (smoothDeph2[x, y] < shadowInfo00[x, y]) {
+            tempdiff++;
+          }
+
+          // TODO: den Unterschied von smoothDeph2 und smoothDeph1 einfließen lassen
+        // wenn dieser groß ist, hat auch der Schatten großen Einfluss
+        // also die Var localdeph
+          if (localDeph > 0)
+            localDeph = 0;
+          localDeph /= -4.0;
+          double newFac = (4.0 -(0.75+localDeph)* tempdiff) / 4.0;
+          retVal.Z = newFac * retVal.Z;
+          retVal.X = newFac * retVal.X;
+          retVal.Y = newFac * retVal.Y;
+
+      }
+
 
       return retVal;
     }
