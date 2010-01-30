@@ -35,9 +35,12 @@ namespace Fractrace.PictureArt {
     /// möglich, da die Farbinformationen auf das Graphic-Objekt geschrieben werden.
     /// </summary>
     protected override void PreCalculate() {
+      CreateSmoothNormales();
+    }
+
+    protected void CreateSmoothNormales() {
       normalesSmooth1=new Vec3[pData.Width,pData.Height];
       normalesSmooth2 = new Vec3[pData.Width, pData.Height];
-
 
       // Normieren
       for (int i = 0; i < pData.Width; i++) {
@@ -50,6 +53,7 @@ namespace Fractrace.PictureArt {
         }
       }
 
+      // normalesSmooth1 erzeugen
       for(int i=0;i<pData.Width;i++) {
         for (int j = 0; j < pData.Height;j++ ) {
           Vec3 center = null;
@@ -92,6 +96,46 @@ namespace Fractrace.PictureArt {
         }
 
       }
+
+      // normalesSmooth2 erzeugen
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 center = normalesSmooth1[i,j];
+          // Test ohne smooth-Factor
+          // Nachbarelemente zusammenrechnen
+          Vec3 neighbors = new Vec3();
+          int neighborFound = 0;
+
+          for (int k = -1; k <= 1; k++) {
+            for (int l = -1; l <= 1; l++) {
+              int posX = i + k;
+              int posY = j + l;
+              if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                Vec3 newNormal =normalesSmooth1[posX, posY];
+                if (newNormal != null) {
+                  neighbors.Add(newNormal);
+                  neighborFound++;
+                }
+              }
+            }
+          }
+          neighbors.Normalize();
+          if (center != null) {
+            normalesSmooth1[i, j] = center;
+            if (center != null || neighborFound > 4) {
+              neighbors.Add(center.Mult(1.1));
+              neighbors.Normalize();
+              normalesSmooth2[i, j] = neighbors;
+            }
+          } else {
+            if (neighborFound > 4) {
+              normalesSmooth2[i, j] = neighbors;
+            }
+          }
+
+        }
+
+      }
     }
 
 
@@ -109,7 +153,7 @@ namespace Fractrace.PictureArt {
              return retVal;
            }
        */
-      Vec3 normal = normalesSmooth1[x, y];
+      Vec3 normal = normalesSmooth2[x, y];
       if (normal == null) {
         return new Vec3(0, 0, 0);
       }

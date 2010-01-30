@@ -75,6 +75,8 @@ namespace Fractrace.PictureArt {
       if (winkel > 1)
         winkel = 1;
 
+      winkel *= winkel;
+
       retVal.X = winkel;
       retVal.Y = winkel;
       retVal.Z = winkel;
