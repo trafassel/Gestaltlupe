@@ -34,6 +34,9 @@ namespace Fractrace.PictureArt {
 
     private double[,] smoothDeph3 = null;
 
+    private double minY = double.MaxValue;
+
+    private double maxY = double.MinValue;
 
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
@@ -160,6 +163,10 @@ namespace Fractrace.PictureArt {
           PixelInfo pInfo = pData.Points[i, j];
           if (pInfo != null) {
             smoothDeph1[i, j] = pInfo.Coord.Y;
+            if (minY > pInfo.Coord.Y)
+              minY = pInfo.Coord.Y;
+            if (maxY < pInfo.Coord.Y)
+              maxY = pInfo.Coord.Y;
           } else smoothDeph1[i, j] = double.MinValue;
         }
       }
@@ -169,7 +176,8 @@ namespace Fractrace.PictureArt {
       SetSmoothDeph(smoothDeph3, smoothDeph1);
       SetSmoothDeph(smoothDeph1, smoothDeph3);
       SetSmoothDeph(smoothDeph3, smoothDeph1);
-
+      SetSmoothDeph(smoothDeph1, smoothDeph3);
+      SetSmoothDeph(smoothDeph3, smoothDeph1); 
     }
 
 
@@ -230,14 +238,19 @@ namespace Fractrace.PictureArt {
       // Lokale Tiefeninfo hinzurechnen
       if(smoothDeph2[x, y]!=double.MinValue && smoothDeph1[x, y]!=double.MinValue ) {
         double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
-        double testVar = 0.1;
+        double testVar = 100;
         localDeph = localDeph * testVar;
         if (localDeph > 1)
           localDeph = 1;
         if (localDeph < -1)
           localDeph = -1;
+        if (localDeph > 0)
+          localDeph = localDeph/3.0;
+        
 
         retVal.Z = 0.5 * light.Z + 0.5 *localDeph* light.Z;
+        retVal.X = 0.5 * light.X + 0.5 * localDeph * light.X;
+        retVal.Y = 0.5 * light.Y + 0.5 * localDeph * light.Y;
       }
 
       return retVal;
