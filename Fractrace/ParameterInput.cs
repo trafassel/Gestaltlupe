@@ -47,6 +47,9 @@ namespace Fractrace {
             if (cbAutomaticSave.Checked) {
                 AddToHistory();
             }
+          // Hier auch den Quelltext aktualisieren
+            if (tabControl1.SelectedTab == tpSource)
+              formulaEditor1.Init();
         }
 
       
@@ -295,8 +298,9 @@ namespace Fractrace {
          mHistory.Load(mHistory.CurrentTime);
            UpdateHistoryControl();
            UpdateFromData();
-           
+           formulaEditor1.Init();
            // TODO: Bild aktualisieren
+
        }
 
 

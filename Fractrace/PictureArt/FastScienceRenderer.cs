@@ -41,7 +41,25 @@ namespace Fractrace.PictureArt {
       }
 
       Vec3 light = new Vec3(0, 0, 0);
-      
+
+      if (pInfo.frontLight < 0) {
+        //return Color.FromArgb((int)255, (int)(0), (int)0);
+        try {
+          retVal.X = 0.3;
+          retVal.Y = -pInfo.frontLight/255.0;
+          retVal.Z = 0;
+
+          return retVal;
+
+        } catch (Exception ex) {
+          retVal.X = 1;
+          retVal.Y = 0;
+          retVal.Z = 0;
+          return retVal;
+
+        }
+      }
+
       if (pInfo.Normal != null) {
         light = GetLight(pInfo.Normal);
       }

@@ -245,8 +245,12 @@ namespace Fractrace {
       act_val = act_val.Clone();
 
       Formulas formulas = new Formulas(PData);
-      Fractrace.TomoGeometry.TomoFormulaFactory fac = new Fractrace.TomoGeometry.TomoFormulaFactory();
-      formulas.InternFormula = fac.CreateFromString(ParameterDict.Exemplar["Intern.Formula.Source"]);
+      if (ParameterDict.Exemplar["Intern.Formula.Source"].Trim() == "") {
+        formulas.InternFormula = new Fractrace.TomoGeometry.VecRotMandel2d();
+      } else {
+        Fractrace.TomoGeometry.TomoFormulaFactory fac = new Fractrace.TomoGeometry.TomoFormulaFactory();
+        formulas.InternFormula = fac.CreateFromString(ParameterDict.Exemplar["Intern.Formula.Source"]);
+      }
       if (formulas.InternFormula == null)
         return;
       formulas.InternFormula.Init();
@@ -491,7 +495,9 @@ namespace Fractrace {
                           PixelInfo pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
                           PData.Points[xx, yy] = pixelInfo;
+                          // TODO: Bessere Möglichkeit der Schneidung schaffen.
 
+                          cycleAdd = minCycle;
                           fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,
                             wix, wiy, wiz,
                             jx, jy, jz, jzz, formula, false);
@@ -503,6 +509,8 @@ namespace Fractrace {
                           GData.ColorInfo2[xx + 1, yy] = fa1;
                           //if (mStarter == null)
                           //  grLabel.DrawRectangle(p, xx + 1, yy, (float)0.5, (float)0.5);
+
+                          // Debug: Querschnitt wieder einfügen
                           pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
                           PData.Points[xx + 1, yy] = pixelInfo;

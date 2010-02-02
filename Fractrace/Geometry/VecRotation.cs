@@ -202,6 +202,12 @@ namespace Fractrace.Geometry {
       toAxisAngle();
     }
 
+    public void Normalize() {
+      double r =Math.Sqrt(x * x + y * y + z * z);
+      x = x / r;
+      y = y / r;
+      z = z / r;
+    }
 		
 		
 

@@ -19,6 +19,14 @@ namespace Fractrace.PictureArt {
       : base(pData) {
     }
 
+    protected bool useAmbient = false;
+
+    protected bool useDarken = false;
+
+    private double borderMinY = 0;
+
+    private double borderMaxY = 0;
+
 
     private Vec3[,] normalesSmooth1 = null;
 
@@ -27,6 +35,12 @@ namespace Fractrace.PictureArt {
     private Vec3[,] colorAmbient1 = null;
 
     private Vec3[,] colorAmbient2 = null;
+
+    private Vec3[,] rgbPlane = null;
+
+    private Vec3[,] rgbSmoothPlane1 = null;
+    private Vec3[,] rgbSmoothPlane2 = null;
+    private Vec3[,] rgbSmoothPlane3 = null;
 
     private double[,] smoothDeph1 = null;
 
@@ -61,11 +75,220 @@ namespace Fractrace.PictureArt {
     /// möglich, da die Farbinformationen auf das Graphic-Objekt geschrieben werden.
     /// </summary>
     protected override void PreCalculate() {
+      useAmbient = ParameterDict.Exemplar.GetBool("Composite.UseAmbient");
+      useDarken = ParameterDict.Exemplar.GetBool("Composite.UseDarken");
+      borderMinY=ParameterDict.Exemplar.GetDouble("Border.Min.y");
+      borderMaxY=ParameterDict.Exemplar.GetDouble("Border.Max.y");
       CreateSmoothNormales();
       CreateSmoothDeph();
       CreateShadowInfo();
+      DrawPlane();
+      DarkenPlane();
+      if(useAmbient)
+        SmoothPlane();
+      NormalizePlane();
     }
 
+    
+    /// <summary>
+    /// Erzeugt das Bild im rgb-Format
+    /// </summary>
+    protected void DarkenPlane() {
+      double mainDeph = maxY - minY;// borderMaxY - borderMinY;
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 col = rgbPlane[i, j];
+          double yd = smoothDeph2[i, j];
+          if (yd == double.MinValue)
+            yd = minY;
+          double ydNormalized = (yd - minY) / mainDeph;
+          if (ydNormalized > 0.2) {
+
+          }
+          ydNormalized = ydNormalized - 0.5;
+          ydNormalized = 2.0 * Math.Abs(ydNormalized);
+          ydNormalized = Math.Sqrt(ydNormalized);
+         // ydNormalized = Math.Sqrt(ydNormalized);
+          col.X = col.X * ydNormalized;
+          col.Y = col.Y * ydNormalized;
+          col.Z =0.2* col.Z+(0.8) * ydNormalized*col.Z;
+
+        }
+      }
+    }
+
+    /// <summary>
+    /// Erzeugt das Bild im rgb-Format
+    /// </summary>
+    protected void SmoothPlane() {
+      rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
+      rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          rgbSmoothPlane2[i, j] = rgbPlane[i, j];
+        }
+      }
+
+      double mainDeph = maxY - minY;// borderMaxY - borderMinY;
+      
+
+      for (int m = 0; m < 10; m++) {
+
+        // Zweiter Durchlauf
+        for (int i = 0; i < pData.Width; i++) {
+          for (int j = 0; j < pData.Height; j++) {
+            double neighborsFound = 0;
+            Vec3 nColor = new Vec3();
+            for (int k = -1; k <= 1; k++) {
+              for (int l = -1; l <= 1; l++) {
+                int posX = i + k;
+                int posY = j + l;
+                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                  nColor.Add(rgbSmoothPlane2[posX, posY]);
+                  neighborsFound++;
+                }
+              }
+            }
+            if (neighborsFound > 0)
+              nColor = nColor.Mult(1 / neighborsFound);
+            //Vec3 nCenterColor = rgbSmoothPlane2[i, j];
+            //nCenterColor.Add(nColor);
+            //nCenterColor = nCenterColor.Mult(0.5);
+
+            double yd = smoothDeph2[i, j];
+            if (yd == double.MinValue)
+              yd = minY;
+            double ydNormalized = (yd - minY) / mainDeph;
+            if (ydNormalized > 0.2) {
+
+            }
+            ydNormalized = ydNormalized - 0.5;
+            ydNormalized = 2.0 * Math.Abs(ydNormalized);
+            //   ydNormalized = 0.5;
+            Vec3 nCenterColor = rgbSmoothPlane2[i, j];
+          //  ydNormalized *= ydNormalized;
+            /*ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;*/
+            //ydNormalized = 0;
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            nCenterColor = nCenterColor.Mult(ydNormalized);
+            nColor = nColor.Mult(1.0 - ydNormalized);
+            nCenterColor.Add(nColor);
+
+            rgbSmoothPlane1[i, j] = nCenterColor;
+          }
+        }
+
+
+        // Dritter Durchlauf
+        for (int i = 0; i < pData.Width; i++) {
+          for (int j = 0; j < pData.Height; j++) {
+            double neighborsFound = 0;
+            Vec3 nColor = new Vec3();
+            for (int k = -1; k <= 1; k++) {
+              for (int l = -1; l <= 1; l++) {
+                int posX = i + k;
+                int posY = j + l;
+                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                  nColor.Add(rgbSmoothPlane1[posX, posY]);
+                  neighborsFound++;
+                }
+              }
+            }
+            if (neighborsFound > 0)
+              nColor = nColor.Mult(1 / neighborsFound);
+
+            double yd = smoothDeph2[i, j];
+            if (yd == double.MinValue)
+              yd = minY;
+            double ydNormalized = (yd - minY) / mainDeph;
+            if (ydNormalized > 0.2) {
+
+            }
+            ydNormalized = ydNormalized - 0.5;
+            ydNormalized = 2.0 * Math.Abs(ydNormalized);
+            //   ydNormalized = 0.5;
+            Vec3 nCenterColor = rgbSmoothPlane1[i, j];
+            //ydNormalized = 0;
+           // ydNormalized *= ydNormalized;
+            /*
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;
+            ydNormalized *= ydNormalized;*/
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            nCenterColor = nCenterColor.Mult(ydNormalized);
+            nColor = nColor.Mult(1.0 - ydNormalized);
+            nCenterColor.Add(nColor);
+
+            //Vec3 nCenterColor = rgbSmoothPlane1[i, j];
+            //nCenterColor.Add(nColor);
+            //nCenterColor = nCenterColor.Mult(0.5);
+            rgbSmoothPlane2[i, j] = nCenterColor;
+          }
+        }
+      }
+
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          rgbPlane[i, j] = rgbSmoothPlane2[i, j]; 
+        }
+      }
+        }
+
+
+    /// <summary>
+    /// Erzeugt das Bild im rgb-Format
+    /// </summary>
+    protected void DrawPlane() {
+        rgbPlane = new Vec3[pData.Width,pData.Height];
+        for (int i = 0; i < pData.Width; i++) {
+          for (int j = 0; j < pData.Height; j++) {
+            rgbPlane[i, j] = GetRgb(i, j);
+          }
+        }
+    }
+
+
+    /// <summary>
+    /// Weißabgleich und Helligkeitskorrektur.
+    /// </summary>
+    protected void NormalizePlane() {
+      double maxRed = 0;
+      double maxGreen = 0;
+      double maxBlue = 0;
+
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 col = rgbPlane[i, j];
+          if (col.X > maxRed)
+            maxRed = col.X;
+          if (col.Y > maxGreen)
+            maxGreen = col.Y;
+          if (col.Z > maxBlue)
+            maxBlue = col.Z;
+        }
+      }
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 col = rgbPlane[i, j];
+          if (maxRed > 0)
+            col.X /= maxRed;
+          if (maxGreen > 0)
+            col.Y /= maxGreen;
+          if (maxBlue > 0)
+            col.Z /= maxBlue;
+        }
+      }
+
+    }
+ 
     protected void CreateSmoothNormales() {
       normalesSmooth1=new Vec3[pData.Width,pData.Height];
       normalesSmooth2 = new Vec3[pData.Width, pData.Height];
@@ -248,7 +471,7 @@ namespace Fractrace.PictureArt {
       double ydv = diffy / ((double)(pData.Height));
       double ydh = diffy / ((double)(pData.Width));
 
-      yd *= 4.0; ydv *= 4.0; ydh *= 4.0;
+      yd *= 4.0; ydv *= 1.7; ydh *= 1.7;
 
         for (int i = 0; i < pData.Width; i++) {
         for (int j = 0; j < pData.Height; j++) {
@@ -263,7 +486,7 @@ namespace Fractrace.PictureArt {
 
         }
          }
-        for (int k = 0; k < 100; k++) {
+        for (int k = 0; k < 300; k++) {
           for (int i = 0; i < pData.Width; i++) {
             for (int j = 0; j < pData.Height; j++) {
 
@@ -271,35 +494,35 @@ namespace Fractrace.PictureArt {
               if (i < pData.Width - 1 && j < pData.Height - 1) {
                 double localShadow = shadowInfo11[i + 1, j + 1] - yd;
                 if (localShadow > shadowInfo11[i, j])
-                  shadowInfo11[i, j] = localShadow;
+                  shadowInfo11[i, j] =0.5*(shadowInfo11[i, j]+ localShadow);
               }
 
               // Licht von oben rechts
               if (i < pData.Width - 1 && j > 0) {
                 double localShadow = shadowInfo10[i + 1, j - 1] - yd;
                 if (localShadow > shadowInfo10[i, j])
-                  shadowInfo10[i, j] = localShadow;
+                  shadowInfo10[i, j] = 0.5*(shadowInfo10[i, j]+localShadow);
               }
 
               // Licht von unten links
               if (i >0 && j < pData.Height - 1) {
                 double localShadow = shadowInfo01[i - 1, j + 1] - yd;
                 if (localShadow > shadowInfo01[i, j])
-                  shadowInfo01[i, j] = localShadow;
+                  shadowInfo01[i, j] =0.5*(shadowInfo01[i, j]+ localShadow);
               }
 
               // Licht von oben links
               if (i >0 && j >0) {
                 double localShadow = shadowInfo00[i - 1, j - 1] - yd;
                 if (localShadow > shadowInfo00[i, j])
-                  shadowInfo00[i, j] = localShadow;
+                  shadowInfo00[i, j] =0.5*(shadowInfo00[i, j]+ localShadow);
               }
 
               // Licht von links
               if (i > 0) {
                 double localShadow = shadowInfo00h[i - 1, j] - ydh;
                 if (localShadow > shadowInfo00h[i, j])
-                  shadowInfo00h[i, j] = localShadow;
+                  shadowInfo00h[i, j] =0.5*(shadowInfo00h[i, j]+ localShadow);
               }
 
 
@@ -307,21 +530,21 @@ namespace Fractrace.PictureArt {
               if (i < pData.Width - 1) {
                 double localShadow = shadowInfo01h[i + 1, j] - ydh;
                 if (localShadow > shadowInfo01h[i, j])
-                  shadowInfo01h[i, j] = localShadow;
+                  shadowInfo01h[i, j] =0.5*(shadowInfo01h[i, j]+ localShadow);
               }
 
               // Licht von oben
               if (j < pData.Height - 1) {
                 double localShadow = shadowInfo10v[i, j+1] - ydv;
                 if (localShadow > shadowInfo10v[i, j])
-                  shadowInfo10v[i, j] = localShadow;
+                  shadowInfo10v[i, j] =0.5*(shadowInfo10v[i, j]+ localShadow);
               }
 
               // Licht von unten
               if (j >0) {
                 double localShadow = shadowInfo11v[i, j - 1] - ydv;
                 if (localShadow > shadowInfo11v[i, j])
-                  shadowInfo11v[i, j] = localShadow;
+                  shadowInfo11v[i, j] =0.5*(shadowInfo11v[i, j]+ localShadow);
               }
 
 
@@ -366,6 +589,8 @@ namespace Fractrace.PictureArt {
               }
 
               shadowTempPlane[i, j] = 1 - tempdiff / 8.0;
+              if (shadowTempPlane[i, j] < 0)
+                shadowTempPlane[i, j] = 0;
             }
           }
         }
@@ -374,6 +599,20 @@ namespace Fractrace.PictureArt {
           for (int j = 0; j < pData.Height; j++) {
             // TODO: smooth
             shadowPlane[i,j]=shadowTempPlane[i,j];
+            double sCount = 0;
+            double sPlaneEntry = 0;
+            for (int k = -1; k <= 1; k++) {
+              for (int l = -1; l <= 1; l++) {
+                int posX = i + k;
+                int posY = j + l;
+                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                  sCount++;
+                  sPlaneEntry += shadowTempPlane[posX, posY];
+                }
+              }
+            }
+            if(sCount>0)
+              shadowPlane[i, j] = 0.4 * shadowTempPlane[i, j] + 0.6 * sPlaneEntry/sCount;
           }
         }
     }
@@ -385,6 +624,17 @@ namespace Fractrace.PictureArt {
     /// <param name="y"></param>
     /// <returns></returns>
     protected override Vec3 GetRgbAt(int x, int y) {
+      return rgbPlane[x, y];
+    }
+
+
+    /// <summary>
+    /// Liefert die Farbe zum Punkt x,y
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    protected Vec3 GetRgb(int x, int y) {
       Vec3 retVal = new Vec3(0, 0, 1); // rot
       /*
            PixelInfo pInfo = pData.Points[x, y];
@@ -398,8 +648,16 @@ namespace Fractrace.PictureArt {
       }
 
       Vec3 light = new Vec3(0, 0, 0);
-      light = GetLight(normal);
 
+      light = GetLight(normal);
+      double derivation = 0;
+      Vec3 derivationVec = normalesSmooth1[x, y];
+      if (derivationVec != null) {
+        Vec3 der = derivationVec.Diff(normal);
+        derivation = der.Norm;
+      }
+
+      light.X += derivation;
       retVal.X = light.X;
       retVal.Y = light.Y;
       retVal.Z = light.Z;
@@ -425,41 +683,11 @@ namespace Fractrace.PictureArt {
         retVal.Y = 0.5 * light.Y + 0.5 * localDeph * light.Y;
       }
 
-      /*
-      if(smoothDeph2[x, y]!=double.MinValue) {
-        double yd = ydiff / ((double)(pData.Width + pData.Height));
-        yd *= 4.0;
-        double shadowfactor = 0;
-        double tempdiff = 0;
-        
-        if (smoothDeph2[x, y] < shadowInfo11[x, y]) {
-          tempdiff++;
-        }
-        
-        
-        if (smoothDeph2[x, y] < shadowInfo01[x, y]) {
-          tempdiff++;
-        }
-        
-          if (smoothDeph2[x, y] < shadowInfo10[x, y]) {
-          tempdiff++;
-          }
-          if (smoothDeph2[x, y] < shadowInfo00[x, y]) {
-            tempdiff++;
-          }
-
-          // TODO: den Unterschied von smoothDeph2 und smoothDeph1 einfließen lassen
-        // wenn dieser groß ist, hat auch der Schatten großen Einfluss
-        // also die Var localdeph
-          if (localDeph > 0)
-            localDeph = 0;
-          localDeph /= -4.0;
-          double newFac = (4.0 -(0.75+localDeph)* tempdiff) / 4.0;
-       */
       double newFac =shadowPlane[x,y];
-          retVal.Z = newFac * retVal.Z;
-          retVal.X = newFac * retVal.X;
+          retVal.Z =0.1*retVal.Z + (0.9)*newFac * retVal.Z;
+          retVal.X = 0.1 * retVal.X+0.9* newFac * retVal.X;
           retVal.Y = newFac * retVal.Y;
+
 
 
       return retVal;

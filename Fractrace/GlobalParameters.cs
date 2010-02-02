@@ -92,7 +92,7 @@ namespace Fractrace {
             ParameterDict.Exemplar["Composite.Color1TestArea"] = "10";
             ParameterDict.Exemplar["Composite.FrontLight"] = "1";
             ParameterDict.Exemplar["Composite.AmbientLight"] = "0";
-
+            ParameterDict.Exemplar["Composite.Renderer"] = "NiceRenderer";
         //    ParameterDict.Exemplar["Composite.UseMedian"] = "1";
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.

@@ -150,6 +150,7 @@
     <Compile Include="StereoForm.Designer.cs">
       <DependentUpon>StereoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TomoGeometry\VecRotMandel2d.cs" />
     <Compile Include="TomoGeometry\Mandelbulb.cs" />
     <Compile Include="TomoGeometry\TomoFormula.cs" />
     <Compile Include="TomoGeometry\TomoFormulaFactory.cs" />
