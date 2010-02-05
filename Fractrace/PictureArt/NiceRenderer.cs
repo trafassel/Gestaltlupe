@@ -91,7 +91,7 @@ namespace Fractrace.PictureArt {
 
     
     /// <summary>
-    /// Erzeugt das Bild im rgb-Format
+    /// Die Gestalt wird nach hinten abgedunkelt.
     /// </summary>
     protected void DarkenPlane() {
       double mainDeph = maxY - minY;// borderMaxY - borderMinY;
@@ -101,17 +101,16 @@ namespace Fractrace.PictureArt {
           double yd = smoothDeph2[i, j];
           if (yd == double.MinValue)
             yd = minY;
-          double ydNormalized = (yd - minY) / mainDeph;
-          if (ydNormalized > 0.2) {
-
+            double ydNormalized = (yd - minY) / mainDeph;
+            ydNormalized *= 2*ydNormalized;
+          if (ydNormalized > 1) {
+            ydNormalized = 1;
           }
-          ydNormalized = ydNormalized - 0.5;
-          ydNormalized = 2.0 * Math.Abs(ydNormalized);
-          ydNormalized = Math.Sqrt(ydNormalized);
+         
          // ydNormalized = Math.Sqrt(ydNormalized);
           col.X = col.X * ydNormalized;
           col.Y = col.Y * ydNormalized;
-          col.Z =0.2* col.Z+(0.8) * ydNormalized*col.Z;
+          col.Z =ydNormalized*col.Z;
 
         }
       }
@@ -159,11 +158,20 @@ namespace Fractrace.PictureArt {
             if (yd == double.MinValue)
               yd = minY;
             double ydNormalized = (yd - minY) / mainDeph;
+           // ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = ydNormalized * ydNormalized;
             if (ydNormalized > 0.2) {
 
             }
-            ydNormalized = ydNormalized - 0.5;
+            ydNormalized = ydNormalized - 0.8;
             ydNormalized = 2.0 * Math.Abs(ydNormalized);
+            //ydNormalized = Math.Sqrt(ydNormalized);
+            if (ydNormalized > 1)
+              ydNormalized = 1;
+            if (ydNormalized < 0)
+              ydNormalized = 0;
+
+            ydNormalized = 1 - ydNormalized;
             //   ydNormalized = 0.5;
             Vec3 nCenterColor = rgbSmoothPlane2[i, j];
           //  ydNormalized *= ydNormalized;
@@ -206,11 +214,18 @@ namespace Fractrace.PictureArt {
             if (yd == double.MinValue)
               yd = minY;
             double ydNormalized = (yd - minY) / mainDeph;
+           ydNormalized = Math.Sqrt(ydNormalized);
+           ydNormalized = ydNormalized * ydNormalized;
             if (ydNormalized > 0.2) {
 
             }
-            ydNormalized = ydNormalized - 0.5;
+            ydNormalized = ydNormalized - 0.8;
             ydNormalized = 2.0 * Math.Abs(ydNormalized);
+            if (ydNormalized > 1)
+              ydNormalized = 1;
+            if (ydNormalized < 0)
+              ydNormalized = 0;
+            ydNormalized = 1 - ydNormalized;
             //   ydNormalized = 0.5;
             Vec3 nCenterColor = rgbSmoothPlane1[i, j];
             //ydNormalized = 0;
@@ -221,7 +236,7 @@ namespace Fractrace.PictureArt {
             ydNormalized *= ydNormalized;
             ydNormalized *= ydNormalized;
             ydNormalized *= ydNormalized;*/
-            ydNormalized = Math.Sqrt(ydNormalized);
+            //ydNormalized = Math.Sqrt(ydNormalized);
             ydNormalized = Math.Sqrt(ydNormalized);
             nCenterColor = nCenterColor.Mult(ydNormalized);
             nColor = nColor.Mult(1.0 - ydNormalized);
@@ -635,6 +650,8 @@ namespace Fractrace.PictureArt {
     /// <param name="y"></param>
     /// <returns></returns>
     protected Vec3 GetRgb(int x, int y) {
+      // TODO: Wenn Schnitt mit Begrenzung vorliegt, soll die Anzahl der durchgeführten Iterationen als
+      // Farbwert dargestellt werden.
       Vec3 retVal = new Vec3(0, 0, 1); // rot
       /*
            PixelInfo pInfo = pData.Points[x, y];
@@ -657,7 +674,7 @@ namespace Fractrace.PictureArt {
         derivation = der.Norm;
       }
 
-      light.X += derivation;
+      light.X += derivation/2.0;
       retVal.X = light.X;
       retVal.Y = light.Y;
       retVal.Z = light.Z;
@@ -684,9 +701,9 @@ namespace Fractrace.PictureArt {
       }
 
       double newFac =shadowPlane[x,y];
-          retVal.Z =0.1*retVal.Z + (0.9)*newFac * retVal.Z;
-          retVal.X = 0.1 * retVal.X+0.9* newFac * retVal.X;
-          retVal.Y = newFac * retVal.Y;
+          retVal.Z =newFac * retVal.Z;
+          retVal.X = newFac * retVal.X;
+          retVal.Y = (0.02+0.98*newFac) * retVal.Y;
 
 
 

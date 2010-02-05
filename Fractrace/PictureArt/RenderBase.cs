@@ -53,6 +53,8 @@ namespace Fractrace.PictureArt {
          Vec3 col=GetRgbAt(x,y);
 
           try {
+            if ( double.IsNaN(col.X))
+              return Color.Red;
             return Color.FromArgb((int)(255.0*col.X), (int)(255.0*col.Y), (int)(255.0*col.Z));
           } catch (Exception ex) {
             Console.WriteLine(ex.ToString());
