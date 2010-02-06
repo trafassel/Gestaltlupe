@@ -69,11 +69,15 @@ namespace Fractrace {
       }
     }
 
-
+    /// <summary>
+    /// Um das schnelle Zeichnen von Objekten aus den Preview Control zu aktivieren, 
+    /// </summary>
+    string oldRenderer = "";
     /// <summary>
     /// Neuzeichnen.
     /// </summary>
     protected override void StartDrawing() {
+
       forceRedraw = false;
       btnPreview.Enabled = false;
       inDrawing = true;
@@ -110,7 +114,13 @@ namespace Fractrace {
     /// </summary>
     protected override void OneStepEnds() {
       if (iter != null) {
+        string oldRenderer = ParameterDict.Exemplar["Composite.Renderer"];
+        ParameterDict.Exemplar["Composite.Renderer"] = "FastScienceRenderer";
+
         Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
+        // Hier wird kurz der Renderer ausgetauscht
+        ParameterDict.Exemplar["Composite.Renderer"]=oldRenderer;
+        
         pArt.Paint(grLabel);
         Application.DoEvents();
         this.Refresh();
