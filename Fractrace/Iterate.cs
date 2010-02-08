@@ -494,6 +494,7 @@ namespace Fractrace {
                           //  grLabel.DrawRectangle(p, xx, yy, (float)0.5, (float)0.5);
                           PixelInfo pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
+                          pixelInfo.iterations = usedCycles;
                           PData.Points[xx, yy] = pixelInfo;
                           // TODO: Bessere Möglichkeit der Schneidung schaffen.
 
@@ -501,6 +502,8 @@ namespace Fractrace {
                           fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,
                             wix, wiy, wiz,
                             jx, jy, jz, jzz, formula, false);
+                          pixelInfo = new PixelInfo();
+                          pixelInfo.iterations = fa1;
                           if (fa1 < 1)
                             fa1 = 255;
                           else
@@ -511,13 +514,14 @@ namespace Fractrace {
                           //  grLabel.DrawRectangle(p, xx + 1, yy, (float)0.5, (float)0.5);
 
                           // Debug: Querschnitt wieder einfügen
-                          pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
                           PData.Points[xx + 1, yy] = pixelInfo;
 
                           fa1 = formulas.Rechne(x, y, z - zd / 2.0, zz, zyklen + cycleAdd,
                             wix, wiy, wiz,
                             jx, jy, jz, jzz, formula, false);
+                          pixelInfo = new PixelInfo();
+                          pixelInfo.iterations = fa1;
                           if (fa1 < 1)
                             fa1 = 255;
                           else
@@ -526,13 +530,15 @@ namespace Fractrace {
                           GData.ColorInfo2[xx, yy + 1] = fa1;
                           //if (mStarter == null)
                           //  grLabel.DrawRectangle(p, xx, yy + 1, (float)0.5, (float)0.5);
-                          pixelInfo = new PixelInfo();
+                          //pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
                           PData.Points[xx, yy + 1] = pixelInfo;
 
                           fa1 = formulas.Rechne(x + xd / 2.0, y, z - zd / 2.0, zz, zyklen + cycleAdd,
                             wix, wiy, wiz,
                             jx, jy, jz, jzz, formula, false);
+                          pixelInfo = new PixelInfo();
+                          pixelInfo.iterations = fa1;
                           if (fa1 < 1)
                             fa1 = 255;
                           else
@@ -541,7 +547,7 @@ namespace Fractrace {
                           GData.ColorInfo2[xx + 1, yy + 1] = fa1;
                           //if (mStarter == null)
                           //  grLabel.DrawRectangle(p, xx + 1, yy + 1, (float)0.5, (float)0.5);
-                          pixelInfo = new PixelInfo();
+                          //pixelInfo = new PixelInfo();
                           pixelInfo.frontLight = -fa1;
                           PData.Points[xx + 1, yy + 1] = pixelInfo;
 

@@ -89,7 +89,11 @@ namespace Fractrace.Basic {
                     arr.Add(newEntry);
                 }
             }
-            dataGridView1.DataSource = arr;
+            try {
+              dataGridView1.DataSource = arr;
+            } catch (Exception ex) {
+              System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
 
 

@@ -77,7 +77,7 @@ namespace Fractrace.PictureArt {
     /// </summary>
     /// <param name="normal"></param>
     /// <returns></returns>
-    protected Vec3 GetLight(Vec3 normal) {
+    protected virtual Vec3 GetLight(Vec3 normal) {
       Vec3 retVal = new Vec3(0, 0, 0);
 
       double norm= Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z*normal.Z);
@@ -94,6 +94,9 @@ namespace Fractrace.PictureArt {
         winkel = 1;
 
       winkel *= winkel;
+
+      // Todo: Zweite Lichtquelle
+
 
       retVal.X = winkel;
       retVal.Y = winkel;

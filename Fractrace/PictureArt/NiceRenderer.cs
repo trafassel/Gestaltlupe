@@ -652,13 +652,21 @@ namespace Fractrace.PictureArt {
     protected Vec3 GetRgb(int x, int y) {
       // TODO: Wenn Schnitt mit Begrenzung vorliegt, soll die Anzahl der durchgeführten Iterationen als
       // Farbwert dargestellt werden.
-      Vec3 retVal = new Vec3(0, 0, 1); // rot
-      /*
-           PixelInfo pInfo = pData.Points[x, y];
-           if (pInfo == null) {
-             return retVal;
-           }
-       */
+      Vec3 retVal = new Vec3(1, 0, 0); // blau
+      
+      PixelInfo pInfo = pData.Points[x, y];
+      if (pInfo != null) {
+        if (pInfo.iterations >= 0) {
+          double it = -pInfo.frontLight/255.0;
+
+          retVal.X = it;
+          retVal.Y = 1-it;
+          retVal.Z = 0;
+           
+         return retVal;
+        }
+      }
+
       Vec3 normal = normalesSmooth2[x, y];
       if (normal == null) {
         return new Vec3(0, 0, 0);
@@ -707,6 +715,88 @@ namespace Fractrace.PictureArt {
       return retVal;
     }
 
+
+    /// <summary>
+    /// Liefert die Farbe der Oberfläche entsprechend der Normalen.
+    /// </summary>
+    /// <param name="normal"></param>
+    /// <returns></returns>
+    protected override Vec3 GetLight(Vec3 normal) {
+      Vec3 retVal = new Vec3(0, 0, 0);
+
+      double norm = Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
+      /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
+      /* mit Vergleichsvektor (Beide nachträglich normiert )             */
+      double winkel = 0;
+      if (norm == null)
+        return retVal;
+
+      winkel = Math.Acos((normal.Y) / norm);
+      winkel = 1 - winkel;
+
+      if (winkel < 0)
+        winkel = 0;
+      if (winkel > 1)
+        winkel = 1;
+
+      winkel *= winkel;
+
+      // Zum Test nur zweite Lichtquelle
+      winkel = 0;
+      // Zweite Lichtquelle
+      // 1 -1 1  
+      double norm2 = Math.Sqrt(3.0);
+      double winkel2 = Math.Acos((normal.X+ normal.Y+normal.Z) / (norm*norm2));
+      winkel2 = 1 - winkel2;
+
+      if (winkel2 < 0)
+        winkel2 = 0;
+      if (winkel2 > 1)
+        winkel2 = 1;
+
+      winkel2 *= winkel2;
+
+      winkel += winkel2;
+
+      // Dritte Lichtquelle
+      // 0 -1 1  
+      double norm3 = Math.Sqrt(2.0);
+      double winkel3 = Math.Acos((normal.Y + normal.Z) / (norm * norm3));
+      winkel3 = 1 - winkel3;
+
+      if (winkel3 < 0)
+        winkel3 = 0;
+      if (winkel3 > 1)
+        winkel3 = 1;
+
+      winkel3 *= winkel3;
+
+      winkel += winkel3;
+
+      // Vierte Lichtquelle
+      // 0 -1 1  
+      double norm4 = Math.Sqrt(2.0);
+      double winkel4 = Math.Acos((normal.X+normal.Y) / (norm * norm4));
+      winkel4 = 1 - winkel4;
+
+      if (winkel4 < 0)
+        winkel4 = 0;
+      if (winkel4 > 1)
+        winkel4 = 1;
+
+      winkel4 *= winkel4;
+
+      winkel += winkel4;
+
+      if (winkel > 1)
+        winkel = 1;
+
+      retVal.X = winkel;
+      retVal.Y = winkel;
+      retVal.Z = winkel;
+
+      return retVal;
+    }
 
 
 

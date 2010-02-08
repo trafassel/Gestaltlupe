@@ -48,7 +48,6 @@ namespace Fractrace.TomoGeometry {
              System.CodeDom.Compiler.ICodeCompiler compiler = provider.CreateCompiler();
 
             string tomoSource = @"
-//using Tarakos.X3d;
 using System;
 using Fractrace.TomoGeometry;
 public class CSTomoFormula : TomoFormula {

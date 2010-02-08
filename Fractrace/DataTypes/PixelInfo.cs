@@ -38,6 +38,11 @@ namespace Fractrace.DataTypes {
         /// </summary>
         public double derivation = 0;
 
+
+      /// <summary>
+      /// Anzahl der Iterationen. Dient der Farbdarstellung des Schnittes.
+      /// </summary>
+        public double iterations = -1;
         
     }
 }
