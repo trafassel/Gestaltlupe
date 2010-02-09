@@ -711,6 +711,29 @@ namespace Fractrace {
 
        }
 
+      /// <summary>
+      /// Berechnung anhalten
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+       private void btnPause_Click(object sender, EventArgs e) {
+         if (btnPause.Text == "Pause") {
+           Fractrace.Iterate.Pause = true;
+           btnPause.Text = "Run";
+         } else {
+           Fractrace.Iterate.Pause = false;
+           btnPause.Text = "Pause";
+         }
+       }
+
+       private void button2_Click(object sender, EventArgs e) {
+
+       }
+
+       private void panel12_Paint(object sender, PaintEventArgs e) {
+
+       }
+
 
     }
 }

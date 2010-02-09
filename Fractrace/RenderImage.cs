@@ -55,17 +55,23 @@ namespace Fractrace
 
 
         protected void SetPictureBoxSize() {
-            double sizeWeight = 700;
-            int maxSize = (int)(sizeWeight * ParameterDict.Exemplar.GetDouble("View.Size"));
-            if (maxx != maxSize) {
-                maxx = maxSize;
-                maxy = maxSize;
-                mPictureBox.Width = maxx;
-                mPictureBox.Height = maxy;
-                Image labelImage = new Bitmap((int)(maxx), (int)(maxy));
-                mPictureBox.Image = labelImage;
-                grLabel = Graphics.FromImage(labelImage);
-            }
+          double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
+          double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
+          //ParameterDict.Exemplar["View.Deph"] = "800";
+
+
+          int maxSizeX = (int)(widthInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
+          int maxSizeY = (int)(heightInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
+          if (maxx != maxSizeX || maxy != maxSizeY) {
+            maxx = maxSizeX;
+            maxy = maxSizeY;
+            mPictureBox.Width = maxx;
+            mPictureBox.Height = maxy;
+            Image labelImage = new Bitmap((int)(maxx), (int)(maxy));
+            mPictureBox.Image = labelImage;
+            grLabel = Graphics.FromImage(labelImage);
+          }
+
         }
 
 

@@ -16,13 +16,15 @@ namespace Fractrace.PictureArt {
         public static Renderer Create(PictureData pdata) {
           switch (ParameterDict.Exemplar["Composite.Renderer"]) {
             case "NiceRenderer":
+            case "2":
               return new NiceRenderer(pdata);
-             
 
             case "FastScienceRenderer":
+            case "0":
               return new FastScienceRenderer(pdata);
 
             case "ScienceRenderer":
+            case "1":
               return new ScienceRenderer(pdata);
 
           }

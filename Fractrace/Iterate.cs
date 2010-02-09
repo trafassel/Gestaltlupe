@@ -25,6 +25,21 @@ namespace Fractrace {
 
     protected bool mAbort = false;
 
+    protected static bool mPause = false;
+
+
+    /// <summary>
+    /// Globales Anhalten der Berechnung.
+    /// </summary>
+    public static bool Pause {
+      get {
+        return mPause;
+      }
+      set {
+        mPause = value;
+      }
+
+    }
 
     /// <summary>
     /// Von Außen wurde Abbruch angestoßen. 
@@ -211,6 +226,12 @@ namespace Fractrace {
         return false;
       bool retVal = true;
       lock (generateLock) {
+        while (mPause) {
+          System.Threading.Thread.Sleep(10);
+          System.Windows.Forms.Application.DoEvents();
+          if (mAbort)
+            return false;
+        }
         if (y < availableY)
           retVal = false;
         else {
@@ -264,6 +285,9 @@ namespace Fractrace {
       MAXX_ITER = width;
       MAXY_ITER = (int)(ParameterDict.Exemplar.GetDouble("View.Deph") * screensize);
       MAXZ_ITER = height;
+      if (MAXY_ITER < 120) {
+        MAXY_ITER = MAXX_ITER;
+      }
 
       int MINX_ITER = 0;
       int MINY_ITER = 0;

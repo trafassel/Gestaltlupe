@@ -60,22 +60,24 @@
           this.btnBack = new System.Windows.Forms.Button();
           this.panel3 = new System.Windows.Forms.Panel();
           this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-          this.preview2 = new Fractrace.PreviewControl();
-          this.preview1 = new Fractrace.PreviewControl();
           this.splitter1 = new System.Windows.Forms.Splitter();
           this.panel11 = new System.Windows.Forms.Panel();
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.Data = new System.Windows.Forms.TabPage();
-          this.parameterDictControl1 = new Fractrace.Basic.ParameterDictControl();
           this.tpNavigate = new System.Windows.Forms.TabPage();
-          this.navigateControl1 = new Fractrace.NavigateControl();
           this.tpSource = new System.Windows.Forms.TabPage();
-          this.formulaEditor1 = new Fractrace.FormulaEditor();
           this.tpFile = new System.Windows.Forms.TabPage();
           this.btnLoad = new System.Windows.Forms.Button();
           this.btnSave = new System.Windows.Forms.Button();
           this.tabPage1 = new System.Windows.Forms.TabPage();
+          this.panel12 = new System.Windows.Forms.Panel();
+          this.btnPause = new System.Windows.Forms.Button();
+          this.parameterDictControl1 = new Fractrace.Basic.ParameterDictControl();
+          this.navigateControl1 = new Fractrace.NavigateControl();
+          this.formulaEditor1 = new Fractrace.FormulaEditor();
           this.animationControl1 = new Fractrace.Animation.AnimationControl();
+          this.preview2 = new Fractrace.PreviewControl();
+          this.preview1 = new Fractrace.PreviewControl();
           this.panel1.SuspendLayout();
           this.panel2.SuspendLayout();
           this.panel4.SuspendLayout();
@@ -101,6 +103,7 @@
           this.tpSource.SuspendLayout();
           this.tpFile.SuspendLayout();
           this.tabPage1.SuspendLayout();
+          this.panel12.SuspendLayout();
           this.SuspendLayout();
           // 
           // panel1
@@ -231,8 +234,8 @@
           // 
           // panel21
           // 
-          this.panel21.Controls.Add(this.btnStop);
           this.panel21.Controls.Add(this.btnStart);
+          this.panel21.Controls.Add(this.panel12);
           this.panel21.Dock = System.Windows.Forms.DockStyle.Left;
           this.panel21.Location = new System.Drawing.Point(4, 4);
           this.panel21.Margin = new System.Windows.Forms.Padding(4);
@@ -242,9 +245,9 @@
           // 
           // btnStop
           // 
-          this.btnStop.Location = new System.Drawing.Point(7, 45);
+          this.btnStop.Location = new System.Drawing.Point(5, 38);
           this.btnStop.Name = "btnStop";
-          this.btnStop.Size = new System.Drawing.Size(73, 30);
+          this.btnStop.Size = new System.Drawing.Size(77, 30);
           this.btnStop.TabIndex = 1;
           this.btnStop.Text = "Stop";
           this.btnStop.UseVisualStyleBackColor = true;
@@ -252,7 +255,7 @@
           // 
           // btnStart
           // 
-          this.btnStart.Location = new System.Drawing.Point(4, 4);
+          this.btnStart.Location = new System.Drawing.Point(5, 4);
           this.btnStart.Margin = new System.Windows.Forms.Padding(4);
           this.btnStart.Name = "btnStart";
           this.btnStart.Size = new System.Drawing.Size(77, 31);
@@ -508,31 +511,6 @@
           this.splitContainer1.SplitterDistance = 85;
           this.splitContainer1.TabIndex = 1;
           // 
-          // preview2
-          // 
-          this.preview2.Dock = System.Windows.Forms.DockStyle.Right;
-          this.preview2.Image = ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
-          this.preview2.IsRightView = false;
-          this.preview2.Location = new System.Drawing.Point(121, 0);
-          this.preview2.Name = "preview2";
-          this.preview2.RenderOnClick = true;
-          this.preview2.ShowProgressBar = true;
-          this.preview2.Size = new System.Drawing.Size(79, 85);
-          this.preview2.TabIndex = 2;
-          // 
-          // preview1
-          // 
-          this.preview1.Dock = System.Windows.Forms.DockStyle.Left;
-          this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
-          this.preview1.IsRightView = false;
-          this.preview1.Location = new System.Drawing.Point(0, 0);
-          this.preview1.Name = "preview1";
-          this.preview1.RenderOnClick = true;
-          this.preview1.ShowProgressBar = true;
-          this.preview1.Size = new System.Drawing.Size(76, 85);
-          this.preview1.TabIndex = 1;
-          this.preview1.RenderingEnds += new Fractrace.PictureRenderingIsReady(this.preview1_RenderingEnds);
-          // 
           // splitter1
           // 
           this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -578,15 +556,6 @@
           this.Data.Text = "Data";
           this.Data.UseVisualStyleBackColor = true;
           // 
-          // parameterDictControl1
-          // 
-          this.parameterDictControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.parameterDictControl1.Location = new System.Drawing.Point(0, 0);
-          this.parameterDictControl1.Margin = new System.Windows.Forms.Padding(5);
-          this.parameterDictControl1.Name = "parameterDictControl1";
-          this.parameterDictControl1.Size = new System.Drawing.Size(651, 408);
-          this.parameterDictControl1.TabIndex = 0;
-          // 
           // tpNavigate
           // 
           this.tpNavigate.Controls.Add(this.navigateControl1);
@@ -597,15 +566,6 @@
           this.tpNavigate.Text = "Navigate";
           this.tpNavigate.UseVisualStyleBackColor = true;
           // 
-          // navigateControl1
-          // 
-          this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.navigateControl1.Location = new System.Drawing.Point(0, 0);
-          this.navigateControl1.Name = "navigateControl1";
-          this.navigateControl1.Size = new System.Drawing.Size(651, 408);
-          this.navigateControl1.TabIndex = 0;
-          this.navigateControl1.Load += new System.EventHandler(this.navigateControl1_Load_1);
-          // 
           // tpSource
           // 
           this.tpSource.Controls.Add(this.formulaEditor1);
@@ -615,14 +575,6 @@
           this.tpSource.TabIndex = 10;
           this.tpSource.Text = "Formula";
           this.tpSource.UseVisualStyleBackColor = true;
-          // 
-          // formulaEditor1
-          // 
-          this.formulaEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.formulaEditor1.Location = new System.Drawing.Point(0, 0);
-          this.formulaEditor1.Name = "formulaEditor1";
-          this.formulaEditor1.Size = new System.Drawing.Size(651, 408);
-          this.formulaEditor1.TabIndex = 0;
           // 
           // tpFile
           // 
@@ -668,6 +620,54 @@
           this.tabPage1.Text = "Animation";
           this.tabPage1.UseVisualStyleBackColor = true;
           // 
+          // panel12
+          // 
+          this.panel12.Controls.Add(this.btnStop);
+          this.panel12.Controls.Add(this.btnPause);
+          this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
+          this.panel12.Location = new System.Drawing.Point(0, 0);
+          this.panel12.Margin = new System.Windows.Forms.Padding(4);
+          this.panel12.Name = "panel12";
+          this.panel12.Size = new System.Drawing.Size(100, 97);
+          this.panel12.TabIndex = 2;
+          this.panel12.Paint += new System.Windows.Forms.PaintEventHandler(this.panel12_Paint);
+          // 
+          // btnPause
+          // 
+          this.btnPause.Location = new System.Drawing.Point(5, 70);
+          this.btnPause.Name = "btnPause";
+          this.btnPause.Size = new System.Drawing.Size(76, 27);
+          this.btnPause.TabIndex = 2;
+          this.btnPause.Text = "Pause";
+          this.btnPause.UseVisualStyleBackColor = true;
+          this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+          // 
+          // parameterDictControl1
+          // 
+          this.parameterDictControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.parameterDictControl1.Location = new System.Drawing.Point(0, 0);
+          this.parameterDictControl1.Margin = new System.Windows.Forms.Padding(5);
+          this.parameterDictControl1.Name = "parameterDictControl1";
+          this.parameterDictControl1.Size = new System.Drawing.Size(651, 408);
+          this.parameterDictControl1.TabIndex = 0;
+          // 
+          // navigateControl1
+          // 
+          this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.navigateControl1.Location = new System.Drawing.Point(0, 0);
+          this.navigateControl1.Name = "navigateControl1";
+          this.navigateControl1.Size = new System.Drawing.Size(651, 408);
+          this.navigateControl1.TabIndex = 0;
+          this.navigateControl1.Load += new System.EventHandler(this.navigateControl1_Load_1);
+          // 
+          // formulaEditor1
+          // 
+          this.formulaEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.formulaEditor1.Location = new System.Drawing.Point(0, 0);
+          this.formulaEditor1.Name = "formulaEditor1";
+          this.formulaEditor1.Size = new System.Drawing.Size(651, 408);
+          this.formulaEditor1.TabIndex = 0;
+          // 
           // animationControl1
           // 
           this.animationControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -675,6 +675,31 @@
           this.animationControl1.Name = "animationControl1";
           this.animationControl1.Size = new System.Drawing.Size(651, 408);
           this.animationControl1.TabIndex = 0;
+          // 
+          // preview2
+          // 
+          this.preview2.Dock = System.Windows.Forms.DockStyle.Right;
+          this.preview2.Image = ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
+          this.preview2.IsRightView = false;
+          this.preview2.Location = new System.Drawing.Point(121, 0);
+          this.preview2.Name = "preview2";
+          this.preview2.RenderOnClick = true;
+          this.preview2.ShowProgressBar = true;
+          this.preview2.Size = new System.Drawing.Size(79, 85);
+          this.preview2.TabIndex = 2;
+          // 
+          // preview1
+          // 
+          this.preview1.Dock = System.Windows.Forms.DockStyle.Left;
+          this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
+          this.preview1.IsRightView = false;
+          this.preview1.Location = new System.Drawing.Point(0, 0);
+          this.preview1.Name = "preview1";
+          this.preview1.RenderOnClick = true;
+          this.preview1.ShowProgressBar = true;
+          this.preview1.Size = new System.Drawing.Size(76, 85);
+          this.preview1.TabIndex = 1;
+          this.preview1.RenderingEnds += new Fractrace.PictureRenderingIsReady(this.preview1_RenderingEnds);
           // 
           // ParameterInput
           // 
@@ -717,6 +742,7 @@
           this.tpSource.ResumeLayout(false);
           this.tpFile.ResumeLayout(false);
           this.tabPage1.ResumeLayout(false);
+          this.panel12.ResumeLayout(false);
           this.ResumeLayout(false);
 
         }
@@ -775,5 +801,7 @@
         private System.Windows.Forms.Button btnSaveInHistory;
         private System.Windows.Forms.CheckBox cbAutomaticSave;
         private System.Windows.Forms.Button btnCreatePoster;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Button btnPause;
     }
 }
