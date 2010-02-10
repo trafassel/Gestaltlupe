@@ -1,20 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
   <Entry Key="Animation.Steps" Value="300" />
-  <Entry Key="Border.Max.x" Value="1.06666666666667" />
+  <Entry Key="Border.Max.x" Value="1.89629629629631" />
   <Entry Key="Border.Max.y" Value="2.53888888888889" />
-  <Entry Key="Border.Max.z" Value="1.06666666666667" />
+  <Entry Key="Border.Max.z" Value="1.42222222222223" />
   <Entry Key="Border.Max.zz" Value="0" />
-  <Entry Key="Border.Min.x" Value="-1.06666666666667" />
+  <Entry Key="Border.Min.x" Value="-1.89629629629631" />
   <Entry Key="Border.Min.y" Value="-1.19444444444445" />
-  <Entry Key="Border.Min.z" Value="-1.06666666666667" />
+  <Entry Key="Border.Min.z" Value="-1.42222222222223" />
   <Entry Key="Border.Min.zz" Value="0" />
+  <Entry Key="Composite.AmbientLight" Value="0" />
   <Entry Key="Composite.BackgoundDarken" Value="0" />
   <Entry Key="Composite.Blurring" Value="0" />
   <Entry Key="Composite.BlurringDeph" Value="0" />
+  <Entry Key="Composite.Color1Factor" Value="50" />
+  <Entry Key="Composite.Color1TestArea" Value="10" />
+  <Entry Key="Composite.FrontLight" Value="1" />
+  <Entry Key="Composite.Renderer" Value="NiceRenderer" />
   <Entry Key="Composite.Shininess" Value="2" />
+  <Entry Key="Composite.UseAmbient" Value="1" />
+  <Entry Key="Composite.UseColor1" Value="0" />
+  <Entry Key="Composite.UseDarken" Value="1" />
+  <Entry Key="Composite.UseDerivation" Value="1" />
+  <Entry Key="Composite.UseMedian" Value="1" />
   <Entry Key="Computation.NoOfThreads" Value="8" />
-  <Entry Key="Formula.Static.Cycles" Value="7" />
+  <Entry Key="Formula.Static.Cycles" Value="21" />
   <Entry Key="Formula.Static.Formula" Value="-2" />
   <Entry Key="Formula.Static.jx" Value="0" />
   <Entry Key="Formula.Static.jy" Value="0" />
@@ -32,9 +42,15 @@
   <Entry Key="Transformation.AngleX" Value="0" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="0" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
   <Entry Key="View.ClassicView" Value="0" />
+  <Entry Key="View.Deph" Value="1800" />
+  <Entry Key="View.Height" Value="720" />
   <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.PosterX" Value="0" />
+  <Entry Key="View.PosterZ" Value="0" />
   <Entry Key="View.Raster" Value="2" />
   <Entry Key="View.Size" Value="1" />
+  <Entry Key="View.Width" Value="1280" />
   <Entry Key="View.Zoom" Value="1" />
 </ParameterDict>

@@ -85,7 +85,7 @@ namespace Fractrace.PictureArt {
       DrawPlane();
       DarkenPlane();
       if (useAmbient)
-        SmoothPlane();
+       SmoothPlane();
       NormalizePlane();
     }
 
@@ -427,6 +427,17 @@ namespace Fractrace.PictureArt {
         }
       }
 
+      // Höhe der Begrenzungsfläche auf ymax setzen
+     for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          PixelInfo pInfo = pData.Points[i, j];
+          if (pInfo != null) {
+            smoothDeph1[i, j] =maxY;
+          }
+        }
+      }
+
+
       SetSmoothDeph(smoothDeph1, smoothDeph2);
       SetSmoothDeph(smoothDeph2, smoothDeph3);
       SetSmoothDeph(smoothDeph3, smoothDeph1);
@@ -501,16 +512,44 @@ namespace Fractrace.PictureArt {
 
         }
       }
+
+      for (int i = pData.Width - 1; i >= 0; i--) {
+        for (int j = pData.Height-1; j >= 0; j--) {
+          if (i < pData.Width - 1 && j < pData.Height - 1) {
+            double localShadow = shadowInfo11[i + 1, j + 1] - yd;
+            if (localShadow > shadowInfo11[i, j])
+              shadowInfo11[i, j] = localShadow;
+          }
+          // Licht von rechts
+          if (i < pData.Width - 1) {
+            double localShadow = shadowInfo01h[i + 1, j] - ydh;
+            if (localShadow > shadowInfo01h[i, j])
+              shadowInfo01h[i, j] = localShadow;
+          }
+          // Licht von oben
+          if (j < pData.Height - 1) {
+            double localShadow = shadowInfo10v[i, j + 1] - ydv;
+            if (localShadow > shadowInfo10v[i, j])
+              shadowInfo10v[i, j] = localShadow;
+          }
+
+
+
+        }
+      }
+
+      /*
       for (int k = 0; k < 300; k++) {
         for (int i = 0; i < pData.Width; i++) {
           for (int j = 0; j < pData.Height; j++) {
 
             // Licht von unten rechts
-            if (i < pData.Width - 1 && j < pData.Height - 1) {
-              double localShadow = shadowInfo11[i + 1, j + 1] - yd;
-              if (localShadow > shadowInfo11[i, j])
-                shadowInfo11[i, j] = 0.5 * (shadowInfo11[i, j] + localShadow);
-            }
+            
+            //if (i < pData.Width - 1 && j < pData.Height - 1) {
+            //  double localShadow = shadowInfo11[i + 1, j + 1] - yd;
+            //  if (localShadow > shadowInfo11[i, j])
+            //    shadowInfo11[i, j] = 0.5 * (shadowInfo11[i, j] + localShadow);
+            //}
 
             // Licht von oben rechts
             if (i < pData.Width - 1 && j > 0) {
@@ -540,20 +579,21 @@ namespace Fractrace.PictureArt {
                 shadowInfo00h[i, j] = 0.5 * (shadowInfo00h[i, j] + localShadow);
             }
 
-
+            
             // Licht von rechts
-            if (i < pData.Width - 1) {
-              double localShadow = shadowInfo01h[i + 1, j] - ydh;
-              if (localShadow > shadowInfo01h[i, j])
-                shadowInfo01h[i, j] = 0.5 * (shadowInfo01h[i, j] + localShadow);
-            }
-
+            //if (i < pData.Width - 1) {
+            //  double localShadow = shadowInfo01h[i + 1, j] - ydh;
+            //  if (localShadow > shadowInfo01h[i, j])
+            //    shadowInfo01h[i, j] = 0.5 * (shadowInfo01h[i, j] + localShadow);
+            //}
+            
             // Licht von oben
-            if (j < pData.Height - 1) {
-              double localShadow = shadowInfo10v[i, j + 1] - ydv;
-              if (localShadow > shadowInfo10v[i, j])
-                shadowInfo10v[i, j] = 0.5 * (shadowInfo10v[i, j] + localShadow);
-            }
+            
+            //if (j < pData.Height - 1) {
+            //  double localShadow = shadowInfo10v[i, j + 1] - ydv;
+            //  if (localShadow > shadowInfo10v[i, j])
+            //    shadowInfo10v[i, j] = 0.5 * (shadowInfo10v[i, j] + localShadow);
+            //}
 
             // Licht von unten
             if (j > 0) {
@@ -567,6 +607,7 @@ namespace Fractrace.PictureArt {
           }
         }
       }
+       */
 
       // Die shadowplane aufbauen
       for (int i = 0; i < pData.Width; i++) {
@@ -652,11 +693,14 @@ namespace Fractrace.PictureArt {
     protected Vec3 GetRgb(int x, int y) {
       // TODO: Wenn Schnitt mit Begrenzung vorliegt, soll die Anzahl der durchgeführten Iterationen als
       // Farbwert dargestellt werden.
-      Vec3 retVal = new Vec3(1, 0, 0); // blau
+      Vec3 retVal = new Vec3(0, 0, 0); // blau
       
       PixelInfo pInfo = pData.Points[x, y];
+      
       if (pInfo != null) {
         if (pInfo.iterations >= 0) {
+         // return retVal;
+
           double it = -pInfo.frontLight/255.0;
 
           retVal.X = it;
@@ -723,12 +767,14 @@ namespace Fractrace.PictureArt {
     /// <returns></returns>
     protected override Vec3 GetLight(Vec3 normal) {
       Vec3 retVal = new Vec3(0, 0, 0);
+      if(normal==null)
+        return retVal;
 
       double norm = Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
       /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
       /* mit Vergleichsvektor (Beide nachträglich normiert )             */
       double winkel = 0;
-      if (norm == null)
+      if (norm == 0)
         return retVal;
 
       winkel = Math.Acos((normal.Y) / norm);
@@ -741,6 +787,7 @@ namespace Fractrace.PictureArt {
 
       winkel *= winkel;
 
+      
       // Zum Test nur zweite Lichtquelle
       winkel = 0;
       // Zweite Lichtquelle
@@ -787,14 +834,20 @@ namespace Fractrace.PictureArt {
       winkel4 *= winkel4;
 
       winkel += winkel4;
-
+      winkel /= 1.7;
       if (winkel > 1)
         winkel = 1;
+      if (winkel < 0)
+        winkel = 0;
 
       retVal.X = winkel;
       retVal.Y = winkel;
       retVal.Z = winkel;
-
+/*
+      retVal.X = 1;
+      retVal.Y = 1;
+      retVal.Z = 1;
+*/
       return retVal;
     }
 
