@@ -86,7 +86,7 @@ namespace Fractrace.PictureArt {
       DarkenPlane();
       if (useAmbient)
        SmoothPlane();
-      NormalizePlane();
+     // NormalizePlane();
     }
 
 
