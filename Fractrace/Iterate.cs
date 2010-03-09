@@ -433,6 +433,11 @@ namespace Fractrace {
                     vInfo.k = z;
                     vInfo.l = zz;
 
+                    cycleAdd = 1024;
+                    if (minCycle != 51 && minCycle >= 0)
+                    {
+                        cycleAdd = minCycle - zyklen;
+                    }
                     if (isYborder) { // es liegt Schnitt mit Begrenzung vor
                       colour_type = 0; // COL; // Farbige Darstellung
 

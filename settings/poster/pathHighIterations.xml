@@ -25,7 +25,7 @@
   <Entry Key="Composite.UseDerivation" Value="1" />
   <Entry Key="Composite.UseMedian" Value="0" />
   <Entry Key="Computation.NoOfThreads" Value="8" />
-  <Entry Key="Formula.Static.Cycles" Value="20" />
+  <Entry Key="Formula.Static.Cycles" Value="20000" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
   <Entry Key="Formula.Static.jy" Value="0" />

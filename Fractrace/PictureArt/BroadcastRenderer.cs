@@ -8,16 +8,17 @@ using Fractrace.Basic;
 using Fractrace.PictureArt;
 using Fractrace.Geometry;
 
+
 namespace Fractrace.PictureArt
 {
-    class NiceRenderer : FastScienceRenderer
+    class BroadcastRenderer : FastScienceRenderer
     {
 
-        /// <summary>
+         /// <summary>
         /// Initialisierung
         /// </summary>
         /// <param name="pData"></param>
-        public NiceRenderer(PictureData pData)
+        public BroadcastRenderer(PictureData pData)
             : base(pData)
         {
         }
@@ -112,14 +113,13 @@ namespace Fractrace.PictureArt
             CreateSmoothDeph();
             CreateShadowInfo();
             DrawPlane();
-            if (ParameterDict.Exemplar.GetBool("Composite.Normalize"))
-                NormalizePlane();
             DarkenPlane();
             if (useAmbient)
                 SmoothPlane();
             //  ParameterDict.Exemplar["Composite.Normalize"] = "1";
 
-          
+            if (ParameterDict.Exemplar.GetBool("Composite.Normalize"))
+                NormalizePlane();
         }
 
 
@@ -964,6 +964,9 @@ namespace Fractrace.PictureArt
             if (norm == 0)
                 return retVal;
 
+
+            // erste Lichtquelle
+            // 0 -1 0  
             winkel = Math.Acos((normal.Y) / norm);
             winkel = 1 - winkel;
 
@@ -976,7 +979,7 @@ namespace Fractrace.PictureArt
 
 
             // Zum Test nur zweite Lichtquelle
-            winkel = 0;
+            winkel = 0; // Frontlight wird ausgeschaltet.
             // Zweite Lichtquelle
             // 1 -1 1  
             double norm2 = Math.Sqrt(3.0);
@@ -1021,6 +1024,52 @@ namespace Fractrace.PictureArt
             winkel4 *= winkel4;
 
             winkel += winkel4;
+
+            // fünfte Lichtquelle
+            // -1 -1 1  
+            double norm5 = Math.Sqrt(3.0);
+            double winkel5 = Math.Acos((-normal.X + normal.Y + normal.Z) / (norm * norm5));
+            winkel5 = 1 - winkel5;
+
+            if (winkel5 < 0)
+                winkel5 = 0;
+            if (winkel5 > 1)
+                winkel5 = 1;
+
+            winkel5 *= winkel5;
+
+            winkel += 0.1*winkel5;
+
+            // 6. Lichtquelle
+            // 0 -1 -1  
+            double norm6 = Math.Sqrt(2.0);
+            double winkel6 = Math.Acos((normal.Y - normal.Z) / (norm * norm3));
+            winkel6 = 1 - winkel6;
+
+            if (winkel6 < 0)
+                winkel6 = 0;
+            if (winkel6 > 1)
+                winkel6 = 1;
+
+            winkel6 *= winkel6;
+
+            winkel += 0.1 * winkel6;
+
+            // 7. Lichtquelle
+            // -1 -1 0  
+            double norm7 = Math.Sqrt(2.0);
+            double winkel7 = Math.Acos((-normal.X + normal.Y) / (norm * norm7));
+            winkel7 = 1 - winkel7;
+
+            if (winkel7 < 0)
+                winkel7 = 0;
+            if (winkel7 > 1)
+                winkel7 = 1;
+
+            winkel7 *= winkel7;
+
+            winkel += 0.1 * winkel7;
+//            winkel /= 1.7;
             winkel /= 1.7;
             if (winkel > 1)
                 winkel = 1;

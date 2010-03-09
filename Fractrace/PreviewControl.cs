@@ -114,18 +114,25 @@ namespace Fractrace {
     /// </summary>
     protected override void OneStepEnds() {
       if (iter != null) {
-        string oldRenderer = ParameterDict.Exemplar["Composite.Renderer"];
-        ParameterDict.Exemplar["Composite.Renderer"] = "FastScienceRenderer";
+        lock (iter) {
+          try {
+            string oldRenderer = ParameterDict.Exemplar["Composite.Renderer"];
+            ParameterDict.Exemplar["Composite.Renderer"] = "FastScienceRenderer";
 
-        Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
-        // Hier wird kurz der Renderer ausgetauscht
-        ParameterDict.Exemplar["Composite.Renderer"]=oldRenderer;
-        
-        pArt.Paint(grLabel);
-        Application.DoEvents();
-        this.Refresh();
-        if (RenderingEnds != null)
-          RenderingEnds();
+            Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
+            // Hier wird kurz der Renderer ausgetauscht
+            ParameterDict.Exemplar["Composite.Renderer"] = oldRenderer;
+
+            pArt.Paint(grLabel);
+            Application.DoEvents();
+            this.Refresh();
+            if (RenderingEnds != null)
+              RenderingEnds();
+          } catch (Exception ex) {
+            // tritt auf, wenn iter null ist
+            System.Diagnostics.Debug.WriteLine(ex.ToString());
+          }
+        }
       }
       btnPreview.Enabled = true;
       inDrawing = false;
