@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Animation.Steps" Value="300" />
+  <Entry Key="Border.Max.x" Value="0.0149641607654962" />
+  <Entry Key="Border.Max.y" Value="0.741328761152959" />
+  <Entry Key="Border.Max.z" Value="0.48693213556286" />
+  <Entry Key="Border.Max.zz" Value="0" />
+  <Entry Key="Border.Min.x" Value="0.0130544644073282" />
+  <Entry Key="Border.Min.y" Value="0.740131028399391" />
+  <Entry Key="Border.Min.z" Value="0.486078861634515" />
+  <Entry Key="Border.Min.zz" Value="0" />
+  <Entry Key="Composite.AmbientLight" Value="1" />
+  <Entry Key="Composite.BackgoundDarken" Value="1" />
+  <Entry Key="Composite.Blurring" Value="1" />
+  <Entry Key="Composite.BlurringDeph" Value="1" />
+  <Entry Key="Composite.Color1Factor" Value="50" />
+  <Entry Key="Composite.Color1TestArea" Value="10" />
+  <Entry Key="Composite.FrontLight" Value="1" />
+  <Entry Key="Composite.Normalize" Value="1" />
+  <Entry Key="Composite.Renderer" Value="NiceRenderer" />
+  <Entry Key="Composite.Shininess" Value="2" />
+  <Entry Key="Composite.UseAmbient" Value="1" />
+  <Entry Key="Composite.UseColor1" Value="0" />
+  <Entry Key="Composite.UseDarken" Value="1" />
+  <Entry Key="Composite.UseDerivation" Value="1" />
+  <Entry Key="Composite.UseMedian" Value="0" />
+  <Entry Key="Computation.NoOfThreads" Value="8" />
+  <Entry Key="Formula.Static.Cycles" Value="12.8866666666667" />
+  <Entry Key="Formula.Static.Formula" Value="-1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="51" />
+  <Entry Key="Intern.Formula.Source" Value="/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;//gr1=3;&#xD;&#xA;   &#xD;&#xA;         // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;          gr1=GetDouble(&quot;Formula.Static.Cycles&quot;);&#xD;&#xA;int tempGr=(int)gr1;&#xD;&#xA;gr1=gr1- tempGr;&#xD;&#xA;gr1=1-gr1;&#xD;&#xA;gr1*=2.4;&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;          double gr1=0;&#xD;&#xA;&#xD;&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;            double aar, aai, aaj;&#xD;&#xA;            long tw;&#xD;&#xA;            int n;&#xD;&#xA;            int pow = 8; // n=8 entspricht dem Mandelbulb&#xD;&#xA;&#xD;&#xA;            double gr =Math.Pow(10,gr1)+1.0;  //   10; // Ab diesem Wert liegt mit Sicherheit Nichtzugehörigkeit zur Menge vor.&#xD;&#xA;            double theta, phi;&#xD;&#xA;&#xD;&#xA;            double r_n = 0;&#xD;&#xA;            aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;            tw = 0L;&#xD;&#xA;            double r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;&#xD;&#xA;             double      phi_pow;&#xD;&#xA;             double       theta_pow;&#xD;&#xA;             double    sin_theta_pow;&#xD;&#xA;              double  rn_sin_theta_pow;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;            for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;&#xD;&#xA;                theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xD;&#xA;                phi = Math.Atan2(ai, ar);&#xD;&#xA;                r_n = Math.Pow(r, pow);&#xD;&#xA;&#xD;&#xA;                phi_pow=phi*pow;&#xD;&#xA;                theta_pow=theta*pow;&#xD;&#xA;                sin_theta_pow=Math.Sin(theta_pow);&#xD;&#xA;               rn_sin_theta_pow=r_n* sin_theta_pow;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;                ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;&#xD;&#xA;                ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;&#xD;&#xA;                aj = r_n * Math.Cos(theta_pow)+bj;&#xD;&#xA;&#xD;&#xA;                aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;                r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;&#xD;&#xA;                if (r &gt; gr) { tw = n; break; }&#xD;&#xA;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            if (invers) {&#xD;&#xA;                if (tw == 0)&#xD;&#xA;                    tw = 1;&#xD;&#xA;                else&#xD;&#xA;                    tw = 0;&#xD;&#xA;            }&#xD;&#xA;            return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;" />
+  <Entry Key="test2" Value="df" />
+  <Entry Key="Transformation.3.AngleX" Value="4.98039215686274" />
+  <Entry Key="Transformation.3.AngleY" Value="-17.2019607843137" />
+  <Entry Key="Transformation.3.AngleZ" Value="12.8176470588235" />
+  <Entry Key="Transformation.3.CenterX" Value="0.00688844104990085" />
+  <Entry Key="Transformation.3.CenterY" Value="0.309072727436468" />
+  <Entry Key="Transformation.3.CenterZ" Value="0.181218987620451" />
+  <Entry Key="Transformation.AngleX" Value="152.624444444445" />
+  <Entry Key="Transformation.AngleY" Value="0" />
+  <Entry Key="Transformation.AngleZ" Value="102.418555555555" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
+  <Entry Key="View.ClassicView" Value="0" />
+  <Entry Key="View.Deph" Value="1800" />
+  <Entry Key="View.Height" Value="720" />
+  <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.PosterX" Value="0" />
+  <Entry Key="View.PosterZ" Value="0" />
+  <Entry Key="View.Raster" Value="2" />
+  <Entry Key="View.Size" Value="1" />
+  <Entry Key="View.Width" Value="1280" />
+  <Entry Key="View.Zoom" Value="1" />
+</ParameterDict>
