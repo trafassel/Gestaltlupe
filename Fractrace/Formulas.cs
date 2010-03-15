@@ -1337,6 +1337,7 @@ double xx, yy, zz;
               if (pointsCount > 0)
                 ycenter = ycenter / ((double)pointsCount);
 
+                /*
               double maxdiff = Math.Max((yd + xd + zd) / 2.0, ymax - ymin);
 
                 // derivation soll eigentlich die lokale Erhöhung anzeigen,
@@ -1374,6 +1375,8 @@ double xx, yy, zz;
                   if (pData.Points[pixelX + 1, pixelY + 1] != null)
                     pData.Points[pixelX + 1, pixelY + 1].derivation = derivation;
               }
+
+                */
             }
             return ((int)col[0]);
         }

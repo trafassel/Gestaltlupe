@@ -158,10 +158,13 @@
     <Compile Include="Geometry\VecRotation.cs" />
     <Compile Include="PictureArt\BroadcastRenderer.cs" />
     <Compile Include="PictureArt\FastScienceRenderer.cs" />
+    <Compile Include="PictureArt\HeighMap.cs" />
     <Compile Include="PictureArt\NiceRenderer.cs" />
     <Compile Include="PictureArt\NiceRendererMultiThread.cs" />
+    <Compile Include="PictureArt\Picture.cs" />
     <Compile Include="PictureArt\RenderBase.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
+    <Compile Include="PictureArt\SharpRenderer.cs" />
     <Compile Include="PictureArt\SmallRenderer.cs" />
     <Compile Include="PictureArt\PictureArtFactory.cs" />
     <Compile Include="PictureArt\Renderer.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="StereoForm.Designer.cs">
       <DependentUpon>StereoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TomoGeometry\AdditionalPointInfo.cs" />
     <Compile Include="TomoGeometry\VecRotMandel2d.cs" />
     <Compile Include="TomoGeometry\Mandelbulb.cs" />
     <Compile Include="TomoGeometry\TomoFormula.cs" />

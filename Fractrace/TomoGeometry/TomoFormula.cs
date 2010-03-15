@@ -37,6 +37,9 @@ namespace Fractrace.TomoGeometry {
         }
 
 
+        public AdditionalPointInfo additionalPointInfo = null;
+
+
         public void Set(string id, int value) {
           ParameterDict.Exemplar.SetInt(id,value);
         }

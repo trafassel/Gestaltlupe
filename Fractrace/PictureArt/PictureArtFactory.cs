@@ -15,6 +15,11 @@ namespace Fractrace.PictureArt {
         /// <returns></returns>
         public static Renderer Create(PictureData pdata) {
           switch (ParameterDict.Exemplar["Composite.Renderer"]) {
+              
+              case "4":
+              case "SharpRenderer":
+                  return new SharpRenderer(pdata);
+              
               case "3":
               case "BroadcastRenderer":
                   return new BroadcastRenderer(pdata);

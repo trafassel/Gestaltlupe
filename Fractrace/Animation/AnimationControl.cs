@@ -182,11 +182,19 @@ namespace Fractrace.Animation {
       /// <param name="sender"></param>
       /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e) {
-          int row = dataGridView1.CurrentCell.RowIndex;
-          if (row >= 0 && row < mAnimationSteps.Steps.Count) {
-            mAnimationSteps.Steps.RemoveAt(row);
-            UpdateFromAnimationSteps();
-          }
+            try
+            {
+                int row = dataGridView1.CurrentCell.RowIndex;
+                if (row >= 0 && row < mAnimationSteps.Steps.Count)
+                {
+                    mAnimationSteps.Steps.RemoveAt(row);
+                    UpdateFromAnimationSteps();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
 
 
