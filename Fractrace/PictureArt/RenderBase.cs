@@ -51,7 +51,19 @@ namespace Fractrace.PictureArt {
         /// <returns></returns>
         protected virtual Color GetColor(int x, int y) {
          Vec3 col=GetRgbAt(x,y);
-
+         if (col.X < 0)
+           col.X = 0;
+         if (col.Y < 0)
+           col.Y = 0;
+         if (col.Z < 0)
+           col.Z = 0;
+         if (col.X > 1)
+           col.X = 1;
+         if (col.Y > 1)
+           col.Y = 1;
+         if (col.Z > 1)
+           col.Z = 1;
+        
           try {
             if ( double.IsNaN(col.X))
               return Color.Red;

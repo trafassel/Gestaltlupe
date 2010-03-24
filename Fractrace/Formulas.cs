@@ -1064,6 +1064,13 @@ double xx, yy, zz;
             double xDistance = distance * 6.0;
             double zDistance = distance * 6.0;
 
+            // Eventuell während der Berechnung entstehende Zusatzinfos für alle 4 Punkte.
+            AdditionalPointInfo[] pinfoSet=null;
+            if (mInternFormula != null && mInternFormula.additionalPointInfo!=null)
+            {
+                pinfoSet = new AdditionalPointInfo[5];
+            }
+
             for (k = 4; k >= 0; k--) {
                 switch (k) {
                     case 2:     /* oben */
@@ -1178,6 +1185,11 @@ double xx, yy, zz;
 
 
                 }
+
+                if (pinfoSet != null)
+                {
+                  pinfoSet[k] = mInternFormula.additionalPointInfo;
+                }
             }
 
             // Die Normalen der 4 Randpunkte
@@ -1258,6 +1270,8 @@ double xx, yy, zz;
                           pInfo.frontLight = winkel;
                           pInfo.Normal = normals[k];
                           pData.Points[indexX, indexY] = pInfo;
+                          if(pinfoSet!=null)
+                          pInfo.AdditionalInfo = pinfoSet[k];
                         }
                       }
                     } else {
@@ -1274,11 +1288,11 @@ double xx, yy, zz;
                       }
                       pInfo.Normal = normals[k];
                         pInfo.frontLight += winkel/4.0;
+                        if (pinfoSet != null)
+                          pInfo.AdditionalInfo = pinfoSet[k];
                         // TODO: Auch die Normalen übertragen
                       }
-
-                    
-
+                  
                 }
                 else {
 
@@ -1313,6 +1327,7 @@ double xx, yy, zz;
                 }
             }
 
+          /*
             // Oberflächenkrümmung bestimmen
             double derivation = 0;
             // Zentrum der 4 Randpunkte mit dem Mittelpunkt vergleichen.
@@ -1337,7 +1352,7 @@ double xx, yy, zz;
               if (pointsCount > 0)
                 ycenter = ycenter / ((double)pointsCount);
 
-                /*
+                
               double maxdiff = Math.Max((yd + xd + zd) / 2.0, ymax - ymin);
 
                 // derivation soll eigentlich die lokale Erhöhung anzeigen,
@@ -1376,8 +1391,8 @@ double xx, yy, zz;
                     pData.Points[pixelX + 1, pixelY + 1].derivation = derivation;
               }
 
-                */
-            }
+               
+            } */
             return ((int)col[0]);
         }
 

@@ -886,10 +886,11 @@ namespace Fractrace.PictureArt
                     // return retVal;
 
                     double it = -pInfo.frontLight / 255.0;
-
+                    if (it > 1)
+                      it = 1;
                     retVal.X = it;
-                    retVal.Y = 1 - it;
-                    retVal.Z = 0;
+                    retVal.Y = 0.2+0.8*it;
+                    retVal.Z = it;
 
                     picInfo[x, y] = 1;
 
@@ -945,6 +946,37 @@ namespace Fractrace.PictureArt
             retVal.X = newFac * retVal.X;
             retVal.Y = (0.02 + 0.98 * newFac) * retVal.Y;
 
+          // Falls weitere Farbinformation vorhanden sind, werden diese nun auf die Punkte angewendet
+            bool useAdditionalColorinfo = true;
+            if (useAdditionalColorinfo&&pInfo != null && pInfo.AdditionalInfo != null) {
+              // Normalisieren;
+              double r1=pInfo.AdditionalInfo.red;
+              double g1=pInfo.AdditionalInfo.green;
+              double b1=pInfo.AdditionalInfo.blue;
+              if (r1 < 0)
+                r1 = -r1;
+              if (g1 < 0)
+                g1 = -g1;
+              if (b1 < 0)
+                b1 = -b1;
+              double minr = r1;
+              if (minr > g1)
+                minr = g1;
+              if (minr > b1)
+                minr = b1;
+              
+              //r1 -= minr;
+              //g1 -= minr;
+              //b1 -= minr;
+              
+
+              double norm = Math.Sqrt(r1*r1+g1*g1+b1*b1)/Math.Sqrt(3.0);
+              if (norm != 0) {
+                retVal.X *= (r1) / norm;
+                retVal.Y *= (g1) / norm;
+                retVal.Z *= (b1) / norm;
+              }
+            }
             return retVal;
         }
 

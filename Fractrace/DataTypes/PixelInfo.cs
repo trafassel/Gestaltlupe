@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Fractrace.Geometry;
+using Fractrace.TomoGeometry;
 
 namespace Fractrace.DataTypes {
 
@@ -17,7 +18,8 @@ namespace Fractrace.DataTypes {
 
         }
 
-
+        public AdditionalPointInfo AdditionalInfo = null;
+      
         /// <summary>
         /// Realkoordinaten des Pixels
         /// </summary>
