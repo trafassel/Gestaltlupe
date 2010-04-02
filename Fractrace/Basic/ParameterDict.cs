@@ -132,14 +132,25 @@ namespace Fractrace.Basic {
             return string.Empty;
         }
 
+
         protected void SetValue(string name,string value) {
             mEntries[name]=value;
             if(EventChanged!=null)
             EventChanged(this, new ParameterDictChangedEventArgs(name, value));
-
-         //   NodeFound(this, new SearchEventArgs(mHirarchy));
         }
 
+
+      /// <summary>
+      /// Hier kann ein Eintrsg geändert werden, ohne einen Change-Event auszulösen. 
+      /// </summary>
+      /// <param name="name"></param>
+      /// <param name="value"></param>
+      /// <param name="raiseChangeEvent"></param>
+        public void SetValue(string name, string value,bool raiseChangeEvent) {
+          mEntries[name] = value;
+          if (EventChanged != null && raiseChangeEvent)
+            EventChanged(this, new ParameterDictChangedEventArgs(name, value));
+        }
 
         /// <summary>
         /// Öffentlicher Zugriff auf das interne Dictionary.

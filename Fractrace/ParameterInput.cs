@@ -77,6 +77,7 @@ namespace Fractrace {
         /// <param name="source"></param>
         /// <param name="e"></param>
         void Exemplar_EventChanged(object source, ParameterDictChangedEventArgs e) {
+        
             UpdateFromData();
         }
 

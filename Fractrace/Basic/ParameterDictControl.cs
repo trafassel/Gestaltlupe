@@ -82,6 +82,8 @@ namespace Fractrace.Basic {
         /// Die Daten werden neu gezeichnet.
         /// </summary>
         public void UpdateFromData() {
+          if (inDataGridView1_CellValueChanged)
+            return;
             arr = new System.Collections.Generic.List<OptionMember>();
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
                 if (entry.Key.StartsWith(mChoosenHirarchy)) {
@@ -117,15 +119,19 @@ namespace Fractrace.Basic {
         System.Collections.Generic.List<OptionMember> arr = null;
 
 
+        private bool inDataGridView1_CellValueChanged = false;
+
         /// <summary>
         /// Ein Eintrag wurde verändert.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+          inDataGridView1_CellValueChanged = true;
            OptionMember optionEntry=arr[e.RowIndex];
            ParameterDict.Exemplar[optionEntry.Name] = optionEntry.Value;
            Changed = true;
+           inDataGridView1_CellValueChanged = false;
         }
 
 

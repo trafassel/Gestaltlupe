@@ -8,10 +8,17 @@ namespace Fractrace.TomoGeometry
     public class AdditionalPointInfo
     {
 
-        public int red = 0;
+      public AdditionalPointInfo(AdditionalPointInfo other) {
+        this.red = other.red;
+        this.blue = other.blue;
+        this.green = other.green;
+      }
 
-        public int green = 0;
 
-        public int blue = 0;
+        public double red = 0;
+
+        public double green = 0;
+
+        public double blue = 0;
     }
 }

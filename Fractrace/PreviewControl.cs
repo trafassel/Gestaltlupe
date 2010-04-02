@@ -117,12 +117,10 @@ namespace Fractrace {
         lock (iter) {
           try {
             string oldRenderer = ParameterDict.Exemplar["Composite.Renderer"];
-            ParameterDict.Exemplar["Composite.Renderer"] = "FastScienceRenderer";
-
+            ParameterDict.Exemplar.SetValue("Composite.Renderer","FastScienceRenderer",false);
             Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
             // Hier wird kurz der Renderer ausgetauscht
-            ParameterDict.Exemplar["Composite.Renderer"] = oldRenderer;
-
+            ParameterDict.Exemplar.SetValue("Composite.Renderer", oldRenderer, false);
             pArt.Paint(grLabel);
             Application.DoEvents();
             this.Refresh();

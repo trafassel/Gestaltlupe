@@ -1188,7 +1188,7 @@ double xx, yy, zz;
 
                 if (pinfoSet != null)
                 {
-                  pinfoSet[k] = mInternFormula.additionalPointInfo;
+                  pinfoSet[k] = new AdditionalPointInfo(mInternFormula.additionalPointInfo);
                 }
             }
 
