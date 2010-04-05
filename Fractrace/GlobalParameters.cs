@@ -82,7 +82,7 @@ namespace Fractrace {
             ParameterDict.Exemplar["Composite.BackgoundDarken"] = "0";
             // Glanz des Lichtes
             ParameterDict.Exemplar["Composite.Shininess"] = "1";
-            // Glanz des Lichtes
+            // Tiefenunschärfe
             ParameterDict.Exemplar["Composite.UseAmbient"] = "1";
             ParameterDict.Exemplar["Composite.UseDarken"] = "1";
             ParameterDict.Exemplar["Composite.UseMedian"] = "1";
@@ -93,7 +93,14 @@ namespace Fractrace {
             ParameterDict.Exemplar["Composite.FrontLight"] = "1";
             ParameterDict.Exemplar["Composite.AmbientLight"] = "0";
             ParameterDict.Exemplar["Composite.Normalize"] = "1";
-            ParameterDict.Exemplar["Composite.Renderer"] = "NiceRenderer";
+            ParameterDict.Exemplar["Composite.Renderer"] = "UniversalRenderer";
+
+          // Eigenschaften von UniversalRenderer
+            ParameterDict.Exemplar["Composite.Renderer.Universal.UseAmbient"] = "1";
+            ParameterDict.Exemplar["Composite.Renderer.Universal.UseDarken"] = "1";
+            ParameterDict.Exemplar["Composite.Renderer.Universal.UseColorFromFormula"] = "1";
+            ParameterDict.Exemplar["Composite.Renderer.Universal.UseMedianColorFromFormula"] = "1";
+
         //    ParameterDict.Exemplar["Composite.UseMedian"] = "1";
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.

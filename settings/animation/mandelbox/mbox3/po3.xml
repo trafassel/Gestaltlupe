@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
   <Entry Key="Animation.Steps" Value="100" />
-  <Entry Key="Border.Max.x" Value="3.534303355068" />
-  <Entry Key="Border.Max.y" Value="1.80118855966283" />
-  <Entry Key="Border.Max.z" Value="-0.33509596100324" />
+  <Entry Key="Border.Max.x" Value="3.62264979672627" />
+  <Entry Key="Border.Max.y" Value="1.30185498154731" />
+  <Entry Key="Border.Max.z" Value="-0.248601210932381" />
   <Entry Key="Border.Max.zz" Value="0" />
-  <Entry Key="Border.Min.x" Value="3.50269307844898" />
-  <Entry Key="Border.Min.y" Value="1.75377314473431" />
-  <Entry Key="Border.Min.z" Value="-0.349144972833913" />
+  <Entry Key="Border.Min.x" Value="3.62248737582031" />
+  <Entry Key="Border.Min.y" Value="1.30169256064135" />
+  <Entry Key="Border.Min.z" Value="-0.248649335645259" />
   <Entry Key="Border.Min.zz" Value="0" />
   <Entry Key="Composite.AmbientLight" Value="0" />
   <Entry Key="Composite.BackgoundDarken" Value="0" />
@@ -25,7 +25,7 @@
   <Entry Key="Composite.UseDerivation" Value="1" />
   <Entry Key="Composite.UseMedian" Value="1" />
   <Entry Key="Computation.NoOfThreads" Value="8" />
-  <Entry Key="Formula.Static.Cycles" Value="18" />
+  <Entry Key="Formula.Static.Cycles" Value="22" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0.3" />
   <Entry Key="Formula.Static.jy" Value="0.6" />
@@ -51,7 +51,7 @@
   <Entry Key="View.PosterX" Value="0" />
   <Entry Key="View.PosterZ" Value="0" />
   <Entry Key="View.Raster" Value="2" />
-  <Entry Key="View.Size" Value="0.4" />
+  <Entry Key="View.Size" Value="1" />
   <Entry Key="View.Width" Value="1280" />
   <Entry Key="View.Zoom" Value="1" />
 </ParameterDict>

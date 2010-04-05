@@ -15,6 +15,9 @@ namespace Fractrace.TomoGeometry
       }
 
 
+      public AdditionalPointInfo() {
+      }
+
         public double red = 0;
 
         public double green = 0;
