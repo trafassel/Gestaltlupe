@@ -100,7 +100,7 @@ namespace Fractrace {
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseDarken"] = "1";
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseColorFromFormula"] = "1";
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseMedianColorFromFormula"] = "1";
-
+            ParameterDict.Exemplar["Composite.Renderer.Universal.ComicStyle"] = "0";
         //    ParameterDict.Exemplar["Composite.UseMedian"] = "1";
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.

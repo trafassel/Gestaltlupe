@@ -92,7 +92,7 @@ namespace Fractrace.PictureArt {
     private double[,] smoothDeph2 = null;
 
     
-    private double[,] smoothDeph3 = null;
+    private double[,] _smoothDeph3 = null;
 
 
     /// <summary>
@@ -124,6 +124,7 @@ namespace Fractrace.PictureArt {
 
     private double maxY = double.MinValue;
 
+    bool comicStyle = false;
 
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
@@ -133,6 +134,8 @@ namespace Fractrace.PictureArt {
       useDarken = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseDarken");
       useColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseColorFromFormula");
       useMedianColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseMedianColorFromFormula");
+      comicStyle= ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.ComicStyle");
+      
 
       borderMinY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
       borderMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
@@ -533,7 +536,7 @@ namespace Fractrace.PictureArt {
     protected void CreateSmoothDeph() {
       smoothDeph1 = new double[pData.Width, pData.Height];
       smoothDeph2 = new double[pData.Width, pData.Height];
-      smoothDeph3 = new double[pData.Width, pData.Height];
+      //smoothDeph3 = new double[pData.Width, pData.Height];
 
       // Normieren
       for (int i = 0; i < pData.Width; i++) {
@@ -565,12 +568,14 @@ namespace Fractrace.PictureArt {
       }
 
       SetSmoothDeph(smoothDeph1, smoothDeph2);
+      /*
       SetSmoothDeph(smoothDeph2, smoothDeph3);
       SetSmoothDeph(smoothDeph3, smoothDeph1);
       SetSmoothDeph(smoothDeph1, smoothDeph3);
       SetSmoothDeph(smoothDeph3, smoothDeph1);
       SetSmoothDeph(smoothDeph1, smoothDeph3);
       SetSmoothDeph(smoothDeph3, smoothDeph1);
+       */
     }
 
 

@@ -56,7 +56,7 @@ namespace Fractrace.PictureArt
 
         private double[,] smoothDeph2 = null;
 
-        private double[,] smoothDeph3 = null;
+        private double[,] _smoothDeph3 = null;
 
 
         /// <summary>
@@ -523,7 +523,7 @@ namespace Fractrace.PictureArt
         {
             smoothDeph1 = new double[pData.Width, pData.Height];
             smoothDeph2 = new double[pData.Width, pData.Height];
-            smoothDeph3 = new double[pData.Width, pData.Height];
+            _smoothDeph3 = new double[pData.Width, pData.Height];
 
             // Normieren
             for (int i = 0; i < pData.Width; i++)
@@ -558,12 +558,13 @@ namespace Fractrace.PictureArt
 
 
             SetSmoothDeph(smoothDeph1, smoothDeph2);
-            SetSmoothDeph(smoothDeph2, smoothDeph3);
+       /*     SetSmoothDeph(smoothDeph2, smoothDeph3);
             SetSmoothDeph(smoothDeph3, smoothDeph1);
             SetSmoothDeph(smoothDeph1, smoothDeph3);
             SetSmoothDeph(smoothDeph3, smoothDeph1);
             SetSmoothDeph(smoothDeph1, smoothDeph3);
             SetSmoothDeph(smoothDeph3, smoothDeph1);
+        * */
         }
 
 
