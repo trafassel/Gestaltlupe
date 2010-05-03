@@ -99,7 +99,9 @@ namespace Fractrace.Basic {
                         if (entryNode.Name == "Entry") {
                             string key = entryNode.Attributes.GetNamedItem("Key").Value;
                             string value = entryNode.Attributes.GetNamedItem("Value").Value;
-                            mEntries[key] = value;
+                            lock (mEntries) {
+                              mEntries[key] = value;
+                            }
 
                         }
 
@@ -134,7 +136,9 @@ namespace Fractrace.Basic {
 
 
         protected void SetValue(string name,string value) {
-            mEntries[name]=value;
+          lock (mEntries) {
+            mEntries[name] = value;
+          }
             if(EventChanged!=null)
             EventChanged(this, new ParameterDictChangedEventArgs(name, value));
         }
@@ -147,7 +151,9 @@ namespace Fractrace.Basic {
       /// <param name="value"></param>
       /// <param name="raiseChangeEvent"></param>
         public void SetValue(string name, string value,bool raiseChangeEvent) {
-          mEntries[name] = value;
+          lock (mEntries) {
+            mEntries[name] = value;
+          }
           if (EventChanged != null && raiseChangeEvent)
             EventChanged(this, new ParameterDictChangedEventArgs(name, value));
         }
@@ -167,8 +173,10 @@ namespace Fractrace.Basic {
         public SortedDictionary<string, string> SortedEntries {
             get {
                 SortedDictionary<string, string> retVal = new SortedDictionary<string, string>();
-                foreach (KeyValuePair<string, string> entry in Entries) {
+                lock (mEntries) {
+                  foreach (KeyValuePair<string, string> entry in mEntries) {
                     retVal[entry.Key] = entry.Value;
+                  }
                 }
                 return retVal;
             }
@@ -181,7 +189,9 @@ namespace Fractrace.Basic {
         /// <param name="key"></param>
         /// <param name="value"></param>
         public void SetDouble(string key, double value) {
+          lock (mEntries) {
             mEntries[key] = value.ToString(Culture.NumberFormat);
+          }
             EventChanged(this, new ParameterDictChangedEventArgs(key, value.ToString()));
         }
 
@@ -206,7 +216,9 @@ namespace Fractrace.Basic {
         /// <param name="key"></param>
         /// <param name="value"></param>
         public void SetInt(string key, int value) {
+          lock (mEntries) {
             mEntries[key] = value.ToString(Culture.NumberFormat);
+          }
             EventChanged(this, new ParameterDictChangedEventArgs(key, value.ToString()));
         }
 
@@ -231,10 +243,12 @@ namespace Fractrace.Basic {
         /// <param name="value"></param>
         public void SetBool(string key, bool value)
         {
+          lock (mEntries) {
             if (value)
-                mEntries[key] = "1";
+              mEntries[key] = "1";
             else
-                mEntries[key] = "0";
+              mEntries[key] = "0";
+          }
             EventChanged(this, new ParameterDictChangedEventArgs(key, mEntries[key]));
         }
 
