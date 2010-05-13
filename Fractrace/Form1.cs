@@ -420,6 +420,21 @@ namespace Fractrace {
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the button3 control.
+        /// Exportieren wurde ausgewählt. 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void button3_Click(object sender, EventArgs e) {
+          SaveFileDialog sd = new SaveFileDialog();
+          sd.Filter = "*.wrl|*.wrl|*.*|all";
+          if (sd.ShowDialog() == DialogResult.OK) {
+            X3dExporter export = new X3dExporter(iter);
+            export.Save(sd.FileName);
+          }
+        }
+
 
     }
 }
