@@ -249,6 +249,19 @@ namespace Fractrace {
     protected int MAXZ_ITER = 0;
 
 
+
+    protected Formulas mLastUsedFormulas = null;
+
+    /// <summary>
+    /// Die im zuletzt gestarteten Thread verwendete Formula-Klasse kann benutzt werden, um aus den x,y,z-Raumkoordinaten
+    /// die benutzten Koordinaten der mathematischen Menge zu ermitteln.
+    /// </summary>
+    public Formulas LastUsedFormulas {
+      get {
+        return mLastUsedFormulas;
+      }
+    }
+
     /// <summary>
     /// Berechung eines Einzelbildes.
     /// </summary>
@@ -266,6 +279,7 @@ namespace Fractrace {
       act_val = act_val.Clone();
 
       Formulas formulas = new Formulas(PData);
+      mLastUsedFormulas = formulas;
       if (ParameterDict.Exemplar["Intern.Formula.Source"].Trim() == "") {
         formulas.InternFormula = new Fractrace.TomoGeometry.VecRotMandel2d();
       } else {
@@ -512,7 +526,7 @@ namespace Fractrace {
                         //  grLabel.FillRectangle(brush, xx, yy + raster / 2, raster / 2, raster);
                       }
 
-                    } else if (raster == 2) {
+                    } else if (raster == 2) { 
                       if (colour_type == 0) {
                         // Es liegt also Schnittpunkt mit dem virtuellen Bildschirm vor. In diesem Fall
                         // wird die klassische 2D Darstellung des Fraktals verwendet.
@@ -772,6 +786,7 @@ namespace Fractrace {
         }
       }
 
+      
        }
 
 
