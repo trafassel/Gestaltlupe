@@ -712,11 +712,112 @@ double xx, yy, zz;
             return ((int)col[0]);
         }
 
+
+        /// <summary>
+        /// Wendet die in mProjection enthaltenen Transformationen an. 
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="z">The z.</param>
+        /// <returns></returns>
+        public Vec3 GetTransform(double x, double y, double z) {
+          Vec3 retVal=new Vec3();
+            
+            double a, f, re, im, xmi, ymi, zmi;
+
+            try {
+              if (mProjection != null) {
+                Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
+                x = projPoint.X;
+                y = projPoint.Y;
+                z = projPoint.Z;
+              }
+
+              if (mTransforms.Count > 0) {
+                Vec3 vec = new Vec3(x, y, z);
+                foreach (Transform3D trans in mTransforms) {
+                  vec = trans.Transform(vec);
+                }
+                x = vec.X;
+                y = vec.Y;
+                z = vec.Z;
+              }
+
+              /* Einbeziehung des Winkels  */
+              f = Math.PI / 180.0;
+              /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
+              // Drehung
+              xmi = 0; ymi = 0; zmi = 0;
+              x -= xmi; y -= ymi; z -= zmi;
+              re = Math.Cos(mGlobalAngleZ * f); im = Math.Sin(mGlobalAngleZ * f);
+              a = re * x - im * y;
+              y = re * y + im * x;
+              x = a;
+              // Neigung
+              re = Math.Cos(mGlobalAngleY * f); im = Math.Sin(mGlobalAngleY * f);
+              a = re * z - im * x;
+              x = re * x + im * z;
+              z = a;
+              // Kippen
+              re = Math.Cos(mGlobalAngleX * f); im = Math.Sin(mGlobalAngleX * f);
+              a = re * y - im * z;
+              z = re * z + im * y;
+              y = a;
+              x += xmi; y += ymi; z += zmi;
+
+              retVal.X = x;
+              retVal.Y = y;
+              retVal.Z = z;
+            } catch (Exception ex) {
+              System.Diagnostics.Debug.WriteLine(ex.ToString());
+              retVal.X = x;
+              retVal.Y = y;
+              retVal.Z = z;
+            }
+
+              return retVal;
+
+        }
+
+
+        protected double mGlobalAngleX = 0;
+
+        protected double mGlobalAngleY = 0;
+
+        protected double mGlobalAngleZ = 0;
+
+
+
+      /// <summary>
+      /// Die Berechnung wird gestartet.
+      /// </summary>
+      /// <param name="x">x-Position in Ansichtskoordinaten</param>
+        /// <param name="y">y-Position in Ansichtskoordinaten</param>
+        /// <param name="z">z-Position in Ansichtskoordinaten</param>
+        /// <param name="zz">zz-Position in Ansichtskoordinaten (alt)</param>
+      /// <param name="zykl">Benutzte Zyklen</param>
+      /// <param name="wix">Globaler Winkel X</param>
+        /// <param name="wiy">Globaler Winkel Y</param>
+        /// <param name="wiz">Globaler Winkel Z</param>
+      /// <param name="jx">Julia Parameter x</param>
+        /// <param name="jy">Julia Parameter y</param>
+        /// <param name="jz">Julia Parameter z</param>
+        /// <param name="jzz">Julia Parameter zz</param>
+      /// <param name="formula">Formel-ID</param>
+      /// <param name="invers">Gibt an, ob von innen gerechnet wird.</param>
+      /// <returns></returns>
         public int Rechne(double x, double y, double z, double zz, long zykl,
                double wix, double wiy, double wiz,
                double jx, double jy, double jz, double jzz, int formula, bool invers) {
+            
             long we = 0;
             double a, f, re, im, xmi, ymi, zmi;
+
+            mGlobalAngleX = wix;
+
+            mGlobalAngleY = wiy;
+          
+            mGlobalAngleZ = wiz;
 
             try {
               if (mProjection != null) {

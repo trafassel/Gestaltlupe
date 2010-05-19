@@ -343,6 +343,13 @@ namespace Fractrace {
        }
 
 
+      /// <summary>
+      /// Damit wird vermieden, dass nach dem Export von 3D Daten stets beim Öffnen das Exportverzeichnis
+       /// als InitialDirectory verwendet wird. 
+      /// </summary>
+       protected static string oldDirectory = ""; 
+
+
         /// <summary>
         /// Konfiguration öffnen.
         /// </summary>
@@ -351,6 +358,9 @@ namespace Fractrace {
        private void btnLoad_Click(object sender, EventArgs e) {
            OpenFileDialog od = new OpenFileDialog();
            od.Filter = "*.xml|*.xml;*.tomo|*.*|*.*";
+           if (oldDirectory != "") {
+             od.InitialDirectory = oldDirectory;
+           }
            if (od.ShowDialog() == DialogResult.OK) {
                ParameterDict.Exemplar.Load(od.FileName);
                ShowPicture(od.FileName);
@@ -358,7 +368,7 @@ namespace Fractrace {
                parameterDictControl1.UpdateFromData();
                ParameterValuesChanged();
               // preview1.Draw();
-              
+               oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
            }
        }
 

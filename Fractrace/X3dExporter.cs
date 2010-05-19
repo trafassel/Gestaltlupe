@@ -52,6 +52,27 @@ namespace Fractrace {
 
 
     /// <summary>
+    /// Wendet die mIterate.LastUsedFormulas verwendete Transformation auf die übergebenen Punktkoordinaten an.
+    /// Wenn die Transformationsinformationen nicht vorliegen werden die Ursprungskoordinaten geliefert.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public PixelInfo AddTransform(PixelInfo input) {
+      if (mIterate != null) {
+        if (mIterate.LastUsedFormulas != null) {
+          Geometry.Vec3 vec = mIterate.LastUsedFormulas.GetTransform(input.Coord.X, input.Coord.Y, input.Coord.Z);
+          PixelInfo tempPoint = new PixelInfo();
+          tempPoint.Coord = vec;
+          tempPoint.AdditionalInfo = input.AdditionalInfo;
+          tempPoint.Normal = input.Normal; // Die normale wird noch nicht berücksichtigt.
+          return tempPoint;
+        }
+      }
+      return input;
+    }
+
+
+    /// <summary>
     /// Die Geometrie aus iter wird in der VRML-Datei fileName abgelegt.
     /// </summary>
     /// <param name="fileName">Name of the file.</param>
@@ -82,7 +103,19 @@ namespace Fractrace {
 for (int i = 0; i < mIterate.PictureData.Width; i++) {
   for (int j = 0; j < mIterate.PictureData.Height; j++) {
     if (mIterate.PictureData.Points[i, j] != null) {
-      PixelInfo point=mIterate.PictureData.Points[i, j];
+      PixelInfo point = AddTransform(mIterate.PictureData.Points[i, j]);
+      /*
+      if (mIterate != null) {
+        if (mIterate.LastUsedFormulas != null) {
+          Geometry.Vec3 vec = mIterate.LastUsedFormulas.GetTransform(point.Coord.X, point.Coord.Y, point.Coord.Z);
+          PixelInfo tempPoint = new PixelInfo();
+          tempPoint.Coord = vec;
+          tempPoint.AdditionalInfo = point.AdditionalInfo;
+          tempPoint.Normal = point.Normal; // Die normale wird noch nicht berücksichtigt.
+          point = tempPoint;
+        }
+      }
+       */
       if (minx > point.Coord.X)
         minx = point.Coord.X;
       if (miny > point.Coord.Y)
@@ -146,7 +179,7 @@ point [
 
 foreach (  KeyValuePair<int,int> entry in pointList) {
   if( mIterate.PictureData.Points[entry.Key,entry.Value]!=null) { 
-    PixelInfo pInfo= mIterate.PictureData.Points[entry.Key,entry.Value];
+    PixelInfo pInfo= AddTransform(mIterate.PictureData.Points[entry.Key,entry.Value]);
         if (pInfo != null) {
           if (pInfo.Coord != null) {
             sw.WriteLine(pInfo.Coord.X.ToString(mNumberFormatInfo)+" "+pInfo.Coord.Y.ToString(mNumberFormatInfo)+" "+pInfo.Coord.Z.ToString(mNumberFormatInfo)+", ");
