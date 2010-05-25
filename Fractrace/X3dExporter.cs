@@ -176,13 +176,28 @@ point [
  // Hier die Koordinaten eintragen:
  // z.B: point [ 0 0 0.3, 1 0 0, 1 1 0, 0 1 0]
 
+      double oldx = 0;
+      double oldy = 0;
+      double oldz = 0;
 
 foreach (  KeyValuePair<int,int> entry in pointList) {
   if( mIterate.PictureData.Points[entry.Key,entry.Value]!=null) { 
     PixelInfo pInfo= AddTransform(mIterate.PictureData.Points[entry.Key,entry.Value]);
         if (pInfo != null) {
           if (pInfo.Coord != null) {
-            sw.WriteLine(pInfo.Coord.X.ToString(mNumberFormatInfo)+" "+pInfo.Coord.Y.ToString(mNumberFormatInfo)+" "+pInfo.Coord.Z.ToString(mNumberFormatInfo)+", ");
+            // Skalierung unter Einstellungen festlegen
+            double x = 1000.0 * pInfo.Coord.X;
+            double y = 1000.0 * pInfo.Coord.Y;
+            double z = 1000.0 * pInfo.Coord.Z;
+            if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 &&pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000) { // nicht der beste Schutz vor Ausreißern
+              sw.WriteLine(x.ToString(mNumberFormatInfo) + " " + y.ToString(mNumberFormatInfo) + " " + z.ToString(mNumberFormatInfo) + ", ");
+              oldx = x;
+              oldy = y;
+              oldz = z;
+            } else {
+              sw.WriteLine(oldx.ToString(mNumberFormatInfo) + " " + oldy.ToString(mNumberFormatInfo) + " " + oldz.ToString(mNumberFormatInfo) + ", ");
+
+            }
           }
         }
       }
@@ -222,7 +237,12 @@ color [
            blue = 0;
          }
 
-         sw.WriteLine(red.ToString(mNumberFormatInfo) + " " + green.ToString(mNumberFormatInfo) + " " + blue.ToString(mNumberFormatInfo) + ", ");
+         string line=red.ToString(mNumberFormatInfo) + " " + green.ToString(mNumberFormatInfo) + " " + blue.ToString(mNumberFormatInfo) + ", ";
+        
+         // Sollte eigentlich nicht mehr notwendig sein: bei Problemen wird die rote Farbe gezeigt.
+         if(line.ToLower().Contains("nan"))
+           line=" 1 0 0, ";
+         sw.WriteLine(line);
        }
 //       sw.WriteLine(pInfo.Coord.X.ToString(mNumberFormatInfo) + " " + pInfo.Coord.Y.ToString(mNumberFormatInfo) + " " + pInfo.Coord.Z.ToString(mNumberFormatInfo) + ", ");
      }
