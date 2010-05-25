@@ -212,9 +212,15 @@ color [
           double blue=pInfo.AdditionalInfo.blue;
 
          double norm=Math.Sqrt(red*red+green*green+blue*blue);
-         red=Math.Abs(red/norm);
-         green=Math.Abs(green/norm);
-         blue=Math.Abs(blue/norm);
+         if (norm != 0) {
+           red = Math.Abs(red / norm);
+           green = Math.Abs(green / norm);
+           blue = Math.Abs(blue / norm);
+         } else {
+           red = 0;
+           green = 0;
+           blue = 0;
+         }
 
          sw.WriteLine(red.ToString(mNumberFormatInfo) + " " + green.ToString(mNumberFormatInfo) + " " + blue.ToString(mNumberFormatInfo) + ", ");
        }
