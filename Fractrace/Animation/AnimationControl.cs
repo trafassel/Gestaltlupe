@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 using Fractrace.Basic;
@@ -72,6 +72,7 @@ namespace Fractrace.Animation {
 
           dataGridView1.DataSource = null;
           dataGridView1.DataSource = mAnimationSteps.Steps.ToList();
+         // dataGridView1.DataSource = mAnimationSteps.Steps;
           if (currentRow >= 0 && currentRow < mAnimationSteps.Steps.Count) {
             //dataGridView1.CurrentCell = DataGridViewCell.;
             dataGridView1.Rows[currentRow].Selected=true;

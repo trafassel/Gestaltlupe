@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -743,6 +742,30 @@ namespace Fractrace {
 
        private void panel12_Paint(object sender, PaintEventArgs e) {
 
+       }
+
+       /// <summary>
+       /// Handles the Click event of the btnLoadLast control.
+       /// Das letzte Projekt wird geladen.
+       /// </summary>
+       /// <param name="sender">The source of the event.</param>
+       /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+       private void btnLoadLast_Click(object sender, EventArgs e) {
+
+       }
+
+
+       /// <summary>
+       /// Projektdatei wird geladen und (falls ein Bild existiert) angezeigt.
+       /// </summary>
+       /// <param name="fileName">Name of the file.</param>
+       private void LoadConfiguration(string fileName) {
+         ParameterDict.Exemplar.Load(fileName);
+         ShowPicture(fileName);
+         Data.Update();
+         parameterDictControl1.UpdateFromData();
+         ParameterValuesChanged();
+         oldDirectory = System.IO.Path.GetDirectoryName(fileName);
        }
 
 
