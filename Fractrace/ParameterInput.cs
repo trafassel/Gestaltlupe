@@ -751,7 +751,23 @@ namespace Fractrace {
        /// <param name="sender">The source of the event.</param>
        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
        private void btnLoadLast_Click(object sender, EventArgs e) {
-
+         string exportDir = FileSystem.Exemplar.ExportDir;
+         exportDir = System.IO.Path.Combine(exportDir, "data");
+         exportDir = System.IO.Path.Combine(exportDir, "parameters");
+         if(System.IO.Directory.Exists(exportDir)) {
+           DateTime maxDateTime = DateTime.MinValue;
+           string fileName="";
+           foreach (string file in System.IO.Directory.GetFiles(exportDir)) {
+             DateTime dt = System.IO.File.GetCreationTime(file);
+             if (dt > maxDateTime) {
+               maxDateTime = dt;
+               fileName = file;
+             }
+           }
+           if (fileName != "") {
+             LoadConfiguration(fileName);
+           }
+         }
        }
 
 

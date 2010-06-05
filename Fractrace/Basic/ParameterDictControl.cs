@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace Fractrace.Basic {
     public partial class ParameterDictControl : UserControl {
+
+
         public ParameterDictControl() {
             InitializeComponent();
             Init();
