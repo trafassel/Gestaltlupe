@@ -276,6 +276,7 @@ namespace Fractrace.Animation {
           mPreview1.Draw();
         }
 
+      
 
     }
 }

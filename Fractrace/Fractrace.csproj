@@ -94,6 +94,9 @@
     <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fractrace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <ExecutableExtension>.exe</ExecutableExtension>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -119,6 +122,22 @@
     </Compile>
     <Compile Include="Animation\AnimationPoint.cs" />
     <Compile Include="Animation\AnimationSteps.cs" />
+    <Compile Include="Basic\DataViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\DataViewControl.Designer.cs">
+      <DependentUpon>DataViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\DataViewElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\DataViewElement.Designer.cs">
+      <DependentUpon>DataViewElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\DataViewElementFactory.cs" />
+    <Compile Include="Basic\DataViewStringElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Basic\IAsyncComputationStarter.cs" />
     <Compile Include="Basic\OptionMember.cs" />
     <Compile Include="Basic\ParameterDict.cs" />
@@ -214,6 +233,12 @@
     <Compile Include="X3dExporter.cs" />
     <EmbeddedResource Include="Animation\AnimationControl.resx">
       <DependentUpon>AnimationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\DataViewControl.resx">
+      <DependentUpon>DataViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\DataViewElement.resx">
+      <DependentUpon>DataViewElement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\ParameterDictControl.resx">
       <DependentUpon>ParameterDictControl.cs</DependentUpon>

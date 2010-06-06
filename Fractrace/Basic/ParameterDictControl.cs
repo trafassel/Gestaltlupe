@@ -31,9 +31,14 @@ namespace Fractrace.Basic {
                     } else
                         if (parentCat != "") {
                             if (!Nodes.ContainsKey(parentCat)) {
-                                // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
+                               
                                 Nodes[parentCat] = new TreeNode(parentCat);
                                 Nodes[parentCat].Tag = parentCat;
+                                // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
+                                string testParentParent = GetCategory(parentCat);
+                                if (testParentParent!="." && Nodes.ContainsKey(parentCat)) {
+                                  Nodes[testParentParent].Nodes.Add(Nodes[parentCat]);
+                                } else 
                                 treeView1.Nodes.Add(Nodes[parentCat]);
                             }
                             Nodes[parentCat].Nodes.Add(tNode);
@@ -83,6 +88,9 @@ namespace Fractrace.Basic {
         /// Die Daten werden neu gezeichnet.
         /// </summary>
         public void UpdateFromData() {
+          this.dataViewControl1.Select(mChoosenHirarchy);
+
+
           if (inDataGridView1_CellValueChanged)
             return;
             arr = new System.Collections.Generic.List<OptionMember>();

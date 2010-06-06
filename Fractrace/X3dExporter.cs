@@ -205,7 +205,7 @@ foreach (  KeyValuePair<int,int> entry in pointList) {
  sw.WriteLine(@"
 ]
 }
-color
+color*
  Color{
 color [
 ");
