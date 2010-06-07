@@ -80,7 +80,7 @@ namespace Fractrace {
       forceRedraw = false;
       btnPreview.Enabled = false;
       inDrawing = true;
-      iter = new Iterate(btnPreview.Width, btnPreview.Height, this);
+      iter = new Iterate(btnPreview.Width, btnPreview.Height, this,false);
       iter.Init(grLabel);
       AssignParameters();
       iter.StartAsync(mParameter,

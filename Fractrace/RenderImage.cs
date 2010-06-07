@@ -24,6 +24,17 @@ namespace Fractrace
 
         protected Graphics grLabel = null;
 
+
+        /// <summary>
+        /// Berechnung wird abgebrochen:
+        /// </summary>
+        public void Abort() {
+          if (iter != null) {
+            iter.Abort();
+          }
+        }
+
+
         protected Iterate iter = null;
 
         int maxx = 0;
@@ -97,7 +108,8 @@ namespace Fractrace
             forceRedraw = false;
             inDrawing = true;
             SetPictureBoxSize();
-            iter = new Iterate(maxx, maxy, this);
+            iter = new Iterate(maxx, maxy, this,IsRightView);
+
             iter.Init(grLabel);
             AssignParameters();
             iter.StartAsync(mParameter,
@@ -112,6 +124,7 @@ namespace Fractrace
 
         protected virtual void AssignParameters() {
             mParameter.SetFromParameterDict();
+          /*
             if (isRightView) {
                 double eyePos = 0.2; // Das rechte Auge wird um 0.2 Einheiten nach rechts verschoben
                 // Der Blickpunkt wird etwas nach rechts verschoben
@@ -119,9 +132,9 @@ namespace Fractrace
                 mParameter.end_tupel.x += eyePos * xd;
                 mParameter.start_tupel.x += eyePos * xd;
             }
+           */
         }
 
-       
 
         /// <summary>
         /// Zeichnen wird von außen angestoßen.

@@ -112,7 +112,7 @@ namespace Fractrace {
             if (!ParameterDict.Exemplar.GetBool("View.ClassicView")) {
                 classicIter = null;
                 paras.Assign();
-                iter = new Iterate(maxx, maxy, this);
+                iter = new Iterate(maxx, maxy, this,false);
                 //Iterate.DEPHFACTOR = paras.DephFactor;
                 iter.Init(grLabel);
                 iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
@@ -325,6 +325,8 @@ namespace Fractrace {
                 iter = null;
             }
 
+         
+          // Stereo fehlt noch
             if (classicIter != null) {
                 classicIter.Abort();
             }

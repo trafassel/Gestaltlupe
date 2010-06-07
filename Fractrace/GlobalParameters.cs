@@ -104,8 +104,13 @@ namespace Fractrace {
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.
             // Diese Zahl entspricht üblicherweise der Anzahl der Prozessoren.
-            ParameterDict.Exemplar["Computation.NoOfThreads"] = "8";
+            ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";
 
+          // Augenabstand.
+            ParameterDict.Exemplar["Transformation.Stereo.EyeDistance"] = "0.5";
+
+          // Winkel, um den das rechte Auge nach links sieht. 
+            ParameterDict.Exemplar["Transformation.Stereo.Angle"] = "-9";
         }
     }
 }

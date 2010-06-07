@@ -5,6 +5,7 @@ using System.Text;
 using Fractrace.Basic;
 
 namespace Fractrace.Geometry {
+
     public class Rotation: Transform3D{
 
 
@@ -20,6 +21,10 @@ namespace Fractrace.Geometry {
 
         protected double AngleZ=0;
 
+
+      /// <summary>
+      /// Diese Objektinstanz wird mit den Werten aus den Einstellungen befüllt.
+      /// </summary>
         public override void Init() {
             CenterX=ParameterDict.Exemplar.GetDouble("Transformation.3.CenterX");
             CenterY=ParameterDict.Exemplar.GetDouble("Transformation.3.CenterY");
@@ -28,6 +33,26 @@ namespace Fractrace.Geometry {
             AngleY=ParameterDict.Exemplar.GetDouble("Transformation.3.AngleY");
             AngleZ=ParameterDict.Exemplar.GetDouble("Transformation.3.AngleZ");
         }
+
+
+        /// <summary>
+        /// Initialisierung
+        /// </summary>
+        /// <param name="centerX">The center X.</param>
+        /// <param name="centerY">The center Y.</param>
+        /// <param name="centerZ">The center Z.</param>
+        /// <param name="angleX">The angle X.</param>
+        /// <param name="angleY">The angle Y.</param>
+        /// <param name="angleZ">The angle Z.</param>
+      public void Init(double centerX,double centerY,double centerZ,double angleX,double angleY,double angleZ) {
+        CenterX=centerX;
+        CenterY=centerY;
+        CenterZ=centerZ;
+        AngleX=angleX;
+        AngleY=angleY;  
+        AngleZ=angleZ;
+      }
+
 
         public override Vec3 Transform(Vec3 input) {
 

@@ -108,13 +108,21 @@ namespace Fractrace {
     /// </summary>
     /// <param name="width"></param>
     /// <param name="height"></param>
-    public Iterate(int width, int height, IAsyncComputationStarter starter) {
+    public Iterate(int width, int height, IAsyncComputationStarter starter, bool isRightView) {
       mStarter = starter;
       GData = new GraphicData(width, height);
       PData = new PictureData(width, height);
       this.width = width;
       this.height = height;
+      this.mIsRightView = isRightView;
     }
+
+    
+    /// <summary>
+    /// Wird bei der Stereoansicht verwendet, hier wird unterschieden, ob
+    /// es sich um eine Sicht vom rechten Auge handelt. 
+    /// </summary>
+    protected bool mIsRightView =false;
 
 
     /// <summary>
@@ -128,6 +136,7 @@ namespace Fractrace {
     }
 
     double percent = 0;
+
 
     /// <summary>
     /// Liefert den Status der Berechnung (von 0-100)
@@ -160,7 +169,7 @@ namespace Fractrace {
 
 
     /// <summary>
-    /// Von hier aus wird die Berechnung in Einzelthreads aufgesprlittet.
+    /// Von hier aus wird die Berechnung in Einzelthreads aufgesplittet.
     /// </summary>
     /// <param name="act_val"></param>
     /// <param name="zyklen"></param>
@@ -261,6 +270,7 @@ namespace Fractrace {
       }
     }
 
+
     /// <summary>
     /// Berechung eines Einzelbildes.
     /// </summary>
@@ -293,6 +303,14 @@ namespace Fractrace {
       rot.Init();
 
       formulas.Transforms.Add(rot);
+
+      if (mIsRightView) {
+        RightEyeView stereoTransform = new RightEyeView();
+        stereoTransform.Init();
+        formulas.Transforms.Add(stereoTransform);
+      }
+
+
       col = formulas.col;
 
       MAXX_ITER = width;
@@ -354,6 +372,8 @@ namespace Fractrace {
       Projection proj = new Projection(camera, viewPoint);
       if( ParameterDict.Exemplar.GetBool("View.Perspective"))
          formulas.Projection = proj;
+
+  
 
       // Bei der Postererstellung werden die Parameter der räumlichen Projektion auf das mittlere Bild 
       // ausgerichtet und anschließend die Grenzen verschoben

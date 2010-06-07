@@ -24,5 +24,14 @@ namespace Fractrace {
         }
 
 
+        /// <summary>
+        /// Berechnung wird abgebrochen.
+        /// </summary>
+        public void Abort() {
+          if (imageRenderer != null) {
+            imageRenderer.Abort();
+          }
+        }
+
     }
 }

@@ -452,6 +452,9 @@ namespace Fractrace {
        private void button27_Click(object sender, EventArgs e) {
            mPosterMode = false;
            Form1.PublicForm.Stop();
+           if (mStereoForm != null) {
+             mStereoForm.Abort();
+           }
        }
 
        private void navigateControl1_Load(object sender, EventArgs e) {
