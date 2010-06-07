@@ -89,6 +89,11 @@ namespace Fractrace.Basic {
 
         }
 
+
+      /// <summary>
+      /// Projektdaten werden geladen.
+      /// </summary>
+      /// <param name="fileName"></param>
         public void Load(string fileName) {
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(fileName);
@@ -101,15 +106,10 @@ namespace Fractrace.Basic {
                             lock (mEntries) {
                               mEntries[key] = value;
                             }
-
                         }
-
                     }
                 }
-
             }
-            
-
         }
 
 
@@ -127,6 +127,12 @@ namespace Fractrace.Basic {
 
         }
 
+
+      /// <summary>
+      /// Liefert die durch name spezifizierte Eigenschaft.
+      /// </summary>
+      /// <param name="name"></param>
+      /// <returns></returns>
         protected string GetValue(string name) {
             if (mEntries.ContainsKey(name))
                 return mEntries[name];
@@ -134,6 +140,12 @@ namespace Fractrace.Basic {
         }
 
 
+
+      /// <summary>
+      /// Der Eigenschaft mit der angegeben Bezeichnung wird ein Wert zugewiesen. 
+      /// </summary>
+      /// <param name="name"></param>
+      /// <param name="value"></param>
         protected void SetValue(string name,string value) {
           lock (mEntries) {
             mEntries[name] = value;
@@ -157,6 +169,7 @@ namespace Fractrace.Basic {
             EventChanged(this, new ParameterDictChangedEventArgs(name, value));
         }
 
+
         /// <summary>
         /// Öffentlicher Zugriff auf das interne Dictionary.
         /// </summary>
@@ -165,6 +178,7 @@ namespace Fractrace.Basic {
                 return mEntries;
             }
         }
+
 
         /// <summary>
         /// Öffentlicher Zugriff auf das interne Dictionary.

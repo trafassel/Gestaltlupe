@@ -45,12 +45,17 @@
           this.btnStop = new System.Windows.Forms.Button();
           this.btnStart = new System.Windows.Forms.Button();
           this.panel1 = new System.Windows.Forms.Panel();
+          this.pnlAnimationEntries = new System.Windows.Forms.Panel();
+          this.tbAnimationDescription = new System.Windows.Forms.TextBox();
+          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
           this.splitContainer1.Panel2.SuspendLayout();
           this.splitContainer1.SuspendLayout();
           this.pnlSteps.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
           this.splitContainer2.Panel1.SuspendLayout();
           this.splitContainer2.Panel2.SuspendLayout();
           this.splitContainer2.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
           this.panel2.SuspendLayout();
           this.panel4.SuspendLayout();
           this.panel7.SuspendLayout();
@@ -58,6 +63,7 @@
           this.panel6.SuspendLayout();
           this.panel9.SuspendLayout();
           this.panel8.SuspendLayout();
+          this.pnlAnimationEntries.SuspendLayout();
           this.SuspendLayout();
           // 
           // splitContainer1
@@ -91,6 +97,7 @@
           // 
           // splitContainer2.Panel1
           // 
+          this.splitContainer2.Panel1.Controls.Add(this.pnlAnimationEntries);
           this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
           this.splitContainer2.Panel1.Controls.Add(this.panel2);
           // 
@@ -293,6 +300,25 @@
           this.panel1.Size = new System.Drawing.Size(569, 12);
           this.panel1.TabIndex = 0;
           // 
+          // pnlAnimationEntries
+          // 
+          this.pnlAnimationEntries.Controls.Add(this.tbAnimationDescription);
+          this.pnlAnimationEntries.Location = new System.Drawing.Point(9, 9);
+          this.pnlAnimationEntries.Name = "pnlAnimationEntries";
+          this.pnlAnimationEntries.Size = new System.Drawing.Size(211, 134);
+          this.pnlAnimationEntries.TabIndex = 2;
+          this.pnlAnimationEntries.Visible = false;
+          // 
+          // tbAnimationDescription
+          // 
+          this.tbAnimationDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.tbAnimationDescription.Location = new System.Drawing.Point(0, 0);
+          this.tbAnimationDescription.Multiline = true;
+          this.tbAnimationDescription.Name = "tbAnimationDescription";
+          this.tbAnimationDescription.Size = new System.Drawing.Size(211, 134);
+          this.tbAnimationDescription.TabIndex = 0;
+          this.tbAnimationDescription.Visible = false;
+          // 
           // AnimationControl
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -301,11 +327,14 @@
           this.Name = "AnimationControl";
           this.Size = new System.Drawing.Size(598, 300);
           this.splitContainer1.Panel2.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
           this.splitContainer1.ResumeLayout(false);
           this.pnlSteps.ResumeLayout(false);
           this.splitContainer2.Panel1.ResumeLayout(false);
           this.splitContainer2.Panel2.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
           this.splitContainer2.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
           this.panel2.ResumeLayout(false);
           this.panel4.ResumeLayout(false);
           this.panel7.ResumeLayout(false);
@@ -315,6 +344,8 @@
           this.panel9.ResumeLayout(false);
           this.panel9.PerformLayout();
           this.panel8.ResumeLayout(false);
+          this.pnlAnimationEntries.ResumeLayout(false);
+          this.pnlAnimationEntries.PerformLayout();
           this.ResumeLayout(false);
 
         }
@@ -343,5 +374,7 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Panel pnlPreview;
+        private System.Windows.Forms.Panel pnlAnimationEntries;
+        private System.Windows.Forms.TextBox tbAnimationDescription;
     }
 }
