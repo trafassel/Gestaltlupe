@@ -46,11 +46,11 @@
           this.btnStop = new System.Windows.Forms.Button();
           this.btnStart = new System.Windows.Forms.Button();
           this.panel1 = new System.Windows.Forms.Panel();
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+          //((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
           this.splitContainer1.Panel2.SuspendLayout();
           this.splitContainer1.SuspendLayout();
           this.pnlSteps.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+          //((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
           this.splitContainer2.Panel1.SuspendLayout();
           this.splitContainer2.Panel2.SuspendLayout();
           this.splitContainer2.SuspendLayout();
@@ -121,6 +121,7 @@
           this.tbAnimationDescription.Location = new System.Drawing.Point(0, 0);
           this.tbAnimationDescription.Multiline = true;
           this.tbAnimationDescription.Name = "tbAnimationDescription";
+          this.tbAnimationDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
           this.tbAnimationDescription.Size = new System.Drawing.Size(230, 266);
           this.tbAnimationDescription.TabIndex = 0;
           // 
@@ -311,12 +312,12 @@
           this.Name = "AnimationControl";
           this.Size = new System.Drawing.Size(598, 300);
           this.splitContainer1.Panel2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+          //((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
           this.splitContainer1.ResumeLayout(false);
           this.pnlSteps.ResumeLayout(false);
           this.splitContainer2.Panel1.ResumeLayout(false);
           this.splitContainer2.Panel2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+          //((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
           this.splitContainer2.ResumeLayout(false);
           this.pnlAnimationEntries.ResumeLayout(false);
           this.pnlAnimationEntries.PerformLayout();

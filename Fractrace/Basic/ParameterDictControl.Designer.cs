@@ -29,12 +29,12 @@
           this.dataGridView1 = new System.Windows.Forms.DataGridView();
           this.pnlEdit = new System.Windows.Forms.Panel();
           this.dataViewControl1 = new Fractrace.Basic.DataViewControl();
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+          //((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
           this.splitContainer1.Panel1.SuspendLayout();
           this.splitContainer1.Panel2.SuspendLayout();
           this.splitContainer1.SuspendLayout();
           this.panel1.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+          //((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
           this.pnlEdit.SuspendLayout();
           this.SuspendLayout();
           // 
@@ -127,10 +127,10 @@
           this.Size = new System.Drawing.Size(457, 383);
           this.splitContainer1.Panel1.ResumeLayout(false);
           this.splitContainer1.Panel2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+        //  ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
           this.splitContainer1.ResumeLayout(false);
           this.panel1.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+          //((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
           this.pnlEdit.ResumeLayout(false);
           this.ResumeLayout(false);
 
