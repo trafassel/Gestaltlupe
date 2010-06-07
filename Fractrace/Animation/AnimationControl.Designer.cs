@@ -26,7 +26,8 @@
           this.splitContainer1 = new System.Windows.Forms.SplitContainer();
           this.pnlSteps = new System.Windows.Forms.Panel();
           this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-          this.dataGridView1 = new System.Windows.Forms.DataGridView();
+          this.pnlAnimationEntries = new System.Windows.Forms.Panel();
+          this.tbAnimationDescription = new System.Windows.Forms.TextBox();
           this.panel2 = new System.Windows.Forms.Panel();
           this.btnDelete = new System.Windows.Forms.Button();
           this.btnAddRow = new System.Windows.Forms.Button();
@@ -45,8 +46,6 @@
           this.btnStop = new System.Windows.Forms.Button();
           this.btnStart = new System.Windows.Forms.Button();
           this.panel1 = new System.Windows.Forms.Panel();
-          this.pnlAnimationEntries = new System.Windows.Forms.Panel();
-          this.tbAnimationDescription = new System.Windows.Forms.TextBox();
           ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
           this.splitContainer1.Panel2.SuspendLayout();
           this.splitContainer1.SuspendLayout();
@@ -55,7 +54,7 @@
           this.splitContainer2.Panel1.SuspendLayout();
           this.splitContainer2.Panel2.SuspendLayout();
           this.splitContainer2.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+          this.pnlAnimationEntries.SuspendLayout();
           this.panel2.SuspendLayout();
           this.panel4.SuspendLayout();
           this.panel7.SuspendLayout();
@@ -63,7 +62,6 @@
           this.panel6.SuspendLayout();
           this.panel9.SuspendLayout();
           this.panel8.SuspendLayout();
-          this.pnlAnimationEntries.SuspendLayout();
           this.SuspendLayout();
           // 
           // splitContainer1
@@ -98,7 +96,6 @@
           // splitContainer2.Panel1
           // 
           this.splitContainer2.Panel1.Controls.Add(this.pnlAnimationEntries);
-          this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
           this.splitContainer2.Panel1.Controls.Add(this.panel2);
           // 
           // splitContainer2.Panel2
@@ -109,15 +106,23 @@
           this.splitContainer2.SplitterDistance = 230;
           this.splitContainer2.TabIndex = 0;
           // 
-          // dataGridView1
+          // pnlAnimationEntries
           // 
-          this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-          this.dataGridView1.Name = "dataGridView1";
-          this.dataGridView1.RowTemplate.Height = 24;
-          this.dataGridView1.Size = new System.Drawing.Size(230, 266);
-          this.dataGridView1.TabIndex = 1;
+          this.pnlAnimationEntries.Controls.Add(this.tbAnimationDescription);
+          this.pnlAnimationEntries.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.pnlAnimationEntries.Location = new System.Drawing.Point(0, 0);
+          this.pnlAnimationEntries.Name = "pnlAnimationEntries";
+          this.pnlAnimationEntries.Size = new System.Drawing.Size(230, 266);
+          this.pnlAnimationEntries.TabIndex = 2;
+          // 
+          // tbAnimationDescription
+          // 
+          this.tbAnimationDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.tbAnimationDescription.Location = new System.Drawing.Point(0, 0);
+          this.tbAnimationDescription.Multiline = true;
+          this.tbAnimationDescription.Name = "tbAnimationDescription";
+          this.tbAnimationDescription.Size = new System.Drawing.Size(230, 266);
+          this.tbAnimationDescription.TabIndex = 0;
           // 
           // panel2
           // 
@@ -131,14 +136,12 @@
           // 
           // btnDelete
           // 
-          this.btnDelete.Dock = System.Windows.Forms.DockStyle.Left;
-          this.btnDelete.Location = new System.Drawing.Point(32, 0);
+          this.btnDelete.Location = new System.Drawing.Point(0, 0);
           this.btnDelete.Name = "btnDelete";
-          this.btnDelete.Size = new System.Drawing.Size(27, 22);
-          this.btnDelete.TabIndex = 1;
-          this.btnDelete.Text = "-";
-          this.btnDelete.UseVisualStyleBackColor = true;
-          this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+          this.btnDelete.Size = new System.Drawing.Size(75, 23);
+          this.btnDelete.TabIndex = 0;
+          this.btnDelete.Text = "+";
+          this.btnDelete.Click += new System.EventHandler(this.btnAddRow_Click);
           // 
           // btnAddRow
           // 
@@ -300,25 +303,6 @@
           this.panel1.Size = new System.Drawing.Size(569, 12);
           this.panel1.TabIndex = 0;
           // 
-          // pnlAnimationEntries
-          // 
-          this.pnlAnimationEntries.Controls.Add(this.tbAnimationDescription);
-          this.pnlAnimationEntries.Location = new System.Drawing.Point(9, 9);
-          this.pnlAnimationEntries.Name = "pnlAnimationEntries";
-          this.pnlAnimationEntries.Size = new System.Drawing.Size(211, 134);
-          this.pnlAnimationEntries.TabIndex = 2;
-          this.pnlAnimationEntries.Visible = false;
-          // 
-          // tbAnimationDescription
-          // 
-          this.tbAnimationDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.tbAnimationDescription.Location = new System.Drawing.Point(0, 0);
-          this.tbAnimationDescription.Multiline = true;
-          this.tbAnimationDescription.Name = "tbAnimationDescription";
-          this.tbAnimationDescription.Size = new System.Drawing.Size(211, 134);
-          this.tbAnimationDescription.TabIndex = 0;
-          this.tbAnimationDescription.Visible = false;
-          // 
           // AnimationControl
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -334,7 +318,8 @@
           this.splitContainer2.Panel2.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
           this.splitContainer2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+          this.pnlAnimationEntries.ResumeLayout(false);
+          this.pnlAnimationEntries.PerformLayout();
           this.panel2.ResumeLayout(false);
           this.panel4.ResumeLayout(false);
           this.panel7.ResumeLayout(false);
@@ -344,8 +329,6 @@
           this.panel9.ResumeLayout(false);
           this.panel9.PerformLayout();
           this.panel8.ResumeLayout(false);
-          this.pnlAnimationEntries.ResumeLayout(false);
-          this.pnlAnimationEntries.PerformLayout();
           this.ResumeLayout(false);
 
         }
@@ -357,7 +340,6 @@
         private System.Windows.Forms.Panel pnlSteps;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnAddRow;
         private System.Windows.Forms.Panel panel6;

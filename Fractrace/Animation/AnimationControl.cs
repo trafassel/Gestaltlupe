@@ -15,7 +15,6 @@ namespace Fractrace.Animation {
 
         public AnimationControl() {
             InitializeComponent();
-            dataGridView1.DataSource = mAnimationSteps.Steps;
         }
 
 
@@ -46,39 +45,8 @@ namespace Fractrace.Animation {
         private void btnAddRow_Click(object sender, EventArgs e) {
             AnimationPoint point = new AnimationPoint();
             point.Time = dataPerTime.CurrentTime;
-          if(mAnimationSteps.Steps.Count>0)
             point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");
-          int row = 0;
-          if (dataGridView1.CurrentCell != null) {
-            row = dataGridView1.CurrentCell.RowIndex;
-          }
-            if (row > 0 && row < mAnimationSteps.Steps.Count) {
-              mAnimationSteps.Steps.Insert(row+1, point);
-            } else {
-              mAnimationSteps.Steps.Add(point);
-            }
-            UpdateFromAnimationSteps();
-        }
-
-
-      /// <summary>
-        /// Der Inhalt der Tabelle wird vom Feld mAnimationSteps ausgehend aufgebaut.
-      /// </summary>
-        private void UpdateFromAnimationSteps() {
-          // Alte Auswahlposition speichern:
-          int currentRow = 0;
-          if(dataGridView1.CurrentCell!=null)
-            currentRow=dataGridView1.CurrentCell.RowIndex;
-
-          dataGridView1.DataSource = null;
-          dataGridView1.DataSource = mAnimationSteps.Steps.ToList();
-         // dataGridView1.DataSource = mAnimationSteps.Steps;
-          if (currentRow >= 0 && currentRow < mAnimationSteps.Steps.Count) {
-            //dataGridView1.CurrentCell = DataGridViewCell.;
-            dataGridView1.Rows[currentRow].Selected=true;
-            dataGridView1.CurrentCell = dataGridView1.Rows[currentRow].Cells[0];
-            //.CurrentCell.RowIndex = currentRow;
-          }
+            tbAnimationDescription.Text = tbAnimationDescription.Text + System.Environment.NewLine + "Run Steps " + point.Steps.ToString() + " Time " + point.Time.ToString();
         }
 
 
@@ -90,12 +58,56 @@ namespace Fractrace.Animation {
       /// </summary>
         protected string mFormula = "";
 
+
+      /// <summary>
+      /// Aus dem eingegebenen Text wird die Animation erzeugt.
+      /// </summary>
+        private void CreateAnimationSteps() {
+          mAnimationSteps.Steps.Clear();
+          string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine," ");
+          string[] entries = tempstr.Split(' ');
+          string currentLine = "";
+          AnimationPoint currentAp = null;
+          string lastEntry = "";
+          foreach (string str in entries) {
+            switch (str.ToLower()) {
+              case "run":
+                if (currentAp != null)
+                  mAnimationSteps.Steps.Add(currentAp);
+                currentAp = new AnimationPoint();
+                break;
+            }
+
+            switch (lastEntry.ToLower()) {
+              case "steps":
+                if(currentAp!=null)
+                currentAp.Steps=int.Parse(str);
+                break;
+
+              case "time":
+                if (currentAp != null)
+                currentAp.Time=int.Parse(str);
+                break;
+
+            }
+
+            lastEntry = str;
+          }
+          if (currentAp != null)
+            mAnimationSteps.Steps.Add(currentAp);
+
+
+        }
+
+
         /// <summary>
         /// Start der Animation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e) {
+
+          CreateAnimationSteps();
           if (mAnimationSteps.Steps.Count == 0)
             return;
           btnStart.Enabled = false;
@@ -177,40 +189,7 @@ namespace Fractrace.Animation {
         }
 
 
-      /// <summary>
-      /// Der ausgewählte Eintrag wird aus der Liste entfernt.
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="e"></param>
-        private void btnDelete_Click(object sender, EventArgs e) {
-            try
-            {
-                int row = dataGridView1.CurrentCell.RowIndex;
-                if (row >= 0 && row < mAnimationSteps.Steps.Count)
-                {
-                    mAnimationSteps.Steps.RemoveAt(row);
-                    UpdateFromAnimationSteps();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-        }
-
-
-      /// <summary>
-      /// Nutzereingabe zur Größe der Ausgabefläche.
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="e"></param>
-        private void tbSize_TextChanged(object sender, EventArgs e) {
-            if (double.TryParse(tbSize.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mPictureSize))
-                tbSize.ForeColor = Color.Black;
-            else
-                tbSize.ForeColor = Color.Red;
-        }
-
+     
 
       /// <summary>
       /// Die Einzelereignisse der Animation werden gezeigt.
@@ -276,6 +255,17 @@ namespace Fractrace.Animation {
           mPreview1.Draw();
         }
 
+        private void tbSize_TextChanged(object sender, EventArgs e) {
+          if (double.TryParse(tbSize.Text, System.Globalization.NumberStyles.Number,ParameterDict.Culture.NumberFormat, out mPictureSize)) {
+            tbSize.ForeColor=Color.Black;
+          }
+          else
+                        tbSize.ForeColor=Color.Red;
+
+         
+        }
+
+    
       
 
     }
