@@ -109,8 +109,6 @@ namespace Fractrace
             inDrawing = true;
             SetPictureBoxSize();
             iter = new Iterate(maxx, maxy, this,IsRightView);
-
-            iter.Init(grLabel);
             AssignParameters();
             iter.StartAsync(mParameter,
                     ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),

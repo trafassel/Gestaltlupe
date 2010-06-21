@@ -81,7 +81,6 @@ namespace Fractrace {
       btnPreview.Enabled = false;
       inDrawing = true;
       iter = new Iterate(btnPreview.Width, btnPreview.Height, this,false);
-      iter.Init(grLabel);
       AssignParameters();
       iter.StartAsync(mParameter,
               ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),

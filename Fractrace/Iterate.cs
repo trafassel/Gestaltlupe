@@ -37,8 +37,8 @@ namespace Fractrace {
       set {
         mPause = value;
       }
-
     }
+
 
     /// <summary>
     /// Von Außen wurde Abbruch angestoßen. 
@@ -119,22 +119,16 @@ namespace Fractrace {
 
     
     /// <summary>
-    /// Wird bei der Stereoansicht verwendet, hier wird unterschieden, ob
+    /// Wird bei der Stereoansicht verwendet. Hier wird unterschieden, ob
     /// es sich um eine Sicht vom rechten Auge handelt. 
     /// </summary>
     protected bool mIsRightView =false;
 
 
+  
     /// <summary>
-    /// Initialisation
+    /// Liefert den Status der Berechnung (von 0-100)
     /// </summary>
-    /// <param name="grLabel"></param>
-    /// <param name="grLabel_1"></param>
-    /// <param name="grLabel_2"></param>
-    public void Init(Graphics grLabel) {
-      this.grLabel = grLabel;
-    }
-
     double percent = 0;
 
 
@@ -159,7 +153,7 @@ namespace Fractrace {
 
 
     /// <summary>
-    /// Dient als Lock variable für 
+    /// Dient als Lock variable.
     /// </summary>
     protected object generateLock = new object();
 

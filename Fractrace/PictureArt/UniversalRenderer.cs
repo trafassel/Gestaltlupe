@@ -35,7 +35,7 @@ namespace Fractrace.PictureArt {
 
     /// <summary>
     /// Entspricht ParameterDict.Exemplar["Composite.Renderer.Universal.UseColorFromFormula"]==1
-    /// Die während der Berechung entstandenen Formeln werden benutzt
+    /// Die während der Berechung entstandenen Farben werden benutzt
     /// </summary>
     protected bool useColorFromFormula = false;
 
