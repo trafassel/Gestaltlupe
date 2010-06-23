@@ -118,6 +118,26 @@ namespace Fractrace.PictureArt {
 
     private double maxY = double.MinValue;
 
+    /// <summary>
+    /// Helligkeit des Lichtes, das aus der Position des Nutzers kommt.
+    /// Bezug auf ParameterDict.Exemplar["Composite.Renderer.Universal.FrontLightIntensity"]
+    /// </summary>
+    private double frontLightIntensity = 0;
+
+    /// <summary>
+    ///  Helligkeit des Umgebungslichtes.
+    /// Bezug auf ParameterDict.Exemplar["Composite.Renderer.Universal.AmbientLightIntensity"]
+    /// </summary>
+    private double ambientLightIntensity = 0;
+
+
+    /// <summary>
+    ///  Zusätzliche Aufhellung, 0: keine, 1 alles ist Weiß
+    ///  Bezug auf ParameterDict.Exemplar["Composite.Renderer.Universal.Brightening"]
+    /// </summary>
+    private double brightening = 0;
+
+
     bool comicStyle = false;
 
     /// <summary>
@@ -129,11 +149,18 @@ namespace Fractrace.PictureArt {
       useColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseColorFromFormula");
       useMedianColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseMedianColorFromFormula");
       comicStyle= ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.ComicStyle");
-      
-
 
       borderMinY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
       borderMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+      frontLightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Universal.FrontLightIntensity");
+
+      ambientLightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Universal.AmbientLightIntensity");
+      brightening = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Universal.Brightening");
+      if (frontLightIntensity > 1)
+        frontLightIntensity = 1;
+      if (frontLightIntensity < 0)
+        frontLightIntensity = 0;
+
 
       picInfo = new int[pData.Width, pData.Height];
       for (int i = 0; i < pData.Width; i++) {
@@ -150,13 +177,35 @@ namespace Fractrace.PictureArt {
       CreateSmoothDeph();
       CreateShadowInfo();
       DrawPlane();
+      SmoothEmptyPixel();
       if (ParameterDict.Exemplar.GetBool("Composite.Normalize"))
         NormalizePlane();
       DarkenPlane();
+      if (brightening > 0) {
+        BrightenBitmap();
+      }
       if (useAmbient)
         SmoothPlane();
 
     }
+
+    /// <summary>
+    /// Abhängig von der Variablen brightening wird das Gesamtbild aufgehellt.
+    /// </summary>
+    protected void BrightenBitmap() {
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          Vec3 col = rgbPlane[i, j];
+          double redLeft = 1 - col.X;
+          double greenLeft = 1 - col.Y;
+          double blueLeft = 1 - col.Z;
+          col.X += col.X*brightening * redLeft;
+          col.Y += col.Y * brightening * greenLeft;
+          col.Z += col.Z * brightening * blueLeft;
+        }
+      }
+    }
+
 
     double minRedColorFromFormula = double.MaxValue;
     double minGreenColorFromFormula = double.MaxValue;
@@ -184,8 +233,14 @@ namespace Fractrace.PictureArt {
             if (pInfo != null && pInfo.AdditionalInfo != null) {
               // Normalisieren;
               double r1 = pInfo.AdditionalInfo.red;
+              if (r1 > 10000)
+                r1 = 10000;
               double g1 = pInfo.AdditionalInfo.green;
+              if (g1 > 10000)
+                g1 = 10000;
               double b1 = pInfo.AdditionalInfo.blue;
+              if (b1 > 10000)
+                b1 = 10000;
               if (r1 < minRedColorFromFormula)
                 minRedColorFromFormula = r1;
               if (r1 > maxRedColorFromFormula)
@@ -220,6 +275,46 @@ namespace Fractrace.PictureArt {
           maxGreenColorFromFormula = 1;
       }
 
+    }
+
+
+
+    /// <summary>
+    /// Bildpunkte, die auf Grund fehlender Informationen nicht geladen werden konnten, werden
+    /// aus den Umgebungsinformationen gemittelt.
+    /// </summary>
+    protected void SmoothEmptyPixel() {
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          PixelInfo pInfo = pData.Points[i, j];
+
+          if (pInfo == null) { // Dieser Wert ist zu setzen
+            Vec3 col = rgbPlane[i, j];
+            col.X = 0; col.Y = 0; col.Z = 0;
+            double pixelCount = 0;
+            for (int k = i - 1; k <= i + 1; k++) {
+              for (int l = j - 1; l <= j + 1; l++) {
+                if (k >= 0 && k < pData.Width && l >= 0 && l < pData.Height) {
+                  PixelInfo pInfo2 = pData.Points[k, l];
+                  if (pInfo2 != null) {
+                    pixelCount++;
+                    Vec3 otherColor = rgbPlane[k, l];
+                    col.X += otherColor.X;
+                    col.Y += otherColor.Y;
+                    col.Z += otherColor.Z;
+                  }
+                }
+              }
+            }
+            pixelCount++; // Etwas dunkler sollte es schon werden
+            if (pixelCount > 0) {
+              col.X /= pixelCount;
+              col.Y /= pixelCount;
+              col.Z /= pixelCount;
+            }
+          }
+        }
+      }
     }
 
 
@@ -625,6 +720,8 @@ namespace Fractrace.PictureArt {
       shadowInfo10v = new double[pData.Width, pData.Height];
       shadowInfo00h = new double[pData.Width, pData.Height];
 
+      // Hier wird zusätzlich der Abstand zur Objektgrenze gemessen, die den Schatten geworfen hat.
+      // Damit sollten weichere Umrisse möglich sein.
       shadowInfo11dist = new double[pData.Width, pData.Height];
       shadowInfo01dist = new double[pData.Width, pData.Height];
       shadowInfo10dist = new double[pData.Width, pData.Height];
@@ -779,6 +876,13 @@ namespace Fractrace.PictureArt {
       Vec3 retVal = new Vec3(0, 0, 0); // blau
 
       PixelInfo pInfo = pData.Points[x, y];
+      if (pInfo == null) {
+        retVal.X = 0;
+        retVal.Y = 0;
+        retVal.Z = 0;
+        return retVal;
+      }
+
 
       if (pInfo != null) {
         // pInfo.iterations sind nur gesetzt, wenn Schnittpunkt mit Bildschirm vorliegt.
@@ -916,7 +1020,8 @@ namespace Fractrace.PictureArt {
 
 
       // Zum Test nur zweite Lichtquelle
-      winkel = 0; // Frontlight wird ausgeschaltet.
+      winkel = frontLightIntensity*winkel; // Frontlight wird ausgeschaltet.
+
       // Zweite Lichtquelle
       // 1 -1 1  
       double norm2 = Math.Sqrt(3.0);
@@ -962,56 +1067,69 @@ namespace Fractrace.PictureArt {
 
       winkel += winkel4;
 
-      // fünfte Lichtquelle
-      // -1 -1 1  
-      double norm5 = Math.Sqrt(3.0);
-      double winkel5 = Math.Acos((-normal.X + normal.Y + normal.Z) / (norm * norm5));
-      winkel5 = 1 - winkel5;
 
-      if (winkel5 < 0)
-        winkel5 = 0;
-      if (winkel5 > 1)
-        winkel5 = 1;
+      if (ambientLightIntensity > 0) {
 
-      winkel5 *= winkel5;
+        // fünfte Lichtquelle
+        // -1 -1 1  
+        double norm5 = Math.Sqrt(3.0);
+        double winkel5 = Math.Acos((-normal.X + normal.Y + normal.Z) / (norm * norm5));
+        winkel5 = 1 - winkel5;
 
-      winkel += 0.1 * winkel5;
+        if (winkel5 < 0)
+          winkel5 = 0;
+        if (winkel5 > 1)
+          winkel5 = 1;
 
-      // 6. Lichtquelle
-      // 0 -1 -1  
-      double norm6 = Math.Sqrt(2.0);
-      double winkel6 = Math.Acos((normal.Y - normal.Z) / (norm * norm3));
-      winkel6 = 1 - winkel6;
+        winkel5 *= winkel5;
 
-      if (winkel6 < 0)
-        winkel6 = 0;
-      if (winkel6 > 1)
-        winkel6 = 1;
+        winkel += ambientLightIntensity * winkel5;
 
-      winkel6 *= winkel6;
+        // 6. Lichtquelle
+        // 0 -1 -1  
+        double norm6 = Math.Sqrt(2.0);
+        double winkel6 = Math.Acos((normal.Y - normal.Z) / (norm * norm3));
+        winkel6 = 1 - winkel6;
 
-      winkel += 0.1 * winkel6;
+        if (winkel6 < 0)
+          winkel6 = 0;
+        if (winkel6 > 1)
+          winkel6 = 1;
 
-      // 7. Lichtquelle
-      // -1 -1 0  
-      double norm7 = Math.Sqrt(2.0);
-      double winkel7 = Math.Acos((-normal.X + normal.Y) / (norm * norm7));
-      winkel7 = 1 - winkel7;
+        winkel6 *= winkel6;
 
-      if (winkel7 < 0)
-        winkel7 = 0;
-      if (winkel7 > 1)
-        winkel7 = 1;
+        winkel += ambientLightIntensity * winkel6;
 
-      winkel7 *= winkel7;
+        // 7. Lichtquelle
+        // -1 -1 0  
+        double norm7 = Math.Sqrt(2.0);
+        double winkel7 = Math.Acos((-normal.X + normal.Y) / (norm * norm7));
+        winkel7 = 1 - winkel7;
 
-      winkel += 0.1 * winkel7;
-      //            winkel /= 1.7;
+        if (winkel7 < 0)
+          winkel7 = 0;
+        if (winkel7 > 1)
+          winkel7 = 1;
+
+        winkel7 *= winkel7;
+
+        winkel += ambientLightIntensity * winkel7;
+        //            winkel /= 1.7;
+
+
+      }
+
+
       winkel /= 1.7;
       if (winkel > 1)
         winkel = 1;
       if (winkel < 0)
         winkel = 0;
+
+
+
+
+
 
       retVal.X = winkel;
       retVal.Y = winkel;
@@ -1021,6 +1139,9 @@ namespace Fractrace.PictureArt {
             retVal.Y = 1;
             retVal.Z = 1;
       */
+
+
+
       return retVal;
     }
 

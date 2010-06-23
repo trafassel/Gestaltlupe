@@ -2,11 +2,11 @@
 <ParameterDict>
   <Entry Key="Animation.Steps" Value="300" />
   <Entry Key="Border.Max.x" Value="0.475310736877314" />
-  <Entry Key="Border.Max.y" Value="0.639161193553688" />
+  <Entry Key="Border.Max.y" Value="0.784359703076315" />
   <Entry Key="Border.Max.z" Value="0.442509743307058" />
   <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-0.409708749736814" />
-  <Entry Key="Border.Min.y" Value="-0.232029863582074" />
+  <Entry Key="Border.Min.y" Value="-0.086831354059447" />
   <Entry Key="Border.Min.z" Value="-0.442509743307058" />
   <Entry Key="Border.Min.zz" Value="0" />
   <Entry Key="Composite.AmbientLight" Value="0" />
@@ -18,12 +18,10 @@
   <Entry Key="Composite.FrontLight" Value="1" />
   <Entry Key="Composite.Normalize" Value="1" />
   <Entry Key="Composite.Renderer" Value="5" />
-  <Entry Key="Composite.Renderer.Universal.AmbientLightIntensity" Value="0.4" />
-  <Entry Key="Composite.Renderer.Universal.ComicStyle" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.FrontLightIntensity" Value="0.1" />
-  <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseDarken" Value="1" />
+  <Entry Key="Composite.Renderer.Universal.ComicStyle" Value="0" />
+  <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="0" />
+  <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="0" />
+  <Entry Key="Composite.Renderer.Universal.UseDarken" Value="0" />
   <Entry Key="Composite.Renderer.Universal.UseMedianColorFromFormula" Value="0" />
   <Entry Key="Composite.Shininess" Value="2" />
   <Entry Key="Composite.UseAmbient" Value="1" />

@@ -95,11 +95,26 @@ namespace Fractrace {
             ParameterDict.Exemplar["Composite.Renderer"] = "UniversalRenderer";
 
           // Eigenschaften von UniversalRenderer
+          // Tiefenunschärfe wird verwendet.
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseAmbient"] = "1";
+          // Gestalt wird nach hinten abgedunkelt.
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseDarken"] = "1";
+          // Die in der Gestaltformel definierte Farbe wird verwendet. 
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseColorFromFormula"] = "1";
+            //  Die in der Gestaltformel definierte Farbe wird vor der Benutzung normalisiert.
+          // Vorsicht: Treten hier Ausreißer in einer Farbkomponente aus, ist
+          // diese Farbkomponente fast überall 0. 
             ParameterDict.Exemplar["Composite.Renderer.Universal.UseMedianColorFromFormula"] = "1";
+          // Wenn dieser Wert 1 beträgt, werden Begrenzungen schwarz nachgezogen.
             ParameterDict.Exemplar["Composite.Renderer.Universal.ComicStyle"] = "0";
+          // Helligkeit des Lichtes, das aus der Position des Nutzers kommt.
+            ParameterDict.Exemplar["Composite.Renderer.Universal.FrontLightIntensity"] = "0.1";
+          // Helligkeit weiterer zusätzlicher Lichtquellen
+            ParameterDict.Exemplar["Composite.Renderer.Universal.AmbientLightIntensity"] = "0.4";
+
+          // Zusätzliche Aufhellung, 0: keine, 1 alles ist Weiß
+            ParameterDict.Exemplar["Composite.Renderer.Universal.Brightening"] = "0";
+
         //    ParameterDict.Exemplar["Composite.UseMedian"] = "1";
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.
