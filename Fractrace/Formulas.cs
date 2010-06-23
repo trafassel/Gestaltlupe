@@ -21,9 +21,7 @@ namespace Fractrace {
 
         // Parameter, die durch die Eingabemaske definiert werden
         private static double gr = 10;
-        private double arj = 0, ark = 0;
         //private double zn=0, xn=0, yn=0, zzn=0; 
-        int maxcol = 0, mincol = 10256;
         /* Hier stehen die Formeln, die den
            verschiedenen Zahlendarstellungen entsprechen */
 
@@ -127,7 +125,7 @@ namespace Fractrace {
         }
 
         long H1(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl) {
-            double aar, aai, aaj, aak, arj, ark;
+            double aar, aai, aaj, aak;
             long tw;
             int n;
 
@@ -181,7 +179,6 @@ double xx, yy, zz;
           ai = 0; aj = 0; ak = 0;
 
           double x=ai,y=aj,z=ak;
-          double r_n = 0;
 
           xx = x * x; yy = y * y; zz = z * z; 
           tw = 0L;
@@ -245,7 +242,6 @@ double xx, yy, zz;
           ai = 0; aj = 0; ak = 0;
 
           double x = ai, y = aj, z = ak;
-          double r_n = 0;
 
           xx = x * x; yy = y * y; zz = z * z;
           tw = 0L;
@@ -307,7 +303,6 @@ double xx, yy, zz;
           ai = 0; aj = 0; ak = 0;
 
           double x = 1, y = 0, z = 0;
-          double r_n = 0;
 
           xx = x * x; yy = y * y; zz = z * z;
           tw = 0;
@@ -479,7 +474,7 @@ double xx, yy, zz;
 
 
         long H2(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl) {
-            double aar, aai, ai_alt, aj_alt, aaj, aak, cj, ck, ari, arj, ark, aik, aij, ajk, ak_alt;
+            double aar, aai, aaj, aak;
             long tw;
             int n;
 
@@ -500,8 +495,8 @@ double xx, yy, zz;
         long H3(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl) {
 
 
-            double aar, aai, ai_alt, aj_alt, aaj, aak, cj, ck, ari, arj, ark, aik, aij, ajk, ak_alt;
-            double c, d;
+            double aar, aai, aaj, aak;
+            double d;
             long tw;
             int n;
 
@@ -522,8 +517,8 @@ double xx, yy, zz;
         long H4(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl) {
 
 
-            double aar, aai, ai_alt, aj_alt, aaj, aak, cj, ck, ari, arj, ark, aik, aij, ajk, ak_alt;
-            double c, d;
+            double aar, aai, aaj, aak;
+            double d;
             long tw;
             int n;
 
@@ -548,7 +543,7 @@ double xx, yy, zz;
 
 
         long Qu(double ar, double ai, double aj, double ak, double br, double bi, double bj, double bk, long zkl) {
-            double aar, aai, aaj, aak, arj, ark;
+            double aar, aai, aaj, aak;
             long tw;
             int n;
 
@@ -592,9 +587,8 @@ double xx, yy, zz;
             double ox = 0, oy = 0, oz = 0, rx = 0, ry = 0, rz = 0;
             double[] tief = new double[5];
             double startwert = 0;
-            int k = 0, te3 = 0, scrart = 1;
-            int wert = 0, pu = 0, set = 0;
-            te3 = 0;
+            int k = 0;
+            int wert = 0, pu = 0;
 
             double distance = 0.19;
             n = 0;
@@ -622,9 +616,7 @@ double xx, yy, zz;
                 }
                 zn = zn + n * zd; xn = xn - n * xd;
                 yn = yn + n * yd; zzn = zzn + n * zzd;
-                set = 0;
                 if (Rechne(xn, yn, zn, zzn, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0) {
-                    set = 1;
                     for (m = 0; m >= -4.0; m -= 0.2) {
                         zm = zn + m * zd; xm = xn - m * xd;
                         ym = yn + m * yd; zzm = zzn + m * zzd;

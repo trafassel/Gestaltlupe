@@ -42,23 +42,18 @@ namespace Fractrace.PictureArt
 
         private Vec3[,] normalesSmooth2 = null;
 
-        private Vec3[,] colorAmbient1 = null;
-
-        private Vec3[,] colorAmbient2 = null;
-
+      
+     
         private Vec3[,] rgbPlane = null;
 
         private Vec3[,] rgbSmoothPlane1 = null;
         private Vec3[,] rgbSmoothPlane2 = null;
-        private Vec3[,] rgbSmoothPlane3 = null;
-
+    
         private double[,] smoothDeph1 = null;
 
         private double[,] smoothDeph2 = null;
 
-        private double[,] _smoothDeph3 = null;
-
-
+      
         /// <summary>
         /// Tiefe, wenn Schatten von unten rechts kommt.
         /// </summary>

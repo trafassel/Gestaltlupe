@@ -382,10 +382,6 @@ namespace Fractrace {
            if(!parameterdictFile.ToLower().StartsWith(Fractrace.FileSystem.Exemplar.ExportDir.ToLower()))
                return;
            string fileName = System.IO.Path.GetFileNameWithoutExtension(parameterdictFile);
-           // Data128pic8
-           int gesData=0;
-           int gesPic=0;
-           gesData=4;
            string tempFileName=fileName.Substring(4); // Data ist vier Zeichen lang.
            
            //gesData=int.Parse(

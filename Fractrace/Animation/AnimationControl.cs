@@ -65,7 +65,6 @@ namespace Fractrace.Animation {
           mAnimationSteps.Steps.Clear();
           string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine," ");
           string[] entries = tempstr.Split(' ');
-          string currentLine = "";
           AnimationPoint currentAp = null;
           string lastEntry = "";
           foreach (string str in entries) {

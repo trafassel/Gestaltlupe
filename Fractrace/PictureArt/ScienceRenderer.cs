@@ -168,7 +168,6 @@ namespace Fractrace {
       /// <param name="y"></param>
       /// <returns></returns>
       protected double  GetLocalDeph(int x, int y) {
-        double retVal = 0;
         PixelInfo center = pData.Points[x, y];
         if (center == null)
           return 0;
@@ -349,6 +348,7 @@ namespace Fractrace {
               try {
                 return Color.FromArgb((int)0, (int)(-pInfo.frontLight), (int)0);
               } catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 return (new ColorRGB(1)).Color;
               }
             }

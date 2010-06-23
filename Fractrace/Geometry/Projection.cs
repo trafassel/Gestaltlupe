@@ -37,7 +37,7 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public Vec3 Transform(Vec3 input) {
+        public override Vec3 Transform(Vec3 input) {
             Vec3 p1 = input.Diff(camera);
             double dp = p1.Norm;
             double fac = dp / d;

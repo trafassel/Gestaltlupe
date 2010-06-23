@@ -67,11 +67,8 @@ namespace Fractrace.PictureArt {
     private Vec3[,] normalesSmooth2 = null;
 
 
-    private Vec3[,] colorAmbient1 = null;
-
-
-    private Vec3[,] colorAmbient2 = null;
-
+  
+  
 
     private Vec3[,] rgbPlane = null;
 
@@ -82,8 +79,7 @@ namespace Fractrace.PictureArt {
     private Vec3[,] rgbSmoothPlane2 = null;
     
     
-    private Vec3[,] rgbSmoothPlane3 = null;
-
+ 
     
     private double[,] smoothDeph1 = null;
 
@@ -91,8 +87,7 @@ namespace Fractrace.PictureArt {
     private double[,] smoothDeph2 = null;
 
     
-    private double[,] _smoothDeph3 = null;
-
+   
 
     /// <summary>
     /// Tiefe, wenn Schatten von den verschidensten Richtungen kommt.
@@ -136,6 +131,7 @@ namespace Fractrace.PictureArt {
       comicStyle= ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.ComicStyle");
       
 
+
       borderMinY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
       borderMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
 
@@ -145,8 +141,10 @@ namespace Fractrace.PictureArt {
           picInfo[i, j] = 0;
         }
       }
-      if (useMedianColorFromFormula) {
-        PreCalculateMedianColorFromFormula();
+      if (useColorFromFormula) {
+        if (useMedianColorFromFormula) {
+          PreCalculateMedianColorFromFormula();
+        }
       }
       CreateSmoothNormales();
       CreateSmoothDeph();
@@ -611,8 +609,10 @@ namespace Fractrace.PictureArt {
       }
     }
 
+
     /// <summary>
     /// Schatteninformationen, wenn das Licht von oben rechts kommen, werden erzeugt.
+    /// Vorbereitet für weitere Lichtquellen.
     /// </summary>
     protected virtual void CreateShadowInfo() {
       // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
@@ -692,12 +692,8 @@ namespace Fractrace.PictureArt {
               shadowInfo10v[i, j] = localShadow;
             shadowInfo10vdist[i, j] = shadowInfo10vdist[i, j + 1] + 1;
           }
-
-
-
         }
       }
-
 
       // Die shadowplane aufbauen
       for (int i = 0; i < pData.Width; i++) {
@@ -711,11 +707,9 @@ namespace Fractrace.PictureArt {
             if (smoothDeph2[i, j] < shadowInfo01[i, j]) {
               tempdiff++;
             }
-
             if (smoothDeph2[i, j] < shadowInfo10[i, j]) {
               tempdiff++;
             }
-
             if (smoothDeph2[i, j] < shadowInfo00[i, j]) {
               tempdiff++;
             }
@@ -725,11 +719,9 @@ namespace Fractrace.PictureArt {
             if (smoothDeph2[i, j] < shadowInfo01h[i, j]) {
               tempdiff++;
             }
-
             if (smoothDeph2[i, j] < shadowInfo10v[i, j]) {
               tempdiff++;
             }
-
             if (smoothDeph2[i, j] < shadowInfo00h[i, j]) {
               tempdiff++;
             }

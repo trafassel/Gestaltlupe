@@ -41,8 +41,7 @@ namespace Fractrace {
         }
 
 
-        Image labelImage = null;
-
+    
         Graphics grLabel = null;
 
         int maxx = 0;
@@ -311,8 +310,7 @@ namespace Fractrace {
 
         }
 
-        private bool abortAni = false;
-
+      
 
         /// <summary>
         /// Stop wurde gewählt.
@@ -331,7 +329,6 @@ namespace Fractrace {
                 classicIter.Abort();
             }
 
-            abortAni = true;
         }
 
 

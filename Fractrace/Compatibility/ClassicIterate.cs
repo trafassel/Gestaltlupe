@@ -136,8 +136,6 @@ namespace Fractrace.Compability {
 
             double fa1;//, zyklen = 5;
             int xschl = 0, yschl = 0, zschl = 0, xx = 0, yy = 0;
-            int d = 0; // Radius, Position und Zaehler
-            double alpha = 0, r = 0; // Winkel und Radius
             double wix = 0, wiy = 0, wiz = 0;
             double jx = 0, jy = 0, jz = 0, jzz = 0;
 
@@ -163,7 +161,6 @@ namespace Fractrace.Compability {
 
             //formula = 24;
 
-            int t1 = 0;
             int colour_type = 0;
 
             int G_Parameter__number_of_frames = 1;
@@ -206,10 +203,6 @@ namespace Fractrace.Compability {
                     // double dephFactor = (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXX * MAXY * MAXZ * 20.0);
                     // if (dephFactor < 0)
                     //     dephFactor = -dephFactor;
-                    double dephFactor = 0;
-
-                    double currentDeph = 0;
-                    bool isBorder = true;
                     bool isZborder = true;
                     bool isXborder = true;
                     bool isYborder = true;
@@ -288,17 +281,8 @@ namespace Fractrace.Compability {
                             x = act_val.start_tupel.x + (double)xd * xschl / (raster);
 
                             int analogDephtInfo = 455;
-                            double satColor = 0.1;
-                            // Primitive Bildmanipulation
-                            double tewared = 4;
-                            double tewagreen = 4;
-                            double tewablue = 4;
 
-                            currentDeph = 1;
-
-
-
-
+                          
                             double currentDephSize1 = currentDephSize;
                             double miny = 0;
 
@@ -386,9 +370,6 @@ namespace Fractrace.Compability {
                                          */
 
 
-                                        t1 = 0;
-
-                                        t1 = 1;
                                         fa1 = 0;//test=1;
 
                                         // Tiefe in x,y,z hineinrechnen
@@ -947,11 +928,7 @@ namespace Fractrace.Compability {
                                         //double xzDephFactor = currentDephSize1 * 10*screensize;
                                         //double yDephFactor = currentDephSize1 * 10 *screensize;
 
-                                        // debug only: im Zweifel die Abstände viel kleiner setzen
-                                        double tempFac = 0.1;
-                                        //xzDephFactor *= tempFac;
-                                        //yDephFactor *= 1;
-
+                                      
 
                                         // ende debug only
 
@@ -1198,7 +1175,6 @@ jx, jy, jz, jzz, formula, perspective, inverse);
                     dephInfo = GData.ColorInfoDeph[i, j];
                     //  }
                     Pen p = new Pen(Color.FromArgb(100, 200, 50));
-                    double fa1 = 0;
                     double fa2 = GData.ColorInfo2[i, j];
 
 

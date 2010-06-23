@@ -51,6 +51,7 @@ namespace Fractrace.PictureArt {
           return retVal;
 
         } catch (Exception ex) {
+          System.Diagnostics.Debug.WriteLine(ex.ToString());
           retVal.X = 1;
           retVal.Y = 0;
           retVal.Z = 0;

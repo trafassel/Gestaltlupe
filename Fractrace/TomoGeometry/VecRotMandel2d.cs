@@ -27,7 +27,6 @@ namespace Fractrace.TomoGeometry {
         //          ai = 0; aj = 0; ak = 0;
 
         double x = ar, y = ai, z = aj;
-        double r_n = 0;
 
         xx = x * x; yy = y * y; zz = z * z;
         tw = 0;
@@ -87,7 +86,6 @@ namespace Fractrace.TomoGeometry {
         long tw;
         int n;
         double x = ar, y = ai, z = aj;
-        double r_n = 0;
 
         xx = x * x; yy = y * y; zz = z * z;
         tw = 0;

@@ -1,4 +1,6 @@
-﻿namespace Fractrace {
+﻿using System.Drawing;
+
+namespace Fractrace {
     partial class ParameterInput {
         /// <summary>
         /// Required designer variable.
@@ -539,7 +541,9 @@
           // preview2
           // 
           this.preview2.Dock = System.Windows.Forms.DockStyle.Right;
-          this.preview2.Image = ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
+         
+            
+          //  ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
           this.preview2.IsRightView = false;
           this.preview2.Location = new System.Drawing.Point(91, 0);
           this.preview2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -547,12 +551,13 @@
           this.preview2.RenderOnClick = true;
           this.preview2.ShowProgressBar = true;
           this.preview2.Size = new System.Drawing.Size(59, 69);
+          this.preview2.Image = new Bitmap((int)(this.preview2.Size.Width), (int)(this.preview2.Size.Height)); 
           this.preview2.TabIndex = 2;
           // 
           // preview1
           // 
           this.preview1.Dock = System.Windows.Forms.DockStyle.Left;
-          this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
+          //this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
           this.preview1.IsRightView = false;
           this.preview1.Location = new System.Drawing.Point(0, 0);
           this.preview1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -560,6 +565,7 @@
           this.preview1.RenderOnClick = true;
           this.preview1.ShowProgressBar = true;
           this.preview1.Size = new System.Drawing.Size(57, 69);
+          this.preview1.Image = new Bitmap((int)(this.preview1.Size.Width), (int)(this.preview1.Size.Height)); 
           this.preview1.TabIndex = 1;
           this.preview1.RenderingEnds += new Fractrace.PictureRenderingIsReady(this.preview1_RenderingEnds);
           // 

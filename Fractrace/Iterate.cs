@@ -353,8 +353,6 @@ namespace Fractrace {
       double ycenter = (act_val.start_tupel.y + act_val.end_tupel.y) / 2.0;
       double zcenter = (act_val.start_tupel.z + act_val.end_tupel.z) / 2.0;
 
-      bool isZborder = true;
-      bool isXborder = true;
       bool isYborder = true;
 
       // Projektion initialisieren und der Berechnung zuordnen:
@@ -390,14 +388,6 @@ namespace Fractrace {
         // Nur wenn der Scheduler die Erlaubnis gibt, zschl zu benutzen,
         // die Berechnung ausführen (sonst nächste Iteration)
         if (IsAvailable(MAXZ_ITER - zschl)) {
-
-          isZborder = false;
-          if (zschl < (MINZ_ITER) + raster) {
-            isZborder = true;
-          } else
-            if (zschl > (MAXZ_ITER) - raster) {
-              isZborder = true;
-            }
 
           System.Windows.Forms.Application.DoEvents();
           z = act_val.end_tupel.z - (double)zd * (MAXZ_ITER - zschl) / (raster);
@@ -915,7 +905,6 @@ namespace Fractrace {
           dephInfo = GData.ColorInfoDeph[i, j];
           //  }
           Pen p = new Pen(Color.FromArgb(100, 200, 50));
-          double fa1 = 0;
           double fa2 = GData.ColorInfo2[i, j];
 
           p.Color = Color.FromArgb((int)fa2, (int)(fa2), (int)fa2);

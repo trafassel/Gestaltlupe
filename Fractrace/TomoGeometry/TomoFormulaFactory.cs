@@ -44,7 +44,8 @@ namespace Fractrace.TomoGeometry {
 
             parameters.ReferencedAssemblies.AddRange(refs);
             provider = new Microsoft.CSharp.CSharpCodeProvider();
-             System.CodeDom.Compiler.ICodeCompiler compiler = provider.CreateCompiler();
+           
+             //System.CodeDom.Compiler.ICodeCompiler compiler = provider.CreateCompiler();
 
             string tomoSource = @"
 using System;
@@ -60,14 +61,15 @@ public CSTomoFormula() {
 
 
             try {
-                results = compiler.CompileAssemblyFromSource(parameters, tomoSource);
+                //results = compiler.CompileAssemblyFromSource(parameters, tomoSource);
+              results = provider.CompileAssemblyFromSource(parameters, tomoSource);
             } catch (Exception ex) {
+                // TODO: Fehlerhafte Zeile markieren
                 Console.WriteLine(ex.ToString());
                 FormulaEditor.AddError(ex.ToString());
                 return;
             }
 
-            System.Reflection.Assembly mCAssembly = null;
             if (results.Errors.Count != 0) {
                 foreach (System.CodeDom.Compiler.CompilerError cerror in results.Errors) {
                     if (!cerror.IsWarning) {

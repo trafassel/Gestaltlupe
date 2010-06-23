@@ -25,9 +25,6 @@ namespace Fractrace.PictureArt {
         /// <param name="y"></param>
         /// <returns></returns>
         protected override Color GetColor(int x, int y) {
-          double red = 0;
-          double green = 0;
-          double blue = 0;
           PixelInfo pInfo = pData.Points[x, y];
           if (pInfo == null) {
             return Color.Red;
