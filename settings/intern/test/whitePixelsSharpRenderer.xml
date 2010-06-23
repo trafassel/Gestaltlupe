@@ -17,7 +17,7 @@
   <Entry Key="Composite.Color1TestArea" Value="10" />
   <Entry Key="Composite.FrontLight" Value="1" />
   <Entry Key="Composite.Normalize" Value="1" />
-  <Entry Key="Composite.Renderer" Value="5" />
+  <Entry Key="Composite.Renderer" Value="4" />
   <Entry Key="Composite.Renderer.Universal.ComicStyle" Value="1" />
   <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="1" />
   <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="1" />

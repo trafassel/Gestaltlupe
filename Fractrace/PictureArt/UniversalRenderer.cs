@@ -781,8 +781,8 @@ namespace Fractrace.PictureArt {
       PixelInfo pInfo = pData.Points[x, y];
 
       if (pInfo != null) {
+        // pInfo.iterations sind nur gesetzt, wenn Schnittpunkt mit Bildschirm vorliegt.
         if (pInfo.iterations >= 0) {
-          // return retVal;
 
           double it = -pInfo.frontLight / 255.0;
           if (it > 1)
@@ -844,31 +844,33 @@ namespace Fractrace.PictureArt {
 
       // Falls weitere Farbinformation vorhanden sind, werden diese nun auf die Punkte angewendet
       bool useAdditionalColorinfo = true;
-      if (useAdditionalColorinfo && pInfo != null && pInfo.AdditionalInfo != null) {
-        // Normalisieren;
-        double r1 = pInfo.AdditionalInfo.red;
-        double g1 = pInfo.AdditionalInfo.green;
-        double b1 = pInfo.AdditionalInfo.blue;
-        if (r1 < 0)
-          r1 = -r1;
-        if (g1 < 0)
-          g1 = -g1;
-        if (b1 < 0)
-          b1 = -b1;
-        double minr = r1;
-        if (minr > g1)
-          minr = g1;
-        if (minr > b1)
-          minr = b1;
+      if (useColorFromFormula) {
+        if (useAdditionalColorinfo && pInfo != null && pInfo.AdditionalInfo != null) {
+          // Normalisieren;
+          double r1 = pInfo.AdditionalInfo.red;
+          double g1 = pInfo.AdditionalInfo.green;
+          double b1 = pInfo.AdditionalInfo.blue;
+          if (r1 < 0)
+            r1 = -r1;
+          if (g1 < 0)
+            g1 = -g1;
+          if (b1 < 0)
+            b1 = -b1;
+          double minr = r1;
+          if (minr > g1)
+            minr = g1;
+          if (minr > b1)
+            minr = b1;
 
-        //r1 -= minr;
-        //g1 -= minr;
-        //b1 -= minr;
-        if (useMedianColorFromFormula) {
-          r1 = (r1 - minRedColorFromFormula) / (maxRedColorFromFormula - minRedColorFromFormula);
-          g1 = (g1 - minGreenColorFromFormula) / (maxGreenColorFromFormula - minGreenColorFromFormula);
-          b1 = (b1 - minBlueColorFromFormula) / (maxBlueColorFromFormula - minBlueColorFromFormula);
-        }
+          //r1 -= minr;
+          //g1 -= minr;
+          //b1 -= minr;
+          if (useMedianColorFromFormula) {
+            r1 = (r1 - minRedColorFromFormula) / (maxRedColorFromFormula - minRedColorFromFormula);
+            g1 = (g1 - minGreenColorFromFormula) / (maxGreenColorFromFormula - minGreenColorFromFormula);
+            b1 = (b1 - minBlueColorFromFormula) / (maxBlueColorFromFormula - minBlueColorFromFormula);
+          }
+
 
           double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1) / Math.Sqrt(3.0);
           if (norm != 0) {
@@ -876,6 +878,7 @@ namespace Fractrace.PictureArt {
             retVal.Y *= (g1) / norm;
             retVal.Z *= (b1) / norm;
           }
+        }
       }
       return retVal;
     }

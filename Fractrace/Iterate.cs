@@ -102,7 +102,7 @@ namespace Fractrace {
     /// </summary>
     IAsyncComputationStarter mStarter = null;
 
-    
+
     /// <summary>
     /// Initialisation
     /// </summary>
@@ -117,15 +117,15 @@ namespace Fractrace {
       this.mIsRightView = isRightView;
     }
 
-    
+
     /// <summary>
     /// Wird bei der Stereoansicht verwendet. Hier wird unterschieden, ob
     /// es sich um eine Sicht vom rechten Auge handelt. 
     /// </summary>
-    protected bool mIsRightView =false;
+    protected bool mIsRightView = false;
 
 
-  
+
     /// <summary>
     /// Liefert den Status der Berechnung (von 0-100)
     /// </summary>
@@ -362,10 +362,10 @@ namespace Fractrace {
       Vec3 camera = new Vec3(xcenter, act_val.end_tupel.y + cameraDeph, zcenter);
       Vec3 viewPoint = new Vec3(xcenter, act_val.end_tupel.y, zcenter);
       Projection proj = new Projection(camera, viewPoint);
-      if( ParameterDict.Exemplar.GetBool("View.Perspective"))
-         formulas.Projection = proj;
+      if (ParameterDict.Exemplar.GetBool("View.Perspective"))
+        formulas.Projection = proj;
 
-  
+
 
       // Bei der Postererstellung werden die Parameter der räumlichen Projektion auf das mittlere Bild 
       // ausgerichtet und anschließend die Grenzen verschoben
@@ -420,8 +420,8 @@ namespace Fractrace {
                   int usedCycles = 0;
                   bool inverse = false;
                   if (GData == null) {
-                      System.Diagnostics.Debug.WriteLine("Error: GData == null");
-                      return;
+                    System.Diagnostics.Debug.WriteLine("Error: GData == null");
+                    return;
                   }
                   if ((GData.Picture)[xx, yy] == 0)
                     usedCycles = formulas.Rechne(x, y, z, zz, zyklen,
@@ -441,7 +441,7 @@ namespace Fractrace {
                     minYDetected = true;
                     // Iteration ist nicht abgebrochen, also weiterrechnen:
                     int oldPictureInfo = (GData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
-                                                                  // die Farbberechnung wiederholt wird.
+                    // die Farbberechnung wiederholt wird.
                     (GData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
                     VoxelInfo vInfo = new VoxelInfo();
                     GData.PointInfo[xx, yy] = vInfo;
@@ -451,9 +451,8 @@ namespace Fractrace {
                     vInfo.l = zz;
 
                     cycleAdd = 1024;
-                    if (minCycle != 51 && minCycle >= 0)
-                    {
-                        cycleAdd = minCycle - zyklen;
+                    if (minCycle != 51 && minCycle >= 0) {
+                      cycleAdd = minCycle - zyklen;
                     }
                     if (isYborder) { // es liegt Schnitt mit Begrenzung vor
                       colour_type = 0; // COL; // Farbige Darstellung
@@ -478,15 +477,15 @@ namespace Fractrace {
                       colour_type = 1; // GREY;
 
                       if (inverse)
-                        fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz, 
-                          xd , yd , zd , zzd,
+                        fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
+                          xd, yd, zd, zzd,
                           wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse, xx, yy,true);
+                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                       else
-                        fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz, 
-                          xd , yd , zd , zzd ,
+                        fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
+                          xd, yd, zd, zzd,
                           wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse, xx, yy,true);
+                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                       fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
                     }
 
@@ -529,7 +528,7 @@ namespace Fractrace {
                         //  grLabel.FillRectangle(brush, xx, yy + raster / 2, raster / 2, raster);
                       }
 
-                    } else if (raster == 2) { 
+                    } else if (raster == 2) {
                       if (colour_type == 0) {
                         // Es liegt also Schnittpunkt mit dem virtuellen Bildschirm vor. In diesem Fall
                         // wird die klassische 2D Darstellung des Fraktals verwendet.
@@ -610,9 +609,9 @@ namespace Fractrace {
                         //  redMin = 0.5;
                         //}
 
-                          // Wenn eine der Infos null ist, nochmal in höherer Auflösung rechnen
-//                              pixelInfo = new PixelInfo();
-//                          pixelInfo.frontLight = -fa1;
+                        // Wenn eine der Infos null ist, nochmal in höherer Auflösung rechnen
+                        //                              pixelInfo = new PixelInfo();
+                        //                          pixelInfo.frontLight = -fa1;
 
                         /*
                         PixelInfo pInfo1 = PData.Points[xx, yy];
@@ -625,155 +624,168 @@ namespace Fractrace {
                         */
                         //p.Color = Color.FromArgb((int)(col[3]), (int)col[3], (int)col[3]);
                         //DrawPoint(col[3], xx, yy);
-                            double fa = 0;
-                            if (PData.Points[xx, yy] != null)
-                              GData.ColorInfo[xx, yy] = col[3];
-                            else {
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                 minCycle,
-                                 x, y, z, zz,
-                         0.5 * xd, yd, 0.5 * zd, zzd,
-                         wix, wiy, wiz,
-                         jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                              GData.ColorInfo[xx, yy] = (col[0]+col[1]+col[2]+ col[3])/4.0;
-                            }
-                     
+                        //double fa = 0;
+                        if (PData.Points[xx, yy] != null)
+                          GData.ColorInfo[xx, yy] = col[3];
+                        else {
+                          // 
+                          GData.ColorInfo[xx, yy] = -1;
+                          /*
+                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                             minCycle,
+                             x, y, z, zz,
+                     0.5 * xd, yd, 0.5 * zd, zzd,
+                     wix, wiy, wiz,
+                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
+                          GData.ColorInfo[xx, yy] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                           */
+                        }
+
                         //p.Color = Color.FromArgb((int)(redMin * col[0]), (int)col[0], (int)col[0]);
                         //DrawPoint(col[0], xx + 1, yy);
-                            if (PData.Points[xx+1, yy] != null)
-                        GData.ColorInfo[xx + 1, yy] = col[0];
-                            else {
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                 minCycle,
-                                 x+0.5*xd, y, z, zz,
-                         0.5 * xd, yd, 0.5 * zd, zzd,
-                         wix, wiy, wiz,
-                         jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                              GData.ColorInfo[xx+1, yy] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                            }
+                        if (PData.Points[xx + 1, yy] != null)
+                          GData.ColorInfo[xx + 1, yy] = col[0];
+                        else {
+                          GData.ColorInfo[xx+1, yy] = -1;
+                          /*
+                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                             minCycle,
+                             x + 0.5 * xd, y, z, zz,
+                     0.5 * xd, yd, 0.5 * zd, zzd,
+                     wix, wiy, wiz,
+                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
+                          GData.ColorInfo[xx + 1, yy] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                           */
+                        }
 
                         //p.Color = Color.FromArgb((int)(redMin * col[1]), (int)col[1], (int)col[1]);
                         //DrawPoint(col[1], xx + 1, yy + 1);
-                            if (PData.Points[xx + 1, yy+1] != null)
-                        GData.ColorInfo[xx + 1, yy + 1] = col[1];
-                            else {
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                 minCycle,
-                                 x + 0.5 * xd, y, z-0.5*zd, zz,
-                         0.5 * xd, yd, 0.5 * zd, zzd,
-                         wix, wiy, wiz,
-                         jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                              GData.ColorInfo[xx + 1, yy+1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                            }
+                        if (PData.Points[xx + 1, yy + 1] != null)
+                          GData.ColorInfo[xx + 1, yy + 1] = col[1];
+                        else {
+                          GData.ColorInfo[xx+1, yy+1] = -1;
+                          /*
+                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                             minCycle,
+                             x + 0.5 * xd, y, z - 0.5 * zd, zz,
+                     0.5 * xd, yd, 0.5 * zd, zzd,
+                     wix, wiy, wiz,
+                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
+                          GData.ColorInfo[xx + 1, yy + 1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                           */
+                        }
 
                         //p.Color = Color.FromArgb((int)(redMin * col[2]), (int)col[2], (int)col[2]);
                         //DrawPoint(col[2], xx, yy + 1);
-                            if (PData.Points[xx, yy + 1] != null)
-                        GData.ColorInfo[xx, yy + 1] = col[2];
-                            else {
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                 minCycle,
-                                 x, y, z - 0.5 * zd, zz,
-                         0.5 * xd, yd, 0.5 * zd, zzd,
-                         wix, wiy, wiz,
-                         jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                              GData.ColorInfo[xx, yy + 1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                            }
+                        if (PData.Points[xx, yy + 1] != null)
+                          GData.ColorInfo[xx, yy + 1] = col[2];
+                        else {
+                          GData.ColorInfo[xx, yy+1] = -1;
+                          /*
+                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                             minCycle,
+                             x, y, z - 0.5 * zd, zz,
+                     0.5 * xd, yd, 0.5 * zd, zzd,
+                     wix, wiy, wiz,
+                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
+                          GData.ColorInfo[xx, yy + 1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                           */
+                        }
                         // Wenn Farbänderung zum Nachbarknoten zu groß ist, diesen Punkt neu
                         // berechnen
-
-                              /*
-                        if (xx > 0 && yy > 0) {
-                          double tempX = x - xd / 2.0;
-                          double tempY = y;
-                          double tempZ = z - zd / 2.0;
-                          for (int xxi = xx; xxi <= xx + 1; xxi++, tempX += xd) {
-                            for (int yyi = yy; yyi <= yy + 1; yyi++, tempZ += zd) {
-                              double currentCol = GData.ColorInfo[xxi, yyi];
-                              if (currentCol < 0.01) {
-                                if (inverse)
-                                  fa1 = formulas.WinkelPerspective(minCycle, tempX, y, tempZ, zz, 
-                                    xd * xzDephFactor * 0.5, yd * yDephFactor, zd * xzDephFactor * 0.5, zzd,
-                                    wix, wiy, wiz,
-                                    jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-                                else
-                                  fa1 = formulas.WinkelPerspective(zyklen, tempX, y, tempZ, zz, 
-                                    xd * xzDephFactor, yd * yDephFactor, zd * xzDephFactor, zzd * xzDephFactor,
-                                    wix, wiy, wiz,
-                                    jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-                                fa1 = 0;
-                                for (int i = 0; i < 4; i++) {
-                                  fa1 += col[i];
-                                }
-                                fa1 = fa1 / 4.0;
-                                p.Color = Color.FromArgb((int)(fa1), (int)fa1, (int)fa1);
-                                DrawPoint((int)fa1, xxi, yyi);
-                              }
-                            }
-                          }
-                        }
-                              */
-                        
-                     // }
-
-                      /*
-                          else {
-                              // Die vier Einzelpunkte nachberechnen
-                              
-                              //if ((GData.Picture)[xx, yy] == 1)
-                              //    (GData.Picture)[xx, yy] =0;
-
-                              int newPictureInfo = (GData.Picture)[xx, yy];
-                              (GData.Picture)[xx, yy] = oldPictureInfo; 
-
-                              PixelInfo pInfo = new PixelInfo();
-                           pInfo.frontLight=1;
                           
-                           pInfo.Coord.X = x;
-                           pInfo.Coord.Y = y;
-                           pInfo.Coord.Z = 0;
+                        /*
+                  if (xx > 0 && yy > 0) {
+                    double tempX = x - xd / 2.0;
+                    double tempY = y;
+                    double tempZ = z - zd / 2.0;
+                    for (int xxi = xx; xxi <= xx + 1; xxi++, tempX += xd) {
+                      for (int yyi = yy; yyi <= yy + 1; yyi++, tempZ += zd) {
+                        double currentCol = GData.ColorInfo[xxi, yyi];
+                        if (currentCol < 0.01) {
+                          if (inverse)
+                            fa1 = formulas.WinkelPerspective(minCycle, tempX, y, tempZ, zz, 
+                              xd * xzDephFactor * 0.5, yd * yDephFactor, zd * xzDephFactor * 0.5, zzd,
+                              wix, wiy, wiz,
+                              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
+                          else
+                            fa1 = formulas.WinkelPerspective(zyklen, tempX, y, tempZ, zz, 
+                              xd * xzDephFactor, yd * yDephFactor, zd * xzDephFactor, zzd * xzDephFactor,
+                              wix, wiy, wiz,
+                              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
+                          fa1 = 0;
+                          for (int i = 0; i < 4; i++) {
+                            fa1 += col[i];
+                          }
+                          fa1 = fa1 / 4.0;
+                          p.Color = Color.FromArgb((int)(fa1), (int)fa1, (int)fa1);
+                          DrawPoint((int)fa1, xxi, yyi);
+                        }
+                      }
+                    }
+                  }
+                        */
+
+                        // }
+
+                        /*
+                            else {
+                                // Die vier Einzelpunkte nachberechnen
+                              
+                                //if ((GData.Picture)[xx, yy] == 1)
+                                //    (GData.Picture)[xx, yy] =0;
+
+                                int newPictureInfo = (GData.Picture)[xx, yy];
+                                (GData.Picture)[xx, yy] = oldPictureInfo; 
+
+                                PixelInfo pInfo = new PixelInfo();
+                             pInfo.frontLight=1;
+                          
+                             pInfo.Coord.X = x;
+                             pInfo.Coord.Y = y;
+                             pInfo.Coord.Z = 0;
                              
                          
-                           PData.Points[xx, yy] = null;
-                           PData.Points[xx + 1, yy] = null;
-                           PData.Points[xx, yy + 1] = null;
-                           PData.Points[xx + 1, yy + 1] = null;
+                             PData.Points[xx, yy] = null;
+                             PData.Points[xx + 1, yy] = null;
+                             PData.Points[xx, yy + 1] = null;
+                             PData.Points[xx + 1, yy + 1] = null;
 
                             
-                              double fa=ComputeColor(formulas,act_val.start_tupel.y,act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                  minCycle,
-                                  x, y, z, zz,
-                          0.25*xd , yd , 0.25*zd , zzd ,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse, xx, yy,raster);
-
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                                double fa=ComputeColor(formulas,act_val.start_tupel.y,act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
                                     minCycle,
-                                    x+0.5*xd, y, z-0.5*zd, zz,
-                            0.25 * xd, yd, 0.25 * zd, zzd,
+                                    x, y, z, zz,
+                            0.25*xd , yd , 0.25*zd , zzd ,
                             wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx+1, yy+1, raster);
+                            jx, jy, jz, jzz, formula, inverse, xx, yy,raster);
 
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                    minCycle,
-                                    x+xd/2.0, y, z, zz,
-                            0.25 * xd, yd, 0.25 * zd, zzd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx+1, yy, raster);
+                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                                      minCycle,
+                                      x+0.5*xd, y, z-0.5*zd, zz,
+                              0.25 * xd, yd, 0.25 * zd, zzd,
+                              wix, wiy, wiz,
+                              jx, jy, jz, jzz, formula, inverse, xx+1, yy+1, raster);
 
-                              fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                    minCycle,
-                                    x, y, z-zd/2.0, zz,
-                            0.25 * xd, yd, 0.25 * zd, zzd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx, yy+1, raster);
+                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                                      minCycle,
+                                      x+xd/2.0, y, z, zz,
+                              0.25 * xd, yd, 0.25 * zd, zzd,
+                              wix, wiy, wiz,
+                              jx, jy, jz, jzz, formula, inverse, xx+1, yy, raster);
+
+                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
+                                      minCycle,
+                                      x, y, z-zd/2.0, zz,
+                              0.25 * xd, yd, 0.25 * zd, zzd,
+                              wix, wiy, wiz,
+                              jx, jy, jz, jzz, formula, inverse, xx, yy+1, raster);
                             
 
-                           //   pInfo.frontLight = fa;
-                              (GData.Picture)[xx, yy] = newPictureInfo; 
+                             //   pInfo.frontLight = fa;
+                                (GData.Picture)[xx, yy] = newPictureInfo; 
 
-                          }*/
-                          }
+                            }*/
+                      }
                     } else {
                       p.Color = Color.FromArgb((int)fa1, (int)fa1, (int)fa1);
                       GData.ColorInfo2[xx, yy] = fa1;
@@ -789,96 +801,65 @@ namespace Fractrace {
         }
       }
 
-      
-       }
+
+    }
 
 
 
-    public double ComputeColor(Formulas formulas, double yMin, double yMax, int yDimMin, int yDimMax, 
+    /*
+    public double ComputeColor(Formulas formulas, double yMin, double yMax, int yDimMin, int yDimMax,
         long zykl, double x, double y, double z, double zz,
         double xd, double yd, double zd, double zzd,
         double wix, double wiy, double wiz,
-        double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY,int raster) {
-        
-      
+        double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY, int raster) {
+
+
       double color = 0;
-        
 
-        // debug only
-        
-        /*
-        PData.Points[pixelX, pixelY].Coord.X = x;
-        PData.Points[pixelX, pixelY].Coord.Y = 0;
-        PData.Points[pixelX, pixelY].Coord.Z = z;
-        return 1;
-         */
-
-        // ende debug only
-        // for next Schleife für y 
-
-
-      //  Console.WriteLine("ComputeColor(" + x.ToString() + ", " + z.ToString() + ")");
-        
-        for (int yschl = (int)(yDimMax); yschl >= yDimMin; yschl -= raster) {
-            y = yMax - (double)yd * (yDimMax - yschl) / (raster);
-             int usedCycles = 0;
-                  bool inverse = false;
-                  if (GData == null) {
-                      System.Diagnostics.Debug.WriteLine("Error: GData == null");
-                      return 0;
-                  }
-                  if ((GData.Picture)[pixelX, pixelY] == 0)
-                      usedCycles = formulas.Rechne(x, y, z, zz, zykl,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse);
-                  if ((GData.Picture)[pixelX, pixelY] == 2) {// Invers rechnen
-                    inverse = true;
-                    usedCycles = formulas.Rechne(x, y, z, zz, zykl,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse);
-                  }
-                  if (usedCycles == 0) {
-                    
-                    double fa1 = 0;
-                    if (inverse)
-                      fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
-                        xd, yd, zd, zzd,
-                        wix, wiy, wiz,
-                        jx, jy, jz, jzz, formula, inverse, pixelX, pixelY,false);
-                    else
-                      fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
-                        xd, yd, zd, zzd,
-                        wix, wiy, wiz,
-                        jx, jy, jz, jzz, formula, inverse, pixelX, pixelY,false);
-                    fa1 = (formulas.col[0] + formulas.col[1] + formulas.col[2] + formulas.col[3]) / 4.0;
-                    
-                    /*
-                      PData.Points[pixelX, pixelY].Coord.X = x;
-                      PData.Points[pixelX, pixelY].Coord.Y = y;
-                      PData.Points[pixelX, pixelY].Coord.Z = z;
-                    */
-                    color = fa1;
-                     
-                    //color = fa1;
-                      return color;
-
-                  }
+      for (int yschl = (int)(yDimMax); yschl >= yDimMin; yschl -= raster) {
+        y = yMax - (double)yd * (yDimMax - yschl) / (raster);
+        int usedCycles = 0;
+        bool inverse = false;
+        if (GData == null) {
+          System.Diagnostics.Debug.WriteLine("Error: GData == null");
+          return 0;
         }
-        /*
-        if (inverse)
-            fa1 = formulas.WinkelPerspective(minCycle, tempX, y, tempZ, zz,
-              xd * 0.5, yd , zd  * 0.5, zzd,
+        if ((GData.Picture)[pixelX, pixelY] == 0)
+          usedCycles = formulas.Rechne(x, y, z, zz, zykl,
               wix, wiy, wiz,
-              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-        else
-            fa1 = formulas.WinkelPerspective(zyklen, tempX, y, tempZ, zz,
-              xd , yd , zd , zzd ,
-              wix, wiy, wiz,
-              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-        */
-        return color;
-    }
+              jx, jy, jz, jzz, formula, inverse);
+        if ((GData.Picture)[pixelX, pixelY] == 2) {// Invers rechnen
+          inverse = true;
+          usedCycles = formulas.Rechne(x, y, z, zz, zykl,
+                wix, wiy, wiz,
+                jx, jy, jz, jzz, formula, inverse);
+        }
+        if (usedCycles == 0) {
 
+          double fa1 = 0;
+          if (inverse)
+            fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
+              xd, yd, zd, zzd,
+              wix, wiy, wiz,
+              jx, jy, jz, jzz, formula, inverse, pixelX, pixelY, false);
+          else
+            fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
+              xd, yd, zd, zzd,
+              wix, wiy, wiz,
+              jx, jy, jz, jzz, formula, inverse, pixelX, pixelY, false);
+          fa1 = (formulas.col[0] + formulas.col[1] + formulas.col[2] + formulas.col[3]) / 4.0;
+
+          color = fa1;
+
+          return color;
+
+        }
+      }
+      return color;
+    }
+    */
+
+    /*
     /// <summary>
     /// Neuzeichnen:
     /// </summary>
@@ -928,7 +909,7 @@ namespace Fractrace {
       if (x < width && y < height)
         GData.ColorInfo2[x, y] = col;
     }
-
+    */
 
   }
 }
