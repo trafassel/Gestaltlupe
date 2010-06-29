@@ -195,7 +195,6 @@ foreach (  KeyValuePair<int,int> entry in pointList) {
               oldz = z;
             } else {
               sw.WriteLine(oldx.ToString(mNumberFormatInfo) + " " + oldy.ToString(mNumberFormatInfo) + " " + oldz.ToString(mNumberFormatInfo) + ", ");
-
             }
           }
         }
@@ -205,7 +204,7 @@ foreach (  KeyValuePair<int,int> entry in pointList) {
  sw.WriteLine(@"
 ]
 }
-color*
+color
  Color{
 color [
 ");
