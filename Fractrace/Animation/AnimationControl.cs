@@ -153,19 +153,42 @@ namespace Fractrace.Animation {
             double r = 1.0 / steps * (double)i;
             Application.DoEvents();
             animationHistory.Load(r);
+
+              // Left View
             Form1.PublicForm.ComputeOneStep();
             lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString()+ " Step " + i.ToString() + " (from " + steps.ToString() + ")";
             // Auf Beendigung der Berechnung warten.
             if (animationAbort)
               break;
             while (Form1.PublicForm.InComputation) {
-           //   System.Threading.Thread.Sleep(199);
               if (animationAbort)
                 break;
               Application.DoEvents();
               if (animationAbort)
                 break;
             }
+
+            // Right View
+            if (ParameterInput.MainParameterInput.Stereo)
+            {
+                ParameterInput.MainParameterInput.DrawStereo();
+
+
+                //Form1.PublicForm.ComputeOneStep();
+                lblAnimationProgress.Text = "compute right: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
+                // Auf Beendigung der Berechnung warten.
+                if (animationAbort)
+                    break;
+                while (ParameterInput.MainParameterInput.StereoForm.ImageRenderer.InDrawing)
+                {
+                    if (animationAbort)
+                        break;
+                    Application.DoEvents();
+                    if (animationAbort)
+                        break;
+                }
+            }
+
           }   
       }
 

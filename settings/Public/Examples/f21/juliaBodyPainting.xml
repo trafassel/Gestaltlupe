@@ -64,8 +64,8 @@
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.8845" />
-  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
-  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-15" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.1" />
   <Entry Key="View.ClassicView" Value="0" />
   <Entry Key="View.Deph" Value="1800" />
   <Entry Key="View.Height" Value="720" />
