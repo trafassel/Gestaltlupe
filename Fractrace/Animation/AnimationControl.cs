@@ -42,6 +42,7 @@ namespace Fractrace.Animation {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddRow_Click(object sender, EventArgs e) {
+            // TODO: aktuelles Bild in History speichern
             AnimationPoint point = new AnimationPoint();
             point.Time = dataPerTime.CurrentTime;
             point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");

@@ -140,6 +140,9 @@ namespace Fractrace.PictureArt {
 
     bool comicStyle = false;
 
+
+    bool normalizeColors = false;
+
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
     /// </summary>
@@ -149,7 +152,7 @@ namespace Fractrace.PictureArt {
       useColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseColorFromFormula");
       useMedianColorFromFormula = ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.UseMedianColorFromFormula");
       comicStyle= ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.ComicStyle");
-
+     normalizeColors= ParameterDict.Exemplar.GetBool("Composite.Renderer.Universal.NormalizeColors");
       borderMinY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
       borderMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
       frontLightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Universal.FrontLightIntensity");
