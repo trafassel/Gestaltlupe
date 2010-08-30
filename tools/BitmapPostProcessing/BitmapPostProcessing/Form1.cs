@@ -38,11 +38,19 @@ namespace BitmapPostProcessing {
                     int maxgap = 250;
                     int currentGap = 0;
                     int i = 10000;
+                    BitmapCombine bitmapCombine = new BitmapCombine();
                     while (currentGap < maxgap) {
                         string currentRightPicFileName = fileName +rightPicSubstring+ i.ToString()+extension;
                         string currentLeftPicFileName = fileName +leftPicSubString+ i.ToString()+extension;
-                        if (System.IO.File.Exists(System.IO.Path.Combine(dirName,  currentRightPicFileName)) && System.IO.File.Exists(System.IO.Path.Combine(dirName, currentLeftPicFileName))) {
+                        currentRightPicFileName=System.IO.Path.Combine(dirName,  currentRightPicFileName);
+                        currentLeftPicFileName=System.IO.Path.Combine(dirName, currentLeftPicFileName);
+                        if (System.IO.File.Exists(currentRightPicFileName) && System.IO.File.Exists(currentLeftPicFileName)) {
                             // TODO: Kombinieren und speichern.
+                            bitmapCombine.Combine(currentLeftPicFileName, currentRightPicFileName, System.IO.Path.Combine(dirName, "combine" + fileName + i.ToString() + extension));
+                            //bitmapCombine = null;
+                            //GC.Collect();
+                            //bitmapCombine = new BitmapCombine();
+                        
                         } else {
                             currentGap++;
                         }
