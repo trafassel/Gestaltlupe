@@ -115,6 +115,9 @@ namespace Fractrace {
           // Zusätzliche Aufhellung, 0: keine, 1 alles ist Weiß
             ParameterDict.Exemplar["Composite.Renderer.Universal.Brightening"] = "0";
 
+            // Farben werden möglichst ausgeglichen (weißabgleich).
+            ParameterDict.Exemplar["Composite.Renderer.Universal.NormalizeColors"] = "0";
+
         //    ParameterDict.Exemplar["Composite.UseMedian"] = "1";
 
             // Die Anzahl der Threads, die parallel ausgeführt werden.

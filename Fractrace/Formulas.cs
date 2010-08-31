@@ -7,7 +7,6 @@ using Fractrace.Geometry;
 using Fractrace.DataTypes;
 using Fractrace.TomoGeometry;
 
-
 namespace Fractrace {
 
 

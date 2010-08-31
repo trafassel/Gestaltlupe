@@ -6,7 +6,6 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-
 using Fractrace.Basic;
 using Fractrace.DataTypes;
 
@@ -18,8 +17,6 @@ namespace Fractrace {
 
 
     protected System.Windows.Forms.Button btnPreview;
-
-
 
 
     /// <summary>
@@ -56,6 +53,7 @@ namespace Fractrace {
 
     protected bool mRenderOnClick = true;
 
+
     /// <summary>
     /// Umschaltung, ob bei Mausklick mit den aktuellen Parametern gerechnet werden soll.
     /// </summary>
@@ -68,6 +66,7 @@ namespace Fractrace {
       }
     }
 
+
     /// <summary>
     /// Um das schnelle Zeichnen von Objekten aus den Preview Control zu aktivieren,
     /// wird noch nicht benutzt.
@@ -79,10 +78,12 @@ namespace Fractrace {
     /// Neuzeichnen.
     /// </summary>
     protected override void StartDrawing() {
-
       forceRedraw = false;
       btnPreview.Enabled = false;
       inDrawing = true;
+      Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+      btnPreview.BackgroundImage = labelImage;
+      grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
       iter = new Iterate(btnPreview.Width, btnPreview.Height, this,false);
       AssignParameters();
       iter.StartAsync(mParameter,
@@ -91,9 +92,8 @@ namespace Fractrace {
               1,
               ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
               ParameterDict.Exemplar.GetBool("View.Perspective"));
-
-
     }
+
 
     /// <summary>
     /// Direktzugriff auf das interne Bild.
@@ -106,7 +106,6 @@ namespace Fractrace {
         btnPreview.BackgroundImage = value;
         grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
       }
-
     }
 
 
@@ -117,11 +116,7 @@ namespace Fractrace {
       if (iter != null) {
         lock (iter) {
           try {
-            //string oldRenderer = ParameterDict.Exemplar["Composite.Renderer"];
-            //ParameterDict.Exemplar.SetValue("Composite.Renderer","FastScienceRenderer",false);
             Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
-            // Hier wird kurz der Renderer ausgetauscht
-            //ParameterDict.Exemplar.SetValue("Composite.Renderer", oldRenderer, false);
             pArt.Paint(grLabel);
             Application.DoEvents();
             this.Refresh();

@@ -10,13 +10,18 @@ using Fractrace.DataTypes;
 using Fractrace.Basic;
 
 namespace Fractrace {
+
+
+  
     public partial class ParameterInput : Form {
 
+        public static ParameterInput MainParameterInput = null;
 
         /// <summary>
         /// Initialisierung
         /// </summary>
         public ParameterInput() {
+            MainParameterInput=this;
             InitializeComponent();
             mParameter.SetToDefault();
             ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
@@ -221,7 +226,7 @@ namespace Fractrace {
           }
         }
 
-        private void DrawStereo() {
+        public void DrawStereo() {
             if (mStereoForm == null) {
                 mStereoForm = new StereoForm();
                 mStereoForm.Show();
@@ -229,6 +234,14 @@ namespace Fractrace {
             mStereoForm.ImageRenderer.Draw();
         }
 
+
+        public StereoForm StereoForm
+        {
+            get
+            {
+                return mStereoForm;
+            }
+        }
 
         private StereoForm mStereoForm = null;
 

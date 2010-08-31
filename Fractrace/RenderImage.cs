@@ -211,7 +211,15 @@ namespace Fractrace
                 StartDrawing();
         }
 
-      
+
+        /// <summary>
+        /// While computation this value is set to true.
+        /// </summary>
+        public bool InDrawing {
+            get {
+                return inDrawing;
+            }
+        }
 
 
     }
