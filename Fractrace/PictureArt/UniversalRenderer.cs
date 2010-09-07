@@ -1137,13 +1137,6 @@ namespace Fractrace.PictureArt {
       retVal.X = winkel;
       retVal.Y = winkel;
       retVal.Z = winkel;
-      /*
-            retVal.X = 1;
-            retVal.Y = 1;
-            retVal.Z = 1;
-      */
-
-
 
       return retVal;
     }

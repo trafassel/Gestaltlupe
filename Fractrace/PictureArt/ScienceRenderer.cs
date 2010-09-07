@@ -201,17 +201,7 @@ namespace Fractrace {
               }
             }
           }
-      //    double col = 0;
-        /*
-          double otherPos = 0;
-          for (int i = 1; i <= 4; i++) {
-            if (neigborCount[i] > 0) {
-              deph[i] = deph[i] / ((double)neigborCount[i]);
-              otherPos += deph[i]; // Jeder Abstand wird mit 1 gewichtet.
-              //col += color[i] * weight[i];
-            }
-          }
-         */
+   
         if(otherPosCount>0)
             otherPos = otherPos / otherPosCount-center.Coord.Y;
           return otherPos;

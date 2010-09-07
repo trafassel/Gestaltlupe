@@ -171,6 +171,7 @@
     <Compile Include="PictureArt\NiceRenderer.cs" />
     <Compile Include="PictureArt\NiceRendererMultiThread.cs" />
     <Compile Include="PictureArt\Picture.cs" />
+    <Compile Include="PictureArt\PlasicRenderer.cs" />
     <Compile Include="PictureArt\RenderBase.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
     <Compile Include="PictureArt\SharpRenderer.cs" />

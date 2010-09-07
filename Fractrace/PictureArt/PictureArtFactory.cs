@@ -42,6 +42,12 @@ namespace Fractrace.PictureArt {
         case "1":
           return new ScienceRenderer(pdata);
 
+        case "PlasicRenderer":
+        case "6":
+          return new PlasicRenderer(pdata);
+
+          
+
       }
       // return new ScienceRenderer(pdata);
       //return new SmallRenderer(pdata);
