@@ -143,7 +143,7 @@ namespace Fractrace {
         return panel1.Visible;
       }
       set {
-        panel1.Visible = value;
+            panel1.Visible = value;
       }
     }
 
