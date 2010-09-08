@@ -306,7 +306,13 @@ namespace Fractrace.PictureArt {
             minr = b1;
 
           //double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
-          double norm = (r1+ g1 + b1)/3.0;
+          double norm = (r1+ g1 + b1);
+          // etwas grauer machen
+          r1 += norm;
+          g1 += norm;
+          b1 += norm;
+          norm = (r1 + g1 + b1)/3.0;
+
           if (norm != 0) {
             retVal.X *= (r1) / norm;
             retVal.Y *= (g1) / norm;
