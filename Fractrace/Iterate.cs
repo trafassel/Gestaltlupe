@@ -806,7 +806,7 @@ namespace Fractrace {
                             }*/
                       }
                     } else {
-                      p.Color = Color.FromArgb((int)fa1, (int)fa1, (int)fa1);
+                      //p.Color = Color.FromArgb((int)fa1, (int)fa1, (int)fa1);
                       GData.ColorInfo2[xx, yy] = fa1;
                       //if (mStarter == null)
                       //  grLabel.DrawRectangle(p, xx, yy, 1, 1);

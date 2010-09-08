@@ -64,7 +64,7 @@
   <Entry Key="View.Perspective" Value="1" />
   <Entry Key="View.PosterX" Value="0" />
   <Entry Key="View.PosterZ" Value="0" />
-  <Entry Key="View.Raster" Value="2" />
+  <Entry Key="View.Raster" Value="1" />
   <Entry Key="View.Size" Value="0.5" />
   <Entry Key="View.Width" Value="1280" />
   <Entry Key="View.Zoom" Value="1" />

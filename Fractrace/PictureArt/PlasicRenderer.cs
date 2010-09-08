@@ -63,7 +63,7 @@ namespace Fractrace.PictureArt {
       }
       CreateSmoothNormales();
       CreateSmoothDeph();
-     // CreateShadowInfo();
+      CreateShadowInfo();
       DrawPlane();
       SmoothEmptyPixel();
 
@@ -180,13 +180,14 @@ namespace Fractrace.PictureArt {
       retVal.Y = light.Y;
       retVal.Z = light.Z;
 
+      double d1 = maxY - minY;
+      double d2 = pData.Width + pData.Height;
+      double d3 = d1 / d2;
 
       if (smoothDeph2[x, y] != double.MinValue && smoothDeph1[x, y] != double.MinValue) {
         double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
 
-        double d1 = maxY - minY;
-        double d2 = pData.Width + pData.Height;
-        double d3 = d1 / d2;
+     
 
 
         if (localDeph > 0) {
@@ -210,12 +211,120 @@ namespace Fractrace.PictureArt {
 
         }
       }
-      
-      /*else {
-        retVal.X = 1;
-        retVal.Y = 1;
-        retVal.Z = 0;
+
+      // Testweise nur die Blau Komponente entsprechend der Schatteninfos verkleinern
+     // double shadow_height = shadowInfo11[x, y];
+      double shadow_height = shadowInfo11[x, y];
+      double ypos = smoothDeph2[x, y];
+      double ysdiff = shadow_height - ypos;
+      double factor = 3000;
+      double shadowlight = factor * d3 * ysdiff;
+      if (shadowlight > 0.3)
+        shadowlight = 0.3;
+      if (ysdiff > 0) {
+        retVal.Z -= shadowlight;
+        retVal.X -= shadowlight;
+        retVal.Y -= shadowlight;
+      }
+
+       shadow_height = shadowInfo00[x, y];
+       ypos = smoothDeph2[x, y];
+       ysdiff = shadow_height - ypos;
+       shadowlight = factor * d3 * ysdiff;
+      if (shadowlight > 0.3)
+        shadowlight = 0.3;
+      if (ysdiff > 0) {
+        retVal.Z -= shadowlight;
+        retVal.X -= shadowlight;
+        retVal.Y -= shadowlight;
+      }
+
+
+      shadow_height = shadowInfo01[x, y];
+      ypos = smoothDeph2[x, y];
+      ysdiff = shadow_height - ypos;
+      shadowlight = factor * d3 * ysdiff;
+      if (shadowlight > 0.3)
+        shadowlight = 0.3;
+      if (ysdiff > 0) {
+        retVal.Z -= shadowlight;
+        retVal.X -= shadowlight;
+        retVal.Y -= shadowlight;
+      }
+
+      shadow_height = shadowInfo10[x, y];
+      ypos = smoothDeph2[x, y];
+      ysdiff = shadow_height - ypos;
+      shadowlight = factor * d3 * ysdiff;
+      if (shadowlight > 0.3)
+        shadowlight = 0.3;
+      if (ysdiff > 0) {
+        retVal.Z -= shadowlight;
+        retVal.X -= shadowlight;
+        retVal.Y -= shadowlight;
+      }
+      /*
+       shadow_height = shadowInfo01[x, y];
+       ysdiff = shadow_height - ypos;
+       shadowlight = factor * d3 * ysdiff;
+       if (shadowlight > 0.3)
+         shadowlight = 0.3;
+      if (ysdiff > 0) {
+        retVal.Z -= shadowlight;
+        retVal.X -= shadowlight;
+        retVal.Y -= shadowlight;
       }*/
+      
+
+      if (retVal.Y < 0)
+        retVal.Y = 0;
+      if (retVal.Z < 0)
+        retVal.Z = 0;
+      if (retVal.Y > 1)
+        retVal.Y = 1;
+      if (retVal.Z > 1)
+        retVal.Z = 1;
+
+      // Falls weitere Farbinformation vorhanden sind, werden diese nun auf die Punkte angewendet
+      bool useAdditionalColorinfo = true;
+      if (useAdditionalColorinfo) {
+        if (pInfo != null && pInfo.AdditionalInfo != null) {
+          // Normalisieren;
+          double r1 = pInfo.AdditionalInfo.red;
+          double g1 = pInfo.AdditionalInfo.green;
+          double b1 = pInfo.AdditionalInfo.blue;
+          if (r1 < 0)
+            r1 = -r1;
+          if (g1 < 0)
+            g1 = -g1;
+          if (b1 < 0)
+            b1 = -b1;
+          double minr = r1;
+          if (minr > g1)
+            minr = g1;
+          if (minr > b1)
+            minr = b1;
+
+          //double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
+          double norm = (r1+ g1 + b1)/3.0;
+          if (norm != 0) {
+            retVal.X *= (r1) / norm;
+            retVal.Y *= (g1) / norm;
+            retVal.Z *= (b1) / norm;
+          }
+        }
+      }
+
+
+      if (retVal.Y < 0)
+        retVal.Y = 0;
+      if (retVal.Z < 0)
+        retVal.Z = 0;
+      if (retVal.Y > 1)
+        retVal.Y = 1;
+      if (retVal.Z > 1)
+        retVal.Z = 1;
+
 
       return retVal;
     }
@@ -318,6 +427,77 @@ namespace Fractrace.PictureArt {
     }
 
 
+    /// <summary>
+    /// Schatteninformationen, wenn das Licht von oben rechts kommen, werden erzeugt.
+    /// Vorbereitet für weitere Lichtquellen.
+    /// </summary>
+    protected virtual void CreateShadowInfo() {
+      // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
+      shadowInfo11 = new double[pData.Width, pData.Height];
+      shadowInfo01 = new double[pData.Width, pData.Height];
+      shadowInfo10 = new double[pData.Width, pData.Height];
+      shadowInfo00 = new double[pData.Width, pData.Height];
+     
+     // shadowPlane = new double[pData.Width, pData.Height];
+      double[,] shadowTempPlane = new double[pData.Width, pData.Height];
+
+      double diffy = maxY - minY;
+      double yd = diffy / ((double)(pData.Width + pData.Height));
+      double ydv = diffy / ((double)(pData.Height));
+      double ydh = diffy / ((double)(pData.Width));
+
+      yd *= 4.0; ydv *= 1.7; ydh *= 1.7;
+
+      for (int i = 0; i < pData.Width; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          shadowInfo11[i, j] = smoothDeph2[i, j];
+          shadowInfo10[i, j] = smoothDeph2[i, j];
+          shadowInfo01[i, j] = smoothDeph2[i, j];
+          shadowInfo00[i, j] = smoothDeph2[i, j];
+        }
+      }
+
+      for (int i = pData.Width - 1; i >= 0; i--) {
+
+        for (int j = pData.Height - 1; j >= 0; j--) {
+          if (i < pData.Width - 1 && j < pData.Height - 1) {
+            double localShadow = shadowInfo11[i, j + 1] - ydh;
+            if (localShadow > shadowInfo11[i, j]) {
+              shadowInfo11[i, j] = localShadow;
+            }
+          }
+        }
+
+        for (int j = 0; j < pData.Height; j++) {
+         
+          // Licht von rechts
+          if (i < pData.Width - 1) {
+            double localShadow = shadowInfo01[i + 1, j] - ydh;
+            if (localShadow > shadowInfo01[i, j]) {
+              shadowInfo01[i, j] = localShadow;
+            }
+          }
+          
+        }
+      }
+      for (int i = 0;i< pData.Width ; i++) {
+        for (int j = 0; j < pData.Height; j++) {
+          if (j > 0) {
+            double localShadow = shadowInfo10[i, j -1] - ydv;
+            if (localShadow > shadowInfo10[i, j])
+               shadowInfo10[i, j] = localShadow;
+          }
+          if (i > 0) {
+            double localShadow = shadowInfo00[i-1, j] - ydh;
+            if (localShadow > shadowInfo00[i, j])
+              shadowInfo00[i, j] = localShadow;
+          }
+
+        }
+      }
+
+
+    }
 
     /// <summary>
     /// Die Oberflächennormalen werden abgerundet.
