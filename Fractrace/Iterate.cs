@@ -476,17 +476,36 @@ namespace Fractrace {
                     } else {// innerer Punkt
                       colour_type = 1; // GREY;
 
-                      if (inverse)
-                        fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
-                          xd, yd, zd, zzd,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                      else
-                        fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
-                          xd, yd, zd, zzd,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                      fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                      if (inverse) {
+                        if (raster == 1) {
+                          fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
+                         xd, yd, zd, zzd,
+                         wix, wiy, wiz,
+                         jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                        } else {
+                          fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
+                            xd, yd, zd, zzd,
+                            wix, wiy, wiz,
+                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                        }
+                      }
+                      else {
+                        if (raster == 1) {
+                          fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
+   xd, yd, zd, zzd,
+   wix, wiy, wiz,
+   jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                          fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+
+
+                        } else {
+                          fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
+                            xd, yd, zd, zzd,
+                            wix, wiy, wiz,
+                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                          fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                        }
+                      }
                     }
 
                     if (raster > 2) {

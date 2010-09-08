@@ -180,28 +180,38 @@ namespace Fractrace.PictureArt {
       retVal.Y = light.Y;
       retVal.Z = light.Z;
 
-      /*
+
       if (smoothDeph2[x, y] != double.MinValue && smoothDeph1[x, y] != double.MinValue) {
         double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
-        retVal.X -= 100 * localDeph;
-        retVal.Y -= 100 * localDeph;
-        retVal.Z -= 100 * localDeph;
 
-        if (retVal.X < 0)
-          retVal.X = 0;
-        if (retVal.X > 1)
-          retVal.X = 1;
+        double d1 = maxY - minY;
+        double d2 = pData.Width + pData.Height;
+        double d3 = d1 / d2;
 
-        if (retVal.Y < 0)
-          retVal.Y = 0;
-        if (retVal.Z < 0)
-          retVal.Z = 0;
-        if (retVal.Y > 1)
-          retVal.Y = 1;
-        if (retVal.Z > 1)
-          retVal.Z = 1;
 
-      } else {
+        if (localDeph > 0) {
+          retVal.X -= 50000*d3 * localDeph;
+          retVal.Y -= 50000 * d3 * localDeph;
+          retVal.Z -= 50000 * d3 * localDeph;
+
+          if (retVal.X < 0)
+            retVal.X = 0;
+          if (retVal.X > 1)
+            retVal.X = 1;
+
+          if (retVal.Y < 0)
+            retVal.Y = 0;
+          if (retVal.Z < 0)
+            retVal.Z = 0;
+          if (retVal.Y > 1)
+            retVal.Y = 1;
+          if (retVal.Z > 1)
+            retVal.Z = 1;
+
+        }
+      }
+      
+      /*else {
         retVal.X = 1;
         retVal.Y = 1;
         retVal.Z = 0;
@@ -218,7 +228,7 @@ namespace Fractrace.PictureArt {
     /// <returns></returns>
     protected virtual Vec3 GetLight(Vec3 normal) {
       // debug only
-   //  return new Vec3(0.8, 0.8, 0.81);
+   // return new Vec3(0.8, 0.8, 0.81);
 
 
       Vec3 retVal = new Vec3(0, 0, 0);
@@ -474,10 +484,10 @@ namespace Fractrace.PictureArt {
           int neighborFound = 0;
           double smoothDeph = 0;
           sdeph2[i, j] = double.MinValue;
-          int k=0;
-          //for (int k = -2; k <= 2; k++) {
-            int l = -1;
-            //for (int l = -2; l <= 2; l++) {
+          //int k=0;
+          for (int k = -1; k <= 1; k++) {
+            //int l = -1;
+            for (int l = -1; l <= 1; l++) {
               int posX = i + k;
               int posY = j + l;
               if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
@@ -496,8 +506,8 @@ namespace Fractrace.PictureArt {
                 if (newDeph != double.MinValue && newDeph>sdeph1[i, j]) {
                   smoothDeph += newDeph;
                 }*/
-            //  }
-            //}
+              }
+            }
           }
           if (neighborFound > 0 && sdeph1[i, j]!=double.MinValue) {
             smoothDeph /= (double)neighborFound;
