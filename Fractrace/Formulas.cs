@@ -1136,6 +1136,9 @@ double xx, yy, zz;
 
             }
 
+
+            PixelInfo[] borderPoints = new PixelInfo[4];
+
             double m = 0;
             double xv = 0, yv = 0, zv = 0, winkel = 0, yn = 0, diff = 0;
             double xn = 0, zn = 0, zzn = 0, xm = 0, ym = 0, zm = 0, zzm = 0;
@@ -1151,9 +1154,13 @@ double xx, yy, zz;
             int pu = 0;
 
             double distance = 0.09;
+          // Testweise verkleinert:
+           // distance = 0.06;
 
             double xDistance = distance * 6.0;
             double zDistance = distance * 6.0;
+          // debug only
+          //  zDistance = distance * 2.0;
 
             // Eventuell während der Berechnung entstehende Zusatzinfos für alle 4 Punkte.
             AdditionalPointInfo[] pinfoSet=null;
@@ -1167,7 +1174,7 @@ double xx, yy, zz;
                     case 2:     /* oben */
                         xn = x;
                         yn = y;
-                        zn = z - zDistance * zd; zzn = zz + zDistance * zzd;
+                        zn = z - zDistance * zd; zzn = zz - zDistance * zzd;
                         break;
                     case 1:     /* rechts  */
                         xn = x + xDistance * xd;
@@ -1329,7 +1336,10 @@ double xx, yy, zz;
                     int indexX = 0, indexY = 0;
                     if (use4Points) {
 
+                      /*
                       switch (k) {
+
+                       
                         case 0:
                           indexX = pixelX + 1;
                           indexY = pixelY;
@@ -1349,40 +1359,69 @@ double xx, yy, zz;
                           indexX = pixelX;
                           indexY = pixelY;
                           break;
+                          
 
                       }
+                       */
+                      PixelInfo pInfo = null;
+                      if (borderPoints[k] == null) {
+                        pInfo = new PixelInfo();
+                        borderPoints[k] = pInfo;
+                      } else {
+                        pInfo = borderPoints[k];
+                      }
 
+                      pInfo.Coord.X = xpos[k];
+                      pInfo.Coord.Y = ypos[k] + tief[k] * yd;
+                      pInfo.Coord.Z = zpos[k];
+                      pInfo.frontLight = winkel;
+                      pInfo.Normal = normals[k];
+                      //pData.Points[indexX, indexY] = pInfo;
+                      //if (k == 0 || k == 3) {// Debug only (um die reale Position zu ermitteln)
+                       if (pinfoSet != null)
+                          pInfo.AdditionalInfo = pinfoSet[k];
+                      //}
+                      /*
                       if (indexX < pData.Width && indexY < pData.Height) {
-                        if (pData.Points[indexX, indexY] == null) {
-                          PixelInfo pInfo = new PixelInfo();
+                          if (pData.Points[indexX, indexY] == null) {
+                            PixelInfo pInfo = new PixelInfo();
+                            pInfo.Coord.X = xpos[k];
+                            pInfo.Coord.Y = ypos[k] + tief[k] * yd;
+                            pInfo.Coord.Z = zpos[k];
+                            pInfo.frontLight = winkel;
+                            pInfo.Normal = normals[k];
+                            pData.Points[indexX, indexY] = pInfo;
+                           // System.Random random = new Random();
+                           // if (random.NextDouble() > 0.96) {
+                              if (k == 0||k==3) {// Debug only (um die reale Position zu ermitteln)
+                                if (pinfoSet != null)
+                                  pInfo.AdditionalInfo = pinfoSet[k];
+                              }
+                           // }
+                        }
+                      }*/
+                    } else {
+                      PixelInfo pInfo = null;
+                        if (pData.Points[pixelX, pixelY] == null) {
+                          // TODO: Später Querschnitt aus allen Einzelwinkeln bestimmen
+                          pInfo = new PixelInfo();
+                          pData.Points[pixelX, pixelY] = pInfo;
                           pInfo.Coord.X = xpos[k];
                           pInfo.Coord.Y = ypos[k] + tief[k] * yd;
                           pInfo.Coord.Z = zpos[k];
-                          pInfo.frontLight = winkel;
-                          pInfo.Normal = normals[k];
-                          pData.Points[indexX, indexY] = pInfo;
-                          if(pinfoSet!=null)
-                          pInfo.AdditionalInfo = pinfoSet[k];
+                        } else {
+                          pInfo = pData.Points[pixelX, pixelY];
                         }
-                      }
-                    } else {
-                      PixelInfo pInfo = null;
-                      if (pData.Points[pixelX, pixelY] == null) {
-                        // TODO: Später Querschnitt aus allen Einzelwinkeln bestimmen
-                        pInfo = new PixelInfo();
-                        pData.Points[pixelX, pixelY] = pInfo;
-                        pInfo.Coord.X = xpos[k];
-                        pInfo.Coord.Y = ypos[k] + tief[k] * yd;
-                        pInfo.Coord.Z = zpos[k];
-                      } else {
-                        pInfo = pData.Points[pixelX, pixelY]; 
-                      }
-                      pInfo.Normal = normals[k];
-                        pInfo.frontLight += winkel/4.0;
+
+                        pInfo.Normal = normals[k];
+                        pInfo.frontLight += winkel / 4.0;
+                  if (k == 0||k==3) { // Debug only (um die reale Position zu ermitteln)   
                         if (pinfoSet != null)
                           pInfo.AdditionalInfo = pinfoSet[k];
+                  }
                         // TODO: Auch die Normalen übertragen
-                      }
+                      
+                    }
                   
                 }
                 else {
@@ -1484,6 +1523,92 @@ double xx, yy, zz;
 
                
             } */
+
+          // Zusatzinformationen der anderen Pixel aufbauen
+
+
+            if (use4Points) {
+
+              int indexX = pixelX;
+              int indexY = pixelY;
+              int kNeigbour1 = 0;
+              int kNeigbour2 = 0;
+              for (k = 0; k < 4; k++) {
+                switch (k) {
+
+                  case 0:
+                    indexX = pixelX + 1;
+                    indexY = pixelY + 1;
+                    kNeigbour1 = 1;
+                    kNeigbour2 = 2;
+                    break;
+
+                  case 1:
+                    indexX = pixelX;
+                    indexY = pixelY + 1;
+                    kNeigbour1 = 2;
+                    kNeigbour2 = 3;
+                    break;
+
+
+                  case 2:
+                    indexX = pixelX;
+                    indexY = pixelY;
+                    kNeigbour1 = 3;
+                    kNeigbour2 = 0;
+                    break;
+
+                  case 3:
+                    indexX = pixelX + 1;
+                    indexY = pixelY;
+                    kNeigbour1 = 0;
+                    kNeigbour2 = 1;
+
+                    break;
+
+                }
+              
+                PixelInfo otherP1 = borderPoints[kNeigbour1];
+                PixelInfo otherP2 = borderPoints[kNeigbour2];
+                if (otherP1 == null)
+                  otherP1 = otherP2;
+                if (otherP2 == null)
+                  otherP2 = otherP1;
+                if (otherP1 != null) {
+                   PixelInfo pInfo = new PixelInfo();
+                      pInfo.Coord.X = (otherP1.Coord.X+otherP2.Coord.X)/2.0;
+                      pInfo.Coord.Y = (otherP1.Coord.Y + otherP2.Coord.Y) / 2.0;
+                      pInfo.Coord.Z = (otherP1.Coord.Z + otherP2.Coord.Z) / 2.0;
+                      pInfo.frontLight = (otherP1.frontLight+otherP2.frontLight)/2.0;
+                      pInfo.Normal.X = (otherP1.Normal.X + otherP2.Normal.X) / 2.0;
+                      pInfo.Normal.Y = (otherP1.Normal.Y + otherP2.Normal.Y) / 2.0;
+                      pInfo.Normal.Z = (otherP1.Normal.Z + otherP2.Normal.Z) / 2.0;
+                      if (otherP1.AdditionalInfo != null && otherP2.AdditionalInfo != null) {
+                        AdditionalPointInfo pinfo = new AdditionalPointInfo();
+                        pinfo.blue = (otherP1.AdditionalInfo.blue + otherP2.AdditionalInfo.blue) / 2.0;
+                        pinfo.green = (otherP1.AdditionalInfo.green + otherP2.AdditionalInfo.green) / 2.0;
+                        pinfo.red = (otherP1.AdditionalInfo.red + otherP2.AdditionalInfo.red) / 2.0;
+                        pInfo.AdditionalInfo = pinfo;
+                      }
+
+                      //pData.Points[indexX, indexY] = pInfo;
+                      //if (k == 0 || k == 3) {// Debug only (um die reale Position zu ermitteln)
+                      // if (pinfoSet != null)
+                      //    pInfo.AdditionalInfo = pinfoSet[k];
+                      //}
+
+                      if (indexX < pData.Width && indexY < pData.Height) {
+                        pData.Points[indexX, indexY] = pInfo;
+                      }
+
+                }
+
+
+              }
+            }
+
+
+
             return ((int)col[0]);
         }
 
