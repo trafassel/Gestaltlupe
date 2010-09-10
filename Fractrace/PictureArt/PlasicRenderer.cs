@@ -48,9 +48,11 @@ namespace Fractrace.PictureArt {
 
     private double[,] smoothDeph1 = null;
     private double[,] smoothDeph2 = null;
-    private double[,] smoothDeph3 = null;
 
     private Vec3[,] rgbPlane = null;
+
+    private Vec3[,] rgbSmoothPlane1 = null;
+    private Vec3[,] rgbSmoothPlane2 = null;
 
     private double minY = double.MaxValue;
 
@@ -71,7 +73,9 @@ namespace Fractrace.PictureArt {
       CreateShadowInfo();
       DrawPlane();
       SmoothEmptyPixel();
-
+      //DarkenPlane();
+      SmoothPlane();
+      DarkenPlane();
     }
 
 
@@ -746,15 +750,14 @@ namespace Fractrace.PictureArt {
     /// </summary>
     protected void CreateSmoothDeph() {
       smoothDeph1 = new double[pData.Width, pData.Height];
-     // smoothDeph2 = new double[pData.Width, pData.Height];
-     // smoothDeph3 = new double[pData.Width, pData.Height];
+      smoothDeph2 = new double[pData.Width, pData.Height];
 
       // Normieren
       for (int i = 0; i < pData.Width; i++) {
         for (int j = 0; j < pData.Height; j++) {
           PixelInfo pInfo = pData.Points[i, j];
           if (pInfo != null) {
-            smoothDeph1[i, j] = pInfo.Coord.Y;
+            smoothDeph2[i, j] = pInfo.Coord.Y;
             // if (pInfo.Coord.Y != 0) { // Unterscheidung, ob Schnitt mit Begrenzung vorliegt.
             if (minY > pInfo.Coord.Y)
               minY = pInfo.Coord.Y;
@@ -762,19 +765,14 @@ namespace Fractrace.PictureArt {
               maxY = pInfo.Coord.Y;
             //}
           } else {
-            smoothDeph1[i, j] = double.MinValue;
-            //smoothDeph1[i, j] = 0;
+            smoothDeph2[i, j] = double.MinValue;
           }
         }
       }
 
     
-      /*
-      SetSmoothDeph(smoothDeph1, smoothDeph2);
       
-      SetSmoothDeph(smoothDeph2, smoothDeph3);
-      SetSmoothDeph(smoothDeph3, smoothDeph2);
-    */
+      SetSmoothDeph(smoothDeph2, smoothDeph1);
     }
 
 
@@ -808,10 +806,6 @@ namespace Fractrace.PictureArt {
                   neighborFound++;
 
                 }
-                /*
-                if (newDeph != double.MinValue && newDeph>sdeph1[i, j]) {
-                  smoothDeph += newDeph;
-                }*/
               }
             }
           }
@@ -823,6 +817,152 @@ namespace Fractrace.PictureArt {
           }
         }
       }
+    }
+
+
+
+    /// <summary>
+    /// Unschärfe wird dazugerechnet.
+    /// </summary>
+    protected void SmoothPlane() {
+        double ydGlobal = (maxY - minY) / ((double)(pData.Width + pData.Height));
+        rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
+        rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
+        for (int i = 0; i < pData.Width; i++) {
+            for (int j = 0; j < pData.Height; j++) {
+                rgbSmoothPlane2[i, j] = rgbPlane[i, j];
+            }
+        }
+
+        double mainDeph = maxY - minY;
+
+        for (int m = 0; m < 5; m++) {
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    double neighborsFound = 0;
+                    Vec3 nColor = new Vec3();
+                    for (int k = -1; k <= 1; k++) {
+                        for (int l = -1; l <= 1; l++) {
+                            int posX = i + k;
+                            int posY = j + l;
+                            if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
+                                double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
+                                if (ylocalDiff > -3.0 * ydGlobal) {
+                                    nColor.Add(rgbSmoothPlane2[posX, posY]);
+                                    neighborsFound++;
+                                }
+                            }
+                        }
+                    }
+                    if (neighborsFound > 0)
+                        nColor = nColor.Mult(1 / neighborsFound);
+
+                    double yd = smoothDeph2[i, j];
+                    if (yd == double.MinValue)
+                        yd = minY;
+                    double ydNormalized = (yd - minY) / mainDeph;
+                    ydNormalized = ydNormalized * ydNormalized;
+                    //ydNormalized = ydNormalized - 0.5;
+                    ydNormalized = 1.0 * Math.Abs(ydNormalized);
+                    if (ydNormalized > 1)
+                        ydNormalized = 1;
+                    if (ydNormalized < 0)
+                        ydNormalized = 0;
+
+                    //ydNormalized = 1 - ydNormalized;
+                    Vec3 nCenterColor = rgbSmoothPlane2[i, j];
+                    ydNormalized = Math.Sqrt(ydNormalized);
+                    ydNormalized = Math.Sqrt(ydNormalized);
+                    nCenterColor = nCenterColor.Mult(ydNormalized);
+                    nColor = nColor.Mult(1.0 - ydNormalized);
+                    nCenterColor.Add(nColor);
+
+                    rgbSmoothPlane1[i, j] = nCenterColor;
+                }
+            }
+
+
+            // Dritter Durchlauf
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    double neighborsFound = 0;
+                    Vec3 nColor = new Vec3();
+                    for (int k = -1; k <= 1; k++) {
+                        for (int l = -1; l <= 1; l++) {
+                            int posX = i + k;
+                            int posY = j + l;
+                            if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
+                                double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
+                                if (ylocalDiff > -3.0 * ydGlobal) {
+                                    nColor.Add(rgbSmoothPlane1[posX, posY]);
+                                    neighborsFound++;
+                                }
+                            }
+                        }
+                    }
+                    if (neighborsFound > 0)
+                        nColor = nColor.Mult(1 / neighborsFound);
+
+                    double yd = smoothDeph2[i, j];
+                    if (yd == double.MinValue)
+                        yd = minY;
+                    double ydNormalized = (yd - minY) / mainDeph;
+                    ydNormalized = Math.Sqrt(ydNormalized);
+                    ydNormalized = ydNormalized * ydNormalized;
+                    //ydNormalized = ydNormalized - 0.8;
+                    ydNormalized = 1.0 * Math.Abs(ydNormalized);
+                    if (ydNormalized > 1)
+                        ydNormalized = 1;
+                    if (ydNormalized < 0)
+                        ydNormalized = 0;
+                    //ydNormalized = 1 - ydNormalized;
+                    Vec3 nCenterColor = rgbSmoothPlane1[i, j];
+                    ydNormalized = Math.Sqrt(ydNormalized);
+                    nCenterColor = nCenterColor.Mult(ydNormalized);
+                    nColor = nColor.Mult(1.0 - ydNormalized);
+                    nCenterColor.Add(nColor);
+                    rgbSmoothPlane2[i, j] = nCenterColor;
+                }
+            }
+        }
+
+        for (int i = 0; i < pData.Width; i++) {
+            for (int j = 0; j < pData.Height; j++) {
+                rgbPlane[i, j] = rgbSmoothPlane2[i, j];
+            }
+        }
+
+        rgbSmoothPlane1 = null;
+        rgbSmoothPlane2 = null;
+    }
+
+
+    /// <summary>
+    /// Die Gestalt wird nach hinten abgedunkelt.
+    /// </summary>
+    protected void DarkenPlane() {
+        double mainDeph = maxY - minY;// borderMaxY - borderMinY;
+        for (int i = 0; i < pData.Width; i++) {
+            for (int j = 0; j < pData.Height; j++) {
+                Vec3 col = rgbPlane[i, j];
+                double yd = smoothDeph2[i, j];
+                if (yd == double.MinValue)
+                    yd = minY;
+                double ydNormalized = (yd - minY) / mainDeph;
+                ydNormalized = Math.Sqrt(ydNormalized);
+                ydNormalized *= 2 * ydNormalized;
+                if (ydNormalized > 0.95) {
+                    ydNormalized = 0.95;
+                }
+                ydNormalized += 0.05;
+                col.X = col.X * ydNormalized;
+                col.Y = col.Y * ydNormalized;
+                ydNormalized += 0.05;
+                col.Z = ydNormalized * col.Z;
+            }
+        }
     }
 
 
