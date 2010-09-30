@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
   <Entry Key="Animation.Steps" Value="300" />
-  <Entry Key="Border.Max.x" Value="0.318421359199178" />
-  <Entry Key="Border.Max.y" Value="-1.93017020762124" />
-  <Entry Key="Border.Max.z" Value="0.379910612383103" />
+  <Entry Key="Border.Max.x" Value="2.9300411522634" />
+  <Entry Key="Border.Max.y" Value="-1.53086419753087" />
+  <Entry Key="Border.Max.z" Value="0.0438957475994507" />
   <Entry Key="Border.Max.zz" Value="0" />
-  <Entry Key="Border.Min.x" Value="0.292866128804975" />
-  <Entry Key="Border.Min.y" Value="-1.94959812300666" />
-  <Entry Key="Border.Min.z" Value="0.356884934811495" />
+  <Entry Key="Border.Min.x" Value="2.40329218106998" />
+  <Entry Key="Border.Min.y" Value="-2.71604938271605" />
+  <Entry Key="Border.Min.z" Value="-0.482853223593963" />
   <Entry Key="Border.Min.zz" Value="0" />
   <Entry Key="Composite.AmbientLight" Value="0" />
   <Entry Key="Composite.BackgoundDarken" Value="0" />
@@ -53,19 +53,19 @@
   <Entry Key="Transformation.3.CenterX" Value="-0.407525953022069" />
   <Entry Key="Transformation.3.CenterY" Value="2.56540588074062" />
   <Entry Key="Transformation.3.CenterZ" Value="0.07803688462125" />
-  <Entry Key="Transformation.AngleX" Value="12" />
+  <Entry Key="Transformation.AngleX" Value="40" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="-23" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.3" />
   <Entry Key="Transformation.Stereo.Angle" Value="-9" />
   <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
   <Entry Key="View.ClassicView" Value="0" />
-  <Entry Key="View.Deph" Value="1800" />
+  <Entry Key="View.Deph" Value="2800" />
   <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="0" />
   <Entry Key="View.PosterX" Value="0" />
   <Entry Key="View.PosterZ" Value="0" />
-  <Entry Key="View.Raster" Value="2" />
+  <Entry Key="View.Raster" Value="1" />
   <Entry Key="View.Size" Value="1" />
   <Entry Key="View.Width" Value="1200" />
   <Entry Key="View.Zoom" Value="1" />

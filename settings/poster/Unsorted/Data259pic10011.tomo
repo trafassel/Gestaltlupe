@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
   <Entry Key="Animation.Steps" Value="300" />
-  <Entry Key="Border.Max.x" Value="0.318421359199178" />
-  <Entry Key="Border.Max.y" Value="-1.93017020762124" />
-  <Entry Key="Border.Max.z" Value="0.379910612383103" />
+  <Entry Key="Border.Max.x" Value="2.72592531949202" />
+  <Entry Key="Border.Max.y" Value="-0.962396602289733" />
+  <Entry Key="Border.Max.z" Value="0.572839617534759" />
   <Entry Key="Border.Max.zz" Value="0" />
-  <Entry Key="Border.Min.x" Value="0.292866128804975" />
-  <Entry Key="Border.Min.y" Value="-1.94959812300666" />
-  <Entry Key="Border.Min.z" Value="0.356884934811495" />
+  <Entry Key="Border.Min.x" Value="2.27212252408766" />
+  <Entry Key="Border.Min.y" Value="-1.30739221276885" />
+  <Entry Key="Border.Min.z" Value="0.163955929659839" />
   <Entry Key="Border.Min.zz" Value="0" />
   <Entry Key="Composite.AmbientLight" Value="0" />
   <Entry Key="Composite.BackgoundDarken" Value="0" />
@@ -49,10 +49,10 @@
   <Entry Key="test2" Value="df" />
   <Entry Key="Transformation.3.AngleX" Value="0" />
   <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="-0.407525953022069" />
-  <Entry Key="Transformation.3.CenterY" Value="2.56540588074062" />
-  <Entry Key="Transformation.3.CenterZ" Value="0.07803688462125" />
+  <Entry Key="Transformation.3.AngleZ" Value="-40" />
+  <Entry Key="Transformation.3.CenterX" Value="2.5746577210239" />
+  <Entry Key="Transformation.3.CenterY" Value="-0.910647260717866" />
+  <Entry Key="Transformation.3.CenterZ" Value="0.368397773597299" />
   <Entry Key="Transformation.AngleX" Value="12" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="-23" />

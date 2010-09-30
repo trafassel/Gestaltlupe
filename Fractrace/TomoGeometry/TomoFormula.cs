@@ -58,7 +58,7 @@ namespace Fractrace.TomoGeometry {
 
         public void AddValue(string id, double value) {
           ParameterDict.Exemplar[id] = "";
-          ParameterDict.Exemplar.SetDouble(id, value);
+          ParameterDict.Exemplar.SetValue(id, value.ToString(),false);
         }
 
         /// <summary>
