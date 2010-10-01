@@ -933,6 +933,9 @@ namespace Fractrace.PictureArt {
     /// Unschärfe wird dazugerechnet.
     /// </summary>
     protected void SmoothPlane() {
+      double fieldOfViewStart = -0.5;
+      double regularSmooth = 0.98; // Bei 1 ist der Vordergrund maximal scharf.
+      double smoothIntensity = 1;
         double ydGlobal = (maxY - minY) / ((double)(pData.Width + pData.Height));
         rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
         rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
@@ -943,7 +946,6 @@ namespace Fractrace.PictureArt {
         }
 
         double mainDeph = maxY - minY;
-
         for (int m = 0; m < 5; m++) {
             for (int i = 0; i < pData.Width; i++) {
                 for (int j = 0; j < pData.Height; j++) {
@@ -970,18 +972,23 @@ namespace Fractrace.PictureArt {
                     if (yd == double.MinValue)
                         yd = minY;
                     double ydNormalized = (yd - minY) / mainDeph;
-                    ydNormalized = ydNormalized * ydNormalized;
-                    //ydNormalized = ydNormalized - 0.5;
-                    ydNormalized = 1.0 * Math.Abs(ydNormalized);
-                    if (ydNormalized > 1)
-                        ydNormalized = 1;
+                    //ydNormalized = ydNormalized * ydNormalized;
+                    ydNormalized -= fieldOfViewStart;
+                    //ydNormalized = 1.0 * Math.Abs(ydNormalized);
+                    if (ydNormalized > regularSmooth)
+                      ydNormalized = regularSmooth;
                     if (ydNormalized < 0)
                         ydNormalized = 0;
 
                     //ydNormalized = 1 - ydNormalized;
                     Vec3 nCenterColor = rgbSmoothPlane2[i, j];
-                    ydNormalized = Math.Sqrt(ydNormalized);
-                    ydNormalized = Math.Sqrt(ydNormalized);
+                    //ydNormalized = ydNormalized * ydNormalized;
+                    ydNormalized = 2*Math.Sqrt(ydNormalized)-1;
+                    if (ydNormalized < 0)
+                      ydNormalized = 0;
+
+                    
+                    //ydNormalized = Math.Sqrt(ydNormalized);
                     nCenterColor = nCenterColor.Mult(ydNormalized);
                     nColor = nColor.Mult(1.0 - ydNormalized);
                     nCenterColor.Add(nColor);
@@ -1017,17 +1024,21 @@ namespace Fractrace.PictureArt {
                     if (yd == double.MinValue)
                         yd = minY;
                     double ydNormalized = (yd - minY) / mainDeph;
-                    ydNormalized = Math.Sqrt(ydNormalized);
-                    ydNormalized = ydNormalized * ydNormalized;
-                    //ydNormalized = ydNormalized - 0.8;
-                    ydNormalized = 1.0 * Math.Abs(ydNormalized);
-                    if (ydNormalized > 1)
-                        ydNormalized = 1;
+                    //ydNormalized = Math.Sqrt(ydNormalized);
+                    //ydNormalized = ydNormalized * ydNormalized;
+                    ydNormalized -= fieldOfViewStart;
+                    //ydNormalized = 1.0 * Math.Abs(ydNormalized);
+                    if (ydNormalized > regularSmooth)
+                      ydNormalized = regularSmooth;
                     if (ydNormalized < 0)
                         ydNormalized = 0;
                     //ydNormalized = 1 - ydNormalized;
                     Vec3 nCenterColor = rgbSmoothPlane1[i, j];
-                    ydNormalized = Math.Sqrt(ydNormalized);
+                    //ydNormalized = ydNormalized * ydNormalized;
+                    ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
+                    if (ydNormalized < 0)
+                      ydNormalized = 0;
+                    //ydNormalized = Math.Sqrt(ydNormalized);
                     nCenterColor = nCenterColor.Mult(ydNormalized);
                     nColor = nColor.Mult(1.0 - ydNormalized);
                     nCenterColor.Add(nColor);
