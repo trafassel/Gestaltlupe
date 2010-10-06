@@ -28,6 +28,10 @@ namespace Fractrace {
             ParameterDict.Exemplar["Transformation.AngleY"] = "0";
             ParameterDict.Exemplar["Transformation.AngleZ"] = "0";
 
+            ParameterDict.Exemplar["Transformation.Camera.AngleX"] = "0";
+            ParameterDict.Exemplar["Transformation.Camera.AngleY"] = "0";
+            ParameterDict.Exemplar["Transformation.Camera.AngleZ"] = "0";
+
             ParameterDict.Exemplar["Transformation.3.AngleX"] = "0";
             ParameterDict.Exemplar["Transformation.3.AngleY"] = "0";
             ParameterDict.Exemplar["Transformation.3.AngleZ"] = "0";

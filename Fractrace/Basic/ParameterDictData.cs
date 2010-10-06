@@ -13,15 +13,20 @@ namespace Fractrace.Basic {
         /// <param name="dict"></param>
         /// <returns></returns>
         public int Save() {
-            lock (refCountLock) {
-                Dictionary<string, string> dict = new Dictionary<string, string>();
-                foreach(KeyValuePair<string,string> entry in ParameterDict.Exemplar.Entries) {
-                    dict[entry.Key] = entry.Value;
-                }
-                refCount++;
-                mHistory.Add(dict);
-                return Time;
+          lock (refCountLock) {
+            try {
+              Dictionary<string, string> dict = new Dictionary<string, string>();
+              foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries) {
+                dict[entry.Key] = entry.Value;
+              }
+              refCount++;
+              mHistory.Add(dict);
+              return Time;
+            } catch (System.Exception ex) {
+              System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
+          }
+          return 0;
         }
 
         System.Collections.Generic.List<Dictionary<string,string>> mHistory = new List<Dictionary<string,string>>();

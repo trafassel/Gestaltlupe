@@ -17,6 +17,19 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
+    /// Corresponding string value is set from ParameterDict.Exemplar.
+    /// </summary>
+    public override void Update() {
+      string newValue = ParameterDict.Exemplar[mName];
+      if (oldValue != newValue) {
+        mValue = newValue;
+        this.tbValue.Text = mValue;
+        oldValue = newValue;
+      }
+    }
+
+
+    /// <summary>
     /// Text wurde vom Nutzer verändert.
     /// </summary>
     /// <param name="sender"></param>

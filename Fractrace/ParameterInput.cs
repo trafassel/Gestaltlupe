@@ -470,34 +470,7 @@ namespace Fractrace {
 
        }
 
-        /// <summary>
-       /// Zwischen dem aktuellen und dem nächsten Schritt werden "Animation.Steps" Zwischenschritte berechnet.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-       private void btnStartAnimation_Click_1(object sender, EventArgs e) {
-           btnStartAnimation.Enabled = false;
-           btnStopAnimation.Visible = true;
-           Application.DoEvents();
-           animationAbort = false;
-           int steps = (int)ParameterDict.Exemplar.GetDouble("Animation.Steps");
-           lblAnimationSteps.Text = "Step 0 (from " + steps.ToString() + ")";
-           for (int i = 0; i < steps&&!animationAbort; i++) {
-               double r = 1.0 / steps * (double)i;
-               Application.DoEvents();
-               mHistory.Load((double)mHistory.CurrentTime + r);
-               ForceRedraw();
-               lblAnimationSteps.Text = "Step " + i.ToString() + " (from " + steps.ToString() + ")";
-               // Auf Beendigung der Berechnung warten.
-               while (Form1.PublicForm.InComputation) {
-                   System.Threading.Thread.Sleep(199);
-                   Application.DoEvents();
-               }
-           }
-           btnStartAnimation.Enabled = true;
-           btnStopAnimation.Visible = true;
-       }
-
+       
        private void btnStopAnimation_Click_1(object sender, EventArgs e) {
            animationAbort = true;
            Form1.PublicForm.Stop();
@@ -794,6 +767,29 @@ namespace Fractrace {
          parameterDictControl1.UpdateFromData();
          ParameterValuesChanged();
          oldDirectory = System.IO.Path.GetDirectoryName(fileName);
+       }
+
+       private void btnPreview_Click(object sender, EventArgs e) {
+       {
+         mPosterMode = false;
+           // Todo: Bild nur speichern, wenn der Haken gesetzt ist
+           if (cbSaveHistory.Checked)
+           {
+             mHistory.CurrentTime = mHistory.Save();
+             this.Text = "Parameters " + mHistory.CurrentTime.ToString();
+           }
+         // Size und Raster festlegen
+           string sizeStr = ParameterDict.Exemplar["View.Size"];
+           string rasterStr = ParameterDict.Exemplar["View.Raster"];
+           ParameterDict.Exemplar["View.Size"] = "0.2";
+           ParameterDict.Exemplar["View.Raster"] = "2";
+
+           ForceRedraw();
+           // Size und Raster auf die Ursprungswerte setzen
+           ParameterDict.Exemplar["View.Size"]=sizeStr;
+           ParameterDict.Exemplar["View.Raster"] = rasterStr;
+
+       }
        }
 
 

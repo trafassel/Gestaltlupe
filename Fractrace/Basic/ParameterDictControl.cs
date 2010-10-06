@@ -97,7 +97,11 @@ namespace Fractrace.Basic {
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
                 if (entry.Key.StartsWith(mChoosenHirarchy)) {
                     OptionMember newEntry = new OptionMember(entry.Key, entry.Value);
-                    arr.Add(newEntry);
+                    try {
+                      arr.Add(newEntry);
+                    } catch (System.Exception ex) {
+                      System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    }
                 }
             }
             try {

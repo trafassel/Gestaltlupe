@@ -298,6 +298,18 @@ namespace Fractrace {
 
       formulas.Transforms.Add(rot);
 
+
+      // Umschauen
+      double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
+      double centerY = 0.15 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y"))
+          + ParameterDict.Exemplar.GetDouble("Border.Max.y");
+      double centerZ = (ParameterDict.Exemplar.GetDouble("Border.Max.z") + ParameterDict.Exemplar.GetDouble("Border.Min.z")) / 2.0;
+      ParameterDict.Exemplar.SetDouble("Transformation.3.CenterX", centerX);
+      ParameterDict.Exemplar.SetDouble("Transformation.3.CenterY", centerY);
+      ParameterDict.Exemplar.SetDouble("Transformation.3.CenterZ", centerZ);
+      // ende Umschauen
+
+
       if (mIsRightView) {
         RightEyeView stereoTransform = new RightEyeView();
         stereoTransform.Init();

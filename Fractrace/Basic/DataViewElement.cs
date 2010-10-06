@@ -50,6 +50,20 @@ namespace Fractrace.Basic {
     }
 
 
+    protected string oldValue = "";
+
+    /// <summary>
+    /// Corresponding string value is set from ParameterDict.Exemplar.
+    /// </summary>
+    public virtual void Update() {
+      string newValue = ParameterDict.Exemplar[mName];
+      if (oldValue != newValue) {
+        mValue = newValue;
+        oldValue = newValue;
+      }
+
+    }
+
     /// <summary>
     /// Hier werden die weiteren Steuerelemente aufgebaut. 
     /// </summary>

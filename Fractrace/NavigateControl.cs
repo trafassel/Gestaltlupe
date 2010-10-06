@@ -351,6 +351,25 @@ namespace Fractrace {
         }
 
 
+        /// <summary>
+        /// Handles the Click event of the btnZoomIn control.
+        /// Hineinzoomen
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnZoomIn_Click(object sender, EventArgs e) {
+          btnZoomX_Click(null, null);
+          btnZoomY_Click(null, null);
+          btnZoomZ_Click(null, null);
+        }
+
+        private void btnZoomOut_Click(object sender, EventArgs e) {
+          button1_Click(null, null);
+          btnZoomYout_Click(null,null);
+          btnZoomZout_Click(null, null);
+        }
+
+
 
     }
 }

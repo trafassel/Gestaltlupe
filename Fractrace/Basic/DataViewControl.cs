@@ -15,11 +15,21 @@ namespace Fractrace.Basic {
 
     protected List<DataViewElement> oldElements = new List<DataViewElement>();
 
+
+    protected string oldCategory = "";
+
     /// <summary>
     /// Inhalt des Steuerelementes wird mit den Einträgen befüllt, die category entsprechen.
     /// </summary>
     /// <param name="category"></param>
     public void Select(string category) {
+      if (category == oldCategory) {
+        Update(category);
+        return;
+      }
+
+      oldCategory = category;
+
       this.SuspendLayout();
 
       // alte events abkoppeln:
@@ -62,17 +72,11 @@ namespace Fractrace.Basic {
               elementAdded = true;
           }
         }
-
-
       }
-
       for (int i = oldElements.Count - 1; i >= 0; i--) {
         DataViewElement dElement = oldElements[i];
         pnlMain.Controls.Add(dElement);
       }
-             
-
-
       this.Height = height;
       this.ResumeLayout(true);
 
@@ -87,6 +91,18 @@ namespace Fractrace.Basic {
       if(ElementChanged!=null)
         ElementChanged(name,value);
       //throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Updates 
+    /// </summary>
+    /// <param name="category"></param>
+    protected void Update(string category) {
+      if (category == "Formula")
+        return;
+      foreach (DataViewElement element in oldElements) {
+        element.Update();
+      }
     }
 
 
