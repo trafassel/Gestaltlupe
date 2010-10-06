@@ -58,6 +58,7 @@ namespace Fractrace.PictureArt {
 
     private double maxY = double.MinValue;
 
+
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
     /// </summary>
@@ -72,7 +73,8 @@ namespace Fractrace.PictureArt {
       CreateSmoothDeph();
       CreateShadowInfo();
       DrawPlane();
-      DarkenPlane();
+      if(ParameterDict.Exemplar.GetBool("Composite.UseDarken"))
+        DarkenPlane();
       SmoothEmptyPixel();
       SmoothPlane();
     }

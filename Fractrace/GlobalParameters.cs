@@ -66,6 +66,7 @@ namespace Fractrace {
             ParameterDict.Exemplar["View.Width"] = "640";
             ParameterDict.Exemplar["View.Height"] = "480";
             ParameterDict.Exemplar["View.Deph"] = "800";
+            ParameterDict.Exemplar["View.DephAdd"] = "0";
             // Beide folgenden Variablen können zur Erstellung eines Posters benutzt werden
             // 0 bezeichnet die normale (Zentrums-)Ansicht
             // PosterX=-1: Verschiebung um ein Bild nach links

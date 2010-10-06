@@ -278,6 +278,8 @@ namespace Fractrace {
       double[] col = null;
       double xd, yd, zd, zzd;
       double x, y, z, zz;
+      
+      int dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd");
 
       act_val = act_val.Clone();
 
@@ -416,7 +418,7 @@ namespace Fractrace {
             x = act_val.start_tupel.x + (double)xd * xschl / (raster);
             double miny = 0;
             isYborder = true;
-            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER; yschl -= raster) {
+            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= raster) {
               xx = xschl;
               yy = MAXZ_ITER - zschl;
 
