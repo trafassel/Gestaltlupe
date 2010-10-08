@@ -700,6 +700,8 @@ namespace Fractrace {
          ParameterDict.Exemplar.SetInt("View.PosterZ", yi);
          ForceRedraw();
          mPosterStep++;
+         ParameterDict.Exemplar.SetInt("View.PosterX", 0);
+         ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
        }
 
        private void navigateControl1_Load_1(object sender, EventArgs e) {

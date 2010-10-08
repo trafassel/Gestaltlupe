@@ -296,12 +296,6 @@ namespace Fractrace {
       formulas.InternFormula.Init();
 
 
-
-      Rotation rot = new Rotation();
-      rot.Init();
-      formulas.Transforms.Add(rot);
-
-
       // Umschauen
       double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
       double centerY = 0.5 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") + ParameterDict.Exemplar.GetDouble("Border.Min.y"));
@@ -317,6 +311,10 @@ namespace Fractrace {
       ParameterDict.Exemplar.SetDouble("Transformation.3.CenterZ", centerZ);
        */
       // ende Umschauen
+
+      Rotation rot = new Rotation();
+      rot.Init();
+      formulas.Transforms.Add(rot);
 
 
       if (mIsRightView) {

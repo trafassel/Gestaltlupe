@@ -222,12 +222,11 @@ namespace Fractrace {
         }
 
         private void button4_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleX = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleX");
+            //SetRotationCenter();
+          double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
             angleX -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleX", angleX);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX", angleX);
             DrawAndWriteInHistory();
-      
         }
 
 
@@ -270,10 +269,10 @@ namespace Fractrace {
         }
 
         private void btnRotX_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleX = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleX");
+            //SetRotationCenter();
+            double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
             angleX += mAngle;    
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleX",angleX);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX",angleX);
             DrawAndWriteInHistory();
         }
 
@@ -294,51 +293,40 @@ namespace Fractrace {
 
 
         private void btnRotY_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleY = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleY");
+            //SetRotationCenter();
+            double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
             angleY += mAngle;    
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleY",angleY);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY",angleY);
             DrawAndWriteInHistory();
         }
 
 
 
         private void btnRotZ_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleZ");
+            //SetRotationCenter();
+          double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
             angleZ += mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleZ", angleZ);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
             DrawAndWriteInHistory();
 
         }
 
         private void btnRotYneg_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleY = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleY");
+            //SetRotationCenter();
+          double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
             angleY -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleY", angleY);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY", angleY);
             DrawAndWriteInHistory();
         }
 
         private void btnRotZneg_Click(object sender, EventArgs e) {
-            SetRotationCenter();
-            double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleZ");
+            //SetRotationCenter();
+          double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
             angleZ -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleZ", angleZ);
+            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
             DrawAndWriteInHistory();
         }
 
-
-        /// <summary>
-        /// Alle Betrachtungswinkel werden auf null gesetzt.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAllAngles0_Click(object sender, EventArgs e) {
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleX", 0);
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleY", 0);
-            ParameterDict.Exemplar.SetDouble("Transformation.3.AngleZ", 0);
-        }
 
 
         /// <summary>
