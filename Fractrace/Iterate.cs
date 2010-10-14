@@ -278,8 +278,8 @@ namespace Fractrace {
       double[] col = null;
       double xd, yd, zd, zzd;
       double x, y, z, zz;
-      
-      int dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd");
+
+      double dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd") *screensize;
 
       act_val = act_val.Clone();
 
