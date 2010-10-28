@@ -96,6 +96,30 @@ namespace Fractrace.Geometry {
         }
 
 
+        /// <summary>
+        /// Zieht die Einträge eines anderen Vektors von diesem Verktor ab.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public void Subtract(Vec3 other) {
+          X -= other.X;
+          Y -= other.Y;
+          Z -= other.Z;
+        }
+
+
+        /// <summary>
+        /// Zieht die Einträge eines anderen Vektors von diesem Verktor ab.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public void Subtract(double x,double y,double z) {
+          X -= x;
+          Y -= y;
+          Z -= z;
+        }
+
+
       /// <summary>
       /// Alle Einträge werden nornmiert.
       /// </summary>
