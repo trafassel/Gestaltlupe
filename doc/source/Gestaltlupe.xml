@@ -72,8 +72,6 @@ Windows.Forms library 2.0).</para>
   </part>
   <part>
     <title>Install</title>
-
-
     <para>
       Gestaltlupe is available at GitHub at:
 
@@ -112,10 +110,9 @@ Windows.Forms library 2.0).</para>
       </para>
     </chapter>
   </part>
-  
   <part>
     <title>Interface Description</title>
-    <para>After its first start, Gestaltlupe presents the following interface.</para>
+    <para>After its first start, Gestaltlupe presents the parameter input formular.</para>
     <imageobject>
       <title>Start Screen</title>
       <imagedata format="png" fileref="pic/start.png" />
@@ -140,34 +137,541 @@ Windows.Forms library 2.0).</para>
       <imagedata format="png" fileref="pic/firstRendering.png" />
     </imageobject>
     <para>Are you satisfied with the result? Not, oh, ...</para>
-    <para>If you want to improve the quality of the rendering result, you have the read the chapter Rendering.</para>
+    <para>If you want to improve the quality of the rendering result, you have to read the chapter <link linkend="rendering" branch="">Rendering</link>. </para>
     <para>Or perhaps you want to see, what is inside the tunnel or you want to rotate and zoom the whole object.
 The chapter Navigation describes, how to navigate in the virtual 3D space.</para>
     <para>I understand. You favourite formula is another fractal, and you want to have some colours. Then you have to read the chapter Formula.  </para>
-    <chapter>
+    <para>If you are completed your study in navigation or formula description, you are ready for your first animation. </para>
+    <chapter id="rendering">
       <title>Rendering</title>
+      <para>Rendering is a 2 stage process. 
+
+In the first stage the geometry is generated. The geometry data for each pixel of the resulting bitmap contains:
+
+<itemizedlist branch=""><listitem>the exact coordinates of the corresponding surface point</listitem>
+<listitem>the normal of the surface at this point</listitem>
+<listitem>and (eventually) the surface color</listitem>
+</itemizedlist></para>
       <para>
-      </para>
+In the second stage the renderer generates the bitmap from the geometry data . Because the renderer got only informations of the visible points, the ability to generate a cinema like raytracing picture is limited. </para>
+      <para>
+The first stage used multiple threads. This means, the computation is done on multiple processors. 
+The second stage runs in one thread, uses only one processor and blocks the whole application.</para>
+      <para>There are 6 different renderers. To choose another one, you have to set <link linkend="composite">Composite.Renderer</link> to the name (or number) of your favourite renderer type, and press <emphasis branch="">Repaint</emphasis> in the result window. This is much faster than pressing <emphasis branch="">Start</emphasis> in the parameter window. Using of <emphasis branch="">Repaint</emphasis> is also recommended, if you change some of the rendering <link linkend="composite" branch="">parameters</link>.</para>
+      <section>
+        <title>FastScienceRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/FastScienceRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>ScienceRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/ScienceRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>NiceRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/NiceRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>BroadcastRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/BroadcastRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>SharpRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/SharpRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>UniversalRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/UniversalRenderer.png" />
+        </imageobject>
+      </section>
+      <section>
+        <title>PlasicRenderer</title>
+        <para>
+        </para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/PlasicRenderer.png" />
+        </imageobject>
+      </section>
     </chapter>
-    <chapter>
+    <chapter id="navigation">
       <title>Navigation</title>
       <para>
       </para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/Navigate.png" />
+      </imageobject>
     </chapter>
-    <chapter>
+    <chapter id="formula">
       <title>Formula</title>
       <para>
       </para>
     </chapter>
+    <chapter id="animation">
+      <title>Animation</title>
+      <para>
+      </para>
+    </chapter>
+    <chapter>
+      <title>History</title>
+      <para>
+      </para>
+    </chapter>
   </part>
-  
   <part>
     <title>References</title>
     <para>
     </para>
     <chapter>
       <title>Parameter</title>
-      <para>bfdhfg</para>
+      <para>
+      </para>
+      <section>
+        <title>Animation</title>
+        <para>
+        </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Animation.Steps</entry>
+                <entry> Default animation steps while adding the frame in the animation control. 
+</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section>
+        <title>Border</title>
+        <para>
+        </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Border.Max.x</entry>
+                <entry>Maximal X-Value</entry>
+              </row>
+              <row>
+                <entry>Border.Max.y</entry>
+                <entry>Maximal Y-Value</entry>
+              </row>
+              <row>
+                <entry>Border.Max.z</entry>
+                <entry>Maximal Z-Value</entry>
+              </row>
+              <row>
+                <entry>Border.Min.x</entry>
+                <entry>Minimal X-Value</entry>
+              </row>
+              <row>
+                <entry>Border.Min.y</entry>
+                <entry>Minimal Y-Value</entry>
+              </row>
+              <row>
+                <entry>Border.Min.z</entry>
+                <entry>Minimal Z-Value</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section id="composite">
+        <title>Composite</title>
+        <para>
+</para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row> <entry>Composite.Blurring</entry> <entry> Strength of blurring (0-1)  [used in Renderer 2-4]</entry></row>
+              <row> <entry>Composite.BlurringDeph</entry> <entry>not used anymore</entry></row>
+              <row> <entry>Composite.BackgoundDarken</entry> <entry>Activates the darkening of distand points    [used in Renderer 2,3,4,6]</entry></row>
+              <row> <entry>Composite.Shininess</entry> <entry>Light and material property  [used in Renderer 2 - 4]</entry>
+</row>
+              <row> <entry>Composite.UseAmbient</entry> <entry>Activates the Blurring.  [used in Renderer ?]</entry></row>
+              <row> <entry>Composite.UseDarken</entry> <entry>Activates the darkening of distand points    [used in Renderer ?]</entry></row>
+              <row> <entry>Composite.UseMedian</entry> <entry>Use object median instead of the center of the bounds [used in Renderer 2,3] </entry></row>
+              <row> <entry>Composite.UseDerivation</entry> <entry> [used in Renderer ?</entry>
+</row>
+              <row> <entry>Composite.UseColor1</entry> <entry>Activates the surface color [used in Renderer ?] </entry></row>
+              <row> <entry>Composite.Color1Factor</entry> <entry> [used in Renderer ?]</entry></row>
+              <row> <entry>Composite.Color1TestArea</entry> <entry>[used in Renderer ?]</entry></row>
+              <row> <entry>Composite.FrontLight</entry> <entry>Activates additional front light  [used in Renderer ?]</entry></row>
+              <row> <entry>Composite.AmbientLight</entry> <entry>Activates additional ambient light  [used in Renderer ?]</entry></row>
+              <row>
+                <entry>Composite.Normalize</entry> <entry>Normalise the color and light parameter to get the best picture results. Don't use this parameter in animations [apply to Renderer 2 - 5]</entry></row>
+              <row> <entry>Composite.Renderer</entry> <entry> 
+<para>
+<itemizedlist><listitem>Composite.Renderer=0 : use FastScienceRenderer</listitem>
+<listitem>Composite.Renderer=1 : use ScienceRenderer</listitem>
+<listitem>Composite.Renderer=2 : use NiceRenderer</listitem>
+<listitem>Composite.Renderer=3 : use BroadcastRenderer</listitem>
+<listitem>Composite.Renderer=4 : use SharpRenderer</listitem>
+<listitem>Composite.Renderer=5 : use UniversalRenderer</listitem>
+<listitem>Composite.Renderer=6 : use PlasicRenderer</listitem>
+</itemizedlist>
+ </para>
+</entry>
+     </row>
+              <row> <entry>Composite.Renderer.Universal.UseAmbient</entry> <entry>Activates Blurring in UniversalRenderer</entry></row>
+              <row> <entry>Composite.Renderer.Universal.UseDarken</entry> <entry>Activates Background darkening in UniversalRenderer</entry></row>
+              <row> <entry>Composite.Renderer.Universal.UseColorFromFormula</entry> <entry> Activates surface color in UniversalRenderer</entry></row>
+              <row>
+                <entry>Composite.Renderer.Universal.UseMedianColorFromFormula</entry> <entry>Activates median for surface color in UniversalRenderer</entry></row>
+              <row>
+                <entry>Composite.Renderer.Universal.ComicStyle</entry> <entry> Activates comic style (additional black lines at the border) in UniversalRenderer</entry></row>
+              <row> <entry>Composite.Renderer.Universal.FrontLightIntensity</entry> <entry> Intensity (0-1) of the Front Light in UniversalRenderer</entry></row>
+              <row> <entry>Composite.Renderer.Universal.AmbientLightIntensity</entry> <entry> Intensity (0-1) of the Ambient Light in UniversalRenderer.</entry></row>
+              <row> <entry>Composite.Renderer.Universal.Brightening</entry> <entry>Additional Brightening (0-1) in UniversalRenderer</entry></row>
+              <row> <entry>Composite.Renderer.Universal.NormalizeColors</entry> <entry> Normalise the color and light parameter to get the best picture results.
+Don't use this parameter in animations [apply to UniversalRenderer]</entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+              <row> <entry> </entry> <entry> </entry></row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para>
+        </para>
+      </section>
+      <section>
+        <title>Computation</title>
+        <para>
+        </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Computation.NoOfThreads</entry>
+                <entry>Number of threads used in computation. The recommended value is the number of processors.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section>
+        <title>Formula</title>
+        <para>
+        </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Formula.Static.jx</entry>
+                <entry>
+<para>
+X-component of the Julia Seed, if the formula is in julia mode.</para><para>
+X-component of the start value , if the formula is in mandelbrot mode.
+</para>
+</entry>
+</row>
+              <row>
+                <entry>Formula.Static.jy</entry>
+                <entry>
+<para>
+Y-component of the Julia Seed, if the formula is in julia mode.</para><para>
+Y-component of the start value , if the formula is in mandelbrot mode.
+</para>
+</entry>
+</row>
+              <row>
+                <entry>Formula.Static.jz</entry>
+                <entry>
+<para>
+Z-component of the Julia Seed, if the formula is in julia mode.</para><para>
+Z-component of the start value , if the formula is in mandelbrot mode.
+</para>
+</entry>
+</row>
+              <row>
+                <entry>Formula.Static.jzz</entry>
+                <entry>Q-component of the Julia Seed, if the formula is in julia mode.</entry>
+              </row>
+              <row>
+                <entry>Formula.Static.Cycles</entry>
+                <entry>Number of iterations used in the formula.</entry>
+              </row>
+              <row>
+                <entry>Formula.Static.MinCycle</entry>
+                <entry>
+                  <para>Number of iterations used in the formula, if the inside of the 3D object is rendered.</para>
+                  <para>
+If minCycle=51, then inside rendering is deactivated.</para>
+                </entry>  </row>
+              <row>
+                <entry>Formula.Static.Formula</entry>
+                <entry>
+<para>The used formula. Values from 1 to 26 corresponds to some inbuild formulas.</para>
+<para>Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.</para>
+<para>Formula.Static.Formula=-2: Use "Intern.Formula.Source" in julia mode.</para></entry>
+              </row>
+              <row>
+                <entry>Intern.Formula.Source</entry>
+                <entry>Source code of the formula, if Formula.Static.Formula &lt; 0.</entry> </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section>
+        <title>Transformation</title>
+        <para>
+   
+
+    
+
+    
+
+     
+</para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Transformation.Stereo.EyeDistance</entry>
+                <entry>EyeDistance in stereo mode.</entry>
+              </row>
+              <row>
+                <entry>Transformation.Stereo.Angle</entry>
+                <entry>Angle difference in stereo mode. </entry>
+              </row>
+              <row>
+                <entry>Transformation.AngleX</entry>
+                <entry>Rotation angle (in degree) for axis x (center=(0,0,0)).</entry>
+              </row>
+              <row>
+                <entry>Transformation.AngleY</entry>
+                <entry>Rotation angle (in degree) for axis y (center=(0,0,0)).</entry>
+              </row>
+              <row>
+                <entry>Transformation.AngleZ</entry>
+                <entry>Rotation angle (in degree) for axis z (center=(0,0,0)).</entry> </row>
+              <row>
+                <entry>Transformation.Camera.AngleX</entry>
+                <entry>Rotation angle (in degree) for axis x (rotation center is center of the given bounds).</entry>
+              </row>
+              <row>
+                <entry>Transformation.Camera.AngleY</entry>
+                <entry>Rotation angle (in degree) for axis y (rotation center is center of the given bounds).</entry>
+              </row>
+              <row>
+                <entry>Transformation.Camera.AngleZ</entry>
+                <entry>Rotation angle (in degree) for axis z (rotation center is center of the given bounds)</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.AngleX</entry>
+                <entry>Rotation angle (in degree) for axis x (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.AngleY</entry>
+                <entry>Rotation angle (in degree) for axis y (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.AngleZ</entry>
+                <entry>Rotation angle (in degree) for axis z (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.CenterX</entry>
+                <entry>x- component of the center of rotation Transformation.3</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.CenterY</entry>
+                <entry>y- component of the center of rotation Transformation.3</entry>
+              </row>
+              <row>
+                <entry>Transformation.3.CenterZ</entry>
+                <entry>z- component of the center of rotation Transformation.3</entry>  </row>
+              <row>
+                <entry>Transformation.Perspective.Cameraposition</entry>
+                <entry>Distance to the virtual screen. Small values gives a more 3D effect. Large values
+      // gives the scene a parallel projection view.</entry> </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section>
+        <title>View</title>
+        <para>
+ 
+
+    
+
+    
+   
+
+   
+
+</para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>View.Zoom</entry>
+                <entry>Not used anymore</entry>
+              </row>
+              <row>
+                <entry>View.Raster</entry>
+                <entry>
+                  <para>Rendering Quality.</para>
+                  <para>View.Raster=1: best quality</para>
+                  <para>View.Raster=2, up to 8 times faster than View.Raster=1, but less nice - especially at the object borders.</para>
+                </entry>
+              </row>
+              <row>
+                <entry>View.Size</entry>
+                <entry>
+                  <para>width of the rendered bitmap=View.Size*View.Width</para>
+                  <para>height of the rendered bitmap=View.Size*View.Height</para> </entry>
+              </row>
+              <row>
+                <entry>View.ClassicView</entry>
+                <entry>Set "View.ClassicView" to 1 to activate the classic view ... eventually </entry>
+              </row>
+              <row>
+                <entry>View.Perspective</entry>
+                <entry>Switch between 3D view and parallel view.</entry>
+              </row>
+              <row>
+                <entry>View.Width</entry>
+                <entry>View.Size*View.Width == width of the rendered bitmap.</entry> </row>
+              <row>
+                <entry>View.Height</entry>
+                <entry>View.Size*View.Height == height of the rendered bitmap.</entry>
+              </row>
+              <row>
+                <entry>View.Deph</entry>
+                <entry>Virtual voxel space at the y-coordinate. Higher values :-&gt; more accurate rendering, but 
+      // more time consuming.</entry>
+              </row>
+              <row>
+                <entry>View.DephAdd</entry>
+                <entry>Additional voxel space (removes black background parts of the rendered image).</entry>
+              </row>
+              <row>
+                <entry>View.PosterZ</entry>
+                <entry>
+                  <para>Used internaly in creating of a poster.</para>
+                  <para>PosterZ=-1: Render the bitmap above the given bounds.</para>
+                  <para>PosterZ=1: Render the bitmap below the given bounds.</para>
+                </entry>
+              </row>
+              <row>
+                <entry>View.PosterX</entry>
+                <entry>
+                  <para>Used internally in creating a poster.</para>
+                  <para>PosterX=-1: Render the bitmap left the given bounds.</para>
+                  <para>PosterX=1: Render the bitmap right the given bounds.</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
     </chapter>
   </part>
 </book>
