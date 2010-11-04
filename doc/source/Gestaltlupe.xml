@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<book id="book" lang="de">
+  <bookinfo>
+    <title>Book</title>
+    <releaseinfo role="CVS">
+    </releaseinfo>
+    <authorgroup>
+      <corpauthor>
+      </corpauthor>
+      <author>
+        <firstname>me</firstname>
+        <surname>me.last</surname>
+        <affiliation>
+          <address>
+            <email>name@unknown.com</email>
+          </address>
+        </affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <holder>unknown GmbH</holder>
+    </copyright>
+    <pubdate>
+    </pubdate>
+    <abstract>
+      <para>
+      </para>
+    </abstract>
+  </bookinfo>
+  <part>
+    <title>Introduction</title>
+    <para>
+Gestaltlupe is a scientific tool to render tomographic functions. 
+A tomographic function <emphasis branch="">T(p)</emphasis> (<emphasis branch="">p</emphasis> is a point <emphasis branch="">p=(x,y,z)</emphasis> in <emphasis branch="">R^3</emphasis>) returns either <emphasis branch="">true</emphasis> or <emphasis branch="">false</emphasis>. The rendering 
+interpreted this as formula description of an arbitrary object in the 3D space. This means: <emphasis branch="">T(p)=true</emphasis>, 
+if and only if <emphasis branch="">p</emphasis> is inside the object. </para>
+    <para>
+Double click on <application branch="">Gestaltlupe_1_0_2.exe</application> , choose Tab <emphasis branch="">file</emphasis>, load an sample project and press the 
+button “preview” to get after a short time a small picture of the given 3D object, or press "start" 
+to render a bitmap in full resolution. </para>
+  </part>
+  <part>
+    <title>Install
+</title>
+    <para>Gestaltlupe is available at GitHub at:
+
+<ulink url="" branch="">http://github.com/trafassel/Gestaltlupe </ulink>
+   
+The corresponding Version 1.0.2, which is documented here, can be found at:
+
+<ulink url="" branch="">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe </ulink>
+
+On this page you have to click “raw” to get the binary.  But the recommended way to work with 
+Gestaltlupe is to download the full archive file (the big “Download” button at 
+<ulink url="" branch="">http://github.com/trafassel/Gestaltlupe </ulink>). The archive contains the binaries and sample projects 
+with the corresponding formulas.
+</para>
+    <para />
+    <chapter>
+      <title>Windows</title>
+      <para>
+Gestaltlupe is developed and tested with WindowsXP and Windows7. It is a native .NET 2.0 application. </para>
+    </chapter>
+    <chapter>
+      <title>Linux
+</title>
+      <para>To run Gestaltlupe  on a Linux system, you have to install the mono package 
+(<ulink url="" branch="">http://www.mono-project.com/Main_Page </ulink>). It is tested on a Ubuntu Hardy Heron 8.04.3 LTS. 
+It runs without problems, but looks more ugly than the windows version (Yes, that is possible).</para>
+    </chapter>
+    <chapter>
+      <title>Mac OSX</title>
+      <para>
+It is tested on a Mac OSX 10.6. with Mono 2.8 . It can produce some nice pictures, but working is a 
+pain, because some windows forms are not redrawn properly (Gestaltlupe is compatible to the 
+Windows.Forms library 2.0).</para>
+    </chapter>
+  </part>
+  <part>
+    <title>Interface Description
+</title>
+    <para>After its first start, Gestaltlupe presents the following interface.</para>
+    <imageobject>
+      <title>Start Screen</title>
+      <imagedata format="png" fileref="pic/start.png" />
+    </imageobject>
+    <para>If you click on the left square in the bottom frame, you get a small overview of the defined scene. </para>
+    <imageobject>
+      <title>
+      </title>
+      <imagedata format="png" fileref="pic/firstPic.png" />
+    </imageobject>
+    <para>If the view looks OK, you can click on <emphasis branch="">Preview</emphasis> to get a greater picture. The result ist presented in the output window.</para>
+    <imageobject>
+      <title>
+      </title>
+      <imagedata format="png" fileref="pic/FirstPreview.png" />
+    </imageobject>
+    <para>The picture is saved automatic. The corresponding path is given at the top of the output window.</para>
+    <para>The final rendering starts after click on the button <emphasis branch="">Start</emphasis>.</para>
+    <imageobject>
+      <title>
+      </title>
+      <imagedata format="png" fileref="pic/firstRendering.png" />
+    </imageobject>
+    <para>Are you satisfied with the result? Not, oh, ...</para>
+    <para>If you want to improve the quality of the rendering result, you have the read the chapter Rendering.</para>
+    <para>Or perhaps you want to see, what is inside the tunnel or you want to rotate and zoom the whole object.
+The chapter Navigation describes, how to navigate in the virtual 3D space.</para>
+    <para>I understand. You favourite formula is another fractal, and you want to have some colours. Then you have to read the chapter Formula.  </para>
+    <chapter>
+      <title>Rendering</title>
+      <para>
+      </para>
+    </chapter>
+    <chapter>
+      <title>Navigation</title>
+      <para>
+      </para>
+    </chapter>
+    <chapter>
+      <title>Formula</title>
+      <para>
+      </para>
+    </chapter>
+  </part>
+</book>
