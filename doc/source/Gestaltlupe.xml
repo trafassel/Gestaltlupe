@@ -138,20 +138,17 @@ Windows.Forms library 2.0).</para>
     </imageobject>
     <para>Are you satisfied with the result? Not, oh, ...</para>
     <para>If you want to improve the quality of the rendering result, you have to read the chapter <link linkend="rendering" branch="">Rendering</link>. </para>
-    <para>Or perhaps you want to see, what is inside the tunnel or you want to rotate and zoom the whole object.
-The chapter Navigation describes, how to navigate in the virtual 3D space.</para>
-    <para>I understand. You favourite formula is another fractal, and you want to have some colours. Then you have to read the chapter Formula.  </para>
-    <para>If you are completed your study in navigation or formula description, you are ready for your first animation. </para>
+    <para>Or you want to see, what is inside the tunnel or rotate and zoom the whole object.
+The chapter <link linkend="navigation">Navigation</link> describes, how to navigate in the virtual 3D space.</para>
+    <para>I understand. You favourite formula is another fractal, and you want some colours. Then you have to read the chapter <link linkend="formula">Formula</link>.  </para>
+    <para>If you are completed your study in navigation or formula description, you are ready for your first <link linkend="animation">animation</link>. </para>
     <chapter id="rendering">
       <title>Rendering</title>
       <para>Rendering is a 2 stage process. 
 
 In the first stage the geometry is generated. The geometry data for each pixel of the resulting bitmap contains:
 
-<itemizedlist branch=""><listitem>the exact coordinates of the corresponding surface point</listitem>
-<listitem>the normal of the surface at this point</listitem>
-<listitem>and (eventually) the surface color</listitem>
-</itemizedlist></para>
+<itemizedlist branch=""><listitem>the exact coordinates of the corresponding surface point</listitem><listitem>the normal of the surface at this point</listitem><listitem>and (eventually) the surface color</listitem></itemizedlist></para>
       <para>
 In the second stage the renderer generates the bitmap from the geometry data . Because the renderer got only informations of the visible points, the ability to generate a cinema like raytracing picture is limited. </para>
       <para>
@@ -238,6 +235,25 @@ The second stage runs in one thread, uses only one processor and blocks the whol
         </title>
         <imagedata format="png" fileref="pic/Navigate.png" />
       </imageobject>
+      <para />
+      <table>
+        <title>
+        </title>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>...</entry>
+              <entry>...</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>...</entry>
+              <entry>...</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
     </chapter>
     <chapter id="formula">
       <title>Formula</title>
@@ -333,7 +349,7 @@ The second stage runs in one thread, uses only one processor and blocks the whol
       <section id="composite">
         <title>Composite</title>
         <para>
-</para>
+        </para>
         <table>
           <title>
           </title>
@@ -345,63 +361,205 @@ The second stage runs in one thread, uses only one processor and blocks the whol
               </row>
             </thead>
             <tbody>
-              <row> <entry>Composite.Blurring</entry> <entry> Strength of blurring (0-1)  [used in Renderer 2-4]</entry></row>
-              <row> <entry>Composite.BlurringDeph</entry> <entry>not used anymore</entry></row>
-              <row> <entry>Composite.BackgoundDarken</entry> <entry>Activates the darkening of distand points    [used in Renderer 2,3,4,6]</entry></row>
-              <row> <entry>Composite.Shininess</entry> <entry>Light and material property  [used in Renderer 2 - 4]</entry>
-</row>
-              <row> <entry>Composite.UseAmbient</entry> <entry>Activates the Blurring.  [used in Renderer ?]</entry></row>
-              <row> <entry>Composite.UseDarken</entry> <entry>Activates the darkening of distand points    [used in Renderer ?]</entry></row>
-              <row> <entry>Composite.UseMedian</entry> <entry>Use object median instead of the center of the bounds [used in Renderer 2,3] </entry></row>
-              <row> <entry>Composite.UseDerivation</entry> <entry> [used in Renderer ?</entry>
-</row>
-              <row> <entry>Composite.UseColor1</entry> <entry>Activates the surface color [used in Renderer ?] </entry></row>
-              <row> <entry>Composite.Color1Factor</entry> <entry> [used in Renderer ?]</entry></row>
-              <row> <entry>Composite.Color1TestArea</entry> <entry>[used in Renderer ?]</entry></row>
-              <row> <entry>Composite.FrontLight</entry> <entry>Activates additional front light  [used in Renderer ?]</entry></row>
-              <row> <entry>Composite.AmbientLight</entry> <entry>Activates additional ambient light  [used in Renderer ?]</entry></row>
               <row>
-                <entry>Composite.Normalize</entry> <entry>Normalise the color and light parameter to get the best picture results. Don't use this parameter in animations [apply to Renderer 2 - 5]</entry></row>
-              <row> <entry>Composite.Renderer</entry> <entry> 
-<para>
-<itemizedlist><listitem>Composite.Renderer=0 : use FastScienceRenderer</listitem>
-<listitem>Composite.Renderer=1 : use ScienceRenderer</listitem>
-<listitem>Composite.Renderer=2 : use NiceRenderer</listitem>
-<listitem>Composite.Renderer=3 : use BroadcastRenderer</listitem>
-<listitem>Composite.Renderer=4 : use SharpRenderer</listitem>
-<listitem>Composite.Renderer=5 : use UniversalRenderer</listitem>
-<listitem>Composite.Renderer=6 : use PlasicRenderer</listitem>
-</itemizedlist>
- </para>
-</entry>
-     </row>
-              <row> <entry>Composite.Renderer.Universal.UseAmbient</entry> <entry>Activates Blurring in UniversalRenderer</entry></row>
-              <row> <entry>Composite.Renderer.Universal.UseDarken</entry> <entry>Activates Background darkening in UniversalRenderer</entry></row>
-              <row> <entry>Composite.Renderer.Universal.UseColorFromFormula</entry> <entry> Activates surface color in UniversalRenderer</entry></row>
+                <entry>Composite.Blurring</entry>
+                <entry> Strength of blurring (0-1)  [used in Renderer 2-4]</entry>
+              </row>
               <row>
-                <entry>Composite.Renderer.Universal.UseMedianColorFromFormula</entry> <entry>Activates median for surface color in UniversalRenderer</entry></row>
+                <entry>Composite.BlurringDeph</entry>
+                <entry>not used anymore</entry>
+              </row>
               <row>
-                <entry>Composite.Renderer.Universal.ComicStyle</entry> <entry> Activates comic style (additional black lines at the border) in UniversalRenderer</entry></row>
-              <row> <entry>Composite.Renderer.Universal.FrontLightIntensity</entry> <entry> Intensity (0-1) of the Front Light in UniversalRenderer</entry></row>
-              <row> <entry>Composite.Renderer.Universal.AmbientLightIntensity</entry> <entry> Intensity (0-1) of the Ambient Light in UniversalRenderer.</entry></row>
-              <row> <entry>Composite.Renderer.Universal.Brightening</entry> <entry>Additional Brightening (0-1) in UniversalRenderer</entry></row>
-              <row> <entry>Composite.Renderer.Universal.NormalizeColors</entry> <entry> Normalise the color and light parameter to get the best picture results.
-Don't use this parameter in animations [apply to UniversalRenderer]</entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
-              <row> <entry> </entry> <entry> </entry></row>
+                <entry>Composite.BackgoundDarken</entry>
+                <entry>Activates the darkening of distand points    [used in Renderer 2,3,4,6]</entry>
+              </row>
+              <row>
+                <entry>Composite.Shininess</entry>
+                <entry>Light and material property  [used in Renderer 2 - 4]</entry>
+              </row>
+              <row>
+                <entry>Composite.UseAmbient</entry>
+                <entry>Activates the Blurring.  [used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.UseDarken</entry>
+                <entry>Activates the darkening of distand points    [used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.UseMedian</entry>
+                <entry>Use object median instead of the center of the bounds [used in Renderer 2,3] </entry>
+              </row>
+              <row>
+                <entry>Composite.UseDerivation</entry>
+                <entry> [used in Renderer ?</entry>
+              </row>
+              <row>
+                <entry>Composite.UseColor1</entry>
+                <entry>Activates the surface color [used in Renderer ?] </entry>
+              </row>
+              <row>
+                <entry>Composite.Color1Factor</entry>
+                <entry> [used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.Color1TestArea</entry>
+                <entry>[used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.FrontLight</entry>
+                <entry>Activates additional front light  [used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.AmbientLight</entry>
+                <entry>Activates additional ambient light  [used in Renderer ?]</entry>
+              </row>
+              <row>
+                <entry>Composite.Normalize</entry>
+                <entry>Normalise the color and light parameter to get the best picture results. Don't use this parameter in animations [apply to Renderer 2 - 5]</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer</entry>
+                <entry>
+                  <para>
+                    <itemizedlist>
+                      <listitem>Composite.Renderer=0 : use FastScienceRenderer</listitem>
+                      <listitem>Composite.Renderer=1 : use ScienceRenderer</listitem>
+                      <listitem>Composite.Renderer=2 : use NiceRenderer</listitem>
+                      <listitem>Composite.Renderer=3 : use BroadcastRenderer</listitem>
+                      <listitem>Composite.Renderer=4 : use SharpRenderer</listitem>
+                      <listitem>Composite.Renderer=5 : use UniversalRenderer</listitem>
+                      <listitem>Composite.Renderer=6 : use PlasicRenderer</listitem>
+                    </itemizedlist>
+                  </para>
+                </entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.UseAmbient</entry>
+                <entry>Activates Blurring in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.UseDarken</entry>
+                <entry>Activates Background darkening in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.UseColorFromFormula</entry>
+                <entry> Activates surface color in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.UseMedianColorFromFormula</entry>
+                <entry>Activates median for surface color in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.ComicStyle</entry>
+                <entry> Activates comic style (additional black lines at the border) in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.FrontLightIntensity</entry>
+                <entry> Intensity (0-1) of the Front Light in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.AmbientLightIntensity</entry>
+                <entry> Intensity (0-1) of the Ambient Light in UniversalRenderer.</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.Brightening</entry>
+                <entry>Additional Brightening (0-1) in UniversalRenderer</entry>
+              </row>
+              <row>
+                <entry>Composite.Renderer.Universal.NormalizeColors</entry>
+                <entry> Normalise the color and light parameter to get the best picture results.
+Don't use this parameter in animations [apply to UniversalRenderer]</entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
+              <row>
+                <entry>
+                </entry>
+                <entry>
+                </entry>
+              </row>
             </tbody>
           </tgroup>
         </table>
@@ -449,30 +607,33 @@ Don't use this parameter in animations [apply to UniversalRenderer]</entry></row
               <row>
                 <entry>Formula.Static.jx</entry>
                 <entry>
-<para>
-X-component of the Julia Seed, if the formula is in julia mode.</para><para>
+                  <para>
+X-component of the Julia Seed, if the formula is in julia mode.</para>
+                  <para>
 X-component of the start value , if the formula is in mandelbrot mode.
 </para>
-</entry>
-</row>
+                </entry>
+              </row>
               <row>
                 <entry>Formula.Static.jy</entry>
                 <entry>
-<para>
-Y-component of the Julia Seed, if the formula is in julia mode.</para><para>
+                  <para>
+Y-component of the Julia Seed, if the formula is in julia mode.</para>
+                  <para>
 Y-component of the start value , if the formula is in mandelbrot mode.
 </para>
-</entry>
-</row>
+                </entry>
+              </row>
               <row>
                 <entry>Formula.Static.jz</entry>
                 <entry>
-<para>
-Z-component of the Julia Seed, if the formula is in julia mode.</para><para>
+                  <para>
+Z-component of the Julia Seed, if the formula is in julia mode.</para>
+                  <para>
 Z-component of the start value , if the formula is in mandelbrot mode.
 </para>
-</entry>
-</row>
+                </entry>
+              </row>
               <row>
                 <entry>Formula.Static.jzz</entry>
                 <entry>Q-component of the Julia Seed, if the formula is in julia mode.</entry>
@@ -487,17 +648,20 @@ Z-component of the start value , if the formula is in mandelbrot mode.
                   <para>Number of iterations used in the formula, if the inside of the 3D object is rendered.</para>
                   <para>
 If minCycle=51, then inside rendering is deactivated.</para>
-                </entry>  </row>
+                </entry>
+              </row>
               <row>
                 <entry>Formula.Static.Formula</entry>
                 <entry>
-<para>The used formula. Values from 1 to 26 corresponds to some inbuild formulas.</para>
-<para>Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.</para>
-<para>Formula.Static.Formula=-2: Use "Intern.Formula.Source" in julia mode.</para></entry>
+                  <para>The used formula. Values from 1 to 26 corresponds to some inbuild formulas.</para>
+                  <para>Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.</para>
+                  <para>Formula.Static.Formula=-2: Use "Intern.Formula.Source" in julia mode.</para>
+                </entry>
               </row>
               <row>
                 <entry>Intern.Formula.Source</entry>
-                <entry>Source code of the formula, if Formula.Static.Formula &lt; 0.</entry> </row>
+                <entry>Source code of the formula, if Formula.Static.Formula &lt; 0.</entry>
+              </row>
             </tbody>
           </tgroup>
         </table>
@@ -505,14 +669,7 @@ If minCycle=51, then inside rendering is deactivated.</para>
       <section>
         <title>Transformation</title>
         <para>
-   
-
-    
-
-    
-
-     
-</para>
+        </para>
         <table>
           <title>
           </title>
@@ -542,7 +699,8 @@ If minCycle=51, then inside rendering is deactivated.</para>
               </row>
               <row>
                 <entry>Transformation.AngleZ</entry>
-                <entry>Rotation angle (in degree) for axis z (center=(0,0,0)).</entry> </row>
+                <entry>Rotation angle (in degree) for axis z (center=(0,0,0)).</entry>
+              </row>
               <row>
                 <entry>Transformation.Camera.AngleX</entry>
                 <entry>Rotation angle (in degree) for axis x (rotation center is center of the given bounds).</entry>
@@ -577,11 +735,13 @@ If minCycle=51, then inside rendering is deactivated.</para>
               </row>
               <row>
                 <entry>Transformation.3.CenterZ</entry>
-                <entry>z- component of the center of rotation Transformation.3</entry>  </row>
+                <entry>z- component of the center of rotation Transformation.3</entry>
+              </row>
               <row>
                 <entry>Transformation.Perspective.Cameraposition</entry>
                 <entry>Distance to the virtual screen. Small values gives a more 3D effect. Large values
-      // gives the scene a parallel projection view.</entry> </row>
+      // gives the scene a parallel projection view.</entry>
+              </row>
             </tbody>
           </tgroup>
         </table>
@@ -589,16 +749,7 @@ If minCycle=51, then inside rendering is deactivated.</para>
       <section>
         <title>View</title>
         <para>
- 
-
-    
-
-    
-   
-
-   
-
-</para>
+        </para>
         <table>
           <title>
           </title>
@@ -626,7 +777,8 @@ If minCycle=51, then inside rendering is deactivated.</para>
                 <entry>View.Size</entry>
                 <entry>
                   <para>width of the rendered bitmap=View.Size*View.Width</para>
-                  <para>height of the rendered bitmap=View.Size*View.Height</para> </entry>
+                  <para>height of the rendered bitmap=View.Size*View.Height</para>
+                </entry>
               </row>
               <row>
                 <entry>View.ClassicView</entry>
@@ -638,7 +790,8 @@ If minCycle=51, then inside rendering is deactivated.</para>
               </row>
               <row>
                 <entry>View.Width</entry>
-                <entry>View.Size*View.Width == width of the rendered bitmap.</entry> </row>
+                <entry>View.Size*View.Width == width of the rendered bitmap.</entry>
+              </row>
               <row>
                 <entry>View.Height</entry>
                 <entry>View.Size*View.Height == height of the rendered bitmap.</entry>
