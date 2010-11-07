@@ -228,32 +228,115 @@ The second stage runs in one thread, uses only one processor and blocks the whol
     </chapter>
     <chapter id="navigation">
       <title>Navigation</title>
-      <para>
-      </para>
+      <para>The area in 3D space, which will be used for the rendering of the 3D object is defined in the <link linkend="parameter.border">border</link> parameters. The monitor plane corresponds to  <emphasis branch="">(x,x)</emphasis> and the direction of the y-axis is the depht.   </para>
+      <para>The camera settings (i.e. rotations) are given in <link linkend="parameter.transformation">Transformation</link>. Some of this parameters can be manipulated in the navigation control. I.e. defining a factor value of 12 and double pressing of <emphasis branch="">left</emphasis> (&lt;-) is the same as factor=6 and pressing <emphasis branch="">left</emphasis> one time.</para>
       <imageobject>
         <title>
         </title>
         <imagedata format="png" fileref="pic/Navigate.png" />
       </imageobject>
-      <para />
+      <para>If you press one of the buttons, the small preview control at the bottom is redrawn automatically, but you don't have to wait for completing the picture. </para>
       <table>
         <title>
         </title>
         <tgroup cols="2">
           <thead>
             <row>
-              <entry>...</entry>
-              <entry>...</entry>
+              <entry>Symbol</entry>
+              <entry>Description</entry>
             </row>
           </thead>
           <tbody>
             <row>
-              <entry>...</entry>
-              <entry>...</entry>
+              <entry>&gt; &lt;</entry>
+              <entry>move forward</entry>
+            </row>
+            <row>
+              <entry>&lt;&gt;</entry>
+              <entry>move back</entry>
+            </row>
+            <row>
+              <entry>/\</entry>
+              <entry>move up</entry>
+            </row>
+            <row>
+              <entry>\/</entry>
+              <entry>move down</entry>
+            </row>
+            <row>
+              <entry>&lt;-</entry>
+              <entry>move left</entry>
+            </row>
+            <row>
+              <entry>-&gt;</entry>
+              <entry>move right</entry>
+            </row>
+            <row>
+              <entry>+</entry>
+              <entry>zoom in</entry>
+            </row>
+            <row>
+              <entry>-</entry>
+              <entry>zoom out</entry>
+            </row>
+            <row>
+              <entry>RotX (+,-)</entry>
+              <entry>Add the given angle (in degree) to the rotation in the (1,0,0) axis</entry>
+            </row>
+            <row>
+              <entry>RotY (+,-)</entry>
+              <entry>Add the given angle (in degree) to the rotation in the (0,1,0) axis</entry>
+            </row>
+            <row>
+              <entry>RotZ (+,-)</entry>
+              <entry>Add the given angle (in degree) to the rotation in the (0,0,1) axis</entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
+            </row>
+            <row>
+              <entry>
+              </entry>
+              <entry>
+              </entry>
             </row>
           </tbody>
         </tgroup>
       </table>
+      <para>The corresponding entry <emphasis branch="">factor</emphasis> defines the corresponding amount of moving (<emphasis branch="">factor1</emphasis>) or zooming (<emphasis branch="">factor2</emphasis>). High values corresponds to small moving steps, tiny values to bis steps.  </para>
     </chapter>
     <chapter id="formula">
       <title>Formula</title>
@@ -303,7 +386,7 @@ The second stage runs in one thread, uses only one processor and blocks the whol
           </tgroup>
         </table>
       </section>
-      <section>
+      <section id="parameter.border">
         <title>Border</title>
         <para>
         </para>
@@ -666,7 +749,7 @@ If minCycle=51, then inside rendering is deactivated.</para>
           </tgroup>
         </table>
       </section>
-      <section>
+      <section id="parameter.transformation">
         <title>Transformation</title>
         <para>
         </para>
