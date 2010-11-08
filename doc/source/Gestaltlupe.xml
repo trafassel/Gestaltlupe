@@ -228,14 +228,14 @@ The second stage runs in one thread, uses only one processor and blocks the whol
     </chapter>
     <chapter id="navigation">
       <title>Navigation</title>
-      <para>The area in 3D space, which will be used for the rendering of the 3D object is defined in the <link linkend="parameter.border">border</link> parameters. The monitor plane corresponds to  <emphasis branch="">(x,x)</emphasis> and the direction of the y-axis is the depht.   </para>
-      <para>The camera settings (i.e. rotations) are given in <link linkend="parameter.transformation">Transformation</link>. Some of this parameters can be manipulated in the navigation control. I.e. defining a factor value of 12 and double pressing of <emphasis branch="">left</emphasis> (&lt;-) is the same as factor=6 and pressing <emphasis branch="">left</emphasis> one time.</para>
+      <para>The area in 3D space, which will be used for the rendering of the 3D object is defined in the <link linkend="parameter.border">border</link> parameters. The monitor plane corresponds to  <emphasis branch="">(x,z)</emphasis> and the direction of the y-axis is the depth.   </para>
+      <para>The camera settings (i.e. rotations) are given in <link linkend="parameter.transformation">Transformation</link>. Some of this parameters can be manipulated in the navigation control.</para>
       <imageobject>
         <title>
         </title>
         <imagedata format="png" fileref="pic/Navigate.png" />
       </imageobject>
-      <para>If you press one of the buttons, the small preview control at the bottom is redrawn automatically, but you don't have to wait for completing the picture. </para>
+      <para>If you press one of the buttons, the small preview control at the bottom is redrawn automatically, but you don't have to wait for completing the picture.  I.e. defining a factor value of 12 and double pressing of <emphasis branch="">left</emphasis> (&lt;-) is the same as factor=6 and pressing <emphasis branch="">left</emphasis> just one time.</para>
       <table>
         <title>
         </title>
@@ -336,12 +336,330 @@ The second stage runs in one thread, uses only one processor and blocks the whol
           </tbody>
         </tgroup>
       </table>
-      <para>The corresponding entry <emphasis branch="">factor</emphasis> defines the corresponding amount of moving (<emphasis branch="">factor1</emphasis>) or zooming (<emphasis branch="">factor2</emphasis>). High values corresponds to small moving steps, tiny values to bis steps.  </para>
+      <para>The corresponding entry <emphasis branch="">factor</emphasis> defines the corresponding amount of moving (<emphasis branch="">factor1</emphasis>) or zooming (<emphasis branch="">factor2</emphasis>). High values corresponds to small moving steps, tiny values to big steps.  </para>
     </chapter>
     <chapter id="formula">
       <title>Formula</title>
       <para>
+The type of the formula is defined in <link linkend="parameter.formula">Formula.Static.Formula</link>. Values from 1 to 26 corresponds to some inbuild formulas, but the most flexible way to work with formulas is to use the source code, defined in the <emphasis branch="">formula</emphasis> tab. 
+
+
+If <emphasis branch="">Formula.Static.Formula=</emphasis>-1 the source code is called in mandelbrot mode (<emphasis branch="">Formula.Static.Formula=</emphasis>-2 corresponds to the julia mode). </para>
+      <para>
       </para>
+      <para>The difference between this two modes is a calling convention. Either the first arguments are the start values or the start arguments are given in the arguments 3 to 6. </para>
+      <para>The return value is either 0 (if the point to test is inside the 3d object), or &gt;1 if outside. Values &gt;1 are used to define the colours in the cut plane.</para>
+      <section>
+        <title>Mandelbrot Mode</title>
+        <para>If the border is defined by (-2,-2,-2) to (2,2,2), <emphasis branch="">Formula.Static.Formula=</emphasis>-1 and the formula is:  </para>
+        <programlisting>public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+if(br*br+bi*bi+bj*bj &lt; 1)
+            return (0);
+
+return 1;
+
+}</programlisting>
+        <para>The result (after pressing <emphasis branch="">Preview</emphasis>) will looks like:</para>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/formula1.png" />
+        </imageobject>
+        <para>In Mandelbrot mode, the arguments are:</para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis>ar</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jx
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>ai</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jy
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>aj</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jz
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">br</emphasis>
+                </entry>
+                <entry>x-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">bi</emphasis>
+                </entry>
+                <entry>y-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">bj</emphasis>
+                </entry>
+                <entry>z-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">bk</emphasis>
+                </entry>
+                <entry>not used in mandelbrot mode</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">zkl</emphasis>
+                </entry>
+                <entry>The value of <emphasis>Formula.Static.Cycles</emphasis>, if there is an outside rendering or <emphasis>Formula.Static.MinCycle</emphasis> if the inside should be displayed. 
+</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>invers</emphasis>
+                </entry>
+                <entry>This value is true, if inside rendering is <emphasis branch="">on</emphasis></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+      <section>
+        <title>Julia Mode</title>
+        <para>If the border is defined by (-2,-2,-2) to (2,2,2), <emphasis branch="">Formula.Static.Formula=</emphasis>-1 and the formula is:  </para>
+        <programlisting>public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+if(br*br+bi*bi+bj*bj &lt; 1)
+            return (0);
+
+return 1;
+
+}</programlisting>
+        <para>The result is just a black bitmap. In julia mode, the arguments <emphasis branch="">br</emphasis>,<emphasis branch="">bi</emphasis> and <emphasis branch="">bj</emphasis> are fixed and the point to test is given by (<emphasis branch="">ar</emphasis>,<emphasis branch="">ai</emphasis>,<emphasis branch="">aj</emphasis>).</para>
+        <para>All other parameters are defined similar to the mandelbrot mode. </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <emphasis branch="">ar</emphasis>
+                </entry>
+                <entry>x-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">ai</emphasis>
+                </entry>
+                <entry>y-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">aj</emphasis>
+                </entry>
+                <entry>z-component of the point to test</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>br</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jx
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>bi</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jy
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>bj</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jz
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>bk</emphasis>
+                </entry>
+                <entry>The value of <emphasis branch="">Formula.Static.jzz
+</emphasis></entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis branch="">zkl</emphasis>
+                </entry>
+                <entry>The value of <emphasis>Formula.Static.Cycles</emphasis>, if there is an outside rendering or <emphasis>Formula.Static.MinCycle</emphasis> if the inside should be displayed. 
+</entry>
+              </row>
+              <row>
+                <entry>
+                  <emphasis>invers</emphasis>
+                </entry>
+                <entry>This value is true, if inside rendering is <emphasis branch="">on</emphasis></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para>Predefined Mathematical methods has to start with <emphasis branch="">Math</emphasis>.</para>
+        <programlisting>public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+if(ar*ar+ai*ai+aj*aj1)
+            return (0);
+
+if(Math.Abs(ar)+Math.Abs(ai)+Math.Abs(aj)&lt;1.4)
+            return (0);
+
+return 1;
+}</programlisting>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="jpg" fileref="pic/formula2.jpg" />
+        </imageobject>
+      </section>
+      <section>
+        <title>Surface Color</title>
+        <para>Surface colours can be defined in the field <emphasis branch="">additionalPointInfo</emphasis>. The rgb-values of the surface color corresponds to (<emphasis branch="">additionalPointInfo.red</emphasis>, <emphasis branch="">additionalPointInfo.green</emphasis>, <emphasis branch="">additionalPointInfo.blue</emphasis>). </para>
+        <para>To use this property, <emphasis branch="">additionalPointInfo</emphasis> has to be created in the Init() method.</para>
+        <programlisting>public override void Init() {
+  base.Init();
+  additionalPointInfo=new AdditionalPointInfo();
+}</programlisting>
+        <para>Now <emphasis branch="">additionalPointInfo</emphasis> can be used in the method <emphasis branch="">InSet</emphasis>.</para>
+        <programlisting>
+public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+  additionalPointInfo.red=0;
+  additionalPointInfo.green=0;
+  additionalPointInfo.blue=0;
+
+  if(ar*ar+ai*ai+aj*aj&lt;1) {
+    additionalPointInfo.red=1;
+    additionalPointInfo.green=1;
+    return (0);
+  }
+
+  if(Math.Abs(ar)+Math.Abs(ai)+Math.Abs(aj)&lt;1.4) {
+    additionalPointInfo.blue=0.6;
+    return (0);
+  }
+
+  return 1;
+}</programlisting>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="jpg" fileref="pic/formula3.jpg" />
+        </imageobject>
+      </section>
+      <section>
+        <title>Inside Rendering</title>
+        <para>It is (at least for the author of this documentation) one of the surprising results in the 3D fractal generation, that the complement of some 3D objects are looking different than the original object. The rendering of this complement is often denoted in this document as inside rendering.</para>
+        <para>To switch on the inside rendering of the 3D object, move the camera forward until the virtual monitor screen is touched. On the touch plane, the inside rendering is activatet and the  <emphasis branch="">invers</emphasis> parameter is <emphasis branch="">true</emphasis>. The formula must now return 0 if the test point is outside, and a value &gt;0 if the testpoint is inside the 3D object.  </para>
+        <programlisting>public override void Init() {
+  base.Init();
+  additionalPointInfo=new AdditionalPointInfo();
+}
+
+public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+
+
+additionalPointInfo.red=0;
+additionalPointInfo.green=0;
+additionalPointInfo.blue=0;
+
+if(ar*ar+ai*ai+aj*aj &lt; 1) {
+  additionalPointInfo.red=1;
+  additionalPointInfo.green=1;
+  if (invers) return 1;
+  return (0);
+}
+
+if(Math.Abs(ar)+Math.Abs(ai)+Math.Abs(aj) &lt; 1.4) {
+   additionalPointInfo.blue=0.6;
+   if (invers) return 1;
+   return (0);
+}
+
+  if (invers) return 0;
+  return 1;
+}</programlisting>
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="jpg" fileref="pic/formula4.jpg" />
+        </imageobject>
+      </section>
+      <section>
+        <title>Methods and Datatypes</title>
+        <para>There are some predefined methods and datatypes, which will be documented here.</para>
+        <section>
+          <title>Access to Global Parameters</title>
+          <para>
+          </para>
+          <para>You can set the valu of all global parameters,</para>
+          <programlisting>public void Set(string id, int value); 
+public void Set(string id, double value);
+public void Set(string id, bool value);
+</programlisting>
+          <para>read the value of all global parameters</para>
+          <programlisting> public double GetDouble(string id);</programlisting>
+          <para>or you can define new global parameters.</para>
+          <programlisting> public void AddValue(string id, double value);
+</programlisting>
+        </section>
+        <section>
+          <title>Init</title>
+          <para>The method Init() is called at the start of the rendering process. This function is a good place to perform some time consuming computations, which dos not need to called for each testing point. Furthermore, the reading of global parameters should be performed here, because the user is able to change some global parameters while the rendering process is running.</para>
+          <programlisting>public override void Init() {
+  base.Init();
+  additionalPointInfo=new AdditionalPointInfo();
+}</programlisting>
+        </section>
+        <section>
+          <title>Vectorrotation</title>
+          <para>
+          </para>
+        </section>
+      </section>
+      <section>
+        <title>Bugs</title>
+        <para>To compile the formula source with the C# compiler, you have to activate the small rendering control (the left square in the bottom frame). Syntax errors are displayed in a subframe (here a german error message).
+</para>
+        <para />
+        <imageobject>
+          <title>
+          </title>
+          <imagedata format="png" fileref="pic/error.png" />
+        </imageobject>
+        <para>The line info in the error message is not correct (the position is ok). The exact line where the error occurs is line-8. Press the small button on the left to close the error frame.</para>
+      </section>
     </chapter>
     <chapter id="animation">
       <title>Animation</title>
@@ -672,7 +990,7 @@ Don't use this parameter in animations [apply to UniversalRenderer]</entry>
           </tgroup>
         </table>
       </section>
-      <section>
+      <section id="parameter.formula">
         <title>Formula</title>
         <para>
         </para>
