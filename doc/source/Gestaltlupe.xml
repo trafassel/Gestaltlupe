@@ -75,15 +75,15 @@ Windows.Forms library 2.0).</para>
     <para>
       Gestaltlupe is available at GitHub at:
 
-      <ulink url="" branch="">http://github.com/trafassel/Gestaltlupe </ulink>
+      <ulink url="http://github.com/trafassel/Gestaltlupe">http://github.com/trafassel/Gestaltlupe </ulink>
 
       The corresponding Version 1.0.2, which is documented here, can be found at:
 
-      <ulink url="" branch="">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe </ulink>
+      <ulink url="http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe </ulink>
 
       On this page you have to click “raw” to get the binary.  But the recommended way to work with
       Gestaltlupe is to download the full archive file (the big “Download” button at
-      <ulink url="" branch="">http://github.com/trafassel/Gestaltlupe </ulink>). The archive contains the binaries and sample projects
+      <ulink url="http://github.com/trafassel/Gestaltlupe" branch="">http://github.com/trafassel/Gestaltlupe </ulink>). The archive contains the binaries and sample projects
       with the corresponding formulas.
     </para>
     <para />
@@ -658,13 +658,25 @@ public void Set(string id, bool value);
           </title>
           <imagedata format="png" fileref="pic/error.png" />
         </imageobject>
-        <para>The line info in the error message is not correct (the position is ok). The exact line where the error occurs is line-8. Press the small button on the left to close the error frame.</para>
+        <para>The line info in the error message is not correct (the position is OK). The exact line where the error occurs is line-8. Pressing the small button on the left closes the error frame.</para>
       </section>
     </chapter>
     <chapter id="animation">
       <title>Animation</title>
       <para>
       </para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/AnimationControl1.png" />
+      </imageobject>
+      <para>Pressing the Button, marked with +, adds the last rendered scene (either via <emphasis branch="">Preview</emphasis> or <emphasis branch="">Start</emphasis> to the animation key frame list. </para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/AnimationControl2.png" />
+      </imageobject>
+      <para>An animation frame entry starts with <application branch="">Run</application>. The parameter <application branch="">Steps</application></para>
     </chapter>
     <chapter>
       <title>History</title>
