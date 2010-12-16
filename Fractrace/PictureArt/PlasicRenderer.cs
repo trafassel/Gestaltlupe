@@ -196,90 +196,6 @@ namespace Fractrace.PictureArt {
       double d2 = pData.Width + pData.Height;
       double d3 = d1 / d2;
 
-      /*
-      if (smoothDeph2[x, y] != double.MinValue && smoothDeph1[x, y] != double.MinValue) {
-        double localDeph = smoothDeph2[x, y] - smoothDeph1[x, y];
-
-     
-
-
-        if (localDeph > 0) {
-          retVal.X -= 50000*d3 * localDeph;
-          retVal.Y -= 50000 * d3 * localDeph;
-          retVal.Z -= 50000 * d3 * localDeph;
-
-          if (retVal.X < 0)
-            retVal.X = 0;
-          if (retVal.X > 1)
-            retVal.X = 1;
-
-          if (retVal.Y < 0)
-            retVal.Y = 0;
-          if (retVal.Z < 0)
-            retVal.Z = 0;
-          if (retVal.Y > 1)
-            retVal.Y = 1;
-          if (retVal.Z > 1)
-            retVal.Z = 1;
-
-        }
-      }*/
-
-      // Testweise nur die Blau Komponente entsprechend der Schatteninfos verkleinern
-     // double shadow_height = shadowInfo11[x, y];
-
-      /*
-      double shadow_height = shadowInfo11[x, y];
-      double ypos = smoothDeph2[x, y];
-      double ysdiff = shadow_height - ypos;
-      double factor = 3000;
-      double shadowlight = factor * d3 * ysdiff;
-      if (shadowlight > 0.3)
-        shadowlight = 0.3;
-      if (ysdiff > 0) {
-        retVal.Z -= shadowlight;
-        retVal.X -= shadowlight;
-        retVal.Y -= shadowlight;
-      }
-
-       shadow_height = shadowInfo00[x, y];
-       ypos = smoothDeph2[x, y];
-       ysdiff = shadow_height - ypos;
-       shadowlight = factor * d3 * ysdiff;
-      if (shadowlight > 0.3)
-        shadowlight = 0.3;
-      if (ysdiff > 0) {
-        retVal.Z -= shadowlight;
-        retVal.X -= shadowlight;
-        retVal.Y -= shadowlight;
-      }
-
-
-      shadow_height = shadowInfo01[x, y];
-      ypos = smoothDeph2[x, y];
-      ysdiff = shadow_height - ypos;
-      shadowlight = factor * d3 * ysdiff;
-      if (shadowlight > 0.3)
-        shadowlight = 0.3;
-      if (ysdiff > 0) {
-        retVal.Z -= shadowlight;
-        retVal.X -= shadowlight;
-        retVal.Y -= shadowlight;
-      }
-
-      shadow_height = shadowInfo10[x, y];
-      ypos = smoothDeph2[x, y];
-      ysdiff = shadow_height - ypos;
-      shadowlight = factor * d3 * ysdiff;
-      if (shadowlight > 0.3)
-        shadowlight = 0.3;
-      if (ysdiff > 0) {
-        retVal.Z -= shadowlight;
-        retVal.X -= shadowlight;
-        retVal.Y -= shadowlight;
-      }*/
-
-
 
       double shadowlight = 0.34 * shadowPlane[x, y];
       retVal.Z = 0.2*retVal.Z+0.8*Math.Max(0,retVal.Z- shadowlight);
@@ -294,16 +210,6 @@ namespace Fractrace.PictureArt {
         retVal.Y = 1;
       if (retVal.Z > 1)
         retVal.Z = 1;
-
-
-
-      // Begin: Einschub weißer Hintergrung
- /*
-      retVal.X = 0.8;
-      retVal.Y = 0.8;
-      retVal.Z = 0.8;
-      */
-      // Ende Einschub, weißer Hintergrund
 
 
       // Falls weitere Farbinformation vorhanden sind, werden diese nun auf die Punkte angewendet
@@ -363,9 +269,6 @@ namespace Fractrace.PictureArt {
     /// <param name="normal"></param>
     /// <returns></returns>
     protected virtual Vec3 GetLight(Vec3 normal) {
-      // debug only
-   // return new Vec3(0.8, 0.8, 0.81);
-
 
       Vec3 retVal = new Vec3(0, 0, 0);
       if (normal == null)
@@ -417,22 +320,14 @@ namespace Fractrace.PictureArt {
       if (winkel2 > 1)
         winkel2 = 1;
 
-     // winkel2 *= winkel2;
-
-      
-     // winkel =weight_frontLight*winkel+ weight_second_light*winkel2;
-
       winkel *= 2.1;
       winkel2 *= 1.3;
 
       double colorComponent1 = 1.1 * weight_frontLight * winkel + 0.9 * weight_second_light * winkel2;
       double colorComponent2 = 0.9 * weight_frontLight * winkel + 1.1 * weight_second_light * winkel2;
-
-
       colorComponent1 = (1.0 - emissive) * colorComponent1 + emissive;
       colorComponent2 = (1.0 - emissive) * colorComponent2 + emissive;
 
-  //    winkel += 0.1; // Emissive Light
       if (colorComponent1 > 1)
         colorComponent1 = 1;
       if (colorComponent1 < 0)
@@ -442,13 +337,9 @@ namespace Fractrace.PictureArt {
       if (colorComponent2 < 0)
         colorComponent2 = 0;
 
-
       retVal.X = colorComponent1;
       retVal.Y = colorComponent1;
       retVal.Z = colorComponent2;
-
-
-
 
       return retVal;
     }
@@ -471,8 +362,6 @@ namespace Fractrace.PictureArt {
       shadowInfo00sharp = new double[pData.Width, pData.Height];
 
       shadowPlane = new double[pData.Width, pData.Height];
-
-     // shadowPlane = new double[pData.Width, pData.Height];
       double[,] shadowTempPlane = new double[pData.Width, pData.Height];
 
       double diffy = maxY - minY;
@@ -576,7 +465,6 @@ namespace Fractrace.PictureArt {
 
             }
 
-
             double magicNumber = 0.000001;
             if (height != double.MinValue) {
                 height += magicNumber; // magic number
@@ -605,10 +493,8 @@ namespace Fractrace.PictureArt {
               shadowInfo10sharp[i, j] = smoothDeph1[i, j];
               shadowInfo01sharp[i, j] = smoothDeph1[i, j];
               shadowInfo00sharp[i, j] = smoothDeph1[i, j];
-              //shadowPlane[i, j] = 0;
           }
       }
-
 
       for (int i = pData.Width - 1; i >= 0; i--) {
           for (int j = pData.Height - 1; j >= 0; j--) {
@@ -624,7 +510,6 @@ namespace Fractrace.PictureArt {
               }
           }
           for (int j = 0; j < pData.Height; j++) {
-
               // Licht von rechts
               if (i < pData.Width - 1 &&j>0) {
                   double localShadow = shadowInfo01[i + 1, j-1] - ydh;
@@ -649,8 +534,6 @@ namespace Fractrace.PictureArt {
                       shadowInfo10sharp[i, j] = localShadow;
               }
           }
-
-
           for (int j = 0; j < pData.Height; j++) {
               if (i > 0 && j>0) {
                   double localShadow = shadowInfo00[i - 1, j-1] - ydh;
@@ -670,9 +553,9 @@ namespace Fractrace.PictureArt {
               double height = smoothDeph1[i, j];
               double shadowHeight = 0;
               double sharpShadowHeight = 0;
-
               for (int k = 0; k < 4; k++) {
                   switch (k) {
+
                       case 0:
                           shadowHeight = shadowInfo00[i, j];
                           sharpShadowHeight = shadowInfo00sharp[i, j];
@@ -694,7 +577,6 @@ namespace Fractrace.PictureArt {
                           break;
 
                   }
-
 
                   double magicNumber = 0.000001;
                   if (height != double.MinValue) {
@@ -748,8 +630,6 @@ namespace Fractrace.PictureArt {
               shadowPlane[i, j]=0.3*shadowPlane[i, j]+0.7*sumNeighbors/neighborsFound;
           }
         }
-
-
     }
 
     /// <summary>

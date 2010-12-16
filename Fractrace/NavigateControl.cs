@@ -10,16 +10,37 @@ using Fractrace.Basic;
 using Fractrace.Geometry;
 
 namespace Fractrace {
+
+
+    /// <summary>
+    /// A Control with some basic buttons to navigate in the virtual object space.
+    /// </summary>
     public partial class NavigateControl : UserControl {
+
+
+        /// <summary>
+        /// Contructer.
+        /// </summary>
         public NavigateControl() {
             InitializeComponent();
         }
 
 
+        /// <summary>
+        /// A small control to display the preview of the rendered scene.
+        /// </summary>
         PreviewControl mPreview = null;
 
+
+        /// <summary>
+        /// The "right eye"-view of the control.
+        /// </summary>
         PreviewControl mPreviewStereo = null;
 
+
+        /// <summary>
+        /// Parent control.
+        /// </summary>
         ParameterInput mParent = null;
 
 
@@ -42,7 +63,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Initialisierung.
+        /// Initialisation.
         /// </summary>
         /// <param name="preview"></param>
         public void Init(PreviewControl preview, PreviewControl preview2,ParameterInput parent) {
@@ -55,7 +76,7 @@ namespace Fractrace {
       
 
         /// <summary>
-        /// Bewegung nach links.
+        /// Move left.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -88,7 +109,6 @@ namespace Fractrace {
 
           Rotation rotView = null;
 
-
           double centerXChange = centerX + 1;
           double centerYChange = centerY + 1;
           double centerZChange = centerZ + 1;
@@ -100,24 +120,15 @@ namespace Fractrace {
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
           centerDiffX = rotView.Transform(new Vec3(1, 0, 0));
 
-          /*
-          rotView.Init(1, 0, 0, ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
-               ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
-          centerDiffX = rotView.Transform(new Vec3(0, 0, 0));
-          */
-         // centerDiffX.Subtract(1, 0, 0);
-
           rotView = new Rotation();
           rotView.Init(0,0,0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
           centerDiffY = rotView.Transform(new Vec3(0, -1, 0));
-          //centerDiffY.Subtract(0, 1, 0);
 
           rotView = new Rotation();
           rotView.Init(0, 0, 0,- ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
           centerDiffZ = rotView.Transform(new Vec3(0, 0, -1));
-          //centerDiffZ.Subtract(0, 0, 1);
 
           // Set 0-Entries
           if (centerDiffX.X > -minDoubleVal && centerDiffX.X < minDoubleVal)
@@ -140,11 +151,17 @@ namespace Fractrace {
             centerDiffZ.Y = 0;
           if (centerDiffZ.Z > -minDoubleVal && centerDiffZ.Z < minDoubleVal)
             centerDiffZ.Z = 0;
-
-
         }
 
 
+        /// <summary>
+        /// Solve the equation system a*pp1+b*pp2+c*pp3=pp0 
+        /// </summary>
+        /// <param name="pp0"></param>
+        /// <param name="pp1"></param>
+        /// <param name="pp2"></param>
+        /// <param name="pp3"></param>
+        /// <returns></returns>
      Vec3 SolveEqusyst( Vec3 pp0, Vec3 pp1, Vec3 pp2, Vec3 pp3) {
 	double s=0,t=0,u=0;	
 	
@@ -202,13 +219,8 @@ namespace Fractrace {
 			}
 		}
 
-
-
 	if (x33==0) {
-
-		//Logfile::Exemplar()->o_strm << "Warning in BS_Plane::solve_eqsyst(): " << "Vectors are not independent" << endl;
 		if (x34!=0) {
-			//Logfile::Exemplar()->o_strm << "Warning in BS_Plane::solve_eqsyst(): "<< "Vectors are not independent" << endl;
 			return new Vec3(0,0,0);
 			}
 		else {
@@ -237,8 +249,11 @@ namespace Fractrace {
 	return new Vec3(s,t,u);
 	}
 
-
-
+        
+        /// <summary>
+     /// Slide X-border (not used anymore).
+        /// </summary>
+        /// <param name="xdiff"></param>
         private void SlideX(double xdiff) {
           double endX = ParameterDict.Exemplar.GetDouble("Border.Max.x");
           double startX = ParameterDict.Exemplar.GetDouble("Border.Min.x");
@@ -250,6 +265,9 @@ namespace Fractrace {
         }
 
 
+        /// <summary>
+        /// Slide Y-border (not used anymore).
+        /// </summary>
         private void SlideY(double ydiff) {
           double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
           double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
@@ -260,6 +278,11 @@ namespace Fractrace {
           ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
         }
 
+
+        /// <summary>
+        /// Slide Z-border (not used anymore).
+        /// </summary>
+        /// <param name="zdiff"></param>
         private void SlideZ(double zdiff) {
           double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
           double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
@@ -272,7 +295,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Bewegung nach rechts.
+        /// Move right.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -295,7 +318,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Bewegung nach oben
+        /// Move up.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -314,18 +337,6 @@ namespace Fractrace {
             SlideZ(trans.Z / mFactor);
 
           DrawAndWriteInHistory();
-
-
-
-          /*
-            double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            double ddiff = endZ - startZ;
-            endZ += ddiff / mFactor;
-            startZ += ddiff / mFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
-            DrawAndWriteInHistory();*/
         }
 
 
@@ -349,16 +360,6 @@ namespace Fractrace {
             SlideZ(trans.Z / mFactor);
 
           DrawAndWriteInHistory();
-          /*
-            double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            double ddiff = endZ - startZ;
-            endZ -= ddiff / mFactor;
-            startZ -= ddiff / mFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
-            DrawAndWriteInHistory();
-           */
         }
 
 
@@ -382,16 +383,8 @@ namespace Fractrace {
             SlideZ(trans.Z / mFactor);
 
           DrawAndWriteInHistory();
-          /*
-            double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            double ddiff = endY - startY;
-            endY -= ddiff / mFactor;
-            startY -= ddiff / mFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
-            DrawAndWriteInHistory();*/
         }
+
 
         /// <summary>
         /// Rückwärts
@@ -414,21 +407,11 @@ namespace Fractrace {
 
           DrawAndWriteInHistory();
 
-          /*
-            double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            double ddiff = endY - startY;
-            endY += ddiff / mFactor;
-            startY += ddiff / mFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
-            DrawAndWriteInHistory();
-           */
         }
 
 
         /// <summary>
-        /// X Zoomen
+        /// X Zoom
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -443,6 +426,12 @@ namespace Fractrace {
             DrawAndWriteInHistory();
         }
 
+
+        /// <summary>
+        /// Y-Zoom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnZoomY_Click(object sender, EventArgs e) {
             double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
             double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
@@ -455,6 +444,12 @@ namespace Fractrace {
        
         }
 
+
+        /// <summary>
+        /// Z-Zoom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnZoomZ_Click(object sender, EventArgs e) {
             double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
             double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
@@ -467,6 +462,12 @@ namespace Fractrace {
      
         }
 
+
+        /// <summary>
+        /// Zoom out X
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e) {
             double endX = ParameterDict.Exemplar.GetDouble("Border.Max.x");
             double startX = ParameterDict.Exemplar.GetDouble("Border.Min.x");
@@ -479,6 +480,12 @@ namespace Fractrace {
  
         }
 
+
+        /// <summary>
+        /// Zoom out Y
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnZoomYout_Click(object sender, EventArgs e) {
             double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
             double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
@@ -491,6 +498,12 @@ namespace Fractrace {
 
         }
 
+
+        /// <summary>
+        /// Zoom aout Z
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnZoomZout_Click(object sender, EventArgs e) {
             double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
             double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
@@ -503,7 +516,9 @@ namespace Fractrace {
    
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         protected double mFactor = 6;
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
