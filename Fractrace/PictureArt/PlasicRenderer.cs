@@ -401,7 +401,7 @@ namespace Fractrace.PictureArt {
 
         for (int i = 0; i < pData.Width; i++) {
           for (int j = 0; j < pData.Height; j++) {
-            shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
+            //shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
             shadowTempPlane[i, j] = 0;
           }
         }
@@ -632,6 +632,12 @@ namespace Fractrace.PictureArt {
             // alt:
             shadowTempPlane[i, j] = shadowMapEntry;
             //shadowPlane[i, j] += shadowMapEntry / shadowNumber;
+          }
+        }
+
+        for (int i = 0; i < pData.Width; i++) {
+          for (int j = 0; j < pData.Height; j++) {
+            shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
           }
         }
       }
