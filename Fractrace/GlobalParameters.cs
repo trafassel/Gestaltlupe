@@ -195,6 +195,16 @@ namespace Fractrace {
       // Don't use this parameter in animations [used in UniversalRenderer]
       ParameterDict.Exemplar["Composite.Renderer.Universal.NormalizeColors"] = "0";
 
+      // Activates Background darkening in PlasicRenderer
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.UseDarken"] = "0";
+      // Corresponds to the number of shadows in PlasicRenderer
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "1";
+      // Intensity of the FieldOfView
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "4";
+      // Intensity of the Surface Color
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "0.5";
+
+
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";
 
