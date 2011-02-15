@@ -387,7 +387,7 @@ namespace Fractrace {
         protected void OnProgress() {
             progressBar1.Value = (int)mProgress;
         }
-
+        
         /// <summary>
         /// Fortschritt der Berechnung in Prozent.
         /// </summary>
