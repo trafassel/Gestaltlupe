@@ -17,6 +17,8 @@ namespace Fractrace.Animation {
         }
 
 
+        protected bool fixFormula = false;
+
         /// <summary>
         /// Verweis auf die global verwaltete Historie.
         /// </summary>
@@ -117,7 +119,9 @@ namespace Fractrace.Animation {
           
      //     AnimationPoint apStart = mAnimationSteps.Steps[0];
      //     dataPerTime.Load(apStart.Time);
-          mFormula = ParameterDict.Exemplar["Intern.Formula.Source"];
+          if (fixFormula) {
+              mFormula = ParameterDict.Exemplar["Intern.Formula.Source"];
+          }
           for (int i = 1; i < mAnimationSteps.Steps.Count; i++) {
             if (animationAbort)
               break;
@@ -143,11 +147,15 @@ namespace Fractrace.Animation {
           dataPerTime.Load(from);
           // Größe festlegen:
           ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-          ParameterDict.Exemplar["Intern.Formula.Source"]=mFormula;
+          if (fixFormula) {
+              ParameterDict.Exemplar["Intern.Formula.Source"] = mFormula;
+          }
           animationHistory.Save();
           dataPerTime.Load(to);
           ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-          ParameterDict.Exemplar["Intern.Formula.Source"] = mFormula;
+          if (fixFormula) {
+              ParameterDict.Exemplar["Intern.Formula.Source"] = mFormula;
+          }
           animationHistory.Save();
           lblAnimationProgress.Text = "compute: "+from.ToString()+" "+to.ToString();
           for (int i = 0; i < steps && !animationAbort; i++) {
