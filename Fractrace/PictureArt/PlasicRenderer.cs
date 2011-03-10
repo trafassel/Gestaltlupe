@@ -281,7 +281,7 @@ namespace Fractrace.PictureArt {
     protected virtual Vec3 GetLight(Vec3 normal) {
 
       Vec3 retVal = new Vec3(0, 0, 0);
-      return new Vec3(1, 1, 1);
+      //return new Vec3(1, 1, 1);
       if (normal == null)
         return retVal;
 
