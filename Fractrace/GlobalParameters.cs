@@ -203,7 +203,10 @@ namespace Fractrace {
       ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "4";
       // Intensity of the Surface Color
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "0.5";
-
+      // Use Light
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.UseLight"] = "1";
+      // Shadow height factor
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "1";
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";
