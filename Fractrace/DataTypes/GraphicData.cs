@@ -13,6 +13,8 @@ namespace Fractrace.DataTypes {
         public double j = 0;
         public double k = 0;
         public double l = 0;
+        // True, if 
+        public bool inside = false;
     }
 
 

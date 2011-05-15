@@ -23,7 +23,20 @@ namespace Fractrace.PictureArt {
         public PlasicRenderer(PictureData pData)
             : base(pData) {
         }
-        
+
+
+        /// <summary>
+        /// Coordninate of the bottom, left, front point of the Boundingbox (in original Coordinates).  
+        /// </summary>
+        private Vec3 minPoint = new Vec3(0, 0, 0);
+
+
+        /// <summary>
+        /// Coordninate of the top, right, backside point of the Boundingbox (in original Coordinates).  
+        /// </summary>
+        private Vec3 maxPoint = new Vec3(0, 0, 0);
+
+
 
         private Vec3[,] normalesSmooth1 = null;
 
@@ -37,6 +50,7 @@ namespace Fractrace.PictureArt {
 
 
         private Vec3[,] normalesSmooth2 = null;
+        private double[,] sharpShadow = null;
 
         private double[,] shadowInfo11 = null;
         private double[,] shadowInfo10 = null;
@@ -82,15 +96,16 @@ namespace Fractrace.PictureArt {
 
 
         // Influence of the shininess (0 <= shininessFactor <=1)
-        private double shininessFactor=0.7;
+        private double shininessFactor = 0.7;
 
-      // Shininess ( 0... 1000)
-        private double shininess=8;
+        // Shininess ( 0... 1000)
+        private double shininess = 8;
 
         // Normal of the light source     
-        private Vec3 lightRay=new Vec3();
-   
+        private Vec3 lightRay = new Vec3();
 
+        // If thrue, sharp shadow rendering is activated (warning: time consuming) 
+        private bool useSharpShadow = false;
 
 
         /// <summary>
@@ -108,13 +123,18 @@ namespace Fractrace.PictureArt {
             lightRay.X = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.X");
             lightRay.Y = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Y");
             lightRay.Z = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Z");
-            
+            useSharpShadow = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseSharpShadow");
+
             picInfo = new int[pData.Width, pData.Height];
+
             for (int i = 0; i < pData.Width; i++) {
                 for (int j = 0; j < pData.Height; j++) {
                     picInfo[i, j] = 0;
                 }
             }
+            CreateStatisticInfo();
+            if (useSharpShadow)
+                CreateSharpShadow();
             CreateSmoothNormales();
             CreateSmoothDeph();
             CreateShadowInfo();
@@ -127,6 +147,41 @@ namespace Fractrace.PictureArt {
             SmoothPlane();
         }
 
+
+        /// <summary>
+        /// Creates boundingbox infos.
+        /// </summary>
+        protected void CreateStatisticInfo() {
+            minPoint.X = Double.MaxValue;
+            minPoint.Y = Double.MaxValue;
+            minPoint.Z = Double.MaxValue;
+            maxPoint.X = Double.MinValue;
+            maxPoint.Y = Double.MinValue;
+            maxPoint.Z = Double.MinValue;
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    PixelInfo pInfo = pData.Points[i, j];
+                    if (pInfo != null) {
+                        Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+                        if (coord.X < minPoint.X)
+                            minPoint.X = coord.X;
+                        if (coord.Y < minPoint.Y)
+                            minPoint.Y = coord.Y;
+                        if (coord.Z < minPoint.Z)
+                            minPoint.Z = coord.Z;
+                        if (coord.X > maxPoint.X)
+                            maxPoint.X = coord.X;
+                        if (coord.Y > maxPoint.Y)
+                            maxPoint.Y = coord.Y;
+                        if (coord.Z > maxPoint.Z)
+                            maxPoint.Z = coord.Z;
+
+
+                    }
+                }
+            }
+
+        }
 
         /// <summary>
         /// Liefert die Farbe zum Punkt x,y
@@ -194,6 +249,38 @@ namespace Fractrace.PictureArt {
 
 
 
+        /// <summary>
+        /// Der Schlagschatten wird erzeugt.
+        /// </summary>
+        protected void CreateSharpShadow() {
+            double rayDist = minPoint.Dist(maxPoint);
+            sharpShadow = new double[pData.Width, pData.Height];
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    picInfo[i, j] = 0;
+                    sharpShadow[i, j] = 0;
+                }
+            }
+
+            Vec3 normal = null;
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    PixelInfo pInfo = pData.Points[i, j];
+                    if (pInfo != null) {
+                        normal = pInfo.Normal;
+                        Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+                        if (IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside)) {
+                            sharpShadow[i, j] = 1;
+                        }
+                    }
+                }
+            }
+
+            //sharpShadow
+
+        }
+
+
         protected Vec3 GetRgb(int x, int y) {
             Vec3 retVal = new Vec3(0, 0, 1); // rot
             PixelInfo pInfo = pData.Points[x, y];
@@ -229,31 +316,29 @@ namespace Fractrace.PictureArt {
 
             Vec3 normal = normalesSmooth2[x, y];
             if (normal == null) { normal = pInfo.Normal; }
+            // Testweise original Normale verwenden
+            normal = pInfo.Normal; 
+            // TODO: Obiges auskommentieren
             if (normal == null)
                 return new Vec3(0, 0, 0);
 
-            Vec3 tempCoord = new Vec3();
-            tempCoord.X = pInfo.Coord.X + normal.X;
-            tempCoord.Y = pInfo.Coord.Y + normal.Y;
-            tempCoord.Z = pInfo.Coord.Z + normal.Z;
-            Vec3 tempcoord2 = formula.GetTransform(tempCoord.X,tempCoord.Y,tempCoord.Z);
+            // tempcoord2 enthält die umgerechnete Oberflächennormale. 
+            //Vec3 tempcoord2 = formula.GetTransform(tempCoord.X, tempCoord.Y, tempCoord.Z);
 
-            Vec3 coord = formula.GetTransform(pInfo.Coord.X,pInfo.Coord.Y,pInfo.Coord.Z);
+            Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+            Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + normal.X, pInfo.Coord.Y + normal.Y, pInfo.Coord.Z + normal.Z);
             tempcoord2.X -= coord.X;
             tempcoord2.Y -= coord.Y;
             tempcoord2.Z -= coord.Z;
 
             // Normalize:
-            double norm = Math.Sqrt(tempcoord2.X * tempcoord2.X + tempcoord2.Y * tempcoord2.Y + tempcoord2.Z * tempcoord2.Z);
-            tempcoord2.X/=norm;
-            tempcoord2.Y /= norm;
-            tempcoord2.Z /= norm;
+            tempcoord2.Normalize();
 
             if (pInfo.Normal != null) {
-                //light = GetLight(normal);
-                //light = GetLight(pInfo.Normal);
-
-                light = GetLight(tempcoord2);
+                if (sharpShadow[x, y] > 0.5)
+                    light = new Vec3(0, 1, 0);
+                else
+                    light = GetLight(tempcoord2);
             }
 
             retVal.X = light.X;
@@ -302,7 +387,7 @@ namespace Fractrace.PictureArt {
                         minr = b1;
 
                     //double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
-                    norm = (r1 + g1 + b1);
+                    double norm = (r1 + g1 + b1);
                     // etwas grauer machen
                     r1 += (1 - colorIntensity) * norm;
                     g1 += (1 - colorIntensity) * norm;
@@ -342,12 +427,12 @@ namespace Fractrace.PictureArt {
             if (normal == null)
                 return retVal;
 
-         //   double shininess = 128;
-          //  double shininess = 8;
-          //  double weight_shini = 0.7;
+            //   double shininess = 128;
+            //  double shininess = 8;
+            //  double weight_shini = 0.7;
             double weight_shini = shininessFactor;
             double weight_diffuse = 1 - weight_shini;
-                
+
             double norm = Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
             // Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl
             // mit Vergleichsvektor (Beide nachträglich normiert )            
@@ -355,24 +440,24 @@ namespace Fractrace.PictureArt {
             if (norm == 0)
                 return retVal;
 
-            
+
             // Zweite Lichtquelle
             // alt: 1 -1 1  
             // alt: 1 -2 1  
-          //  double norm2 = Math.Sqrt(6.0);
-          //  angle = Math.Acos((normal.X - 2.0 * normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
-          //  alt: 1 1 1  
-          //  double norm2 = Math.Sqrt(3.0);
-          //  angle = Math.Acos((normal.X - normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
+            //  double norm2 = Math.Sqrt(6.0);
+            //  angle = Math.Acos((normal.X - 2.0 * normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
+            //  alt: 1 1 1  
+            //  double norm2 = Math.Sqrt(3.0);
+            //  angle = Math.Acos((normal.X - normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
 
 
-         // Vec3 lightVec = new Vec3(0, 1, 0);
-         // Vec3 lightVec = new Vec3(0.15, 1, 0.2);
-            Vec3 lightVec = new Vec3(lightRay.X , lightRay.Y, lightRay.Z);
+            // Vec3 lightVec = new Vec3(0, 1, 0);
+            // Vec3 lightVec = new Vec3(0.15, 1, 0.2);
+            Vec3 lightVec = new Vec3(lightRay.X, lightRay.Y, lightRay.Z);
             lightVec.Normalize();
             double norm2 = lightVec.Norm;
-           angle = Math.Acos((normal.X * lightVec.X + normal.Y*lightVec.Y+normal.Z*lightVec.Z) / (norm * norm2)) / (Math.PI/2.0);
-       //     angle = (normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2);
+            angle = Math.Acos((normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2)) / (Math.PI / 2.0);
+            //     angle = (normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2);
 
 
             angle = 1 - angle;
@@ -381,8 +466,8 @@ namespace Fractrace.PictureArt {
             if (angle > 1)
                 angle = 1;
             double light = weight_diffuse * angle + weight_shini * Math.Pow(angle, shininess);
-         //   double light =(Math.Pow(angle, 128));
-         //   double light = angle;
+            //   double light =(Math.Pow(angle, 128));
+            //   double light = angle;
             if (light < 0)
                 light = 0;
             if (light > 1)
@@ -1132,6 +1217,36 @@ namespace Fractrace.PictureArt {
                 }
             }
 
+        }
+
+
+        /// <summary>
+        /// Test, if the given point is inside the sharp shadow. 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="ray"></param>
+        /// <param name="rayLenght"></param>
+        /// <returns></returns>
+        protected bool IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse) {
+            int steps = 100;
+            inverse = false;
+            double dSteps = steps;
+            double dist = 0;
+            for (int gSteps = 0; gSteps < 6; gSteps++) {
+                dist = rayLenght / dSteps;
+                Vec3 currentPoint = new Vec3(point);
+                currentPoint.Add(ray.Mult(dist));
+                for (int i = 0; i < steps; i++) {
+                    currentPoint.Add(ray.Mult(dist));
+                    if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse))
+                        return true;
+                    else {
+                        //  return false;
+                    }
+                }
+                rayLenght /= 1.4;
+            }
+            return false;
         }
 
 

@@ -778,6 +778,51 @@ double xx, yy, zz;
 
 
 
+        /// <summary>
+        /// Test, if the given point is element of the difined set.
+        /// Don't work with the internal formulas.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public bool TestPoint(double x, double y, double z,bool inverse) {
+            long we=-1;
+            switch (old_formula) {
+                case -2: /* Interne Formel verwenden: als Jula-Menge */
+                    we = 1;
+                    if (mInternFormula != null)
+                        we = mInternFormula.InSet(x, y, z, old_jx, old_jy, old_jz, old_jzz, old_zykl, inverse);
+                    break;
+
+
+                case -1: /* Interne Formel verwenden: als Mandelbrotmenge */
+                    we = 1;
+                    if (mInternFormula != null)
+                        we = mInternFormula.InSet(old_jx, old_jy, old_jz, x, y, z, old_jzz, old_zykl, inverse);
+                    break;
+            }
+
+            if (we == -1)
+                return false;
+
+            if (we == 0)
+                return true;
+
+            if (we > 0 && we<old_zykl)
+                return false;
+
+
+            return true;
+        }
+
+        protected double old_jx = 0;
+        protected double old_jy = 0;
+        protected double old_jz = 0;
+        protected double old_jzz = 0;
+        protected int old_formula = 0;
+        protected long old_zykl=20;
+
       /// <summary>
       /// Die Berechnung wird gestartet.
       /// </summary>
@@ -799,7 +844,13 @@ double xx, yy, zz;
         public int Rechne(double x, double y, double z, double zz, long zykl,
                double wix, double wiy, double wiz,
                double jx, double jy, double jz, double jzz, int formula, bool invers) {
-            
+
+                   old_jx = jx;
+                   old_jy = jy;
+                   old_jz = jz;
+                   old_jzz = jzz;
+                   old_formula = formula;
+
             long we = 0;
             double a, f, re, im, xmi, ymi, zmi;
 
@@ -1376,30 +1427,10 @@ double xx, yy, zz;
                       pInfo.Coord.Z = zpos[k];
                       pInfo.frontLight = winkel;
                       pInfo.Normal = normals[k];
-                      //pData.Points[indexX, indexY] = pInfo;
-                      //if (k == 0 || k == 3) {// Debug only (um die reale Position zu ermitteln)
+                      pInfo.IsInside = !invers;
+
                        if (pinfoSet != null)
                           pInfo.AdditionalInfo = pinfoSet[k];
-                      //}
-                      /*
-                      if (indexX < pData.Width && indexY < pData.Height) {
-                          if (pData.Points[indexX, indexY] == null) {
-                            PixelInfo pInfo = new PixelInfo();
-                            pInfo.Coord.X = xpos[k];
-                            pInfo.Coord.Y = ypos[k] + tief[k] * yd;
-                            pInfo.Coord.Z = zpos[k];
-                            pInfo.frontLight = winkel;
-                            pInfo.Normal = normals[k];
-                            pData.Points[indexX, indexY] = pInfo;
-                           // System.Random random = new Random();
-                           // if (random.NextDouble() > 0.96) {
-                              if (k == 0||k==3) {// Debug only (um die reale Position zu ermitteln)
-                                if (pinfoSet != null)
-                                  pInfo.AdditionalInfo = pinfoSet[k];
-                              }
-                           // }
-                        }
-                      }*/
                     } else {
                       PixelInfo pInfo = null;
                         if (pData.Points[pixelX, pixelY] == null) {
@@ -1409,10 +1440,11 @@ double xx, yy, zz;
                           pInfo.Coord.X = xpos[k];
                           pInfo.Coord.Y = ypos[k] + tief[k] * yd;
                           pInfo.Coord.Z = zpos[k];
+                          pInfo.IsInside = !invers;
                         } else {
                           pInfo = pData.Points[pixelX, pixelY];
+                          pInfo.IsInside = !invers;
                         }
-
                         pInfo.Normal = normals[k];
                         pInfo.frontLight += winkel / 4.0;
                   if (k == 0||k==3) { // Debug only (um die reale Position zu ermitteln)   
@@ -1457,75 +1489,8 @@ double xx, yy, zz;
                 }
             }
 
-          /*
-            // Oberflächenkrümmung bestimmen
-            double derivation = 0;
-            // Zentrum der 4 Randpunkte mit dem Mittelpunkt vergleichen.
-            double ycenter = 0;
-
-            if (tief[4] < 19) {
-              int pointsCount = 0;
-              double ymax = double.MinValue;
-              double ymin = double.MaxValue;
-              double currentY = 0;
-              for (k = 0; k < 4; k++) {
-                if (tief[k] < 19) {
-                  currentY = ypos[k] + tief[k] * yd;
-                  ycenter += currentY;
-                  if (currentY > ymax)
-                    ymax = currentY;
-                  if (currentY < ymin)
-                    ymin = currentY;
-                  pointsCount++;
-                }
-              }
-              if (pointsCount > 0)
-                ycenter = ycenter / ((double)pointsCount);
-
-                
-              double maxdiff = Math.Max((yd + xd + zd) / 2.0, ymax - ymin);
-
-                // derivation soll eigentlich die lokale Erhöhung anzeigen,
-                // wird aber zur Zeit nicht mehr in PictureArt verwendet
-              derivation = 2.0 * (ypos[4] - ycenter) / (maxdiff);
-
-              // Dasselbe über die Normalen:
-              double winkel1 = 0;
-              double winkel2 = 0;
-              if (normals[0] != null && normals[2] != null)
-                winkel1 = Math.Acos((normals[0].X * normals[2].X + normals[0].Y * normals[2].Y + normals[0].Z * normals[2].Z) /
-                    (Math.Sqrt(normals[0].X * normals[0].X + normals[0].Y * normals[0].Y + normals[0].Z * normals[0].Z) *
-                    Math.Sqrt(normals[2].X * normals[2].X + normals[2].Y * normals[2].Y + normals[2].Z * normals[2].Z)));
-              if (normals[1] != null && normals[3] != null)
-                winkel2 = Math.Acos((normals[1].X * normals[3].X + normals[1].Y * normals[3].Y + normals[1].Z * normals[3].Z) /
-                    (Math.Sqrt(normals[1].X * normals[1].X + normals[1].Y * normals[1].Y + normals[1].Z * normals[1].Z) *
-                    Math.Sqrt(normals[3].X * normals[3].X + normals[3].Y * normals[3].Y + normals[3].Z * normals[3].Z)));
-
-              if (derivation < 0)
-                derivation = -Math.Max(winkel, winkel2);
-              else
-                derivation = Math.Max(winkel, winkel2);
-
-              if (pixelX >= 0 && pixelY >= 0) {
-                if (pixelX < pData.Width && pixelY < pData.Height)
-                  if (pData.Points[pixelX, pixelY] != null)
-                    pData.Points[pixelX, pixelY].derivation = derivation;
-                if (pixelX + 1 < pData.Width && pixelY < pData.Height)
-                  if (pData.Points[pixelX + 1, pixelY] != null)
-                    pData.Points[pixelX + 1, pixelY].derivation = derivation;
-                if (pixelX < pData.Width && pixelY + 1 < pData.Height)
-                  if (pData.Points[pixelX, pixelY + 1] != null)
-                    pData.Points[pixelX, pixelY + 1].derivation = derivation;
-                if (pixelX + 1 < pData.Width && pixelY + 1 < pData.Height)
-                  if (pData.Points[pixelX + 1, pixelY + 1] != null)
-                    pData.Points[pixelX + 1, pixelY + 1].derivation = derivation;
-              }
-
-               
-            } */
-
+      
           // Zusatzinformationen der anderen Pixel aufbauen
-
 
             if (use4Points) {
 
@@ -1534,7 +1499,8 @@ double xx, yy, zz;
               int kNeigbour1 = 0;
               int kNeigbour2 = 0;
               for (k = 0; k < 4; k++) {
-                switch (k) {
+             
+                  switch (k) {
 
                   case 0:
                     indexX = pixelX + 1;
@@ -1550,7 +1516,6 @@ double xx, yy, zz;
                     kNeigbour2 = 3;
                     break;
 
-
                   case 2:
                     indexX = pixelX;
                     indexY = pixelY;
@@ -1563,7 +1528,6 @@ double xx, yy, zz;
                     indexY = pixelY;
                     kNeigbour1 = 0;
                     kNeigbour2 = 1;
-
                     break;
 
                 }
@@ -1576,6 +1540,7 @@ double xx, yy, zz;
                   otherP2 = otherP1;
                 if (otherP1 != null) {
                    PixelInfo pInfo = new PixelInfo();
+                   pInfo.IsInside = !invers;
                       pInfo.Coord.X = (otherP1.Coord.X+otherP2.Coord.X)/2.0;
                       pInfo.Coord.Y = (otherP1.Coord.Y + otherP2.Coord.Y) / 2.0;
                       pInfo.Coord.Z = (otherP1.Coord.Z + otherP2.Coord.Z) / 2.0;
@@ -1590,12 +1555,6 @@ double xx, yy, zz;
                         pinfo.red = (otherP1.AdditionalInfo.red + otherP2.AdditionalInfo.red) / 2.0;
                         pInfo.AdditionalInfo = pinfo;
                       }
-
-                      //pData.Points[indexX, indexY] = pInfo;
-                      //if (k == 0 || k == 3) {// Debug only (um die reale Position zu ermitteln)
-                      // if (pinfoSet != null)
-                      //    pInfo.AdditionalInfo = pinfoSet[k];
-                      //}
 
                       if (indexX < pData.Width && indexY < pData.Height) {
                         pData.Points[indexX, indexY] = pInfo;

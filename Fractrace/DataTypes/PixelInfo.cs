@@ -44,6 +44,12 @@ namespace Fractrace.DataTypes {
       /// Anzahl der Iterationen. Dient der Farbdarstellung des Schnittes.
       /// </summary>
         public double iterations = -1;
+
+
+        /// <summary>
+        /// True, if the corresponding pixel is part of the inside view
+        /// </summary>
+        public bool IsInside = false;
         
     }
 }

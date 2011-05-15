@@ -215,6 +215,8 @@ namespace Fractrace {
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.X"] = "0.45";
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Y"] = "1";
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Z"] = "0.45";
+      // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.UseSharpShadow"] = "0";
 
 
 
