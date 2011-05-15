@@ -180,6 +180,12 @@ namespace Fractrace {
       m_perspective = perspective;
 
       availableY = 0;
+
+
+
+      // If all formula and view parameters stay the same, there is no need to compute the picture.
+
+
       int noOfThreads = ParameterDict.Exemplar.GetInt("Computation.NoOfThreads");
       if (noOfThreads == 1) {
         Generate(act_val, zyklen, raster, screensize, formula, perspective);

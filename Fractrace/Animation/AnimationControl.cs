@@ -11,13 +11,19 @@ using Fractrace.Basic;
 namespace Fractrace.Animation {
     public partial class AnimationControl : UserControl {
 
-
+        /// <summary>
+        /// Constructer.
+        /// </summary>
         public AnimationControl() {
             InitializeComponent();
         }
 
 
+        /// <summary>
+        /// True, if the current formula is used in each frame.
+        /// </summary>
         protected bool fixFormula = false;
+
 
         /// <summary>
         /// Verweis auf die global verwaltete Historie.
@@ -33,9 +39,10 @@ namespace Fractrace.Animation {
         }
 
 
+        /// <summary>
+        /// The Timeline.
+        /// </summary>
         private AnimationSteps mAnimationSteps = new AnimationSteps();
-
-      
 
 
         /// <summary>
@@ -52,8 +59,11 @@ namespace Fractrace.Animation {
         }
 
 
-
+        /// <summary>
+        /// Size of the picture in each frame.
+        /// </summary>
         protected double mPictureSize = 1;
+
 
       /// <summary>
       /// Enthält die Formel des ersten Eintrages
@@ -91,13 +101,10 @@ namespace Fractrace.Animation {
                 break;
 
             }
-
             lastEntry = str;
           }
           if (currentAp != null)
             mAnimationSteps.Steps.Add(currentAp);
-
-
         }
 
 
@@ -107,7 +114,6 @@ namespace Fractrace.Animation {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e) {
-
           CreateAnimationSteps();
           if (mAnimationSteps.Steps.Count == 0)
             return;
@@ -115,10 +121,8 @@ namespace Fractrace.Animation {
           btnStop.Enabled = true;
           btnStop.Visible = true;
           animationAbort = false;
-          lblAnimationProgress.Text = "startet...";
+          lblAnimationProgress.Text = "run ...";
           
-     //     AnimationPoint apStart = mAnimationSteps.Steps[0];
-     //     dataPerTime.Load(apStart.Time);
           if (fixFormula) {
               mFormula = ParameterDict.Exemplar["Intern.Formula.Source"];
           }

@@ -112,8 +112,6 @@ namespace Fractrace {
                 classicIter = null;
                 paras.Assign();
                 iter = new Iterate(maxx, maxy, this,false);
-                //Iterate.DEPHFACTOR = paras.DephFactor;
-                //iter.Init(grLabel);
                 iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
             }
             else {

@@ -165,6 +165,7 @@
     <Compile Include="Geometry\Rotation.cs" />
     <Compile Include="Geometry\Transform3D.cs" />
     <Compile Include="Geometry\VecRotation.cs" />
+    <Compile Include="GestaltParameter.cs" />
     <Compile Include="PictureArt\BroadcastRenderer.cs" />
     <Compile Include="PictureArt\FastScienceRenderer.cs" />
     <Compile Include="PictureArt\HeighMap.cs" />
