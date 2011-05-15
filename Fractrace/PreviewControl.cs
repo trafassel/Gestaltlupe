@@ -116,7 +116,7 @@ namespace Fractrace {
       if (iter != null) {
         lock (iter) {
           try {
-            Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData);
+            Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData,iter.LastUsedFormulas);
             pArt.Paint(grLabel);
             Application.DoEvents();
             this.Refresh();

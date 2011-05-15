@@ -23,6 +23,7 @@ namespace Fractrace.PictureArt {
         public PlasicRenderer(PictureData pData)
             : base(pData) {
         }
+        
 
         private Vec3[,] normalesSmooth1 = null;
 
@@ -63,17 +64,34 @@ namespace Fractrace.PictureArt {
         // Corresponds to the number of shadows
         private int shadowNumber = 1;
 
+
         // Intensity of the FieldOfView
         private int ambientIntensity = 4;
+
 
         // Intensity of the Surface Color
         private double colorIntensity = 0.5;
 
+
         // if useLight==false, only the shades are computed. 
         private bool useLight = true;
 
+
         // Shadow height factor
         private double shadowJustify = 1;
+
+
+        // Influence of the shininess (0 <= shininessFactor <=1)
+        private double shininessFactor=0.7;
+
+      // Shininess ( 0... 1000)
+        private double shininess=8;
+
+        // Normal of the light source     
+        private Vec3 lightRay=new Vec3();
+   
+
+
 
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
@@ -85,6 +103,12 @@ namespace Fractrace.PictureArt {
             useLight = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseLight");
             shadowJustify = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ShadowJustify");
 
+            shininessFactor = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ShininessFactor");
+            shininess = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Shininess");
+            lightRay.X = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.X");
+            lightRay.Y = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Y");
+            lightRay.Z = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Z");
+            
             picInfo = new int[pData.Width, pData.Height];
             for (int i = 0; i < pData.Width; i++) {
                 for (int j = 0; j < pData.Height; j++) {
@@ -126,6 +150,7 @@ namespace Fractrace.PictureArt {
                 }
             }
         }
+
 
         /// <summary>
         /// Bildpunkte, die auf Grund fehlender Informationen nicht geladen werden konnten, werden
@@ -207,8 +232,28 @@ namespace Fractrace.PictureArt {
             if (normal == null)
                 return new Vec3(0, 0, 0);
 
+            Vec3 tempCoord = new Vec3();
+            tempCoord.X = pInfo.Coord.X + normal.X;
+            tempCoord.Y = pInfo.Coord.Y + normal.Y;
+            tempCoord.Z = pInfo.Coord.Z + normal.Z;
+            Vec3 tempcoord2 = formula.GetTransform(tempCoord.X,tempCoord.Y,tempCoord.Z);
+
+            Vec3 coord = formula.GetTransform(pInfo.Coord.X,pInfo.Coord.Y,pInfo.Coord.Z);
+            tempcoord2.X -= coord.X;
+            tempcoord2.Y -= coord.Y;
+            tempcoord2.Z -= coord.Z;
+
+            // Normalize:
+            double norm = Math.Sqrt(tempcoord2.X * tempcoord2.X + tempcoord2.Y * tempcoord2.Y + tempcoord2.Z * tempcoord2.Z);
+            tempcoord2.X/=norm;
+            tempcoord2.Y /= norm;
+            tempcoord2.Z /= norm;
+
             if (pInfo.Normal != null) {
-                light = GetLight(normal);
+                //light = GetLight(normal);
+                //light = GetLight(pInfo.Normal);
+
+                light = GetLight(tempcoord2);
             }
 
             retVal.X = light.X;
@@ -257,7 +302,7 @@ namespace Fractrace.PictureArt {
                         minr = b1;
 
                     //double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
-                    double norm = (r1 + g1 + b1);
+                    norm = (r1 + g1 + b1);
                     // etwas grauer machen
                     r1 += (1 - colorIntensity) * norm;
                     g1 += (1 - colorIntensity) * norm;
@@ -297,53 +342,59 @@ namespace Fractrace.PictureArt {
             if (normal == null)
                 return retVal;
 
-            double shininess = 4;
-            double weight_shini = 0.5;
+         //   double shininess = 128;
+          //  double shininess = 8;
+          //  double weight_shini = 0.7;
+            double weight_shini = shininessFactor;
             double weight_diffuse = 1 - weight_shini;
-            double weight_frontLight = 0.1;
-            double weight_second_light = 1 - weight_frontLight;
-            double shininess_front = 1.2;
-            double emissive = 0.3;
-
+                
             double norm = Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
-            /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
-            /* mit Vergleichsvektor (Beide nachträglich normiert )             */
-            double winkel = 0;
+            // Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl
+            // mit Vergleichsvektor (Beide nachträglich normiert )            
+            double angle = 0;
             if (norm == 0)
                 return retVal;
-            if (norm != 0)
-                winkel = Math.Acos((normal.Y) / norm);
-            winkel = 1 - winkel;
 
-            if (winkel < 0)
-                winkel = 0;
-            if (winkel > 1)
-                winkel = 1;
-
-            winkel = Math.Pow(winkel, shininess_front);
-            //  winkel = 0.5;
-
+            
             // Zweite Lichtquelle
             // alt: 1 -1 1  
             // alt: 1 -2 1  
-            double norm2 = Math.Sqrt(6.0);
-            double winkel2 = Math.Acos((normal.X + 2.0 * normal.Y + normal.Z) / (norm * norm2));
+          //  double norm2 = Math.Sqrt(6.0);
+          //  angle = Math.Acos((normal.X - 2.0 * normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
+          //  alt: 1 1 1  
+          //  double norm2 = Math.Sqrt(3.0);
+          //  angle = Math.Acos((normal.X - normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
 
-            winkel2 = 1 - winkel2;
-            if (winkel2 < 0)
-                winkel2 = 0;
-            if (winkel2 > 1)
-                winkel2 = 1;
-            winkel2 = weight_diffuse * winkel2 + weight_shini * Math.Pow(winkel2, shininess);
 
-            if (winkel2 < 0)
-                winkel2 = 0;
-            if (winkel2 > 1)
-                winkel2 = 1;
+         // Vec3 lightVec = new Vec3(0, 1, 0);
+         // Vec3 lightVec = new Vec3(0.15, 1, 0.2);
+            Vec3 lightVec = new Vec3(lightRay.X , lightRay.Y, lightRay.Z);
+            lightVec.Normalize();
+            double norm2 = lightVec.Norm;
+           angle = Math.Acos((normal.X * lightVec.X + normal.Y*lightVec.Y+normal.Z*lightVec.Z) / (norm * norm2)) / (Math.PI/2.0);
+       //     angle = (normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2);
 
+
+            angle = 1 - angle;
+            if (angle < 0)
+                angle = 0;
+            if (angle > 1)
+                angle = 1;
+            double light = weight_diffuse * angle + weight_shini * Math.Pow(angle, shininess);
+         //   double light =(Math.Pow(angle, 128));
+         //   double light = angle;
+            if (light < 0)
+                light = 0;
+            if (light > 1)
+                light = 1;
+
+
+            /*
             winkel *= 2.1;
             winkel2 *= 1.3;
+             */
 
+            /*
             double colorComponent1 = 1.1 * weight_frontLight * winkel + 0.9 * weight_second_light * winkel2;
             double colorComponent2 = 0.9 * weight_frontLight * winkel + 1.1 * weight_second_light * winkel2;
             colorComponent1 = (1.0 - emissive) * colorComponent1 + emissive;
@@ -361,6 +412,10 @@ namespace Fractrace.PictureArt {
             retVal.X = colorComponent1;
             retVal.Y = colorComponent1;
             retVal.Z = colorComponent2;
+             */
+            retVal.X = light;
+            retVal.Y = light;
+            retVal.Z = light;
 
             return retVal;
         }

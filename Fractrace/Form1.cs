@@ -352,7 +352,7 @@ namespace Fractrace {
             btnRepaint.Enabled = false;
             try {
                 if (iter != null) {
-                    Renderer pArt = PictureArtFactory.Create(iter.PictureData);
+                    Renderer pArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
                     pArt.Paint(grLabel);
                     Application.DoEvents();
                     this.Refresh();

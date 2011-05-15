@@ -271,6 +271,8 @@ namespace Fractrace {
     }
 
 
+
+
     /// <summary>
     /// Berechung eines Einzelbildes.
     /// </summary>

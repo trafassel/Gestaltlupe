@@ -13,42 +13,53 @@ namespace Fractrace.PictureArt {
     /// Hier können eigene Renderer zugeschaltet werden:
     /// </summary>
     /// <returns></returns>
-    public static Renderer Create(PictureData pdata) {
+    public static Renderer Create(PictureData pdata,Formulas formula) {
+        Renderer retVal = null;
+
       switch (ParameterDict.Exemplar["Composite.Renderer"]) {
 
         case "5":
         case "UniversalRenderer":
-          return new UniversalRenderer(pdata);
-
+          retVal= new UniversalRenderer(pdata);
+          break;
 
         case "4":
         case "SharpRenderer":
-          return new SharpRenderer(pdata);
+          retVal = new SharpRenderer(pdata);
+          break;
 
         case "3":
         case "BroadcastRenderer":
-          return new BroadcastRenderer(pdata);
-
+          retVal = new BroadcastRenderer(pdata);
+          break;
 
         case "NiceRenderer":
         case "2":
-          return new NiceRenderer(pdata);
+          retVal= new NiceRenderer(pdata);
+          break;
 
         case "FastScienceRenderer":
         case "0":
-          return new FastScienceRenderer(pdata);
+          retVal= new FastScienceRenderer(pdata);
+          break;
 
         case "ScienceRenderer":
         case "1":
-          return new ScienceRenderer(pdata);
+          retVal = new ScienceRenderer(pdata);
+          break;
 
         case "PlasicRenderer":
         case "6":
-          return new PlasicRenderer(pdata);
-
+          retVal = new PlasicRenderer(pdata);
+          break;
           
-
       }
+
+      if (retVal != null) {
+          retVal.Init(formula);
+          return retVal;
+      }
+
       // return new ScienceRenderer(pdata);
       //return new SmallRenderer(pdata);
       //   return new FastScienceRenderer(pdata);

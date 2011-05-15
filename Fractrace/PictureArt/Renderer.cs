@@ -15,6 +15,19 @@ namespace Fractrace.PictureArt {
 
         protected PictureData pData = null;
 
+        protected Formulas formula = null;
+
+
+        /// <summary>
+        /// Initialisation. Formula is needed for sharp rendering and computing original coordinates.
+        /// </summary>
+        /// <param name="formula"></param>
+        public void Init(Formulas formula) {
+            this.formula = formula;
+        }
+
+
+
 
         /// <summary>
         /// Initialisierung

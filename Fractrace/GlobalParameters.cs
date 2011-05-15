@@ -207,6 +207,16 @@ namespace Fractrace {
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseLight"] = "1";
       // Shadow height factor
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "1";
+      // Shininess factor (0 ... 1)
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShininessFactor"] = "0.3";
+      // Shininess ( 0... 1000)
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.Shininess"] = "5";
+     // Normal of the light source
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.X"] = "0.45";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Y"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Z"] = "0.45";
+
+
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";
