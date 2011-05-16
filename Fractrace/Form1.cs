@@ -96,6 +96,32 @@ namespace Fractrace {
         }
 
 
+      /// <summary>
+      /// Enthält die 
+      /// </summary>
+        protected string oldParameterHashWithoutPictureArt = "";
+
+
+      /// <summary>
+      /// Computes the hash of all Parameter entries, which are used in 
+      /// rendering, but not in picture art.
+      /// </summary>
+      /// <returns></returns>
+        protected string GetParameterHashWithoutPictureArt() {
+          StringBuilder tempHash = new StringBuilder();
+
+          tempHash.Append(ParameterDict.Exemplar.GetHash("View"));
+          tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
+          tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
+          tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
+          // Composite  nicht
+          // Computation.NoOfThreads nicht
+
+          return tempHash.ToString();
+
+        }
+
+
 
         /// <summary>
         /// Erzeugt eine Bilddarstellung.
@@ -109,18 +135,23 @@ namespace Fractrace {
             inComputeOneStep = true;
             SetPictureBoxSize();
             if (!ParameterDict.Exemplar.GetBool("View.ClassicView")) {
+              string tempParameterHash = GetParameterHashWithoutPictureArt();
+              if (oldParameterHashWithoutPictureArt == tempParameterHash) {
+                // 
+                OneStepEnds();
+              } else {
                 classicIter = null;
                 paras.Assign();
-                iter = new Iterate(maxx, maxy, this,false);
+                iter = new Iterate(maxx, maxy, this, false);
                 iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
-            }
-            else {
-                iter = null;
-                classicIter = new Fractrace.Compability.ClassicIterate(maxx, maxy);
-                // Fractrace.Compability.ClassicIterate.DEPHFACTOR = paras.DephFactor;
-                classicIter.Init(grLabel);
-                classicIter.frac_iterate(paras.Parameter, paras.Cycles, paras.Raster, (int)paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
-                OneStepEnds();
+              }
+            } else {
+              iter = null;
+              classicIter = new Fractrace.Compability.ClassicIterate(maxx, maxy);
+              // Fractrace.Compability.ClassicIterate.DEPHFACTOR = paras.DephFactor;
+              classicIter.Init(grLabel);
+              classicIter.frac_iterate(paras.Parameter, paras.Cycles, paras.Raster, (int)paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+              OneStepEnds();
             }
 
 

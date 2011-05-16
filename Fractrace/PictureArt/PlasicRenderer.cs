@@ -276,6 +276,10 @@ namespace Fractrace.PictureArt {
         /// Der Schlagschatten wird erzeugt.
         /// </summary>
         protected void CreateSharpShadow() {
+          // Erst ab 4 Pixel handelt es sich um einen Schlagschatten
+          int shadowIntensityCount=4;
+          // Je höher, desto größer die Rechenzeit und desto genau die Schlagschattenberechnung.
+          int shadowCorrectness=100;
             double rayDist = minPoint.Dist(maxPoint);
             sharpShadow = new double[pData.Width, pData.Height];
             double[,] sharpTempShadow = new double[pData.Width, pData.Height];
@@ -293,13 +297,13 @@ namespace Fractrace.PictureArt {
                     PixelInfo pInfo = pData.Points[i, j];
                     if (pInfo != null) {
                         normal = pInfo.Normal;
+                        sharpShadow[i, j] = 0;
                         Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-                        if (IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside)) {
-                            sharpShadow[i, j] = 1;
+                      int sharpShadowIntensity=IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside,shadowIntensityCount,shadowCorrectness);
+                          sharpShadow[i, j] = sharpShadowIntensity/((double)shadowIntensityCount);
                         }
                     }
                 }
-            }
 
             double[,] sShad1 = sharpShadow;
             double[,] sShad2 = sharpTempShadow;
@@ -1294,31 +1298,36 @@ namespace Fractrace.PictureArt {
 
         /// <summary>
         /// Test, if the given point is inside the sharp shadow. 
+        /// Returns the number of intersection with the ray and the fractal, but not more than maxIntersections.
+        /// 
         /// </summary>
         /// <param name="point"></param>
         /// <param name="ray"></param>
         /// <param name="rayLenght"></param>
         /// <returns></returns>
-        protected bool IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse) {
-            int steps = 100;
+        protected int IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse,int maxIntersections,int steps) {
+            //int steps = 100;
             inverse = false;
             double dSteps = steps;
             double dist = 0;
+            int shadowCount = 0;
             for (int gSteps = 0; gSteps < 6; gSteps++) {
                 dist = rayLenght / dSteps;
                 Vec3 currentPoint = new Vec3(point);
                 currentPoint.Add(ray.Mult(dist));
                 for (int i = 0; i < steps; i++) {
                     currentPoint.Add(ray.Mult(dist));
-                    if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse))
-                        return true;
-                    else {
-                        //  return false;
+                    if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse)) {
+                      shadowCount++;
+                      if(shadowCount>=maxIntersections)
+                        return maxIntersections;
+                    } else {
+                      //  return false;
                     }
                 }
                 rayLenght /= 1.4;
             }
-            return false;
+            return shadowCount;
         }
 
 

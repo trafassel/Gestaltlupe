@@ -167,7 +167,7 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
-    /// Set entry without raising a change event. 
+    /// Set entry with the possibility not to raise a change event. 
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
@@ -204,6 +204,27 @@ namespace Fractrace.Basic {
         }
         return retVal;
       }
+    }
+
+
+    /// <summary>
+    /// Gets the Hash of all node, which name starts with nodeHirarchy.
+    /// </summary>
+    /// <param name="nodeHirarchy">The node hirarchy.</param>
+    /// <returns></returns>
+    public string GetHash(string nodeHirarchy) {
+       StringBuilder sb=new StringBuilder();
+        foreach (KeyValuePair<string, string> entry in SortedEntries) {
+          if(entry.Key.StartsWith(nodeHirarchy)) {
+            sb.Append("|"+entry.Key+"|"+entry.Value+"|");
+          }
+        }
+       string bigstr=sb.ToString();
+        System.Security.Cryptography.MD5 sha = System.Security.Cryptography.MD5.Create();
+            byte[] buffer = new byte[Encoding.ASCII.GetByteCount(bigstr)];
+            buffer = Encoding.ASCII.GetBytes(bigstr);
+            byte[] buffer2 = sha.ComputeHash(buffer);
+            return Encoding.ASCII.GetString(buffer2);
     }
 
 
