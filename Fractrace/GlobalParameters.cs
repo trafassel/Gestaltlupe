@@ -203,6 +203,8 @@ namespace Fractrace {
       ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "4";
       // Intensity of the Surface Color
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "0.5";
+      // If ColorGreyness=1, no color is rendered
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorGreyness"] = "0";
       // Use Light
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseLight"] = "1";
       // Shadow height factor
@@ -217,8 +219,14 @@ namespace Fractrace {
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Z"] = "0.45";
       // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseSharpShadow"] = "0";
+     // To justify the color components 
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Red"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Green"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Blue"] = "1";
 
-
+      // If LightIntensity==1, no shadow renderers are used
+      // If LightIntensity==0, only shadow renderers are used
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.LightIntensity"] = "0.5";
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";

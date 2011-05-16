@@ -108,6 +108,16 @@ namespace Fractrace.PictureArt {
         private bool useSharpShadow = false;
 
 
+        private double colorFactorRed = 1;
+        private double colorFactorGreen = 1;
+        private double colorFactorBlue = 1;
+
+         private double lightIntensity = 0.5;
+
+           // If ColorGreyness=1, no color is rendered
+        private double colorGreyness=0;
+      
+
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
@@ -124,6 +134,19 @@ namespace Fractrace.PictureArt {
             lightRay.Y = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Y");
             lightRay.Z = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Z");
             useSharpShadow = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseSharpShadow");
+
+             colorFactorRed = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Red");
+             colorFactorGreen = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Green");
+             colorFactorBlue = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Blue");
+
+             lightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.LightIntensity");
+
+             colorGreyness = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorGreyness");
+    
+             if (lightIntensity > 1)
+                 lightIntensity = 1;
+             if (lightIntensity < 0)
+                 lightIntensity = 0;
 
             picInfo = new int[pData.Width, pData.Height];
 
@@ -255,6 +278,8 @@ namespace Fractrace.PictureArt {
         protected void CreateSharpShadow() {
             double rayDist = minPoint.Dist(maxPoint);
             sharpShadow = new double[pData.Width, pData.Height];
+            double[,] sharpTempShadow = new double[pData.Width, pData.Height];
+
             for (int i = 0; i < pData.Width; i++) {
                 for (int j = 0; j < pData.Height; j++) {
                     picInfo[i, j] = 0;
@@ -276,11 +301,44 @@ namespace Fractrace.PictureArt {
                 }
             }
 
+            double[,] sShad1 = sharpShadow;
+            double[,] sShad2 = sharpTempShadow;
+
+            for(int m=0;m<2;m++) {
+
+                for (int i = 0; i < pData.Width; i++) {
+                    for (int j = 0; j < pData.Height; j++) {
+                        double neighborsFound = 0;
+                        double sumNeighbors = 0;
+                        for (int k = -1; k <= 1; k++) {
+                            for (int l = -1; l <= 1; l++) {
+                                int posX = i + k;
+                                int posY = j + l;
+                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                    sumNeighbors += sShad1[posX, posY];
+                                    neighborsFound++;
+                                }
+                            }
+                        }
+                        if (neighborsFound > 0)
+                            sShad2[i, j] = 0.4 * sShad1[i, j] + 0.6 * sumNeighbors / neighborsFound;
+                    }
+                }
+
+                sShad1 = sharpTempShadow;
+                sShad2 = sharpShadow ;
+            }
             //sharpShadow
 
         }
 
 
+        /// <summary>
+        /// Get the color information of the bitmap at (x,y)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         protected Vec3 GetRgb(int x, int y) {
             Vec3 retVal = new Vec3(0, 0, 1); // rot
             PixelInfo pInfo = pData.Points[x, y];
@@ -335,10 +393,8 @@ namespace Fractrace.PictureArt {
             tempcoord2.Normalize();
 
             if (pInfo.Normal != null) {
-                if (sharpShadow[x, y] > 0.5)
-                    light = new Vec3(0, 1, 0);
-                else
                     light = GetLight(tempcoord2);
+                    if (sharpShadow!=null) { light=light.Mult(1-sharpShadow[x, y]);}
             }
 
             retVal.X = light.X;
@@ -349,10 +405,18 @@ namespace Fractrace.PictureArt {
             double d2 = pData.Width + pData.Height;
             double d3 = d1 / d2;
 
+
+           // lightIntensity
+             retVal.X = lightIntensity*retVal.X+    (1-lightIntensity)*    (1-shadowPlane[x, y]);
+             retVal.Y = lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
+             retVal.Z = lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
+
+                /*
             double shadowlight = 0.34 * shadowPlane[x, y];
             retVal.Z = 0.2 * retVal.Z + 0.8 * Math.Max(0, retVal.Z - shadowlight);
             retVal.X = 0.2 * retVal.X + 0.8 * Math.Max(0, retVal.X - shadowlight);
             retVal.Y = 0.2 * retVal.Y + 0.8 * Math.Max(0, retVal.Y - shadowlight);
+                 */
 
             if (retVal.Y < 0)
                 retVal.Y = 0;
@@ -371,34 +435,40 @@ namespace Fractrace.PictureArt {
             if (useAdditionalColorinfo) {
                 if (pInfo != null && pInfo.AdditionalInfo != null) {
                     // Normalisieren;
-                    double r1 = pInfo.AdditionalInfo.red;
-                    double g1 = pInfo.AdditionalInfo.green;
-                    double b1 = pInfo.AdditionalInfo.blue;
+                    double r1 =colorFactorRed* Math.Pow(pInfo.AdditionalInfo.red,colorIntensity);
+                    double g1 = colorFactorGreen * Math.Pow(pInfo.AdditionalInfo.green, colorIntensity);
+                    double b1 = colorFactorBlue * Math.Pow(pInfo.AdditionalInfo.blue, colorIntensity);
                     if (r1 < 0)
                         r1 = -r1;
                     if (g1 < 0)
                         g1 = -g1;
                     if (b1 < 0)
                         b1 = -b1;
-                    double minr = r1;
-                    if (minr > g1)
-                        minr = g1;
-                    if (minr > b1)
-                        minr = b1;
+ 
+                    double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
+                    norm = norm / 3.0;
+                    r1 = r1/ norm;
+                    g1 = g1 / norm;
+                    b1 = b1 / norm;
 
-                    //double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
-                    double norm = (r1 + g1 + b1);
-                    // etwas grauer machen
-                    r1 += (1 - colorIntensity) * norm;
-                    g1 += (1 - colorIntensity) * norm;
-                    b1 += (1 - colorIntensity) * norm;
-                    norm = (r1 + g1 + b1) / 3.0;
+                    if (colorGreyness > 0) {
+                        r1 = 0.5 * colorGreyness + (1 - colorGreyness) * r1;
+                        g1 = 0.5 * colorGreyness + (1 - colorGreyness) * g1;
+                        b1 = 0.5 * colorGreyness + (1 - colorGreyness) * b1;
+                    }
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
 
                     if (norm != 0) {
-                        retVal.X *= (r1) / norm;
-                        retVal.Y *= (g1) / norm;
-                        retVal.Z *= (b1) / norm;
-                    }
+                        retVal.X *= r1;
+                        retVal.Y *= g1;
+                        retVal.Z *= b1;
+                    }                    
                 }
             }
             if (retVal.Y < 0)
@@ -427,9 +497,6 @@ namespace Fractrace.PictureArt {
             if (normal == null)
                 return retVal;
 
-            //   double shininess = 128;
-            //  double shininess = 8;
-            //  double weight_shini = 0.7;
             double weight_shini = shininessFactor;
             double weight_diffuse = 1 - weight_shini;
 
@@ -440,25 +507,10 @@ namespace Fractrace.PictureArt {
             if (norm == 0)
                 return retVal;
 
-
-            // Zweite Lichtquelle
-            // alt: 1 -1 1  
-            // alt: 1 -2 1  
-            //  double norm2 = Math.Sqrt(6.0);
-            //  angle = Math.Acos((normal.X - 2.0 * normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
-            //  alt: 1 1 1  
-            //  double norm2 = Math.Sqrt(3.0);
-            //  angle = Math.Acos((normal.X - normal.Y + normal.Z) / (norm * norm2))/(2.0*Math.PI);
-
-
-            // Vec3 lightVec = new Vec3(0, 1, 0);
-            // Vec3 lightVec = new Vec3(0.15, 1, 0.2);
             Vec3 lightVec = new Vec3(lightRay.X, lightRay.Y, lightRay.Z);
             lightVec.Normalize();
             double norm2 = lightVec.Norm;
             angle = Math.Acos((normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2)) / (Math.PI / 2.0);
-            //     angle = (normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2);
-
 
             angle = 1 - angle;
             if (angle < 0)
@@ -473,31 +525,6 @@ namespace Fractrace.PictureArt {
             if (light > 1)
                 light = 1;
 
-
-            /*
-            winkel *= 2.1;
-            winkel2 *= 1.3;
-             */
-
-            /*
-            double colorComponent1 = 1.1 * weight_frontLight * winkel + 0.9 * weight_second_light * winkel2;
-            double colorComponent2 = 0.9 * weight_frontLight * winkel + 1.1 * weight_second_light * winkel2;
-            colorComponent1 = (1.0 - emissive) * colorComponent1 + emissive;
-            colorComponent2 = (1.0 - emissive) * colorComponent2 + emissive;
-
-            if (colorComponent1 > 1)
-                colorComponent1 = 1;
-            if (colorComponent1 < 0)
-                colorComponent1 = 0;
-            if (colorComponent2 > 1)
-                colorComponent2 = 1;
-            if (colorComponent2 < 0)
-                colorComponent2 = 0;
-
-            retVal.X = colorComponent1;
-            retVal.Y = colorComponent1;
-            retVal.Z = colorComponent2;
-             */
             retVal.X = light;
             retVal.Y = light;
             retVal.Z = light;
@@ -541,288 +568,346 @@ namespace Fractrace.PictureArt {
                 }
             }
 
-            for (int shadowIter = 1; shadowIter < shadowNumber + 1; shadowIter++) {
+            double shadowVal = 0.4;
 
-                yd = diffy / ((double)(pData.Width + pData.Height));
-                ydv = diffy / ((double)(pData.Height));
-                ydh = diffy / ((double)(pData.Width));
+            for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
 
-                yd *= 2.0 * shadowIter / dShadowNumber; ydv *= 1.2 * shadowIter / dShadowNumber; ydh *= 1.2 * shadowIter / dShadowNumber;
+                switch (shadowMode) {
+                    case 0:
+                        diffy = 0.3*shadowJustify * (maxY - minY);
+                        shadowVal = 0.16;
+                        break;
+                    case 1:
+                        diffy = shadowJustify * (maxY - minY);
+                        shadowVal = 0.4;
+                        break;
+                    case 2:
+                        diffy = 3.0*shadowJustify * (maxY - minY);
+                        shadowVal = 0.18;
+                        break;
 
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        //shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
-                        shadowTempPlane[i, j] = 0;
-                    }
-                }
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        shadowInfo11[i, j] = smoothDeph1[i, j];
-                        shadowInfo10[i, j] = smoothDeph1[i, j];
-                        shadowInfo01[i, j] = smoothDeph1[i, j];
-                        shadowInfo00[i, j] = smoothDeph1[i, j];
-                        shadowInfo11sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo10sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo01sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo00sharp[i, j] = smoothDeph1[i, j];
-                    }
                 }
 
-                for (int i = pData.Width - 1; i >= 0; i--) {
-                    for (int j = pData.Height - 1; j >= 0; j--) {
-                        if (j < pData.Height - 1) {
-                            double localShadow = shadowInfo11[i, j + 1] - ydh;
-                            if (localShadow > shadowInfo11[i, j]) {
-                                shadowInfo11[i, j] = localShadow;
-                            }
-                            localShadow = shadowInfo11sharp[i, j + 1] - sharpness * ydh;
-                            if (localShadow > shadowInfo11sharp[i, j]) {
-                                shadowInfo11sharp[i, j] = localShadow;
-                            }
+                for (int shadowIter = 1; shadowIter < shadowNumber + 1; shadowIter++) {
+
+                    yd = diffy / ((double)(pData.Width + pData.Height));
+                    ydv = diffy / ((double)(pData.Height));
+                    ydh = diffy / ((double)(pData.Width));
+
+                    yd *= 2.0 * shadowIter / dShadowNumber; ydv *= 1.2 * shadowIter / dShadowNumber; ydh *= 1.2 * shadowIter / dShadowNumber;
+
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            //shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
+                            shadowTempPlane[i, j] = 0;
                         }
                     }
-                    for (int j = 0; j < pData.Height; j++) {
-                        // Licht von rechts
-                        if (i < pData.Width - 1) {
-                            double localShadow = shadowInfo01[i + 1, j] - ydh;
-                            if (localShadow > shadowInfo01[i, j]) {
-                                shadowInfo01[i, j] = localShadow;
-                            }
-                            localShadow = shadowInfo01sharp[i + 1, j] - sharpness * ydh;
-                            if (localShadow > shadowInfo01sharp[i, j]) {
-                                shadowInfo01sharp[i, j] = localShadow;
-                            }
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            shadowInfo11[i, j] = smoothDeph1[i, j];
+                            shadowInfo10[i, j] = smoothDeph1[i, j];
+                            shadowInfo01[i, j] = smoothDeph1[i, j];
+                            shadowInfo00[i, j] = smoothDeph1[i, j];
+                            shadowInfo11sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo10sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo01sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo00sharp[i, j] = smoothDeph1[i, j];
                         }
                     }
-                }
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        if (j > 0) {
-                            double localShadow = shadowInfo10[i, j - 1] - ydv;
-                            if (localShadow > shadowInfo10[i, j])
-                                shadowInfo10[i, j] = localShadow;
-                            localShadow = shadowInfo10sharp[i, j - 1] - sharpness * ydv;
-                            if (localShadow > shadowInfo10sharp[i, j])
-                                shadowInfo10sharp[i, j] = localShadow;
-                        }
-                        if (i > 0) {
-                            double localShadow = shadowInfo00[i - 1, j] - ydh;
-                            if (localShadow > shadowInfo00[i, j])
-                                shadowInfo00[i, j] = localShadow;
-                            localShadow = shadowInfo00sharp[i - 1, j] - sharpness * ydh;
-                            if (localShadow > shadowInfo00sharp[i, j])
-                                shadowInfo00sharp[i, j] = localShadow;
-                        }
-                    }
-                }
 
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        double shadowMapEntry = 0;
-                        double currentShadowMapEntry = 0;
-                        double height = smoothDeph1[i, j];
-                        double shadowHeight = 0;
-                        double sharpShadowHeight = 0;
-
-                        for (int k = 0; k < 4; k++) {
-                            switch (k) {
-                                case 0:
-                                    shadowHeight = shadowInfo00[i, j];
-                                    sharpShadowHeight = shadowInfo00sharp[i, j];
-                                    break;
-
-                                case 1:
-                                    shadowHeight = shadowInfo01[i, j];
-                                    sharpShadowHeight = shadowInfo01sharp[i, j];
-                                    break;
-
-                                case 2:
-                                    shadowHeight = shadowInfo10[i, j];
-                                    sharpShadowHeight = shadowInfo10sharp[i, j];
-                                    break;
-
-                                case 3:
-                                    shadowHeight = shadowInfo11[i, j];
-                                    sharpShadowHeight = shadowInfo11sharp[i, j];
-                                    break;
-
-                            }
-
-                            double magicNumber = 0.000001 * diffy;
-                            if (height != double.MinValue) {
-                                height += magicNumber; // magic number
-                                if (height <= sharpShadowHeight) // inside the sharp shadow
-                                    currentShadowMapEntry = 0.4;
-                                if (height <= shadowHeight) // inside the sharp shadow
-                                    currentShadowMapEntry += 0.4;
-                                shadowMapEntry += currentShadowMapEntry;
-                            }
-                        }
-                        shadowMapEntry /= 4.0;
-                        if (shadowMapEntry > 1)
-                            shadowMapEntry = 1;
-                        shadowTempPlane[i, j] += shadowMapEntry;
-                    }
-                }
-
-                // Stufe2: Schräge Schatten
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        shadowInfo11[i, j] = smoothDeph1[i, j];
-                        shadowInfo10[i, j] = smoothDeph1[i, j];
-                        shadowInfo01[i, j] = smoothDeph1[i, j];
-                        shadowInfo00[i, j] = smoothDeph1[i, j];
-                        shadowInfo11sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo10sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo01sharp[i, j] = smoothDeph1[i, j];
-                        shadowInfo00sharp[i, j] = smoothDeph1[i, j];
-                    }
-                }
-
-                for (int i = pData.Width - 1; i >= 0; i--) {
-                    for (int j = pData.Height - 1; j >= 0; j--) {
-                        if (i < pData.Width - 1 && j < pData.Height - 1) {
-                            double localShadow = shadowInfo11[i + 1, j + 1] - ydh;
-                            if (localShadow > shadowInfo11[i, j]) {
-                                shadowInfo11[i, j] = localShadow;
-                            }
-                            localShadow = shadowInfo11sharp[i + 1, j + 1] - sharpness * ydh;
-                            if (localShadow > shadowInfo11sharp[i, j]) {
-                                shadowInfo11sharp[i, j] = localShadow;
-                            }
-                        }
-                    }
-                    for (int j = 0; j < pData.Height; j++) {
-                        // Licht von rechts
-                        if (i < pData.Width - 1 && j > 0) {
-                            double localShadow = shadowInfo01[i + 1, j - 1] - ydh;
-                            if (localShadow > shadowInfo01[i, j]) {
-                                shadowInfo01[i, j] = localShadow;
-                            }
-                            localShadow = shadowInfo01sharp[i + 1, j - 1] - sharpness * ydh;
-                            if (localShadow > shadowInfo01sharp[i, j]) {
-                                shadowInfo01sharp[i, j] = localShadow;
-                            }
-                        }
-                    }
-                }
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = pData.Height - 1; j >= 0; j--) {
-                        if (i > 0 && j < pData.Height - 1) {
-                            double localShadow = shadowInfo10[i - 1, j + 1] - ydv;
-                            if (localShadow > shadowInfo10[i, j])
-                                shadowInfo10[i, j] = localShadow;
-                            localShadow = shadowInfo10sharp[i - 1, j + 1] - sharpness * ydv;
-                            if (localShadow > shadowInfo10sharp[i, j])
-                                shadowInfo10sharp[i, j] = localShadow;
-                        }
-                    }
-                    for (int j = 0; j < pData.Height; j++) {
-                        if (i > 0 && j > 0) {
-                            double localShadow = shadowInfo00[i - 1, j - 1] - ydh;
-                            if (localShadow > shadowInfo00[i, j])
-                                shadowInfo00[i, j] = localShadow;
-                            localShadow = shadowInfo00sharp[i - 1, j - 1] - sharpness * ydh;
-                            if (localShadow > shadowInfo00sharp[i, j])
-                                shadowInfo00sharp[i, j] = localShadow;
-                        }
-                    }
-                }
-
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        double shadowMapEntry = 0;
-                        double currentShadowMapEntry = 0;
-                        double height = smoothDeph1[i, j];
-                        double shadowHeight = 0;
-                        double sharpShadowHeight = 0;
-                        for (int k = 0; k < 4; k++) {
-                            switch (k) {
-
-                                case 0:
-                                    shadowHeight = shadowInfo00[i, j];
-                                    sharpShadowHeight = shadowInfo00sharp[i, j];
-                                    break;
-
-                                case 1:
-                                    shadowHeight = shadowInfo01[i, j];
-                                    sharpShadowHeight = shadowInfo01sharp[i, j];
-                                    break;
-
-                                case 2:
-                                    shadowHeight = shadowInfo10[i, j];
-                                    sharpShadowHeight = shadowInfo10sharp[i, j];
-                                    break;
-
-                                case 3:
-                                    shadowHeight = shadowInfo11[i, j];
-                                    sharpShadowHeight = shadowInfo11sharp[i, j];
-                                    break;
-
-                            }
-
-                            double magicNumber = 0.000001;
-                            if (height != double.MinValue) {
-                                height += magicNumber; // magic number
-                                if (height <= sharpShadowHeight) // inside the sharp shadow
-                                    currentShadowMapEntry = 0.4;
-                                if (height <= shadowHeight) // inside the sharp shadow
-                                    currentShadowMapEntry += 0.4;
-                                shadowMapEntry += currentShadowMapEntry;
-                            }
-                        }
-                        shadowMapEntry /= 4.0;
-                        //shadowMapEntry /= (2.0 * (double)shadowNumber);
-                        if (shadowMapEntry > 1)
-                            shadowMapEntry = 1;
-                        shadowMapEntry += shadowTempPlane[i, j];
-                        shadowMapEntry /= 2.0;
-                        if (shadowMapEntry > 1)
-                            shadowMapEntry = 1;
-                        // alt:
-                        shadowTempPlane[i, j] = shadowMapEntry;
-                        //shadowPlane[i, j] += shadowMapEntry / shadowNumber;
-                    }
-                }
-
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
-                    }
-                }
-            }
-
-            // Release Memory:
-            shadowInfo11 = null;
-            shadowInfo01 = null;
-            shadowInfo10 = null;
-            shadowInfo00 = null;
-            shadowInfo11sharp = null;
-            shadowInfo01sharp = null;
-            shadowInfo10sharp = null;
-            shadowInfo00sharp = null;
-
-            // Smooth shadowPlane
-            // 2 times
-            for (int m = 0; m < 2; m++)
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        double neighborsFound = 0;
-                        double sumNeighbors = 0;
-                        for (int k = -1; k <= 1; k++) {
-                            for (int l = -1; l <= 1; l++) {
-                                int posX = i + k;
-                                int posY = j + l;
-                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
-                                    sumNeighbors += shadowPlane[posX, posY];
-                                    neighborsFound++;
+                    for (int i = pData.Width - 1; i >= 0; i--) {
+                        for (int j = pData.Height - 1; j >= 0; j--) {
+                            if (j < pData.Height - 1) {
+                                double localShadow = shadowInfo11[i, j + 1] - ydh;
+                                if (localShadow > shadowInfo11[i, j]) {
+                                    shadowInfo11[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo11sharp[i, j + 1] - sharpness * ydh;
+                                if (localShadow > shadowInfo11sharp[i, j]) {
+                                    shadowInfo11sharp[i, j] = localShadow;
                                 }
                             }
                         }
-                        if (neighborsFound > 0)
-                            shadowPlane[i, j] = 0.3 * shadowPlane[i, j] + 0.7 * sumNeighbors / neighborsFound;
+                        for (int j = 0; j < pData.Height; j++) {
+                            // Licht von rechts
+                            if (i < pData.Width - 1) {
+                                double localShadow = shadowInfo01[i + 1, j] - ydh;
+                                if (localShadow > shadowInfo01[i, j]) {
+                                    shadowInfo01[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo01sharp[i + 1, j] - sharpness * ydh;
+                                if (localShadow > shadowInfo01sharp[i, j]) {
+                                    shadowInfo01sharp[i, j] = localShadow;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            if (j > 0) {
+                                double localShadow = shadowInfo10[i, j - 1] - ydv;
+                                if (localShadow > shadowInfo10[i, j])
+                                    shadowInfo10[i, j] = localShadow;
+                                localShadow = shadowInfo10sharp[i, j - 1] - sharpness * ydv;
+                                if (localShadow > shadowInfo10sharp[i, j])
+                                    shadowInfo10sharp[i, j] = localShadow;
+                            }
+                            if (i > 0) {
+                                double localShadow = shadowInfo00[i - 1, j] - ydh;
+                                if (localShadow > shadowInfo00[i, j])
+                                    shadowInfo00[i, j] = localShadow;
+                                localShadow = shadowInfo00sharp[i - 1, j] - sharpness * ydh;
+                                if (localShadow > shadowInfo00sharp[i, j])
+                                    shadowInfo00sharp[i, j] = localShadow;
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            double shadowMapEntry = 0;
+                            double currentShadowMapEntry = 0;
+                            double height = smoothDeph1[i, j];
+                            double shadowHeight = 0;
+                            double sharpShadowHeight = 0;
+
+                            for (int k = 0; k < 4; k++) {
+                                switch (k) {
+                                    case 0:
+                                        shadowHeight = shadowInfo00[i, j];
+                                        sharpShadowHeight = shadowInfo00sharp[i, j];
+                                        break;
+
+                                    case 1:
+                                        shadowHeight = shadowInfo01[i, j];
+                                        sharpShadowHeight = shadowInfo01sharp[i, j];
+                                        break;
+
+                                    case 2:
+                                        shadowHeight = shadowInfo10[i, j];
+                                        sharpShadowHeight = shadowInfo10sharp[i, j];
+                                        break;
+
+                                    case 3:
+                                        shadowHeight = shadowInfo11[i, j];
+                                        sharpShadowHeight = shadowInfo11sharp[i, j];
+                                        break;
+
+                                }
+
+                                double magicNumber = 0.000001 * diffy;
+                                if (height != double.MinValue) {
+                                    height += magicNumber; // magic number
+                                    if (height <= sharpShadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry = shadowVal;
+                                    if (height <= shadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry += shadowVal;
+                                    shadowMapEntry += currentShadowMapEntry;
+                                }
+                            }
+                            shadowMapEntry /= 4.0;
+                            if (shadowMapEntry > 1)
+                                shadowMapEntry = 1;
+                            shadowTempPlane[i, j] += shadowMapEntry;
+                        }
+                    }
+
+                    // Stufe2: Schräge Schatten
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            shadowInfo11[i, j] = smoothDeph1[i, j];
+                            shadowInfo10[i, j] = smoothDeph1[i, j];
+                            shadowInfo01[i, j] = smoothDeph1[i, j];
+                            shadowInfo00[i, j] = smoothDeph1[i, j];
+                            shadowInfo11sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo10sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo01sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo00sharp[i, j] = smoothDeph1[i, j];
+                        }
+                    }
+
+                    for (int i = pData.Width - 1; i >= 0; i--) {
+                        for (int j = pData.Height - 1; j >= 0; j--) {
+                            if (i < pData.Width - 1 && j < pData.Height - 1) {
+                                double localShadow = shadowInfo11[i + 1, j + 1] - ydh;
+                                if (localShadow > shadowInfo11[i, j]) {
+                                    shadowInfo11[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo11sharp[i + 1, j + 1] - sharpness * ydh;
+                                if (localShadow > shadowInfo11sharp[i, j]) {
+                                    shadowInfo11sharp[i, j] = localShadow;
+                                }
+                            }
+                        }
+                        for (int j = 0; j < pData.Height; j++) {
+                            // Licht von rechts
+                            if (i < pData.Width - 1 && j > 0) {
+                                double localShadow = shadowInfo01[i + 1, j - 1] - ydh;
+                                if (localShadow > shadowInfo01[i, j]) {
+                                    shadowInfo01[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo01sharp[i + 1, j - 1] - sharpness * ydh;
+                                if (localShadow > shadowInfo01sharp[i, j]) {
+                                    shadowInfo01sharp[i, j] = localShadow;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = pData.Height - 1; j >= 0; j--) {
+                            if (i > 0 && j < pData.Height - 1) {
+                                double localShadow = shadowInfo10[i - 1, j + 1] - ydv;
+                                if (localShadow > shadowInfo10[i, j])
+                                    shadowInfo10[i, j] = localShadow;
+                                localShadow = shadowInfo10sharp[i - 1, j + 1] - sharpness * ydv;
+                                if (localShadow > shadowInfo10sharp[i, j])
+                                    shadowInfo10sharp[i, j] = localShadow;
+                            }
+                        }
+                        for (int j = 0; j < pData.Height; j++) {
+                            if (i > 0 && j > 0) {
+                                double localShadow = shadowInfo00[i - 1, j - 1] - ydh;
+                                if (localShadow > shadowInfo00[i, j])
+                                    shadowInfo00[i, j] = localShadow;
+                                localShadow = shadowInfo00sharp[i - 1, j - 1] - sharpness * ydh;
+                                if (localShadow > shadowInfo00sharp[i, j])
+                                    shadowInfo00sharp[i, j] = localShadow;
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            double shadowMapEntry = 0;
+                            double currentShadowMapEntry = 0;
+                            double height = smoothDeph1[i, j];
+                            double shadowHeight = 0;
+                            double sharpShadowHeight = 0;
+                            for (int k = 0; k < 4; k++) {
+                                switch (k) {
+
+                                    case 0:
+                                        shadowHeight = shadowInfo00[i, j];
+                                        sharpShadowHeight = shadowInfo00sharp[i, j];
+                                        break;
+
+                                    case 1:
+                                        shadowHeight = shadowInfo01[i, j];
+                                        sharpShadowHeight = shadowInfo01sharp[i, j];
+                                        break;
+
+                                    case 2:
+                                        shadowHeight = shadowInfo10[i, j];
+                                        sharpShadowHeight = shadowInfo10sharp[i, j];
+                                        break;
+
+                                    case 3:
+                                        shadowHeight = shadowInfo11[i, j];
+                                        sharpShadowHeight = shadowInfo11sharp[i, j];
+                                        break;
+
+                                }
+
+                                double magicNumber = 0.000001;
+                                if (height != double.MinValue) {
+                                    height += magicNumber; // magic number
+                                    if (height <= sharpShadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry = shadowVal;
+                                    if (height <= shadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry += shadowVal;
+                                    shadowMapEntry += currentShadowMapEntry;
+                                }
+                            }
+                            shadowMapEntry /= 4.0;
+                            //shadowMapEntry /= (2.0 * (double)shadowNumber);
+                            if (shadowMapEntry > 1)
+                                shadowMapEntry = 1;
+                            shadowMapEntry += shadowTempPlane[i, j];
+                            shadowMapEntry /= 2.0;
+                            if (shadowMapEntry > 1)
+                                shadowMapEntry = 1;
+                            // alt:
+                            shadowTempPlane[i, j] = shadowMapEntry;
+                            //shadowPlane[i, j] += shadowMapEntry / shadowNumber;
+                        }
+                    }
+
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
+                        }
                     }
                 }
+            }
+                // Release Memory:
+                shadowInfo11 = null;
+                shadowInfo01 = null;
+                shadowInfo10 = null;
+                shadowInfo00 = null;
+                shadowInfo11sharp = null;
+                shadowInfo01sharp = null;
+                shadowInfo10sharp = null;
+                shadowInfo00sharp = null;
+
+                // Smooth shadowPlane
+                // 2 times
+           
+
+                double[,] shadowTempPlane1 = null;
+                double[,] shadowTempPlane2 = null;
+
+               
+
+                for (int m = 0; m < 2; m++) {
+                    if (m == 0) {
+                        shadowTempPlane1 = shadowPlane;
+                        shadowTempPlane2 = shadowTempPlane;
+                    } else {
+                        shadowTempPlane2 = shadowPlane;
+                        shadowTempPlane1 = shadowTempPlane;
+
+                    }
+                    for (int i = 0; i < pData.Width; i++) {
+                        for (int j = 0; j < pData.Height; j++) {
+                            double neighborsFound = 0;
+                            double sumNeighbors = 0;
+                            for (int k = -1; k <= 1; k++) {
+                                for (int l = -1; l <= 1; l++) {
+                                    int posX = i + k;
+                                    int posY = j + l;
+                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                        sumNeighbors += shadowTempPlane1[posX, posY];
+                                        neighborsFound++;
+                                    }
+                                }
+                            }
+                            if (neighborsFound > 0)
+                                shadowTempPlane2[i, j] = 0.4 * shadowTempPlane1[i, j] + 0.6 * sumNeighbors / neighborsFound;
+                        }
+                    }
+                }
+
+            // Normalisieren:
+                double sMin = Double.MaxValue;
+                double sMax = Double.MinValue;
+                for (int i = 0; i < pData.Width; i++) {
+                    for (int j = 0; j < pData.Height; j++) {
+                        if (sMin > shadowPlane[i, j])
+                            sMin = shadowPlane[i, j];
+                        if (sMax < shadowPlane[i, j])
+                            sMax = shadowPlane[i, j];
+
+                    }
+                }
+                double sDiff = sMax - sMin;
+                for (int i = 0; i < pData.Width; i++) {
+                    for (int j = 0; j < pData.Height; j++) {
+                        shadowPlane[i, j] = (shadowPlane[i, j] - sMin) / sDiff;
+                    }
+                }
+
+
+
         }
 
         /// <summary>
@@ -1021,11 +1106,10 @@ namespace Fractrace.PictureArt {
                 }
             }
 
+
+            // rgbSmoothPlane1 is set
             double mainDeph = maxY - minY;
             for (int m = 0; m < ambientIntensity + 1; m++) {
-
-
-
                 for (int i = 0; i < pData.Width; i++) {
                     for (int j = 0; j < pData.Height; j++) {
                         double neighborsFound = 0;
@@ -1051,23 +1135,17 @@ namespace Fractrace.PictureArt {
                         if (yd == double.MinValue)
                             yd = minY;
                         double ydNormalized = (yd - minY) / mainDeph;
-                        //ydNormalized = ydNormalized * ydNormalized;
                         ydNormalized -= fieldOfViewStart;
-                        //ydNormalized = 1.0 * Math.Abs(ydNormalized);
                         if (ydNormalized > regularSmooth)
                             ydNormalized = regularSmooth;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
 
-                        //ydNormalized = 1 - ydNormalized;
                         Vec3 nCenterColor = rgbSmoothPlane2[i, j];
-                        //ydNormalized = ydNormalized * ydNormalized;
                         ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
 
-
-                        //ydNormalized = Math.Sqrt(ydNormalized);
                         nCenterColor = nCenterColor.Mult(ydNormalized);
                         nColor = nColor.Mult(1.0 - ydNormalized);
                         nCenterColor.Add(nColor);
@@ -1077,7 +1155,7 @@ namespace Fractrace.PictureArt {
                 }
 
 
-                // Dritter Durchlauf
+                // rgbSmoothPlane2 is set (from rgbSmoothPlane1)
                 for (int i = 0; i < pData.Width; i++) {
                     for (int j = 0; j < pData.Height; j++) {
                         double neighborsFound = 0;
@@ -1103,21 +1181,15 @@ namespace Fractrace.PictureArt {
                         if (yd == double.MinValue)
                             yd = minY;
                         double ydNormalized = (yd - minY) / mainDeph;
-                        //ydNormalized = Math.Sqrt(ydNormalized);
-                        //ydNormalized = ydNormalized * ydNormalized;
                         ydNormalized -= fieldOfViewStart;
-                        //ydNormalized = 1.0 * Math.Abs(ydNormalized);
                         if (ydNormalized > regularSmooth)
                             ydNormalized = regularSmooth;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
-                        //ydNormalized = 1 - ydNormalized;
                         Vec3 nCenterColor = rgbSmoothPlane1[i, j];
-                        //ydNormalized = ydNormalized * ydNormalized;
                         ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
-                        //ydNormalized = Math.Sqrt(ydNormalized);
                         nCenterColor = nCenterColor.Mult(ydNormalized);
                         nColor = nColor.Mult(1.0 - ydNormalized);
                         nCenterColor.Add(nColor);
