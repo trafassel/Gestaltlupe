@@ -140,6 +140,7 @@ namespace Fractrace {
                 // 
                 OneStepEnds();
               } else {
+                oldParameterHashWithoutPictureArt = tempParameterHash;
                 classicIter = null;
                 paras.Assign();
                 iter = new Iterate(maxx, maxy, this, false);
