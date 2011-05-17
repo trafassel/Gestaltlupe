@@ -7,7 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Fractrace.Basic {
+
+
+  /// <summary>
+  /// Display the Entries of the global object ParameterDict.
+  /// </summary>
   public partial class DataViewControl : UserControl {
+    
+    
     public DataViewControl() {
       InitializeComponent();
     }
@@ -16,7 +23,15 @@ namespace Fractrace.Basic {
     protected List<DataViewElement> oldElements = new List<DataViewElement>();
 
 
+
+    /// <summary>
+    /// Some created pages. Key is the category.
+    /// </summary>
+    protected Dictionary<string, DataViewControlPage> mPages = new Dictionary<string, DataViewControlPage>();
+
+
     protected string oldCategory = "";
+
 
     /// <summary>
     /// Inhalt des Steuerelementes wird mit den Einträgen befüllt, die category entsprechen.
@@ -59,7 +74,7 @@ namespace Fractrace.Basic {
         }
       }
 
-      // Wenn kein dirketes Unterelement existiert, werden alle Unterelemente eingefügt.
+      // Wenn kein direktes Unterelement existiert, werden alle Unterelemente eingefügt.
       if (!elementAdded) {
         foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
           if (entry.Key.StartsWith(category)) {
@@ -82,12 +97,13 @@ namespace Fractrace.Basic {
 
     }
 
+
     /// <summary>
     /// Ein Unterelement hat sich geändert.
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    void dElement_ElementChanged(string name, string value) {
+    public void dElement_ElementChanged(string name, string value) {
       if(ElementChanged!=null)
         ElementChanged(name,value);
       //throw new NotImplementedException();
@@ -98,7 +114,7 @@ namespace Fractrace.Basic {
     /// </summary>
     /// <param name="category"></param>
     protected void Update(string category) {
-      if (category == "Formula")
+          if (category == "Formula")
         return;
       foreach (DataViewElement element in oldElements) {
         element.Update();

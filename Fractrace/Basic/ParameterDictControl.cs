@@ -31,7 +31,6 @@ namespace Fractrace.Basic {
                     } else
                         if (parentCat != "") {
                             if (!Nodes.ContainsKey(parentCat)) {
-                               
                                 Nodes[parentCat] = new TreeNode(parentCat);
                                 Nodes[parentCat].Tag = parentCat;
                                 // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
@@ -89,26 +88,6 @@ namespace Fractrace.Basic {
         /// </summary>
         public void UpdateFromData() {
           this.dataViewControl1.Select(mChoosenHirarchy);
-
-
-          if (inDataGridView1_CellValueChanged)
-            return;
-            arr = new System.Collections.Generic.List<OptionMember>();
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
-                if (entry.Key.StartsWith(mChoosenHirarchy)) {
-                    OptionMember newEntry = new OptionMember(entry.Key, entry.Value);
-                    try {
-                      arr.Add(newEntry);
-                    } catch (System.Exception ex) {
-                      System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    }
-                }
-            }
-            try {
-              dataGridView1.DataSource = arr;
-            } catch (Exception ex) {
-              System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
         }
 
 
@@ -126,38 +105,8 @@ namespace Fractrace.Basic {
           UpdateFromData();
         }
 
-        /// <summary>
-        /// Die Einträge zum ausgewählen Knoten.
-        /// </summary>
-        System.Collections.Generic.List<OptionMember> arr = null;
-
-
-        private bool inDataGridView1_CellValueChanged = false;
-
-        /// <summary>
-        /// Ein Eintrag wurde verändert.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-          inDataGridView1_CellValueChanged = true;
-           OptionMember optionEntry=arr[e.RowIndex];
-           ParameterDict.Exemplar[optionEntry.Name] = optionEntry.Value;
-           Changed = true;
-           inDataGridView1_CellValueChanged = false;
-        }
-
-
-        /// <summary>
-        /// Zugriff auf das aktualisierte Datagrid
-        /// </summary>
-        public DataGridView InternDataGridView {
-            get {
-                return dataGridView1;
-            }
-
-        }
-
+ 
+   
         public bool Changed = false;
 
     }

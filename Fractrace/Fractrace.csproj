@@ -116,6 +116,12 @@
     <Compile Include="Basic\DataViewControl.Designer.cs">
       <DependentUpon>DataViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Basic\DataViewControlPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Basic\DataViewControlPage.Designer.cs">
+      <DependentUpon>DataViewControlPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Basic\DataViewElement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\DataViewControl.resx">
       <DependentUpon>DataViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\DataViewControlPage.resx">
+      <DependentUpon>DataViewControlPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\DataViewElement.resx">
       <DependentUpon>DataViewElement.cs</DependentUpon>

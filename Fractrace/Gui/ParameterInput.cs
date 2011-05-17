@@ -15,7 +15,12 @@ namespace Fractrace {
   
     public partial class ParameterInput : Form {
 
+
+      /// <summary>
+      /// Global instance of this unique window.
+      /// </summary>
         public static ParameterInput MainParameterInput = null;
+
 
         /// <summary>
         /// Initialisierung
@@ -25,23 +30,12 @@ namespace Fractrace {
             InitializeComponent();
             mParameter.SetToDefault();
             ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
-            // Das zweite PreviewControl ist für die Stereosicht zuständig.
+            //additional  PreviewControl for geometry informations 
             preview2.IsRightView = true; 
             navigateControl1.Init(preview1,preview2,this);
-            parameterDictControl1.InternDataGridView.CellValueChanged += new DataGridViewCellEventHandler(InternDataGridView_CellValueChanged);
             this.animationControl1.Init(mHistory);
         }
-
-
-        /// <summary>
-        /// Wenn sich Einträge im Datagrid geändert haben, wird Neuzeichnen angestoßen.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void InternDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-            ParameterValuesChanged();
-        }
-
+      
 
         /// <summary>
         /// Irgendwelche Werte haben sich geändert.

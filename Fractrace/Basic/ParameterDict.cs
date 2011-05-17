@@ -208,7 +208,7 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
-    /// Gets the Hash of all node, which name starts with nodeHirarchy.
+    /// Gets the Hash (elementName|elemenValue) of all elementes, which name starts with nodeHirarchy.
     /// </summary>
     /// <param name="nodeHirarchy">The node hirarchy.</param>
     /// <returns></returns>
@@ -226,6 +226,30 @@ namespace Fractrace.Basic {
             byte[] buffer2 = sha.ComputeHash(buffer);
             return Encoding.ASCII.GetString(buffer2);
     }
+
+
+    /// <summary>
+    /// Gets the Hash (elementName) of all elementNames, which name starts with nodeHirarchy.
+    /// </summary>
+    /// <param name="nodeHirarchy">The node hirarchy.</param>
+    /// <returns></returns>
+    public string GetHashOfName(string nodeHirarchy) {
+      StringBuilder sb = new StringBuilder();
+      foreach (KeyValuePair<string, string> entry in SortedEntries) {
+        if (entry.Key.StartsWith(nodeHirarchy)) {
+          sb.Append("|" + entry.Key + "|");
+        }
+      }
+      string bigstr = sb.ToString();
+      System.Security.Cryptography.MD5 sha = System.Security.Cryptography.MD5.Create();
+      byte[] buffer = new byte[Encoding.ASCII.GetByteCount(bigstr)];
+      buffer = Encoding.ASCII.GetBytes(bigstr);
+      byte[] buffer2 = sha.ComputeHash(buffer);
+      return Encoding.ASCII.GetString(buffer2);
+    }
+
+
+
 
 
     /// <summary>

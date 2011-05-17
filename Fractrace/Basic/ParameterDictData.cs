@@ -40,7 +40,9 @@ namespace Fractrace.Basic {
             if (index < 0 | index > Time)
                 throw new ArgumentException("Index out of range");
             foreach (KeyValuePair<string, string> entry in mHistory[index]) {
-                ParameterDict.Exemplar[entry.Key] = entry.Value;
+              // No raise update events
+              // ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
+              ParameterDict.Exemplar[entry.Key] = entry.Value;
             }
         }
 
