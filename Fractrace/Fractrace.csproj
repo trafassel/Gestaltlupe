@@ -148,16 +148,16 @@
     <Compile Include="DataTypes\XYZTupel .cs" />
     <Compile Include="DataTypes\Zoom .cs" />
     <Compile Include="FileSystem.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Gui\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Gui\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormulaEditor.cs">
+    <Compile Include="Gui\FormulaEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FormulaEditor.Designer.cs">
+    <Compile Include="Gui\FormulaEditor.Designer.cs">
       <DependentUpon>FormulaEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Formulas.cs" />
@@ -180,13 +180,13 @@
     <Compile Include="PictureArt\PictureArtFactory.cs" />
     <Compile Include="PictureArt\Renderer.cs" />
     <Compile Include="PictureArt\UniversalRenderer.cs" />
-    <Compile Include="PreviewControl.cs">
+    <Compile Include="Gui\PreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StereoForm.cs">
+    <Compile Include="Gui\StereoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StereoForm.Designer.cs">
+    <Compile Include="Gui\StereoForm.Designer.cs">
       <DependentUpon>StereoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TomoGeometry\AdditionalPointInfo.cs" />
@@ -194,29 +194,28 @@
     <Compile Include="TomoGeometry\Mandelbulb.cs" />
     <Compile Include="TomoGeometry\TomoFormula.cs" />
     <Compile Include="TomoGeometry\TomoFormulaFactory.cs" />
-    <Compile Include="TomoGeometry\VrmlCoordinateTransformation.cs" />
     <Compile Include="Geometry\Projection.cs" />
     <Compile Include="Geometry\Vec3.cs" />
     <Compile Include="GlobalObjects.cs" />
     <Compile Include="GlobalParameters.cs" />
     <Compile Include="Iterate.cs" />
-    <Compile Include="NavigateControl.cs">
+    <Compile Include="Gui\NavigateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NavigateControl.Designer.cs">
+    <Compile Include="Gui\NavigateControl.Designer.cs">
       <DependentUpon>NavigateControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParameterInput.cs">
+    <Compile Include="Gui\ParameterInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParameterInput.Designer.cs">
+    <Compile Include="Gui\ParameterInput.Designer.cs">
       <DependentUpon>ParameterInput.cs</DependentUpon>
     </Compile>
     <Compile Include="PictureArt\ScienceRenderer.cs" />
-    <Compile Include="RenderImage.cs">
+    <Compile Include="Gui\RenderImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="RenderImage.Designer.cs">
+    <Compile Include="Gui\RenderImage.Designer.cs">
       <DependentUpon>RenderImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -235,21 +234,21 @@
       <DependentUpon>ParameterDictControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Gui\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormulaEditor.resx">
+    <EmbeddedResource Include="Gui\FormulaEditor.resx">
       <DependentUpon>FormulaEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NavigateControl.resx">
+    <EmbeddedResource Include="Gui\NavigateControl.resx">
       <DependentUpon>NavigateControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParameterInput.resx">
+    <EmbeddedResource Include="Gui\ParameterInput.resx">
       <DependentUpon>ParameterInput.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RenderImage.resx">
+    <EmbeddedResource Include="Gui\RenderImage.resx">
       <DependentUpon>RenderImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -257,7 +256,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="StereoForm.resx">
+    <EmbeddedResource Include="Gui\StereoForm.resx">
       <DependentUpon>StereoForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
