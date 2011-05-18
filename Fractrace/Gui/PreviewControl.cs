@@ -31,22 +31,26 @@ namespace Fractrace {
       this.btnPreview.Size = new System.Drawing.Size(150, 140);
       this.btnPreview.TabIndex = 1;
       this.btnPreview.UseVisualStyleBackColor = true;
-      this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
-
-
+      //this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
       Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
       btnPreview.BackgroundImage = labelImage;
       grLabel = Graphics.FromImage(labelImage);
     }
 
+    public Button PreviewButton {
+      get {
+        return this.btnPreview;
+      }
+    }
+
 
 
     /// <summary>
-    /// Neuzeichnen wurde ausgewählt
+    /// Redraw, forced by the user  (in this application on mouse click).
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected void btnPreview_Click(object sender, EventArgs e) {
+    public void btnPreview_Click(object sender, EventArgs e) {
       if(mRenderOnClick)
         StartDrawing();
     }

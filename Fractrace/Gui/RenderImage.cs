@@ -199,13 +199,15 @@ namespace Fractrace
                 pArt.Paint(grLabel);
                 Application.DoEvents();
                 this.Refresh();
-                if (mPictureBox.Image.Width > 400) {
+              // In instance of RenderImage is used in the big stereo
+              // and in the small preview display. Which variant is used is (clumsy) detected
+              // by the picture size.
+                if (mPictureBox.Image.Width > 400) { 
                     string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.jpg");
                     this.Text = fileName;
                     mPictureBox.Image.Save(fileName);
                 }
             }
-            //btnPreview.Enabled = true;
             inDrawing = false;
             if (forceRedraw)
                 StartDrawing();
