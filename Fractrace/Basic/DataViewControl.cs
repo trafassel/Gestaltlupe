@@ -13,8 +13,11 @@ namespace Fractrace.Basic {
   /// Display the Entries of the global object ParameterDict.
   /// </summary>
   public partial class DataViewControl : UserControl {
-    
-    
+
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DataViewControl"/> class.
+    /// </summary>
     public DataViewControl() {
       InitializeComponent();
     }
@@ -33,11 +36,37 @@ namespace Fractrace.Basic {
     protected string oldCategory = "";
 
 
+
+    /// <summary>
+    /// A new category (as node in the tree view is selected). This control 
+    /// has to display all corresponding entries.
+    /// </summary>
+    /// <param name="category">The category.</param>
+    public void Select(string category) {
+      this.SuspendLayout();
+      DataViewControlPage newPage=null;
+      if (mPages.ContainsKey(category)) {
+        newPage = mPages[category];
+        newPage.Update();
+      } else {
+        newPage = new DataViewControlPage(this);
+        newPage.Create(category);
+        mPages[category] = newPage;
+      }
+      if (oldCategory != category) {
+        pnlMain.Controls.Clear();
+        pnlMain.Controls.Add(newPage);
+        this.Height = newPage.ComputedHeight;
+      }
+      this.ResumeLayout(true);
+      oldCategory = category;
+    }
+
     /// <summary>
     /// Inhalt des Steuerelementes wird mit den Einträgen befüllt, die category entsprechen.
     /// </summary>
     /// <param name="category"></param>
-    public void Select(string category) {
+    public void Select_old(string category) {
       if (category == oldCategory) {
         Update(category);
         return;

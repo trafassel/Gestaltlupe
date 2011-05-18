@@ -477,7 +477,7 @@ namespace Fractrace {
         /// </summary>
         /// <param name="e"></param>
        protected override void OnClosing(CancelEventArgs e) {
-           if (MessageBox.Show("Exit", "Really?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+         if (MessageBox.Show("Close Application?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                RemoveEmptyDirectory();
                base.OnClosing(e);
                Form1.PublicForm.ForceClosing();

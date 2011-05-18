@@ -48,16 +48,14 @@ namespace Fractrace.Basic {
     protected string mNodeHash = "";
 
 
-
-
     /// <summary>
     /// Gets the unique string of the names and values of all entries.
-    /// This property can be used to test, if all values are up to date.
+    /// This property can be used to test if all values are up to date.
     /// </summary>
     /// <value>The node value hash.</value>
     public string NodeValueHash {
       get {
-        return mNodeHash;
+        return mNodeValueHash;
       }
     }
 
@@ -84,8 +82,111 @@ namespace Fractrace.Basic {
       }
     }
 
-    public void Update(string category) {
 
+    /// <summary>
+    /// Control ist filled with all entries which corresponds to the given category.
+    /// </summary>
+    /// <param name="category">The category.</param>
+    public void Create(string category) {
+      this.Dock = DockStyle.Fill;
+
+      mCategory = category;
+      mNodeHash = ParameterDict.Exemplar.GetHashOfName(category);
+      mNodeValueHash = ParameterDict.Exemplar.GetHash(category);
+     // this.BackColor = Color.Green;
+
+      // Contain the edit entries before adding to the control
+      List<DataViewElement> oldElements = new List<DataViewElement>();
+      /*
+      if (category == oldCategory) {
+        Update(category);
+        return;
+      }*/
+
+      this.SuspendLayout();
+
+      mComputedHeight = 0;
+
+      bool elementAdded = false;
+      foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
+        if (entry.Key.StartsWith(category)) {
+          if (entry.Key.Length > category.Length) {
+            string tempName = entry.Key.Substring(category.Length + 1);
+            if (!tempName.Contains(".")) {
+              DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, "", "", true);
+              dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
+              oldElements.Add(dElement);
+              dElement.TabIndex = oldElements.Count;
+              mComputedHeight += DataViewElementFactory.DefaultHeight;
+              elementAdded = true;
+            }
+          }
+        }
+      }
+
+      // Wenn kein direktes Unterelement existiert, werden alle Unterelemente eingefügt.
+      if (!elementAdded) {
+        foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
+          if (entry.Key.StartsWith(category)) {
+            DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, "", "", false);
+            // pnlMain.Controls.Add(dElement);
+            dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
+            oldElements.Add(dElement);
+            dElement.TabIndex = oldElements.Count;
+            mComputedHeight += DataViewElementFactory.DefaultHeight;
+            elementAdded = true;
+          }
+        }
+      }
+      for (int i = oldElements.Count - 1; i >= 0; i--) {
+        DataViewElement dElement = oldElements[i];
+        Controls.Add(dElement);
+      }
+    //  this.Height = height;
+      this.ResumeLayout(true);
+    }
+
+
+    protected int mComputedHeight = 1200;
+
+
+    /// <summary>
+    /// Gets the expected height of this control.
+    /// </summary>
+    /// <value>The height of the computed.</value>
+    public int ComputedHeight {
+      get {
+        return mComputedHeight;
+      }
+    }
+
+    /// <summary>
+    /// Subentries are updated. Returns true, if at least one entry is added or removed.
+    /// </summary>
+    /// <param name="category">The category.</param>
+    public bool Update() {
+      string newNodeHash = ParameterDict.Exemplar.GetHashOfName(mCategory);
+      string newNodeValueHash = ParameterDict.Exemplar.GetHash(mCategory);
+      if (newNodeHash != mNodeHash) { // At least one entry is added or deleted, so everything must new created 
+        Create(mCategory);
+        return true;
+      }
+      if (newNodeValueHash != mNodeValueHash) { // At least one value has changed, so each subcontrol hat to update itself 
+        //Create(mCategory);
+        // TODO: Implementation
+        foreach (UserControl subControl in Controls) {
+          if (subControl is DataViewElement) {
+            DataViewElement dataView = (DataViewElement)subControl;
+            dataView.Update();
+          }
+        }
+
+        mNodeValueHash = ParameterDict.Exemplar.GetHash(mCategory);
+        return false;
+      }
+
+      return false;
+      // If nothing has changed, nothing has to update.
 
     }
 

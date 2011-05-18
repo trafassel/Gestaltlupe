@@ -473,7 +473,7 @@ namespace Fractrace {
     /// <param name="e"></param>
     protected override void OnClosing(CancelEventArgs e) {
       if (!forceClosing) {
-        if (MessageBox.Show("Exit", "Really?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+        if (MessageBox.Show("Close Application?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes) {
           base.OnClosing(e);
         } else e.Cancel = true;
       }
