@@ -7,6 +7,8 @@ using Fractrace.DataTypes;
 using Fractrace.Basic;
 
 namespace Fractrace.PictureArt {
+
+
   class PictureArtFactory {
 
     /// <summary>
@@ -51,6 +53,11 @@ namespace Fractrace.PictureArt {
         case "PlasicRenderer":
         case "6":
           retVal = new PlasicRenderer(pdata);
+          break;
+
+        case "FrontViewRenderer":
+        case "7":
+          retVal = new FrontViewRenderer(pdata);
           break;
           
       }
