@@ -13,6 +13,10 @@ namespace Fractrace {
 
   public delegate void PictureRenderingIsReady();
 
+
+    /// <summary>
+    /// Control which displays the redered image.
+    /// </summary>
   public class PreviewControl : RenderImage {
 
 
@@ -44,6 +48,47 @@ namespace Fractrace {
     }
 
 
+    /// <summary>
+    /// Clear the image.
+    /// </summary>
+    public void Clear() {
+
+
+        /*
+        if (mPictureBox == null) {
+            this.BackColor = Color.Red;
+            return;
+        }
+
+
+         //   Init();
+         */
+
+
+
+
+        //Image labelImage = new Bitmap((int)(Width), (int)(Height));
+        //mPictureBox.Image = labelImage;
+        Pen p = new Pen(Color.Red);
+        p.Width = 3;
+
+
+        Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+        btnPreview.BackgroundImage = labelImage;
+        grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
+
+        //btnPreview.BackColor = Color.Red;
+        /*
+        Graphics grLabel = Graphics.FromImage(btnPreview.Image);
+        grLabel.DrawRectangle(p, 2, 2, (float)20, (float)20);
+        Application.DoEvents();
+         * */
+        grLabel.DrawRectangle(p, 0, 0, (float)btnPreview.Width, (float)btnPreview.Height);
+        this.Refresh();
+        // Redraw();
+    }
+
+
 
     /// <summary>
     /// Redraw, forced by the user  (in this application on mouse click).
@@ -56,6 +101,7 @@ namespace Fractrace {
     }
 
     protected bool mRenderOnClick = true;
+
 
 
     /// <summary>
@@ -120,7 +166,11 @@ namespace Fractrace {
       if (iter != null) {
         lock (iter) {
           try {
-            Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData,iter.LastUsedFormulas);
+              Fractrace.PictureArt.Renderer pArt;
+              if (fixedRenderer == -1)
+                  pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+              else
+                  pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
             pArt.Paint(grLabel);
             Application.DoEvents();
             this.Refresh();

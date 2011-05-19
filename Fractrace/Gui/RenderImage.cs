@@ -35,6 +35,15 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Public access to the internal iterate object to reuse the iteration results.
+        /// </summary>
+        public Iterate Iterate {
+            get {
+                return iter;
+            }
+        }
+
         protected Iterate iter = null;
 
         int maxx = 0;
@@ -60,6 +69,8 @@ namespace Fractrace
             mPictureBox = new PictureBox();
             this.panel2.Controls.Add(mPictureBox);
         }
+
+
 
         protected PictureBox mPictureBox = null;
 
@@ -120,24 +131,19 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Parameters are set from ParameterDict.
+        /// </summary>
         protected virtual void AssignParameters() {
             mParameter.SetFromParameterDict();
-          /*
-            if (isRightView) {
-                double eyePos = 0.2; // Das rechte Auge wird um 0.2 Einheiten nach rechts verschoben
-                // Der Blickpunkt wird etwas nach rechts verschoben
-                double xd = mParameter.end_tupel.x - mParameter.start_tupel.x;
-                mParameter.end_tupel.x += eyePos * xd;
-                mParameter.start_tupel.x += eyePos * xd;
-            }
-           */
         }
 
 
         /// <summary>
-        /// Zeichnen wird von außen angestoßen.
+        /// Create an draw image.
         /// </summary>
         public virtual void Draw() {
+            fixedRenderer = -1;
             if (!inDrawing)
                 StartDrawing();
             else {
@@ -147,6 +153,43 @@ namespace Fractrace
                 iter = null;
                 forceRedraw = true;
             }
+        }
+
+
+        /// <summary>
+        /// if fixedRenderer != -1 renderer to use for creating the bitmap.
+        /// </summary>
+        protected int fixedRenderer = -1;
+
+
+        /*
+        /// <summary>
+        /// Paint image with fixed renderer
+        /// </summary>
+        public virtual void Draw(int renderer) {
+            fixedRenderer = renderer;
+            if (!inDrawing)
+                StartDrawing();
+            else {
+                if (iter != null) {
+                    iter.Abort();
+                }
+                iter = null;
+                forceRedraw = true;
+            }
+        }
+         */
+
+
+        /// <summary>
+        /// Paint image with fixed renderer and reuse an iterate object after computation. 
+        /// </summary>
+        /// <param name="otherIterate"></param>
+        /// <param name="renderer"></param>
+        public virtual void Redraw(Iterate otherIterate, int renderer) {
+            fixedRenderer = renderer;
+            iter = otherIterate;
+            OneStepEnds();
         }
 
 
@@ -195,7 +238,11 @@ namespace Fractrace
         /// </summary>
         protected virtual void OneStepEnds() {
             if (iter != null) {
-                Fractrace.PictureArt.Renderer pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                Fractrace.PictureArt.Renderer pArt;
+                if (fixedRenderer == -1)
+                    pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                else
+                    pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
                 pArt.Paint(grLabel);
                 Application.DoEvents();
                 this.Refresh();

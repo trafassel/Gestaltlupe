@@ -38,6 +38,13 @@ namespace Fractrace {
       navigateControl1.Init(preview1, preview2, this);
       this.animationControl1.Init(mHistory);
       preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
+        string assembyInfo=System.Reflection.Assembly.GetExecutingAssembly().FullName;
+        string[] infos = assembyInfo.Split(',');
+        string version = "";
+        if (infos.Length > 1)
+            version = infos[1];
+
+      this.Text = "Gestaltlupe"+version+"    ["+System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir)+"]";
     }
 
 
@@ -221,9 +228,26 @@ namespace Fractrace {
 
 
     private void ComputationEnds() {
-      if (mPosterMode) {
-        DrawNextPosterPart();
-      }
+        if (mPosterMode) {
+            DrawNextPosterPart();
+        } else {
+            // Use the picture in the render frame to display in preview (for history)
+            Image image= Form1.PublicForm.GetImage();
+            
+            int imageWidth = preview1.Width;
+            int imageHeight= preview1.Height;
+
+            Image newImage = new Bitmap(imageWidth, imageHeight);
+            Graphics gr = Graphics.FromImage(newImage);
+            gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
+
+
+            //mHistoryImages[mHistory.Time] = preview1.Image;
+            mHistoryImages[mHistory.Time] = newImage;
+
+
+           // Console.WriteLine("Save Pic to Time " + mHistory.Time.ToString());
+        }
     }
 
     public void DrawStereo() {
@@ -319,7 +343,6 @@ namespace Fractrace {
     /// Das Control zur Übersicht der historischen Daten wird neu geladen.
     /// </summary>
     protected void UpdateHistoryControl() {
-      this.Text = "Parameters " + mHistory.CurrentTime.ToString();
       lblCurrentStep.Text = mHistory.CurrentTime.ToString();
       if (mHistory.CurrentTime > 0) {
         btnLastStep.Text = ((int)(mHistory.CurrentTime - 1)).ToString();
@@ -440,7 +463,6 @@ namespace Fractrace {
       // Todo: Bild nur speichern, wenn der Haken gesetzt ist
       if (cbSaveHistory.Checked) {
         mHistory.CurrentTime = mHistory.Save();
-        this.Text = "Parameters " + mHistory.CurrentTime.ToString();
       }
       ForceRedraw();
 
@@ -563,12 +585,14 @@ namespace Fractrace {
       try {
       if (mHistory.CurrentTime > 0) {
         mHistory.CurrentTime--;
+        preview2.Clear();
         if (!UpdateHistoryPic()) {
           // Not working:
           //Graphics gr = Graphics.FromImage(preview1.Image);
           //gr.DrawRectangle(new System.Drawing.Pen(Color.Gray, 4), 10, 10, 20, 20);
           //preview1.Refresh();
-          preview1.Visible = false;
+            preview1.Clear();
+          //preview1.Visible = false;
         } else {
           preview1.Visible = true;
         }
@@ -595,8 +619,10 @@ namespace Fractrace {
       try {
         if (mHistory.CurrentTime < mHistory.Time) {
           mHistory.CurrentTime++;
+          preview2.Clear();
           if (!UpdateHistoryPic()) {
-            preview1.Visible = false;
+              preview1.Clear();
+            //preview1.Visible = false;
           } else {
             preview1.Visible = true;
           }
@@ -627,10 +653,11 @@ namespace Fractrace {
     /// Erstellung des Images im Vorschaufenster wurde beendet.
     /// </summary>
     private void preview1_RenderingEnds() {
-      // Der Zähler wird auf den aktuellen Endzeitpunkt gestellt.
+      // Counter is set to the last time entry.
       mHistory.CurrentTime = mHistory.Time;
       UpdateHistoryControl();
       SavePicData();
+      preview2.Redraw(preview1.Iterate,7); // Renderer 7 is able to display a front view
     }
 
 
@@ -638,7 +665,7 @@ namespace Fractrace {
     /// User has click on Preview1 Control. 
     /// </summary>
     private void preview1_Clicked() {
-      // Der Zähler wird auf den aktuellen Endzeitpunkt gestellt.
+        // Counter is set to the last time entry.
       mHistory.CurrentTime = mHistory.Time;
       UpdateHistoryControl();
       SavePicData();
@@ -808,7 +835,6 @@ namespace Fractrace {
         // Todo: Bild nur speichern, wenn der Haken gesetzt ist
         if (cbSaveHistory.Checked) {
           mHistory.CurrentTime = mHistory.Save();
-          this.Text = "Parameters " + mHistory.CurrentTime.ToString();
         }
         // Size und Raster festlegen
         string sizeStr = ParameterDict.Exemplar["View.Size"];

@@ -34,25 +34,61 @@ namespace Fractrace.PictureArt {
       width = pData.Width;
       height = pData.Height;
       PreCalculate();
+
+      for (int i = 0; i < width; i++) {
+          for (int j = 0; j < height; j++) {
+              Pen p = new Pen(Color.White);
+              grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+          }
+      }
       for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-          Pen p = new Pen(GetColor(i, j));
-          grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+          //Pen p = new Pen(GetColor(i, j));
+            Pen p = new Pen(Color.Black);
+            // Switch to front draw
+            PixelInfo pInfo = pData.Points[i, j];
+            if (pInfo != null) {
+                double y = pInfo.Coord.Y;
+                double dheight = height;
+                double ypos = y - expectedMinY;
+                ypos = ypos / (expectedMaxY - expectedMinY);
+                ypos = dheight-dheight * ypos;
+                grLabel.DrawRectangle(p, i, (int) ypos, (float)0.5, (float)0.5);
+            } 
         }
       }
     }
 
 
+    protected double expectedMinY = double.MaxValue;
+    protected double expectedMaxY = double.MinValue;
+    protected double minY = double.MaxValue;
+    protected double maxY = double.MinValue;
 
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
     /// </summary>
     protected override void PreCalculate() {
-      for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-          
-        }
+      expectedMinY=ParameterDict.Exemplar.GetDouble("Border.Min.y");
+      expectedMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+
+      minY = double.MaxValue;
+      maxY = double.MinValue;
+
+      for (int i = 0; i < pData.Width; i++) {
+          for (int j = 0; j < pData.Height; j++) {
+              PixelInfo pInfo = pData.Points[i, j];
+              if (pInfo != null) {
+                  if (minY > pInfo.Coord.Y && pInfo.Coord.Y != 0)
+                      minY = pInfo.Coord.Y;
+                  if (maxY < pInfo.Coord.Y)
+                      maxY = pInfo.Coord.Y;
+                
+              } else {
+              }
+          }
       }
+
     }
 
 

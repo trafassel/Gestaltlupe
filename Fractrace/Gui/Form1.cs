@@ -175,8 +175,10 @@ namespace Fractrace {
       tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
       tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
       tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
-      // Composite  not
-      // Computation.NoOfThreads not
+      tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
+      // The following categories are not used 
+      // Composite
+      // Computation.NoOfThreads
       return tempHash.ToString();
     }
 
@@ -234,6 +236,15 @@ namespace Fractrace {
       inComputeOneStep = false;
       if (paras != null)
         paras.InComputing = false;
+    }
+
+
+      /// <summary>
+      /// Get internal image data.
+      /// </summary>
+      /// <returns></returns>
+    public Image GetImage() {
+        return pictureBox1.Image;
     }
 
 
