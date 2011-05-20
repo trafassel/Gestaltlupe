@@ -115,20 +115,22 @@ namespace Fractrace {
 
           // For Zerotest
           double minDoubleVal = 0.0000000000000001;
+
+          // This does not work for angle combinations:
           rotView = new Rotation();
           rotView.Init(0,0,0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
-          centerDiffX = rotView.Transform(new Vec3(1, 0, 0));
+          centerDiffX = rotView.TransformForNavigation(new Vec3(1, 0, 0));
 
           rotView = new Rotation();
           rotView.Init(0,0,0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
-          centerDiffY = rotView.Transform(new Vec3(0, -1, 0));
+          centerDiffY = rotView.TransformForNavigation(new Vec3(0, -1, 0));
 
           rotView = new Rotation();
           rotView.Init(0, 0, 0,- ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
-          centerDiffZ = rotView.Transform(new Vec3(0, 0, -1));
+          centerDiffZ = rotView.TransformForNavigation(new Vec3(0, 0, -1));
 
           // Set 0-Entries
           if (centerDiffX.X > -minDoubleVal && centerDiffX.X < minDoubleVal)

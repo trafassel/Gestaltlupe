@@ -85,5 +85,53 @@ namespace Fractrace.Geometry {
 
       return new Vec3(x,y,z);
         }
+
+
+
+        /// <summary>
+        /// Like Transform, but with different angle combination.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public  Vec3 TransformForNavigation(Vec3 input) {
+
+          double x = input.X;
+          double y = input.Y;
+          double z = input.Z;
+
+          /* Einbeziehung des Winkels  */
+          double f = Math.PI / 180.0;
+          /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
+          double re = 0, im = 0, a = 0;
+
+         
+          //            xmi = 0; ymi = 0; zmi = 0;
+          x -= CenterX; y -= CenterY; z -= CenterZ;
+
+          // Kippen
+          re = Math.Cos(AngleX * f); im = Math.Sin(AngleX * f);
+          a = re * y - im * z;
+          z = re * z + im * y;
+          y = a;
+
+          // Neigung
+          re = Math.Cos(AngleY * f); im = Math.Sin(AngleY * f);
+          a = re * z - im * x;
+          x = re * x + im * z;
+          z = a;
+
+          // Drehung
+          re = Math.Cos(AngleZ * f);
+          im = Math.Sin(AngleZ * f);
+          a = re * x - im * y;
+          y = re * y + im * x;
+          x = a;
+
+        
+
+          x += CenterX; y += CenterY; z += CenterZ;
+
+          return new Vec3(x, y, z);
+        }
     }
 }
