@@ -367,7 +367,7 @@ namespace Fractrace {
     /// <param name="e"></param>
     private void btnSave_Click(object sender, EventArgs e) {
       SaveFileDialog sd = new SaveFileDialog();
-      sd.Filter = "*.xml|*.xml|*.*|all";
+      sd.Filter = "*.xml|*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
       if (sd.ShowDialog() == DialogResult.OK) {
         ParameterDict.Exemplar.Save(sd.FileName);
       }
@@ -398,7 +398,6 @@ namespace Fractrace {
         Data.Update();
         parameterDictControl1.UpdateFromData();
         ParameterValuesChanged();
-        // preview1.Draw();
         oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
       }
     }
@@ -908,6 +907,53 @@ namespace Fractrace {
       mHistory.CurrentTime = mHistory.Save();
       LoadFromHistory();
       preview1.btnPreview_Click(sender, e);
+    }
+
+
+      /// <summary>
+      /// Add file data to the current data. 
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+    private void btnAppend_Click(object sender, EventArgs e) {
+        OpenFileDialog od = new OpenFileDialog();
+        od.Filter = "*.xml|*.xml;*.tomo|*.*|*.*";
+        if (oldDirectory != "") {
+            od.InitialDirectory = oldDirectory;
+        }
+        if (od.ShowDialog() == DialogResult.OK) {
+            ParameterDict.Exemplar.Append(od.FileName);
+            ShowPicture(od.FileName);
+            Data.Update();
+            parameterDictControl1.UpdateFromData();
+            ParameterValuesChanged();
+            oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
+        }
+
+    }
+
+    /// <summary>
+    /// Save only Gestalt parameters. 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void btnSaveFormula_Click(object sender, EventArgs e) {
+        SaveFileDialog sd = new SaveFileDialog();
+        sd.Filter = "*.xml|*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
+        if (sd.ShowDialog() == DialogResult.OK) {
+            List<string> formulaSettingCategories=new List<string>();
+            formulaSettingCategories.Add("Border");
+            // The both following parameters has always to be saved if Border is saved.
+            formulaSettingCategories.Add("View.Width");
+            formulaSettingCategories.Add("View.Height");
+            formulaSettingCategories.Add("Border");
+            formulaSettingCategories.Add("View.Perspective");
+            formulaSettingCategories.Add("Border");
+            formulaSettingCategories.Add("Transformation");
+            formulaSettingCategories.Add("Formula");
+            formulaSettingCategories.Add("Intern.Formula");
+            ParameterDict.Exemplar.Save(sd.FileName, formulaSettingCategories);
+        }
     }
 
 

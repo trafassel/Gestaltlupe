@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Animation.Steps" Value="40" />
   <Entry Key="Border.Max.x" Value="-0.358676836364043" />
   <Entry Key="Border.Max.y" Value="-0.543887418145016" />
   <Entry Key="Border.Max.z" Value="0.000524199503563555" />
@@ -9,31 +8,6 @@
   <Entry Key="Border.Min.y" Value="-0.558042824106124" />
   <Entry Key="Border.Min.z" Value="-0.00566879060442151" />
   <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Composite.AmbientLight" Value="0" />
-  <Entry Key="Composite.BackgoundDarken" Value="0" />
-  <Entry Key="Composite.Blurring" Value="0" />
-  <Entry Key="Composite.BlurringDeph" Value="0" />
-  <Entry Key="Composite.Color1Factor" Value="50" />
-  <Entry Key="Composite.Color1TestArea" Value="10" />
-  <Entry Key="Composite.FrontLight" Value="1" />
-  <Entry Key="Composite.Normalize" Value="0" />
-  <Entry Key="Composite.Renderer" Value="5" />
-  <Entry Key="Composite.Renderer.Universal.AmbientLightIntensity" Value="0.4" />
-  <Entry Key="Composite.Renderer.Universal.Brightening" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.ComicStyle" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.FrontLightIntensity" Value="0.1" />
-  <Entry Key="Composite.Renderer.Universal.NormalizeColors" Value="0" />
-  <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseDarken" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseMedianColorFromFormula" Value="0" />
-  <Entry Key="Composite.Shininess" Value="2" />
-  <Entry Key="Composite.UseAmbient" Value="1" />
-  <Entry Key="Composite.UseColor1" Value="0" />
-  <Entry Key="Composite.UseDarken" Value="1" />
-  <Entry Key="Composite.UseDerivation" Value="1" />
-  <Entry Key="Composite.UseMedian" Value="0" />
-  <Entry Key="Computation.NoOfThreads" Value="8" />
   <Entry Key="Formula.Mandelbulb.Pow1" Value="1" />
   <Entry Key="Formula.Mandelbulb.Pow2" Value="8" />
   <Entry Key="Formula.Mandelbulb.Pow3" Value="8" />
@@ -45,7 +19,6 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="18" />
   <Entry Key="Intern.Formula.Source" Value="/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;          gr1=GetDouble(&quot;Formula.Static.Cycles&quot;);&#xD;&#xA;int tempGr=(int)gr1;&#xD;&#xA;gr1Frac=gr1- tempGr;&#xD;&#xA;gr1=1-gr1Frac;&#xD;&#xA;gr1*=2.4;&#xD;&#xA;    gr2=GetDouble(&quot;Formula.Static.MinCycle&quot;);&#xD;&#xA;tempGr=(int)gr2;&#xD;&#xA;gr2Frac=gr2- tempGr;&#xD;&#xA;gr2=1-gr2Frac;&#xD;&#xA;gr2*=2.4;&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA; double gr1=0;&#xD;&#xA;double gr1Frac=0;&#xD;&#xA; double gr2=0;&#xD;&#xA;double gr2Frac=0;&#xD;&#xA;&#xD;&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;            double aar, aai, aaj;&#xD;&#xA;            double aar2, aai2, aaj2;&#xD;&#xA;            long tw;&#xD;&#xA;            int n;&#xD;&#xA;            int pow = 8; // n=8 entspricht dem Mandelbulb&#xD;&#xA;                double gr =Math.Pow(10,gr1)+1.0;  //   10; // Ab diesem Wert liegt mit Sicherheit Nichtzugehörigkeit zur Menge vor.&#xD;&#xA;if(invers)&#xD;&#xA;gr =Math.Pow(10,gr2)+1.0;  &#xD;&#xA;&#xD;&#xA;double grFrac=gr1Frac;&#xD;&#xA;if(invers)&#xD;&#xA;grFrac=gr2Frac;&#xD;&#xA;&#xD;&#xA;            double theta, phi;&#xD;&#xA;&#xD;&#xA;double ar2=ar,  ai2=ai,  aj2=aj;&#xD;&#xA;double br2=br,  bi2=bi,  bj2=bj;&#xD;&#xA;&#xD;&#xA;//TODO: Besser:  Eigentlich Zufall&#xD;&#xA; System.Random rand = new Random(); &#xD;&#xA;&#xD;&#xA;br2+=0.001*(rand.NextDouble()-0.5);&#xD;&#xA;bi2+=0.001*(rand.NextDouble()-0.5);&#xD;&#xA;bj2+=0.001*(rand.NextDouble()-0.5);&#xD;&#xA;&#xD;&#xA;            double r_n = 0;&#xD;&#xA;            aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;            aar2 = ar2 * ar2; aai2 = ai2 * ai2; aaj2 = aj2 * aj2;&#xD;&#xA;            tw = 0L;&#xD;&#xA;            double r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;            double r2 = Math.Sqrt(aar2 + aai2 + aaj2);&#xD;&#xA;&#xD;&#xA;             double      phi_pow;&#xD;&#xA;             double       theta_pow;&#xD;&#xA;             double    sin_theta_pow;&#xD;&#xA;              double  rn_sin_theta_pow;&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=0;&#xD;&#xA;additionalPointInfo.green=0;&#xD;&#xA;additionalPointInfo.blue=0;&#xD;&#xA;&#xD;&#xA;double red=0; double green=0; double blue=0;&#xD;&#xA;&#xD;&#xA;            for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;&#xD;&#xA;                theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xD;&#xA;                phi = Math.Atan2(ai, ar);&#xD;&#xA;                r_n = Math.Pow(r, pow);&#xD;&#xA;&#xD;&#xA;                phi_pow=phi*pow;&#xD;&#xA;                theta_pow=theta*pow;&#xD;&#xA;                sin_theta_pow=Math.Sin(theta_pow);&#xD;&#xA;               rn_sin_theta_pow=r_n* sin_theta_pow;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;                ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;&#xD;&#xA;                ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;&#xD;&#xA;                aj = r_n * Math.Cos(theta_pow)+bj;&#xD;&#xA;&#xD;&#xA;                aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;                r =aar + aai + aaj;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;// Dasselbe nochmal mit dem Nachbarpunkt&#xD;&#xA;                theta = Math.Atan2(Math.Sqrt(aar2 + aai2), aj2);&#xD;&#xA;                phi = Math.Atan2(ai2, ar2);&#xD;&#xA;                r_n = Math.Pow(r2, pow);&#xD;&#xA;&#xD;&#xA;                phi_pow=phi*pow;&#xD;&#xA;                theta_pow=theta*pow;&#xD;&#xA;                sin_theta_pow=Math.Sin(theta_pow);&#xD;&#xA;               rn_sin_theta_pow=r_n* sin_theta_pow;&#xD;&#xA;&#xD;&#xA;                ar2 =  rn_sin_theta_pow * Math.Cos(phi_pow)+br2;&#xD;&#xA;                ai2 = rn_sin_theta_pow * Math.Sin(phi_pow)+bi2;&#xD;&#xA;                aj2 = r_n * Math.Cos(theta_pow)+bj2;&#xD;&#xA;&#xD;&#xA;                aar2 = ar2 * ar2; aai2 = ai2 * ai2; aaj2 = aj2 * aj2;&#xD;&#xA;                r2 =aar2 + aai2 + aaj2;&#xD;&#xA;*/&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if(n&lt;zkl-1) {&#xD;&#xA;red+=aar/r;&#xD;&#xA;green+=aai/r;&#xD;&#xA;blue+=aaj/r;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;if(n==zkl-1) {&#xD;&#xA;red+=grFrac*aar/r;&#xD;&#xA;green+=grFrac*aai/r;&#xD;&#xA;blue+=grFrac*aaj/r;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;r= Math.Sqrt(r);&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;double diffr=ar2-ar;&#xD;&#xA;double diffi=ai2-ai;&#xD;&#xA;double diffj=aj2-aj;&#xD;&#xA;double rr=diffr*diffr+diffi*diffi+diffj*diffj;&#xD;&#xA;&#xD;&#xA;double dd=35000;&#xD;&#xA;red=dd;&#xD;&#xA;green=Math.Max(0,rr-dd);&#xD;&#xA;blue=dd;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;red=aar/aai;&#xD;&#xA;green=aai/aaj;&#xD;&#xA;blue=aaj/aar;&#xD;&#xA;*/&#xD;&#xA;   // if (rr /r&gt; 0.1) { tw = n; break; }&#xD;&#xA;               if (r &gt; gr) { tw = n; break; }&#xD;&#xA;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=red;&#xD;&#xA;additionalPointInfo.green=green;&#xD;&#xA;additionalPointInfo.blue=blue;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;            if (invers) {&#xD;&#xA;                if (tw == 0)&#xD;&#xA;                    tw = 1;&#xD;&#xA;                else&#xD;&#xA;                    tw = 0;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;if(red&lt;=blue || red&lt;=green) {&#xD;&#xA;tw=1;&#xD;&#xA;}*/&#xD;&#xA;            return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;" />
-  <Entry Key="test2" Value="df" />
   <Entry Key="Transformation.3.AngleX" Value="0" />
   <Entry Key="Transformation.3.AngleY" Value="0" />
   <Entry Key="Transformation.3.AngleZ" Value="0" />
@@ -55,17 +28,13 @@
   <Entry Key="Transformation.AngleX" Value="16" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="70" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="0" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.3" />
   <Entry Key="Transformation.Stereo.Angle" Value="-4" />
   <Entry Key="Transformation.Stereo.EyeDistance" Value="0.02" />
-  <Entry Key="View.ClassicView" Value="0" />
-  <Entry Key="View.Deph" Value="1800" />
   <Entry Key="View.Height" Value="720" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.PosterX" Value="0" />
-  <Entry Key="View.PosterZ" Value="0" />
-  <Entry Key="View.Raster" Value="2" />
-  <Entry Key="View.Size" Value="0.2" />
   <Entry Key="View.Width" Value="1280" />
-  <Entry Key="View.Zoom" Value="1" />
 </ParameterDict>

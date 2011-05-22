@@ -130,7 +130,7 @@ namespace Fractrace {
       ParameterDict.Exemplar["View.PosterZ"] = "0";
 
       // Default animation steps while adding the frame in the animation control. 
-      ParameterDict.Exemplar["Animation.Steps"] = "300";
+      ParameterDict.Exemplar["Animation.Steps"] = "30";
 
       // Strength of blurring (0-1)  [used in Renderer 2-4]
       ParameterDict.Exemplar["Composite.Blurring"] = "0";
@@ -198,11 +198,11 @@ namespace Fractrace {
       // Activates Background darkening in PlasicRenderer
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseDarken"] = "0";
       // Corresponds to the number of shadows in PlasicRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "12";
       // Intensity of the FieldOfView
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "4";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "1";
       // Intensity of the Surface Color
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "0.5";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "1";
       // If ColorGreyness=1, no color is rendered
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorGreyness"] = "0";
       // Use Light
