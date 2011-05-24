@@ -88,10 +88,71 @@ namespace Fractrace {
       // Values from 1 to 26 corresponds to some inbuild formulas.
       // Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.
       // Formula.Static.Formula=-2: Use "Intern.Formula.Source" in julia mode.
-      ParameterDict.Exemplar["Formula.Static.Formula"] = "24";
+      ParameterDict.Exemplar["Formula.Static.Formula"] = "-1";
 
       // Source code of the formula, if Formula.Static.Formula < 0.
-      ParameterDict.Exemplar["Intern.Formula.Source"] = "";
+      ParameterDict.Exemplar["Intern.Formula.Source"] = @"
+public override void Init() { 
+  base.Init();
+  additionalPointInfo=new AdditionalPointInfo();
+  gr1=GetDouble(""Formula.Static.Cycles"");
+  int tempGr=(int)gr1;
+  gr1=gr1- tempGr;
+  gr1=1-gr1;
+  gr1*=2.4;
+}
+
+double gr1=0;
+
+public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
+  double aar, aai, aaj;
+  long tw;
+  int n;
+  int pow = 8; // n=8 default Mandelbulb
+  double gr =Math.Pow(10,gr1)+1.0;  // Bailout
+  double theta, phi;
+  double r_n = 0;
+  aar = ar * ar; aai = ai * ai; aaj = aj * aj;
+  tw = 0L;
+  double r = Math.Sqrt(aar + aai + aaj);
+  double  phi_pow,theta_pow,sin_theta_pow,rn_sin_theta_pow;
+
+  additionalPointInfo.red=0;
+  additionalPointInfo.green=0;
+  additionalPointInfo.blue=0;
+
+  for (n = 1; n < zkl; n++) {
+    theta = Math.Atan2(Math.Sqrt(aar + aai), aj);
+    phi = Math.Atan2(ai, ar);
+    r_n = Math.Pow(r, pow);
+    phi_pow=phi*pow;
+    theta_pow=theta*pow;
+    sin_theta_pow=Math.Sin(theta_pow);
+    rn_sin_theta_pow=r_n* sin_theta_pow;
+    ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;
+    ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;
+    aj = r_n * Math.Cos(theta_pow)+bj;
+    aar = ar * ar; aai = ai * ai; aaj = aj * aj;
+    r = Math.Sqrt(aar + aai + aaj);
+
+    additionalPointInfo.red=aar;
+    additionalPointInfo.green=aai;
+    additionalPointInfo.blue=aaj;
+
+    if (r > gr) { tw = n; break; }
+  }
+
+  if (invers) {
+     if (tw == 0)
+        tw = 1;
+      else
+        tw = 0;
+  }
+  return (tw);
+}
+
+
+";
 
       // Rendering Quality.
       // View.Raster=1: best quality
@@ -108,10 +169,10 @@ namespace Fractrace {
       ParameterDict.Exemplar["View.Perspective"] = "1";
 
       // View.Size*View.Width == width of the rendered bitmap.
-      ParameterDict.Exemplar["View.Width"] = "640";
+      ParameterDict.Exemplar["View.Width"] = "1200";
 
       // View.Size*View.Height == height of the rendered bitmap.
-      ParameterDict.Exemplar["View.Height"] = "480";
+      ParameterDict.Exemplar["View.Height"] = "1200";
 
       // Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but 
       // more time consuming.

@@ -957,6 +957,19 @@ namespace Fractrace {
     }
 
 
+    /// <summary>
+    /// Handles the Click event of the btBulk control.
+    /// The formula parameters and the formula itself are combined in a compact text,
+    /// which can later be copied into the formula text window to get the current
+    /// formula configuration.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void btBulk_Click(object sender, EventArgs e) {
+      tbInfoOutput.Text = InfoGenerator.GenerateCompressedFormula();
+    }
+
+
 
   }
 }

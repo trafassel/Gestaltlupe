@@ -56,10 +56,34 @@ namespace Fractrace.TomoGeometry {
           return ParameterDict.Exemplar.GetDouble(id);
         }
 
+
+        public string GetString(string id) {
+          return ParameterDict.Exemplar[id];
+        }
+
+
         public void AddValue(string id, double value) {
           ParameterDict.Exemplar[id] = "";
           ParameterDict.Exemplar.SetValue(id, value.ToString(),false);
         }
+
+        /// <summary>
+        /// Delete the entry with given id complete from the Properties. 
+        /// </summary>
+        /// <param name="id">The id.</param>
+        public void RemoveProperty(string id) {
+          ParameterDict.Exemplar.RemoveProperty(id);
+        }
+
+
+        /// <summary>
+        /// Sets a bulk of parameters 
+        /// </summary>
+        /// <param name="text">The text.</param>
+        public void SetParameterBulk(string text) {
+          ParameterDict.Exemplar.AppendFromText(text);
+        }
+
 
         /// <summary>
         /// Wird aufgerufen, kurz bevor der Scanalgorithmus beginnt. Zu diesem Zeitpunkt sind alle festen Parameter der

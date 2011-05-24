@@ -24,7 +24,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Liefert das Verzeichnis, unter dem die angeforderten Dateinamen gespeichert werden.
+        /// Get the directory where the created bitmaps and the corresponding settings are stored.
         /// </summary>
         public string ExportDir {
             get {
@@ -38,7 +38,9 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Beim Anlegen wird der Ausgabepfad angelegt.
+        /// Initializes a new instance of the <see cref="FileSystem"/> class.
+        /// Warning: Each time a new instance of the class is created, a 
+        /// new directory in the user home path is created. 
         /// </summary>
         protected FileSystem() {
             int i = 0;
@@ -59,9 +61,13 @@ namespace Fractrace {
             System.IO.Directory.CreateDirectory(mProjectDir);
         }
 
-        protected object fileSync = new object();
+     
 
+        /// <summary>
+        /// Current File count (start with 10000 for easy sorting in video processing software)
+        /// </summary>
         protected int fileCount = 10000;
+
 
         /// <summary>
         /// Liefert einen passenden Dateinamen.

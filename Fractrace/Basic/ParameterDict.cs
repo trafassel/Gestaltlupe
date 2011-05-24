@@ -168,6 +168,26 @@ namespace Fractrace.Basic {
 
 
         /// <summary>
+        /// The text 
+        /// </summary>
+        /// <param name="text">The text.</param>
+        public void AppendFromText(string text) {
+           lock (mEntries) {
+          XmlDocument xdoc = new XmlDocument();
+          XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
+          xnode.InnerXml = text;
+          foreach (XmlNode entryNode in xnode) {
+            if (entryNode.Name == "Entry") {
+              string key = entryNode.Attributes.GetNamedItem("Key").Value;
+              string value = entryNode.Attributes.GetNamedItem("Value").Value;
+                mEntries[key] = value;
+              }
+            }
+          }
+        }
+
+
+        /// <summary>
         /// Gets or sets the <see cref="System.String"/> with the specified name.
         /// </summary>
         /// <value></value>
@@ -224,6 +244,17 @@ namespace Fractrace.Basic {
 
 
         /// <summary>
+        /// Removes the Entry with the given name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        public void RemoveProperty(string name) {
+          if (mEntries.ContainsKey(name)) {
+            mEntries.Remove(name);
+          }
+        }
+
+
+        /// <summary>
         /// Public access to the internal dictionary.
         /// </summary>
         public Dictionary<string, string> Entries {
@@ -266,7 +297,17 @@ namespace Fractrace.Basic {
             byte[] buffer = new byte[Encoding.ASCII.GetByteCount(bigstr)];
             buffer = Encoding.ASCII.GetBytes(bigstr);
             byte[] buffer2 = sha.ComputeHash(buffer);
-            return Encoding.ASCII.GetString(buffer2);
+
+            string temp = "";
+            StringBuilder retVal = new StringBuilder();
+            for (int i = 0; i < buffer2.Length; i++) {
+              temp = Convert.ToString(buffer2[i], 16);
+              if (temp.Length == 1)
+                temp = "0" + temp;
+              retVal.Append(temp);
+            }
+            return retVal.ToString();
+          //  return Encoding.ASCII.GetString(buffer2);
         }
 
 
