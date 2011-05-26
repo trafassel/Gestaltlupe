@@ -32,7 +32,7 @@ namespace Fractrace {
       this.btnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
       this.btnPreview.Location = new System.Drawing.Point(0, 0);
       this.btnPreview.Name = "btnPreview";
-      this.btnPreview.Size = new System.Drawing.Size(150, 140);
+      this.btnPreview.Size = new System.Drawing.Size(50, 40);
       this.btnPreview.TabIndex = 1;
       this.btnPreview.UseVisualStyleBackColor = true;
       //this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
@@ -124,6 +124,16 @@ namespace Fractrace {
     string oldRenderer = "";
 
 
+
+      /// <summary>
+    /// Set the size of the labelImage
+      /// </summary>
+    public void InitLabelImage() {
+        Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+        btnPreview.BackgroundImage = labelImage;
+        grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
+    }
+
     /// <summary>
     /// Neuzeichnen.
     /// </summary>
@@ -171,7 +181,10 @@ namespace Fractrace {
                   pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
               else
                   pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
+            //  btnPreview
             pArt.Paint(grLabel);
+     
+             // btnPreview.Size.Width
             Application.DoEvents();
             this.Refresh();
             if (RenderingEnds != null)

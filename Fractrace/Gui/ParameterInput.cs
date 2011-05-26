@@ -34,7 +34,7 @@ namespace Fractrace {
       mParameter.SetToDefault();
       ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
       //additional PreviewControl for geometry informations (not used yet)
-      preview2.IsRightView = true;
+      //preview2.IsRightView = true;
       navigateControl1.Init(preview1, preview2, this);
       this.animationControl1.Init(mHistory);
       preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
@@ -45,6 +45,7 @@ namespace Fractrace {
             version = infos[1];
 
       this.Text = "Gestaltlupe"+version+"    ["+System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir)+"]";
+      tabControl1.SelectedIndex = 1;
     }
 
 
@@ -656,6 +657,8 @@ namespace Fractrace {
       mHistory.CurrentTime = mHistory.Time;
       UpdateHistoryControl();
       SavePicData();
+      //preview2.Draw();
+      preview2.InitLabelImage();
       preview2.Redraw(preview1.Iterate,7); // Renderer 7 is able to display a front view
     }
 
@@ -750,6 +753,8 @@ namespace Fractrace {
           // Ende
           mPosterStep = 0;
           mPosterMode = false;
+          ParameterDict.Exemplar.SetInt("View.PosterX", 0);
+          ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
           return;
       }
 
@@ -757,8 +762,6 @@ namespace Fractrace {
       ParameterDict.Exemplar.SetInt("View.PosterZ", yi);
       ForceRedraw();
       mPosterStep++;
-      ParameterDict.Exemplar.SetInt("View.PosterX", 0);
-      ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
     }
 
     private void navigateControl1_Load_1(object sender, EventArgs e) {

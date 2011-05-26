@@ -236,6 +236,8 @@ namespace Fractrace {
       inComputeOneStep = false;
       if (paras != null)
         paras.InComputing = false;
+      //ParameterDict.Exemplar.SetInt("View.PosterX", 0);
+      //ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
     }
 
 

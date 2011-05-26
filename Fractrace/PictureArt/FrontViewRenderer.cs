@@ -41,21 +41,28 @@ namespace Fractrace.PictureArt {
               grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
           }
       }
-      for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-          //Pen p = new Pen(GetColor(i, j));
-            Pen p = new Pen(Color.Black);
-            // Switch to front draw
-            PixelInfo pInfo = pData.Points[i, j];
-            if (pInfo != null) {
-                double y = pInfo.Coord.Y;
-                double dheight = height;
-                double ypos = y - expectedMinY;
-                ypos = ypos / (expectedMaxY - expectedMinY);
-                ypos = dheight-dheight * ypos;
-                grLabel.DrawRectangle(p, i, (int) ypos, (float)0.5, (float)0.5);
-            } 
-        }
+
+
+      // ?? Eigentlich sollte width==grLabel.VisibleClipBounds.Width gelten.
+
+      for (int i = 0; i < width && i < grLabel.VisibleClipBounds.Width; i++) {
+          for (int j = 0; j < grLabel.VisibleClipBounds.Height && j < height; j++) {
+              //Pen p = new Pen(GetColor(i, j)); this
+              Pen p = new Pen(Color.Black);
+              // Switch to front draw
+              PixelInfo pInfo = pData.Points[i, j];
+              if (pInfo != null) {
+                  double y = pInfo.Coord.Y;
+                  if (y != 0) {
+                  //double y = pInfo.Coord.Z;
+                  double dheight = height;
+                  double ypos = y - expectedMinY;
+                  ypos = ypos / (expectedMaxY - expectedMinY);
+                  ypos = dheight - dheight * ypos;
+                  grLabel.DrawRectangle(p, i, (int)ypos, (float)0.5, (float)0.5);
+                  }
+              }
+          }
       }
     }
 
