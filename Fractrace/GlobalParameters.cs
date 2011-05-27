@@ -134,10 +134,10 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
     aj = r_n * Math.Cos(theta_pow)+bj;
     aar = ar * ar; aai = ai * ai; aaj = aj * aj;
     r = Math.Sqrt(aar + aai + aaj);
-    if (r > gr) { tw = n; break; }
     additionalPointInfo.red=aar;
     additionalPointInfo.green=aai;
     additionalPointInfo.blue=aaj;
+    if (r > gr) { tw = n; break; }
   }
 
   if (invers) {
