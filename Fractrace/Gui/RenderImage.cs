@@ -187,7 +187,6 @@ namespace Fractrace
         /// <param name="otherIterate"></param>
         /// <param name="renderer"></param>
         public virtual void Redraw(Iterate otherIterate, int renderer) {
-
             fixedRenderer = renderer;
             iter = otherIterate;
             OneStepEnds();

@@ -770,6 +770,74 @@ double xx, yy, zz;
         }
 
 
+        /// <summary>
+        /// Transform the point (x,y,z) corresponding the defined rotations.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="z">The z.</param>
+        /// <returns></returns>
+        public Vec3 GetTransformWithoutProjection(double x, double y, double z) {
+            Vec3 retVal = new Vec3();
+
+            double a, f, re, im, xmi, ymi, zmi;
+
+            try {
+
+              if (mProjection != null) {
+                Vec3 projPoint = mProjection.ReverseTransform(new Vec3(x, y, z));
+                x = projPoint.X;
+                y = projPoint.Y;
+                z = projPoint.Z;
+              }
+
+                if (mTransforms.Count > 0) {
+                    Vec3 vec = new Vec3(x, y, z);
+                    foreach (Transform3D trans in mTransforms) {
+                        vec = trans.Transform(vec);
+                    }
+                    x = vec.X;
+                    y = vec.Y;
+                    z = vec.Z;
+                }
+
+                /* Einbeziehung des Winkels  */
+                f = Math.PI / 180.0;
+                /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
+                // Drehung
+                xmi = 0; ymi = 0; zmi = 0;
+                x -= xmi; y -= ymi; z -= zmi;
+                re = Math.Cos(mGlobalAngleZ * f); im = Math.Sin(mGlobalAngleZ * f);
+                a = re * x - im * y;
+                y = re * y + im * x;
+                x = a;
+                // Neigung
+                re = Math.Cos(mGlobalAngleY * f); im = Math.Sin(mGlobalAngleY * f);
+                a = re * z - im * x;
+                x = re * x + im * z;
+                z = a;
+                // Kippen
+                re = Math.Cos(mGlobalAngleX * f); im = Math.Sin(mGlobalAngleX * f);
+                a = re * y - im * z;
+                z = re * z + im * y;
+                y = a;
+                x += xmi; y += ymi; z += zmi;
+
+                retVal.X = x;
+                retVal.Y = y;
+                retVal.Z = z;
+            } catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                retVal.X = x;
+                retVal.Y = y;
+                retVal.Z = z;
+            }
+
+            return retVal;
+
+        }
+
+
         protected double mGlobalAngleX = 0;
 
         protected double mGlobalAngleY = 0;

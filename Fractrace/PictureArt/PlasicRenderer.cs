@@ -112,11 +112,11 @@ namespace Fractrace.PictureArt {
         private double colorFactorGreen = 1;
         private double colorFactorBlue = 1;
 
-         private double lightIntensity = 0.5;
+        private double lightIntensity = 0.5;
 
-           // If ColorGreyness=1, no color is rendered
-        private double colorGreyness=0;
-      
+        // If ColorGreyness=1, no color is rendered
+        private double colorGreyness = 0;
+
 
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
@@ -135,18 +135,18 @@ namespace Fractrace.PictureArt {
             lightRay.Z = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Z");
             useSharpShadow = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseSharpShadow");
 
-             colorFactorRed = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Red");
-             colorFactorGreen = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Green");
-             colorFactorBlue = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Blue");
+            colorFactorRed = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Red");
+            colorFactorGreen = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Green");
+            colorFactorBlue = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Blue");
 
-             lightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.LightIntensity");
+            lightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.LightIntensity");
 
-             colorGreyness = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorGreyness");
-    
-             if (lightIntensity > 1)
-                 lightIntensity = 1;
-             if (lightIntensity < 0)
-                 lightIntensity = 0;
+            colorGreyness = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorGreyness");
+
+            if (lightIntensity > 1)
+                lightIntensity = 1;
+            if (lightIntensity < 0)
+                lightIntensity = 0;
 
             picInfo = new int[pData.Width, pData.Height];
 
@@ -158,7 +158,8 @@ namespace Fractrace.PictureArt {
             CreateStatisticInfo();
             if (useSharpShadow)
                 CreateSharpShadow();
-            CreateSmoothNormales();
+            // Testweise auskommentiert (braucht man eventuell auch nicht):
+            // CreateSmoothNormales();
             CreateSmoothDeph();
             CreateShadowInfo();
             DrawPlane();
@@ -276,10 +277,10 @@ namespace Fractrace.PictureArt {
         /// Der Schlagschatten wird erzeugt.
         /// </summary>
         protected void CreateSharpShadow() {
-          // Erst ab 4 Pixel handelt es sich um einen Schlagschatten
-          int shadowIntensityCount=4;
-          // Je höher, desto größer die Rechenzeit und desto genau die Schlagschattenberechnung.
-          int shadowCorrectness=100;
+            // Erst ab 4 Pixel handelt es sich um einen Schlagschatten
+            int shadowIntensityCount = 4;
+            // Je höher, desto größer die Rechenzeit und desto genau die Schlagschattenberechnung.
+            int shadowCorrectness = 100;
             double rayDist = minPoint.Dist(maxPoint);
             sharpShadow = new double[pData.Width, pData.Height];
             double[,] sharpTempShadow = new double[pData.Width, pData.Height];
@@ -299,16 +300,16 @@ namespace Fractrace.PictureArt {
                         normal = pInfo.Normal;
                         sharpShadow[i, j] = 0;
                         Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-                      int sharpShadowIntensity=IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside,shadowIntensityCount,shadowCorrectness);
-                          sharpShadow[i, j] = sharpShadowIntensity/((double)shadowIntensityCount);
-                        }
+                        int sharpShadowIntensity = IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside, shadowIntensityCount, shadowCorrectness);
+                        sharpShadow[i, j] = sharpShadowIntensity / ((double)shadowIntensityCount);
                     }
                 }
+            }
 
             double[,] sShad1 = sharpShadow;
             double[,] sShad2 = sharpTempShadow;
 
-            for(int m=0;m<2;m++) {
+            for (int m = 0; m < 2; m++) {
 
                 for (int i = 0; i < pData.Width; i++) {
                     for (int j = 0; j < pData.Height; j++) {
@@ -330,7 +331,7 @@ namespace Fractrace.PictureArt {
                 }
 
                 sShad1 = sharpTempShadow;
-                sShad2 = sharpShadow ;
+                sShad2 = sharpShadow;
             }
             //sharpShadow
 
@@ -376,19 +377,25 @@ namespace Fractrace.PictureArt {
                 }
             }
 
-            Vec3 normal = normalesSmooth2[x, y];
+            Vec3 normal = null;
+                
+//               normal= normalesSmooth2[x, y];
             if (normal == null) { normal = pInfo.Normal; }
             // Testweise original Normale verwenden
-            normal = pInfo.Normal; 
+            normal = pInfo.Normal;
             // TODO: Obiges auskommentieren
             if (normal == null)
                 return new Vec3(0, 0, 0);
 
             // tempcoord2 enthält die umgerechnete Oberflächennormale. 
             //Vec3 tempcoord2 = formula.GetTransform(tempCoord.X, tempCoord.Y, tempCoord.Z);
-
-            Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-            Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + normal.X, pInfo.Coord.Y + normal.Y, pInfo.Coord.Z + normal.Z);
+            double tfac = 1;
+            
+            Vec3 coord = formula.GetTransformWithoutProjection(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+            Vec3 tempcoord2 = formula.GetTransformWithoutProjection(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
+            
+            //Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+            //Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X +tfac* normal.X, pInfo.Coord.Y +tfac* normal.Y, pInfo.Coord.Z +tfac* normal.Z);
             tempcoord2.X -= coord.X;
             tempcoord2.Y -= coord.Y;
             tempcoord2.Z -= coord.Z;
@@ -397,8 +404,10 @@ namespace Fractrace.PictureArt {
             tempcoord2.Normalize();
 
             if (pInfo.Normal != null) {
-                    light = GetLight(tempcoord2);
-                    if (sharpShadow!=null) { light=light.Mult(1-sharpShadow[x, y]);}
+                light = GetLight(tempcoord2);
+                //light = GetLight(pInfo.Normal);
+
+                if (sharpShadow != null) { light = light.Mult(1 - sharpShadow[x, y]); }
             }
 
             retVal.X = light.X;
@@ -410,17 +419,17 @@ namespace Fractrace.PictureArt {
             double d3 = d1 / d2;
 
 
-           // lightIntensity
-             retVal.X = lightIntensity*retVal.X+    (1-lightIntensity)*    (1-shadowPlane[x, y]);
-             retVal.Y = lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
-             retVal.Z = lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
+            // lightIntensity
+            retVal.X = lightIntensity * retVal.X + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
+            retVal.Y = lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
+            retVal.Z = lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]);
 
-                /*
-            double shadowlight = 0.34 * shadowPlane[x, y];
-            retVal.Z = 0.2 * retVal.Z + 0.8 * Math.Max(0, retVal.Z - shadowlight);
-            retVal.X = 0.2 * retVal.X + 0.8 * Math.Max(0, retVal.X - shadowlight);
-            retVal.Y = 0.2 * retVal.Y + 0.8 * Math.Max(0, retVal.Y - shadowlight);
-                 */
+            /*
+        double shadowlight = 0.34 * shadowPlane[x, y];
+        retVal.Z = 0.2 * retVal.Z + 0.8 * Math.Max(0, retVal.Z - shadowlight);
+        retVal.X = 0.2 * retVal.X + 0.8 * Math.Max(0, retVal.X - shadowlight);
+        retVal.Y = 0.2 * retVal.Y + 0.8 * Math.Max(0, retVal.Y - shadowlight);
+             */
 
             if (retVal.Y < 0)
                 retVal.Y = 0;
@@ -439,7 +448,7 @@ namespace Fractrace.PictureArt {
             if (useAdditionalColorinfo) {
                 if (pInfo != null && pInfo.AdditionalInfo != null) {
                     // Normalisieren;
-                    double r1 =colorFactorRed* Math.Pow(pInfo.AdditionalInfo.red,colorIntensity);
+                    double r1 = colorFactorRed * Math.Pow(pInfo.AdditionalInfo.red, colorIntensity);
                     double g1 = colorFactorGreen * Math.Pow(pInfo.AdditionalInfo.green, colorIntensity);
                     double b1 = colorFactorBlue * Math.Pow(pInfo.AdditionalInfo.blue, colorIntensity);
                     if (r1 < 0)
@@ -448,10 +457,10 @@ namespace Fractrace.PictureArt {
                         g1 = -g1;
                     if (b1 < 0)
                         b1 = -b1;
- 
+
                     double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
                     norm = norm / 3.0;
-                    r1 = r1/ norm;
+                    r1 = r1 / norm;
                     g1 = g1 / norm;
                     b1 = b1 / norm;
 
@@ -472,7 +481,7 @@ namespace Fractrace.PictureArt {
                         retVal.X *= r1;
                         retVal.Y *= g1;
                         retVal.Z *= b1;
-                    }                    
+                    }
                 }
             }
             if (retVal.Y < 0)
@@ -575,19 +584,20 @@ namespace Fractrace.PictureArt {
             double shadowVal = 0.4;
 
             for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
+                //         for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
 
                 switch (shadowMode) {
                     case 0:
-                        diffy = 0.3*shadowJustify * (maxY - minY);
-                        shadowVal = 0.16;
+                        diffy = 0.3 * shadowJustify * (maxY - minY);
+                        shadowVal = 0.25;
                         break;
                     case 1:
                         diffy = shadowJustify * (maxY - minY);
                         shadowVal = 0.4;
                         break;
                     case 2:
-                        diffy = 3.0*shadowJustify * (maxY - minY);
-                        shadowVal = 0.18;
+                        diffy = 3.0 * shadowJustify * (maxY - minY);
+                        shadowVal = 0.25;
                         break;
 
                 }
@@ -598,24 +608,59 @@ namespace Fractrace.PictureArt {
                     ydv = diffy / ((double)(pData.Height));
                     ydh = diffy / ((double)(pData.Width));
 
-                    yd *= 2.0 * shadowIter / dShadowNumber; ydv *= 1.2 * shadowIter / dShadowNumber; ydh *= 1.2 * shadowIter / dShadowNumber;
 
+                    yd *= 2.0 * (double)shadowIter / (double)dShadowNumber; ydv *= 1.2 * (double)shadowIter / (double)dShadowNumber; ydh *= 1.2 * (double)shadowIter / (double)dShadowNumber;
+
+                    // Clean Plane
                     for (int i = 0; i < pData.Width; i++) {
                         for (int j = 0; j < pData.Height; j++) {
-                            //shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
                             shadowTempPlane[i, j] = 0;
                         }
                     }
+
                     for (int i = 0; i < pData.Width; i++) {
                         for (int j = 0; j < pData.Height; j++) {
-                            shadowInfo11[i, j] = smoothDeph1[i, j];
-                            shadowInfo10[i, j] = smoothDeph1[i, j];
-                            shadowInfo01[i, j] = smoothDeph1[i, j];
-                            shadowInfo00[i, j] = smoothDeph1[i, j];
-                            shadowInfo11sharp[i, j] = smoothDeph1[i, j];
-                            shadowInfo10sharp[i, j] = smoothDeph1[i, j];
-                            shadowInfo01sharp[i, j] = smoothDeph1[i, j];
-                            shadowInfo00sharp[i, j] = smoothDeph1[i, j];
+                            PixelInfo pInfo = pData.Points[i, j];
+                            if (pInfo != null) {
+                                /*
+                                shadowInfo11[i, j] = pInfo.Coord.Y;
+                                shadowInfo10[i, j] = pInfo.Coord.Y;
+                                shadowInfo01[i, j] = pInfo.Coord.Y;
+                                shadowInfo00[i, j] = pInfo.Coord.Y;
+                                shadowInfo11sharp[i, j] = pInfo.Coord.Y;
+                                shadowInfo10sharp[i, j] = pInfo.Coord.Y;
+                                shadowInfo01sharp[i, j] = pInfo.Coord.Y;
+                                shadowInfo00sharp[i, j] = pInfo.Coord.Y;
+                                 */
+                                shadowInfo11[i, j] = smoothDeph1[i, j];
+                                shadowInfo10[i, j] = smoothDeph1[i, j];
+                                shadowInfo01[i, j] = smoothDeph1[i, j];
+                                shadowInfo00[i, j] = smoothDeph1[i, j];
+                                shadowInfo11sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo10sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo01sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo00sharp[i, j] = smoothDeph1[i, j];
+                            } else {
+
+                                shadowInfo11[i, j] = smoothDeph1[i, j];
+                                shadowInfo10[i, j] = smoothDeph1[i, j];
+                                shadowInfo01[i, j] = smoothDeph1[i, j];
+                                shadowInfo00[i, j] = smoothDeph1[i, j];
+                                shadowInfo11sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo10sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo01sharp[i, j] = smoothDeph1[i, j];
+                                shadowInfo00sharp[i, j] = smoothDeph1[i, j];
+                                /*
+                               shadowInfo11[i, j] = 0;
+                               shadowInfo10[i, j] = 0;
+                               shadowInfo01[i, j] = 0;
+                               shadowInfo00[i, j] = 0;
+                               shadowInfo11sharp[i, j] = 0;
+                               shadowInfo10sharp[i, j] = 0;
+                               shadowInfo01sharp[i, j] = 0;
+                               shadowInfo00sharp[i, j] = 0;
+                               */
+                            }
                         }
                     }
 
@@ -676,6 +721,7 @@ namespace Fractrace.PictureArt {
                             double sharpShadowHeight = 0;
 
                             for (int k = 0; k < 4; k++) {
+                                //      for (int k = 0; k <= 0; k++) {  
                                 switch (k) {
                                     case 0:
                                         shadowHeight = shadowInfo00[i, j];
@@ -843,75 +889,34 @@ namespace Fractrace.PictureArt {
                     }
                 }
             }
-                // Release Memory:
-                shadowInfo11 = null;
-                shadowInfo01 = null;
-                shadowInfo10 = null;
-                shadowInfo00 = null;
-                shadowInfo11sharp = null;
-                shadowInfo01sharp = null;
-                shadowInfo10sharp = null;
-                shadowInfo00sharp = null;
+            // Release Memory:
+            shadowInfo11 = null;
+            shadowInfo01 = null;
+            shadowInfo10 = null;
+            shadowInfo00 = null;
+            shadowInfo11sharp = null;
+            shadowInfo01sharp = null;
+            shadowInfo10sharp = null;
+            shadowInfo00sharp = null;
 
-                // Smooth shadowPlane
-                // 2 times
-           
+            // Normalise:
+            double sMin = Double.MaxValue;
+            double sMax = Double.MinValue;
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    if (sMin > shadowPlane[i, j])
+                        sMin = shadowPlane[i, j];
+                    if (sMax < shadowPlane[i, j])
+                        sMax = shadowPlane[i, j];
 
-                double[,] shadowTempPlane1 = null;
-                double[,] shadowTempPlane2 = null;
-
-               
-
-                for (int m = 0; m < 2; m++) {
-                    if (m == 0) {
-                        shadowTempPlane1 = shadowPlane;
-                        shadowTempPlane2 = shadowTempPlane;
-                    } else {
-                        shadowTempPlane2 = shadowPlane;
-                        shadowTempPlane1 = shadowTempPlane;
-
-                    }
-                    for (int i = 0; i < pData.Width; i++) {
-                        for (int j = 0; j < pData.Height; j++) {
-                            double neighborsFound = 0;
-                            double sumNeighbors = 0;
-                            for (int k = -1; k <= 1; k++) {
-                                for (int l = -1; l <= 1; l++) {
-                                    int posX = i + k;
-                                    int posY = j + l;
-                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
-                                        sumNeighbors += shadowTempPlane1[posX, posY];
-                                        neighborsFound++;
-                                    }
-                                }
-                            }
-                            if (neighborsFound > 0)
-                                shadowTempPlane2[i, j] = 0.4 * shadowTempPlane1[i, j] + 0.6 * sumNeighbors / neighborsFound;
-                        }
-                    }
                 }
-
-            // Normalisieren:
-                double sMin = Double.MaxValue;
-                double sMax = Double.MinValue;
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        if (sMin > shadowPlane[i, j])
-                            sMin = shadowPlane[i, j];
-                        if (sMax < shadowPlane[i, j])
-                            sMax = shadowPlane[i, j];
-
-                    }
+            }
+            double sDiff = sMax - sMin;
+            for (int i = 0; i < pData.Width; i++) {
+                for (int j = 0; j < pData.Height; j++) {
+                    shadowPlane[i, j] = (shadowPlane[i, j] - sMin) / sDiff;
                 }
-                double sDiff = sMax - sMin;
-                for (int i = 0; i < pData.Width; i++) {
-                    for (int j = 0; j < pData.Height; j++) {
-                        shadowPlane[i, j] = (shadowPlane[i, j] - sMin) / sDiff;
-                    }
-                }
-
-
-
+            }
         }
 
         /// <summary>
@@ -943,7 +948,6 @@ namespace Fractrace.PictureArt {
                     // Nachbarelemente zusammenrechnen
                     Vec3 neighbors = new Vec3();
                     int neighborFound = 0;
-
                     for (int k = -2; k <= 2; k++) {
                         for (int l = -2; l <= 2; l++) {
                             int posX = i + k;
@@ -981,7 +985,6 @@ namespace Fractrace.PictureArt {
                     // Nachbarelemente zusammenrechnen
                     Vec3 neighbors = new Vec3();
                     int neighborFound = 0;
-
                     for (int k = -1; k <= 1; k++) {
                         for (int l = -1; l <= 1; l++) {
                             int posX = i + k;
@@ -1008,9 +1011,7 @@ namespace Fractrace.PictureArt {
                             normalesSmooth2[i, j] = neighbors;
                         }
                     }
-
                 }
-
             }
             // Release Memory
             normalesSmooth1 = null;
@@ -1083,7 +1084,7 @@ namespace Fractrace.PictureArt {
                     }
                     if (neighborFound > 0 && sdeph1[i, j] != double.MinValue) {
                         smoothDeph /= (double)neighborFound;
-                        sdeph2[i, j] = 0.5 * (sdeph1[i, j] + smoothDeph);
+                        sdeph2[i, j] = 1.0 * (0.8 * sdeph1[i, j] + 0.2 * smoothDeph);
                     } else {
                         sdeph2[i, j] = double.MinValue;
                     }
@@ -1113,7 +1114,7 @@ namespace Fractrace.PictureArt {
 
             // rgbSmoothPlane1 is set
             double mainDeph = maxY - minY;
-            for (int m = 0; m < ambientIntensity + 1; m++) {
+            for (int m = 0; m < ambientIntensity; m++) {
                 for (int i = 0; i < pData.Width; i++) {
                     for (int j = 0; j < pData.Height; j++) {
                         double neighborsFound = 0;
@@ -1124,11 +1125,12 @@ namespace Fractrace.PictureArt {
                                 int posY = j + l;
                                 if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
                                     // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
+                                    // neu: doch:
                                     double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
-                                    if (ylocalDiff > -3.0 * ydGlobal) {
+                                    //if (ylocalDiff > -3.0 * ydGlobal) {
                                         nColor.Add(rgbSmoothPlane2[posX, posY]);
                                         neighborsFound++;
-                                    }
+                                    //}
                                 }
                             }
                         }
@@ -1150,6 +1152,7 @@ namespace Fractrace.PictureArt {
                         if (ydNormalized < 0)
                             ydNormalized = 0;
 
+
                         nCenterColor = nCenterColor.Mult(ydNormalized);
                         nColor = nColor.Mult(1.0 - ydNormalized);
                         nCenterColor.Add(nColor);
@@ -1170,11 +1173,12 @@ namespace Fractrace.PictureArt {
                                 int posY = j + l;
                                 if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
                                     // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
+                                    // Neu: doch
                                     double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
-                                    if (ylocalDiff > -3.0 * ydGlobal) {
+                                    //if (ylocalDiff > -3.0 * ydGlobal) {
                                         nColor.Add(rgbSmoothPlane1[posX, posY]);
                                         neighborsFound++;
-                                    }
+                                    //}
                                 }
                             }
                         }
@@ -1305,7 +1309,7 @@ namespace Fractrace.PictureArt {
         /// <param name="ray"></param>
         /// <param name="rayLenght"></param>
         /// <returns></returns>
-        protected int IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse,int maxIntersections,int steps) {
+        protected int IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse, int maxIntersections, int steps) {
             //int steps = 100;
             inverse = false;
             double dSteps = steps;
@@ -1318,11 +1322,11 @@ namespace Fractrace.PictureArt {
                 for (int i = 0; i < steps; i++) {
                     currentPoint.Add(ray.Mult(dist));
                     if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse)) {
-                      shadowCount++;
-                      if(shadowCount>=maxIntersections)
-                        return maxIntersections;
+                        shadowCount++;
+                        if (shadowCount >= maxIntersections)
+                            return maxIntersections;
                     } else {
-                      //  return false;
+                        //  return false;
                     }
                 }
                 rayLenght /= 1.4;
