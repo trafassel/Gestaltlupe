@@ -14,7 +14,7 @@ namespace Fractrace {
     public static void SetGlobalParameters() {
 
       // Not used anymore:
-      ParameterDict.Exemplar["View.Zoom"] = "1";
+     // ParameterDict.Exemplar["View.Zoom"] = "1";
 
       // Minimal X-Value.
       ParameterDict.Exemplar["Border.Min.x"] = "-1.5";
@@ -267,7 +267,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Use Light
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseLight"] = "1";
       // Shadow height factor
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "2";
       // Shininess factor (0 ... 1)
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ShininessFactor"] = "0.3";
       // Shininess ( 0... 1000)
@@ -282,6 +282,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Red"] = "1";
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Green"] = "1";
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.Blue"] = "1";
+      // accepted integer values: 1, ..., 6  (all values>1 :switch rgb components)
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorFactor.RgbType"] = "1";
 
       // If LightIntensity==1, no shadow renderers are used
       // If LightIntensity==0, only shadow renderers are used

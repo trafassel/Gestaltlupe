@@ -98,9 +98,14 @@ namespace Fractrace.Compability {
             int MINY = (int)ParameterDict.Exemplar.GetDouble("View.MinYDrawing");
             int MINZ = (int)ParameterDict.Exemplar.GetDouble("View.MinZDrawing");
 
-            double viewZoom = ParameterDict.Exemplar.GetDouble("View.Zoom");
+            double viewZoom = 1;
+
+            // Entry View.Zoom removed from settings:
+            /*
+            ParameterDict.Exemplar.GetDouble("View.Zoom");
             if (viewZoom == 0)
                 viewZoom = 1;
+             */
 
             double screensize = viewZoom * pScreensize;
 
