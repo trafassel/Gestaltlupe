@@ -290,7 +290,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Composite.Renderer.Plasic.LightIntensity"] = "0.5";
 
       // Number of threads used in computation. The recommended value is the number of processors.
-      ParameterDict.Exemplar["Computation.NoOfThreads"] = "2";
+      ParameterDict.Exemplar["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();
 
       // EyeDistance in stereo mode.
       ParameterDict.Exemplar["Transformation.Stereo.EyeDistance"] = "0.5";
