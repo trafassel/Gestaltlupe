@@ -30,9 +30,11 @@ namespace Fractrace {
         /// Fehler beim Übersetzen des Quellcodes wird angezeigt.
         /// </summary>
         /// <param name="errorText"></param>
-        public static void AddError(string errorText) {
-            if(FormulaEditor.mStaticInstance!=null)
+        public static void AddError(string errorText,int line,int column) {
+            if (FormulaEditor.mStaticInstance != null) {
                 FormulaEditor.mStaticInstance.ViewError(errorText);
+                FormulaEditor.mStaticInstance.SelectLine(line-9);
+            }
         }
 
 
@@ -62,7 +64,48 @@ namespace Fractrace {
         }
 
 
+        /// <summary>
+        /// Given line is marked red.
+        /// </summary>
+        /// <param name="line"></param>
+        protected void SelectLine(int line) {
+            if (this.InvokeRequired) {
+                this.Invoke(new SelectLineDelegate(SelectLine),line);
+                return;
+            }
+
+            // find the position of the line in the text.
+            int startpos=0, endpos=0;
+            int currentpos=0;
+            int currentline=0;
+            foreach(char c in tbSource.Text.ToCharArray()) {
+                currentpos++;
+                if(c=='\n') {
+                   currentline++;
+                    if(currentline==line) {
+                        startpos=currentpos;
+                    }
+                    if(currentline==line+1) {
+                        endpos=currentpos;
+                    }
+
+                }
+                
+            }
+            if (startpos < endpos && endpos < tbSource.Text.Length) {
+                this.tbSource.Select(startpos, endpos - startpos);
+                this.tbSource.SelectionColor = Color.Red;
+              //  this.tbSource.s
+            }
+          //  this.tbSource.
+        }
+
+
+
+
         delegate void ShowErrorDelegate();
+
+        delegate void SelectLineDelegate(int line);
 
 
         /// <summary>

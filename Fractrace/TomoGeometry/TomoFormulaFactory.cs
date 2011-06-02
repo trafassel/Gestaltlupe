@@ -93,6 +93,7 @@ public CSTomoFormula() {
 Imports System
 Imports Fractrace.TomoGeometry
 
+
 Public Class VBTomoFormula 
 Inherits TomoFormula
 
@@ -106,7 +107,7 @@ End Class
             } catch (Exception ex) {
                 // TODO: Fehlerhafte Zeile markieren
                 Console.WriteLine(ex.ToString());
-                FormulaEditor.AddError(ex.ToString());
+                FormulaEditor.AddError(ex.ToString(),0,0);
                 return;
             }
 
@@ -115,7 +116,7 @@ End Class
                     if (!cerror.IsWarning) {
                         provider = null;
                         Console.WriteLine(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"");
-                        FormulaEditor.AddError(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"");
+                        FormulaEditor.AddError(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"",cerror.Line,cerror.Column);
 
                         return;
                     }
@@ -161,7 +162,7 @@ public CSTomoFormula() {
             } catch (Exception ex) {
                 // TODO: Fehlerhafte Zeile markieren
                 Console.WriteLine(ex.ToString());
-                FormulaEditor.AddError(ex.ToString());
+                FormulaEditor.AddError(ex.ToString(),0,0);
                 return;
             }
 
@@ -170,7 +171,7 @@ public CSTomoFormula() {
                     if (!cerror.IsWarning) {
                         provider = null;
                         Console.WriteLine(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"");
-                        FormulaEditor.AddError(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"");
+                        FormulaEditor.AddError(cerror.ErrorText + "Line " + cerror.Line + " " + cerror.Column + " in \"" + tomoSource + "\"", cerror.Line, cerror.Column);
                         
                         return;
                     }

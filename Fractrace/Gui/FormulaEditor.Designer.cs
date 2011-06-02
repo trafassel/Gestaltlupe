@@ -27,7 +27,7 @@
           this.tbErrors = new System.Windows.Forms.TextBox();
           this.panel2 = new System.Windows.Forms.Panel();
           this.btnShrink = new System.Windows.Forms.Button();
-          this.tbSource = new System.Windows.Forms.TextBox();
+          this.tbSource = new System.Windows.Forms.RichTextBox();
           this.panel1.SuspendLayout();
           this.panel2.SuspendLayout();
           this.SuspendLayout();
@@ -85,7 +85,7 @@
           this.tbSource.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
           this.tbSource.Multiline = true;
           this.tbSource.Name = "tbSource";
-          this.tbSource.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+          this.tbSource.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Both;
           this.tbSource.Size = new System.Drawing.Size(338, 209);
           this.tbSource.TabIndex = 1;
           this.tbSource.TextChanged += new System.EventHandler(this.tbSource_TextChanged);
@@ -110,7 +110,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox tbSource;
+       // private System.Windows.Forms.TextBox tbSource;
+        private System.Windows.Forms.RichTextBox tbSource;
         private System.Windows.Forms.TextBox tbErrors;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnShrink;
