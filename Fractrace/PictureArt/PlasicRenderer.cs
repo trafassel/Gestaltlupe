@@ -803,7 +803,7 @@ namespace Fractrace.PictureArt {
 
                                 }
 
-                                double magicNumber = 0.000001;
+                                double magicNumber = 0.0000000001 * diffy;
                                 if (height != double.MinValue) {
                                     height += magicNumber; // magic number
                                     if (height <= sharpShadowHeight) // inside the sharp shadow
