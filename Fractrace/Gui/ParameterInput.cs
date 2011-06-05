@@ -791,6 +791,15 @@ namespace Fractrace {
 
     }
 
+
+      /// <summary>
+      /// Start rendering in the small preview control.
+      /// </summary>
+    public void DrawSmallPreview() {
+        preview1.Draw();
+        AddToHistory();
+    }
+
     /// <summary>
     /// Handles the Click event of the btnLoadLast control.
     /// Das letzte Projekt wird geladen.

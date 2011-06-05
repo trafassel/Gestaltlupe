@@ -346,15 +346,31 @@ namespace Fractrace {
     /// </summary>
     private void SetZoom() {
       // compute Min and Max
-      double minX = 1000;
-      double minY = 1000;
-      double minZ = 1000;
-      double minZZ = 1000;
-      double maxX = -1000;
-      double maxY = -1000;
-      double maxZ = -1000;
-      double maxZZ = -1000;
+      double minX = double.MaxValue;
+      double minY = double.MaxValue;
+      double minZ = double.MaxValue;
+      double minZZ = double.MaxValue;
+      double maxX = double.MinValue;
+      double maxY = double.MinValue;
+      double maxZ = double.MinValue;
+      double maxZZ = double.MinValue;
 
+      if (ZoomX2 - ZoomX1 < 4) {
+          ZoomX1 -= maxx/10;
+          ZoomX2 += maxx / 10;
+          if (ZoomX1 < 0)
+              ZoomX1 = 0;
+          if (ZoomX2 >=maxx)
+              ZoomX2 = maxx-1;
+          ZoomY1 -= maxy / 10;
+          ZoomY2 += maxy / 10;
+          if (ZoomY1 < 0)
+              ZoomY1 = 0;
+          if (ZoomY2 >= maxy)
+              ZoomY2 = maxy - 1;
+      }
+
+      //  iter.PictureData.Points
       double x, y, z, zz;
       for (int i = ZoomX1; i <= ZoomX2; i++) {
         for (int j = ZoomY1; j <= ZoomY2; j++) {
@@ -363,7 +379,15 @@ namespace Fractrace {
             y = iter.GraphicInfo.PointInfo[i, j].j;
             z = iter.GraphicInfo.PointInfo[i, j].k;
             zz = iter.GraphicInfo.PointInfo[i, j].l;
-            if (minX > x)
+             
+            //Geometry.Vec3 trans = iter.LastUsedFormulas.GetTransformWithoutProjection(x, y, z);
+            
+            Geometry.Vec3 trans2 = iter.LastUsedFormulas.GetTransform(x, y, z);
+            x = trans2.X;
+            y = trans2.Y;
+            z = trans2.Z;
+               
+              if (minX > x)
               minX = x;
             if (maxX < x)
               maxX = x;
@@ -382,7 +406,20 @@ namespace Fractrace {
           }
         }
       }
-      // Parameter befüllen:
+
+      // Set camera nearer to the surface
+        // TODO: only, if perspective view is activated
+      
+        
+        double zoomRatio = ((double)(ZoomX2 - ZoomX1)) / ((double)maxx);
+        double dy = maxY - minY;
+        //double magicNumber = 1.0 - zoomRatio;
+        double magicNumber = 0.7;
+        maxY += magicNumber * dy;
+      minY += magicNumber * dy;
+        
+
+      // Set parameters:
       paras.Parameter.start_tupel.x = minX;
       paras.Parameter.start_tupel.y = minY;
       paras.Parameter.start_tupel.z = minZ;
@@ -396,6 +433,11 @@ namespace Fractrace {
       // Updating to display the new values in the parameter window.
       paras.SetGlobalParameters();
       paras.UpdateFromData();
+      Fractrace.Geometry.Navigator.SetAspectRatio();
+
+       // TODO: draw small Preview 
+
+      ParameterInput.MainParameterInput.DrawSmallPreview();
     }
 
 

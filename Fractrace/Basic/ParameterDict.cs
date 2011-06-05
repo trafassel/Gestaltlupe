@@ -360,12 +360,18 @@ namespace Fractrace.Basic {
                     string var = mEntries[key];
                     if (!double.TryParse(var, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out retVal)) {
                         System.Diagnostics.Debug.WriteLine("Error in GetDouble(" + key + ") can not convert " + var + " in double");
+                        try {
+                            retVal = double.Parse(var);
+                        } catch (Exception ex) {
+                            System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        }
                     }
                     
                 }
             }
             return retVal;
         }
+
 
 
         /// <summary>

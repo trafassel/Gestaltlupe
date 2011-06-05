@@ -562,7 +562,7 @@ namespace Fractrace {
         }
 
 
-        protected double mAngle = 1;
+        protected double mAngle = 10;
 
 
         /// <summary>
@@ -665,6 +665,81 @@ namespace Fractrace {
           button1_Click(null, null);
           btnZoomYout_Click(null,null);
           btnZoomZout_Click(null, null);
+        }
+
+
+        /// <summary>
+        /// Create an automatic aspect corresponding the screen size. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Click(object sender, EventArgs e) {
+            Navigator.SetAspectRatio();
+
+            /*
+            double xmin = ParameterDict.Exemplar.GetDouble("Border.Min.x");
+            double xmax = ParameterDict.Exemplar.GetDouble("Border.Max.x");
+            double ymin = ParameterDict.Exemplar.GetDouble("Border.Min.y");
+            double ymax = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+            double zmin = ParameterDict.Exemplar.GetDouble("Border.Min.z");
+            double zmax = ParameterDict.Exemplar.GetDouble("Border.Max.z");
+
+            double centerX = (xmax + xmin)/2.0;
+            double centerY = (ymax + ymin)/2.0;
+            double centerZ = (zmax + zmin)/2.0;
+
+            double diffx = xmax - xmin;
+            double diffy = ymax - zmin;
+            double diffz = zmax - zmin;
+            double maxDiff = diffx;
+            if (diffz > maxDiff)
+                maxDiff = diffz;
+
+            double screenWidth = ParameterDict.Exemplar.GetDouble("View.Width");
+            double screenHeight = ParameterDict.Exemplar.GetDouble("View.Height");
+            double maxScreenSize = Math.Max(screenWidth, screenHeight);
+
+            // diffx/diffz should be equal to screenWidth/screenHeight;
+            diffx = maxDiff * screenWidth / maxScreenSize;
+            diffz = maxDiff * screenHeight / maxScreenSize;
+            diffy = Math.Max(diffx, diffz);
+
+            diffx/=2.0;diffy/=2.0;diffz/=2.0;
+
+            xmin = centerX - diffx; xmax = centerX + diffx;
+            ymin = centerY - diffy; ymax = centerY + diffy;
+            zmin = centerZ - diffz; zmax = centerZ + diffz;
+
+            ParameterDict.Exemplar.SetDouble("Border.Min.x",xmin);
+            ParameterDict.Exemplar.SetDouble("Border.Min.y", ymin);
+            ParameterDict.Exemplar.SetDouble("Border.Min.z", zmin);
+            ParameterDict.Exemplar.SetDouble("Border.Max.x", xmax);
+            ParameterDict.Exemplar.SetDouble("Border.Max.y", ymax);
+            ParameterDict.Exemplar.SetDouble("Border.Max.z", zmax);
+
+             */
+/*
+  // View.Size*View.Width == width of the rendered bitmap.
+      ParameterDict.Exemplar["View.Width"] = "1200";
+
+      // View.Size*View.Height == height of the rendered bitmap.
+      ParameterDict.Exemplar["View.Height"] = "1200";
+ * 
+  // Minimal X-Value.
+      ParameterDict.Exemplar["Border.Min.x"] = "-1.5";
+      // Maximal X-Value.
+      ParameterDict.Exemplar["Border.Max.x"] = "1.5";
+      // Minimal Y-Value.
+      ParameterDict.Exemplar["Border.Min.y"] = "-1.5";
+      // Maximal y-Value.
+      ParameterDict.Exemplar["Border.Max.y"] = "1.5";
+      // Minimal Z-Value
+      ParameterDict.Exemplar["Border.Min.z"] = "-1.5";
+      // Maximal Z-Value.
+      ParameterDict.Exemplar["Border.Max.z"] = "1.5";
+ * 
+ */
+
         }
 
 
