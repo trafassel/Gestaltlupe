@@ -58,89 +58,92 @@ Windows.Forms library 2.0).</para>
   -->
   <part>
     <title>Introduction</title>
+    <para>Gestaltlupe is a scientific tool to render <link linkend="tomographicfunction" branch="">tomographic functions</link>.
+    
+    </para>
     <para>
-      Gestaltlupe is a scientific tool to render tomographic functions.
-      A tomographic function <emphasis branch="">T(p)</emphasis> (<emphasis branch="">p</emphasis> is a point <emphasis branch="">p=(x,y,z)</emphasis> in <emphasis branch="">R^3</emphasis>) returns either <emphasis branch="">true</emphasis> or <emphasis branch="">false</emphasis>. The rendering
-      interpreted this as formula description of an arbitrary object in the 3D space. This means: <emphasis branch="">T(p)=true</emphasis>,
-      if and only if <emphasis branch="">p</emphasis> is inside the object.
     </para>
     <para>
       Double click on <application branch="">Gestaltlupe_1_0_2.exe</application> , choose Tab <emphasis branch="">file</emphasis>, load an sample project and press the
       button “preview” to get after a short time a small picture of the given 3D object, or press "start"
       to render a bitmap in full resolution.
     </para>
-  </part>
-  <part>
-    <title>Install</title>
-    <para>
+    <chapter>
+      <title>Install</title>
+      <para>
       Gestaltlupe is available at GitHub at:
 
       <ulink url="http://github.com/trafassel/Gestaltlupe">http://github.com/trafassel/Gestaltlupe </ulink>
 
-      The corresponding Version 1.0.2, which is documented here, can be found at:
+      The corresponding Version 1.1.0, which is documented here, can be found at:
 
-      <ulink url="http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe </ulink>
+      <ulink url="http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_1_0.exe">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_1_0.exe </ulink>
 
       On this page you have to click “raw” to get the binary.  But the recommended way to work with
       Gestaltlupe is to download the full archive file (the big “Download” button at
       <ulink url="http://github.com/trafassel/Gestaltlupe" branch="">http://github.com/trafassel/Gestaltlupe </ulink>). The archive contains the binaries and sample projects
-      with the corresponding formulas.
+      with the corresponding formulas and this documentation.
     </para>
-    <para />
-    <chapter>
-      <title>Windows</title>
-      <para>
+      <para />
+      <section>
+        <title>Windows</title>
+        <para>
         Gestaltlupe is developed and tested with WindowsXP and Windows7. It is a native .NET 2.0 application.
       </para>
-    </chapter>
-    <chapter>
-      <title>Linux</title>
-      <para>
+      </section>
+      <section>
+        <title>Linux</title>
+        <para>
         To run Gestaltlupe  on a Linux system, you have to install the mono package
         (<ulink url="" branch="">http://www.mono-project.com/Main_Page </ulink>). It is tested on a Ubuntu Hardy Heron 8.04.3 LTS.
-        It runs without problems, but looks more ugly than the windows version (Yes, that is possible).
+        It runs without problems, but looks more ugly than the windows version.
       </para>
-    </chapter>
-    <chapter>
-      <title>Mac OSX</title>
-      <para>
+      </section>
+      <section>
+        <title>Mac OSX</title>
+        <para>
         It is tested on a Mac OSX 10.6. with Mono 2.8 . It can produce some nice pictures, but working is a
         pain, because some windows forms are not redrawn properly (Gestaltlupe is compatible to the
         Windows.Forms library 2.0).
       </para>
+      </section>
+    </chapter>
+    <chapter>
+      <title>Getting Started</title>
+      <para>Gestaltlupe starts in navigation mode.</para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/MainWindow.png" />
+      </imageobject>
+      <para>The default tomographic formula is the Mandelbulb. If you click on the left square in the bottom frame, you get a small overview of the defined scene.</para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/Preview1.png" />
+      </imageobject>
+      <para>If the overview looks good, the user can press the button <emphasis branch="">Preview</emphasis> to draw the scene as bigger preview in a separate window. </para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/Preview2.png" />
+      </imageobject>
+      <para>This picture is saved automatically in the file, defined at the top of the render window. The corresponding settings are saved with the same name, but with the ending <application branch="">*.tomo</application> in the path <emphasis branch="">Userpath</emphasis><application branch="">/Documents/TomoTrace/data/parameters</application>. So you are always able to open the settings for a generated picture. </para>
+      <para>The final rendering starts after click on the button <emphasis branch="">Start</emphasis> in the main window.</para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/Output1.png" />
+      </imageobject>
+      <para />
     </chapter>
   </part>
   <part>
     <title>Interface Description</title>
-    <para>After its first start, Gestaltlupe presents the parameter input formular.</para>
-    <imageobject>
-      <title>Start Screen</title>
-      <imagedata format="png" fileref="pic/start.png" />
-    </imageobject>
-    <para>If you click on the left square in the bottom frame, you get a small overview of the defined scene. </para>
-    <imageobject>
-      <title>
-      </title>
-      <imagedata format="png" fileref="pic/firstPic.png" />
-    </imageobject>
-    <para>If the view looks OK, you can click on <emphasis branch="">Preview</emphasis> to get a greater picture. The result ist presented in the output window.</para>
-    <imageobject>
-      <title>
-      </title>
-      <imagedata format="png" fileref="pic/FirstPreview.png" />
-    </imageobject>
-    <para>The picture is saved automatic. The corresponding path is given at the top of the output window.</para>
-    <para>The final rendering starts after click on the button <emphasis branch="">Start</emphasis>.</para>
-    <imageobject>
-      <title>
-      </title>
-      <imagedata format="png" fileref="pic/firstRendering.png" />
-    </imageobject>
-    <para>Are you satisfied with the result? Not, oh, ...</para>
     <para>If you want to improve the quality of the rendering result, you have to read the chapter <link linkend="rendering" branch="">Rendering</link>. </para>
     <para>Or you want to see, what is inside the tunnel or rotate and zoom the whole object.
 The chapter <link linkend="navigation">Navigation</link> describes, how to navigate in the virtual 3D space.</para>
-    <para>I understand. You favourite formula is another fractal, and you want some colours. Then you have to read the chapter <link linkend="formula">Formula</link>.  </para>
+    <para>If you want to define another fractal, then you have to read the chapter <link linkend="formula">Formula</link>.  </para>
     <para>If you are completed your study in navigation or formula description, you are ready for your first <link linkend="animation">animation</link>. </para>
     <chapter id="rendering">
       <title>Rendering</title>
@@ -155,6 +158,7 @@ In the second stage the renderer generates the bitmap from the geometry data . B
 The first stage used multiple threads. This means, the computation is done on multiple processors. 
 The second stage runs in one thread, uses only one processor and blocks the whole application.</para>
       <para>There are 6 different renderers. To choose another one, you have to set <link linkend="composite">Composite.Renderer</link> to the name (or number) of your favourite renderer type, and press <emphasis branch="">Repaint</emphasis> in the result window. This is much faster than pressing <emphasis branch="">Start</emphasis> in the parameter window. Using of <emphasis branch="">Repaint</emphasis> is also recommended, if you change some of the rendering <link linkend="composite" branch="">parameters</link>.</para>
+      <para>The default renderer is <link linkend="plasicrenderer" branch="">PlasicRenderer</link>. It produces the best pictures, but needs at most memory and computing time. </para>
       <section>
         <title>FastScienceRenderer</title>
         <para>
@@ -215,7 +219,7 @@ The second stage runs in one thread, uses only one processor and blocks the whol
           <imagedata format="png" fileref="pic/UniversalRenderer.png" />
         </imageobject>
       </section>
-      <section>
+      <section id="plasicrenderer">
         <title>PlasicRenderer</title>
         <para>
         </para>
@@ -224,6 +228,8 @@ The second stage runs in one thread, uses only one processor and blocks the whol
           </title>
           <imagedata format="png" fileref="pic/PlasicRenderer.png" />
         </imageobject>
+        <para>The settings for PlasicRenderer can be changed in the node <link linkend="compositerendererplasic">Composite.Renderer.Plasic</link> at the <emphasis branch="">Data</emphasis> tab in the main window. Here you can define a mix of ambient shadows, phong shading and a hard shadow.</para>
+        <para />
       </section>
     </chapter>
     <chapter id="navigation">
@@ -236,6 +242,7 @@ The second stage runs in one thread, uses only one processor and blocks the whol
         <imagedata format="png" fileref="pic/Navigate.png" />
       </imageobject>
       <para>If you press one of the buttons, the small preview control at the bottom is redrawn automatically, but you don't have to wait for completing the picture.  I.e. defining a factor value of 12 and double pressing of <emphasis branch="">left</emphasis> (&lt;-) is the same as factor=6 and pressing <emphasis branch="">left</emphasis> just one time.</para>
+      <para>Using one of the buttons <emphasis branch="">ZoomX</emphasis>, ...  <emphasis branch="">ZoomZOut</emphasis> results in a broken screen aspect. To correct the x/z ratio, you have to press the button <emphasis branch="">Automatic</emphasis>.</para>
       <table>
         <title>
         </title>
@@ -337,6 +344,18 @@ The second stage runs in one thread, uses only one processor and blocks the whol
         </tgroup>
       </table>
       <para>The corresponding entry <emphasis branch="">factor</emphasis> defines the corresponding amount of moving (<emphasis branch="">factor1</emphasis>) or zooming (<emphasis branch="">factor2</emphasis>). High values corresponds to small moving steps, tiny values to big steps.  </para>
+      <para>After pressing one of the navigation button, the small preview control is updated automatically.</para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/Preview1.png" />
+      </imageobject>
+      <para>Here you see the rendered object in front view (the same view as the final rendering) and as symbolic black and white reversed top view. The top view helps to find the best viewing distance. If there are much black points at the top, the camera is to close, if there is only white space in the upper part, the camera is to far away.</para>
+      <section>
+        <title>Zooming</title>
+        <para>The render window allows a zooming. First, you have to press the button <emphasis branch="">Zoom</emphasis>. After this you can select the zooming area with the mouse. It is also possible to double click an interesting part, which defines the center of the zoomed view. </para>
+        <para>If the selection is done, the small rendering control is activated with the new settings. If the result looks good, you can start a new rendering by pressing <emphasis branch="">Start</emphasis>.</para>
+      </section>
     </chapter>
     <chapter id="formula">
       <title>Formula</title>
@@ -349,6 +368,7 @@ If <emphasis branch="">Formula.Static.Formula=</emphasis>-1 the source code is c
       </para>
       <para>The difference between this two modes is a calling convention. Either the first arguments are the start values or the start arguments are given in the arguments 3 to 6. </para>
       <para>The return value is either 0 (if the point to test is inside the 3d object), or &gt;1 if outside. Values &gt;1 are used to define the colours in the cut plane.</para>
+      <para>Allowed languages are C# or VB.Net.</para>
       <section>
         <title>Mandelbrot Mode</title>
         <para>If the border is defined by (-2,-2,-2) to (2,2,2), <emphasis branch="">Formula.Static.Formula=</emphasis>-1 and the formula is:  </para>
@@ -633,6 +653,8 @@ public void Set(string id, bool value);
           <para>or you can define new global parameters.</para>
           <programlisting> public void AddValue(string id, double value);
 </programlisting>
+          <para>A bulk of parameters at the same time can be set with the method <application branch="">SetParameterBulk(string xmlDescription)</application>. The XML description is the same, as the settings in the project file.</para>
+          <programlisting>SetParameterBulk("<Entry Key="Border.Max.x" Value="1.5" /><Entry Key="Border.Max.y" Value="1.5" />");</programlisting>
         </section>
         <section>
           <title>Init</title>
@@ -644,13 +666,25 @@ public void Set(string id, bool value);
         </section>
         <section>
           <title>Vectorrotation</title>
-          <para>
-          </para>
+          <para>The class <emphasis branch="">VecRotation</emphasis> can be used to define a rotation in 3d space. The properties (x,y,z) defines the rotation vector, while angle is the rotation angle. An angle with value Math.Pi defines a rotation of 180 degree. Use the method getTransform(Fractrace.Geometry.Vec3 pos) to apply this transformation to pos (as result value).</para>
+          <programlisting>Fractrace.Geometry.VecRotation vecRot = new Fractrace.Geometry.VecRotation();
+vecRot.x = 0;
+vecRot.y = 0;
+vecRot.z = 1;
+vecRot.angle = phi;
+Fractrace.Geometry.Vec3 newPos= vecRot.getTransform(pos);
+x = newPos.X;
+y = newPos.Y;
+z = newPos.Z;
+
+
+
+</programlisting>
         </section>
       </section>
       <section>
         <title>Bugs</title>
-        <para>To compile the formula source with the C# compiler, you have to activate the small rendering control (the left square in the bottom frame). Syntax errors are displayed in a subframe (here a german error message).
+        <para>To compile the formula source with the C# or vb.net compiler, you have to activate the small rendering control (the left square in the bottom frame). Syntax errors are displayed in a subframe (here a german error message) and the line with the first error is displayed red.
 </para>
         <para />
         <imageobject>
@@ -658,7 +692,7 @@ public void Set(string id, bool value);
           </title>
           <imagedata format="png" fileref="pic/error.png" />
         </imageobject>
-        <para>The line info in the error message is not correct (the position is OK). The exact line where the error occurs is line-8. Pressing the small button on the left closes the error frame.</para>
+        <para>Pressing the small button on the left closes the error frame.</para>
       </section>
     </chapter>
     <chapter id="animation">
@@ -676,12 +710,21 @@ public void Set(string id, bool value);
         </title>
         <imagedata format="png" fileref="pic/AnimationControl2.png" />
       </imageobject>
-      <para>An animation frame entry starts with <application branch="">Run</application>. The parameter <application branch="">Steps</application></para>
+      <para>An animation frame entry starts with <application branch="">Run</application>. The parameter <application branch="">Steps</application> defines the number of frames in this animation step.</para>
+      <para>The entry <emphasis branch="">Size</emphasis> corresponds to the parameter <emphasis branch="">View.Size</emphasis>. This value is set in each frame of the animation. </para>
+      <para>The generation of all frames begins after pressing the button <emphasis branch="">Start</emphasis> </para>
+      <para>Pressing <emphasis branch="">Stop</emphasis> in the animation tab aborts the animation process, but does not stop the generation of the current frame. To stop this, you have to additionally press <emphasis branch="">Stop</emphasis> in the render frame.</para>
     </chapter>
     <chapter>
       <title>History</title>
-      <para>
-      </para>
+      <para>All used parameter setting in the current session are automatically saved in the history tab. </para>
+      <imageobject>
+        <title>
+        </title>
+        <imagedata format="png" fileref="pic/history.png" />
+      </imageobject>
+      <para>You can use a button with a displayed number to navigate directly to the corresponding parameter set. Use the button, marked with &lt;- or -&gt; to skip all parameter sets, where no preview bitmap is available.</para>
+      <para>In most cases (i.e. if you use a navigation button or press the small render control) the current parameter setting is added in the history line. If you don't want to activate the render control, you can save the current settings by pressing <emphasis branch="">Save</emphasis>.</para>
     </chapter>
   </part>
   <part>
@@ -978,6 +1021,89 @@ Don't use this parameter in animations [apply to UniversalRenderer]</entry>
         </table>
         <para>
         </para>
+        <section id="compositerendererplasic">
+          <title>Composite.Renderer.Plasic</title>
+          <para>
+          </para>
+          <table>
+            <title>
+            </title>
+            <tgroup cols="2">
+              <thead>
+                <row>
+                  <entry>Name</entry>
+                  <entry>Description</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>AmbientIntensity</entry>
+                  <entry>Strength of blurring. Use 0 for a sharp picture. A value of 12 gives a smart background blurring  </entry>
+                </row>
+                <row>
+                  <entry>ColorGreyness</entry>
+                  <entry>use 0 for default color settings and 1 for a grey surface coloring (or a double value between 0 and 1)</entry>
+                </row>
+                <row>
+                  <entry>ColorIntensity</entry>
+                  <entry>Intensty of the color, use 0 for no color, 1 for default coloring or a value&gt;1 for very colorful result</entry>
+                </row>
+                <row>
+                  <entry>LightIntensity</entry>
+                  <entry>Set the amount of phong shading, compared with shadow rendering. Use 0 for shadow rendering only or 1 for phong shading only (or a value between 0 and 1 for a combination of both)</entry>
+                </row>
+                <row>
+                  <entry>ShadowJustify</entry>
+                  <entry>The default shadow light angle. Use high values for illuminating deep holes</entry>
+                </row>
+                <row>
+                  <entry>ShadowNumber</entry>
+                  <entry>The number of used shadows. Higher values gives a better picture quality, but needs more time </entry>
+                </row>
+                <row>
+                  <entry>Shininess</entry>
+                  <entry>shininess in phong shading.  </entry>
+                </row>
+                <row>
+                  <entry>ShininessFactor</entry>
+                  <entry>Influence of the shininess. Allowed values are between 0 and 1</entry>
+                </row>
+                <row>
+                  <entry>UseDarken</entry>
+                  <entry>Set this value to 1, if the background of the picture should be smoothed to black</entry>
+                </row>
+                <row>
+                  <entry>UseLight</entry>
+                  <entry>Enable phong shading</entry>
+                </row>
+                <row>
+                  <entry>UseSharpShadow</entry>
+                  <entry>A value of 1 adds a sharp shadow to the phong shading. Be careful with this parameter. The sharp shadow needs a lot of computing time.</entry>
+                </row>
+                <row>
+                  <entry>ColorFactor.Blue</entry>
+                  <entry>Color factor for the blue rgb component</entry>
+                </row>
+                <row>
+                  <entry>ColorFactor.Green</entry>
+                  <entry>Color factor for the green rgb component</entry>
+                </row>
+                <row>
+                  <entry>ColorFactor.Red</entry>
+                  <entry>Color factor for the red rgb component</entry>
+                </row>
+                <row>
+                  <entry>ColorFactor.RgbType</entry>
+                  <entry>Possible values are 1,...,6. Here you can vary the used rgb components. Choose 1, if you want to use the original values, defined in the formula.</entry>
+                </row>
+                <row>
+                  <entry>Light</entry>
+                  <entry>The x,y,z component of the light vector which is used in phong shading</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </section>
       </section>
       <section>
         <title>Computation</title>
@@ -1237,6 +1363,22 @@ If minCycle=51, then inside rendering is deactivated.</para>
             </tbody>
           </tgroup>
         </table>
+      </section>
+    </chapter>
+  </part>
+  <part>
+    <title>Appendix</title>
+    <para>
+    </para>
+    <chapter>
+      <title>Dictionary</title>
+      <para>
+      </para>
+      <section id="tomographicfunction">
+        <title>Tomographic Function</title>
+        <para>  A tomographic function <emphasis branch="">T(p)</emphasis> (<emphasis branch="">p</emphasis> is a point <emphasis branch="">p=(x,y,z)</emphasis> in <emphasis branch="">R^3</emphasis>) returns either <emphasis branch="">true</emphasis> or <emphasis branch="">false</emphasis>. The rendering
+      interpreted this as formula description of an arbitrary object in the 3D space. This means: <emphasis branch="">T(p)=true</emphasis>,
+      if and only if <emphasis branch="">p</emphasis> is inside the object.</para>
       </section>
     </chapter>
   </part>

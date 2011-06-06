@@ -982,6 +982,16 @@ namespace Fractrace {
     }
 
 
+      /// <summary>
+      /// Display the documentation.
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+    private void btnShowDocumentation_Click(object sender, EventArgs e) {
+        System.Windows.Forms.Help.ShowHelp(this,System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),"Gestaltlupe.chm"));
+    }
+
+
 
   }
 }
