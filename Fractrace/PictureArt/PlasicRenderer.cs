@@ -122,12 +122,22 @@ namespace Fractrace.PictureArt {
         /// </summary>
         private int rgbType = 1;
 
+          // Minimal value of FieldOfView
+        private double minFieldOfView=0;
+
+      // Maximal value of FieldOfView
+        private double maxFieldOfView=1;
+
+
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
         protected override void PreCalculate() {
             shadowNumber = ParameterDict.Exemplar.GetInt("Composite.Renderer.Plasic.ShadowNumber");
             ambientIntensity = ParameterDict.Exemplar.GetInt("Composite.Renderer.Plasic.AmbientIntensity");
+            minFieldOfView = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.MinFieldOfView");
+            maxFieldOfView = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.MaxFieldOfView");
+            
             colorIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorIntensity");
             useLight = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseLight");
             shadowJustify = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ShadowJustify");
@@ -206,12 +216,11 @@ namespace Fractrace.PictureArt {
                         if (coord.Z > maxPoint.Z)
                             maxPoint.Z = coord.Z;
 
-
                     }
                 }
             }
-
         }
+
 
         /// <summary>
         /// Liefert die Farbe zum Punkt x,y
@@ -1039,14 +1048,20 @@ namespace Fractrace.PictureArt {
 
 
         /// <summary>
-        /// Unschärfe wird dazugerechnet.
+        /// Used in field of view computing.
+        /// </summary>
+        double ydGlobal = 0;
+
+        /// <summary>
+        /// Compute field of view.
         /// </summary>
         protected void SmoothPlane() {
-            double fieldOfViewStart = -0.5;
-            double regularSmooth = 0.98; // Bei 1 ist der Vordergrund maximal scharf.
-            // double smoothIntensity = 1;
-
-            double ydGlobal = (maxY - minY) / ((double)(pData.Width + pData.Height));
+            //double fieldOfViewStart = -0.5;
+            //double regularSmooth = 0.98; // Bei 1 ist der Vordergrund maximal scharf.
+            double fieldOfViewStart = minFieldOfView;
+            //double regularSmooth = 1; // Bei 1 ist der Vordergrund maximal scharf.
+            
+            ydGlobal = (maxY - minY) / ((double)(pData.Width + pData.Height));
             rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
             rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
             for (int i = 0; i < pData.Width; i++) {
@@ -1065,22 +1080,24 @@ namespace Fractrace.PictureArt {
                         Vec3 nColor = new Vec3();
                         for (int k = -1; k <= 1; k++) {
                             for (int l = -1; l <= 1; l++) {
-                                int posX = i + k;
-                                int posY = j + l;
-                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
-                                    // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
-                                    // neu: doch:
-                                    double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
-                                    //if (ylocalDiff > -3.0 * ydGlobal) {
+                                if (k != 0 || l != 0) {
+                                    int posX = i + k;
+                                    int posY = j + l;
+                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                        double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
                                         nColor.Add(rgbSmoothPlane2[posX, posY]);
                                         neighborsFound++;
-                                    //}
+                                    }
                                 }
                             }
                         }
                         if (neighborsFound > 0)
                             nColor = nColor.Mult(1 / neighborsFound);
 
+                        double ydNormalized = GetAmbientValue(smoothDeph2[i, j]);
+                        Vec3 nCenterColor = rgbSmoothPlane2[i, j];
+
+                        /*
                         double yd = smoothDeph2[i, j];
                         if (yd == double.MinValue)
                             yd = minY;
@@ -1091,11 +1108,23 @@ namespace Fractrace.PictureArt {
                         if (ydNormalized < 0)
                             ydNormalized = 0;
 
-                        Vec3 nCenterColor = rgbSmoothPlane2[i, j];
                         ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
 
+                        // Test:
+                        double ydn = 1-ydNormalized;
+                        ydn *= ydn; ydn *= ydn; ydn *= ydn; ydn *= ydn;
+                        ydNormalized = Math.Sqrt(ydNormalized);
+                        ydNormalized = Math.Sqrt(ydNormalized);
+                        ydNormalized = Math.Sqrt(ydNormalized);
+                        ydNormalized = ydNormalized-0.1*ydn;
+                        if (ydNormalized > regularSmooth)
+                            ydNormalized = regularSmooth;
+                        if (ydNormalized < 0)
+                            ydNormalized = 0;
+                        // Ende Test
+                         */
 
                         nCenterColor = nCenterColor.Mult(ydNormalized);
                         nColor = nColor.Mult(1.0 - ydNormalized);
@@ -1113,22 +1142,27 @@ namespace Fractrace.PictureArt {
                         Vec3 nColor = new Vec3();
                         for (int k = -1; k <= 1; k++) {
                             for (int l = -1; l <= 1; l++) {
-                                int posX = i + k;
-                                int posY = j + l;
-                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
-                                    // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
-                                    // Neu: doch
-                                    double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
-                                    //if (ylocalDiff > -3.0 * ydGlobal) {
+                                if (k != 0 || l != 0) {
+                                    int posX = i + k;
+                                    int posY = j + l;
+                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height) {
+                                        // Ein Element im Vordergrund wird nicht mit in die Unschärfe einbezogen.
+                                        // Neu: doch
+                                        double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
+                                        //if (ylocalDiff > -3.0 * ydGlobal) {
                                         nColor.Add(rgbSmoothPlane1[posX, posY]);
                                         neighborsFound++;
-                                    //}
+                                        //}
+                                    }
                                 }
                             }
                         }
                         if (neighborsFound > 0)
                             nColor = nColor.Mult(1 / neighborsFound);
 
+                        Vec3 nCenterColor = rgbSmoothPlane1[i, j];
+                        double ydNormalized = GetAmbientValue(smoothDeph2[i, j]);
+                        /*
                         double yd = smoothDeph2[i, j];
                         if (yd == double.MinValue)
                             yd = minY;
@@ -1142,6 +1176,7 @@ namespace Fractrace.PictureArt {
                         ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
                         if (ydNormalized < 0)
                             ydNormalized = 0;
+                         */
                         nCenterColor = nCenterColor.Mult(ydNormalized);
                         nColor = nColor.Mult(1.0 - ydNormalized);
                         nCenterColor.Add(nColor);
@@ -1158,6 +1193,78 @@ namespace Fractrace.PictureArt {
 
             rgbSmoothPlane1 = null;
             rgbSmoothPlane2 = null;
+        }
+
+
+
+        /// <summary>
+        /// Get the value, which is used in computing the field of view.
+        /// </summary>
+        /// <param name="ypos"></param>
+        /// <returns></returns>
+        protected double GetAmbientValue(double ypos) {
+            double mainDeph = maxY - minY;
+
+            if (ypos == double.MinValue)
+                ypos = minY;
+            double ydNormalized = (ypos - minY) / mainDeph;
+            double ydist = 0;
+            if (ydNormalized > maxFieldOfView) {
+                ydist =ydNormalized- maxFieldOfView;
+                //ydNormalized = 0;
+                //return 0;
+            } else {
+                if (ydNormalized < minFieldOfView) {
+                    ydist = minFieldOfView - ydNormalized;
+                    //ydNormalized = 0;
+                    //return 0;
+                } else 
+                    ydist =0; // im File of view 
+            }
+
+            double maxDist=0.7*( maxFieldOfView - minFieldOfView);
+
+            if (ydist > maxDist)
+                ydist = 1;
+            else
+                ydist = ydist / maxDist;
+            ydNormalized = 1.0-ydist;
+
+            // Test only
+            if (ydNormalized > 1)
+                ydNormalized = 1;
+
+            if (ydNormalized < 0)
+                ydNormalized = 0;
+
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+
+            return ydNormalized;
+
+            /*
+            if (ydNormalized < 0)
+                ydNormalized = 0;
+
+            ydNormalized = 2 * Math.Sqrt(ydNormalized) - 1;
+            if (ydNormalized < 0)
+                ydNormalized = 0;
+
+            // Test:
+            double ydn = 1 - ydNormalized;
+            ydn *= ydn; ydn *= ydn; ydn *= ydn; ydn *= ydn;
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = ydNormalized - 0.1 * ydn;
+            if (ydNormalized > regularSmooth)
+                ydNormalized = regularSmooth;
+            if (ydNormalized < 0)
+                ydNormalized = 0;
+            // Ende Test
+            */
+
+            return 0;
         }
 
 

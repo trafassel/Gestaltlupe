@@ -260,6 +260,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "12";
       // Intensity of the FieldOfView
       ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "1";
+      // Minimal value of FieldOfView
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.MinFieldOfView"] = "0.3";
+      // Maximal value of FieldOfView
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.MaxFieldOfView"] = "1";
+
       // Intensity of the Surface Color
       ParameterDict.Exemplar["Composite.Renderer.Plasic.ColorIntensity"] = "1";
       // If ColorGreyness=1, no color is rendered

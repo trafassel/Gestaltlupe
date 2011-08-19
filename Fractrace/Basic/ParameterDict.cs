@@ -108,7 +108,7 @@ namespace Fractrace.Basic {
         /// Save all dictionary entries of one of given category into a file.
         /// </summary>
         /// <param name="fileName"></param>
-        public void Save(string fileName,List<String> categoriesToSave) {
+        public void Save(string fileName, List<String> categoriesToSave) {
             XmlTextWriter tw = new XmlTextWriter(fileName, System.Text.Encoding.UTF8);
             tw.Formatting = System.Xml.Formatting.Indented;
             tw.WriteStartDocument();
@@ -172,18 +172,18 @@ namespace Fractrace.Basic {
         /// </summary>
         /// <param name="text">The text.</param>
         public void AppendFromText(string text) {
-           lock (mEntries) {
-          XmlDocument xdoc = new XmlDocument();
-          XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
-          xnode.InnerXml = text;
-          foreach (XmlNode entryNode in xnode) {
-            if (entryNode.Name == "Entry") {
-              string key = entryNode.Attributes.GetNamedItem("Key").Value;
-              string value = entryNode.Attributes.GetNamedItem("Value").Value;
-                mEntries[key] = value;
-              }
+            lock (mEntries) {
+                XmlDocument xdoc = new XmlDocument();
+                XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
+                xnode.InnerXml = text;
+                foreach (XmlNode entryNode in xnode) {
+                    if (entryNode.Name == "Entry") {
+                        string key = entryNode.Attributes.GetNamedItem("Key").Value;
+                        string value = entryNode.Attributes.GetNamedItem("Value").Value;
+                        mEntries[key] = value;
+                    }
+                }
             }
-          }
         }
 
 
@@ -248,9 +248,9 @@ namespace Fractrace.Basic {
         /// </summary>
         /// <param name="name">The name.</param>
         public void RemoveProperty(string name) {
-          if (mEntries.ContainsKey(name)) {
-            mEntries.Remove(name);
-          }
+            if (mEntries.ContainsKey(name)) {
+                mEntries.Remove(name);
+            }
         }
 
 
@@ -301,13 +301,13 @@ namespace Fractrace.Basic {
             string temp = "";
             StringBuilder retVal = new StringBuilder();
             for (int i = 0; i < buffer2.Length; i++) {
-              temp = Convert.ToString(buffer2[i], 16);
-              if (temp.Length == 1)
-                temp = "0" + temp;
-              retVal.Append(temp);
+                temp = Convert.ToString(buffer2[i], 16);
+                if (temp.Length == 1)
+                    temp = "0" + temp;
+                retVal.Append(temp);
             }
             return retVal.ToString();
-          //  return Encoding.ASCII.GetString(buffer2);
+            //  return Encoding.ASCII.GetString(buffer2);
         }
 
 
@@ -366,7 +366,7 @@ namespace Fractrace.Basic {
                             System.Diagnostics.Debug.WriteLine(ex.ToString());
                         }
                     }
-                    
+
                 }
             }
             return retVal;
@@ -395,8 +395,15 @@ namespace Fractrace.Basic {
         public int GetInt(string key) {
             int retVal = 0;
             if (mEntries.ContainsKey(key)) {
-                int.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal);
-            }
+                if (!int.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal)) {
+                    double dRetVal = 0;
+                    try {
+                    if(double.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out dRetVal)) {
+                           retVal=(int)dRetVal;
+                    }
+                    } catch (System.Exception) { }
+                }
+            } 
             return retVal;
         }
 
