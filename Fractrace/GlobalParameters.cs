@@ -257,11 +257,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Activates Background darkening in PlasicRenderer
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseDarken"] = "0";
       // Corresponds to the number of shadows in PlasicRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "12";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowNumber"] = "50";
       // Intensity of the FieldOfView
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "1";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.AmbientIntensity"] = "5";
       // Minimal value of FieldOfView
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.MinFieldOfView"] = "0.3";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.MinFieldOfView"] = "0.7";
       // Maximal value of FieldOfView
       ParameterDict.Exemplar["Composite.Renderer.Plasic.MaxFieldOfView"] = "1";
 
@@ -272,11 +272,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Use Light
       ParameterDict.Exemplar["Composite.Renderer.Plasic.UseLight"] = "1";
       // Shadow height factor
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "2";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShadowJustify"] = "5";
       // Shininess factor (0 ... 1)
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShininessFactor"] = "0.3";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.ShininessFactor"] = "0.5";
       // Shininess ( 0... 1000)
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.Shininess"] = "5";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.Shininess"] = "8";
      // Normal of the light source
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.X"] = "0.45";
       ParameterDict.Exemplar["Composite.Renderer.Plasic.Light.Y"] = "1";
@@ -292,7 +292,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
       // If LightIntensity==1, no shadow renderers are used
       // If LightIntensity==0, only shadow renderers are used
-      ParameterDict.Exemplar["Composite.Renderer.Plasic.LightIntensity"] = "0.5";
+      ParameterDict.Exemplar["Composite.Renderer.Plasic.LightIntensity"] = "0.4";
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();

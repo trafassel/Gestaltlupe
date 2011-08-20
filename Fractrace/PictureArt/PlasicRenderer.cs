@@ -641,9 +641,9 @@ namespace Fractrace.PictureArt {
           //  double shadowVal = 0.3;
             double shadowVal = 0.1;
 
-
-         //   for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
-                for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
+            int shadowTypeCount = 0;
+            for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
+         //       for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
                 switch (shadowMode) {
                     case 0:
                         diffy = 0.3 * shadowJustify * (maxY - minY);
@@ -660,7 +660,11 @@ namespace Fractrace.PictureArt {
 
                 }
 
-                for (int shadowIter = 1; shadowIter < shadowNumber + 1; shadowIter++) {
+                int usedShadowNumber = shadowNumber + 1;
+                if (shadowMode == 0 || shadowMode == 2)
+                    usedShadowNumber =(int)( 0.3 * shadowNumber + 1);
+
+                for (int shadowIter = 1; shadowIter < usedShadowNumber + 1; shadowIter++) {
 
                     yd = diffy / ((double)(pData.Width + pData.Height));
                     ydv = diffy / ((double)(pData.Height));
@@ -679,7 +683,7 @@ namespace Fractrace.PictureArt {
                         }
                     }
 
-                  
+                    shadowTypeCount++;
 
                     // initialize shadowInfo00, ... shadowInfo11, shadowInfo00sharp, ... , shadowInfo11sharp
                     for (int i = 0; i < pData.Width; i++) {
@@ -699,7 +703,114 @@ namespace Fractrace.PictureArt {
                     int currentIntXval = 1;
                     int currentIntYval = 1;
 
-                    
+
+                    //shadowTypeCount = 4;
+                    switch (shadowTypeCount) {
+                        case 1:
+                           currentIntXval = 1;
+                           currentIntYval = 1;
+                            break;
+
+                        case 2:
+                            currentIntXval = 1;
+                            currentIntYval = 0;
+                            break;
+                        case 3:
+                            currentIntXval = 0;
+                            currentIntYval = 1;
+                            break;
+                        case 4:
+                            currentIntXval = 1;
+                            currentIntYval = 2;
+                            break;
+                        case 5:
+                            currentIntXval = 2;
+                            currentIntYval = 1;
+                            break;
+                        case 6:
+                            currentIntXval = 1;
+                            currentIntYval = 3;
+                            break;
+                        case 7:
+                            currentIntXval = 3;
+                            currentIntYval = 1;
+                            break;
+                        case 8:
+                            currentIntXval = 1;
+                            currentIntYval = 4;
+                            break;
+                        case 9:
+                            currentIntXval = 4;
+                            currentIntYval = 1;
+                            break;
+                        case 10:
+                            currentIntXval = 1;
+                            currentIntYval = 5;
+                            break;
+                        case 11:
+                            currentIntXval = 5;
+                            currentIntYval = 1;
+                            break;
+                        case 12:
+                            currentIntXval = 2;
+                            currentIntYval = 3;
+                            break;
+                        case 13:
+                            currentIntXval = 3;
+                            currentIntYval = 2;
+                            break;
+
+                        case 14:
+                            currentIntXval = 3;
+                            currentIntYval = 5;
+                            break;
+                        case 15:
+                            currentIntXval = 5;
+                            currentIntYval = 3;
+                            break;
+                        case 16:
+                            currentIntXval = 7;
+                            currentIntYval = 3;
+                            break;
+                        case 17:
+                            currentIntXval = 3;
+                            currentIntYval = 7;
+                            break;
+                        case 18:
+                            currentIntXval = 8;
+                            currentIntYval = 3;
+                            break;
+                        case 19:
+                            currentIntXval = 3;
+                            currentIntYval = 8;
+                            break;
+                        case 20:
+                            currentIntXval = 4;
+                            currentIntYval = 5;
+                            break;
+                        case 21:
+                            currentIntXval = 5;
+                            currentIntYval = 4;
+                            break;
+                        case 22:
+                            currentIntXval = 7;
+                            currentIntYval = 4;
+                            break;
+                        case 23:
+                            currentIntXval = 4;
+                            currentIntYval = 7;
+                            break;
+
+                    }
+
+                    if (shadowTypeCount >= 23)
+                        shadowTypeCount = 4;
+                        
+                        
+                        
+                        
+                        
+                        /*
                    System.Random rand=new Random();
                     double rt = 6.0 * rand.NextDouble() * rand.NextDouble() + rand.NextDouble();
                         currentIntXval += (int) rt;
@@ -713,7 +824,10 @@ namespace Fractrace.PictureArt {
                             currentIntXval = 0;
                             currentIntYval = 1;
                         }
-                    
+            
+                     */
+
+
                     /*
                     currentIntXval = 1;
                     currentIntYval = 1;
