@@ -178,7 +178,6 @@ namespace Fractrace.PictureArt {
             CreateSmoothDeph();
             CreateShadowInfo();
             DrawPlane();
-            //return;
             if (ParameterDict.Exemplar.GetBool("Composite.Normalize"))
                 NormalizePlane();
             if (ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseDarken"))
@@ -639,7 +638,8 @@ namespace Fractrace.PictureArt {
                 }
             }
 
-            double shadowVal = 0.3;
+          //  double shadowVal = 0.3;
+            double shadowVal = 0.1;
 
 
          //   for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
@@ -667,7 +667,9 @@ namespace Fractrace.PictureArt {
                     ydh = diffy / ((double)(pData.Width));
 
 
-                    yd *= 2.0 * (double)shadowIter / (double)dShadowNumber; ydv *= 1.2 * (double)shadowIter / (double)dShadowNumber; ydh *= 1.2 * (double)shadowIter / (double)dShadowNumber;
+                    yd *= 2.0 * (double)shadowIter / (double)dShadowNumber; 
+                    ydv *= 1.2 * (double)shadowIter / (double)dShadowNumber; 
+                    ydh *= 1.2 * (double)shadowIter / (double)dShadowNumber;
 
 
                     // Clean Plane
@@ -697,6 +699,7 @@ namespace Fractrace.PictureArt {
                     int currentIntXval = 1;
                     int currentIntYval = 1;
 
+                    
                    System.Random rand=new Random();
                     double rt = 6.0 * rand.NextDouble() * rand.NextDouble() + rand.NextDouble();
                         currentIntXval += (int) rt;
@@ -710,7 +713,11 @@ namespace Fractrace.PictureArt {
                             currentIntXval = 0;
                             currentIntYval = 1;
                         }
-
+                    
+                    /*
+                    currentIntXval = 1;
+                    currentIntYval = 1;
+                    */
 
                         // ***********  generate shadowplane ************
 
@@ -815,12 +822,16 @@ namespace Fractrace.PictureArt {
 
                                 if (height != double.MinValue) {
                                     if (height < sharpShadowHeight) // inside the sharp shadow
-                                        currentShadowMapEntry = shadowVal;
-                                    if (height < shadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry +=shadowVal;
+                                    if (height < shadowHeight) // inside the shadow
                                         currentShadowMapEntry += shadowVal;
+
+                                    // Test:
+                                    //currentShadowMapEntry = 0;
                                     shadowMapEntry += currentShadowMapEntry;
                                 }
                             }
+                           // shadowMapEntry /= 1114.0;
                             shadowMapEntry /= 4.0;
                             if (shadowMapEntry > 1)
                                 shadowMapEntry = 1;
@@ -849,7 +860,8 @@ namespace Fractrace.PictureArt {
             shadowInfo10sharp = null;
             shadowInfo00sharp = null;
 
-            // Normalise:
+            
+            // Normalize:
             double sMin = Double.MaxValue;
             double sMax = Double.MinValue;
             for (int i = 0; i < pData.Width; i++) {
@@ -870,6 +882,7 @@ namespace Fractrace.PictureArt {
                     }
                 }
             }
+             
         }
 
         /// <summary>
