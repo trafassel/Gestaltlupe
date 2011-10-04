@@ -356,17 +356,12 @@ namespace Fractrace.Basic {
         public double GetDouble(string key) {
             double retVal = 0;
             if (mEntries.ContainsKey(key)) {
-                if (!double.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal)) {
-                    string var = mEntries[key];
+                string var = mEntries[key];
+                if (!double.TryParse(var, System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal)) {
                     if (!double.TryParse(var, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out retVal)) {
                         System.Diagnostics.Debug.WriteLine("Error in GetDouble(" + key + ") can not convert " + var + " in double");
-                        try {
-                            retVal = double.Parse(var);
-                        } catch (Exception ex) {
-                            System.Diagnostics.Debug.WriteLine(ex.ToString());
-                        }
+                            double.TryParse(var, out retVal);
                     }
-
                 }
             }
             return retVal;

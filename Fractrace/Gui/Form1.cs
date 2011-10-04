@@ -410,14 +410,14 @@ namespace Fractrace {
       // Set camera nearer to the surface
         // TODO: only, if perspective view is activated
       
-        
+        /*
         double zoomRatio = ((double)(ZoomX2 - ZoomX1)) / ((double)maxx);
         double dy = maxY - minY;
         //double magicNumber = 1.0 - zoomRatio;
         double magicNumber = 0.7;
         maxY += magicNumber * dy;
       minY += magicNumber * dy;
-        
+        */
 
       // Set parameters:
       paras.Parameter.start_tupel.x = minX;

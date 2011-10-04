@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="-2.00966744201189" />
   <Entry Key="Border.Max.y" Value="0.0045856965599145" />
   <Entry Key="Border.Max.z" Value="-2.00953356479941" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-2.01997392031805" />
   <Entry Key="Border.Min.y" Value="-0.00628276642245069" />
   <Entry Key="Border.Min.z" Value="-2.01984204007493" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="2" />
   <Entry Key="Formula.Static.Cycles" Value="200" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -18,30 +13,7 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="200" />
-  <Entry Key="Formula.VecRot.Angle1Mult" Value="2" />
-  <Entry Key="Formula.VecRot.Angle1Rot" Value="2" />
-  <Entry Key="Formula.VecRot.Angle1Type" Value="5" />
-  <Entry Key="Formula.VecRot.Angle2Mul" Value="_not_used" />
-  <Entry Key="Formula.VecRot.Angle2Mult" Value="1" />
-  <Entry Key="Formula.VecRot.Angle2Rot" Value="1" />
-  <Entry Key="Formula.VecRot.Angle2Type" Value="2" />
-  <Entry Key="Formula.VecRot.Angle3Mult" Value="1" />
-  <Entry Key="Formula.VecRot.Angle3Rot" Value="2" />
-  <Entry Key="Formula.VecRot.Angle3Type" Value="1" />
-  <Entry Key="Formula.VecRot.Mult1" Value="2" />
-  <Entry Key="Formula.VecRot.Mult2" Value="0" />
-  <Entry Key="Formula.VecRot.Mult3" Value="2" />
-  <Entry Key="Formula.VecRot.Power" Value="2" />
   <Entry Key="Intern.Formula.Source" Value="/* v=abs(v)folding Mandelbox Gestaltlupe Formula*/public override void Init() {base.Init();additionalPointInfo=new AdditionalPointInfo();}public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {double gr=50000; double xx, yy, zz;long tw;int n;double x=0,y=0,z=0;double r_n = 0;xx = x * x; yy = y * y; zz = z * z;tw = 0L;double r = Math.Sqrt(xx + yy + zz);  double scale = 1.05;additionalPointInfo.red=0; additionalPointInfo.green=0;additionalPointInfo.blue=0;for (n = 1; n &lt; zkl; n++) {if (x &lt; -1) x = -2.0 - x;if (y &lt; -1) y = -2.0 - y;if (z &lt; -1) z = -2.0 - z;double fixedRadius = 1;double minRadius = 0.00001;xx=x*x;yy=y*y;zz=z*z;double length=   r = xx + yy + zz;if(r!=0) {additionalPointInfo.red+=0.5*xx/r;additionalPointInfo.green+=0.5*yy/r;additionalPointInfo.blue+=zz/r;}if (length &gt; gr) {  tw = n; break; }double mult=1;if (length &gt;= minRadius) if (length &lt; fixedRadius) {&#xD;&#xA;   mult=Math.Sqrt(fixedRadius)/(length);&#xD;&#xA; }&#xD;&#xA; mult*=scale;&#xD;&#xA; x*=mult;&#xD;&#xA; y*=mult;&#xD;&#xA; z*=mult;&#xD;&#xA;&#xD;&#xA;// In Julia Mode: the fixed Julia values &#xD;&#xA;// Iin Mandelbrot set mode: the room coordinates of the pixel to test &#xD;&#xA;   x+=br;&#xD;&#xA;   y+=bi;&#xD;&#xA;   z+=bj;&#xD;&#xA; }&#xD;&#xA;&#xD;&#xA;// For inside rendering&#xD;&#xA;if (invers) {if (tw == 0) tw = 1; else tw = 0; } &#xD;&#xA;&#xD;&#xA;  // Warning: this valaue can be very dangereus, if it is used for distanve esitmation:&#xD;&#xA;  // &#xD;&#xA;  return (tw); &#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="0" />
-  <Entry Key="Transformation.3.CenterY" Value="0" />
-  <Entry Key="Transformation.3.CenterZ" Value="0" />
-  <Entry Key="Transformation.AngleX" Value="0" />
-  <Entry Key="Transformation.AngleY" Value="0" />
-  <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="180" />

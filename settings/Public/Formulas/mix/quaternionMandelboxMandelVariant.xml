@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Animation.Steps" Value="100" />
   <Entry Key="Border.Max.x" Value="0.123317546068143" />
   <Entry Key="Border.Max.y" Value="3.2748056698674" />
   <Entry Key="Border.Max.z" Value="0.073077064336678" />
@@ -9,26 +8,6 @@
   <Entry Key="Border.Min.y" Value="2.92363968907178" />
   <Entry Key="Border.Min.z" Value="-0.073077064336678" />
   <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Composite.AmbientLight" Value="0" />
-  <Entry Key="Composite.BackgoundDarken" Value="0" />
-  <Entry Key="Composite.Blurring" Value="0" />
-  <Entry Key="Composite.BlurringDeph" Value="0" />
-  <Entry Key="Composite.Color1Factor" Value="50" />
-  <Entry Key="Composite.Color1TestArea" Value="10" />
-  <Entry Key="Composite.FrontLight" Value="1" />
-  <Entry Key="Composite.Normalize" Value="1" />
-  <Entry Key="Composite.Renderer" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseDarken" Value="0" />
-  <Entry Key="Composite.Renderer.Universal.UseMedianColorFromFormula" Value="1" />
-  <Entry Key="Composite.Shininess" Value="2" />
-  <Entry Key="Composite.UseAmbient" Value="1" />
-  <Entry Key="Composite.UseColor1" Value="0" />
-  <Entry Key="Composite.UseDarken" Value="1" />
-  <Entry Key="Composite.UseDerivation" Value="1" />
-  <Entry Key="Composite.UseMedian" Value="1" />
-  <Entry Key="Computation.NoOfThreads" Value="8" />
   <Entry Key="Formula.Static.Cycles" Value="8" />
   <Entry Key="Formula.Static.Formula" Value="-2" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -37,25 +16,11 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="51" />
   <Entry Key="Intern.Formula.Source" Value="/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;// Mandelbox&#xD;&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;&#xD;&#xA;double gr=1112.5;&#xD;&#xA;double xx, yy, zz;&#xD;&#xA;double aar=0,aai=0,aaj=0;&#xD;&#xA;     double length= 0;&#xD;&#xA;&#xD;&#xA;          long tw;&#xD;&#xA;          int n;&#xD;&#xA;          double x=ar,y=ai,z=aj;&#xD;&#xA;          double r_n = 0;&#xD;&#xA;&#xD;&#xA;          xx = x * x; yy = y * y; zz = z * z; &#xD;&#xA;          tw = 0L;&#xD;&#xA;          double r = Math.Sqrt(xx + yy + zz);&#xD;&#xA;  double scale = 1.3;&#xD;&#xA;&#xD;&#xA;int xcount=0;&#xD;&#xA;int ycount=0;&#xD;&#xA;int zcount=0;&#xD;&#xA;&#xD;&#xA;          for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;             &#xD;&#xA; if (y &gt; 1) {&#xD;&#xA;                y = 2.0 - y;&#xD;&#xA;ycount++;&#xD;&#xA;}&#xD;&#xA;else if (y &lt; -1) {&#xD;&#xA;                y = -2.0 - y;&#xD;&#xA;ycount++;&#xD;&#xA;}&#xD;&#xA;             &#xD;&#xA; if (z &gt; 1) {&#xD;&#xA;                z = 2.0 - z;&#xD;&#xA;zcount++;&#xD;&#xA;}&#xD;&#xA;else if (z &lt; -1) {&#xD;&#xA;                z = -2.0 - z;&#xD;&#xA;zcount++;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;   double mult=1;&#xD;&#xA;   mult*=scale;&#xD;&#xA;   x*=mult;&#xD;&#xA;   y*=mult;&#xD;&#xA;   z*=mult;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA; aar = x * x; aai = y * y;aaj= z * z;&#xD;&#xA;&#xD;&#xA;                y = 2.0 * x * y ;&#xD;&#xA;                z = 2.0 * x* z;&#xD;&#xA;                x = aar - aai - aaj;&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;      length=   r = Math.Sqrt(x*x + y*y + z*z);&#xD;&#xA; x+=br;&#xD;&#xA;   y+=bi;&#xD;&#xA;   z+=bj;&#xD;&#xA;       if (length &gt; gr) { &#xD;&#xA;              tw = n; break; &#xD;&#xA;            }&#xD;&#xA;          }&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=xcount;&#xD;&#xA;additionalPointInfo.green=ycount;&#xD;&#xA;additionalPointInfo.blue=zcount;&#xD;&#xA;&#xD;&#xA;          if (invers) {&#xD;&#xA;            if (tw == 0)&#xD;&#xA;              tw = 1;&#xD;&#xA;            else&#xD;&#xA;              tw = 0;&#xD;&#xA;          }&#xD;&#xA;          return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;" />
-  <Entry Key="test2" Value="df" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="0" />
-  <Entry Key="Transformation.3.CenterY" Value="0" />
-  <Entry Key="Transformation.3.CenterZ" Value="0" />
   <Entry Key="Transformation.AngleX" Value="-45" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="43.6153846153846" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.09399" />
-  <Entry Key="View.ClassicView" Value="0" />
-  <Entry Key="View.Deph" Value="2100" />
   <Entry Key="View.Height" Value="720" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.PosterX" Value="0" />
-  <Entry Key="View.PosterZ" Value="0" />
-  <Entry Key="View.Raster" Value="2" />
-  <Entry Key="View.Size" Value="0.4" />
   <Entry Key="View.Width" Value="1280" />
-  <Entry Key="View.Zoom" Value="1" />
 </ParameterDict>

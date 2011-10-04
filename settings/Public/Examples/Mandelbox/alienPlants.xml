@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="-123.518456472428" />
   <Entry Key="Border.Max.y" Value="-39.9979376385779" />
   <Entry Key="Border.Max.z" Value="0.336323150785361" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-123.518612598926" />
   <Entry Key="Border.Min.y" Value="-39.998093765076" />
   <Entry Key="Border.Min.z" Value="0.336235329630173" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="2" />
   <Entry Key="Formula.Static.Cycles" Value="250" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -19,12 +14,6 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="250" />
   <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() {&#xA;     base.Init();&#xA;     additionalPointInfo=new AdditionalPointInfo();&#xA;}&#xA;&#xA;&#xA;// Mandelbox&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;&#xA;  double gr=50000;&#xA;  double xx, yy, zz;&#xA;  long tw;&#xA;  int n;&#xA;  double x=ar,y=ai,z=aj;&#xA;   double r_n = 0;&#xA;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(xx + yy + zz);&#xA;  double scale = 1.1;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;   // if(scale&lt;-1)&#xA;   //   scale=scale-ai*(scale+1);&#xA;&#xA;//              ; fold box onto itself  &#xA;&#xA;bool xneg=(x&lt;0);&#xA;&#xA;   if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;  if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;  if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;   if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;  if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;  if (x &gt; 1)&#xA;      x = 2.0 - x;&#xA;   else if (x &lt; -1)&#xA;      x = -2.0 - x;&#xA;&#xA;//if((x&lt;0)!=xneg)x=-x;&#xA;             &#xA;bool yneg=(y&lt;0);&#xA;&#xA;   if (y &gt; 1)&#xA;     y = 2.0 - y;&#xA;   else if (y &lt; -1)&#xA;      y = -2.0 - y;&#xA;//if((y&lt;0)!=yneg)y=-y;&#xA;&#xA;bool zneg=(z&lt;0);&#xA;             &#xA;   if (z &gt; 1)&#xA;     z = 2.0 - z;&#xA;   else if (z &lt; -1)&#xA;      z = -2.0 - z;&#xA;//if((z&lt;0)!=zneg)z=-z;&#xA;              &#xA;//  ; fold sphere onto itself&#xA;    double fixedRadius = 1;&#xA;    double minRadius = 0.00001;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA; //     double length=   r = Math.Pow(x*x + y*y + z*z,aj);&#xA;   double length=   r = xx + yy + zz;&#xA;&#xA;&#xA;if(r!=0) {&#xA;  additionalPointInfo.red+=xx/r;&#xA;  additionalPointInfo.green+=yy/r;&#xA;  additionalPointInfo.blue+=zz/r;&#xA;}&#xA;&#xA;if (length &gt; gr) { &#xA;   tw = n; break; &#xA;}&#xA;&#xA;   double mult=1;&#xA;&#xA;    if (length &lt; minRadius) {&#xA;      //  mult=Math.Sqrt(fixedRadius)/(minRadius);&#xA;    }   else&#xA; if (length &lt; fixedRadius) {&#xA;        mult=fixedRadius/(length);&#xA;  }&#xA;&#xA;   mult*=scale;&#xA;   x*=mult;&#xA;   y*=mult;&#xA;   z*=mult;&#xA;&#xA;if(x&lt;0) {x=-x;}&#xA;//x=-x;&#xA;//y=-y;&#xA;//z=-z;&#xA;   x+=br;&#xA;   y+=bi;&#xA;   z+=bj;&#xA;}&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;     else&#xA;        tw = 0;&#xA;   }&#xA;   return (tw);&#xA;&#xA;}&#xA;&#xA;" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="-0.407525953022069" />
-  <Entry Key="Transformation.3.CenterY" Value="2.56540588074062" />
-  <Entry Key="Transformation.3.CenterZ" Value="0.07803688462125" />
   <Entry Key="Transformation.AngleX" Value="45" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="-45" />

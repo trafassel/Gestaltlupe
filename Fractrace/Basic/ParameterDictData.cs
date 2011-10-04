@@ -74,7 +74,20 @@ namespace Fractrace.Basic {
     public void Load(double index) {
       foreach (KeyValuePair<string, string> entry in mHistory[(int)index]) {
         double doubleVal = 0;
-        if (double.TryParse(mHistory[(int)index][entry.Key], out doubleVal)) {
+        string var = mHistory[(int)index][entry.Key];
+        bool isDouble = true;
+        if (!double.TryParse(var, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out doubleVal)) {
+            if (!double.TryParse(var, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out doubleVal)) {
+                //System.Diagnostics.Debug.WriteLine("Error in GetDouble(" + key + ") can not convert " + var + " in double");
+                if(!double.TryParse(var, out doubleVal))
+                    isDouble=false;
+            }
+        }
+
+
+
+       // if (double.TryParse(mHistory[(int)index][entry.Key], out doubleVal)) {
+          if(isDouble) {
           double firstDouble = GetDouble((int)index, entry.Key);
           double lastDouble = firstDouble;
           if (index < Time)
@@ -97,7 +110,14 @@ namespace Fractrace.Basic {
     protected double GetDouble(int index, string key) {
       string valuesAsString = mHistory[index][key];
       double retVal = 0;
-      double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal);
+     // string var = mEntries[key];
+      if (!double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal)) {
+          if (!double.TryParse(valuesAsString, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out retVal)) {
+             // System.Diagnostics.Debug.WriteLine("Error in GetDouble(" + key + ") can not convert " + var + " in double");
+              double.TryParse(valuesAsString, out retVal);
+          }
+      }
+      //double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal);
       return retVal;
     }
 

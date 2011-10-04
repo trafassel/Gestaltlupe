@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="0.196128852307799" />
   <Entry Key="Border.Max.y" Value="1.06047051576525" />
   <Entry Key="Border.Max.z" Value="-0.15944455005747" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="0.195676577024143" />
   <Entry Key="Border.Min.y" Value="1.05945664035865" />
   <Entry Key="Border.Min.z" Value="-0.159783756520213" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="" />
   <Entry Key="Formula.Static.Cycles" Value="16" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -25,9 +20,6 @@
   <Entry Key="Transformation.3.CenterX" Value="0.180520516741666" />
   <Entry Key="Transformation.3.CenterY" Value="1.02066030888666" />
   <Entry Key="Transformation.3.CenterZ" Value="-0.149891296290942" />
-  <Entry Key="Transformation.AngleX" Value="0" />
-  <Entry Key="Transformation.AngleY" Value="0" />
-  <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="0" />

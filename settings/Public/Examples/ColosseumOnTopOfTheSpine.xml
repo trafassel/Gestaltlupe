@@ -3,11 +3,9 @@
   <Entry Key="Border.Max.x" Value="-0.145705855014807" />
   <Entry Key="Border.Max.y" Value="0.661216930263532" />
   <Entry Key="Border.Max.z" Value="-0.0323461488102488" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-0.150036347716241" />
   <Entry Key="Border.Min.y" Value="0.65412022891834" />
   <Entry Key="Border.Min.z" Value="-0.0336292577588214" />
-  <Entry Key="Border.Min.zz" Value="0" />
   <Entry Key="Formula.Static.Cycles" Value="10" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />

@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="1.34279752850084" />
   <Entry Key="Border.Max.y" Value="154.94883002385" />
   <Entry Key="Border.Max.z" Value="0.774570448565437" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-1.33251291510325" />
   <Entry Key="Border.Min.y" Value="39.6541953450132" />
   <Entry Key="Border.Min.z" Value="-0.730291675961857" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="1" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="8" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="8" />
   <Entry Key="Formula.Static.Cycles" Value="21" />
   <Entry Key="Formula.Static.Formula" Value="-2" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -28,15 +23,6 @@
   <Entry Key="Formula.Universal.Para8" Value="0" />
   <Entry Key="Formula.Universal.Para9" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="int gr=20;&#xD;&#xA;&#xD;&#xA;/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;para1=GetDouble(&quot;Formula.Universal.Para1&quot;);&#xD;&#xA;para2=GetDouble(&quot;Formula.Universal.Para2&quot;);&#xD;&#xA;para3=GetDouble(&quot;Formula.Universal.Para3&quot;);&#xD;&#xA;para4=GetDouble(&quot;Formula.Universal.Para4&quot;);&#xD;&#xA;para5=GetDouble(&quot;Formula.Universal.Para5&quot;);&#xD;&#xA;para6=GetDouble(&quot;Formula.Universal.Para6&quot;);&#xD;&#xA;para7=GetDouble(&quot;Formula.Universal.Para7&quot;);&#xD;&#xA;para8=GetDouble(&quot;Formula.Universal.Para8&quot;);&#xD;&#xA;para9=GetDouble(&quot;Formula.Universal.Para9&quot;);&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;double para1=0.5;&#xD;&#xA;double para2=1;&#xD;&#xA;double para3=2;&#xD;&#xA;double para4=0.5;&#xD;&#xA;double para5=0.5;&#xD;&#xA;double para6=1;&#xD;&#xA;double para7=2;&#xD;&#xA;double para8=0.5;&#xD;&#xA;double para9=0.5;&#xD;&#xA;&#xD;&#xA;        public override long InSet(double ar, double ai, double aj, double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;            double aar, aai, ai_alt, aj_alt, aaj, cj, ck, ari, arj, ark, aik, aij, ajk, ak_alt;&#xD;&#xA;            double c, d;&#xD;&#xA;            long tw;&#xD;&#xA;            int n;&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=0;&#xD;&#xA;additionalPointInfo.green=0;&#xD;&#xA;additionalPointInfo.blue=0;&#xD;&#xA;&#xD;&#xA;double al=0,aal=0;&#xD;&#xA;//ai=0.1;&#xD;&#xA;            aar = ar * ar; aai = ai * ai; aaj = aj * aj;tw = 0L;&#xD;&#xA;            d = aar + aai + aaj;&#xD;&#xA;            for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;&#xD;&#xA;                ai = para1 * ai * ar * aj;&#xD;&#xA;                aj =para2* aaj + para3*aai + para4*aar;&#xD;&#xA;                ar =para5* aar + para6*aai + para7*aaj;&#xD;&#xA;&#xD;&#xA;     aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;                ar = para4* ai * ar * aj;&#xD;&#xA;                ai =para5* aai - (aaj + aar) *para6;&#xD;&#xA;                aj =para5* aaj - (aai + aar) *para6;&#xD;&#xA;&#xD;&#xA;         aj = para7* ai * ar * aj;&#xD;&#xA;                ar =para8* aar - (aaj + aai) *para9;&#xD;&#xA;                ai =para8* aai - (aaj + aar) *para9;&#xD;&#xA;*/&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;ar+=br;&#xD;&#xA;ai+=bi;&#xD;&#xA;aj+=bj;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;double aiTemp=ai;&#xD;&#xA;ai=aj;&#xD;&#xA;aj=ar;&#xD;&#xA;ar=aiTemp;&#xD;&#xA;*/&#xD;&#xA;//ak=1;&#xD;&#xA;//                al = 2 * al *aj* ar * aj*ak ;&#xD;&#xA;&#xD;&#xA;                aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;                d = aar + aai + aaj;&#xD;&#xA;&#xD;&#xA;double ar2=ar; if(ar&lt;0) ar2=-ar;&#xD;&#xA;double ai2=ai; if(ai&lt;0) ai2=-ai;&#xD;&#xA;double aj2=aj; if(aj&lt;0) aj2=-aj;&#xD;&#xA;&#xD;&#xA;if(d&gt;0) {&#xD;&#xA;additionalPointInfo.red+=ar2/d;&#xD;&#xA;additionalPointInfo.green+=ai2/d;&#xD;&#xA;additionalPointInfo.blue+=aj2/d;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;                if ((d) &gt; gr) { tw = n; break; }&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;       if (invers) {&#xD;&#xA;                if (tw == 0)&#xD;&#xA;                    tw = 1;&#xD;&#xA;                else&#xD;&#xA;                    tw = 0;&#xD;&#xA;            }&#xD;&#xA;            return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="0" />
-  <Entry Key="Transformation.3.CenterY" Value="0" />
-  <Entry Key="Transformation.3.CenterZ" Value="0" />
-  <Entry Key="Transformation.AngleX" Value="0" />
-  <Entry Key="Transformation.AngleY" Value="0" />
-  <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="0" />

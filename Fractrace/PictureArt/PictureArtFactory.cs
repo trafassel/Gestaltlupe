@@ -50,6 +50,7 @@ namespace Fractrace.PictureArt {
           retVal = new ScienceRenderer(pdata);
           break;
 
+        case "":
         case "PlasicRenderer":
         case "6":
           retVal = new PlasicRenderer(pdata);

@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="1.82127207363824" />
   <Entry Key="Border.Max.y" Value="7.48967367414012" />
   <Entry Key="Border.Max.z" Value="1.2960263959141" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-1.81673901273067" />
   <Entry Key="Border.Min.y" Value="-6.51185508633702" />
   <Entry Key="Border.Min.z" Value="-1.43248191886252" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="1" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="8" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="8" />
   <Entry Key="Formula.Static.Cycles" Value="21" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0.0" />
@@ -28,15 +23,6 @@
   <Entry Key="Formula.Universal.Para8" Value="0" />
   <Entry Key="Formula.Universal.Para9" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="int gr=20;&#xD;&#xA;&#xD;&#xA;/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;para1=GetDouble(&quot;Formula.Universal.Para1&quot;);&#xD;&#xA;para2=GetDouble(&quot;Formula.Universal.Para2&quot;);&#xD;&#xA;para3=GetDouble(&quot;Formula.Universal.Para3&quot;);&#xD;&#xA;para4=GetDouble(&quot;Formula.Universal.Para4&quot;);&#xD;&#xA;para5=GetDouble(&quot;Formula.Universal.Para5&quot;);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;double para1=0.5;&#xD;&#xA;double para2=1;&#xD;&#xA;double para3=2;&#xD;&#xA;double para4=0.5;&#xD;&#xA;double para5=0.5;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;        public override long InSet(double ar, double ai, double aj, double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;            double aar, aai, ai_alt, aj_alt, aaj, cj, ck, ari, arj, ark, aik, aij, ajk, ak_alt;&#xD;&#xA;            double c, d;&#xD;&#xA;            long tw;&#xD;&#xA;            int n;&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=0;&#xD;&#xA;additionalPointInfo.green=0;&#xD;&#xA;additionalPointInfo.blue=0;&#xD;&#xA;&#xD;&#xA;double ak=para4,aak=0,al=0,aal=0;&#xD;&#xA;//ai=0.1;&#xD;&#xA;            aar = ar * ar; aai = ai * ai; aaj = aj * aj; tw = 0L;&#xD;&#xA;            d = aar + aai + aaj;&#xD;&#xA;            for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;                ai = para3 * ai * ar * aj;&#xD;&#xA;                aj =para2* aaj - (aai + aar) *para1;&#xD;&#xA;                ar =para5* aar - (aai + aaj) *para4;&#xD;&#xA;&#xD;&#xA;double aiTemp=ai;&#xD;&#xA;ai=aj;&#xD;&#xA;//aj=ar;&#xD;&#xA;//ar=aiTemp;&#xD;&#xA;aj=aiTemp;&#xD;&#xA;&#xD;&#xA;if(n%3==0) {&#xD;&#xA;ar +=br;&#xD;&#xA;    ai +=bi;&#xD;&#xA;    aj +=bj;&#xD;&#xA;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if(n%3==1) {&#xD;&#xA;ar -=br;&#xD;&#xA;    ai +=bj;&#xD;&#xA;    aj +=bi;&#xD;&#xA;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;                aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;                d = aar + aai + aaj;&#xD;&#xA;&#xD;&#xA;// Surface Color&#xD;&#xA;double ar2=ar; if(ar&lt;0) ar2=-ar;&#xD;&#xA;double ai2=ai; if(ai&lt;0) ai2=-ai;&#xD;&#xA;double aj2=aj; if(aj&lt;0) aj2=-aj;&#xD;&#xA;&#xD;&#xA;if(d&gt;0) {&#xD;&#xA;additionalPointInfo.red+=ar2/d;&#xD;&#xA;additionalPointInfo.green+=ai2/d;&#xD;&#xA;additionalPointInfo.blue+=aj2/d;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;                if ((d) &gt; gr) { tw = n; break; }&#xD;&#xA;            }&#xD;&#xA;            return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="0" />
-  <Entry Key="Transformation.3.CenterY" Value="0" />
-  <Entry Key="Transformation.3.CenterZ" Value="0" />
-  <Entry Key="Transformation.AngleX" Value="-60" />
-  <Entry Key="Transformation.AngleY" Value="0" />
-  <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="0" />

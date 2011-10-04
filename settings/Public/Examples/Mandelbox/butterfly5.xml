@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="2.5027870754878" />
   <Entry Key="Border.Max.y" Value="5.8144022348193" />
   <Entry Key="Border.Max.z" Value="2.82042975004987" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-3.37949055319766" />
   <Entry Key="Border.Min.y" Value="-0.0678753938662369" />
   <Entry Key="Border.Min.z" Value="-3.06184787863569" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="2" />
   <Entry Key="Formula.Static.Cycles" Value="12" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="-1.2" />
@@ -18,22 +13,7 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="51" />
-  <Entry Key="Formula.Universal.Para1" Value="1" />
-  <Entry Key="Formula.Universal.Para2" Value="1" />
-  <Entry Key="Formula.Universal.Para3" Value="2" />
-  <Entry Key="Formula.Universal.Para4" Value="1" />
-  <Entry Key="Formula.Universal.Para5" Value="0" />
-  <Entry Key="Formula.Universal.Para6" Value="0" />
-  <Entry Key="Formula.Universal.Para7" Value="0" />
-  <Entry Key="Formula.Universal.Para8" Value="0" />
-  <Entry Key="Formula.Universal.Para9" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;// Mandelbox&#xD;&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;&#xD;&#xA;double gr=50000;&#xD;&#xA;double xx, yy, zz;&#xD;&#xA;          long tw;&#xD;&#xA;          int n;&#xD;&#xA;          double x=0,y=0,z=0;&#xD;&#xA;          double r_n = 0;&#xD;&#xA;&#xD;&#xA;          xx = x * x; yy = y * y; zz = z * z; &#xD;&#xA;          tw = 0L;&#xD;&#xA;          double r = Math.Sqrt(xx + yy + zz);&#xD;&#xA;  double scale = ar;&#xD;&#xA;additionalPointInfo.red=0;&#xD;&#xA;additionalPointInfo.green=0;&#xD;&#xA;additionalPointInfo.blue=0;&#xD;&#xA;&#xD;&#xA;          for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;&#xD;&#xA;//              ; fold box onto itself  &#xD;&#xA;              if (x &gt; 1)&#xD;&#xA;                x = 2.0 - x;&#xD;&#xA;              else if (x &lt; -1)&#xD;&#xA;                x = -2.0 - x;&#xD;&#xA;             &#xD;&#xA;              if (y &gt; 1)&#xD;&#xA;                y = 2.0 - y;&#xD;&#xA;              else if (y &lt; -1)&#xD;&#xA;                y = -2.0 - y;&#xD;&#xA;             &#xD;&#xA;              if (z &gt; 1)&#xD;&#xA;                z = 2.0 - z;&#xD;&#xA;              else if (z &lt; -1)&#xD;&#xA;                z = -2.0 - z;&#xD;&#xA;              &#xD;&#xA;            //  ; fold sphere onto itself&#xD;&#xA;              double fixedRadius = 1;&#xD;&#xA;              double minRadius = 0.00001;&#xD;&#xA;  //    double length=   r = Math.Pow(x*x + y*y + z*z,aj);&#xD;&#xA;          xx = x * x; yy = y * y; zz = z * z; &#xD;&#xA; r =xx+yy+zz;&#xD;&#xA;      double length=  Math.Sqrt(r);&#xD;&#xA;&#xD;&#xA; //  double length=   r = x*x + y*y + z*z;&#xD;&#xA;&#xD;&#xA;            if (length &gt; gr) { &#xD;&#xA;additionalPointInfo.red=xx/r;&#xD;&#xA;additionalPointInfo.green=yy/r;&#xD;&#xA;additionalPointInfo.blue=zz/r;&#xD;&#xA;              tw = n; break; &#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;   double mult=1;&#xD;&#xA;&#xD;&#xA;    if (length &lt; minRadius) {&#xD;&#xA;      //  mult=Math.Sqrt(fixedRadius)/(minRadius);&#xD;&#xA;    }   else&#xD;&#xA; if (length &lt; fixedRadius) {&#xD;&#xA;        mult=fixedRadius/r;&#xD;&#xA;  x*=mult;&#xD;&#xA;   y*=mult;&#xD;&#xA;   z*=mult;&#xD;&#xA;   &#xD;&#xA;}  else {&#xD;&#xA;&#xD;&#xA;  x*=length;&#xD;&#xA;   y*=length;&#xD;&#xA;   z*=length;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;  x*=scale;&#xD;&#xA;   y*=scale;&#xD;&#xA;   z*=scale;&#xD;&#xA;*/&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;  // mult*=scale;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;if(xx&gt;yy &amp;&amp; xx&gt;zz)&#xD;&#xA; x*=scale;&#xD;&#xA;if(yy&gt;xx &amp;&amp; yy&gt;zz)&#xD;&#xA; y*=scale;&#xD;&#xA;if(zz&gt;xx &amp;&amp; zz&gt;yy)&#xD;&#xA; z*=scale;&#xD;&#xA;*/&#xD;&#xA;&#xD;&#xA;   x+=br;&#xD;&#xA;   y+=bi;&#xD;&#xA;   z+=bj;&#xD;&#xA;          }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;          if (invers) {&#xD;&#xA;            if (tw == 0)&#xD;&#xA;              tw = 1;&#xD;&#xA;            else&#xD;&#xA;              tw = 0;&#xD;&#xA;          }&#xD;&#xA;          return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="-0.407525953022069" />
-  <Entry Key="Transformation.3.CenterY" Value="2.56540588074062" />
-  <Entry Key="Transformation.3.CenterZ" Value="0.07803688462125" />
   <Entry Key="Transformation.AngleX" Value="12" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="-23" />

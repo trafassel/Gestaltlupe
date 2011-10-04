@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Border.Max.x" Value="0.332957374383987" />
+  <Entry Key="Border.Max.y" Value="-1.5390418127318" />
+  <Entry Key="Border.Max.z" Value="-0.223454789258691" />
+  <Entry Key="Border.Max.zz" Value="0" />
+  <Entry Key="Border.Min.x" Value="-0.366253111822387" />
+  <Entry Key="Border.Min.y" Value="-2.23825229893817" />
+  <Entry Key="Border.Min.z" Value="-0.616760687749777" />
+  <Entry Key="Border.Min.zz" Value="0" />
+  <Entry Key="Formula.Mandelbulb.Pow1" Value="" />
+  <Entry Key="Formula.Mandelbulb.Pow2" Value="" />
+  <Entry Key="Formula.Mandelbulb.Pow3" Value="" />
+  <Entry Key="Formula.Static.Cycles" Value="256" />
+  <Entry Key="Formula.Static.Formula" Value="-2" />
+  <Entry Key="Formula.Static.jx" Value="1" />
+  <Entry Key="Formula.Static.jy" Value="0.03" />
+  <Entry Key="Formula.Static.jz" Value="0.02" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="256" />
+  <Entry Key="Intern.Formula.Source" Value="public override void Init() {base.Init();additionalPointInfo=new AdditionalPointInfo();}&#xA;&#xA;&#xA;// Simplified Mandelbox&#xA;public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;&#xA;  double gr=50000; // bailoutValue&#xA;  double xx, yy, zz; // temp var&#xA;  long tw; // boring &#xA;  int n;&#xA;  double x=ar,y=ai,z=aj;&#xA;  double r_n = 0;&#xA;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;  tw = 0L;&#xA; double r = Math.Sqrt(xx + yy + zz);&#xA;&#xA;// This fixid to a special non Julia-variant &#xA;  double scale = 1.02;&#xA;&#xA;  // Surface Coloring&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;int xcount=6;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;&#xA;for(int xic=0;xic&lt;xcount;xic++) {&#xA;  if (x &gt; 1) x = 2.0 - x; &#xA;else&#xA;break;&#xA;}&#xA; if (x &lt; -1) x = -2.0 - x;&#xA;             &#xA;  // if (y &gt; 1)    y = 2.0 - y;  else&#xA;  if (y &lt; -1) y = -2.0 - y;&#xA;             &#xA;  // if (z &gt; 1)   z = 2.0 - z; else&#xA;  if (z &lt; -1) z = -2.0 - z;&#xA;              &#xA;  //  ; fold sphere onto itself&#xA;  double fixedRadius = 1;&#xA;  double minRadius = 0.00001;&#xA;&#xA;  xx=x*x;yy=y*y;zz=z*z;&#xA;  double length=   r = xx + yy + zz;&#xA;&#xA;// Colors&#xA;  if(r!=0) {&#xA;  additionalPointInfo.red+=xx/r;&#xA;  additionalPointInfo.green+=yy/r;&#xA;  additionalPointInfo.blue+=zz/r;&#xA;  }&#xA;            &#xA;  // Bailout Condition&#xA;  if (length &gt; gr) {  tw = n; break; }&#xA;&#xA; double mult=1;&#xA;&#xA; if (length &lt; fixedRadius &amp;&amp; length&gt;0) {&#xA;   mult=fixedRadius/length;&#xA; }&#xA; mult*=scale;&#xA; x*=mult;&#xA; y*=mult;&#xA; z*=mult;&#xA;&#xA;// In Julia Mode: the fixed Julia values &#xA;// Iin Mandelbrot set mode: the room coordinates of the pixel to test &#xA;   x+=br;&#xA;   y+=bi;&#xA;   z+=bj;&#xA; }&#xA;&#xA;// For inside rendering&#xA;if (invers) {if (tw == 0) tw = 1; else tw = 0; } &#xA;&#xA;  // Warning: this valaue can be very dangereus, if it is used for distanve esitmation:&#xA;  // &#xA;  return (tw); &#xA;}&#xA;&#xA;" />
+  <Entry Key="Transformation.3.AngleX" Value="0" />
+  <Entry Key="Transformation.3.AngleY" Value="0" />
+  <Entry Key="Transformation.3.AngleZ" Value="0" />
+  <Entry Key="Transformation.3.CenterX" Value="0" />
+  <Entry Key="Transformation.3.CenterY" Value="0" />
+  <Entry Key="Transformation.3.CenterZ" Value="0" />
+  <Entry Key="Transformation.AngleX" Value="0" />
+  <Entry Key="Transformation.AngleY" Value="0" />
+  <Entry Key="Transformation.AngleZ" Value="0" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="180" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="0.3" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="View.Height" Value="720" />
+  <Entry Key="View.Perspective" Value="0" />
+  <Entry Key="View.Width" Value="1280" />
+</ParameterDict>

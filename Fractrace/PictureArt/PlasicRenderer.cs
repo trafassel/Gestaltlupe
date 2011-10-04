@@ -133,30 +133,38 @@ namespace Fractrace.PictureArt {
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
         protected override void PreCalculate() {
-            shadowNumber = ParameterDict.Exemplar.GetInt("Composite.Renderer.Plasic.ShadowNumber");
-            ambientIntensity = ParameterDict.Exemplar.GetInt("Composite.Renderer.Plasic.AmbientIntensity");
-            minFieldOfView = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.MinFieldOfView");
-            maxFieldOfView = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.MaxFieldOfView");
-            
-            colorIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorIntensity");
-            useLight = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseLight");
-            shadowJustify = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ShadowJustify");
+            // Backward compatibility
+            //string parameterNode = "Composite.Renderer.Plasic.";
+            /*
+            if (ParameterDict.Exemplar["Composite.Renderer"] == "") {
+                parameterNode = "Renderer.";
+            }*/
+            // Always use new parameter settings
+            string parameterNode = "Renderer.";
+            shadowNumber = ParameterDict.Exemplar.GetInt(parameterNode+"ShadowNumber");
+            ambientIntensity = ParameterDict.Exemplar.GetInt(parameterNode+"AmbientIntensity");
+            minFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MinFieldOfView");
+            maxFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MaxFieldOfView");
 
-            shininessFactor = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ShininessFactor");
-            shininess = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Shininess");
-            lightRay.X = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.X");
-            lightRay.Y = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Y");
-            lightRay.Z = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.Light.Z");
-            useSharpShadow = ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseSharpShadow");
+            colorIntensity = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorIntensity");
+            useLight = ParameterDict.Exemplar.GetBool(parameterNode + "UseLight");
+            shadowJustify = ParameterDict.Exemplar.GetDouble(parameterNode + "ShadowJustify");
 
-            colorFactorRed = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Red");
-            colorFactorGreen = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Green");
-            colorFactorBlue = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorFactor.Blue");
+            shininessFactor = ParameterDict.Exemplar.GetDouble(parameterNode + "ShininessFactor");
+            shininess = ParameterDict.Exemplar.GetDouble(parameterNode + "Shininess");
+            lightRay.X = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.X");
+            lightRay.Y = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Y");
+            lightRay.Z = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Z");
+            useSharpShadow = ParameterDict.Exemplar.GetBool(parameterNode + "UseSharpShadow");
 
-            lightIntensity = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.LightIntensity");
+            colorFactorRed = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Red");
+            colorFactorGreen = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Green");
+            colorFactorBlue = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Blue");
 
-            colorGreyness = ParameterDict.Exemplar.GetDouble("Composite.Renderer.Plasic.ColorGreyness");
-           rgbType= ParameterDict.Exemplar.GetInt("Composite.Renderer.Plasic.ColorFactor.RgbType");
+            lightIntensity = ParameterDict.Exemplar.GetDouble(parameterNode + "LightIntensity");
+
+            colorGreyness = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorGreyness");
+            rgbType = ParameterDict.Exemplar.GetInt(parameterNode + "ColorFactor.RgbType");
 
             if (lightIntensity > 1)
                 lightIntensity = 1;
@@ -178,9 +186,9 @@ namespace Fractrace.PictureArt {
             CreateSmoothDeph();
             CreateShadowInfo();
             DrawPlane();
-            if (ParameterDict.Exemplar.GetBool("Composite.Normalize"))
+            if (ParameterDict.Exemplar.GetBool(parameterNode + "Normalize"))
                 NormalizePlane();
-            if (ParameterDict.Exemplar.GetBool("Composite.Renderer.Plasic.UseDarken"))
+            if (ParameterDict.Exemplar.GetBool(parameterNode + "UseDarken"))
                 DarkenPlane();
             SmoothEmptyPixel();
             SmoothPlane();
@@ -642,12 +650,12 @@ namespace Fractrace.PictureArt {
             double shadowVal = 0.1;
 
             int shadowTypeCount = 0;
-            for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
+            for (int shadowMode = 0; shadowMode < 5; shadowMode++) {
          //       for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
                 switch (shadowMode) {
                     case 0:
                         diffy = 0.3 * shadowJustify * (maxY - minY);
-                        shadowVal = 0.19;
+                        shadowVal = 0.1;
                         break;
                     case 1:
                         diffy = shadowJustify * (maxY - minY);
@@ -657,12 +665,22 @@ namespace Fractrace.PictureArt {
                         diffy = 3.0 * shadowJustify * (maxY - minY);
                         shadowVal = 0.19;
                         break;
+                    case 3:
+                        diffy = 0.1 * shadowJustify * (maxY - minY);
+                        shadowVal = 0.19;
+                        break;
+                    case 4:
+                        diffy = 9.0 * shadowJustify * (maxY - minY);
+                        shadowVal = 0.1;
+                        break;
 
                 }
 
                 int usedShadowNumber = shadowNumber + 1;
                 if (shadowMode == 0 || shadowMode == 2)
                     usedShadowNumber =(int)( 0.3 * shadowNumber + 1);
+                if (shadowMode == 3 || shadowMode == 4)
+                    usedShadowNumber = (int)(0.1 * shadowNumber + 1);
 
                 for (int shadowIter = 1; shadowIter < usedShadowNumber + 1; shadowIter++) {
 

@@ -3,14 +3,9 @@
   <Entry Key="Border.Max.x" Value="0.592592592592591" />
   <Entry Key="Border.Max.y" Value="-2" />
   <Entry Key="Border.Max.z" Value="0.592592592592591" />
-  <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-0.592592592592591" />
   <Entry Key="Border.Min.y" Value="-3.18518518518518" />
   <Entry Key="Border.Min.z" Value="-0.592592592592591" />
-  <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Formula.Mandelbulb.Pow1" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow2" Value="2" />
-  <Entry Key="Formula.Mandelbulb.Pow3" Value="2" />
   <Entry Key="Formula.Static.Cycles" Value="170" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="-1.1" />

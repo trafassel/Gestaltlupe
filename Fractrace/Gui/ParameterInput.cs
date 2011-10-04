@@ -133,12 +133,11 @@ namespace Fractrace {
       ParameterDict.Exemplar.SetDouble("Border.Min.x", mParameter.start_tupel.x);
       ParameterDict.Exemplar.SetDouble("Border.Min.y", mParameter.start_tupel.y);
       ParameterDict.Exemplar.SetDouble("Border.Min.z", mParameter.start_tupel.z);
-      ParameterDict.Exemplar.SetDouble("Border.Min.zz", mParameter.start_tupel.zz);
+      //ParameterDict.Exemplar.SetDouble("Border.Min.zz", mParameter.start_tupel.zz);
       ParameterDict.Exemplar.SetDouble("Border.Max.x", mParameter.end_tupel.x);
       ParameterDict.Exemplar.SetDouble("Border.Max.y", mParameter.end_tupel.y);
       ParameterDict.Exemplar.SetDouble("Border.Max.z", mParameter.end_tupel.z);
-      ParameterDict.Exemplar.SetDouble("Border.Max.zz", mParameter.end_tupel.zz);
-
+      //ParameterDict.Exemplar.SetDouble("Border.Max.zz", mParameter.end_tupel.zz);
     }
 
 
