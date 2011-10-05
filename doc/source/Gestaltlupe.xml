@@ -64,7 +64,7 @@ Windows.Forms library 2.0).</para>
     <para>
     </para>
     <para>
-      Double click on <application branch="">Gestaltlupe_1_0_2.exe</application> , choose Tab <emphasis branch="">file</emphasis>, load an sample project and press the
+      Double click on <application branch="">Gestaltlupe_1_2_0.exe</application> , choose Tab <emphasis branch="">file</emphasis>, load an sample project and press the
       button “preview” to get after a short time a small picture of the given 3D object, or press "start"
       to render a bitmap in full resolution.
     </para>
@@ -75,9 +75,9 @@ Windows.Forms library 2.0).</para>
 
       <ulink url="http://github.com/trafassel/Gestaltlupe">http://github.com/trafassel/Gestaltlupe </ulink>
 
-      The corresponding Version 1.1.0, which is documented here, can be found at:
+      The corresponding Version 1.2.0, which is documented here, can be found at:
 
-      <ulink url="http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_1_0.exe">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_1_0.exe </ulink>
+      <ulink url="http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_2_0.exe">http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_2_0.exe </ulink>
 
       On this page you have to click “raw” to get the binary.  But the recommended way to work with
       Gestaltlupe is to download the full archive file (the big “Download” button at
@@ -157,80 +157,6 @@ In the second stage the renderer generates the bitmap from the geometry data . B
       <para>
 The first stage used multiple threads. This means, the computation is done on multiple processors. 
 The second stage runs in one thread, uses only one processor and blocks the whole application.</para>
-      <para>There are 6 different renderers. To choose another one, you have to set <link linkend="composite">Composite.Renderer</link> to the name (or number) of your favourite renderer type, and press <emphasis branch="">Repaint</emphasis> in the result window. This is much faster than pressing <emphasis branch="">Start</emphasis> in the parameter window. Using of <emphasis branch="">Repaint</emphasis> is also recommended, if you change some of the rendering <link linkend="composite" branch="">parameters</link>.</para>
-      <para>The default renderer is <link linkend="plasicrenderer" branch="">PlasicRenderer</link>. It produces the best pictures, but needs at most memory and computing time. </para>
-      <section>
-        <title>FastScienceRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/FastScienceRenderer.png" />
-        </imageobject>
-      </section>
-      <section>
-        <title>ScienceRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/ScienceRenderer.png" />
-        </imageobject>
-      </section>
-      <section>
-        <title>NiceRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/NiceRenderer.png" />
-        </imageobject>
-      </section>
-      <section>
-        <title>BroadcastRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/BroadcastRenderer.png" />
-        </imageobject>
-      </section>
-      <section>
-        <title>SharpRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/SharpRenderer.png" />
-        </imageobject>
-      </section>
-      <section>
-        <title>UniversalRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/UniversalRenderer.png" />
-        </imageobject>
-      </section>
-      <section id="plasicrenderer">
-        <title>PlasicRenderer</title>
-        <para>
-        </para>
-        <imageobject>
-          <title>
-          </title>
-          <imagedata format="png" fileref="pic/PlasicRenderer.png" />
-        </imageobject>
-        <para>The settings for PlasicRenderer can be changed in the node <link linkend="compositerendererplasic">Composite.Renderer.Plasic</link> at the <emphasis branch="">Data</emphasis> tab in the main window. Here you can define a mix of ambient shadows, phong shading and a hard shadow.</para>
-        <para />
-      </section>
     </chapter>
     <chapter id="navigation">
       <title>Navigation</title>
@@ -643,7 +569,7 @@ if(Math.Abs(ar)+Math.Abs(ai)+Math.Abs(aj) &lt; 1.4) {
           <title>Access to Global Parameters</title>
           <para>
           </para>
-          <para>You can set the valu of all global parameters,</para>
+          <para>You can set the value of all global parameters,</para>
           <programlisting>public void Set(string id, int value); 
 public void Set(string id, double value);
 public void Set(string id, bool value);
@@ -712,7 +638,7 @@ z = newPos.Z;
       </imageobject>
       <para>An animation frame entry starts with <application branch="">Run</application>. The parameter <application branch="">Steps</application> defines the number of frames in this animation step.</para>
       <para>The entry <emphasis branch="">Size</emphasis> corresponds to the parameter <emphasis branch="">View.Size</emphasis>. This value is set in each frame of the animation. </para>
-      <para>The generation of all frames begins after pressing the button <emphasis branch="">Start</emphasis> </para>
+      <para>The generation of all frames begins after pressing the button <emphasis branch="">Start</emphasis></para>
       <para>Pressing <emphasis branch="">Stop</emphasis> in the animation tab aborts the animation process, but does not stop the generation of the current frame. To stop this, you have to additionally press <emphasis branch="">Stop</emphasis> in the render frame.</para>
     </chapter>
     <chapter>
@@ -761,8 +687,7 @@ z = newPos.Z;
       </section>
       <section id="parameter.border">
         <title>Border</title>
-        <para>
-        </para>
+        <para>The border defines the bounding box of the computed point set. If you set this borde by hand, make sure, that you press <emphasis branch="">Automatic</emphasis> in the tab <emphasis branch="">Navigate</emphasis> to fix this values corresponding to the choosen window size.</para>
         <table>
           <title>
           </title>
@@ -801,309 +726,6 @@ z = newPos.Z;
             </tbody>
           </tgroup>
         </table>
-      </section>
-      <section id="composite">
-        <title>Composite</title>
-        <para>
-        </para>
-        <table>
-          <title>
-          </title>
-          <tgroup cols="2">
-            <thead>
-              <row>
-                <entry>Name</entry>
-                <entry>Description</entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry>Composite.Blurring</entry>
-                <entry> Strength of blurring (0-1)  [used in Renderer 2-4]</entry>
-              </row>
-              <row>
-                <entry>Composite.BlurringDeph</entry>
-                <entry>not used anymore</entry>
-              </row>
-              <row>
-                <entry>Composite.BackgoundDarken</entry>
-                <entry>Activates the darkening of distand points    [used in Renderer 2,3,4,6]</entry>
-              </row>
-              <row>
-                <entry>Composite.Shininess</entry>
-                <entry>Light and material property  [used in Renderer 2 - 4]</entry>
-              </row>
-              <row>
-                <entry>Composite.UseAmbient</entry>
-                <entry>Activates the Blurring.  [used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.UseDarken</entry>
-                <entry>Activates the darkening of distand points    [used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.UseMedian</entry>
-                <entry>Use object median instead of the center of the bounds [used in Renderer 2,3] </entry>
-              </row>
-              <row>
-                <entry>Composite.UseDerivation</entry>
-                <entry> [used in Renderer ?</entry>
-              </row>
-              <row>
-                <entry>Composite.UseColor1</entry>
-                <entry>Activates the surface color [used in Renderer ?] </entry>
-              </row>
-              <row>
-                <entry>Composite.Color1Factor</entry>
-                <entry> [used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.Color1TestArea</entry>
-                <entry>[used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.FrontLight</entry>
-                <entry>Activates additional front light  [used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.AmbientLight</entry>
-                <entry>Activates additional ambient light  [used in Renderer ?]</entry>
-              </row>
-              <row>
-                <entry>Composite.Normalize</entry>
-                <entry>Normalise the color and light parameter to get the best picture results. Don't use this parameter in animations [apply to Renderer 2 - 5]</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer</entry>
-                <entry>
-                  <para>
-                    <itemizedlist>
-                      <listitem>Composite.Renderer=0 : use FastScienceRenderer</listitem>
-                      <listitem>Composite.Renderer=1 : use ScienceRenderer</listitem>
-                      <listitem>Composite.Renderer=2 : use NiceRenderer</listitem>
-                      <listitem>Composite.Renderer=3 : use BroadcastRenderer</listitem>
-                      <listitem>Composite.Renderer=4 : use SharpRenderer</listitem>
-                      <listitem>Composite.Renderer=5 : use UniversalRenderer</listitem>
-                      <listitem>Composite.Renderer=6 : use PlasicRenderer</listitem>
-                    </itemizedlist>
-                  </para>
-                </entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.UseAmbient</entry>
-                <entry>Activates Blurring in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.UseDarken</entry>
-                <entry>Activates Background darkening in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.UseColorFromFormula</entry>
-                <entry> Activates surface color in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.UseMedianColorFromFormula</entry>
-                <entry>Activates median for surface color in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.ComicStyle</entry>
-                <entry> Activates comic style (additional black lines at the border) in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.FrontLightIntensity</entry>
-                <entry> Intensity (0-1) of the Front Light in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.AmbientLightIntensity</entry>
-                <entry> Intensity (0-1) of the Ambient Light in UniversalRenderer.</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.Brightening</entry>
-                <entry>Additional Brightening (0-1) in UniversalRenderer</entry>
-              </row>
-              <row>
-                <entry>Composite.Renderer.Universal.NormalizeColors</entry>
-                <entry> Normalise the color and light parameter to get the best picture results.
-Don't use this parameter in animations [apply to UniversalRenderer]</entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-              <row>
-                <entry>
-                </entry>
-                <entry>
-                </entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-        <para>
-        </para>
-        <section id="compositerendererplasic">
-          <title>Composite.Renderer.Plasic</title>
-          <para>
-          </para>
-          <table>
-            <title>
-            </title>
-            <tgroup cols="2">
-              <thead>
-                <row>
-                  <entry>Name</entry>
-                  <entry>Description</entry>
-                </row>
-              </thead>
-              <tbody>
-                <row>
-                  <entry>AmbientIntensity</entry>
-                  <entry>Strength of blurring. Use 0 for a sharp picture. A value of 12 gives a smart background blurring  </entry>
-                </row>
-                <row>
-                  <entry>ColorGreyness</entry>
-                  <entry>use 0 for default color settings and 1 for a grey surface coloring (or a double value between 0 and 1)</entry>
-                </row>
-                <row>
-                  <entry>ColorIntensity</entry>
-                  <entry>Intensty of the color, use 0 for no color, 1 for default coloring or a value&gt;1 for very colorful result</entry>
-                </row>
-                <row>
-                  <entry>LightIntensity</entry>
-                  <entry>Set the amount of phong shading, compared with shadow rendering. Use 0 for shadow rendering only or 1 for phong shading only (or a value between 0 and 1 for a combination of both)</entry>
-                </row>
-                <row>
-                  <entry>ShadowJustify</entry>
-                  <entry>The default shadow light angle. Use high values for illuminating deep holes</entry>
-                </row>
-                <row>
-                  <entry>ShadowNumber</entry>
-                  <entry>The number of used shadows. Higher values gives a better picture quality, but needs more time </entry>
-                </row>
-                <row>
-                  <entry>Shininess</entry>
-                  <entry>shininess in phong shading.  </entry>
-                </row>
-                <row>
-                  <entry>ShininessFactor</entry>
-                  <entry>Influence of the shininess. Allowed values are between 0 and 1</entry>
-                </row>
-                <row>
-                  <entry>UseDarken</entry>
-                  <entry>Set this value to 1, if the background of the picture should be smoothed to black</entry>
-                </row>
-                <row>
-                  <entry>UseLight</entry>
-                  <entry>Enable phong shading</entry>
-                </row>
-                <row>
-                  <entry>UseSharpShadow</entry>
-                  <entry>A value of 1 adds a sharp shadow to the phong shading. Be careful with this parameter. The sharp shadow needs a lot of computing time.</entry>
-                </row>
-                <row>
-                  <entry>ColorFactor.Blue</entry>
-                  <entry>Color factor for the blue rgb component</entry>
-                </row>
-                <row>
-                  <entry>ColorFactor.Green</entry>
-                  <entry>Color factor for the green rgb component</entry>
-                </row>
-                <row>
-                  <entry>ColorFactor.Red</entry>
-                  <entry>Color factor for the red rgb component</entry>
-                </row>
-                <row>
-                  <entry>ColorFactor.RgbType</entry>
-                  <entry>Possible values are 1,...,6. Here you can vary the used rgb components. Choose 1, if you want to use the original values, defined in the formula.</entry>
-                </row>
-                <row>
-                  <entry>Light</entry>
-                  <entry>The x,y,z component of the light vector which is used in phong shading</entry>
-                </row>
-              </tbody>
-            </tgroup>
-          </table>
-        </section>
       </section>
       <section>
         <title>Computation</title>
@@ -1205,6 +827,104 @@ If minCycle=51, then inside rendering is deactivated.</para>
           </tgroup>
         </table>
       </section>
+      <section id="composite">
+        <title>Renderer</title>
+        <para>
+        </para>
+        <para>
+        </para>
+        <table>
+          <title>
+          </title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Name</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>AmbientIntensity</entry>
+                <entry>Strength of blurring. Use 0 for a sharp picture. A value of 5 gives a smart background blurring  </entry>
+              </row>
+              <row>
+                <entry>ColorGreyness</entry>
+                <entry>use 0 for default color settings and 1 for a grey surface coloring (or a double value between 0 and 1)</entry>
+              </row>
+              <row>
+                <entry>ColorIntensity</entry>
+                <entry>Intensty of the color, use 0 for no color, 1 for default coloring or a value&gt;1 for very colorful result</entry>
+              </row>
+              <row>
+                <entry>LightIntensity</entry>
+                <entry>Set the amount of phong shading, compared with shadow rendering. Use 0 for shadow rendering only or 1 for phong shading only (or a value between 0 and 1 for a combination of both)</entry>
+              </row>
+              <row>
+                <entry>MaxFieldOfView</entry>
+                <entry>Upper bound for the field of view. If this parameter is 1, the objects near the camera are sharp.</entry>
+              </row>
+              <row>
+                <entry>MinFieldOfView</entry>
+                <entry>Lower bound for the field of view.</entry>
+              </row>
+              <row>
+                <entry>Normalise</entry>
+                <entry>(0/1 value) Normalise the color and light parameter to get the best picture results. In animations this parameter should be set to 0. 
+</entry>
+              </row>
+              <row>
+                <entry>ShadowJustify</entry>
+                <entry>The default shadow light angle. Use high values for illuminating deep holes</entry>
+              </row>
+              <row>
+                <entry>ShadowNumber</entry>
+                <entry>The number of used shadows. Higher values gives a better picture quality, but needs more time </entry>
+              </row>
+              <row>
+                <entry>Shininess</entry>
+                <entry>shininess in phong shading.  </entry>
+              </row>
+              <row>
+                <entry>ShininessFactor</entry>
+                <entry>Influence of the shininess. Allowed values are between 0 and 1</entry>
+              </row>
+              <row>
+                <entry>UseDarken</entry>
+                <entry>Set this value to 1, if the background of the picture should be smoothed to black</entry>
+              </row>
+              <row>
+                <entry>UseLight</entry>
+                <entry>Enable phong shading</entry>
+              </row>
+              <row>
+                <entry>UseSharpShadow</entry>
+                <entry>A value of 1 adds a sharp shadow to the phong shading. Be careful with this parameter. The sharp shadow needs a lot of computing time.</entry>
+              </row>
+              <row>
+                <entry>ColorFactor.Blue</entry>
+                <entry>Color factor for the blue rgb component</entry>
+              </row>
+              <row>
+                <entry>ColorFactor.Green</entry>
+                <entry>Color factor for the green rgb component</entry>
+              </row>
+              <row>
+                <entry>ColorFactor.Red</entry>
+                <entry>Color factor for the red rgb component</entry>
+              </row>
+              <row>
+                <entry>ColorFactor.RgbType</entry>
+                <entry>Possible values are 1,...,6. Here you can vary the used rgb components. Choose 1, if you want to use the original values, defined in the formula.</entry>
+              </row>
+              <row>
+                <entry>Light</entry>
+                <entry>The x,y,z component of the light vector which is used in phong shading</entry>
+              </row>
+            </tbody>
+          </tgroup>
+</table>
+      </section>
       <section id="parameter.transformation">
         <title>Transformation</title>
         <para>
@@ -1229,18 +949,6 @@ If minCycle=51, then inside rendering is deactivated.</para>
                 <entry>Angle difference in stereo mode. </entry>
               </row>
               <row>
-                <entry>Transformation.AngleX</entry>
-                <entry>Rotation angle (in degree) for axis x (center=(0,0,0)).</entry>
-              </row>
-              <row>
-                <entry>Transformation.AngleY</entry>
-                <entry>Rotation angle (in degree) for axis y (center=(0,0,0)).</entry>
-              </row>
-              <row>
-                <entry>Transformation.AngleZ</entry>
-                <entry>Rotation angle (in degree) for axis z (center=(0,0,0)).</entry>
-              </row>
-              <row>
                 <entry>Transformation.Camera.AngleX</entry>
                 <entry>Rotation angle (in degree) for axis x (rotation center is center of the given bounds).</entry>
               </row>
@@ -1251,30 +959,6 @@ If minCycle=51, then inside rendering is deactivated.</para>
               <row>
                 <entry>Transformation.Camera.AngleZ</entry>
                 <entry>Rotation angle (in degree) for axis z (rotation center is center of the given bounds)</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.AngleX</entry>
-                <entry>Rotation angle (in degree) for axis x (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.AngleY</entry>
-                <entry>Rotation angle (in degree) for axis y (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.AngleZ</entry>
-                <entry>Rotation angle (in degree) for axis z (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.CenterX</entry>
-                <entry>x- component of the center of rotation Transformation.3</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.CenterY</entry>
-                <entry>y- component of the center of rotation Transformation.3</entry>
-              </row>
-              <row>
-                <entry>Transformation.3.CenterZ</entry>
-                <entry>z- component of the center of rotation Transformation.3</entry>
               </row>
               <row>
                 <entry>Transformation.Perspective.Cameraposition</entry>
@@ -1301,10 +985,6 @@ If minCycle=51, then inside rendering is deactivated.</para>
             </thead>
             <tbody>
               <row>
-                <entry>View.Zoom</entry>
-                <entry>Not used anymore</entry>
-              </row>
-              <row>
                 <entry>View.Raster</entry>
                 <entry>
                   <para>Rendering Quality.</para>
@@ -1318,10 +998,6 @@ If minCycle=51, then inside rendering is deactivated.</para>
                   <para>width of the rendered bitmap=View.Size*View.Width</para>
                   <para>height of the rendered bitmap=View.Size*View.Height</para>
                 </entry>
-              </row>
-              <row>
-                <entry>View.ClassicView</entry>
-                <entry>Set "View.ClassicView" to 1 to activate the classic view ... eventually </entry>
               </row>
               <row>
                 <entry>View.Perspective</entry>
