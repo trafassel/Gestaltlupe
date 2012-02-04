@@ -286,11 +286,8 @@ namespace Fractrace {
       double[] col = null;
       double xd, yd, zd, zzd;
       double x, y, z, zz;
-
       double dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd") *screensize;
-
       act_val = act_val.Clone();
-
       Formulas formulas = new Formulas(PData);
       mLastUsedFormulas = formulas;
       if (ParameterDict.Exemplar["Intern.Formula.Source"].Trim() == "") {
@@ -303,7 +300,6 @@ namespace Fractrace {
         return;
       formulas.InternFormula.Init();
 
-
       // Umschauen
       double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
       double centerY = 0.5 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") + ParameterDict.Exemplar.GetDouble("Border.Min.y"));
@@ -313,17 +309,11 @@ namespace Fractrace {
       rotView.Init(centerX, centerY, centerZ,ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
           ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
       formulas.Transforms.Add(rotView);
-      /*
-        ParameterDict.Exemplar.SetDouble("Transformation.3.CenterX", centerX);
-      ParameterDict.Exemplar.SetDouble("Transformation.3.CenterY", centerY);
-      ParameterDict.Exemplar.SetDouble("Transformation.3.CenterZ", centerZ);
-       */
       // ende Umschauen
 
       Rotation rot = new Rotation();
       rot.Init();
       formulas.Transforms.Add(rot);
-
 
       if (mIsRightView) {
         RightEyeView stereoTransform = new RightEyeView();
@@ -331,9 +321,7 @@ namespace Fractrace {
         formulas.Transforms.Add(stereoTransform);
       }
 
-
       col = formulas.col;
-
       MAXX_ITER = width;
       MAXY_ITER = (int)(ParameterDict.Exemplar.GetDouble("View.Deph") * screensize);
       MAXZ_ITER = height;
@@ -361,10 +349,8 @@ namespace Fractrace {
         minCycle = 100;
 
       // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
-      int cycleAdd = 1056;
+      int cycleAdd = 128;
 
-      Pen p = new Pen(Color.FromArgb(100, 200, 50));
-      SolidBrush brush = new SolidBrush(Color.FromArgb(0, 0, 0));
       int colour_type = 0;
 
       wix = act_val.arc.x;

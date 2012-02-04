@@ -1,39 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Animation.Steps" Value="100" />
   <Entry Key="Border.Max.x" Value="2" />
-  <Entry Key="Border.Max.y" Value="4" />
+  <Entry Key="Border.Max.y" Value="2.66666666666666" />
   <Entry Key="Border.Max.z" Value="2" />
   <Entry Key="Border.Max.zz" Value="0" />
   <Entry Key="Border.Min.x" Value="-2" />
-  <Entry Key="Border.Min.y" Value="-3.21964677141295E-15" />
+  <Entry Key="Border.Min.y" Value="-1.33333333333334" />
   <Entry Key="Border.Min.z" Value="-2" />
   <Entry Key="Border.Min.zz" Value="0" />
-  <Entry Key="Composite.AmbientLight" Value="0" />
-  <Entry Key="Composite.BackgoundDarken" Value="0" />
-  <Entry Key="Composite.Blurring" Value="0" />
-  <Entry Key="Composite.BlurringDeph" Value="0" />
-  <Entry Key="Composite.Color1Factor" Value="50" />
-  <Entry Key="Composite.Color1TestArea" Value="10" />
-  <Entry Key="Composite.FrontLight" Value="1" />
-  <Entry Key="Composite.Normalize" Value="0" />
-  <Entry Key="Composite.Renderer" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.AmbientLightIntensity" Value="0.4" />
-  <Entry Key="Composite.Renderer.Universal.Brightening" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.ComicStyle" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.FrontLightIntensity" Value="0.1" />
-  <Entry Key="Composite.Renderer.Universal.NormalizeColors" Value="0" />
-  <Entry Key="Composite.Renderer.Universal.UseAmbient" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseColorFromFormula" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseDarken" Value="1" />
-  <Entry Key="Composite.Renderer.Universal.UseMedianColorFromFormula" Value="0" />
-  <Entry Key="Composite.Shininess" Value="2" />
-  <Entry Key="Composite.UseAmbient" Value="1" />
-  <Entry Key="Composite.UseColor1" Value="0" />
-  <Entry Key="Composite.UseDarken" Value="1" />
-  <Entry Key="Composite.UseDerivation" Value="1" />
-  <Entry Key="Composite.UseMedian" Value="0" />
-  <Entry Key="Computation.NoOfThreads" Value="8" />
   <Entry Key="Formula.Mandelbulb.Pow1" Value="1" />
   <Entry Key="Formula.Mandelbulb.Pow2" Value="8" />
   <Entry Key="Formula.Mandelbulb.Pow3" Value="8" />
@@ -54,7 +28,6 @@
   <Entry Key="Formula.Universal.Para8" Value="0" />
   <Entry Key="Formula.Universal.Para9" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="/// &lt;summary&gt;&#xD;&#xA;        /// Initialisierung&#xD;&#xA;        /// &lt;/summary&gt;&#xD;&#xA;        public override void Init() {&#xD;&#xA;            base.Init();&#xD;&#xA;            // Hier kann z.B. pow oder gr aus den Einstellungen gelesen werden.&#xD;&#xA;additionalPointInfo=new AdditionalPointInfo();&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xD;&#xA;            double aar, aai, aaj;&#xD;&#xA;            long tw;&#xD;&#xA;            int n;&#xD;&#xA;            int pow = 7; // n=8 entspricht dem Mandelbulb&#xD;&#xA;                double gr =100;  //   10; // Ab diesem Wert liegt mit Sicherheit Nichtzugehörigkeit zur Menge vor.&#xD;&#xA;&#xD;&#xA;            aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;            tw = 0L;&#xD;&#xA;            double r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=0;&#xD;&#xA;additionalPointInfo.green=0;&#xD;&#xA;additionalPointInfo.blue=0;&#xD;&#xA;&#xD;&#xA;double red=0; double green=0; double blue=0;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;double ar_=ar;&#xD;&#xA;double aj_=aj;&#xD;&#xA;double ai_=ai;&#xD;&#xA;&#xD;&#xA;double divider=0;&#xD;&#xA;            for (n = 1; n &lt; zkl; n++) {&#xD;&#xA;&#xD;&#xA;               divider=ar*ai+ar*aj;&#xD;&#xA;               if(divider!=0)&#xD;&#xA;                ar_=(ar*ar-0.5*(ai+aj))*divider;&#xD;&#xA;&#xD;&#xA;               divider=ai*aj+ai*ar;&#xD;&#xA;               if(divider!=0)&#xD;&#xA;                ai_=(ai*ai- 0.5*(aj+ar))*divider;&#xD;&#xA;&#xD;&#xA;               divider=ai*aj+aj*ar;&#xD;&#xA;               if(divider!=0)&#xD;&#xA;                aj_=(aj*aj-0.5*(ar+ai))*divider;&#xD;&#xA;&#xD;&#xA;                ar=ar_;ai=ai_;aj=aj_;&#xD;&#xA;                aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;                r =aar + aai + aaj;&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;if(n&lt;=zkl-2 &amp;&amp; n&gt;=zkl-4) {&#xD;&#xA;red+=aar/r;&#xD;&#xA;green+=aai/r;&#xD;&#xA;blue+=aaj/r;&#xD;&#xA;}&#xD;&#xA;//if(invers)&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if(n==zkl-1) {&#xD;&#xA;red+=grFrac*aar/r;&#xD;&#xA;green+=grFrac*aai/r;&#xD;&#xA;blue+=grFrac*aaj/r;&#xD;&#xA;}&#xD;&#xA;if(n==zkl-5) {&#xD;&#xA;red+=(1-grFrac)*aar/r;&#xD;&#xA;green+=(1-grFrac)*aai/r;&#xD;&#xA;blue+=(1-grFrac)*aaj/r;&#xD;&#xA;}&#xD;&#xA;*/&#xD;&#xA;r= Math.Sqrt(r);&#xD;&#xA;                if (r &gt; gr) { tw = n; break; }&#xD;&#xA;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;additionalPointInfo.red=red;&#xD;&#xA;additionalPointInfo.green=green;&#xD;&#xA;additionalPointInfo.blue=blue;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;            if (invers) {&#xD;&#xA;                if (tw == 0)&#xD;&#xA;                    tw = 1;&#xD;&#xA;                else&#xD;&#xA;                    tw = 0;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;/*&#xD;&#xA;if(red&lt;=blue || red&lt;=green) {&#xD;&#xA;tw=1;&#xD;&#xA;}*/&#xD;&#xA;            return (tw);&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;" />
-  <Entry Key="test2" Value="df" />
   <Entry Key="Transformation.3.AngleX" Value="0" />
   <Entry Key="Transformation.3.AngleY" Value="0" />
   <Entry Key="Transformation.3.AngleZ" Value="0" />
@@ -64,17 +37,13 @@
   <Entry Key="Transformation.AngleX" Value="0" />
   <Entry Key="Transformation.AngleY" Value="0" />
   <Entry Key="Transformation.AngleZ" Value="0" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="0" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
   <Entry Key="Transformation.Stereo.Angle" Value="-4" />
   <Entry Key="Transformation.Stereo.EyeDistance" Value="0.02" />
-  <Entry Key="View.ClassicView" Value="0" />
-  <Entry Key="View.Deph" Value="1800" />
   <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="0" />
-  <Entry Key="View.PosterX" Value="0" />
-  <Entry Key="View.PosterZ" Value="0" />
-  <Entry Key="View.Raster" Value="2" />
-  <Entry Key="View.Size" Value="0.2" />
   <Entry Key="View.Width" Value="1200" />
-  <Entry Key="View.Zoom" Value="1" />
 </ParameterDict>

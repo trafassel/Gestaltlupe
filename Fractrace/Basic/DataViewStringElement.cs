@@ -30,14 +30,13 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
-    /// Text wurde vom Nutzer verändert.
+    /// Text change by user.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     void tbValue_TextChanged(object sender, EventArgs e) {
       ParameterDict.Exemplar.Entries[mName] = tbValue.Text;
       CallElementChanged(mName, tbValue.Text);
-      //throw new NotImplementedException();
     }
   }
 }

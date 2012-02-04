@@ -6,14 +6,13 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
-    /// Klassen, die eine asynchrone Berechnung starten, können sich über dieses
-    /// Interface von der Beendigung der Berechnung informieren lassen.
+    /// Classes, which are able to use asynchron computations can use this interface to get an event if the computation ends.
     /// </summary>
     public interface IAsyncComputationStarter {
 
 
         /// <summary>
-        /// Wird aufgerufen, wenn die asynchrone Berechnung bendet wurde.
+        /// Is called if computation is ready.
         /// </summary>
         void ComputationEnds();
 

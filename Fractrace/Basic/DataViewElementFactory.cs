@@ -10,24 +10,25 @@ namespace Fractrace.Basic {
 
 
       // Standardmäßig wird als Datentyp string angenommen.
-
       if (retVal == null) {
         retVal = new DataViewStringElement();
         retVal.Dock = System.Windows.Forms.DockStyle.Top;
         retVal.Height = mDefaultHeight;
         retVal.Init(name, value, type, description, shortenName);
       }
-
       return retVal;
-
     }
 
 
+    /// <summary>
+    /// The height of this element.
+    /// </summary>
     public static int DefaultHeight {
       get {
         return mDefaultHeight;
       }
     }
+
     protected static int mDefaultHeight = 24;
 
 

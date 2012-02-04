@@ -254,27 +254,27 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
          */
 
      // ParameterDict.Exemplar["Composite.Renderer"] = "1";
-      ParameterDict.Exemplar["Renderer.Normalize"] = "0";
+      ParameterDict.Exemplar["Renderer.Normalize"] = "1";
 
       // Activates Background darkening in PlasicRenderer
       ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
       // Corresponds to the number of shadows in PlasicRenderer
-      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "30";
+      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "26";
       // Intensity of the FieldOfView
-      ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "5";
+      ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "1";
       // Minimal value of FieldOfView
-      ParameterDict.Exemplar["Renderer.MinFieldOfView"] = "0.7";
+      ParameterDict.Exemplar["Renderer.MinFieldOfView"] = "0.4";
       // Maximal value of FieldOfView
-      ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "1";
+      ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "0.0";
 
       // Intensity of the Surface Color
-      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "1";
+      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "0.4";
       // If ColorGreyness=1, no color is rendered
       ParameterDict.Exemplar["Renderer.ColorGreyness"] = "0";
       // Use Light
       ParameterDict.Exemplar["Renderer.UseLight"] = "1";
       // Shadow height factor
-      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "5";
+      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "4";
       // Shininess factor (0 ... 1)
       ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.5";
       // Shininess ( 0... 1000)
@@ -291,6 +291,14 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Renderer.ColorFactor.Blue"] = "1";
       // accepted integer values: 1, ..., 6  (all values>1 :switch rgb components)
       ParameterDict.Exemplar["Renderer.ColorFactor.RgbType"] = "1";
+
+            // Red component of background color 
+      ParameterDict.Exemplar["Renderer.BackColor.Red"] = "0.25";
+    // Green component of background color 
+      ParameterDict.Exemplar["Renderer.BackColor.Green"] = "0.25";
+    // Blue component of background color 
+      ParameterDict.Exemplar["Renderer.BackColor.Blue"] = "0.3";
+     
 
       // If LightIntensity==1, no shadow renderers are used
       // If LightIntensity==0, only shadow renderers are used

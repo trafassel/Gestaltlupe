@@ -157,6 +157,7 @@ In the second stage the renderer generates the bitmap from the geometry data . B
       <para>
 The first stage used multiple threads. This means, the computation is done on multiple processors. 
 The second stage runs in one thread, uses only one processor and blocks the whole application.</para>
+      <para>The rendering parameters can be set in the <emphasis branch="">Data</emphasis> tab at <link linkend="composite">Renderer</link> </para>
     </chapter>
     <chapter id="navigation">
       <title>Navigation</title>

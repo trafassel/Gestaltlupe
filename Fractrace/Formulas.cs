@@ -735,7 +735,6 @@ double xx, yy, zz;
 
               /* Einbeziehung des Winkels  */
               f = Math.PI / 180.0;
-              /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
               // Drehung
               xmi = 0; ymi = 0; zmi = 0;
               x -= xmi; y -= ymi; z -= zmi;
