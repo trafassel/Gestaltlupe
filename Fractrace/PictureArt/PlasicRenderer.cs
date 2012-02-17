@@ -446,6 +446,7 @@ namespace Fractrace.PictureArt {
       double tfac = 1;
 
       Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+      normal.Normalize();
       Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
 
       //Vec3 coord = formula.GetTransformWithoutProjection(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
