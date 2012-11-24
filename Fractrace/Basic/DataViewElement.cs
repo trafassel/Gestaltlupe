@@ -55,7 +55,7 @@ namespace Fractrace.Basic {
     /// <summary>
     /// Corresponding string value is set from ParameterDict.Exemplar.
     /// </summary>
-    public virtual void Update() {
+    public virtual void UpdateElements() {
       string newValue = ParameterDict.Exemplar[mName];
       if (oldValue != newValue) {
         mValue = newValue;

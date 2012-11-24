@@ -197,6 +197,8 @@ namespace Fractrace {
       if (!ParameterDict.Exemplar.GetBool("View.ClassicView")) {
         string tempParameterHash = GetParameterHashWithoutPictureArt();
         if (oldParameterHashWithoutPictureArt == tempParameterHash) {
+            // new: update Iteration
+
           OneStepEnds();
         } else {
           oldParameterHashWithoutPictureArt = tempParameterHash;
