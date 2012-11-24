@@ -117,14 +117,6 @@ namespace Fractrace {
     }
 
 
-    /// <summary>
-    /// Um das schnelle Zeichnen von Objekten aus den Preview Control zu aktivieren,
-    /// wird noch nicht benutzt.
-    /// </summary>
-    string oldRenderer = "";
-
-
-
       /// <summary>
     /// Set the size of the labelImage
       /// </summary>

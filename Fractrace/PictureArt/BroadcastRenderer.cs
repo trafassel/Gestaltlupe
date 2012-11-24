@@ -553,7 +553,7 @@ namespace Fractrace.PictureArt
             }
 
 
-            SetSmoothDeph(smoothDeph1, smoothDeph2);
+            //SetSmoothDeph(smoothDeph1, smoothDeph2);
             //SetSmoothDeph(smoothDeph2, smoothDeph3);
             //SetSmoothDeph(smoothDeph3, smoothDeph1);
             //SetSmoothDeph(smoothDeph1, smoothDeph3);

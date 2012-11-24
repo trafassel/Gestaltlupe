@@ -1450,37 +1450,8 @@ double xx, yy, zz;
                     if (col[k] < 1) col[k] = 1;
 
 
-                    // Pixelposition im ausgegebenen Bild
-                    int indexX = 0, indexY = 0;
+                   
                     if (use4Points) {
-
-                      /*
-                      switch (k) {
-
-                       
-                        case 0:
-                          indexX = pixelX + 1;
-                          indexY = pixelY;
-                          break;
-
-                        case 1:
-                          indexX = pixelX + 1;
-                          indexY = pixelY + 1;
-                          break;
-
-                        case 2:
-                          indexX = pixelX;
-                          indexY = pixelY + 1;
-                          break;
-
-                        case 3:
-                          indexX = pixelX;
-                          indexY = pixelY;
-                          break;
-                          
-
-                      }
-                       */
                       PixelInfo pInfo = null;
                       if (borderPoints[k] == null) {
                         pInfo = new PixelInfo();

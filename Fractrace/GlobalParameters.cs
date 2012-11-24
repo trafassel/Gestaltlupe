@@ -26,18 +26,6 @@ namespace Fractrace {
       // Maximal Z-Value.
       ParameterDict.Exemplar["Border.Max.z"] = "1.5";
 
-      // Not used anymore
-      //ParameterDict.Exemplar["Border.Min.zz"] = "-1.5";
-      // Not used anymore
-      //ParameterDict.Exemplar["Border.Max.zz"] = "1.5";
-
-      // Rotation angle (in degree) for axis x (center=(0,0,0)).
-      //ParameterDict.Exemplar["Transformation.AngleX"] = "0";
-      // Rotation angle (in degree) for axis y (center=(0,0,0)).
-      //ParameterDict.Exemplar["Transformation.AngleY"] = "0";
-      // Rotation angle (in degree) for axis z (center=(0,0,0)).
-      //ParameterDict.Exemplar["Transformation.AngleZ"] = "0";
-
       // Rotation angle (in degree) for axis x (rotation center is center of the given bounds).
       ParameterDict.Exemplar["Transformation.Camera.AngleX"] = "0";
       // Rotation angle (in degree) for axis y (rotation center is center of the given bounds).
@@ -45,23 +33,9 @@ namespace Fractrace {
       // Rotation angle (in degree) for axis z (rotation center is center of the given bounds).
       ParameterDict.Exemplar["Transformation.Camera.AngleZ"] = "0";
 
-      // Rotation angle (in degree) for axis x (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).
-      //ParameterDict.Exemplar["Transformation.3.AngleX"] = "0";
-      // Rotation angle (in degree) for axis y (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).
-      //ParameterDict.Exemplar["Transformation.3.AngleY"] = "0";
-      // Rotation angle (in degree) for axis z (center=(Transformation.3.CenterX,Transformation.3.CenterY,Transformation.3.CenterZ)).
-      //ParameterDict.Exemplar["Transformation.3.AngleZ"] = "0";
-
-      // x- component of the center of rotation Transformation.3
-      //ParameterDict.Exemplar["Transformation.3.CenterX"] = "0";
-      // y- component of the center of rotation Transformation.3
-      //ParameterDict.Exemplar["Transformation.3.CenterY"] = "0";
-      // z- component of the center of rotation Transformation.3
-      //ParameterDict.Exemplar["Transformation.3.CenterZ"] = "0";
-
       // Distance to the virtual screen. Small values gives a more 3D effect. Large values
       // gives the scene a parallel projection view.
-      ParameterDict.Exemplar["Transformation.Perspective.Cameraposition"] = "0.4";
+      ParameterDict.Exemplar["Transformation.Perspective.Cameraposition"] = "0.6";
 
       // X-component of the Julia Seed, if the formula is in julia mode.
       // X-component of the start value , if the formula is in mandelbrot mode.
@@ -76,11 +50,11 @@ namespace Fractrace {
       ParameterDict.Exemplar["Formula.Static.jzz"] = "0";
 
       // Number of iterations used in the formula.
-      ParameterDict.Exemplar["Formula.Static.Cycles"] = "12";
+      ParameterDict.Exemplar["Formula.Static.Cycles"] = "8";
 
       // Number of iterations used in the formula, if the inside of the 3D object is rendered.
       // Caution: If minCycle=51, then inside rendering is deactivated.
-      ParameterDict.Exemplar["Formula.Static.MinCycle"] = "51";
+      ParameterDict.Exemplar["Formula.Static.MinCycle"] = "8";
       // The used formula.
       // Values from 1 to 26 corresponds to some inbuild formulas.
       // Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.
@@ -131,9 +105,9 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
     aj = r_n * Math.Cos(theta_pow)+bj;
     aar = ar * ar; aai = ai * ai; aaj = aj * aj;
     r = Math.Sqrt(aar + aai + aaj);
-    additionalPointInfo.red=aar;
-    additionalPointInfo.green=aai;
-    additionalPointInfo.blue=aaj;
+    additionalPointInfo.red+=aar/r;
+    additionalPointInfo.green+=aai/r;
+    additionalPointInfo.blue+=aaj/r;
     if (r > gr) { tw = n; break; }
   }
 
@@ -188,101 +162,36 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Default animation steps while adding the frame in the animation control. 
       ParameterDict.Exemplar["Animation.Steps"] = "30";
 
-        /*
-      // Strength of blurring (0-1)  [used in Renderer 2-4]
-      ParameterDict.Exemplar["Composite.Blurring"] = "0";
-
-      // not used anymore.
-      ParameterDict.Exemplar["Composite.BlurringDeph"] = "0";
-
-      // Activates the darkening of distand points    [used in Renderer 2,3,4,6]
-      ParameterDict.Exemplar["Composite.BackgoundDarken"] = "0";
-      // Light and material property  [used in Renderer 2 - 4]
-      ParameterDict.Exemplar["Composite.Shininess"] = "1";
-      // Activates the Blurring.  [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.UseAmbient"] = "1";
-      // Activates the darkening of distand points    [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.UseDarken"] = "1";
-      // Use object median instead of the center of the bounds [used in Renderer 2,3] 
-      ParameterDict.Exemplar["Composite.UseMedian"] = "1";
-      //  [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.UseDerivation"] = "1";
-      // Activates the surface color [used in Renderer ?] 
-      ParameterDict.Exemplar["Composite.UseColor1"] = "0";
-      // [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.Color1Factor"] = "50";
-      // [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.Color1TestArea"] = "10";
-      // Activates additional front light  [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.FrontLight"] = "1";
-      // Activates additional ambient light  [used in Renderer ?]
-      ParameterDict.Exemplar["Composite.AmbientLight"] = "0";
-      // Normalise the color and light parameter to get the best picture results.
-      // Don't use this parameter in animations [used in Renderer 2 - 5]
-      ParameterDict.Exemplar["Composite.Normalize"] = "1";
-
-      // Set the Renderer:
-      // Composite.Renderer=0 : use FastScienceRenderer
-      // Composite.Renderer=1 : use ScienceRenderer
-      // Composite.Renderer=2 : use NiceRenderer
-      // Composite.Renderer=3 : use BroadcastRenderer
-      // Composite.Renderer=4 : use SharpRenderer
-      // Composite.Renderer=5 : use UniversalRenderer
-      // Composite.Renderer=6 : use PlasicRenderer
-      ParameterDict.Exemplar["Composite.Renderer"] = "PlasicRenderer";
-
-
-      // Activates Blurring in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.UseAmbient"] = "1";
-      // Activates Background darkening in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.UseDarken"] = "1";
-      // Activates surface color in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.UseColorFromFormula"] = "1";
-      // Activates median for surface color in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.UseMedianColorFromFormula"] = "1";
-      // Activates comic style (additional black lines at the border) in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.ComicStyle"] = "0";
-      // Intensity (0-1) of the Front Light in UniversalRenderer.
-      ParameterDict.Exemplar["Composite.Renderer.Universal.FrontLightIntensity"] = "0.1";
-      // Intensity (0-1) of the Ambient Light in UniversalRenderer.
-      ParameterDict.Exemplar["Composite.Renderer.Universal.AmbientLightIntensity"] = "0.4";
-      // Additional Brightening (0-1) in UniversalRenderer
-      ParameterDict.Exemplar["Composite.Renderer.Universal.Brightening"] = "0";
-      // Normalise the color and light parameter to get the best picture results.
-      // Don't use this parameter in animations [used in UniversalRenderer]
-      ParameterDict.Exemplar["Composite.Renderer.Universal.NormalizeColors"] = "0";
-         */
-
      // ParameterDict.Exemplar["Composite.Renderer"] = "1";
       ParameterDict.Exemplar["Renderer.Normalize"] = "1";
 
       // Activates Background darkening in PlasicRenderer
       ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
       // Corresponds to the number of shadows in PlasicRenderer
-      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "26";
+      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "22";
       // Intensity of the FieldOfView
       ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "1";
       // Minimal value of FieldOfView
       ParameterDict.Exemplar["Renderer.MinFieldOfView"] = "0.4";
       // Maximal value of FieldOfView
-      ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "0.0";
+      ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "1.0";
 
       // Intensity of the Surface Color
-      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "0.4";
+      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "0.3";
       // If ColorGreyness=1, no color is rendered
       ParameterDict.Exemplar["Renderer.ColorGreyness"] = "0";
       // Use Light
       ParameterDict.Exemplar["Renderer.UseLight"] = "1";
       // Shadow height factor
-      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "4";
+      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "0.08";
       // Shininess factor (0 ... 1)
-      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.5";
+      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.85";
       // Shininess ( 0... 1000)
-      ParameterDict.Exemplar["Renderer.Shininess"] = "8";
+      ParameterDict.Exemplar["Renderer.Shininess"] = "15";
      // Normal of the light source
-      ParameterDict.Exemplar["Renderer.Light.X"] = "0.45";
+      ParameterDict.Exemplar["Renderer.Light.X"] = "0.05";
       ParameterDict.Exemplar["Renderer.Light.Y"] = "1";
-      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.45";
+      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.1";
       // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
       ParameterDict.Exemplar["Renderer.UseSharpShadow"] = "0";
      // To justify the color components 
@@ -293,16 +202,16 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Renderer.ColorFactor.RgbType"] = "1";
 
             // Red component of background color 
-      ParameterDict.Exemplar["Renderer.BackColor.Red"] = "0.25";
+      ParameterDict.Exemplar["Renderer.BackColor.Red"] = "0";
     // Green component of background color 
-      ParameterDict.Exemplar["Renderer.BackColor.Green"] = "0.25";
+      ParameterDict.Exemplar["Renderer.BackColor.Green"] = "0";
     // Blue component of background color 
-      ParameterDict.Exemplar["Renderer.BackColor.Blue"] = "0.3";
+      ParameterDict.Exemplar["Renderer.BackColor.Blue"] = "0";
      
 
       // If LightIntensity==1, no shadow renderers are used
       // If LightIntensity==0, only shadow renderers are used
-      ParameterDict.Exemplar["Renderer.LightIntensity"] = "0.4";
+      ParameterDict.Exemplar["Renderer.LightIntensity"] = "0.35";
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();

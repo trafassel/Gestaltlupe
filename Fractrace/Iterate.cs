@@ -16,8 +16,7 @@ namespace Fractrace {
   /// </summary>
   public class Iterate {
 
-    Graphics grLabel = null;
-
+   
     GraphicData GData = null;
 
     PictureData PData = null;

@@ -81,10 +81,7 @@ namespace Fractrace.PictureArt {
 
     private double maxY = double.MinValue;
 
-    /// <summary>
-    /// Enthält Hinweis darauf, ob in der Formel ein Farbwert definiert wurd.
-    /// </summary>
-    private bool colorIsDefinedInFormula = false;
+ 
 
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
@@ -163,7 +160,6 @@ namespace Fractrace.PictureArt {
     /// und setzt die Farbe colorIsDefinedInFormula entsprechend.
     /// </summary>
     protected void EstimateColorIsDefinedInFormula() {
-      colorIsDefinedInFormula = false;
       for (int i = 0; i < pData.Width; i++) {
         for (int j = 0; j < pData.Height; j++) {
           PixelInfo pInfo = pData.Points[i, j];
