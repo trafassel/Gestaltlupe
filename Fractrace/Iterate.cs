@@ -83,6 +83,11 @@ namespace Fractrace {
     protected int height = 1000;
 
 
+    public Iterate()
+    {
+
+    }
+
     /// <summary>
     /// Initialisation
     /// </summary>
@@ -115,6 +120,33 @@ namespace Fractrace {
       this.height = height;
       this.mIsRightView = isRightView;
     }
+
+
+      
+        DataTypes.GraphicData mOldData = null;
+
+      DataTypes.PictureData mOldPictureData= null;
+
+      /// <summary>
+      /// Count the number of update steps
+      /// </summary>
+      int mUpdateCount = 0;
+
+      
+      /// <summary>
+      /// Set data of the last iteration with the same rendering parameters.
+      /// </summary>
+      /// <param name="oldData"></param>
+      /// <param name="oldPictureData"></param>
+      public void SetOldData(DataTypes.GraphicData oldData, DataTypes.PictureData oldPictureData, int updateCount)
+      {
+          mOldData = oldData;
+          mOldPictureData = oldPictureData;
+          mUpdateCount = updateCount;
+      }
+
+
+
 
 
     /// <summary>
@@ -282,6 +314,8 @@ namespace Fractrace {
     /// <param name="formula"></param>
     /// <param name="perspective"></param>
     protected void Generate(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective) {
+        Random rand = new Random();
+        
       double[] col = null;
       double xd, yd, zd, zzd;
       double x, y, z, zz;
@@ -356,10 +390,34 @@ namespace Fractrace {
       wiy = act_val.arc.y;
       wiz = act_val.arc.z;
 
+
+    // Update with old Data don't makes sense with raster > 2 
+    if(mOldData!=null) {
+        raster=1;
+    }
+
       xd = raster * (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
       yd = raster * (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
       zd = raster * (act_val.end_tupel.z - act_val.start_tupel.z) / (MAXZ_ITER - MINZ_ITER);
       zzd = raster * (act_val.end_tupel.zz - act_val.start_tupel.zz) / (MAXZ_ITER - MINZ_ITER);
+
+      if (mOldData != null)
+      {
+          //raster = 1;
+          if (mUpdateCount < 3)
+          {
+              yd = yd / (mUpdateCount);
+              MAXY_ITER *= mUpdateCount;
+          }
+          else
+          {
+              yd = yd / (3.0);
+              MAXY_ITER *= 3;
+          }
+
+      }
+
+
 
       double xcenter = (act_val.start_tupel.x + act_val.end_tupel.x) / 2.0;
       double ycenter = (act_val.start_tupel.y + act_val.end_tupel.y) / 2.0;
@@ -406,541 +464,456 @@ namespace Fractrace {
           zz = act_val.end_tupel.zz - (double)zzd * (MAXZ_ITER - zschl) / (raster);
 
           bool minYDetected = false;
-          for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += raster) {
-            if (mAbort) {
-              return;
-            }
+          for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += raster)
+          {
+              if (mAbort)
+              {
+                  return;
+              }
 
-            x = act_val.start_tupel.x + (double)xd * xschl / (raster);
-            double miny = 0;
-            isYborder = true;
-            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= raster) {
+              x = act_val.start_tupel.x + (double)xd * xschl / (raster);
+              double miny = 0;
+              isYborder = true;
+
               xx = xschl;
               yy = MAXZ_ITER - zschl;
 
-              if (mAbort) {
-                return;
-              }
+              // Used for better start values in update iteration
+              double yAdd = rand.NextDouble() * yd;
+              // double yAddTemp = 0;
+              // In last computation a voxel ist found at (xx,zz)
+              bool centerIsSet = false;
+              // In last computation at least on voxel ist found near (xx,zz)
+              bool areaIsSet = false;
+              double yAddCenter = 0;
 
-              if (xx >= 0 && xx < width && yy >= 0 && yy < height) {
-                if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2) { // aha, noch zeichnen
-                  // Test, ob Schnitt mit Begrenzung vorliegt  
-                  y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl) / (raster);
-
-                  fa1 = 0;
-
-                  int usedCycles = 0;
-                  bool inverse = false;
-                  if (GData == null) {
-                    System.Diagnostics.Debug.WriteLine("Error: GData == null");
-                    return;
-                  }
-                  if ((GData.Picture)[xx, yy] == 0)
-                    usedCycles = formulas.Rechne(x, y, z, zz, zyklen,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse);
-
-                  if ((GData.Picture)[xx, yy] == 2) {// Invers rechnen
-                    inverse = true;
-                    usedCycles = formulas.Rechne(x, y, z, zz, minCycle,
-                          wix, wiy, wiz,
-                          jx, jy, jz, jzz, formula, inverse);
+              bool needComputing = true;
+              if (mOldPictureData != null)
+              {
+                  needComputing = false;
+                  PixelInfo pxInfoTest = mOldPictureData.Points[xx, yy];
+                  if (pxInfoTest != null && pxInfoTest.Coord != null)
+                  {
+                      yAddCenter = pxInfoTest.Coord.Y;
+                      yAdd = yAddCenter;
+                      centerIsSet = true;
                   }
 
-                  if (usedCycles == 0) {
-                    if (!minYDetected)
-                      miny = yschl;
-                    minYDetected = true;
-                    // Iteration ist nicht abgebrochen, also weiterrechnen:
-                    int oldPictureInfo = (GData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
-                    // die Farbberechnung wiederholt wird.
-                    (GData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
-                    VoxelInfo vInfo = new VoxelInfo();
-                    GData.PointInfo[xx, yy] = vInfo;
-                    vInfo.i = x;
-                    vInfo.j = y;
-                    vInfo.k = z;
-                    vInfo.l = zz;
+                  for (int xxi = -1; xxi <= 1; xxi++)
+                  {
+                      for (int yyi = -1; yyi <= 1; yyi++)
+                      {
+                          int xxposi = xx + xxi;
+                          int yyposi = yy + yyi;
+                          if (xxposi >= 0 && xxposi <= MAXX_ITER && yyposi >= 0 && yyposi <= MAXZ_ITER)
+                          {
 
-                    cycleAdd = 1024;
-                    if (minCycle != 51 && minCycle >= 0) {
-                      cycleAdd = minCycle - zyklen;
-                    }
-                    if (isYborder) { // es liegt Schnitt mit Begrenzung vor
-                      colour_type = 0; // COL; // Farbige Darstellung
+                              PixelInfo pxInfo = mOldPictureData.Points[xxposi, yyposi];
+                              if (pxInfo != null && pxInfo.Coord != null)
+                              {
+                                  areaIsSet = true;
+                                  double yAddTemp = pxInfo.Coord.Y;
+                                  if (yAdd < yAddTemp || !centerIsSet)
+                                      yAdd = yAddTemp;
+                              }
 
-                      fa1 = formulas.Rechne(x, y, z, zz, zyklen + cycleAdd,
-                       wix, wiy, wiz,
-                       jx, jy, jz, jzz, formula, false);
-
-                      if (fa1 == 0) {
-                        if (minCycle != 51) {
-                          fa1 = -1;
-                          (GData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
-                        } else {
-                          fa1 = 255;
-                        }
-                      } else
-                        fa1 = 255 * fa1 / (zyklen + cycleAdd);
-
-                      // debug only: alle Farbwerte auf 1 setzen
-                      col[0] = col[1] = col[2] = col[3] = 255;
-                    } else {// innerer Punkt
-                      colour_type = 1; // GREY;
-
-                      if (inverse) {
-                        if (raster == 1) {
-                          fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
-                         xd, yd, zd, zzd,
-                         wix, wiy, wiz,
-                         jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                        } else {
-                          fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
-                            xd, yd, zd, zzd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                        }
-                      }
-                      else {
-                        if (raster == 1) {
-                          fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
-   xd, yd, zd, zzd,
-   wix, wiy, wiz,
-   jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                          fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-
-
-                        } else {
-                          fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
-                            xd, yd, zd, zzd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                          fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                        }
-                      }
-                    }
-
-                    if (raster > 2) {
-                      if (colour_type == 0) {
-                        if (fa1 >= 0) {
-                          /*
-                          p.Color = Color.White;
-                          if (isXborder)
-                            p.Color = Color.FromArgb((int)fa1, (int)(fa1 / 2.0), (int)(fa1 / 2.0));
-                          if (isYborder)
-                            p.Color = Color.FromArgb((int)(fa1 / 2.0), (int)(fa1), (int)(fa1 / 2.0));
-                          if (isZborder)
-                            p.Color = Color.FromArgb((int)(fa1 / 2.0), (int)(fa1 / 2.0), (int)(fa1));
-                          */
-                          GData.ColorInfo2[xx, yy] = fa1;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx, yy, raster / 2, raster / 2);
-                        }
-                      } else {
-                        //brush.Color = Color.FromArgb((int)fa1, (int)fa1, (int)fa1);
-                        //double redMin = 1;
-                        //if (inverse) {
-                        //  redMin = 0.5;
-                        //}
-                        //p.Color = Color.FromArgb((int)(redMin * col[3]), (int)col[3], (int)col[3]);
-                        //if (mStarter == null)
-                        //  grLabel.FillRectangle(brush, xx, yy, raster / 2, raster / 2);
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[0]), (int)col[0], (int)col[0]);
-                        //if (mStarter == null)
-                        //  grLabel.FillRectangle(brush, xx + raster / 2, yy, raster, raster / 2);
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[1]), (int)col[1], (int)col[1]);
-                        //if (mStarter == null)
-                        //  grLabel.FillRectangle(brush, xx + raster / 2, yy + raster / 2, raster, raster);
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[2]), (int)col[2], (int)col[2]);
-                        //if (mStarter == null)
-                        //  grLabel.FillRectangle(brush, xx, yy + raster / 2, raster / 2, raster);
-                      }
-
-                    } else if (raster == 2) {
-                      if (colour_type == 0) {
-                        // Es liegt also Schnittpunkt mit dem virtuellen Bildschirm vor. In diesem Fall
-                        // wird die klassische 2D Darstellung des Fraktals verwendet.
-                        if (fa1 >= 0) {
-                          //p.Color = Color.FromArgb(0, (int)(fa1), 0);
-                          GData.ColorInfo2[xx, yy] = fa1;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx, yy, (float)0.5, (float)0.5);
-                          PixelInfo pixelInfo = new PixelInfo();
-                          pixelInfo.frontLight = -fa1;
-                          pixelInfo.iterations = usedCycles;
-                          PData.Points[xx, yy] = pixelInfo;
-                          // TODO: Bessere Möglichkeit der Schneidung schaffen.
-
-                          cycleAdd = minCycle;
-                          fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, false);
-                          pixelInfo = new PixelInfo();
-                          pixelInfo.iterations = fa1;
-                          if (fa1 < 1)
-                            fa1 = 255;
-                          else
-                            fa1 = 255.0 * fa1 / (zyklen + cycleAdd);
-                          //p.Color = Color.FromArgb(0, (int)(fa1), 0);
-                          GData.ColorInfo2[xx + 1, yy] = fa1;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx + 1, yy, (float)0.5, (float)0.5);
-
-                          // Debug: Querschnitt wieder einfügen
-                          pixelInfo.frontLight = -fa1;
-                          PData.Points[xx + 1, yy] = pixelInfo;
-
-                          fa1 = formulas.Rechne(x, y, z - zd / 2.0, zz, zyklen + cycleAdd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, false);
-                          pixelInfo = new PixelInfo();
-                          pixelInfo.iterations = fa1;
-                          if (fa1 < 1)
-                            fa1 = 255;
-                          else
-                            fa1 = 255 * fa1 / (zyklen + cycleAdd);
-                          //p.Color = Color.FromArgb(0, (int)(fa1), 0);
-                          GData.ColorInfo2[xx, yy + 1] = fa1;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx, yy + 1, (float)0.5, (float)0.5);
-                          //pixelInfo = new PixelInfo();
-                          pixelInfo.frontLight = -fa1;
-                          PData.Points[xx, yy + 1] = pixelInfo;
-
-                          fa1 = formulas.Rechne(x + xd / 2.0, y, z - zd / 2.0, zz, zyklen + cycleAdd,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, false);
-                          pixelInfo = new PixelInfo();
-                          pixelInfo.iterations = fa1;
-                          if (fa1 < 1)
-                            fa1 = 255;
-                          else
-                            fa1 = 255 * fa1 / (zyklen + cycleAdd);
-                          //p.Color = Color.FromArgb(0, (int)(fa1), 0);
-                          GData.ColorInfo2[xx + 1, yy + 1] = fa1;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx + 1, yy + 1, (float)0.5, (float)0.5);
-                          //pixelInfo = new PixelInfo();
-                          pixelInfo.frontLight = -fa1;
-                          PData.Points[xx + 1, yy + 1] = pixelInfo;
-
-                        } else {
-                          // hier soll später weitergezeichnet werden.
-                          //p.Color = Color.Blue;
-                          //if (mStarter == null)
-                          //  grLabel.DrawRectangle(p, xx, yy, (float)0.5, (float)0.5);
-                          (GData.Picture)[xx, yy] = 2;
-                        }
-                      } else {
-                        //double redMin = 1;
-                        //if (inverse) {
-                        //  redMin = 0.5;
-                        //}
-
-                        // Wenn eine der Infos null ist, nochmal in höherer Auflösung rechnen
-                        //                              pixelInfo = new PixelInfo();
-                        //                          pixelInfo.frontLight = -fa1;
-
-                        /*
-                        PixelInfo pInfo1 = PData.Points[xx, yy];
-                        PixelInfo pInfo2 = PData.Points[xx + 1, yy];
-                        PixelInfo pInfo3 = PData.Points[xx, yy + 1];
-                        PixelInfo pInfo4 = PData.Points[xx + 1, yy + 1];
-                        
-                         // Test, ob aller 4 Einzelpunkte korrekt berechnet wurden.
-                          if(pInfo1!=null && pInfo2!=null && pInfo3!=null && pInfo4!=null) { 
-                        */
-                        //p.Color = Color.FromArgb((int)(col[3]), (int)col[3], (int)col[3]);
-                        //DrawPoint(col[3], xx, yy);
-                        //double fa = 0;
-                        if (PData.Points[xx, yy] != null)
-                          GData.ColorInfo[xx, yy] = col[3];
-                        else {
-                          // 
-                          GData.ColorInfo[xx, yy] = -1;
-                          /*
-                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                             minCycle,
-                             x, y, z, zz,
-                     0.5 * xd, yd, 0.5 * zd, zzd,
-                     wix, wiy, wiz,
-                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                          GData.ColorInfo[xx, yy] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                           */
-                        }
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[0]), (int)col[0], (int)col[0]);
-                        //DrawPoint(col[0], xx + 1, yy);
-                        if (PData.Points[xx + 1, yy] != null)
-                          GData.ColorInfo[xx + 1, yy] = col[0];
-                        else {
-                          GData.ColorInfo[xx+1, yy] = -1;
-                          /*
-                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                             minCycle,
-                             x + 0.5 * xd, y, z, zz,
-                     0.5 * xd, yd, 0.5 * zd, zzd,
-                     wix, wiy, wiz,
-                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                          GData.ColorInfo[xx + 1, yy] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                           */
-                        }
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[1]), (int)col[1], (int)col[1]);
-                        //DrawPoint(col[1], xx + 1, yy + 1);
-                        if (PData.Points[xx + 1, yy + 1] != null)
-                          GData.ColorInfo[xx + 1, yy + 1] = col[1];
-                        else {
-                          GData.ColorInfo[xx+1, yy+1] = -1;
-                          /*
-                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                             minCycle,
-                             x + 0.5 * xd, y, z - 0.5 * zd, zz,
-                     0.5 * xd, yd, 0.5 * zd, zzd,
-                     wix, wiy, wiz,
-                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                          GData.ColorInfo[xx + 1, yy + 1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                           */
-                        }
-
-                        //p.Color = Color.FromArgb((int)(redMin * col[2]), (int)col[2], (int)col[2]);
-                        //DrawPoint(col[2], xx, yy + 1);
-                        if (PData.Points[xx, yy + 1] != null)
-                          GData.ColorInfo[xx, yy + 1] = col[2];
-                        else {
-                          GData.ColorInfo[xx, yy+1] = -1;
-                          /*
-                          fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                             minCycle,
-                             x, y, z - 0.5 * zd, zz,
-                     0.5 * xd, yd, 0.5 * zd, zzd,
-                     wix, wiy, wiz,
-                     jx, jy, jz, jzz, formula, inverse, xx, yy, raster);
-                          GData.ColorInfo[xx, yy + 1] = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                           */
-                        }
-                        // Wenn Farbänderung zum Nachbarknoten zu groß ist, diesen Punkt neu
-                        // berechnen
-                          
-                        /*
-                  if (xx > 0 && yy > 0) {
-                    double tempX = x - xd / 2.0;
-                    double tempY = y;
-                    double tempZ = z - zd / 2.0;
-                    for (int xxi = xx; xxi <= xx + 1; xxi++, tempX += xd) {
-                      for (int yyi = yy; yyi <= yy + 1; yyi++, tempZ += zd) {
-                        double currentCol = GData.ColorInfo[xxi, yyi];
-                        if (currentCol < 0.01) {
-                          if (inverse)
-                            fa1 = formulas.WinkelPerspective(minCycle, tempX, y, tempZ, zz, 
-                              xd * xzDephFactor * 0.5, yd * yDephFactor, zd * xzDephFactor * 0.5, zzd,
-                              wix, wiy, wiz,
-                              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-                          else
-                            fa1 = formulas.WinkelPerspective(zyklen, tempX, y, tempZ, zz, 
-                              xd * xzDephFactor, yd * yDephFactor, zd * xzDephFactor, zzd * xzDephFactor,
-                              wix, wiy, wiz,
-                              jx, jy, jz, jzz, formula, inverse, xxi, yyi);
-                          fa1 = 0;
-                          for (int i = 0; i < 4; i++) {
-                            fa1 += col[i];
                           }
-                          fa1 = fa1 / 4.0;
-                          p.Color = Color.FromArgb((int)(fa1), (int)fa1, (int)fa1);
-                          DrawPoint((int)fa1, xxi, yyi);
-                        }
+
                       }
-                    }
                   }
-                        */
 
-                        // }
+                  /*
 
-                        /*
-                            else {
-                                // Die vier Einzelpunkte nachberechnen
-                              
-                                //if ((GData.Picture)[xx, yy] == 1)
-                                //    (GData.Picture)[xx, yy] =0;
+                  PixelInfo pInfo = mOldPictureData.Points[xx, yy];
+                  if (pInfo != null && pInfo.Coord!=null)
+                  {
+                      yAdd = pInfo.Coord.Y + 4.0 * yd - act_val.end_tupel.y;
+                  }
 
-                                int newPictureInfo = (GData.Picture)[xx, yy];
-                                (GData.Picture)[xx, yy] = oldPictureInfo; 
-
-                                PixelInfo pInfo = new PixelInfo();
-                             pInfo.frontLight=1;
-                          
-                             pInfo.Coord.X = x;
-                             pInfo.Coord.Y = y;
-                             pInfo.Coord.Z = 0;
-                             
-                         
-                             PData.Points[xx, yy] = null;
-                             PData.Points[xx + 1, yy] = null;
-                             PData.Points[xx, yy + 1] = null;
-                             PData.Points[xx + 1, yy + 1] = null;
-
-                            
-                                double fa=ComputeColor(formulas,act_val.start_tupel.y,act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                    minCycle,
-                                    x, y, z, zz,
-                            0.25*xd , yd , 0.25*zd , zzd ,
-                            wix, wiy, wiz,
-                            jx, jy, jz, jzz, formula, inverse, xx, yy,raster);
-
-                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                      minCycle,
-                                      x+0.5*xd, y, z-0.5*zd, zz,
-                              0.25 * xd, yd, 0.25 * zd, zzd,
-                              wix, wiy, wiz,
-                              jx, jy, jz, jzz, formula, inverse, xx+1, yy+1, raster);
-
-                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                      minCycle,
-                                      x+xd/2.0, y, z, zz,
-                              0.25 * xd, yd, 0.25 * zd, zzd,
-                              wix, wiy, wiz,
-                              jx, jy, jz, jzz, formula, inverse, xx+1, yy, raster);
-
-                                fa = ComputeColor(formulas, act_val.start_tupel.y, act_val.end_tupel.y, MINY_ITER, MAXY_ITER,
-                                      minCycle,
-                                      x, y, z-zd/2.0, zz,
-                              0.25 * xd, yd, 0.25 * zd, zzd,
-                              wix, wiy, wiz,
-                              jx, jy, jz, jzz, formula, inverse, xx, yy+1, raster);
-                            
-
-                             //   pInfo.frontLight = fa;
-                                (GData.Picture)[xx, yy] = newPictureInfo; 
-
-                            }*/
+                  // left
+                  if (xx > 0)
+                  {
+                      pInfo = mOldPictureData.Points[xx-1, yy];
+                      if (pInfo != null && pInfo.Coord != null)
+                      {
+                          yAddTemp = pInfo.Coord.Y + 4.0 * yd - act_val.end_tupel.y;
+                          if (yAdd < yAddTemp)
+                              yAdd = yAddTemp;
                       }
-                    } else {
-                      //p.Color = Color.FromArgb((int)fa1, (int)fa1, (int)fa1);
-                      GData.ColorInfo2[xx, yy] = fa1;
-                      //if (mStarter == null)
-                      //  grLabel.DrawRectangle(p, xx, yy, 1, 1);
-                    }
                   }
-                }
+
+                  // right
+                  if (xx < MAXX_ITER)
+                  {
+                      pInfo = mOldPictureData.Points[xx + 1, yy];
+                      if (pInfo != null && pInfo.Coord != null)
+                      {
+                          yAddTemp = pInfo.Coord.Y + 4.0 * yd - act_val.end_tupel.y;
+                          if (yAdd < yAddTemp)
+                              yAdd = yAddTemp;
+                      }
+                  }
+
+                  // up
+                  if (yy > 0)
+                  {
+                      pInfo = mOldPictureData.Points[xx, yy-1];
+                      if (pInfo != null && pInfo.Coord != null)
+                      {
+                          yAddTemp = pInfo.Coord.Y + 4.0 * yd - act_val.end_tupel.y;
+                          if (yAdd < yAddTemp)
+                              yAdd = yAddTemp;
+                      }
+                  }
+
+                  // down
+                  if (yy < MAXZ_ITER)
+                  {
+                      pInfo = mOldPictureData.Points[xx, yy + 1];
+                      if (pInfo != null && pInfo.Coord != null)
+                      {
+                          yAddTemp = pInfo.Coord.Y + 4.0 * yd - act_val.end_tupel.y;
+                          if (yAdd < yAddTemp)
+                              yAdd = yAddTemp;
+                      }
+                  }
+
+
+  //                yAdd = mOldPictureData.Points[xschl, zschl].Coord.Y;
+                   * */
               }
-              isYborder = false;
-            }
+
+              //  yAdd = 0.0;
+
+
+              // Test, ob 
+              // yAddTemp = pxInfo.Coord.Y + 1.0 * yd - act_val.end_tupel.y;
+
+              if (centerIsSet)
+              {
+                  if (yAddCenter + 4.0*yd < yAdd)
+                  {
+                      needComputing = true;
+                      yAdd = yAdd - act_val.end_tupel.y+2.0*yd+rand.NextDouble()*yd;
+                      GData.Picture[xx, yy]=mOldData.Picture[xx,yy];
+                  }
+              }
+              else
+              {
+                  if (areaIsSet)
+                  {
+                      needComputing = true;
+                      //yAdd = yAdd - act_val.end_tupel.y + 2.0 * yd + rand.NextDouble() * yd;
+                      yAdd = rand.NextDouble() * yd;
+                      //GData.Picture[xx, yy] = mOldData.Picture[xx, yy];
+                  }
+              }
+
+             
+              if (needComputing)
+              {
+                  // yadd cannot be easy handled (because of inside rendering).
+                  // yAdd = rand.NextDouble() * yd;
+                  for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= raster)
+                  {
+
+
+                      if (mAbort)
+                      {
+                          return;
+                      }
+
+                      if (xx >= 0 && xx < width && yy >= 0 && yy < height)
+                      {
+                          if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2)
+                          { // aha, noch zeichnen
+                              // Test, ob Schnitt mit Begrenzung vorliegt  
+                              y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl) / (raster);
+
+                             y += yAdd;
+
+
+                              fa1 = 0;
+
+                              int usedCycles = 0;
+                              bool inverse = false;
+                              if (GData == null)
+                              {
+                                  System.Diagnostics.Debug.WriteLine("Error: GData == null");
+                                  return;
+                              }
+                              if ((GData.Picture)[xx, yy] == 0)
+                                  usedCycles = formulas.Rechne(x, y, z, zz, zyklen,
+                                        wix, wiy, wiz,
+                                        jx, jy, jz, jzz, formula, inverse);
+
+                              if ((GData.Picture)[xx, yy] == 2)
+                              {// Invers rechnen
+                                  inverse = true;
+                                  usedCycles = formulas.Rechne(x, y, z, zz, minCycle,
+                                        wix, wiy, wiz,
+                                        jx, jy, jz, jzz, formula, inverse);
+                              }
+
+                              if (usedCycles == 0)
+                              {
+                                  if (!minYDetected)
+                                      miny = yschl;
+                                  minYDetected = true;
+                                  // Iteration ist nicht abgebrochen, also weiterrechnen:
+                                  int oldPictureInfo = (GData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
+                                  // die Farbberechnung wiederholt wird.
+                                  (GData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
+                                  VoxelInfo vInfo = new VoxelInfo();
+                                  GData.PointInfo[xx, yy] = vInfo;
+                                  vInfo.i = x;
+                                  vInfo.j = y;
+                                  vInfo.k = z;
+                                  vInfo.l = zz;
+
+                                  cycleAdd = 1024;
+                                  if (minCycle != 51 && minCycle >= 0)
+                                  {
+                                      cycleAdd = minCycle - zyklen;
+                                  }
+                                  if (isYborder)
+                                  { // es liegt Schnitt mit Begrenzung vor
+                                      colour_type = 0; // COL; // Farbige Darstellung
+
+                                      fa1 = formulas.Rechne(x, y, z, zz, zyklen + cycleAdd,
+                                       wix, wiy, wiz,
+                                       jx, jy, jz, jzz, formula, false);
+
+                                      if (fa1 == 0)
+                                      {
+                                          if (minCycle != 51)
+                                          {
+                                              fa1 = -1;
+                                              (GData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
+                                          }
+                                          else
+                                          {
+                                              fa1 = 255;
+                                          }
+                                      }
+                                      else
+                                          fa1 = 255 * fa1 / (zyklen + cycleAdd);
+
+                                      // debug only: alle Farbwerte auf 1 setzen
+                                      col[0] = col[1] = col[2] = col[3] = 255;
+                                  }
+                                  else
+                                  {// innerer Punkt
+                                      colour_type = 1; // GREY;
+
+                                      if (inverse)
+                                      {
+                                          if (raster == 1)
+                                          {
+                                              fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
+                                             xd, yd, zd, zzd,
+                                             wix, wiy, wiz,
+                                             jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                          }
+                                          else
+                                          {
+                                              fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
+                                                xd, yd, zd, zzd,
+                                                wix, wiy, wiz,
+                                                jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                          }
+                                      }
+                                      else
+                                      {
+                                          if (raster == 1)
+                                          {
+                                              fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
+                       xd, yd, zd, zzd,
+                       wix, wiy, wiz,
+                       jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                              fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+
+
+                                          }
+                                          else
+                                          {
+                                              fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
+                                                xd, yd, zd, zzd,
+                                                wix, wiy, wiz,
+                                                jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                              fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                                          }
+                                      }
+                                  }
+
+                                  if (raster > 2)
+                                  {
+                                      if (colour_type == 0)
+                                      {
+                                          if (fa1 >= 0)
+                                          {
+
+                                              GData.ColorInfo2[xx, yy] = fa1;
+
+                                          }
+                                      }
+                                      else
+                                      {
+
+                                      }
+
+                                  }
+                                  else if (raster == 2)
+                                  {
+                                      if (colour_type == 0)
+                                      {
+                                          // Es liegt also Schnittpunkt mit dem virtuellen Bildschirm vor. In diesem Fall
+                                          // wird die klassische 2D Darstellung des Fraktals verwendet.
+                                          if (fa1 >= 0)
+                                          {
+
+                                              GData.ColorInfo2[xx, yy] = fa1;
+
+                                              PixelInfo pixelInfo = new PixelInfo();
+                                              pixelInfo.frontLight = -fa1;
+                                              pixelInfo.iterations = usedCycles;
+                                              PData.Points[xx, yy] = pixelInfo;
+
+
+                                              cycleAdd = minCycle;
+                                              fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,
+                                                wix, wiy, wiz,
+                                                jx, jy, jz, jzz, formula, false);
+                                              pixelInfo = new PixelInfo();
+                                              pixelInfo.iterations = fa1;
+                                              if (fa1 < 1)
+                                                  fa1 = 255;
+                                              else
+                                                  fa1 = 255.0 * fa1 / (zyklen + cycleAdd);
+
+                                              GData.ColorInfo2[xx + 1, yy] = fa1;
+
+                                              pixelInfo.frontLight = -fa1;
+                                              PData.Points[xx + 1, yy] = pixelInfo;
+
+                                              fa1 = formulas.Rechne(x, y, z - zd / 2.0, zz, zyklen + cycleAdd,
+                                                wix, wiy, wiz,
+                                                jx, jy, jz, jzz, formula, false);
+                                              pixelInfo = new PixelInfo();
+                                              pixelInfo.iterations = fa1;
+                                              if (fa1 < 1)
+                                                  fa1 = 255;
+                                              else
+                                                  fa1 = 255 * fa1 / (zyklen + cycleAdd);
+
+                                              GData.ColorInfo2[xx, yy + 1] = fa1;
+
+                                              pixelInfo.frontLight = -fa1;
+                                              PData.Points[xx, yy + 1] = pixelInfo;
+
+                                              fa1 = formulas.Rechne(x + xd / 2.0, y, z - zd / 2.0, zz, zyklen + cycleAdd,
+                                                wix, wiy, wiz,
+                                                jx, jy, jz, jzz, formula, false);
+                                              pixelInfo = new PixelInfo();
+                                              pixelInfo.iterations = fa1;
+                                              if (fa1 < 1)
+                                                  fa1 = 255;
+                                              else
+                                                  fa1 = 255 * fa1 / (zyklen + cycleAdd);
+
+                                              GData.ColorInfo2[xx + 1, yy + 1] = fa1;
+
+                                              pixelInfo.frontLight = -fa1;
+                                              PData.Points[xx + 1, yy + 1] = pixelInfo;
+
+                                          }
+                                          else
+                                          {
+
+                                              (GData.Picture)[xx, yy] = 2;
+                                          }
+                                      }
+                                      else
+                                      {
+
+
+                                          if (PData.Points[xx, yy] != null)
+                                              GData.ColorInfo[xx, yy] = col[3];
+                                          else
+                                          {
+                                              // 
+                                              GData.ColorInfo[xx, yy] = -1;
+
+                                          }
+
+
+                                          if (PData.Points[xx + 1, yy] != null)
+                                              GData.ColorInfo[xx + 1, yy] = col[0];
+                                          else
+                                          {
+                                              GData.ColorInfo[xx + 1, yy] = -1;
+
+                                          }
+
+
+                                          if (PData.Points[xx + 1, yy + 1] != null)
+                                              GData.ColorInfo[xx + 1, yy + 1] = col[1];
+                                          else
+                                          {
+                                              GData.ColorInfo[xx + 1, yy + 1] = -1;
+
+                                          }
+                                          if (PData.Points[xx, yy + 1] != null)
+                                              GData.ColorInfo[xx, yy + 1] = col[2];
+                                          else
+                                          {
+                                              GData.ColorInfo[xx, yy + 1] = -1;
+                                          }
+
+
+
+                                      }
+                                  }
+                                  else
+                                  {
+                                      GData.ColorInfo2[xx, yy] = fa1;
+                                  }
+                              }
+                          }
+                      }
+                      isYborder = false;
+                  }
+                  if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2)
+                  {
+                      if (mOldPictureData != null)
+                      {
+                          PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                          // TODO:  
+                          GData.ColorInfo2[xx, yy] = mOldData.ColorInfo2[xx, yy];
+                      }
+                  }
+              }
+              else
+              {
+                  // Get the old values:
+                  PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                  GData.ColorInfo2[xx, yy] = mOldData.ColorInfo2[xx, yy];
+                  if (PData.Points[xx, yy] != null && PData.Points[xx, yy].AdditionalInfo != null)
+                  {
+                      /*
+                      PData.Points[xx, yy].AdditionalInfo.blue = 1;
+                      PData.Points[xx, yy].AdditionalInfo.red = 0;
+                      PData.Points[xx, yy].AdditionalInfo.green = 0;
+                       * */
+                  }
+              }
           }
         }
       }
 
-
+      System.Diagnostics.Debug.WriteLine("end computing thread");
     }
-
-
-
-    /*
-    public double ComputeColor(Formulas formulas, double yMin, double yMax, int yDimMin, int yDimMax,
-        long zykl, double x, double y, double z, double zz,
-        double xd, double yd, double zd, double zzd,
-        double wix, double wiy, double wiz,
-        double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY, int raster) {
-
-
-      double color = 0;
-
-      for (int yschl = (int)(yDimMax); yschl >= yDimMin; yschl -= raster) {
-        y = yMax - (double)yd * (yDimMax - yschl) / (raster);
-        int usedCycles = 0;
-        bool inverse = false;
-        if (GData == null) {
-          System.Diagnostics.Debug.WriteLine("Error: GData == null");
-          return 0;
-        }
-        if ((GData.Picture)[pixelX, pixelY] == 0)
-          usedCycles = formulas.Rechne(x, y, z, zz, zykl,
-              wix, wiy, wiz,
-              jx, jy, jz, jzz, formula, inverse);
-        if ((GData.Picture)[pixelX, pixelY] == 2) {// Invers rechnen
-          inverse = true;
-          usedCycles = formulas.Rechne(x, y, z, zz, zykl,
-                wix, wiy, wiz,
-                jx, jy, jz, jzz, formula, inverse);
-        }
-        if (usedCycles == 0) {
-
-          double fa1 = 0;
-          if (inverse)
-            fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
-              xd, yd, zd, zzd,
-              wix, wiy, wiz,
-              jx, jy, jz, jzz, formula, inverse, pixelX, pixelY, false);
-          else
-            fa1 = formulas.WinkelPerspective(zykl, x, y, z, zz,
-              xd, yd, zd, zzd,
-              wix, wiy, wiz,
-              jx, jy, jz, jzz, formula, inverse, pixelX, pixelY, false);
-          fa1 = (formulas.col[0] + formulas.col[1] + formulas.col[2] + formulas.col[3]) / 4.0;
-
-          color = fa1;
-
-          return color;
-
-        }
-      }
-      return color;
-    }
-    */
-
-    /*
-    /// <summary>
-    /// Neuzeichnen:
-    /// </summary>
-    public void Repaint(double dephFactor) {
-      double maxDephInfo = -100000;
-      double minDephInfo = 100000;
-
-      for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-          Pen p = new Pen(Color.FromArgb(0, 0, 0));
-          grLabel.DrawRectangle(p, i, j, 2, 2);
-          if (maxDephInfo < GData.ColorInfoDeph[i, j])
-            maxDephInfo = GData.ColorInfoDeph[i, j];
-          if (minDephInfo > GData.ColorInfoDeph[i, j])
-            minDephInfo = GData.ColorInfoDeph[i, j];
-        }
-      }
-      double dephInfo = 0;
-      double dephDiff = maxDephInfo - minDephInfo;
-
-      for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-          //  if ((GData.Picture)[i, j] != 0) {
-          dephInfo = GData.ColorInfoDeph[i, j];
-          //  }
-          Pen p = new Pen(Color.FromArgb(100, 200, 50));
-          double fa2 = GData.ColorInfo2[i, j];
-
-          p.Color = Color.FromArgb((int)fa2, (int)(fa2), (int)fa2);
-          grLabel.DrawRectangle(p, (float)i, (float)j, (float)0.5, (float)0.5);
-        }
-      }
-    }
-
-
-    /// <summary>
-    /// Ein Punkt wird gezeichnet.
-    /// </summary>
-    /// <param name="col"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    protected void DrawPoint(double col, int x, int y) {
-      Pen p = new Pen(Color.FromArgb(100, 200, 50));
-      p.Color = Color.FromArgb((int)col, (int)col, (int)col);
-      if (mStarter == null)
-        grLabel.DrawRectangle(p, x, y, (float)0.5, (float)0.5);
-      if (x < width && y < height)
-        GData.ColorInfo2[x, y] = col;
-    }
-    */
+  
 
   }
 }
