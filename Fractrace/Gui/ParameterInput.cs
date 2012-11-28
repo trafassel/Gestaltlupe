@@ -439,24 +439,6 @@ namespace Fractrace {
     }
 
 
-
-    private bool animationAbort = false;
-
-
-
-
-    /// <summary>
-    /// Animation anhalten
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void btnStopAnimation_Click(object sender, EventArgs e) {
-      animationAbort = true;
-    }
-
-
-
-
     private void btnStart_Click(object sender, EventArgs e) {
       mPosterMode = false;
       // Todo: Bild nur speichern, wenn der Haken gesetzt ist
@@ -481,15 +463,10 @@ namespace Fractrace {
       }
     }
 
-    private void navigateControl1_Load(object sender, EventArgs e) {
-
-    }
-
+  
 
     private void btnStopAnimation_Click_1(object sender, EventArgs e) {
-      animationAbort = true;
       Form1.PublicForm.Stop();
-      animationAbort = true;
     }
 
 

@@ -19,7 +19,7 @@ namespace Fractrace.Basic {
     /// <summary>
     /// Corresponding string value is set from ParameterDict.Exemplar.
     /// </summary>
-    public override void Update() {
+    public override void UpdateElements() {
       string newValue = ParameterDict.Exemplar[mName];
       if (oldValue != newValue) {
         mValue = newValue;

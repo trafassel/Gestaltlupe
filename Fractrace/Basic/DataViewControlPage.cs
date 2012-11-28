@@ -164,7 +164,7 @@ namespace Fractrace.Basic {
     /// Subentries are updated. Returns true, if at least one entry is added or removed.
     /// </summary>
     /// <param name="category">The category.</param>
-    public bool Update() {
+    public bool IterateElements() {
       string newNodeHash = ParameterDict.Exemplar.GetHashOfName(mCategory);
       string newNodeValueHash = ParameterDict.Exemplar.GetHash(mCategory);
       if (newNodeHash != mNodeHash) { // At least one entry is added or deleted, so everything must new created 
@@ -177,7 +177,7 @@ namespace Fractrace.Basic {
         foreach (UserControl subControl in Controls) {
           if (subControl is DataViewElement) {
             DataViewElement dataView = (DataViewElement)subControl;
-            dataView.Update();
+            dataView.UpdateElements();
           }
         }
 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Fractrace.Animation {
+
+
+
   public class AnimationSteps {
 
     public AnimationSteps() {

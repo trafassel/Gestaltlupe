@@ -184,6 +184,11 @@ namespace Fractrace {
 
 
     /// <summary>
+    /// Count the number of update steps
+    /// </summary>
+    int mUpdateCount = 0;
+
+    /// <summary>
     /// Create surface model.
     /// </summary>
     public void ComputeOneStep() {
@@ -197,11 +202,27 @@ namespace Fractrace {
       if (!ParameterDict.Exemplar.GetBool("View.ClassicView")) {
         string tempParameterHash = GetParameterHashWithoutPictureArt();
         if (oldParameterHashWithoutPictureArt == tempParameterHash) {
-          OneStepEnds();
+            // new: update Iteration
+            oldParameterHashWithoutPictureArt = tempParameterHash;
+            classicIter = null;
+            paras.Assign();
+            DataTypes.GraphicData oldData = null;
+            DataTypes.PictureData oldPictureData = null;
+            if (iter != null)
+            {
+                oldData = iter.GraphicInfo;
+                oldPictureData = iter.PictureData;
+            }
+            iter = new Iterate(maxx, maxy, this, false);
+            mUpdateCount++;
+            iter.SetOldData(oldData, oldPictureData, mUpdateCount);
+            iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+         // OneStepEnds();
         } else {
           oldParameterHashWithoutPictureArt = tempParameterHash;
           classicIter = null;
           paras.Assign();
+          mUpdateCount = 1;
           iter = new Iterate(maxx, maxy, this, false);
           iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
         }
