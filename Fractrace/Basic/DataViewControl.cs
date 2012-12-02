@@ -41,10 +41,13 @@ namespace Fractrace.Basic {
     /// </summary>
     /// <param name="category">The category.</param>
     public void Select(string category) {
+        if (category == "")
+            return;
       this.SuspendLayout();
       DataViewControlPage newPage=null;
       if (mPages.ContainsKey(category)) {
         newPage = mPages[category];
+        newPage.UpdateElements();
         newPage.Update();
       } else {
         newPage = new DataViewControlPage(this);

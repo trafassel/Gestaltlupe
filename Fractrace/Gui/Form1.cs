@@ -244,16 +244,25 @@ namespace Fractrace {
     }
 
 
+/// <summary>
+/// Use by animation control to deactivate rendering outputs in low quality.
+/// </summary>
+    public bool dontActivateRender = false;
+
+
     /// <summary>
     /// Asyncrone computation is ready (but not the generation of the bitmap).
     /// </summary>
     protected void OneStepEnds() {
       Application.DoEvents();
       this.Refresh();
-      ActivatePictureArt();
-      string fileName = FileSystem.Exemplar.GetFileName("pic.jpg");
-      this.Text = fileName;
-      pictureBox1.Image.Save(fileName);
+      if (!dontActivateRender)
+      {
+          ActivatePictureArt();
+          string fileName = FileSystem.Exemplar.GetFileName("pic.jpg");
+          this.Text = fileName;
+          pictureBox1.Image.Save(fileName);
+      }
       inComputeOneStep = false;
       if (paras != null)
         paras.InComputing = false;

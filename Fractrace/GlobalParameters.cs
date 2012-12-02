@@ -54,7 +54,7 @@ namespace Fractrace {
 
       // Number of iterations used in the formula, if the inside of the 3D object is rendered.
       // Caution: If minCycle=51, then inside rendering is deactivated.
-      ParameterDict.Exemplar["Formula.Static.MinCycle"] = "8";
+      ParameterDict.Exemplar["Formula.Static.MinCycle"] = "0";
       // The used formula.
       // Values from 1 to 26 corresponds to some inbuild formulas.
       // Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.
@@ -162,6 +162,9 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Default animation steps while adding the frame in the animation control. 
       ParameterDict.Exemplar["Animation.Steps"] = "30";
 
+      // Number of update steps for better rendering quality.  
+      ParameterDict.Exemplar["Animation.UpdateSteps"] = "3";
+
      // ParameterDict.Exemplar["Composite.Renderer"] = "1";
       ParameterDict.Exemplar["Renderer.Normalize"] = "1";
 
@@ -177,17 +180,22 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "1.0";
 
       // Intensity of the Surface Color
-      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "0.3";
+      ParameterDict.Exemplar["Renderer.ColorIntensity"] = "0.0";
       // If ColorGreyness=1, no color is rendered
       ParameterDict.Exemplar["Renderer.ColorGreyness"] = "0";
       // Use Light
       ParameterDict.Exemplar["Renderer.UseLight"] = "1";
+      // Light Level: light in bright areas
+      ParameterDict.Exemplar["Renderer.BrightLightLevel"] = "1";
       // Shadow height factor
-      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "0.08";
+      ParameterDict.Exemplar["Renderer.ShadowJustify"] = "1";
       // Shininess factor (0 ... 1)
-      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.85";
+      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.7";
       // Shininess ( 0... 1000)
-      ParameterDict.Exemplar["Renderer.Shininess"] = "15";
+      ParameterDict.Exemplar["Renderer.Shininess"] = "8";
+
+      // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
+        ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "2";
      // Normal of the light source
       ParameterDict.Exemplar["Renderer.Light.X"] = "0.05";
       ParameterDict.Exemplar["Renderer.Light.Y"] = "1";
@@ -211,7 +219,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
       // If LightIntensity==1, no shadow renderers are used
       // If LightIntensity==0, only shadow renderers are used
-      ParameterDict.Exemplar["Renderer.LightIntensity"] = "0.35";
+      ParameterDict.Exemplar["Renderer.LightIntensity"] = "0.2";
 
       // Number of threads used in computation. The recommended value is the number of processors.
       ParameterDict.Exemplar["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();

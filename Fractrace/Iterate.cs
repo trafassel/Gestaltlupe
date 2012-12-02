@@ -379,7 +379,7 @@ namespace Fractrace {
       // Innenbereich
       int minCycle = (int)ParameterDict.Exemplar.GetDouble("Formula.Static.MinCycle");
       if (minCycle == 0)
-        minCycle = 100;
+          minCycle = zyklen;
 
       // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
       int cycleAdd = 128;
@@ -403,16 +403,12 @@ namespace Fractrace {
 
       if (mOldData != null)
       {
+          yd = yd / (mUpdateCount);
+
           //raster = 1;
           if (mUpdateCount < 5)
           {
-              yd = yd / (mUpdateCount);
               MAXY_ITER *= mUpdateCount;
-          }
-          else
-          {
-              yd = yd / (5.0);
-              MAXY_ITER *= 5;
           }
 
       }
@@ -526,23 +522,26 @@ namespace Fractrace {
               }
 
 
-              if (centerIsSet)
+              if (yAdd + yd < act_val.end_tupel.y)
               {
-                  if (yAddCenter + 4.0*yd < yAdd)
+                  if (centerIsSet)
                   {
-                      needComputing = true;
-                      yAdd = yAdd - act_val.end_tupel.y+2.0*yd+rand.NextDouble()*yd;
-                      GData.Picture[xx, yy]=mOldData.Picture[xx,yy];
+                      if (yAddCenter + 4.0 * yd < yAdd)
+                      {
+                          needComputing = true;
+                          yAdd = yAdd - act_val.end_tupel.y + 2.0 * ((double)mUpdateCount) * yd + rand.NextDouble() * yd;
+                          GData.Picture[xx, yy] = mOldData.Picture[xx, yy];
+                      }
                   }
-              }
-              else
-              {
-                  if (areaIsSet)
+                  else
                   {
-                      needComputing = true;
-                      //yAdd = yAdd - act_val.end_tupel.y + 2.0 * yd + rand.NextDouble() * yd;
-                      yAdd = rand.NextDouble() * yd;
-                      //GData.Picture[xx, yy] = mOldData.Picture[xx, yy];
+                      if (areaIsSet)
+                      {
+                          needComputing = true;
+                          //yAdd = yAdd - act_val.end_tupel.y + 2.0 * yd + rand.NextDouble() * yd;
+                          yAdd = rand.NextDouble() * yd;
+                          //GData.Picture[xx, yy] = mOldData.Picture[xx, yy];
+                      }
                   }
               }
 
@@ -831,9 +830,22 @@ namespace Fractrace {
                   }
 
 
-                  if (mOldData != null)
+                  if (mOldData != null && mUpdateCount>2)
                   {
-
+                      if (mOldPictureData.Points[xx, yy] != null)
+                      {
+                          if (PData.Points[xx, yy] == null)
+                          {
+                              PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                          }
+                          else
+                          {
+                              if (PData.Points[xx, yy].Coord.Y < mOldPictureData.Points[xx, yy].Coord.Y)
+                              {
+                                  PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                              }
+                          }
+                      }
 
                   }
 

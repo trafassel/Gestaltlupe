@@ -160,6 +160,22 @@ namespace Fractrace.Basic {
       }
     }
 
+
+    public void UpdateElements()
+    {
+
+        foreach (UserControl subControl in Controls)
+        {
+            if (subControl is DataViewElement)
+            {
+                DataViewElement dataView = (DataViewElement)subControl;
+                dataView.UpdateElements();
+            }
+        }
+
+    }
+
+
     /// <summary>
     /// Subentries are updated. Returns true, if at least one entry is added or removed.
     /// </summary>
