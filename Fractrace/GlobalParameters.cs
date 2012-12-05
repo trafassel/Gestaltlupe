@@ -135,7 +135,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       //ParameterDict.Exemplar["View.ClassicView"] = "0";
 
       // Switch between 3D view and parallel view.
-      ParameterDict.Exemplar["View.Perspective"] = "1";
+      ParameterDict.Exemplar["View.Perspective"] = "0";
 
       // View.Size*View.Width == width of the rendered bitmap.
       ParameterDict.Exemplar["View.Width"] = "1200";
@@ -145,10 +145,10 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
       // Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but 
       // more time consuming.
-      ParameterDict.Exemplar["View.Deph"] = "800";
+      ParameterDict.Exemplar["View.Deph"] = "500";
 
       // Additional voxel space (removes black background parts of the rendered image).
-      ParameterDict.Exemplar["View.DephAdd"] = "0";
+      ParameterDict.Exemplar["View.DephAdd"] = "500";
 
       // Used internally in creating a poster.
       // PosterX=-1: Render the bitmap left the given bounds.
@@ -186,20 +186,20 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Use Light
       ParameterDict.Exemplar["Renderer.UseLight"] = "1";
       // Light Level: light in bright areas
-      ParameterDict.Exemplar["Renderer.BrightLightLevel"] = "1";
+      ParameterDict.Exemplar["Renderer.BrightLightLevel"] = "0.2";
       // Shadow height factor
       ParameterDict.Exemplar["Renderer.ShadowJustify"] = "1";
       // Shininess factor (0 ... 1)
-      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.7";
+      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.6";
       // Shininess ( 0... 1000)
-      ParameterDict.Exemplar["Renderer.Shininess"] = "8";
+      ParameterDict.Exemplar["Renderer.Shininess"] = "9";
 
       // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
-        ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "2";
+        ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "8";
      // Normal of the light source
-      ParameterDict.Exemplar["Renderer.Light.X"] = "0.05";
+      ParameterDict.Exemplar["Renderer.Light.X"] = "0.3";
       ParameterDict.Exemplar["Renderer.Light.Y"] = "1";
-      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.1";
+      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.2";
       // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
       ParameterDict.Exemplar["Renderer.UseSharpShadow"] = "0";
      // To justify the color components 

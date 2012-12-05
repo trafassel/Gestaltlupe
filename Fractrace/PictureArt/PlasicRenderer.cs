@@ -450,6 +450,8 @@ namespace Fractrace.PictureArt {
       // tempcoord2 enthält die umgerechnete Oberflächennormale. 
       double tfac = 1;
 
+
+        
       Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
       normal.Normalize();
       Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
@@ -463,6 +465,11 @@ namespace Fractrace.PictureArt {
 
       // Normalize:
       tempcoord2.Normalize();
+      
+
+        // debug only
+      tempcoord2 = normal;
+
 
       if (pInfo.Normal != null) {
         light = GetLight(tempcoord2);
