@@ -1807,6 +1807,8 @@ double xx, yy, zz;
               ry = ypos[pu] + tief[pu] * yd - ypos[4] - tief[4] * yd;
               rz = zpos[pu] - zpos[4];
 
+              // Apply Transformation
+
               /* Dann wird das Kreuzprodukt gebildet, um einen
                  Vergleichsvektor zu haben.                                 */
               xv = oy * rz - oz * ry;

@@ -448,7 +448,7 @@ namespace Fractrace.PictureArt {
         return new Vec3(0, 0, 0);
 
       // tempcoord2 enthält die umgerechnete Oberflächennormale. 
-      double tfac = 1;
+      double tfac = 1000;
 
 
         
@@ -468,7 +468,7 @@ namespace Fractrace.PictureArt {
       
 
         // debug only
-      tempcoord2 = normal;
+    //  tempcoord2 = normal;
 
 
       if (pInfo.Normal != null) {
@@ -717,47 +717,29 @@ namespace Fractrace.PictureArt {
 
       // Drei "Schattenlichtquellen"
       // Eine für die Dunklen Tiefen
-      // Shadowlight1
-      // 1 ist der Durchschnittswert.
-      double shadowlight1Val = 0.1;
-      // 
-      
-       // Eine für die breite Normalasicht
-      // Shadowlight1
-
+      // Eine für die breite Normalasicht
       // Und eine für die mit sehr geringen Eintreffwinkel
       // Ist bei perspektivischen Aufnahmen noch unbrauchbar.
 
+      // Shadowlight1
+      // 1 ist der Durchschnittswert.
+      double shadowlight1Val = 0.1;      
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight1Range = 1;
 
 
+
       double shadowlight2Val = 0.2;
-      // 
-      // Eine für die breite Normalasicht
-      // Shadowlight1
-
-      // Und eine für die mit sehr geringen Eintreffwinkel
-      // Ist bei perspektivischen Aufnahmen noch unbrauchbar.
-
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight2Range = 2;
 
 
       double shadowlight3Val = 0.6;
-      // 
-      // Eine für die breite Normalasicht
-      // Shadowlight1
-
-      // Und eine für die mit sehr geringen Eintreffwinkel
-      // Ist bei perspektivischen Aufnahmen noch unbrauchbar.
-
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight3Range = 0.05;
 
-
-
       double sharpness = 2.5; // 
+
       // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
       shadowInfo11 = new double[pData.Width, pData.Height];
       shadowInfo01 = new double[pData.Width, pData.Height];
@@ -770,10 +752,7 @@ namespace Fractrace.PictureArt {
 
       shadowPlane = new double[pData.Width, pData.Height];
       double[,] shadowTempPlane = new double[pData.Width, pData.Height];
-
-     // double diffy = shadowJustify * (maxY - minY);
       double diffy = shadowJustify * (areaDeph);
-
 
       // Main Iteration:
       double yd = 0;
@@ -789,11 +768,8 @@ namespace Fractrace.PictureArt {
       }
 
       double currentShadowlightRange = 0;
-      //  double shadowVal = 0.3;
       double shadowVal = 0.1;
-
       int shadowTypeCount = 0;
-
       double shadowlight1Level = 0.25;
       double shadowlight2Level = 0.5;
       double shadowlight3Level = 0.25;
@@ -801,51 +777,28 @@ namespace Fractrace.PictureArt {
       for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
         //       for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
         switch (shadowMode) {
-          case 0:
-           
-            diffy = shadowJustify * (areaDeph);
-         
 
+          case 0:
             diffy = shadowJustify * shadowlight1Val * (areaDeph);
             shadowVal = shadowlight1Level;
             currentShadowlightRange = shadowlight1Range;
-
-
             break;
             
           case 1:
-          
-
-
             diffy = shadowJustify * shadowlight2Val * (areaDeph);
             shadowVal = shadowlight2Level;
             currentShadowlightRange = shadowlight2Range;
-
-
-            // TODO: currentShadowlightRange = ...
-
             break;
-          case 2:
-                                  
+
+          case 2:                  
             diffy = shadowJustify * shadowlight3Val * (areaDeph);
             shadowVal = shadowlight3Level;
             currentShadowlightRange = shadowlight3Range;
-
-            break;
-          case 3:
-            diffy = 0.1 * shadowJustify * (areaDeph);
-            shadowVal = 0.19;
-            break;
-          case 4:
-            diffy = 9.0 * shadowJustify * (areaDeph);
-            shadowVal = 0.1;
             break;
 
         }
 
-        int usedShadowNumber = shadowNumber + 1;
-
-        
+        int usedShadowNumber = shadowNumber + 1;        
         if (shadowMode == 0 || shadowMode == 2)
           usedShadowNumber = (int)(0.5 * shadowNumber + 1);
           /*

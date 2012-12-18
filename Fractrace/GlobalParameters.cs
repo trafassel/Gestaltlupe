@@ -135,7 +135,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       //ParameterDict.Exemplar["View.ClassicView"] = "0";
 
       // Switch between 3D view and parallel view.
-      ParameterDict.Exemplar["View.Perspective"] = "0";
+      ParameterDict.Exemplar["View.Perspective"] = "1";
 
       // View.Size*View.Width == width of the rendered bitmap.
       ParameterDict.Exemplar["View.Width"] = "1200";
@@ -145,10 +145,10 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
       // Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but 
       // more time consuming.
-      ParameterDict.Exemplar["View.Deph"] = "500";
+      ParameterDict.Exemplar["View.Deph"] = "400";
 
       // Additional voxel space (removes black background parts of the rendered image).
-      ParameterDict.Exemplar["View.DephAdd"] = "500";
+      ParameterDict.Exemplar["View.DephAdd"] = "0";
 
       // Used internally in creating a poster.
       // PosterX=-1: Render the bitmap left the given bounds.
@@ -159,11 +159,12 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // PosterZ=1: Render the bitmap under the given bounds.
       ParameterDict.Exemplar["View.PosterZ"] = "0";
 
+      // Number of update steps for better rendering quality.  
+      ParameterDict.Exemplar["View.UpdateSteps"] = "3";
+
       // Default animation steps while adding the frame in the animation control. 
       ParameterDict.Exemplar["Animation.Steps"] = "30";
 
-      // Number of update steps for better rendering quality.  
-      ParameterDict.Exemplar["Animation.UpdateSteps"] = "3";
 
      // ParameterDict.Exemplar["Composite.Renderer"] = "1";
       ParameterDict.Exemplar["Renderer.Normalize"] = "1";
@@ -171,11 +172,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Activates Background darkening in PlasicRenderer
       ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
       // Corresponds to the number of shadows in PlasicRenderer
-      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "22";
+      ParameterDict.Exemplar["Renderer.ShadowNumber"] = "11";
       // Intensity of the FieldOfView
-      ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "1";
+      ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "0";
       // Minimal value of FieldOfView
-      ParameterDict.Exemplar["Renderer.MinFieldOfView"] = "0.4";
+      ParameterDict.Exemplar["Renderer.MinFieldOfView"] = "0.0";
       // Maximal value of FieldOfView
       ParameterDict.Exemplar["Renderer.MaxFieldOfView"] = "1.0";
 
@@ -197,9 +198,9 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
         ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "8";
      // Normal of the light source
-      ParameterDict.Exemplar["Renderer.Light.X"] = "0.3";
+      ParameterDict.Exemplar["Renderer.Light.X"] = "0.01";
       ParameterDict.Exemplar["Renderer.Light.Y"] = "1";
-      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.2";
+      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.04";
       // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
       ParameterDict.Exemplar["Renderer.UseSharpShadow"] = "0";
      // To justify the color components 

@@ -44,7 +44,6 @@ namespace Fractrace {
     /// </summary>
     public void Abort() {
       mAbort = true;
-      Console.WriteLine("Abort()");
     }
 
 

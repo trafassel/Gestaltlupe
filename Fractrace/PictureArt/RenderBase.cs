@@ -16,6 +16,7 @@ namespace Fractrace.PictureArt {
         /// </summary>
         /// <param name="pData"></param>
         public RenderBase(PictureData pData):base(pData) {
+
         }
 
         /// <summary>(

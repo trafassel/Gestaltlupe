@@ -167,7 +167,7 @@ namespace Fractrace.Animation {
             Application.DoEvents();
             animationHistory.Load(r);
 
-            int updateSteps = (int)ParameterDict.Exemplar.GetDouble("Animation.UpdateSteps");
+            int updateSteps = (int)ParameterDict.Exemplar.GetDouble("View.UpdateSteps");
             if (updateSteps <= 0)
                 updateSteps = 1;
 

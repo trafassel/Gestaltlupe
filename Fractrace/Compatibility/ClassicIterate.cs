@@ -786,7 +786,7 @@ namespace Fractrace.Compability {
                     // Console.WriteLine("xschl=" + xschl.ToString());
 
                     if (mAbort) {
-                        mAbort = false;
+                       // mAbort = false;
                         return;
                     }
 
