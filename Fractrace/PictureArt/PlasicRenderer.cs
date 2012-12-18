@@ -143,6 +143,11 @@ namespace Fractrace.PictureArt {
     private double areaDeph = 0;
 
 
+       private double brightness = 1;
+
+       private double contrast = 1;
+      
+     
     /// <summary>
     /// Allgemeine Informationen werden erzeugt
     /// </summary>
@@ -159,6 +164,9 @@ namespace Fractrace.PictureArt {
       ambientIntensity = ParameterDict.Exemplar.GetInt(parameterNode + "AmbientIntensity");
       minFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MinFieldOfView");
       maxFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MaxFieldOfView");
+
+      brightness= ParameterDict.Exemplar.GetDouble(parameterNode + "Brightness");
+      contrast = ParameterDict.Exemplar.GetDouble(parameterNode + "Contrast");
 
       colorIntensity = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorIntensity");
       useLight = ParameterDict.Exemplar.GetBool(parameterNode + "UseLight");
@@ -468,7 +476,7 @@ namespace Fractrace.PictureArt {
       
 
         // debug only
-    //  tempcoord2 = normal;
+      tempcoord2 = normal;
 
 
       if (pInfo.Normal != null) {
@@ -565,23 +573,40 @@ namespace Fractrace.PictureArt {
           /*
           double redLumen = 0.08;
           double greenLumen = 0.9;
-          double blueLumen = 0.03;
-          */
+          double blueLumen = 0.1;
+           */
+          double redLumen = 1.5;
+          double greenLumen = 1.1;
+          double blueLumen = 0.15;
+          
 
           /*
           double redLumen = 0.08;
           double greenLumen = 0.9;
           double blueLumen = 0.03;
+           */
 
-          double norm = redLumen * r1 + greenLumen * g1 + blueLumen*b1;
-          norm = norm / 2.0;
+            
+          double norm1 = redLumen * r1 + greenLumen * g1 + blueLumen*b1;
            
-          r1 = r1 / norm;
-          g1 = g1 / norm;
-          b1 = b1 / norm;
+          r1 = r1 / norm1;
+          g1 = g1 / norm1;
+          b1 = b1 / norm1;
+             
 
-           * */
+         // b1 *= 600;
+
+          if (r1 > 1)
+              r1 = 1;
+          if (b1 > 1)
+              b1 = 1;
+          if (g1 > 1)
+              g1 = 1;
+         
           // debug only:
+         // r1 = 0;
+        //  g1 = 0;
+        //  b1 = 1;
           // r1 = r1 + g1 + b1;
           // g1 = r1; b1 = r1;
           if (colorGreyness > 0) {
@@ -590,12 +615,7 @@ namespace Fractrace.PictureArt {
             b1 = 0.5 * colorGreyness + (1 - colorGreyness) * b1;
           }
 
-          if (r1 > 1)
-            r1 = 1;
-          if (b1 > 1)
-            b1 = 1;
-          if (g1 > 1)
-            g1 = 1;
+        
 
           if (norm != 0) {
             switch (rgbType) {
@@ -646,6 +666,26 @@ namespace Fractrace.PictureArt {
           }
         }
       }
+
+      if (contrast != 1)
+      {
+          retVal.X = Math.Pow(retVal.X, contrast);
+          retVal.Y = Math.Pow(retVal.Y, contrast);
+          retVal.Z = Math.Pow(retVal.Z, contrast);
+
+      }
+
+      if (brightness > 1)
+      {
+          retVal.X *= brightness;
+          retVal.Y *= brightness;
+          retVal.Z *= brightness;
+      }
+
+      if (retVal.X < 0)
+          retVal.X = 0;
+      if (retVal.X > 1)
+          retVal.X = 1;
       if (retVal.Y < 0)
         retVal.Y = 0;
       if (retVal.Z < 0)
@@ -727,16 +767,19 @@ namespace Fractrace.PictureArt {
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight1Range = 1;
 
-
+      double shadowlight1Intensity = 0.2;
 
       double shadowlight2Val = 0.2;
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight2Range = 2;
+      double shadowlight2Intensity = 0.6;
 
 
-      double shadowlight3Val = 0.6;
+      double shadowlight3Val = 1.5;
       // Die maximale Abweichung der Auftreffwinkel.
       double shadowlight3Range = 0.05;
+      double shadowlight3Intensity = 1;
+
 
       double sharpness = 2.5; // 
 
@@ -773,6 +816,7 @@ namespace Fractrace.PictureArt {
       double shadowlight1Level = 0.25;
       double shadowlight2Level = 0.5;
       double shadowlight3Level = 0.25;
+      double currentIntensity = 1;
 
       for (int shadowMode = 0; shadowMode < 3; shadowMode++) {
         //       for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
@@ -782,18 +826,21 @@ namespace Fractrace.PictureArt {
             diffy = shadowJustify * shadowlight1Val * (areaDeph);
             shadowVal = shadowlight1Level;
             currentShadowlightRange = shadowlight1Range;
+            currentIntensity = shadowlight1Intensity;
             break;
             
           case 1:
             diffy = shadowJustify * shadowlight2Val * (areaDeph);
             shadowVal = shadowlight2Level;
             currentShadowlightRange = shadowlight2Range;
+            currentIntensity = shadowlight2Intensity;
             break;
 
           case 2:                  
             diffy = shadowJustify * shadowlight3Val * (areaDeph);
             shadowVal = shadowlight3Level;
             currentShadowlightRange = shadowlight3Range;
+            currentIntensity = shadowlight3Intensity;
             break;
 
         }
@@ -1149,7 +1196,7 @@ namespace Fractrace.PictureArt {
 
           for (int i = 0; i < pData.Width; i++) {
             for (int j = 0; j < pData.Height; j++) {
-              shadowPlane[i, j] += shadowTempPlane[i, j] / dShadowNumber;
+              shadowPlane[i, j] += currentIntensity* shadowTempPlane[i, j] / dShadowNumber;
             }
           }
         }

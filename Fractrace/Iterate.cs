@@ -244,6 +244,18 @@ namespace Fractrace {
 
       if (startCount == 0) {
         if (mStarter != null) {
+            if (mAbort)
+            {
+                if (mOldData != null)
+                {
+                    GData = mOldData;
+                }
+                if (mOldPictureData != null)
+                {
+                    PData = mOldPictureData;
+                }
+
+            }
           mStarter.ComputationEnds();
         }
         // Endereignis aufrufen
@@ -543,6 +555,12 @@ namespace Fractrace {
                       }
                   }
               }
+
+              //if (mOldData != null && mUpdateCount == 2)
+              //{
+                  // Compute all subentries on second iteration.
+                 // needComputing = true;
+              //}
 
              
               if (needComputing)

@@ -191,16 +191,24 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Shadow height factor
       ParameterDict.Exemplar["Renderer.ShadowJustify"] = "1";
       // Shininess factor (0 ... 1)
-      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.6";
+      ParameterDict.Exemplar["Renderer.ShininessFactor"] = "0.8";
       // Shininess ( 0... 1000)
-      ParameterDict.Exemplar["Renderer.Shininess"] = "9";
+      ParameterDict.Exemplar["Renderer.Shininess"] = "14";
+
+      // Brightness (1 ...)
+      ParameterDict.Exemplar["Renderer.Brightness"] = "1";
+
+      // Contrast (0 ... 1 ...)
+      ParameterDict.Exemplar["Renderer.Contrast"] = "1";
+        
+
 
       // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
         ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "8";
      // Normal of the light source
-      ParameterDict.Exemplar["Renderer.Light.X"] = "0.01";
+      ParameterDict.Exemplar["Renderer.Light.X"] = "0.2";
       ParameterDict.Exemplar["Renderer.Light.Y"] = "1";
-      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.04";
+      ParameterDict.Exemplar["Renderer.Light.Z"] = "0.15";
       // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
       ParameterDict.Exemplar["Renderer.UseSharpShadow"] = "0";
      // To justify the color components 
