@@ -287,7 +287,30 @@ namespace Fractrace {
         else {
           availableY = y + 1;
           Console.WriteLine("Accepted y=" + y.ToString());
-          mStarter.Progress(100.0 * (y / (double)MAXZ_ITER));
+      //    if (maxUpdateSteps > 0 && mUpdateCount>0)
+          if (maxUpdateSteps > 0 )
+          {
+              double f = ((double)mUpdateCount) / ((double)maxUpdateSteps+1);
+              double maxUpInvers = 0.9 / ((double)maxUpdateSteps + 1);
+
+          //    if (f > 1)
+          //        mStarter.Progress(100.0 * ( y / (double)MAXZ_ITER));
+          //     else
+              mStarter.Progress(  100.0 * (
+                  maxUpInvers  * (    (double)mUpdateCount + y / (double)MAXZ_ITER  ))                    
+                  );
+
+              double a= (double)(mUpdateCount) ;
+              double b= y / (double)MAXZ_ITER;
+              double c = maxUpInvers * (a + b);
+
+              double progress = 100.0 * ( maxUpInvers * ((double)mUpdateCount) + y / (double)MAXZ_ITER);
+
+          }
+          else
+          {
+              mStarter.Progress(100.0 * (y / (double)MAXZ_ITER));
+          }
           retVal = true;
         }
       }
@@ -313,6 +336,7 @@ namespace Fractrace {
     }
 
 
+    int maxUpdateSteps = 1;
 
 
     /// <summary>
@@ -326,7 +350,9 @@ namespace Fractrace {
     /// <param name="perspective"></param>
     protected void Generate(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective) {
         Random rand = new Random();
-        
+
+      maxUpdateSteps=  ParameterDict.Exemplar.GetInt("View.UpdateSteps");
+
       double[] col = null;
       double xd, yd, zd, zzd;
       double x, y, z, zz;

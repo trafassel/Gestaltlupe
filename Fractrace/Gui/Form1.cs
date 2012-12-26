@@ -180,7 +180,16 @@ namespace Fractrace
         protected string GetParameterHashWithoutPictureArt()
         {
             StringBuilder tempHash = new StringBuilder();
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View"));
+
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
@@ -600,11 +609,14 @@ namespace Fractrace
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
-            if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
+         //   if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
+         //   {
+            if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
                 this.Invoke(new ProgressDelegate(OnProgress));
             }
+          //  }
         }
 
 
