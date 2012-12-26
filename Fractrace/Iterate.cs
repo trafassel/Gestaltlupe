@@ -267,6 +267,12 @@ namespace Fractrace {
 
 
     /// <summary>
+    /// True, if 
+    /// </summary>
+    public bool OneStepProgress = false;
+
+
+    /// <summary>
     /// Liefert true, wenn die angegebene z-Koordinate berechnet werden darf. Wird für die Synchronisation der asynchronen Prozesse verwendet.
     /// </summary>
     /// <param name="y"></param>
@@ -288,10 +294,10 @@ namespace Fractrace {
           availableY = y + 1;
           Console.WriteLine("Accepted y=" + y.ToString());
       //    if (maxUpdateSteps > 0 && mUpdateCount>0)
-          if (maxUpdateSteps > 0 )
+          if (maxUpdateSteps > 0 && !OneStepProgress)
           {
               double f = ((double)mUpdateCount) / ((double)maxUpdateSteps+1);
-              double maxUpInvers = 0.9 / ((double)maxUpdateSteps + 1);
+              double maxUpInvers = 1.0 / ((double)maxUpdateSteps + 2);
 
           //    if (f > 1)
           //        mStarter.Progress(100.0 * ( y / (double)MAXZ_ITER));

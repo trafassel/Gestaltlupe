@@ -224,6 +224,11 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
         int mCurrentUpdateStep = 0;
 
 
+      /// <summary>
+      /// Different handling of Progress Bar while in preview.
+      /// </summary>
+        public bool inPreview = false;
+
         /// <summary>
         /// Create surface model.
         /// </summary>
@@ -256,6 +261,9 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
                     iter = new Iterate(maxx, maxy, this, false);
                     mUpdateCount++;
                     iter.SetOldData(oldData, oldPictureData, mUpdateCount);
+                    iter.OneStepProgress = inPreview;
+                  if(mUpdateCount>ParameterDict.Exemplar.GetDouble("View.UpdateSteps")+1)
+                    iter.OneStepProgress = true;
                     iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
                     // OneStepEnds();
                 }
@@ -267,6 +275,7 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
                     paras.Assign();
                     mUpdateCount = 1;
                     iter = new Iterate(maxx, maxy, this, false);
+                    iter.OneStepProgress = inPreview;
                     iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
                 }
             }

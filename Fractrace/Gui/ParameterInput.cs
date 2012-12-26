@@ -327,6 +327,7 @@ namespace Fractrace
         private void OK()
         {
             Changed = true;
+            Form1.PublicForm.inPreview = false;
             ForceRedraw();
         }
 
@@ -518,6 +519,7 @@ namespace Fractrace
             {
                 mHistory.CurrentTime = mHistory.Save();
             }
+            Form1.PublicForm.inPreview = false;
             ForceRedraw();
 
         }
@@ -848,6 +850,7 @@ namespace Fractrace
 
             ParameterDict.Exemplar.SetInt("View.PosterX", xi);
             ParameterDict.Exemplar.SetInt("View.PosterZ", yi);
+            Form1.PublicForm.inPreview = false;
             ForceRedraw();
             mPosterStep++;
         }
@@ -942,6 +945,9 @@ namespace Fractrace
             oldDirectory = System.IO.Path.GetDirectoryName(fileName);
         }
 
+
+        private bool inPreview = false;
+
         private void btnPreview_Click(object sender, EventArgs e)
         {
             mPreviewMode = true;
@@ -957,8 +963,9 @@ namespace Fractrace
                 string rasterStr = ParameterDict.Exemplar["View.Raster"];
                 ParameterDict.Exemplar["View.Size"] = "0.2";
                 ParameterDict.Exemplar["View.Raster"] = "2";
-
+                Form1.PublicForm.inPreview = true;
                 ForceRedraw();
+                Form1.PublicForm.inPreview = false;
                 // Size und Raster auf die Ursprungswerte setzen
                 ParameterDict.Exemplar["View.Size"] = sizeStr;
                 ParameterDict.Exemplar["View.Raster"] = rasterStr;

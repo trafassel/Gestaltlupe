@@ -136,7 +136,8 @@ namespace Fractrace {
       Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
       btnPreview.BackgroundImage = labelImage;
       grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
-      iter = new Iterate(btnPreview.Width, btnPreview.Height, this,false);
+      iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+      iter.OneStepProgress=true;
       AssignParameters();
       iter.StartAsync(mParameter,
               ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),
