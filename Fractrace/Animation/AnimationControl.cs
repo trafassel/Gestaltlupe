@@ -169,12 +169,12 @@ namespace Fractrace.Animation {
 
             int updateSteps = (int)ParameterDict.Exemplar.GetDouble("View.UpdateSteps");
             if (updateSteps <= 0)
-                updateSteps = 1;
+                updateSteps = 0;
 
             Form1.PublicForm.dontActivateRender = false;
-            for (int currentUpdateStep = 0; currentUpdateStep < updateSteps; currentUpdateStep++)
+            for (int currentUpdateStep = 0; currentUpdateStep <= updateSteps; currentUpdateStep++)
             {
-                if (currentUpdateStep < updateSteps - 1)
+                if (currentUpdateStep < updateSteps)
                     Form1.PublicForm.dontActivateRender=true;
                 else
                     Form1.PublicForm.dontActivateRender = false;

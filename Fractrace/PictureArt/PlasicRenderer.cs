@@ -146,6 +146,10 @@ namespace Fractrace.PictureArt {
        private double brightness = 1;
 
        private double contrast = 1;
+
+
+      // Field of Depth parameter
+       private double smoothRange=1;
       
      
     /// <summary>
@@ -1240,104 +1244,107 @@ namespace Fractrace.PictureArt {
     /// Die Oberflächennormalen werden abgerundet.
     /// </summary>
     protected void CreateSmoothNormales() {
-      normalesSmooth1 = new Vec3[pData.Width, pData.Height];
-      normalesSmooth2 = new Vec3[pData.Width, pData.Height];
+        normalesSmooth1 = new Vec3[pData.Width, pData.Height];
+        normalesSmooth2 = new Vec3[pData.Width, pData.Height];
 
-      // Normieren
-      for (int i = 0; i < pData.Width; i++) {
-        for (int j = 0; j < pData.Height; j++) {
-          PixelInfo pInfo = pData.Points[i, j];
-          if (pInfo != null) {
-           // pInfo.Normal.Normalize();
-             normalesSmooth1[i, j] =pInfo.Normal;
-             normalesSmooth1[i, j].Normalize();
-          }
-        }
-      }
-
-      Vec3[,] currentSmooth = normalesSmooth1;
-      Vec3[,] nextSmooth = normalesSmooth2;
-      Vec3[,] tempSmooth;
-
-      int smoothLevel = (int)ParameterDict.Exemplar.GetDouble("Renderer.SmoothNormalLevel");
-
-      for (int currentSmoothLevel = 0; currentSmoothLevel < smoothLevel; currentSmoothLevel++)
-      {
-
-
-
-
-          // crate nextSmooth
-          for (int i = 0; i < pData.Width; i++)
-          {
-              for (int j = 0; j < pData.Height; j++)
-              {
-                  Vec3 center = null;
-                  center = currentSmooth[i, j];
-                  /*
-                if (pInfo != null) {
-                  center = pInfo.Normal;
+        // Normieren
+        for (int i = 0; i < pData.Width; i++)
+        {
+            for (int j = 0; j < pData.Height; j++)
+            {
+                PixelInfo pInfo = pData.Points[i, j];
+                if (pInfo != null)
+                {
+                    // pInfo.Normal.Normalize();
+                    normalesSmooth1[i, j] = pInfo.Normal;
+                    normalesSmooth1[i, j].Normalize();
                 }
-                   */
+            }
+        }
 
-                  // Test ohne smooth-Factor
-                  // Nachbarelemente zusammenrechnen
-                  Vec3 neighbors = new Vec3();
-                  int neighborFound = 0;
+        Vec3[,] currentSmooth = normalesSmooth1;
+        Vec3[,] nextSmooth = normalesSmooth2;
+        Vec3[,] tempSmooth;
 
-                  /*
-                  if (currentSmooth[i, j] != null)
-                  {
-                      neighbors = currentSmooth[i, j];
-                      // Center has higher priority
-                      neighbors.Mult(60.0);
-                  }*/
-                  for (int k = -1; k <= 1; k++)
-                  {
-                      for (int l = -1; l <= 1; l++)
-                      {
-                          int posX = i + k;
-                          int posY = j + l;
-                          if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
-                          {
-                              Vec3 currentNormal = null;
-                              currentNormal = currentSmooth[i+k, j+l];
-                              if (currentNormal != null)
-                              {
-                                  neighbors.Add(currentNormal);
-                                  neighborFound++;
-                              }
-                          }
-                      }
-                  }
-                  neighbors.Normalize();
-                  if (center != null)
-                  {
-                      nextSmooth[i, j] = center;
-                      if (center != null || neighborFound > 1)
-                      {
-                          Vec3 center2 = center;
-                          center2.Mult(200);
-                          neighbors.Add(center2.Mult(4));
-                          neighbors.Normalize();
-                          nextSmooth[i, j] = neighbors;
-                      }
-                  }
-                  else
-                  {
-                      if (neighborFound > 4)
-                      {
-                          nextSmooth[i, j] = neighbors;
-                      }
-                  }
-              }
-          }
+        int smoothLevel = (int)ParameterDict.Exemplar.GetDouble("Renderer.SmoothNormalLevel");
+        for (int currentSmoothLevel = 0; currentSmoothLevel < smoothLevel; currentSmoothLevel++)
+        {
 
-          tempSmooth = currentSmooth;
-          currentSmooth = nextSmooth;
-          nextSmooth = tempSmooth;
+            // create nextSmooth
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    Vec3 center = null;
+                    center = currentSmooth[i, j];
+                    PixelInfo pInfo = pData.Points[i, j];
+                    // Test ohne smooth-Factor
+                    // Nachbarelemente zusammenrechnen
+                    Vec3 neighbors = new Vec3();
+                    int neighborFound = 0;
+                    for (int k = -1; k <= 1; k++)
+                    {
+                        for (int l = -1; l <= 1; l++)
+                        {
+                            int posX = i + k;
+                            int posY = j + l;
+                            if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
+                            {
+                                Vec3 currentNormal = null;
+                                currentNormal = currentSmooth[i + k, j + l];
+                                PixelInfo pInfo2 = pData.Points[i + k, j + l];
 
-      }
+                                if (currentNormal != null)
+                                {
+                                    double amount = 1;
+                                    if (pInfo != null && pInfo2 != null)
+                                    {
+                                        double dist = pInfo.Coord.Dist(pInfo2.Coord);
+
+                                        double dGlobal = maxPoint.Dist(minPoint);
+                                        dGlobal /= 1500;
+                                        if (dist < dGlobal)
+                                            amount = 1.0;
+                                        else if (dist > dGlobal && dist < 5.0 * dGlobal)
+                                            amount = 1.0 - (dGlobal / dist/5.0);
+                                        else
+                                            amount = 0;
+                                    }
+
+                                    neighbors.Add(currentNormal.Mult(amount));
+                                    neighborFound++;
+                                }
+                            }
+                        }
+                    }
+                    neighbors.Normalize();
+                    if (center != null)
+                    {
+                        nextSmooth[i, j] = center;
+                        if (center != null || neighborFound > 1)
+                        {
+                            Vec3 center2 = center;
+                            center2.Mult(200);
+                            neighbors.Add(center2.Mult(4));
+                            neighbors.Normalize();
+                            nextSmooth[i, j] = neighbors;
+                        }
+                    }
+                    else
+                    {
+                        if (neighborFound > 4)
+                        {
+                            nextSmooth[i, j] = neighbors;
+                        }
+                    }
+                }
+            }
+
+            tempSmooth = currentSmooth;
+            currentSmooth = nextSmooth;
+            nextSmooth = tempSmooth;
+
+        }
 
    
     }
@@ -1432,27 +1439,21 @@ namespace Fractrace.PictureArt {
     protected void SmoothPlane()
     {
         double fieldOfViewStart = minFieldOfView;
-
-      //  ydGlobal = (maxY - minY) / ((double)(pData.Width + pData.Height));
-        ydGlobal = (areaDeph) / ((double)(pData.Width + pData.Height));
-        
+        double neighborDist = 5; // Look at neighbors with distance <=5 pixel
+        ydGlobal = (areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
         rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
         rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
-
-        int intRange = 1;
-
-       
-       
-            for (int i = 0; i < pData.Width; i++)
+        int intRange = 3;
+        for (int i = 0; i < pData.Width; i++)
+        {
+            for (int j = 0; j < pData.Height; j++)
             {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    rgbSmoothPlane2[i, j] = rgbPlane[i, j];
-                }
+                rgbSmoothPlane2[i, j] = rgbPlane[i, j];
             }
-            if (ambientIntensity == 0)
-            {
-                //  No field of view defined:
+        }
+        if (ambientIntensity == 0)
+        {
+            //  No field of view defined:
             return;
         }
 
@@ -1462,7 +1463,7 @@ namespace Fractrace.PictureArt {
         // contain the result colors
         Vec3[,] resultPlane = rgbSmoothPlane1;
 
-        double mainDeph1 =areaDeph;
+        double mainDeph1 = areaDeph;
         for (int m = 0; m < ambientIntensity; m++)
         {
             for (int i = 0; i < pData.Width; i++)
@@ -1470,40 +1471,21 @@ namespace Fractrace.PictureArt {
                 for (int j = 0; j < pData.Height; j++)
                 {
                     double neighborsFound = 0;
+                    PixelInfo pInfo = pData.Points[i, j];
                     Vec3 nColor = new Vec3();
                     double ydNormalized = GetAmbientValue(smoothDeph2[i, j]);
                     ydNormalized = Math.Sqrt(ydNormalized);
-                    //ydNormalized = Math.Sqrt(ydNormalized);
-                   
-
-                    /*
-                    ydNormalized *= ydNormalized;
-                    ydNormalized *= ydNormalized;
-                    ydNormalized *= ydNormalized;
-                    ydNormalized *= ydNormalized;
-                     */
-                    /*
-                    if (ydNormalized <= 0.5)
-                        ydNormalized = 0.5;
-
-                    if (ydNormalized >= 0.5)
-                        ydNormalized = 0.5;
-                    */
                     intRange = 1;
                     if (intRange == 0)
                     {
-                        //nColor = rgbPlane[i, j];
                         nColor = currentPlane[i, j];
                         neighborsFound = 1;
                     }
-                    //nColor = currentPlane[i, j];
                     double sumColor = 0;
-                    //nColor.X = currentPlane[i, j].X;
-                    //nColor.Y = currentPlane[i, j].Y;
-                    //nColor.Z = currentPlane[i, j].Z;
 
-         //           if(pData.Points[i, j]!=null) {
-                    if(true) {
+                    //           if(pData.Points[i, j]!=null) {
+                    if (true)
+                    {
                         for (int k = -intRange; k <= intRange; k++)
                         {
                             for (int l = -intRange; l <= intRange; l++)
@@ -1545,6 +1527,30 @@ namespace Fractrace.PictureArt {
 
                                         }
                                         // mult += 0.00001;
+
+
+                                        PixelInfo pInfo2 = pData.Points[posX, posY];
+
+                                        double amount = 1;
+                                        if (pInfo != null && pInfo2 != null)
+                                        {
+                                            double dist = pInfo.Coord.Dist(pInfo2.Coord);
+
+                                            double dGlobal = maxPoint.Dist(minPoint);
+                                            dGlobal /= 1500;
+                                            if (dist < dGlobal)
+                                                amount = 1.0;
+                                            else
+                                          //  else if (dist > dGlobal && dist < 10.0 * dGlobal)
+                                                amount = 1.0 - (dGlobal / dist) / 10.0;
+                                           // else
+                                           //     amount = 0.0;
+                                        }
+
+                                        mult *= amount;
+                                      //  mult *= 1.0/ydNormalized;
+
+
                                         sumColor += mult;
 
                                         Vec3 currentColor = currentPlane[posX, posY];
@@ -1630,7 +1636,7 @@ namespace Fractrace.PictureArt {
       double ydNormalized = (ypos - minY) / mainDeph;
       double ydist = 0;
 
-      double maxDist = 0.7 * (maxFieldOfView - minFieldOfView);
+      double maxDist = (maxFieldOfView - minFieldOfView);
 
       if (ydNormalized > maxFieldOfView) {
         ydist = ydNormalized - maxFieldOfView;
@@ -1658,12 +1664,7 @@ namespace Fractrace.PictureArt {
           ydist = ydist / maxDist;
       }
 
-        /*
-      if (ydist > maxDist)
-        ydist = 1;
-      else
-        ydist = ydist / maxDist;
-         * */
+     
       ydNormalized = 1.0 - ydist;
 
       // Test only
@@ -1675,6 +1676,10 @@ namespace Fractrace.PictureArt {
 
       ydNormalized = Math.Sqrt(ydNormalized);
       ydNormalized = Math.Sqrt(ydNormalized);
+      ydNormalized = Math.Sqrt(ydNormalized);
+      ydNormalized = Math.Sqrt(ydNormalized);
+    //  ydNormalized = Math.Sqrt(ydNormalized);
+     
 
       return ydNormalized;
 
