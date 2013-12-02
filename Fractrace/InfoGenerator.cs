@@ -73,6 +73,75 @@ namespace Fractrace {
 
 
     /// <summary>
+    /// Generates the compressed formula.
+    /// The formula parameters and the formula itself are combined in a compact text,
+    /// which can later be copied into the formula text window to get the current
+    /// formula configuration.
+    /// </summary>
+    /// <returns></returns>
+    public static string GenerateCompressedFormulaAndViewSettings()
+    {
+        //return "// sorry not implemnted";
+        string formula = ParameterDict.Exemplar["Intern.Formula.Source"];
+
+        List<string> formulaSettingCategories = new List<string>();
+        formulaSettingCategories.Add("Border");
+        formulaSettingCategories.Add("View.Width");
+        formulaSettingCategories.Add("View.Height");
+        formulaSettingCategories.Add("Border");
+        formulaSettingCategories.Add("View.Perspective");
+        formulaSettingCategories.Add("Border");
+        formulaSettingCategories.Add("Transformation");
+        formulaSettingCategories.Add("Formula");
+        formulaSettingCategories.Add("Renderer");
+        formulaSettingCategories.Add("Renderer.BackColor");
+        formulaSettingCategories.Add("Renderer.ColorFactor");
+        formulaSettingCategories.Add("Renderer.Light");
+        //formulaSettingCategories.Add("Intern.Formula");
+
+        // To make the new settings unique
+
+        ParameterDict.Exemplar["intern.Formula.TempUpdateVal"] = "vv";
+        string testHash = ParameterDict.Exemplar.GetHash("");
+
+        string insertSettingsStringHere = "base.Init();";
+        if (formula.Contains(insertSettingsStringHere))
+        {
+
+            StringBuilder settingsString = new StringBuilder();
+            settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
+            settingsString.Append("SetParameterBulk(\"");
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+            {
+                bool isInCategorie = false;
+                foreach (string testCategorie in formulaSettingCategories)
+                {
+                    if (entry.Key.StartsWith(testCategorie))
+                    {
+                        isInCategorie = true;
+                        break;
+                    }
+                }
+                if (isInCategorie)
+                {
+                    settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                }
+            }
+
+            // fix this formula to testHash
+            settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
+            settingsString.Append("\");");
+            settingsString.Append("}");
+            formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
+        }
+
+        StringBuilder retVal = new StringBuilder();
+        retVal.Append(CompressFormula(formula));
+        return retVal.ToString();
+    }
+
+
+    /// <summary>
     /// Compress the formula (remove big spaces, newlines, comments.
     /// </summary>
     /// <param name="source">The source.</param>

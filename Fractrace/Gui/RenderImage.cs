@@ -126,7 +126,7 @@ namespace Fractrace
                     2, 
                     1,
                     ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-                    ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    ParameterDict.Exemplar.GetBool("View.Perspective"),false);
 
         }
 

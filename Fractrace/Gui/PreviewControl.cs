@@ -130,6 +130,10 @@ namespace Fractrace {
     /// Neuzeichnen.
     /// </summary>
     protected override void StartDrawing() {
+
+      // TODO: nur, wenn preview läuft
+      Form1.PublicForm.Stop();
+
       forceRedraw = false;
       btnPreview.Enabled = false;
       inDrawing = true;
@@ -144,7 +148,7 @@ namespace Fractrace {
               2,
               1,
               ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-              ParameterDict.Exemplar.GetBool("View.Perspective"));
+              ParameterDict.Exemplar.GetBool("View.Perspective"),false);
     }
 
 
@@ -190,6 +194,13 @@ namespace Fractrace {
       }
       btnPreview.Enabled = true;
       inDrawing = false;
+      if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview") )
+      {
+          ParameterInput.MainParameterInput.ComputePreview();
+      }
+
+
+
       if (forceRedraw)
         StartDrawing();
     }

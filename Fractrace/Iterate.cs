@@ -192,6 +192,12 @@ namespace Fractrace {
     protected int startCount = 0;
 
 
+      /// <summary>
+      /// True if oldPictureDasta has bad quality 
+      /// </summary>
+    protected bool mTransformUpdate = false;
+
+
     /// <summary>
     /// Von hier aus wird die Berechnung in Einzelthreads aufgesplittet.
     /// </summary>
@@ -201,7 +207,8 @@ namespace Fractrace {
     /// <param name="screensize"></param>
     /// <param name="formula"></param>
     /// <param name="perspective"></param>
-    public void StartAsync(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective) {
+    public void StartAsync(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective, bool transformUpdate)
+    {
       m_act_val = act_val;
       m_zyklen = zyklen;
       m_raster = raster;
@@ -211,7 +218,7 @@ namespace Fractrace {
 
       availableY = 0;
 
-
+      mTransformUpdate = transformUpdate;
 
       // If all formula and view parameters stay the same, there is no need to compute the picture.
 
@@ -455,7 +462,10 @@ namespace Fractrace {
           }
 
       }
-
+      if (mTransformUpdate)
+      {
+          yd*=3.0;
+      }
 
 
       double xcenter = (act_val.start_tupel.x + act_val.end_tupel.x) / 2.0;

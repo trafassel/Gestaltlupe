@@ -162,6 +162,15 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // Number of update steps for better rendering quality.  
       ParameterDict.Exemplar["View.UpdateSteps"] = "3";
 
+
+      // Start Preview Rendering just after small render display finishes
+      ParameterDict.Exemplar["View.Pipeline.Preview"] = "1";
+
+
+      // Updates also Preview rendering
+      ParameterDict.Exemplar["View.Pipeline.UpdatePreview"] = "1";
+      
+
       // Default animation steps while adding the frame in the animation control. 
       ParameterDict.Exemplar["Animation.Steps"] = "30";
 

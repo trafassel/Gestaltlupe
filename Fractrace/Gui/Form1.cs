@@ -16,6 +16,10 @@ namespace Fractrace
     public partial class Form1 : Form, IAsyncComputationStarter
     {
 
+
+        
+
+
         private ParameterInput paras = null;
 
 
@@ -93,6 +97,12 @@ namespace Fractrace
         /// The Hash of the Parameters of the last rendering (but without picture art settings).
         /// </summary>
         protected string oldParameterHashWithoutPictureArt = "";
+
+
+        /// <summary>
+        /// The Hash of the Parameters of the last rendering (but without picture art settings and navigation).
+        /// </summary>
+         protected string oldParameterHashWithoutPictureArtAndNavigation="";
 
 
         /// <summary>
@@ -201,6 +211,35 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
         }
 
 
+
+       /// <summary>
+        /// Parameterhash ohne PictureArt und ohne Navigationsänderung
+        /// </summary>
+        /// <returns></returns>
+        protected string GetParameterHashWithoutPictureArtAndNavigation()
+               {
+            StringBuilder tempHash = new StringBuilder();
+
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
+tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
+  //          tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
+            //tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
+            // The following categories are not used 
+            // Composite
+            // Computation.NoOfThreads
+            return tempHash.ToString();
+        }
+
+
         /// <summary>
         /// Count the number of update steps
         /// </summary>
@@ -229,6 +268,8 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
       /// </summary>
         public bool inPreview = false;
 
+
+
         /// <summary>
         /// Create surface model.
         /// </summary>
@@ -244,6 +285,8 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             if (!ParameterDict.Exemplar.GetBool("View.ClassicView"))
             {
                 string tempParameterHash = GetParameterHashWithoutPictureArt();
+               
+
                 if (oldParameterHashWithoutPictureArt == tempParameterHash)
                 {
                     mCurrentUpdateStep++;
@@ -264,19 +307,59 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
                     iter.OneStepProgress = inPreview;
                   if(mUpdateCount>ParameterDict.Exemplar.GetDouble("View.UpdateSteps")+1)
                     iter.OneStepProgress = true;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),false);
                     // OneStepEnds();
                 }
                 else
                 {
-                    mCurrentUpdateStep = 0;
-                    oldParameterHashWithoutPictureArt = tempParameterHash;
-                    classicIter = null;
-                    paras.Assign();
-                    mUpdateCount = 1;
-                    iter = new Iterate(maxx, maxy, this, false);
-                    iter.OneStepProgress = inPreview;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
+                    string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
+                   if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
+                   {
+                       // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
+                       // aber diesmal wird 
+                       // oldData = iter.GraphicInfo;
+                       // und
+                       // oldPictureData = iter.PictureData;
+                       // vorher transformiert.
+                       mCurrentUpdateStep = 1;
+                       oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
+                       classicIter = null;
+                       paras.Assign();
+                       mUpdateCount = 2;
+                       iter = new Iterate(maxx, maxy, this, false);
+                       iter.OneStepProgress = inPreview;
+
+                       
+                       DataTypes.GraphicData oldData = null;
+                       DataTypes.PictureData oldPictureData = null;
+                       if (iter != null && !iter.InAbort)
+                       {
+                           oldData = iter.GraphicInfo;
+                           oldPictureData = iter.PictureData;
+                       }
+                       // TODO: Transformation anwenden
+                       // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
+                       // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
+                       // und die neue normal angewendet werden. 
+                       // Dann sind für jeden Punkt die 
+                       // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
+                       //
+
+
+                       iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),true);
+                   }
+                   else
+                   {
+                       mCurrentUpdateStep = 0;
+                       oldParameterHashWithoutPictureArt = tempParameterHash;
+                       classicIter = null;
+                       paras.Assign();
+                       mUpdateCount = 1;
+                       iter = new Iterate(maxx, maxy, this, false);
+                       iter.OneStepProgress = inPreview;
+                       iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),false);
+                   }
                 }
             }
             else

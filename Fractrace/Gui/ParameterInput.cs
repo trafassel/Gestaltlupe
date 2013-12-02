@@ -260,12 +260,16 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-            if (!mPreviewMode)
+            if (!mPreviewMode || ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
                 if (Form1.PublicForm.CurrentUpdateStep < updateSteps)
                 {
-                    Form1.PublicForm.ComputeOneStep();
+
+                    if (mPreviewMode)
+                        ComputePreview();
+                    else
+                        Form1.PublicForm.ComputeOneStep();
                     return;
                 }
             }
@@ -948,7 +952,18 @@ namespace Fractrace
 
         private bool inPreview = false;
 
-        private void btnPreview_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// Stop the to the preview control assigned iter
+        /// </summary>
+        public void AbortPreview()
+        {
+            Form1.PublicForm.Stop();
+        }
+
+
+
+        public void ComputePreview()
         {
             mPreviewMode = true;
             {
@@ -971,6 +986,12 @@ namespace Fractrace
                 ParameterDict.Exemplar["View.Raster"] = rasterStr;
 
             }
+        }
+
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            ComputePreview();
         }
 
 
@@ -1117,6 +1138,19 @@ namespace Fractrace
         private void btnShowDocumentation_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Help.ShowHelp(this, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Gestaltlupe.chm"));
+        }
+
+
+        /// <summary>
+        /// The formula parameters, the formula itself and diplay settings are combined in a compact text,
+        /// which can later be copied into the formula text window to get the current
+        /// formula configuration.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCreateCompleteBulk_Click(object sender, EventArgs e)
+        {
+            tbInfoOutput.Text = InfoGenerator.GenerateCompressedFormulaAndViewSettings();
         }
 
 
