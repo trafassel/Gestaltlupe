@@ -251,6 +251,14 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
         /// </summary>
         public int CurrentUpdateStep
         {
+
+            set
+            {
+                mCurrentUpdateStep = value;
+            }
+
+
+
             get
             {
                 return mCurrentUpdateStep;

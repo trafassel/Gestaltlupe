@@ -149,6 +149,7 @@ namespace Fractrace {
               1,
               ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
               ParameterDict.Exemplar.GetBool("View.Perspective"),false);
+      Form1.PublicForm.CurrentUpdateStep = 0;
     }
 
 
