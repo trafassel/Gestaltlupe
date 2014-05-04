@@ -18,9 +18,11 @@ namespace Fractrace.Basic {
 
 
         /// <summary>
-        /// Hier wird der Bearbeitungsfortschritt angezeigt.
+        /// Show progress. Valid values are [0, ..., 100].
         /// </summary>
         /// <param name="progrssInPercent"></param>
         void Progress(double progressInPercent);
+
+
     }
 }

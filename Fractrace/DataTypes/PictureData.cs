@@ -39,5 +39,23 @@ namespace Fractrace.DataTypes {
         }
 
         }
+
+        public PictureData Clone()
+        {
+            PictureData retVal = new PictureData(mWidth, mHeight);
+            retVal.Points = new PixelInfo[mWidth + 1, mHeight + 1];
+            for (int i = 0; i <= mWidth; i++)
+            {
+                for (int j = 0; j <= mHeight; j++)
+                {
+                    if (Points[i, j] != null)
+                    {
+                        retVal.Points[i, j] = Points[i, j].Clone();
+                    }
+                }
+            }
+            return retVal;
+        }
+
     }
 }

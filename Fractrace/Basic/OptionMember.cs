@@ -1,5 +1,8 @@
 ﻿namespace Fractrace.Basic {
 
+    /// <summary>
+    /// Entry as 
+    /// </summary>
     public class OptionMember {
         private string mName = "";
         private string mValue = "";
@@ -12,7 +15,7 @@
 
 
         /// <summary>
-        /// Ein eindeutiger Name
+        /// Unique name of this entry.
         /// </summary>
         public string Name {
             get {
@@ -20,8 +23,9 @@
             }
         }
 
+
         /// <summary>
-        /// Wert
+        /// Corresponding value as string.
         /// </summary>
         public string Value {
             get {

@@ -20,7 +20,7 @@ namespace Fractrace.Basic {
 
 
     /// <summary>
-    /// An entry has changed ...
+    /// An entry has changed.
     /// </summary>
     public delegate void ParameterDictChanged(object source, ParameterDictChangedEventArgs e);
 
@@ -105,7 +105,7 @@ namespace Fractrace.Basic {
 
 
         /// <summary>
-        /// Save all dictionary entries of one of given category into a file.
+        /// Save all dictionary entries of given category into a file.
         /// </summary>
         /// <param name="fileName"></param>
         public void Save(string fileName, List<String> categoriesToSave) {
@@ -132,6 +132,7 @@ namespace Fractrace.Basic {
             tw.WriteEndDocument();
             tw.Close();
         }
+
 
         /// <summary>
         /// Load all dictionary entries from the given file.
@@ -198,7 +199,6 @@ namespace Fractrace.Basic {
             set {
                 Exemplar.SetValue(name, value);
             }
-
         }
 
 
@@ -307,7 +307,6 @@ namespace Fractrace.Basic {
                 retVal.Append(temp);
             }
             return retVal.ToString();
-            //  return Encoding.ASCII.GetString(buffer2);
         }
 
 
@@ -330,9 +329,6 @@ namespace Fractrace.Basic {
             byte[] buffer2 = sha.ComputeHash(buffer);
             return Encoding.ASCII.GetString(buffer2);
         }
-
-
-
 
 
         /// <summary>
@@ -366,7 +362,6 @@ namespace Fractrace.Basic {
             }
             return retVal;
         }
-
 
 
         /// <summary>
@@ -429,7 +424,6 @@ namespace Fractrace.Basic {
                 string valueAsString = mEntries[key];
                 if (valueAsString == "1" || valueAsString.ToLower() == "true")
                     return true;
-
             }
             return false;
         }
@@ -441,6 +435,9 @@ namespace Fractrace.Basic {
         protected Dictionary<string, string> mEntries = new Dictionary<string, string>();
 
 
+        /// <summary>
+        /// Short documentation of the entry (in UK-english).
+        /// </summary>
         public Dictionary<string, string> Description {
             get {
                 return mDescription;
@@ -462,7 +459,7 @@ namespace Fractrace.Basic {
         protected Dictionary<string, string> mCategories = new Dictionary<string, string>();
 
 
-        ///<summary>Tritt auf, wenn ein Eintrag geändert wurde.</summary>
+        ///<summary>Raised, if the value of an entry has changed.</summary>
         public event ParameterDictChanged EventChanged = null;
 
 

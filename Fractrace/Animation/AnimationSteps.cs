@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.Animation {
+namespace Fractrace.Animation
+{
 
 
+    public class AnimationSteps
+    {
 
-  public class AnimationSteps {
+        /// <summary>
+        /// Manage list of AnimationPoint.
+        /// </summary>
+        public AnimationSteps()
+        {
 
-    public AnimationSteps() {
+        }
+
+
+        private List<AnimationPoint> mSteps = new List<AnimationPoint>();
+
+
+        public List<AnimationPoint> Steps
+        {
+            get
+            {
+                return mSteps;
+            }
+
+        }
+
 
     }
 
-
-    private List<AnimationPoint> mSteps = new List<AnimationPoint>();
-
-
-    public List<AnimationPoint> Steps {
-      get {
-        return mSteps;
-      }
-
-    }
-  }
 }

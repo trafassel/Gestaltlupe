@@ -141,7 +141,7 @@ namespace Fractrace {
       btnPreview.BackgroundImage = labelImage;
       grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
       iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
-      iter.OneStepProgress=true;
+      iter.OneStepProgress=false;
       AssignParameters();
       iter.StartAsync(mParameter,
               ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),
@@ -179,14 +179,15 @@ namespace Fractrace {
                   pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
               else
                   pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
-            //  btnPreview
+            //  pArt.PaintEnds += pArt_PaintEnds;
             pArt.Paint(grLabel);
-     
-             // btnPreview.Size.Width
+            
             Application.DoEvents();
             this.Refresh();
             if (RenderingEnds != null)
               RenderingEnds();
+
+
           } catch (Exception ex) {
             // tritt auf, wenn iter null ist
             System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -204,6 +205,21 @@ namespace Fractrace {
 
       if (forceRedraw)
         StartDrawing();
+    }
+
+
+
+      /// <summary>
+    /// Called, if event PaintEnds in Renderer is raised. 
+      /// </summary>
+    void pArt_PaintEnds()
+    {
+
+        Application.DoEvents();
+        this.Refresh();
+        if (RenderingEnds != null)
+            RenderingEnds();
+    
     }
 
 

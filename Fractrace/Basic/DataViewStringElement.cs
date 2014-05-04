@@ -5,7 +5,6 @@ using System.Text;
 namespace Fractrace.Basic {
   class DataViewStringElement : DataViewElement {
 
-
     System.Windows.Forms.TextBox tbValue = new System.Windows.Forms.TextBox();
 
     protected override void PreInit() {
@@ -38,5 +37,7 @@ namespace Fractrace.Basic {
       ParameterDict.Exemplar.Entries[mName] = tbValue.Text;
       CallElementChanged(mName, tbValue.Text);
     }
+
+
   }
 }

@@ -30,9 +30,11 @@ namespace Fractrace.PictureArt {
           for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
               Pen p = new Pen(GetColor(i, j));
+                // Hier Exceeption: Das Objekt wird bereits an anderer Stelle verwendet
               grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
             }
           }
+          CallPaintEnds();
         }
 
             /// <summary>

@@ -8,8 +8,7 @@ namespace Fractrace.Basic {
     public static DataViewElement Create(string name, string value, string type, string description,bool shortenName) {
       DataViewElement retVal = null;
 
-
-      // Standardmäßig wird als Datentyp string angenommen.
+      // Use string as default datatype
       if (retVal == null) {
         retVal = new DataViewStringElement();
         retVal.Dock = System.Windows.Forms.DockStyle.Top;

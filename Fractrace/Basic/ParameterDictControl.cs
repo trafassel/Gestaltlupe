@@ -17,7 +17,7 @@ namespace Fractrace.Basic {
 
 
         /// <summary>
-        /// Der Baum wird aus den Einträgen aus dem ParameterDict aufgebaut.
+        /// Build hierarchy from ParameterDict entries. 
         /// </summary>
         protected void Init() {
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries) {
@@ -48,7 +48,11 @@ namespace Fractrace.Basic {
         }
 
 
+        /// <summary>
+        /// Nodes of this three with unique name of the entry as key.
+        /// </summary>
         protected Dictionary<string, TreeNode> Nodes = new Dictionary<string, TreeNode>();
+
 
         /// <summary>
         /// Die Hirarchie wird in den Einträgen durch . abgetrennt. Hier wird der String 

@@ -13,6 +13,21 @@ namespace Fractrace.PictureArt {
 
     public class Renderer {
 
+        public delegate void PaintEndsDelegate();
+
+
+        public event PaintEndsDelegate PaintEnds;
+
+
+        /// <summary>
+        /// Called, if the paint algorithm ends.
+        /// </summary>
+        protected void CallPaintEnds()
+        {
+            if (PaintEnds != null)
+                PaintEnds();
+        }
+
         protected PictureData pData = null;
 
         protected Formulas formula = null;
@@ -25,6 +40,7 @@ namespace Fractrace.PictureArt {
         public void Init(Formulas formula) {
             this.formula = formula;
         }
+
 
 
 

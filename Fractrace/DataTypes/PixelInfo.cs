@@ -50,6 +50,23 @@ namespace Fractrace.DataTypes {
         /// True, if the corresponding pixel is part of the inside view
         /// </summary>
         public bool IsInside = false;
+
+        public PixelInfo Clone()
+        {
+            PixelInfo retVal = new PixelInfo();
+            retVal.Coord.X = Coord.X;
+            retVal.Coord.Y = Coord.Y;
+            retVal.Coord.Z = Coord.Z;
+            retVal.Normal.X = Normal.X;
+            retVal.Normal.Y = Normal.Y;
+            retVal.Normal.Z = Normal.Z;
+            retVal.frontLight = frontLight;
+            retVal.derivation = derivation;
+            retVal.iterations = iterations;
+            if (AdditionalInfo != null)
+                retVal.AdditionalInfo = AdditionalInfo.Clone();
+            return retVal;
+        }
         
     }
 }

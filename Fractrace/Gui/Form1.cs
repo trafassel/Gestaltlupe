@@ -17,9 +17,6 @@ namespace Fractrace
     {
 
 
-        
-
-
         private ParameterInput paras = null;
 
 
@@ -102,7 +99,7 @@ namespace Fractrace
         /// <summary>
         /// The Hash of the Parameters of the last rendering (but without picture art settings and navigation).
         /// </summary>
-         protected string oldParameterHashWithoutPictureArtAndNavigation="";
+        protected string oldParameterHashWithoutPictureArtAndNavigation = "";
 
 
         /// <summary>
@@ -191,15 +188,15 @@ namespace Fractrace
         {
             StringBuilder tempHash = new StringBuilder();
 
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
@@ -212,24 +209,24 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
 
 
 
-       /// <summary>
+        /// <summary>
         /// Parameterhash ohne PictureArt und ohne Navigationsänderung
         /// </summary>
         /// <returns></returns>
         protected string GetParameterHashWithoutPictureArtAndNavigation()
-               {
+        {
             StringBuilder tempHash = new StringBuilder();
 
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
-tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
-  //          tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
+            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
+            //          tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
             //tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
@@ -271,9 +268,9 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
         int mCurrentUpdateStep = 0;
 
 
-      /// <summary>
-      /// Different handling of Progress Bar while in preview.
-      /// </summary>
+        /// <summary>
+        /// Different handling of Progress Bar while in preview.
+        /// </summary>
         public bool inPreview = false;
 
 
@@ -293,8 +290,6 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             if (!ParameterDict.Exemplar.GetBool("View.ClassicView"))
             {
                 string tempParameterHash = GetParameterHashWithoutPictureArt();
-               
-
                 if (oldParameterHashWithoutPictureArt == tempParameterHash)
                 {
                     mCurrentUpdateStep++;
@@ -313,61 +308,60 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
                     mUpdateCount++;
                     iter.SetOldData(oldData, oldPictureData, mUpdateCount);
                     iter.OneStepProgress = inPreview;
-                  if(mUpdateCount>ParameterDict.Exemplar.GetDouble("View.UpdateSteps")+1)
-                    iter.OneStepProgress = true;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),false);
+                    if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
+                        iter.OneStepProgress = true;
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
                     // OneStepEnds();
                 }
                 else
                 {
                     //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
                     string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
-                   if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
-                   {
-                       // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
-                       // aber diesmal wird 
-                       // oldData = iter.GraphicInfo;
-                       // und
-                       // oldPictureData = iter.PictureData;
-                       // vorher transformiert.
-                       mCurrentUpdateStep = 1;
-                       oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
-                       classicIter = null;
-                       paras.Assign();
-                       mUpdateCount = 2;
-                       iter = new Iterate(maxx, maxy, this, false);
-                       iter.OneStepProgress = inPreview;
+                    if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
+                    {
+                        // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
+                        // aber diesmal wird 
+                        // oldData = iter.GraphicInfo;
+                        // und
+                        // oldPictureData = iter.PictureData;
+                        // vorher transformiert.
+                        mCurrentUpdateStep = 1;
+                        oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
+                        classicIter = null;
+                        paras.Assign();
+                        mUpdateCount = 2;
+                        iter = new Iterate(maxx, maxy, this, false);
+                        iter.OneStepProgress = inPreview;
 
-                       
-                       DataTypes.GraphicData oldData = null;
-                       DataTypes.PictureData oldPictureData = null;
-                       if (iter != null && !iter.InAbort)
-                       {
-                           oldData = iter.GraphicInfo;
-                           oldPictureData = iter.PictureData;
-                       }
-                       // TODO: Transformation anwenden
-                       // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
-                       // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
-                       // und die neue normal angewendet werden. 
-                       // Dann sind für jeden Punkt die 
-                       // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
-                       //
+                        DataTypes.GraphicData oldData = null;
+                        DataTypes.PictureData oldPictureData = null;
+                        if (iter != null && !iter.InAbort)
+                        {
+                            oldData = iter.GraphicInfo;
+                            oldPictureData = iter.PictureData;
+                        }
+                        // TODO: Transformation anwenden
+                        // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
+                        // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
+                        // und die neue normal angewendet werden. 
+                        // Dann sind für jeden Punkt die 
+                        // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
+                        //
 
-
-                       iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),true);
-                   }
-                   else
-                   {
-                       mCurrentUpdateStep = 0;
-                       oldParameterHashWithoutPictureArt = tempParameterHash;
-                       classicIter = null;
-                       paras.Assign();
-                       mUpdateCount = 1;
-                       iter = new Iterate(maxx, maxy, this, false);
-                       iter.OneStepProgress = inPreview;
-                       iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"),false);
-                   }
+                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), true);
+                    }
+                    else
+                    {
+                        mCurrentUpdateStep = 0;
+                        oldParameterHashWithoutPictureArt = tempParameterHash;
+                        classicIter = null;
+                        paras.Assign();
+                        mUpdateCount = 1;
+                        iter = new Iterate(maxx, maxy, this, false);
+                     //   iter.OneStepProgress = inPreview;
+                        iter.OneStepProgress = false;
+                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
+                    }
                 }
             }
             else
@@ -689,10 +683,12 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             {
                 if (iter != null && !iter.InAbort)
                 {
-                    Renderer pArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-                    pArt.Paint(grLabel);
-                    Application.DoEvents();
-                    this.Refresh();
+
+
+                    System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(Paint);
+                    System.Threading.Thread thread = new System.Threading.Thread(tStart);
+                    thread.Start();
+                    
                 }
             }
             catch (System.Exception ex)
@@ -702,6 +698,31 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
             btnRepaint.Enabled = true;
         }
 
+        void Paint()
+        {
+            Renderer pArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+            pArt.Paint(grLabel);
+            drawEnds();
+        }
+
+        void pArt_PaintEnds()
+        {
+            drawEnds();
+        }
+
+
+        private void drawEnds()
+        {
+            needUpdate = true;
+           // lock (mDrawMutex) {
+ //           Application.DoEvents();
+//            this.Refresh();
+        //}
+         
+        }
+
+        object mDrawMutex = new Object();
+
 
         /// <summary>
         /// Computation progress in percent.
@@ -709,14 +730,14 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
-         //   if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
-         //   {
+            //   if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
+            //   {
             if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
                 this.Invoke(new ProgressDelegate(OnProgress));
             }
-          //  }
+            //  }
         }
 
 
@@ -771,6 +792,33 @@ tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
                 X3dExporter export = new X3dExporter(iter);
                 export.Save(sd.FileName);
             }
+        }
+
+        private bool needUpdate = false;
+
+
+        private bool inDrawing = false;
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (inDrawing)
+                return;
+            lock (mDrawMutex)
+            {
+                if (inDrawing)
+                    return;
+                btnRepaint.Enabled = false;
+                inDrawing = true;
+                if (needUpdate)
+                {
+                    needUpdate = false;
+                    this.Refresh();
+                }
+                inDrawing = false;
+                btnRepaint.Enabled = true;
+            }
+
         }
 
 

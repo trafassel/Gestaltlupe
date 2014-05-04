@@ -22,5 +22,17 @@ namespace Fractrace.TomoGeometry
         public double green = 0;
 
         public double blue = 0;
+
+
+        public AdditionalPointInfo Clone()
+        {
+            AdditionalPointInfo retVal = new AdditionalPointInfo();
+            retVal.red = red;
+            retVal.green = green;
+            retVal.blue = blue;
+            return retVal;
+        }
+
+
     }
 }

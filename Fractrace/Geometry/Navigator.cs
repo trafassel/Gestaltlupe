@@ -35,20 +35,27 @@ namespace Fractrace.Geometry {
     protected Vec3 mCenter = new Vec3();
 
 
-    /// <summary>
-    /// Size of the area to display.
-    /// </summary>
-    protected double mAreaSize = 0;
-
-
     public static void SetAspectRatio() {
         double xmin = ParameterDict.Exemplar.GetDouble("Border.Min.x");
         double xmax = ParameterDict.Exemplar.GetDouble("Border.Max.x");
+        if (xmin > xmax)
+        {
+            double temPX = xmin; xmin = xmax; xmax = temPX;
+        }
         double ymin = ParameterDict.Exemplar.GetDouble("Border.Min.y");
         double ymax = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+        if (ymin > ymax)
+        {
+            double temPY = ymin; ymin = ymax; ymax = temPY;
+        }
+        
         double zmin = ParameterDict.Exemplar.GetDouble("Border.Min.z");
         double zmax = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-
+        if (xmin > xmax)
+        {
+            double temPZ = zmin; zmin = zmax; zmax = temPZ;
+        }
+        
         double centerX = (xmax + xmin) / 2.0;
         double centerY = (ymax + ymin) / 2.0;
         double centerZ = (zmax + zmin) / 2.0;

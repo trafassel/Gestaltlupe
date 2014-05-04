@@ -22,43 +22,43 @@ namespace Fractrace.PictureArt {
 
         case "5":
         case "UniversalRenderer":
-          retVal= new UniversalRenderer(pdata);
+          retVal= new UniversalRenderer(pdata.Clone());
           break;
 
         case "4":
         case "SharpRenderer":
-          retVal = new SharpRenderer(pdata);
+          retVal = new SharpRenderer(pdata.Clone());
           break;
 
         case "3":
         case "BroadcastRenderer":
-          retVal = new BroadcastRenderer(pdata);
+          retVal = new BroadcastRenderer(pdata.Clone());
           break;
 
         case "NiceRenderer":
         case "2":
-          retVal= new NiceRenderer(pdata);
+          retVal = new NiceRenderer(pdata.Clone());
           break;
 
         case "FastScienceRenderer":
         case "0":
-          retVal= new FastScienceRenderer(pdata);
+          retVal = new FastScienceRenderer(pdata.Clone());
           break;
 
         case "ScienceRenderer":
         case "1":
-          retVal = new ScienceRenderer(pdata);
+          retVal = new ScienceRenderer(pdata.Clone());
           break;
 
         case "":
         case "PlasicRenderer":
         case "6":
-          retVal = new PlasicRenderer(pdata);
+          retVal = new PlasicRenderer(pdata.Clone());
           break;
 
         case "FrontViewRenderer":
         case "7":
-          retVal = new FrontViewRenderer(pdata);
+          retVal = new FrontViewRenderer(pdata.Clone());
           break;
           
       }
