@@ -166,7 +166,6 @@
     <Compile Include="DataTypes\ColorRGB.cs" />
     <Compile Include="DataTypes\FracValues .cs" />
     <Compile Include="DataTypes\GraphicData.cs" />
-    <Compile Include="DataTypes\Parameter .cs" />
     <Compile Include="DataTypes\PictureData.cs" />
     <Compile Include="DataTypes\PixelInfo.cs" />
     <Compile Include="DataTypes\WinValues .cs" />
@@ -224,7 +223,6 @@
     <Compile Include="TomoGeometry\TomoFormulaFactory.cs" />
     <Compile Include="Geometry\Projection.cs" />
     <Compile Include="Geometry\Vec3.cs" />
-    <Compile Include="GlobalObjects.cs" />
     <Compile Include="GlobalParameters.cs" />
     <Compile Include="Iterate.cs" />
     <Compile Include="Gui\NavigateControl.cs">

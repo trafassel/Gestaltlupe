@@ -39,7 +39,6 @@ namespace Fractrace
         {
             MainParameterInput = this;
             InitializeComponent();
-            mParameter.SetToDefault();
             ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
             //additional PreviewControl for geometry informations (not used yet)
             //preview2.IsRightView = true;

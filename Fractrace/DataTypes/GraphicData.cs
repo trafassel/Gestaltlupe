@@ -18,7 +18,6 @@ namespace Fractrace.DataTypes {
     }
 
 
-
     public class VecInfo {
         public double x = 0;
         public double y = 0;

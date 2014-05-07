@@ -72,10 +72,12 @@ namespace Fractrace.DataTypes {
                     Green = 0;
                 if (Green > 1)
                     Green = 1;
+
                 if (Blue < 0)
                     Blue = 0;
                 if (Blue > 1)
                     Blue = 1;
+
                 return Color.FromArgb((int)(255.0 * Red), (int)(255.0 * Green), (int)(255.0 * Blue));
             }
         }
