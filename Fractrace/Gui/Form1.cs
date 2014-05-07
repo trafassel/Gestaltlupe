@@ -12,11 +12,16 @@ using Fractrace.PictureArt;
 namespace Fractrace
 {
 
-
+    /// <summary>
+    /// Control which displays the rendered image and one additional tool button to redraw the picture.
+    /// </summary>
     public partial class Form1 : Form, IAsyncComputationStarter
     {
 
 
+        /// <summary>
+        /// The input control.
+        /// </summary>
         private ParameterInput paras = null;
 
 
@@ -59,7 +64,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Heigt of the Bitmap.
+        /// Heigth of the Bitmap.
         /// </summary>
         int maxy = 0;
 
@@ -68,14 +73,6 @@ namespace Fractrace
         /// Computes the surface data of the "Gestalt". 
         /// </summary>
         Iterate iter = null;
-
-
-        /// <summary>
-        /// Draw the "Gestalt" in a Graphics bitmap.
-        /// (not tested since 01 2010).  
-        /// </summary>
-        Fractrace.Compability.ClassicIterate classicIter = null;
-
 
 
         /// <summary>
@@ -130,6 +127,7 @@ namespace Fractrace
         /// Progress of surface computation in percent.
         /// </summary>
         protected double mProgress = 0;
+
 
         /// <summary>
         /// Global Variables are set.
@@ -208,7 +206,6 @@ namespace Fractrace
         }
 
 
-
         /// <summary>
         /// Parameterhash ohne PictureArt und ohne Navigationsänderung
         /// </summary>
@@ -254,13 +251,13 @@ namespace Fractrace
                 mCurrentUpdateStep = value;
             }
 
-
-
             get
             {
                 return mCurrentUpdateStep;
             }
+
         }
+
 
         /// <summary>
         /// Count the number of pictures, wich eas updated on the same dataset.
@@ -272,7 +269,6 @@ namespace Fractrace
         /// Different handling of Progress Bar while in preview.
         /// </summary>
         public bool inPreview = false;
-
 
 
         /// <summary>
@@ -287,16 +283,48 @@ namespace Fractrace
                 return;
             inComputeOneStep = true;
             SetPictureBoxSize();
-            if (!ParameterDict.Exemplar.GetBool("View.ClassicView"))
+            string tempParameterHash = GetParameterHashWithoutPictureArt();
+            if (oldParameterHashWithoutPictureArt == tempParameterHash)
             {
-                string tempParameterHash = GetParameterHashWithoutPictureArt();
-                if (oldParameterHashWithoutPictureArt == tempParameterHash)
+                mCurrentUpdateStep++;
+                // new: update Iteration
+                oldParameterHashWithoutPictureArt = tempParameterHash;
+                paras.Assign();
+                DataTypes.GraphicData oldData = null;
+                DataTypes.PictureData oldPictureData = null;
+                if (iter != null && !iter.InAbort)
                 {
-                    mCurrentUpdateStep++;
-                    // new: update Iteration
-                    oldParameterHashWithoutPictureArt = tempParameterHash;
-                    classicIter = null;
+                    oldData = iter.GraphicInfo;
+                    oldPictureData = iter.PictureData;
+                }
+                iter = new Iterate(maxx, maxy, this, false);
+                mUpdateCount++;
+                iter.SetOldData(oldData, oldPictureData, mUpdateCount);
+                iter.OneStepProgress = inPreview;
+                if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
+                    iter.OneStepProgress = true;
+                iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
+                // OneStepEnds();
+            }
+            else
+            {
+                //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
+                string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
+                if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
+                {
+                    // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
+                    // aber diesmal wird 
+                    // oldData = iter.GraphicInfo;
+                    // und
+                    // oldPictureData = iter.PictureData;
+                    // vorher transformiert.
+                    mCurrentUpdateStep = 1;
+                    oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
                     paras.Assign();
+                    mUpdateCount = 2;
+                    iter = new Iterate(maxx, maxy, this, false);
+                    iter.OneStepProgress = inPreview;
+
                     DataTypes.GraphicData oldData = null;
                     DataTypes.PictureData oldPictureData = null;
                     if (iter != null && !iter.InAbort)
@@ -304,73 +332,27 @@ namespace Fractrace
                         oldData = iter.GraphicInfo;
                         oldPictureData = iter.PictureData;
                     }
-                    iter = new Iterate(maxx, maxy, this, false);
-                    mUpdateCount++;
-                    iter.SetOldData(oldData, oldPictureData, mUpdateCount);
-                    iter.OneStepProgress = inPreview;
-                    if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
-                        iter.OneStepProgress = true;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
-                    // OneStepEnds();
+                    // TODO: Transformation anwenden
+                    // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
+                    // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
+                    // und die neue normal angewendet werden. 
+                    // Dann sind für jeden Punkt die 
+                    // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
+                    //
+
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), true);
                 }
                 else
                 {
-                    //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
-                    string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
-                    if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
-                    {
-                        // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
-                        // aber diesmal wird 
-                        // oldData = iter.GraphicInfo;
-                        // und
-                        // oldPictureData = iter.PictureData;
-                        // vorher transformiert.
-                        mCurrentUpdateStep = 1;
-                        oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
-                        classicIter = null;
-                        paras.Assign();
-                        mUpdateCount = 2;
-                        iter = new Iterate(maxx, maxy, this, false);
-                        iter.OneStepProgress = inPreview;
-
-                        DataTypes.GraphicData oldData = null;
-                        DataTypes.PictureData oldPictureData = null;
-                        if (iter != null && !iter.InAbort)
-                        {
-                            oldData = iter.GraphicInfo;
-                            oldPictureData = iter.PictureData;
-                        }
-                        // TODO: Transformation anwenden
-                        // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
-                        // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
-                        // und die neue normal angewendet werden. 
-                        // Dann sind für jeden Punkt die 
-                        // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
-                        //
-
-                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), true);
-                    }
-                    else
-                    {
-                        mCurrentUpdateStep = 0;
-                        oldParameterHashWithoutPictureArt = tempParameterHash;
-                        classicIter = null;
-                        paras.Assign();
-                        mUpdateCount = 1;
-                        iter = new Iterate(maxx, maxy, this, false);
-                     //   iter.OneStepProgress = inPreview;
-                        iter.OneStepProgress = false;
-                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
-                    }
+                    mCurrentUpdateStep = 0;
+                    oldParameterHashWithoutPictureArt = tempParameterHash;
+                    paras.Assign();
+                    mUpdateCount = 1;
+                    iter = new Iterate(maxx, maxy, this, false);
+                    //   iter.OneStepProgress = inPreview;
+                    iter.OneStepProgress = false;
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
                 }
-            }
-            else
-            {
-                iter = null;
-                classicIter = new Fractrace.Compability.ClassicIterate(maxx, maxy);
-                classicIter.Init(grLabel);
-                classicIter.frac_iterate(paras.Parameter, paras.Cycles, paras.Raster, (int)paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
-                OneStepEnds();
             }
         }
 
@@ -650,10 +632,6 @@ namespace Fractrace
                 //iter = null;
             }
             // Warning: Compution in stereo window is not stopped.
-            if (classicIter != null)
-            {
-                classicIter.Abort();
-            }
         }
 
 
@@ -688,7 +666,7 @@ namespace Fractrace
                     System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(Paint);
                     System.Threading.Thread thread = new System.Threading.Thread(tStart);
                     thread.Start();
-                    
+
                 }
             }
             catch (System.Exception ex)
@@ -714,11 +692,11 @@ namespace Fractrace
         private void drawEnds()
         {
             needUpdate = true;
-           // lock (mDrawMutex) {
- //           Application.DoEvents();
-//            this.Refresh();
-        //}
-         
+            // lock (mDrawMutex) {
+            //           Application.DoEvents();
+            //            this.Refresh();
+            //}
+
         }
 
         object mDrawMutex = new Object();
@@ -800,6 +778,11 @@ namespace Fractrace
         private bool inDrawing = false;
 
 
+        /// <summary>
+        /// Try to update in background (still with some sync problems).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (inDrawing)

@@ -131,9 +131,6 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
       // View.Size*View.Width == width of the rendered bitmap.
       ParameterDict.Exemplar["View.Size"] = "1";
 
-      // Set "View.ClassicView" to 1 to activate the classic view ... eventually (not tested anymore)
-      //ParameterDict.Exemplar["View.ClassicView"] = "0";
-
       // Switch between 3D view and parallel view.
       ParameterDict.Exemplar["View.Perspective"] = "1";
 

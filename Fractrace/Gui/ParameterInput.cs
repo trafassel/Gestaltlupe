@@ -14,7 +14,7 @@ namespace Fractrace
 
 
     /// <summary>
-    /// Main window (as viewed by the used), the main window of this application is Form1 (which
+    /// Main window (as viewed by the user), the main window of this application is Form1 (which
     /// display the rendered image).
     /// </summary>
     public partial class ParameterInput : Form
