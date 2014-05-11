@@ -284,12 +284,14 @@ namespace Fractrace
             inComputeOneStep = true;
             SetPictureBoxSize();
             string tempParameterHash = GetParameterHashWithoutPictureArt();
+            paras.Assign();
+
+
             if (oldParameterHashWithoutPictureArt == tempParameterHash)
             {
+                // Update last render for better quality
                 mCurrentUpdateStep++;
-                // new: update Iteration
                 oldParameterHashWithoutPictureArt = tempParameterHash;
-                paras.Assign();
                 DataTypes.GraphicData oldData = null;
                 DataTypes.PictureData oldPictureData = null;
                 if (iter != null && !iter.InAbort)
@@ -300,14 +302,17 @@ namespace Fractrace
                 iter = new Iterate(maxx, maxy, this, false);
                 mUpdateCount++;
                 iter.SetOldData(oldData, oldPictureData, mUpdateCount);
-                iter.OneStepProgress = inPreview;
+                if (!ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
+                    iter.OneStepProgress = inPreview;
+                else
+                    iter.OneStepProgress = false;
                 if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
                     iter.OneStepProgress = true;
                 iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
-                // OneStepEnds();
             }
             else
             {
+                /*
                 //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
                 string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
                 if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
@@ -320,7 +325,6 @@ namespace Fractrace
                     // vorher transformiert.
                     mCurrentUpdateStep = 1;
                     oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
-                    paras.Assign();
                     mUpdateCount = 2;
                     iter = new Iterate(maxx, maxy, this, false);
                     iter.OneStepProgress = inPreview;
@@ -343,6 +347,7 @@ namespace Fractrace
                     iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), true);
                 }
                 else
+                    */
                 {
                     mCurrentUpdateStep = 0;
                     oldParameterHashWithoutPictureArt = tempParameterHash;
@@ -377,6 +382,7 @@ namespace Fractrace
         /// </summary>
         protected void OneStepEnds()
         {
+            System.Diagnostics.Debug.WriteLine("OneStepEnds");
             Application.DoEvents();
             this.Refresh();
             if (!dontActivateRender)
@@ -389,8 +395,6 @@ namespace Fractrace
             inComputeOneStep = false;
             if (paras != null)
                 paras.InComputing = false;
-            //ParameterDict.Exemplar.SetInt("View.PosterX", 0);
-            //ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
         }
 
 
@@ -651,55 +655,110 @@ namespace Fractrace
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        object paintMutex=new object();
+
+
+        /// <summary>
+        /// True while method Paint() runs.
+        /// </summary>
+        bool inPaint = false;
+
+
+        /// <summary>
+        /// True, if after end of DrawPicture() a new paint request should be startet. 
+        /// </summary>
+        bool repaintRequested = false;
+
+
+        /// <summary>
         /// The surface data is analysed and the bitmap is generated.
         /// </summary>
         private void ActivatePictureArt()
         {
+            System.Diagnostics.Debug.WriteLine("ActivatePictureArt");
             // TODO: Run this in a own thread.
             btnRepaint.Enabled = false;
             try
             {
                 if (iter != null && !iter.InAbort)
                 {
-
-
-                    System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(Paint);
+                    System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
                     System.Threading.Thread thread = new System.Threading.Thread(tStart);
                     thread.Start();
-
                 }
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            btnRepaint.Enabled = true;
+            //btnRepaint.Enabled = true;
         }
 
-        void Paint()
-        {
-            Renderer pArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-            pArt.Paint(grLabel);
-            drawEnds();
-        }
 
-        void pArt_PaintEnds()
+        /// <summary>
+        /// 
+        /// </summary>
+        Renderer currentPicturArt = null;
+
+
+        /// <summary>
+        /// Create PictureArt and use it to paint the current picture according to iter.
+        /// </summary>
+        void DrawPicture()
         {
-            drawEnds();
+            System.Diagnostics.Debug.WriteLine("DrawPicture() requested");
+            lock (paintMutex)
+            {
+                if (inPaint)
+                {
+                    if (currentPicturArt == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt == null");
+                    }
+                    currentPicturArt.Stop();
+                    repaintRequested = true;
+                    return;
+                }
+                inPaint = true;
+            }
+
+            System.Diagnostics.Debug.WriteLine("DrawPicture()");
+
+            try
+            {
+                if (currentPicturArt != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
+                }
+                currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                currentPicturArt.Paint(grLabel);
+                while (repaintRequested)
+                {
+                    currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                    currentPicturArt.Paint(grLabel);
+                }
+                currentPicturArt = null;
+                repaintRequested = false;
+                drawEnds();
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+            lock (paintMutex)
+            {
+                inPaint = false;
+            }
         }
 
 
         private void drawEnds()
         {
             needUpdate = true;
-            // lock (mDrawMutex) {
-            //           Application.DoEvents();
-            //            this.Refresh();
-            //}
-
         }
-
-        object mDrawMutex = new Object();
 
 
         /// <summary>
@@ -708,14 +767,12 @@ namespace Fractrace
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
-            //   if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
-            //   {
+            System.Diagnostics.Debug.WriteLine("Progress: " + progressInPercent.ToString());
             if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
                 this.Invoke(new ProgressDelegate(OnProgress));
             }
-            //  }
         }
 
 
@@ -775,8 +832,6 @@ namespace Fractrace
         private bool needUpdate = false;
 
 
-        private bool inDrawing = false;
-
 
         /// <summary>
         /// Try to update in background (still with some sync problems).
@@ -785,23 +840,12 @@ namespace Fractrace
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (inDrawing)
-                return;
-            lock (mDrawMutex)
+            if (needUpdate)
             {
-                if (inDrawing)
-                    return;
-                btnRepaint.Enabled = false;
-                inDrawing = true;
-                if (needUpdate)
-                {
-                    needUpdate = false;
-                    this.Refresh();
-                }
-                inDrawing = false;
+                needUpdate = false;
+                this.Refresh();
                 btnRepaint.Enabled = true;
             }
-
         }
 
 

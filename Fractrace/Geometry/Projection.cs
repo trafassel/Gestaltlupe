@@ -27,13 +27,13 @@ namespace Fractrace.Geometry {
 
 
         /// <summary>
-        /// Abstand der Kamera zum Ansichtspunkt.
+        /// Distance from Camera to view point.
         /// </summary>
         protected double d = 0;
 
 
         /// <summary>
-        /// Dies ist einer reverse Transformation.
+        /// reverse transformation.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -45,36 +45,21 @@ namespace Fractrace.Geometry {
             return (p1_p.Sum(camera));
         }
 
+
         /// <summary>
         /// Reversed reverse transformation.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public Vec3 ReverseTransform(Vec3 input) {
-            //return input;
             Vec3 transformedCamera = Transform(camera);
-
-
-            Vec3 tempVec = input.Diff(transformedCamera);   //   return (p1_p.Sum(camera));
+            Vec3 tempVec = input.Diff(transformedCamera);
             double l = tempVec.Norm;
             double dt = Math.Sqrt(l * d);
-            //double dt = l * d;
-
             tempVec.Normalize();
-            //tempVec.Mult(l);
-
-
-          //  tempVec=tempVec.Mult(1 / dt);
             tempVec = tempVec.Mult(dt);
-           
-            //double fac = dp / d;
-            //if (fac == 0)
-            //    fac = 1;
-            //Vec3 p1_p = tempVec.Mult(1.0 / fac);
             return (tempVec.Sum(transformedCamera));
         }
-
-
 
 
     }

@@ -20,28 +20,31 @@ namespace Fractrace.DataTypes {
         public AdditionalPointInfo AdditionalInfo = null;
       
         /// <summary>
-        /// Realkoordinaten des Pixels
+        /// Original coordinates at given pixels
         /// </summary>
         public Vec3 Coord = new Vec3(0,0,0);
 
+
         /// <summary>
-        /// Oberflächennormale der Gestalt bei diesem Pixel.
+        /// Surface normal at given pixel.
         /// </summary>
         public Vec3 Normal = new Vec3(0, 0, 0);
 
+
         /// <summary>
-        /// Intensität der Lichteinstrahlung von vorne.
+        /// Intensity of front light.
         /// </summary>
         public double frontLight = 0;
 
+
         /// <summary>
-        /// Erste Ableitung der Oberfläche. Gibt den Grad der Krümmung an.
+        /// First derivation on surface. If derivation=0, the surface is flat.
         /// </summary>
         public double derivation = 0;
 
 
       /// <summary>
-      /// Anzahl der Iterationen. Dient der Farbdarstellung des Schnittes.
+      /// Iteration cout . Used for colorize cut.
       /// </summary>
         public double iterations = -1;
 

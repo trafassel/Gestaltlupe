@@ -32,6 +32,7 @@ namespace Fractrace
         /// </summary>
         protected int currentPic = 0;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterInput"/> class.
         /// </summary>
@@ -40,8 +41,6 @@ namespace Fractrace
             MainParameterInput = this;
             InitializeComponent();
             ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
-            //additional PreviewControl for geometry informations (not used yet)
-            //preview2.IsRightView = true;
             navigateControl1.Init(preview1, preview2, this);
             this.animationControl1.Init(mHistory);
             preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
@@ -50,11 +49,9 @@ namespace Fractrace
             string version = "";
             if (infos.Length > 1)
                 version = infos[1];
-
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 1;
         }
-
 
 
         /// <summary>
@@ -74,8 +71,6 @@ namespace Fractrace
         }
 
 
-
-
         /// <summary>
         /// Das berechnete Bild wird für die spätere Verwendung gespeichert.
         /// </summary>
@@ -83,7 +78,6 @@ namespace Fractrace
         {
             mHistoryImages[mHistory.Time] = preview1.Image;
             Console.WriteLine("Save Pic to Time " + mHistory.Time.ToString());
-
         }
 
 
@@ -100,7 +94,6 @@ namespace Fractrace
         /// <param name="e"></param>
         void Exemplar_EventChanged(object source, ParameterDictChangedEventArgs e)
         {
-
             UpdateFromData();
         }
 
@@ -122,7 +115,6 @@ namespace Fractrace
         /// </summary>
         public void Assign()
         {
-
             mParameter.start_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Min.x");
             mParameter.start_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Min.y");
             mParameter.start_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Min.z");
@@ -131,11 +123,9 @@ namespace Fractrace
             mParameter.end_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Max.y");
             mParameter.end_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Max.z");
             mParameter.start_tupel.zz = ParameterDict.Exemplar.GetDouble("Border.Max.zz");
-
             mParameter.arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
             mParameter.arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
             mParameter.arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
-
         }
 
 
@@ -147,13 +137,10 @@ namespace Fractrace
             ParameterDict.Exemplar.SetDouble("Border.Min.x", mParameter.start_tupel.x);
             ParameterDict.Exemplar.SetDouble("Border.Min.y", mParameter.start_tupel.y);
             ParameterDict.Exemplar.SetDouble("Border.Min.z", mParameter.start_tupel.z);
-            //ParameterDict.Exemplar.SetDouble("Border.Min.zz", mParameter.start_tupel.zz);
             ParameterDict.Exemplar.SetDouble("Border.Max.x", mParameter.end_tupel.x);
             ParameterDict.Exemplar.SetDouble("Border.Max.y", mParameter.end_tupel.y);
             ParameterDict.Exemplar.SetDouble("Border.Max.z", mParameter.end_tupel.z);
-            //ParameterDict.Exemplar.SetDouble("Border.Max.zz", mParameter.end_tupel.zz);
         }
-
 
 
         /// <summary>
@@ -218,10 +205,6 @@ namespace Fractrace
         }
 
 
-
-
-
-
         /// <summary>
         /// Neuzeichnen über das übergeordentete Control.
         /// </summary>
@@ -264,7 +247,6 @@ namespace Fractrace
                 int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
                 if (Form1.PublicForm.CurrentUpdateStep < updateSteps)
                 {
-
                     if (mPreviewMode)
                         ComputePreview();
                     else
@@ -272,8 +254,6 @@ namespace Fractrace
                     return;
                 }
             }
-
-
             if (mPosterMode)
             {
                 DrawNextPosterPart();

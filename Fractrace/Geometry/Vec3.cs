@@ -33,7 +33,7 @@ namespace Fractrace.Geometry {
 
 
         /// <summary>
-        /// Liefert den Abstand zu einem anderen Punkt.
+        /// Return distance to other.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

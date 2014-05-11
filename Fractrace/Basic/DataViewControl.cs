@@ -64,7 +64,6 @@ namespace Fractrace.Basic {
     }
 
 
-
     /// <summary>
     /// SubElement has changed.
     /// </summary>

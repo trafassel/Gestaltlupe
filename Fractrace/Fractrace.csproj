@@ -168,9 +168,7 @@
     <Compile Include="DataTypes\GraphicData.cs" />
     <Compile Include="DataTypes\PictureData.cs" />
     <Compile Include="DataTypes\PixelInfo.cs" />
-    <Compile Include="DataTypes\WinValues .cs" />
     <Compile Include="DataTypes\XYZTupel .cs" />
-    <Compile Include="DataTypes\Zoom .cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="Geometry\Navigator.cs" />
     <Compile Include="Gui\Form1.cs">
@@ -190,12 +188,10 @@
     <Compile Include="Geometry\Rotation.cs" />
     <Compile Include="Geometry\Transform3D.cs" />
     <Compile Include="Geometry\VecRotation.cs" />
-    <Compile Include="GestaltParameter.cs" />
     <Compile Include="InfoGenerator.cs" />
     <Compile Include="PictureArt\BroadcastRenderer.cs" />
     <Compile Include="PictureArt\FastScienceRenderer.cs" />
     <Compile Include="PictureArt\FrontViewRenderer.cs" />
-    <Compile Include="PictureArt\HeighMap.cs" />
     <Compile Include="PictureArt\NiceRenderer.cs" />
     <Compile Include="PictureArt\NiceRendererMultiThread.cs" />
     <Compile Include="PictureArt\Picture.cs" />

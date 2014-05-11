@@ -42,9 +42,6 @@ namespace Fractrace.PictureArt {
         }
 
 
-
-
-
         /// <summary>
         /// Initialisierung
         /// </summary>
@@ -64,6 +61,15 @@ namespace Fractrace.PictureArt {
         public virtual void Paint(Graphics grLabel) {
         }
 
+
+        protected bool stopRequest = false;
+        /// <summary>
+        /// Render process should be stoppet.
+        /// </summary>
+        public void Stop()
+        {
+            stopRequest = true;
+        }
 
 
     }

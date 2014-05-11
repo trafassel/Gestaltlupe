@@ -2,44 +2,56 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.DataTypes {
-    public class PictureData {
+namespace Fractrace.DataTypes
+{
+    public class PictureData
+    {
 
         public PixelInfo[,] Points = null;
 
+
         /// <summary>
-        /// Breite des fertigen Bildes in Pixel
+        /// Width in pixel
         /// </summary>
-        public int Width {
-            get {
+        public int Width
+        {
+            get
+            {
                 return mWidth;
             }
         }
         private int mWidth = 0;
 
+
         /// <summary>
-        /// Höhe des fertigen Bildes in Pixel
+        /// Height in pixel
         /// </summary>
-        public int Height {
-            get {
+        public int Height
+        {
+            get
+            {
                 return mHeight;
             }
         }
-        
+
         private int mHeight = 0;
 
-        public PictureData(int width, int height) {
+        public PictureData(int width, int height)
+        {
             mWidth = width;
             mHeight = height;
             Points = new PixelInfo[width + 1, height + 1];
-               for (int i = 0; i <= width; i++) {
-                   for (int j = 0; j <= height; j++) {
-                       Points[i, j] = null;
-                   }
+            for (int i = 0; i <= width; i++)
+            {
+                for (int j = 0; j <= height; j++)
+                {
+                    Points[i, j] = null;
+                }
+            }
         }
 
-        }
 
+        //! Return deep copy.
         public PictureData Clone()
         {
             PictureData retVal = new PictureData(mWidth, mHeight);

@@ -49,11 +49,6 @@ namespace Fractrace.Geometry {
       double x = input.X;
       double y = input.Y;
       double z = input.Z;
-
-      /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
-      // Drehung
-      //            xmi = 0; ymi = 0; zmi = 0;
-      
       
       x -= xCenter; y -= yCenter; 
       double re = Math.Cos(mStereoAngle);
@@ -62,7 +57,6 @@ namespace Fractrace.Geometry {
       y = re * y + im * x;
       x = a;
       x += xCenter; y += yCenter;
-
       x += mEyeDistance;
 
       return new Vec3(x, y, z);

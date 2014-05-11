@@ -152,22 +152,11 @@ namespace Fractrace.PictureArt
         private double contrast = 1;
 
 
-        // Field of Depth parameter
-        private double smoothRange = 1;
-
-
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
         protected override void PreCalculate()
         {
-            // Backward compatibility
-            //string parameterNode = "Composite.Renderer.Plasic.";
-            /*
-            if (ParameterDict.Exemplar["Composite.Renderer"] == "") {
-                parameterNode = "Renderer.";
-            }*/
-            // Always use new parameter settings
             string parameterNode = "Renderer.";
             shadowNumber = ParameterDict.Exemplar.GetInt(parameterNode + "ShadowNumber");
             ambientIntensity = ParameterDict.Exemplar.GetInt(parameterNode + "AmbientIntensity");
@@ -186,7 +175,6 @@ namespace Fractrace.PictureArt
             lightRay.X = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.X");
             lightRay.Y = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Y");
             lightRay.Z = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Z");
-
 
             areaDeph = ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y");
             // Rotate lightvec:
@@ -216,7 +204,6 @@ namespace Fractrace.PictureArt
             backColorRed = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Red");
             backColorGreen = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Green");
             backColorBlue = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Blue");
-
 
             if (lightIntensity > 1)
                 lightIntensity = 1;
@@ -357,7 +344,6 @@ namespace Fractrace.PictureArt
                             col.Y /= pixelCount;
                             col.Z /= pixelCount;
                         }
-                        //col.X = 0; col.Y = 0; col.Z = 1;
                     }
                 }
             }
@@ -464,7 +450,7 @@ namespace Fractrace.PictureArt
 
             if (pInfo.frontLight < 0)
             {
-                //return Color.FromArgb((int)255, (int)(0), (int)0);
+             
                 try
                 {
                     retVal.X = 0.3;
@@ -503,14 +489,9 @@ namespace Fractrace.PictureArt
             // tempcoord2 enthält die umgerechnete Oberflächennormale. 
             double tfac = 1000;
 
-
-
             Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
             normal.Normalize();
             Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
-
-            //Vec3 coord = formula.GetTransformWithoutProjection(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-            //Vec3 tempcoord2 = formula.GetTransformWithoutProjection(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
 
             tempcoord2.X -= coord.X;
             tempcoord2.Y -= coord.Y;
@@ -519,10 +500,8 @@ namespace Fractrace.PictureArt
             // Normalize:
             tempcoord2.Normalize();
 
-
             // debug only
             tempcoord2 = normal;
-
 
             if (pInfo.Normal != null)
             {
@@ -538,23 +517,9 @@ namespace Fractrace.PictureArt
             double d2 = pData.Width + pData.Height;
             double d3 = d1 / d2;
 
-
-            // lightIntensity
-
-            /*
-            retVal.X = 0.2*(1 - shadowPlane[x, y])*(lightIntensity * retVal.X + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
-            retVal.Y = 0.2 * (1 - shadowPlane[x, y]) * (lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
-            retVal.Z = 0.2 * (1 - shadowPlane[x, y]) * (lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
-            */
-
             retVal.X = (lightIntensity * retVal.X + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
             retVal.Y = (lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
             retVal.Z = (lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
-            /*
-            retVal.X /= 2;
-            retVal.Y /= 2;
-            retVal.Z /= 2;
-            */
 
             if (retVal.X < 0)
                 retVal.X = 0;
@@ -641,9 +606,6 @@ namespace Fractrace.PictureArt
                     g1 = g1 / norm1;
                     b1 = b1 / norm1;
 
-
-                    // b1 *= 600;
-
                     if (r1 > 1)
                         r1 = 1;
                     if (b1 > 1)
@@ -651,20 +613,12 @@ namespace Fractrace.PictureArt
                     if (g1 > 1)
                         g1 = 1;
 
-                    // debug only:
-                    // r1 = 0;
-                    //  g1 = 0;
-                    //  b1 = 1;
-                    // r1 = r1 + g1 + b1;
-                    // g1 = r1; b1 = r1;
                     if (colorGreyness > 0)
                     {
                         r1 = 0.5 * colorGreyness + (1 - colorGreyness) * r1;
                         g1 = 0.5 * colorGreyness + (1 - colorGreyness) * g1;
                         b1 = 0.5 * colorGreyness + (1 - colorGreyness) * b1;
                     }
-
-
 
                     if (norm != 0)
                     {
