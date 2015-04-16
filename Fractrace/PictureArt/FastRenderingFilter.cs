@@ -16,9 +16,9 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override void Filter()
         {
-            ParameterDict.Exemplar["Renderer.ShadowNumber"] = "11";
-            ParameterDict.Exemplar["Renderer.AmbientIntensity"] = "0";
-            ParameterDict.Exemplar["Renderer.SmoothNormalLevel"] = "3";
+            ParameterDict.Exemplar.SetValue("Renderer.ShadowNumber","11",false);
+            ParameterDict.Exemplar.SetValue("Renderer.AmbientIntensity","0",false);
+            ParameterDict.Exemplar.SetValue("Renderer.SmoothNormalLevel","3",false);
         }
 
 

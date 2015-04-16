@@ -130,12 +130,6 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Progress of picture art in percent.
-        /// </summary>
-        protected double mSubProgress = 0;
-
-
-        /// <summary>
         /// Used to fix inPaint while updating.
         /// </summary>
         object paintMutex = new object();
@@ -231,7 +225,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Parameterhash ohne PictureArt und ohne Navigationsänderung
+        /// Parameterhash without PictureArt and without navigation change.
         /// </summary>
         /// <returns></returns>
         protected string GetParameterHashWithoutPictureArtAndNavigation()
@@ -675,13 +669,27 @@ namespace Fractrace
                 {
                     System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
                 }
+                FastRenderingFilter fastRenderingFilter = null;
+                if (IsSubStepRendering())
+                {
+                    fastRenderingFilter=new FastRenderingFilter();
+                    fastRenderingFilter.Apply();
+                }
+
                 currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+
+                
+
                 currentPicturArt.Paint(grLabel);
                 while (repaintRequested)
                 {
                     currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
                     currentPicturArt.Paint(grLabel);
                 }
+
+                if(fastRenderingFilter!=null)
+                    fastRenderingFilter.Restore();
+
                 currentPicturArt = null;
                 repaintRequested = false;
                 drawEnds();
@@ -796,6 +804,18 @@ namespace Fractrace
                 if (paras != null)
                   paras.InComputing = false;
             }
+        }
+
+
+        /// <summary>
+        /// Return true, if bitmap creation is for substeps only.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsSubStepRendering()
+        {
+            int currentStep = mUpdateCount;
+            int lastStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps")+1;
+            return currentStep < lastStep;
         }
 
 

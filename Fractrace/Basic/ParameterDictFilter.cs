@@ -28,10 +28,9 @@ namespace Fractrace.Basic
         /// </summary>
         public void Apply()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
             {
-                dict[entry.Key] = entry.Value;
+                mSavedDict[entry.Key] = entry.Value;
             }
             Filter();
         }
