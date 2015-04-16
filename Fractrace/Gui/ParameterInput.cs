@@ -242,6 +242,9 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
+            if(Form1.PublicForm.dontActivateRender)
+                return;
+
             if (!mPreviewMode || ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
@@ -751,6 +754,12 @@ namespace Fractrace
         protected int mPosterStep = 0;
 
         protected bool mPosterMode = false;
+
+
+        public void DeactivatePreview()
+        {
+            mPreviewMode = false;
+        }
 
         protected bool mPreviewMode = false;
 

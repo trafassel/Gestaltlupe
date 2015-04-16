@@ -76,6 +76,12 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Copy of iter for using in picture art. 
+        /// </summary>
+        Iterate iterForPictureArt = null;
+
+
+        /// <summary>
         /// Zoom Area
         /// </summary>
         int ZoomX1 = 0, ZoomX2 = 0, ZoomY1 = 0, ZoomY2 = 0;
@@ -329,6 +335,7 @@ namespace Fractrace
             }
             else
             {
+                // Initiate new rendering
                 {
                     mCurrentUpdateStep = 0;
                     oldParameterHashWithoutPictureArt = tempParameterHash;
@@ -348,8 +355,9 @@ namespace Fractrace
         /// </summary>
         public void ComputationEnds()
         {
-//            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
-            OneStepEnds();
+            iterForPictureArt = iter;
+            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+//            OneStepEnds();
         }
 
 
@@ -374,8 +382,8 @@ namespace Fractrace
                  */
             }
             inComputeOneStep = false;
-            //if (paras != null)
-            //    paras.InComputing = false;
+            if (paras != null)
+                paras.InComputing = false;
         }
 
 
@@ -649,58 +657,48 @@ namespace Fractrace
         /// </summary>
         void DrawPicture()
         {
-            lock (paintMutex)
+            if (inPaint)
             {
-                if (inPaint)
-                {
-                    if (currentPicturArt == null)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt == null");
-                    }
-                    currentPicturArt.StopAndWait();
-                    currentPicturArt = null;
-                }
-                inPaint = true;                
-            }
-
-            try
-            {
-                if (currentPicturArt != null)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
-                }
-                FastRenderingFilter fastRenderingFilter = null;
-                if (IsSubStepRendering())
-                {
-                    fastRenderingFilter=new FastRenderingFilter();
-                    fastRenderingFilter.Apply();
-                }
-
-                currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-
-                
-
-                currentPicturArt.Paint(grLabel);
-                while (repaintRequested)
-                {
-                    currentPicturArt = PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-                    currentPicturArt.Paint(grLabel);
-                }
-
-                if(fastRenderingFilter!=null)
-                    fastRenderingFilter.Restore();
-
+                currentPicturArt.StopAndWait();
                 currentPicturArt = null;
-                repaintRequested = false;
-                drawEnds();
-            }
-            catch (System.Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 
             lock (paintMutex)
             {
+
+                inPaint = true;
+
+                try
+                {
+                    if (currentPicturArt != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
+                    }
+                    FastRenderingFilter fastRenderingFilter = null;
+                    if (IsSubStepRendering())
+                    {
+                        fastRenderingFilter = new FastRenderingFilter();
+                        fastRenderingFilter.Apply();
+                    }
+
+                    currentPicturArt = PictureArtFactory.Create(iterForPictureArt.PictureData, iterForPictureArt.LastUsedFormulas);
+                    currentPicturArt.Paint(grLabel);
+                    while (repaintRequested)
+                    {
+                        currentPicturArt = PictureArtFactory.Create(iterForPictureArt.PictureData, iterForPictureArt.LastUsedFormulas);
+                        currentPicturArt.Paint(grLabel);
+                    }
+                    if (fastRenderingFilter != null)
+                        fastRenderingFilter.Restore();
+
+                    currentPicturArt = null;
+                    repaintRequested = false;
+                    drawEnds();
+                }
+                catch (System.Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                }
                 inPaint = false;
             }
         }
@@ -801,8 +799,7 @@ namespace Fractrace
                 this.Text = fileName;
                 pictureBox1.Image.Save(fileName);
                 btnRepaint.Enabled = true;
-                if (paras != null)
-                  paras.InComputing = false;
+               
             }
         }
 

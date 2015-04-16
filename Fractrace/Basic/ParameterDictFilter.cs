@@ -22,17 +22,29 @@ namespace Fractrace.Basic
         /// Saved dict which will be activated after using this filter.
         /// </summary>
         Dictionary<string, string> mSavedDict = new Dictionary<string, string>();
-       
+
+
         /// <summary>
         /// Current values are saved and filter is applied to current values.
         /// </summary>
         public void Apply()
         {
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+            try
             {
-                mSavedDict[entry.Key] = entry.Value;
+                foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+                {
+                    mSavedDict[entry.Key] = entry.Value;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ParameterDict.Exemplar.Entries are updated while saving. Filter is not applyed.");
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                mSavedDict.Clear();
+                return;
             }
             Filter();
+
         }
 
 
@@ -51,12 +63,10 @@ namespace Fractrace.Basic
         public void Restore()
         {
             foreach (KeyValuePair<string, string> entry in mSavedDict)
-            {    
-                ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);       
+            {
+                ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
             }
         }
-
-
 
 
     }
