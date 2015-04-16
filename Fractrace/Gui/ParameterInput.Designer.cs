@@ -305,7 +305,6 @@ namespace Fractrace {
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(75, 77);
             this.panel12.TabIndex = 2;
-            this.panel12.Paint += new System.Windows.Forms.PaintEventHandler(this.panel12_Paint);
             // 
             // btnStop
             // 

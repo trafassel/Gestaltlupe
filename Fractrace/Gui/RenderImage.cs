@@ -101,16 +101,19 @@ namespace Fractrace
         /// </summary>
         protected FracValues mParameter = new FracValues();
 
+
         /// <summary>
         /// Gibt an, ob zur Zeit gezeichnet wird.
         /// </summary>
         protected bool inDrawing = false;
+
 
         /// <summary>
         /// True, wenn von außen das Neuzeichnen aktiviert wurde.
         /// Das bedeutet, nach der aktuellen Zeichnung ist neuzuzeichnen.
         /// </summary>
         protected bool forceRedraw = false;
+
 
         /// <summary>
         /// Neuzeichnen.
@@ -140,7 +143,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Create an draw image.
+        /// Create a draw image.
         /// </summary>
         public virtual void Draw() {
             fixedRenderer = -1;
@@ -162,25 +165,6 @@ namespace Fractrace
         protected int fixedRenderer = -1;
 
 
-        /*
-        /// <summary>
-        /// Paint image with fixed renderer
-        /// </summary>
-        public virtual void Draw(int renderer) {
-            fixedRenderer = renderer;
-            if (!inDrawing)
-                StartDrawing();
-            else {
-                if (iter != null) {
-                    iter.Abort();
-                }
-                iter = null;
-                forceRedraw = true;
-            }
-        }
-         */
-
-
         /// <summary>
         /// Paint image with fixed renderer and reuse an iterate object after computation. 
         /// </summary>
@@ -190,6 +174,16 @@ namespace Fractrace
             fixedRenderer = renderer;
             iter = otherIterate;
             OneStepEnds();
+        }
+
+
+        /// <summary>
+        /// Will be ignored in preview.
+        /// </summary>
+        /// <param name="progressInPercent"></param>
+        public void SubProgress(double progressInPercent)
+        {
+
         }
 
 
@@ -250,7 +244,7 @@ namespace Fractrace
               // and in the small preview display. Which variant is used is (clumsy) detected
               // by the picture size.
                 if (mPictureBox.Image.Width > 400) { 
-                    string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.jpg");
+                    string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.png");
                     this.Text = fileName;
                     mPictureBox.Image.Save(fileName);
                 }

@@ -130,6 +130,30 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Progress of picture art in percent.
+        /// </summary>
+        protected double mSubProgress = 0;
+
+
+        /// <summary>
+        /// Used to fix inPaint while updating.
+        /// </summary>
+        object paintMutex = new object();
+
+
+        /// <summary>
+        /// True while method Paint() runs.
+        /// </summary>
+        bool inPaint = false;
+
+
+        /// <summary>
+        /// True, if after end of DrawPicture() a new paint request should be startet. 
+        /// </summary>
+        bool repaintRequested = false;
+
+
+        /// <summary>
         /// Global Variables are set.
         /// </summary>
         protected void InitGlobalVariables()
@@ -260,7 +284,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Count the number of pictures, wich eas updated on the same dataset.
+        /// Count the number of pictures, wich was updated on the same dataset.
         /// </summary>
         int mCurrentUpdateStep = 0;
 
@@ -285,7 +309,6 @@ namespace Fractrace
             SetPictureBoxSize();
             string tempParameterHash = GetParameterHashWithoutPictureArt();
             paras.Assign();
-
 
             if (oldParameterHashWithoutPictureArt == tempParameterHash)
             {
@@ -312,42 +335,6 @@ namespace Fractrace
             }
             else
             {
-                /*
-                //TODO: Parameterhash ohne PictureArt und ohne Navigationsänderung
-                string tempParameterHash2 = GetParameterHashWithoutPictureArtAndNavigation();
-                if (oldParameterHashWithoutPictureArtAndNavigation == tempParameterHash2)
-                {
-                    // Ähnlich Aufrufe, wie bei if (oldParameterHashWithoutPictureArt == tempParameterHash)
-                    // aber diesmal wird 
-                    // oldData = iter.GraphicInfo;
-                    // und
-                    // oldPictureData = iter.PictureData;
-                    // vorher transformiert.
-                    mCurrentUpdateStep = 1;
-                    oldParameterHashWithoutPictureArtAndNavigation = tempParameterHash2;
-                    mUpdateCount = 2;
-                    iter = new Iterate(maxx, maxy, this, false);
-                    iter.OneStepProgress = inPreview;
-
-                    DataTypes.GraphicData oldData = null;
-                    DataTypes.PictureData oldPictureData = null;
-                    if (iter != null && !iter.InAbort)
-                    {
-                        oldData = iter.GraphicInfo;
-                        oldPictureData = iter.PictureData;
-                    }
-                    // TODO: Transformation anwenden
-                    // Da zu jedem Höhenpunkt die Ursprungskoordinaten mit abgelegt sind
-                    // muss auf jeder Ursprungskoordinate die alte Transformation rückwärts 
-                    // und die neue normal angewendet werden. 
-                    // Dann sind für jeden Punkt die 
-                    // i,j=Indizes der zugehörigen Höhenkoordinaten auszurechnen.
-                    //
-
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), true);
-                }
-                else
-                    */
                 {
                     mCurrentUpdateStep = 0;
                     oldParameterHashWithoutPictureArt = tempParameterHash;
@@ -367,7 +354,8 @@ namespace Fractrace
         /// </summary>
         public void ComputationEnds()
         {
-            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+//            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            OneStepEnds();
         }
 
 
@@ -382,19 +370,18 @@ namespace Fractrace
         /// </summary>
         protected void OneStepEnds()
         {
-            System.Diagnostics.Debug.WriteLine("OneStepEnds");
-            Application.DoEvents();
-            this.Refresh();
             if (!dontActivateRender)
             {
                 ActivatePictureArt();
-                string fileName = FileSystem.Exemplar.GetFileName("pic.jpg");
+                /*
+                string fileName = FileSystem.Exemplar.GetFileName("pic.png");
                 this.Text = fileName;
                 pictureBox1.Image.Save(fileName);
+                 */
             }
             inComputeOneStep = false;
-            if (paras != null)
-                paras.InComputing = false;
+            //if (paras != null)
+            //    paras.InComputing = false;
         }
 
 
@@ -513,7 +500,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Activate zooming. Warning: not working with perspective view. 
+        /// Activate zooming.
         /// </summary>
         private void SetZoom()
         {
@@ -560,8 +547,6 @@ namespace Fractrace
                         z = iter.GraphicInfo.PointInfo[i, j].k;
                         zz = iter.GraphicInfo.PointInfo[i, j].l;
 
-                        //Geometry.Vec3 trans = iter.LastUsedFormulas.GetTransformWithoutProjection(x, y, z);
-
                         Geometry.Vec3 trans2 = iter.LastUsedFormulas.GetTransform(x, y, z);
                         x = trans2.X;
                         y = trans2.Y;
@@ -586,18 +571,6 @@ namespace Fractrace
                     }
                 }
             }
-
-            // Set camera nearer to the surface
-            // TODO: only, if perspective view is activated
-
-            /*
-            double zoomRatio = ((double)(ZoomX2 - ZoomX1)) / ((double)maxx);
-            double dy = maxY - minY;
-            //double magicNumber = 1.0 - zoomRatio;
-            double magicNumber = 0.7;
-            maxY += magicNumber * dy;
-          minY += magicNumber * dy;
-            */
 
             // Set parameters:
             paras.Parameter.start_tupel.x = minX;
@@ -647,39 +620,14 @@ namespace Fractrace
         private void btnRepaint_Click(object sender, EventArgs e)
         {
             ActivatePictureArt();
-            // Always save picture.
-            string fileName = FileSystem.Exemplar.GetFileName("pic.jpg");
-            this.Text = fileName;
-            pictureBox1.Image.Save(fileName);
         }
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        object paintMutex=new object();
-
-
-        /// <summary>
-        /// True while method Paint() runs.
-        /// </summary>
-        bool inPaint = false;
-
-
-        /// <summary>
-        /// True, if after end of DrawPicture() a new paint request should be startet. 
-        /// </summary>
-        bool repaintRequested = false;
-
-
-        /// <summary>
-        /// The surface data is analysed and the bitmap is generated.
+        /// The surface data is analysed. The generation of the corresponding bitmap starts here .
         /// </summary>
         private void ActivatePictureArt()
         {
-            System.Diagnostics.Debug.WriteLine("ActivatePictureArt");
-            // TODO: Run this in a own thread.
-            btnRepaint.Enabled = false;
             try
             {
                 if (iter != null && !iter.InAbort)
@@ -693,7 +641,6 @@ namespace Fractrace
             {
                 MessageBox.Show(ex.ToString());
             }
-            //btnRepaint.Enabled = true;
         }
 
 
@@ -708,7 +655,6 @@ namespace Fractrace
         /// </summary>
         void DrawPicture()
         {
-            System.Diagnostics.Debug.WriteLine("DrawPicture() requested");
             lock (paintMutex)
             {
                 if (inPaint)
@@ -717,14 +663,11 @@ namespace Fractrace
                     {
                         System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt == null");
                     }
-                    currentPicturArt.Stop();
-                    repaintRequested = true;
-                    return;
+                    currentPicturArt.StopAndWait();
+                    currentPicturArt = null;
                 }
-                inPaint = true;
+                inPaint = true;                
             }
-
-            System.Diagnostics.Debug.WriteLine("DrawPicture()");
 
             try
             {
@@ -767,7 +710,6 @@ namespace Fractrace
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
-            System.Diagnostics.Debug.WriteLine("Progress: " + progressInPercent.ToString());
             if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
@@ -840,13 +782,24 @@ namespace Fractrace
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if(inPaint)
+                btnRepaint.Enabled = false;
+
             if (needUpdate)
             {
                 needUpdate = false;
                 this.Refresh();
+                string fileName = FileSystem.Exemplar.GetFileName("pic.png");
+                this.Text = fileName;
+                pictureBox1.Image.Save(fileName);
                 btnRepaint.Enabled = true;
+                if (paras != null)
+                  paras.InComputing = false;
             }
         }
+
+
+    
 
 
     }

@@ -217,7 +217,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Wird von außen gesetzt, um Steuerelemente während der Berechung zu deaktivieren.
+        /// Activate / deactivate some formular elements while rendering.
         /// </summary>
         public bool InComputing
         {
@@ -262,20 +262,12 @@ namespace Fractrace
             {
                 // Use the picture in the render frame to display in preview (for history)
                 Image image = Form1.PublicForm.GetImage();
-
                 int imageWidth = preview1.Width;
                 int imageHeight = preview1.Height;
-
                 Image newImage = new Bitmap(imageWidth, imageHeight);
                 Graphics gr = Graphics.FromImage(newImage);
                 gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
-
-
-                //mHistoryImages[mHistory.Time] = preview1.Image;
                 mHistoryImages[mHistory.Time] = newImage;
-
-
-                // Console.WriteLine("Save Pic to Time " + mHistory.Time.ToString());
             }
         }
 
@@ -484,7 +476,7 @@ namespace Fractrace
             //gesPic=int.Parse(fileName.Split("pic")[1]);
 
             string picDir = System.IO.Path.Combine(Fractrace.FileSystem.Exemplar.ExportDir, "Data" + gesDataString);
-            string picFile = System.IO.Path.Combine(picDir, fileName + ".jpg");
+            string picFile = System.IO.Path.Combine(picDir, fileName + ".png");
             //         string  gesPicFileName="|gesPic"+gesPic+"|"+"|gesData"+gesData+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|";
 
             Form1.PublicForm.ShowPictureFromFile(picFile);
@@ -860,16 +852,6 @@ namespace Fractrace
                 Fractrace.Iterate.Pause = false;
                 btnPause.Text = "Pause";
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel12_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
 

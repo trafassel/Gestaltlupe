@@ -8,85 +8,105 @@ using Fractrace.Basic;
 using Fractrace.PictureArt;
 using Fractrace.Geometry;
 
-namespace Fractrace.PictureArt {
-  public class RenderBase : Renderer {
+namespace Fractrace.PictureArt
+{
+    public class RenderBase : Renderer
+    {
 
-            /// <summary>
-        /// Initialisierung
+
+        /// <summary>
+        /// Initialisation.
         /// </summary>
         /// <param name="pData"></param>
-        public RenderBase(PictureData pData):base(pData) {
+        public RenderBase(PictureData pData)
+            : base(pData)
+        {
 
         }
 
+
         /// <summary>(
-        /// Erstellt das fertige Bild
+        /// Create RGB Picture.
         /// </summary>
         /// <param name="grLabel"></param>
-        public override void Paint(Graphics grLabel) {
+        public override void Paint(Graphics grLabel)
+        {
             if (formula == null)
             {
                 System.Diagnostics.Debug.WriteLine("Warning in RenderBase.Paint() formula==null");
                 return;
             }
-          width = pData.Width;
-          height = pData.Height;
-          PreCalculate();
-          for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-              Pen p = new Pen(GetColor(i, j));
-                // Hier Exceeption: Das Objekt wird bereits an anderer Stelle verwendet
-              grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+            width = pData.Width;
+            height = pData.Height;
+            PreCalculate();
+            if (!stopRequest)
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        Pen p = new Pen(GetColor(i, j));
+                        // Hier Exceeption: Das Objekt wird bereits an anderer Stelle verwendet
+                        grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+                    }
+                }
             }
-          }
-          CallPaintEnds();
+            CallPaintEnds();
         }
 
-            /// <summary>
+
+        /// <summary>
         /// Allgemeine Informationen werden erzeugt
         /// </summary>
-        protected virtual void PreCalculate() {
+        protected virtual void PreCalculate()
+        {
 
 
         }
 
-            /// <summary>
-        /// 
+
+        /// <summary>
+        /// Return rgb value at (x,y)
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        protected virtual Color GetColor(int x, int y) {
-         Vec3 col=GetRgbAt(x,y);
-         if (col.X < 0)
-           col.X = 0;
-         if (col.Y < 0)
-           col.Y = 0;
-         if (col.Z < 0)
-           col.Z = 0;
-         if (col.X > 1)
-           col.X = 1;
-         if (col.Y > 1)
-           col.Y = 1;
-         if (col.Z > 1)
-           col.Z = 1;
-        
-          try {
-            if ( double.IsNaN(col.X))
-              return Color.Red;
-            return Color.FromArgb((int)(255.0*col.X), (int)(255.0*col.Y), (int)(255.0*col.Z));
-          } catch (Exception ex) {
-            Console.WriteLine(ex.ToString());
-          }
-          return Color.Black;
+        protected virtual Color GetColor(int x, int y)
+        {
+            Vec3 col = GetRgbAt(x, y);
+            if (col.X < 0)
+                col.X = 0;
+            if (col.Y < 0)
+                col.Y = 0;
+            if (col.Z < 0)
+                col.Z = 0;
+            if (col.X > 1)
+                col.X = 1;
+            if (col.Y > 1)
+                col.Y = 1;
+            if (col.Z > 1)
+                col.Z = 1;
+
+            try
+            {
+                if (double.IsNaN(col.X))
+                    return Color.Red;
+                return Color.FromArgb((int)(255.0 * col.X), (int)(255.0 * col.Y), (int)(255.0 * col.Z));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return Color.Black;
         }
 
 
-        protected virtual Vec3 GetRgbAt(int x, int y) {
-          Vec3 retVal = new Vec3(1, 0, 0); // rot
-          return retVal;
+        protected virtual Vec3 GetRgbAt(int x, int y)
+        {
+            Vec3 retVal = new Vec3(1, 0, 0); // rot
+            return retVal;
         }
 
 
-  }
+    }
 }
