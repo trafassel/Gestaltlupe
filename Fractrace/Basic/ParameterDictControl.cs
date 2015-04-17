@@ -26,35 +26,39 @@ namespace Fractrace.Basic
         {
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
-                string cat = GetCategory(entry.Key);
-                string parentCat = GetCategory(cat);
-                if (!Nodes.ContainsKey(cat))
+                string parameterName=entry.Key;
+                if (!IsAdditionalInfo(parameterName) && HasEntryControl(parameterName))
                 {
-                    TreeNode tNode = new TreeNode(GetName(cat));
-                    tNode.Tag = cat;
-                    if (parentCat == ".")
+                    string cat = GetCategory(parameterName);
+                    string parentCat = GetCategory(cat);
+                    if (!Nodes.ContainsKey(cat))
                     {
-                        treeView1.Nodes.Add(tNode);
-                    }
-                    else
-                        if (parentCat != "")
+                        TreeNode tNode = new TreeNode(GetName(cat));
+                        tNode.Tag = cat;
+                        if (parentCat == ".")
                         {
-                            if (!Nodes.ContainsKey(parentCat))
-                            {
-                                Nodes[parentCat] = new TreeNode(parentCat);
-                                Nodes[parentCat].Tag = parentCat;
-                                // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
-                                string testParentParent = GetCategory(parentCat);
-                                if (testParentParent != "." && Nodes.ContainsKey(parentCat))
-                                {
-                                    Nodes[testParentParent].Nodes.Add(Nodes[parentCat]);
-                                }
-                                else
-                                    treeView1.Nodes.Add(Nodes[parentCat]);
-                            }
-                            Nodes[parentCat].Nodes.Add(tNode);
+                            treeView1.Nodes.Add(tNode);
                         }
-                    Nodes[cat] = tNode;
+                        else
+                            if (parentCat != "")
+                            {
+                                if (!Nodes.ContainsKey(parentCat))
+                                {
+                                    Nodes[parentCat] = new TreeNode(parentCat);
+                                    Nodes[parentCat].Tag = parentCat;
+                                    // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
+                                    string testParentParent = GetCategory(parentCat);
+                                    if (testParentParent != "." && Nodes.ContainsKey(parentCat))
+                                    {
+                                        Nodes[testParentParent].Nodes.Add(Nodes[parentCat]);
+                                    }
+                                    else
+                                        treeView1.Nodes.Add(Nodes[parentCat]);
+                                }
+                                Nodes[parentCat].Nodes.Add(tNode);
+                            }
+                        Nodes[cat] = tNode;
+                    }
                 }
             }
         }
@@ -98,6 +102,31 @@ namespace Fractrace.Basic
             }
             return category;
         }
+
+
+        /// <summary>
+        /// Return true, if corresponding parameter entry is for info only and should not generate any user control.
+        /// </summary>
+        /// <returns></returns>
+        bool IsAdditionalInfo(string parameterName)
+        {
+            if (parameterName.Contains(".PARAMETERINFO"))
+                return true;
+            return false;
+        }
+
+        
+        /// <summary>
+        /// Return true, if corresponding parameter entry has an user control in ParameterDictControl.
+        /// </summary>
+        /// <returns></returns>
+        bool HasEntryControl(string parameterName)
+        {
+            if (parameterName.StartsWith("Intern."))
+                return false;
+            return true;
+        }
+
 
 
         protected string mChoosenHirarchy = "";

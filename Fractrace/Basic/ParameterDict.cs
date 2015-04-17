@@ -537,5 +537,15 @@ namespace Fractrace.Basic
         public event ParameterDictChanged EventChanged = null;
 
 
+        /// <summary>
+        /// Return Datatype of given parameter. If Datatype is unknown an empty string is returned.
+        /// </summary>
+        /// <param name="parameterName"></param>
+        /// <returns></returns>
+        public string GetDatatype(string parameterName)
+        {
+            return GetValue(parameterName + ".PARAMETERINFO.Datatype");
+        }
+
     }
 }

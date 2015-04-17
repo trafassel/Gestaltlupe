@@ -127,7 +127,7 @@ namespace Fractrace.Basic
                         string tempName = entry.Key.Substring(category.Length + 1);
                         if (!tempName.Contains("."))
                         {
-                            DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, "", "", true);
+                            DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, ParameterDict.Exemplar.GetDatatype(entry.Key), "", true);
                             dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
                             oldElements.Add(dElement);
                             dElement.TabIndex = oldElements.Count;
@@ -145,7 +145,7 @@ namespace Fractrace.Basic
                 {
                     if (entry.Key.StartsWith(category))
                     {
-                        DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, "", "", false);
+                        DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, ParameterDict.Exemplar.GetDatatype(entry.Key), "", false);
                         dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
                         oldElements.Add(dElement);
                         dElement.TabIndex = oldElements.Count;
@@ -225,6 +225,7 @@ namespace Fractrace.Basic
             // If nothing has changed, nothing has to update.
 
         }
+
 
     }
 }

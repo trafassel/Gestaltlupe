@@ -138,6 +138,9 @@
     </Compile>
     <Compile Include="Animation\AnimationPoint.cs" />
     <Compile Include="Animation\AnimationSteps.cs" />
+    <Compile Include="Basic\DataViewBoolElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Basic\DataViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\DataViewElement.resx">
       <DependentUpon>DataViewElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\DataViewStringElement.resx">
+      <DependentUpon>DataViewStringElement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\ParameterDictControl.resx">
       <DependentUpon>ParameterDictControl.cs</DependentUpon>

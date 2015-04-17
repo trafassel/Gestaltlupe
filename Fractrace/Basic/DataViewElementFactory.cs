@@ -11,14 +11,24 @@ namespace Fractrace.Basic
         {
             DataViewElement retVal = null;
 
+            switch (type)
+            {
+                case "Bool":
+                 retVal = new DataViewBoolElement();
+                break;
+
+            }
+
             // Use string as default datatype
             if (retVal == null)
             {
                 retVal = new DataViewStringElement();
-                retVal.Dock = System.Windows.Forms.DockStyle.Top;
-                retVal.Height = mDefaultHeight;
-                retVal.Init(name, value, type, description, shortenName);
             }
+
+            retVal.Dock = System.Windows.Forms.DockStyle.Top;
+            retVal.Height = mDefaultHeight;
+            retVal.Init(name, value, type, description, shortenName);
+
             return retVal;
         }
 

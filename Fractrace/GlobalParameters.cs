@@ -130,12 +130,14 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // View.Raster=1: best quality
             // View.Raster=2, up to 8 times faster than View.Raster=1, but less nice - especially at the object borders. 
             ParameterDict.Exemplar["View.Raster"] = "2";
+            ParameterDict.Exemplar["View.Perspective.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Exemplar["View.Size"] = "1";
 
             // Switch between 3D view and parallel view.
             ParameterDict.Exemplar["View.Perspective"] = "1";
+            ParameterDict.Exemplar["View.Perspective.PARAMETERINFO.Datatype"] = "Bool";
 
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Exemplar["View.Width"] = "1200";
@@ -165,10 +167,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
             // Start Preview Rendering just after small render display finishes
             ParameterDict.Exemplar["View.Pipeline.Preview"] = "1";
-
+            ParameterDict.Exemplar["View.Pipeline.Preview.PARAMETERINFO.Datatype"] = "Bool";
 
             // Updates also Preview rendering
             ParameterDict.Exemplar["View.Pipeline.UpdatePreview"] = "1";
+            ParameterDict.Exemplar["View.Pipeline.UpdatePreview.PARAMETERINFO.Datatype"] = "Bool";
 
 
             // Default animation steps while adding the frame in the animation control. 
@@ -181,6 +184,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
             // Activates Background darkening in PlasicRenderer
             ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
+            ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Datatype"] = "Bool";
+
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Exemplar["Renderer.ShadowNumber"] = "11";
             // Intensity of the FieldOfView
@@ -196,6 +201,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Exemplar["Renderer.ColorGreyness"] = "0";
             // Use Light
             ParameterDict.Exemplar["Renderer.UseLight"] = "1";
+            ParameterDict.Exemplar["Renderer.UseLight.PARAMETERINFO.Datatype"] = "Bool";
+
             // Light Level: light in bright areas
             ParameterDict.Exemplar["Renderer.BrightLightLevel"] = "0.2";
             // Shadow height factor
@@ -221,6 +228,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Exemplar["Renderer.Light.Z"] = "0.15";
             // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
             ParameterDict.Exemplar["Renderer.UseSharpShadow"] = "0";
+            ParameterDict.Exemplar["Renderer.UseSharpShadow.PARAMETERINFO.Datatype"] = "Bool";
             // To justify the color components 
             ParameterDict.Exemplar["Renderer.ColorFactor.Red"] = "1";
             ParameterDict.Exemplar["Renderer.ColorFactor.Green"] = "1";
