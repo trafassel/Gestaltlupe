@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.Geometry {
+namespace Fractrace.Geometry
+{
 
     /// <summary>
     /// Ein Punkt im 3D-Raum
     /// </summary>
-    public class Vec3 {
+    public class Vec3
+    {
 
-      public Vec3() {
-      }
-        public Vec3(double x, double y, double z) {
+        public Vec3()
+        {
+        }
+        public Vec3(double x, double y, double z)
+        {
             this.X = x;
             this.Y = y;
             this.Z = z;
         }
 
 
-        public Vec3(Vec3 other) {
+        public Vec3(Vec3 other)
+        {
             this.X = other.X;
             this.Y = other.Y;
             this.Z = other.Z;
@@ -39,7 +44,8 @@ namespace Fractrace.Geometry {
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public double Dist(Vec3 other) {
+        public double Dist(Vec3 other)
+        {
             return Diff(other).Norm;
         }
 
@@ -49,8 +55,9 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public Vec3 Diff(Vec3 other) {
-            return( new Vec3(this.X - other.X, Y - other.Y, Z - other.Z));
+        public Vec3 Diff(Vec3 other)
+        {
+            return (new Vec3(this.X - other.X, Y - other.Y, Z - other.Z));
         }
 
 
@@ -58,8 +65,10 @@ namespace Fractrace.Geometry {
         /// Liefert den Abstand zum Ursprung.
         /// </summary>
         /// <returns></returns>
-        public double Norm {
-            get {
+        public double Norm
+        {
+            get
+            {
                 return Math.Sqrt(X * X + Y * Y + Z * Z);
             }
         }
@@ -69,7 +78,8 @@ namespace Fractrace.Geometry {
         /// Multipliziert jeden Eintrag mit t.
         /// </summary>
         /// <param name="t"></param>
-        public Vec3 Mult(double t) {
+        public Vec3 Mult(double t)
+        {
             return new Vec3(X * t, Y * t, Z * t);
         }
 
@@ -79,8 +89,9 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public Vec3 Sum(Vec3 other) {
-            return new Vec3(X +other.X, Y +other.Y, Z+other.Z);
+        public Vec3 Sum(Vec3 other)
+        {
+            return new Vec3(X + other.X, Y + other.Y, Z + other.Z);
         }
 
 
@@ -89,10 +100,11 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public void Add(Vec3 other) {
-          X += other.X;
-          Y += other.Y;
-          Z += other.Z;
+        public void Add(Vec3 other)
+        {
+            X += other.X;
+            Y += other.Y;
+            Z += other.Z;
         }
 
 
@@ -101,10 +113,11 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public void Subtract(Vec3 other) {
-          X -= other.X;
-          Y -= other.Y;
-          Z -= other.Z;
+        public void Subtract(Vec3 other)
+        {
+            X -= other.X;
+            Y -= other.Y;
+            Z -= other.Z;
         }
 
 
@@ -113,24 +126,27 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public void Subtract(double x,double y,double z) {
-          X -= x;
-          Y -= y;
-          Z -= z;
+        public void Subtract(double x, double y, double z)
+        {
+            X -= x;
+            Y -= y;
+            Z -= z;
         }
 
 
-      /// <summary>
-      /// Alle Einträge werden nornmiert.
-      /// </summary>
-        public void Normalize() {
-          double d = X * X + Y * Y + Z * Z;
-          if (d != 0) {
-            d = Math.Sqrt(d);
-            X /= d;
-            Y /= d;
-            Z /= d;
-          }
+        /// <summary>
+        /// Alle Einträge werden nornmiert.
+        /// </summary>
+        public void Normalize()
+        {
+            double d = X * X + Y * Y + Z * Z;
+            if (d != 0)
+            {
+                d = Math.Sqrt(d);
+                X /= d;
+                Y /= d;
+                Z /= d;
+            }
         }
 
     }

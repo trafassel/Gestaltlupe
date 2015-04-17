@@ -5,24 +5,27 @@ using System.Text;
 using Fractrace.Geometry;
 using Fractrace.TomoGeometry;
 
-namespace Fractrace.DataTypes {
+namespace Fractrace.DataTypes
+{
 
     /// <summary>
     /// Enthält Zusatzinformationen, die später in einer Bildbearbeitung benutzt werden können,
     /// um mehr Informationen sichtbar zu machen
     /// </summary>
-    public class PixelInfo {
+    public class PixelInfo
+    {
 
-        public PixelInfo() {
+        public PixelInfo()
+        {
 
         }
 
         public AdditionalPointInfo AdditionalInfo = null;
-      
+
         /// <summary>
         /// Original coordinates at given pixels
         /// </summary>
-        public Vec3 Coord = new Vec3(0,0,0);
+        public Vec3 Coord = new Vec3(0, 0, 0);
 
 
         /// <summary>
@@ -43,9 +46,9 @@ namespace Fractrace.DataTypes {
         public double derivation = 0;
 
 
-      /// <summary>
-      /// Iteration cout . Used for colorize cut.
-      /// </summary>
+        /// <summary>
+        /// Iteration cout . Used for colorize cut.
+        /// </summary>
         public double iterations = -1;
 
 
@@ -70,6 +73,6 @@ namespace Fractrace.DataTypes {
                 retVal.AdditionalInfo = AdditionalInfo.Clone();
             return retVal;
         }
-        
+
     }
 }

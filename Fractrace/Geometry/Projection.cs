@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.Geometry {
-    public class Projection: Transform3D {
+namespace Fractrace.Geometry
+{
+    public class Projection : Transform3D
+    {
 
 
-        public Projection(Vec3 camera, Vec3 viewPoint) {
+        public Projection(Vec3 camera, Vec3 viewPoint)
+        {
             this.camera = camera;
             this.viewPoint = viewPoint;
             d = camera.Dist(viewPoint);
@@ -37,7 +40,8 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public override Vec3 Transform(Vec3 input) {
+        public override Vec3 Transform(Vec3 input)
+        {
             Vec3 p1 = input.Diff(camera);
             double dp = p1.Norm;
             double fac = dp / d;
@@ -51,7 +55,8 @@ namespace Fractrace.Geometry {
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public Vec3 ReverseTransform(Vec3 input) {
+        public Vec3 ReverseTransform(Vec3 input)
+        {
             Vec3 transformedCamera = Transform(camera);
             Vec3 tempVec = input.Diff(transformedCamera);
             double l = tempVec.Norm;

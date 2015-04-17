@@ -468,7 +468,7 @@ namespace Fractrace.PictureArt
 
             if (pInfo.frontLight < 0)
             {
-             
+
                 try
                 {
                     retVal.X = 0.3;

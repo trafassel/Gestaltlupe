@@ -357,7 +357,7 @@ namespace Fractrace
         {
             iterForPictureArt = iter;
             this.Invoke(new OneStepEndsDelegate(OneStepEnds));
-//            OneStepEnds();
+            //            OneStepEnds();
         }
 
 
@@ -788,7 +788,7 @@ namespace Fractrace
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(inPaint)
+            if (inPaint)
                 btnRepaint.Enabled = false;
 
             if (needUpdate)
@@ -799,7 +799,7 @@ namespace Fractrace
                 this.Text = fileName;
                 pictureBox1.Image.Save(fileName);
                 btnRepaint.Enabled = true;
-               
+
             }
         }
 
@@ -811,12 +811,12 @@ namespace Fractrace
         private bool IsSubStepRendering()
         {
             int currentStep = mUpdateCount;
-            int lastStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps")+1;
+            int lastStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps") + 1;
             return currentStep < lastStep;
         }
 
 
-    
+
 
 
     }

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.DataTypes {
+namespace Fractrace.DataTypes
+{
 
 
     /// <summary>
     /// Enthält Informationen zu einem Punkt in der 3D Szene
     /// </summary>
-    public class VoxelInfo {
+    public class VoxelInfo
+    {
         public double i = 0;
         public double j = 0;
         public double k = 0;
@@ -18,14 +20,16 @@ namespace Fractrace.DataTypes {
     }
 
 
-    public class VecInfo {
+    public class VecInfo
+    {
         public double x = 0;
         public double y = 0;
         public double z = 0;
     }
 
 
-    public class GraphicData {
+    public class GraphicData
+    {
 
         protected int width = 1000;
         protected int height = 1000;
@@ -38,18 +42,20 @@ namespace Fractrace.DataTypes {
         public double[,] ColorInfo2 = null;
         public double[,] ColorInfoDeph = null;
 
-        public GraphicData(int width, int height) {
+        public GraphicData(int width, int height)
+        {
             this.width = width;
             this.height = height;
-            Picture = new int[width+1, height+1];
-            Normals = new VecInfo[width+1, height+1];
-            PointInfo = new VoxelInfo[width+1, height+1];
-            ColorInfo = new double[width+1, height+1];
-            ColorInfo2 = new double[width+1, height+1];
-            ColorInfoDeph = new double[width+1, height+1];
+            Picture = new int[width + 1, height + 1];
+            Normals = new VecInfo[width + 1, height + 1];
+            PointInfo = new VoxelInfo[width + 1, height + 1];
+            ColorInfo = new double[width + 1, height + 1];
+            ColorInfo2 = new double[width + 1, height + 1];
+            ColorInfoDeph = new double[width + 1, height + 1];
 
             for (int i = 0; i <= width; i++)
-                for (int j = 0; j <= height; j++) {
+                for (int j = 0; j <= height; j++)
+                {
                     PointInfo[i, j] = null;
                     Normals[i, j] = null;
                     Picture[i, j] = 0;

@@ -66,7 +66,7 @@ namespace Fractrace.Geometry
 
             /* Einbeziehung des Winkels  */
             double f = Math.PI / 180.0;
-        
+
             // Drehung
             x -= CenterX; y -= CenterY; z -= CenterZ;
             double re = Math.Cos(AngleZ * f);
@@ -74,13 +74,13 @@ namespace Fractrace.Geometry
             double a = re * x - im * y;
             y = re * y + im * x;
             x = a;
-        
+
             // Neigung
             re = Math.Cos(AngleY * f); im = Math.Sin(AngleY * f);
             a = re * z - im * x;
             x = re * x + im * z;
             z = a;
-            
+
             // Kippen
             re = Math.Cos(AngleX * f); im = Math.Sin(AngleX * f);
             a = re * y - im * z;

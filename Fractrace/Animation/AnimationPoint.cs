@@ -2,44 +2,52 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.Animation {
+namespace Fractrace.Animation
+{
 
 
     /// <summary>
     /// One step in the animation time line. 
     /// </summary>
-   public class AnimationPoint {
+    public class AnimationPoint
+    {
 
-       protected int mSteps = 0;
+        protected int mSteps = 0;
 
-       /// <summary>
-       /// Number of interpolated animation steps from this to the next AnimationPoint. 
-       /// </summary>
-       public int Steps {
-           get {
-               return mSteps;
-           }
-           set {
-               mSteps = value;
-           }
-       }
+        /// <summary>
+        /// Number of interpolated animation steps from this to the next AnimationPoint. 
+        /// </summary>
+        public int Steps
+        {
+            get
+            {
+                return mSteps;
+            }
+            set
+            {
+                mSteps = value;
+            }
+        }
 
 
-       protected int mTime = 0;
+        protected int mTime = 0;
 
 
 
-       /// <summary>
-       /// Digital point in time.
-       /// </summary>
-       public int Time {
-           get {
-               return mTime;
-           }
-           set {
-               mTime = value;
-           }
-       }
-       
+        /// <summary>
+        /// Digital point in time.
+        /// </summary>
+        public int Time
+        {
+            get
+            {
+                return mTime;
+            }
+            set
+            {
+                mTime = value;
+            }
+        }
+
     }
 }

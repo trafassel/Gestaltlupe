@@ -17,7 +17,7 @@ namespace Fractrace
         public RenderImage()
         {
             InitializeComponent();
-                Init();
+            Init();
         }
 
         protected Image labelImage = null;
@@ -28,18 +28,22 @@ namespace Fractrace
         /// <summary>
         /// Berechnung wird abgebrochen:
         /// </summary>
-        public void Abort() {
-          if (iter != null) {
-            iter.Abort();
-          }
+        public void Abort()
+        {
+            if (iter != null)
+            {
+                iter.Abort();
+            }
         }
 
 
         /// <summary>
         /// Public access to the internal iterate object to reuse the iteration results.
         /// </summary>
-        public Iterate Iterate {
-            get {
+        public Iterate Iterate
+        {
+            get
+            {
                 return iter;
             }
         }
@@ -52,12 +56,15 @@ namespace Fractrace
 
         protected bool isRightView = false;
 
-        public bool IsRightView {
-            get {
+        public bool IsRightView
+        {
+            get
+            {
                 return isRightView;
             }
 
-            set {
+            set
+            {
                 isRightView = value;
             }
         }
@@ -65,7 +72,8 @@ namespace Fractrace
         /// <summary>
         /// Der Graphik-Kontext wird initialisiert.
         /// </summary>
-        protected virtual void Init() {
+        protected virtual void Init()
+        {
             mPictureBox = new PictureBox();
             this.panel2.Controls.Add(mPictureBox);
         }
@@ -75,23 +83,25 @@ namespace Fractrace
         protected PictureBox mPictureBox = null;
 
 
-        protected void SetPictureBoxSize() {
-          double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
-          double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
-          //ParameterDict.Exemplar["View.Deph"] = "800";
+        protected void SetPictureBoxSize()
+        {
+            double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
+            double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
+            //ParameterDict.Exemplar["View.Deph"] = "800";
 
 
-          int maxSizeX = (int)(widthInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
-          int maxSizeY = (int)(heightInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
-          if (maxx != maxSizeX || maxy != maxSizeY) {
-            maxx = maxSizeX;
-            maxy = maxSizeY;
-            mPictureBox.Width = maxx;
-            mPictureBox.Height = maxy;
-            Image labelImage = new Bitmap((int)(maxx), (int)(maxy));
-            mPictureBox.Image = labelImage;
-            grLabel = Graphics.FromImage(labelImage);
-          }
+            int maxSizeX = (int)(widthInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
+            int maxSizeY = (int)(heightInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
+            if (maxx != maxSizeX || maxy != maxSizeY)
+            {
+                maxx = maxSizeX;
+                maxy = maxSizeY;
+                mPictureBox.Width = maxx;
+                mPictureBox.Height = maxy;
+                Image labelImage = new Bitmap((int)(maxx), (int)(maxy));
+                mPictureBox.Image = labelImage;
+                grLabel = Graphics.FromImage(labelImage);
+            }
 
         }
 
@@ -118,18 +128,19 @@ namespace Fractrace
         /// <summary>
         /// Neuzeichnen.
         /// </summary>
-        protected virtual void StartDrawing() {
+        protected virtual void StartDrawing()
+        {
             forceRedraw = false;
             inDrawing = true;
             SetPictureBoxSize();
-            iter = new Iterate(maxx, maxy, this,IsRightView);
+            iter = new Iterate(maxx, maxy, this, IsRightView);
             AssignParameters();
             iter.StartAsync(mParameter,
                     ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),
-                    2, 
+                    2,
                     1,
                     ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-                    ParameterDict.Exemplar.GetBool("View.Perspective"),false);
+                    ParameterDict.Exemplar.GetBool("View.Perspective"), false);
 
         }
 
@@ -137,7 +148,8 @@ namespace Fractrace
         /// <summary>
         /// Parameters are set from ParameterDict.
         /// </summary>
-        protected virtual void AssignParameters() {
+        protected virtual void AssignParameters()
+        {
             mParameter.SetFromParameterDict();
         }
 
@@ -145,12 +157,15 @@ namespace Fractrace
         /// <summary>
         /// Create a draw image.
         /// </summary>
-        public virtual void Draw() {
+        public virtual void Draw()
+        {
             fixedRenderer = -1;
             if (!inDrawing)
                 StartDrawing();
-            else {
-                if (iter != null) {
+            else
+            {
+                if (iter != null)
+                {
                     iter.Abort();
                 }
                 iter = null;
@@ -170,7 +185,8 @@ namespace Fractrace
         /// </summary>
         /// <param name="otherIterate"></param>
         /// <param name="renderer"></param>
-        public virtual void Redraw(Iterate otherIterate, int renderer) {
+        public virtual void Redraw(Iterate otherIterate, int renderer)
+        {
             fixedRenderer = renderer;
             iter = otherIterate;
             OneStepEnds();
@@ -191,21 +207,24 @@ namespace Fractrace
         /// Fortschritt in Prozent.
         /// </summary>
         /// <param name="progressInPercent"></param>
-        public void Progress(double progressInPercent) {
-          if (mProgress < progressInPercent - 2 || mProgress > progressInPercent) {
-            mProgress = progressInPercent;
-            // TODO: Testen, ob Invoke die Ausführung verlangsamt
-            this.Invoke(new ProgressDelegate(OnProgress));
-          }
+        public void Progress(double progressInPercent)
+        {
+            if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
+            {
+                mProgress = progressInPercent;
+                // TODO: Testen, ob Invoke die Ausführung verlangsamt
+                this.Invoke(new ProgressDelegate(OnProgress));
+            }
         }
 
 
         protected delegate void ProgressDelegate();
 
-        
-        protected void OnProgress() {
-          if(mProgress>=0 && mProgress<=100)
-            progressBar1.Value = (int)mProgress;
+
+        protected void OnProgress()
+        {
+            if (mProgress >= 0 && mProgress <= 100)
+                progressBar1.Value = (int)mProgress;
 
         }
 
@@ -219,7 +238,8 @@ namespace Fractrace
         /// <summary>
         /// Wird aufgerufen, wenn die asynchrone Berechnung bendet wurde.
         /// </summary>
-        public void ComputationEnds() {
+        public void ComputationEnds()
+        {
             this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
 
@@ -230,8 +250,10 @@ namespace Fractrace
         /// <summary>
         /// Berechnung wurde beendet.
         /// </summary>
-        protected virtual void OneStepEnds() {
-            if (iter != null) {
+        protected virtual void OneStepEnds()
+        {
+            if (iter != null)
+            {
                 Fractrace.PictureArt.Renderer pArt;
                 if (fixedRenderer == -1)
                     pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
@@ -240,10 +262,11 @@ namespace Fractrace
                 pArt.Paint(grLabel);
                 Application.DoEvents();
                 this.Refresh();
-              // In instance of RenderImage is used in the big stereo
-              // and in the small preview display. Which variant is used is (clumsy) detected
-              // by the picture size.
-                if (mPictureBox.Image.Width > 400) { 
+                // In instance of RenderImage is used in the big stereo
+                // and in the small preview display. Which variant is used is (clumsy) detected
+                // by the picture size.
+                if (mPictureBox.Image.Width > 400)
+                {
                     string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.png");
                     this.Text = fileName;
                     mPictureBox.Image.Save(fileName);
@@ -258,8 +281,10 @@ namespace Fractrace
         /// <summary>
         /// While computation this value is set to true.
         /// </summary>
-        public bool InDrawing {
-            get {
+        public bool InDrawing
+        {
+            get
+            {
                 return inDrawing;
             }
         }

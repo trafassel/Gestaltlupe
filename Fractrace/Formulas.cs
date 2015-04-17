@@ -1567,7 +1567,7 @@ namespace Fractrace
                     ox = ovec.X; oy = ovec.Y; oz = ovec.Z;
                     rx = rvec.X; ry = rvec.Y; rz = rvec.Z;
                      */
-                    
+
                     /* Dann wird das Kreuzprodukt gebildet, um einen
                        Vergleichsvektor zu haben.                                 */
                     xv = oy * rz - oz * ry;
@@ -2033,13 +2033,13 @@ namespace Fractrace
                      */
 
                     // Apply Transformation
-          /*        
-       Vec3 ovec = GetTransform(ox, oy, oz);
-       Vec3 rvec = GetTransform(rx, ry, rz);
+                    /*        
+                 Vec3 ovec = GetTransform(ox, oy, oz);
+                 Vec3 rvec = GetTransform(rx, ry, rz);
 
-       ox = ovec.X; oy = ovec.Y; oz = ovec.Z;
-       rx = rvec.X; ry = rvec.Y; rz = rvec.Z;
-          */
+                 ox = ovec.X; oy = ovec.Y; oz = ovec.Z;
+                 rx = rvec.X; ry = rvec.Y; rz = rvec.Z;
+                    */
 
 
                     /* Dann wird das Kreuzprodukt gebildet, um einen

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Fractrace.Basic {
+namespace Fractrace.Basic
+{
 
 
     /// <summary>
     /// Classes, which are able to use asynchron computations can use this interface to get an event if the computation ends.
     /// </summary>
-    public interface IAsyncComputationStarter {
+    public interface IAsyncComputationStarter
+    {
 
 
         /// <summary>

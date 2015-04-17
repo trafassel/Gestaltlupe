@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace Fractrace.DataTypes {
+namespace Fractrace.DataTypes
+{
 
 
     /// <summary>
     /// Datatype to handle color in rgb values where each entry is a double.
     /// </summary>
-    public class ColorRGB {
+    public class ColorRGB
+    {
 
         /// <summary>
         /// Red component of the corresponding color. Valid, if Red is in [0,1].
@@ -30,7 +32,8 @@ namespace Fractrace.DataTypes {
         /// <summary>
         /// Constructer.
         /// </summary>
-        public ColorRGB() {
+        public ColorRGB()
+        {
 
         }
 
@@ -38,7 +41,8 @@ namespace Fractrace.DataTypes {
         /// <summary>
         /// Constructer.
         /// </summary>
-        public ColorRGB(double col) {
+        public ColorRGB(double col)
+        {
             Red = col;
             Green = col;
             Blue = col;
@@ -51,7 +55,8 @@ namespace Fractrace.DataTypes {
         /// <param name="red"></param>
         /// <param name="green"></param>
         /// <param name="blue"></param>
-        public ColorRGB(double red, double green,double blue) {
+        public ColorRGB(double red, double green, double blue)
+        {
             this.Red = red;
             this.Green = green;
             this.Blue = blue;
@@ -61,8 +66,10 @@ namespace Fractrace.DataTypes {
         /// <summary>
         /// Convert this to System.Drawing.Color datatype.
         /// </summary>
-        public Color Color {
-            get {
+        public Color Color
+        {
+            get
+            {
                 if (Red < 0)
                     Red = 0;
                 if (Red > 1)

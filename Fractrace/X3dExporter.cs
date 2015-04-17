@@ -6,19 +6,22 @@ using System.IO;
 using Fractrace.Basic;
 using Fractrace.DataTypes;
 
-namespace Fractrace {
+namespace Fractrace
+{
 
     /// <summary>
     /// Dient dem Export der dargestellten 3D Geometrie.
     /// </summary>
-    public class X3dExporter {
+    public class X3dExporter
+    {
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X3dExporter"/> class.
         /// </summary>
         /// <param name="iter">The iter.</param>
-        public X3dExporter(Iterate iter) {
+        public X3dExporter(Iterate iter)
+        {
             mIterate = iter;
         }
 
@@ -36,7 +39,8 @@ namespace Fractrace {
         /// <param name="point1">The point1.</param>
         /// <param name="point2">The point2.</param>
         /// <returns></returns>
-        protected double Dist(PixelInfo point1, PixelInfo point2) {
+        protected double Dist(PixelInfo point1, PixelInfo point2)
+        {
             if (point1 == null || point2 == null)
                 return -1;
 
@@ -57,9 +61,12 @@ namespace Fractrace {
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public PixelInfo AddTransform(PixelInfo input) {
-            if (mIterate != null) {
-                if (mIterate.LastUsedFormulas != null) {
+        public PixelInfo AddTransform(PixelInfo input)
+        {
+            if (mIterate != null)
+            {
+                if (mIterate.LastUsedFormulas != null)
+                {
                     Geometry.Vec3 vec = mIterate.LastUsedFormulas.GetTransform(input.Coord.X, input.Coord.Y, input.Coord.Z);
                     PixelInfo tempPoint = new PixelInfo();
                     tempPoint.Coord = vec;
@@ -76,7 +83,8 @@ namespace Fractrace {
         /// Die Geometrie aus iter wird in der VRML-Datei fileName abgelegt.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        public void Save(string fileName) {
+        public void Save(string fileName)
+        {
             if (mIterate == null)
                 return;
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
@@ -95,9 +103,12 @@ namespace Fractrace {
             double maxz = Double.MinValue;
 
             int currentIndex = 0;
-            for (int i = 0; i < mIterate.PictureData.Width; i++) {
-                for (int j = 0; j < mIterate.PictureData.Height; j++) {
-                    if (mIterate.PictureData.Points[i, j] != null) {
+            for (int i = 0; i < mIterate.PictureData.Width; i++)
+            {
+                for (int j = 0; j < mIterate.PictureData.Height; j++)
+                {
+                    if (mIterate.PictureData.Points[i, j] != null)
+                    {
                         PixelInfo point = AddTransform(mIterate.PictureData.Points[i, j]);
 
                         if (minx > point.Coord.X)
@@ -117,7 +128,9 @@ namespace Fractrace {
                         pointIndex[i, j] = currentIndex;
                         pointList.Add(coord);
                         currentIndex++;
-                    } else {
+                    }
+                    else
+                    {
                         pointIndex[i, j] = -1;
                     }
                 }
@@ -161,21 +174,28 @@ point [
             double oldy = 0;
             double oldz = 0;
 
-            foreach (KeyValuePair<int, int> entry in pointList) {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null) {
+            foreach (KeyValuePair<int, int> entry in pointList)
+            {
+                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                {
                     PixelInfo pInfo = AddTransform(mIterate.PictureData.Points[entry.Key, entry.Value]);
-                    if (pInfo != null) {
-                        if (pInfo.Coord != null) {
+                    if (pInfo != null)
+                    {
+                        if (pInfo.Coord != null)
+                        {
                             // Skalierung unter Einstellungen festlegen
                             double x = 1000.0 * pInfo.Coord.X;
                             double y = 1000.0 * pInfo.Coord.Y;
                             double z = 1000.0 * pInfo.Coord.Z;
-                            if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 && pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000) { // nicht der beste Schutz vor Ausreißern
+                            if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 && pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000)
+                            { // nicht der beste Schutz vor Ausreißern
                                 sw.WriteLine(x.ToString(mNumberFormatInfo) + " " + y.ToString(mNumberFormatInfo) + " " + z.ToString(mNumberFormatInfo) + ", ");
                                 oldx = x;
                                 oldy = y;
                                 oldz = z;
-                            } else {
+                            }
+                            else
+                            {
                                 sw.WriteLine(oldx.ToString(mNumberFormatInfo) + " " + oldy.ToString(mNumberFormatInfo) + " " + oldz.ToString(mNumberFormatInfo) + ", ");
                             }
                         }
@@ -194,23 +214,32 @@ color [
             // Hier die Farben eintragen:
             // z.B: color [ 0 1 0, 1 1 0, 1 0 0, 0 0 1]
 
-            foreach (KeyValuePair<int, int> entry in pointList) {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null) {
+            foreach (KeyValuePair<int, int> entry in pointList)
+            {
+                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                {
                     PixelInfo pInfo = mIterate.PictureData.Points[entry.Key, entry.Value];
-                    if (pInfo != null) {
-                        if (pInfo != null) {
-                            if (pInfo.Coord != null) {
-                                if (pInfo.AdditionalInfo != null) {
+                    if (pInfo != null)
+                    {
+                        if (pInfo != null)
+                        {
+                            if (pInfo.Coord != null)
+                            {
+                                if (pInfo.AdditionalInfo != null)
+                                {
                                     double red = pInfo.AdditionalInfo.red;
                                     double green = pInfo.AdditionalInfo.green;
                                     double blue = pInfo.AdditionalInfo.blue;
 
                                     double norm = Math.Sqrt(red * red + green * green + blue * blue);
-                                    if (norm != 0) {
+                                    if (norm != 0)
+                                    {
                                         red = Math.Abs(red / norm);
                                         green = Math.Abs(green / norm);
                                         blue = Math.Abs(blue / norm);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         red = 0;
                                         green = 0;
                                         blue = 0;
@@ -241,13 +270,19 @@ colorIndex [
             // z.B: colorIndex [0, 1, 2]
             currentIndex = 0;
 
-            foreach (KeyValuePair<int, int> entry in pointList) {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null) {
+            foreach (KeyValuePair<int, int> entry in pointList)
+            {
+                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                {
                     PixelInfo pInfo = mIterate.PictureData.Points[entry.Key, entry.Value];
-                    if (pInfo != null) {
-                        if (pInfo != null) {
-                            if (pInfo.Coord != null) {
-                                if (pInfo.AdditionalInfo != null) {
+                    if (pInfo != null)
+                    {
+                        if (pInfo != null)
+                        {
+                            if (pInfo.Coord != null)
+                            {
+                                if (pInfo.AdditionalInfo != null)
+                                {
                                     sw.Write(currentIndex.ToString() + ", ");
                                     currentIndex++;
                                 }
@@ -265,12 +300,17 @@ coordIndex [
             // Die Koordinaten anpassen: 
             // z.B: coordIndex [0, 1, 2, 3, -1]
 
-            for (int i = 0; i < mIterate.PictureData.Width; i++) {
-                for (int j = 0; j < mIterate.PictureData.Height; j++) {
-                    if (mIterate.PictureData.Points[i, j] != null) {
+            for (int i = 0; i < mIterate.PictureData.Width; i++)
+            {
+                for (int j = 0; j < mIterate.PictureData.Height; j++)
+                {
+                    if (mIterate.PictureData.Points[i, j] != null)
+                    {
                         // Dreieck 1:
-                        if (i > 0 && j > 0 && mIterate.PictureData.Points[i - 1, j - 1] != null) {
-                            if (mIterate.PictureData.Points[i - 1, j] != null) {
+                        if (i > 0 && j > 0 && mIterate.PictureData.Points[i - 1, j - 1] != null)
+                        {
+                            if (mIterate.PictureData.Points[i - 1, j] != null)
+                            {
                                 // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet.
                                 PixelInfo point1 = mIterate.PictureData.Points[i, j];
                                 PixelInfo point2 = mIterate.PictureData.Points[i - 1, j];
@@ -278,7 +318,8 @@ coordIndex [
                                 if (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist)
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " -1 ");
                             }
-                            if (mIterate.PictureData.Points[i, j - 1] != null) {
+                            if (mIterate.PictureData.Points[i, j - 1] != null)
+                            {
                                 // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet
                                 PixelInfo point1 = mIterate.PictureData.Points[i, j];
                                 PixelInfo point2 = mIterate.PictureData.Points[i - 1, j - 1];
