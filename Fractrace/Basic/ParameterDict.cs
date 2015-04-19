@@ -547,5 +547,28 @@ namespace Fractrace.Basic
             return GetValue(parameterName + ".PARAMETERINFO.Datatype");
         }
 
+
+        /// <summary>
+        /// Return description of given parameter.
+        /// </summary>
+        /// <param name="parameterName"></param>
+        /// <returns></returns>
+        public string GetDescription(string parameterName)
+        {
+            return GetValue(parameterName + ".PARAMETERINFO.Description");
+        }
+
+
+        /// <summary>
+        /// Return true, if corresponding parameter entry is for info only and should not generate any user control.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsAdditionalInfo(string parameterName)
+        {
+            if (parameterName.Contains(".PARAMETERINFO"))
+                return true;
+            return false;
+        }
+
     }
 }

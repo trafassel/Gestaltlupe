@@ -27,7 +27,7 @@ namespace Fractrace.Basic
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
                 string parameterName=entry.Key;
-                if (!IsAdditionalInfo(parameterName) && HasEntryControl(parameterName))
+                if (   !ParameterDict.IsAdditionalInfo(parameterName) && HasEntryControl(parameterName))
                 {
                     string cat = GetCategory(parameterName);
                     string parentCat = GetCategory(cat);
@@ -101,18 +101,6 @@ namespace Fractrace.Basic
                 return category.Substring(pos + 1);
             }
             return category;
-        }
-
-
-        /// <summary>
-        /// Return true, if corresponding parameter entry is for info only and should not generate any user control.
-        /// </summary>
-        /// <returns></returns>
-        bool IsAdditionalInfo(string parameterName)
-        {
-            if (parameterName.Contains(".PARAMETERINFO"))
-                return true;
-            return false;
         }
 
         

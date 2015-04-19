@@ -79,6 +79,6 @@
 
     private System.Windows.Forms.Panel panel1;
     protected System.Windows.Forms.Panel pnlEdit;
-    private System.Windows.Forms.Label lblName;
+    protected System.Windows.Forms.Label lblName;
   }
 }

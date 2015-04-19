@@ -120,14 +120,16 @@ namespace Fractrace.Basic
             bool elementAdded = false;
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
-                if (entry.Key.StartsWith(category))
+                string parameterName = entry.Key;
+                if (parameterName.StartsWith(category) && HasControl(parameterName))
                 {
-                    if (entry.Key.Length > category.Length)
+                    if (parameterName.Length > category.Length)
                     {
-                        string tempName = entry.Key.Substring(category.Length + 1);
+                        string tempName = parameterName.Substring(category.Length + 1);
                         if (!tempName.Contains("."))
                         {
-                            DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, ParameterDict.Exemplar.GetDatatype(entry.Key), "", true);
+                            DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName),
+                                ParameterDict.Exemplar.GetDescription(parameterName), true);
                             dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
                             oldElements.Add(dElement);
                             dElement.TabIndex = oldElements.Count;
@@ -139,21 +141,38 @@ namespace Fractrace.Basic
             }
 
             // Wenn kein direktes Unterelement existiert, werden alle Unterelemente eingefügt.
+            string currentCategory = "";
+            string oldCategory = "";
             if (!elementAdded)
             {
+
                 foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
                 {
-                    if (entry.Key.StartsWith(category))
+                    string parameterName = entry.Key;
+                    if (parameterName.StartsWith(category) && HasControl(parameterName) && !ParameterDict.IsAdditionalInfo(parameterName))
                     {
-                        DataViewElement dElement = DataViewElementFactory.Create(entry.Key, entry.Value, ParameterDict.Exemplar.GetDatatype(entry.Key), "", false);
+                        string[] paraSplit = parameterName.Split('.');
+                        if (paraSplit.Length > 1)
+                        {
+                            currentCategory = paraSplit[paraSplit.Length - 2];
+                            if (currentCategory != oldCategory)
+                            {
+                                DataViewElement helement = DataViewElementFactory.Create(currentCategory, "", "Headline", "", false);
+                                oldElements.Add(helement);
+                                oldCategory = currentCategory;
+                                mComputedHeight += DataViewElementFactory.DefaultHeight;
+                            }
+                        }
+                        DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName), ParameterDict.Exemplar.GetDescription(parameterName), false);
                         dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
                         oldElements.Add(dElement);
                         dElement.TabIndex = oldElements.Count;
                         mComputedHeight += DataViewElementFactory.DefaultHeight;
-                        elementAdded = true;
                     }
                 }
             }
+
+
             for (int i = oldElements.Count - 1; i >= 0; i--)
             {
                 DataViewElement dElement = oldElements[i];
@@ -224,6 +243,17 @@ namespace Fractrace.Basic
             return false;
             // If nothing has changed, nothing has to update.
 
+        }
+
+
+        /// <summary>
+        /// Return true, if the corresponding control should be generated.
+        /// </summary>
+        /// <param name="parameterName"></param>
+        /// <returns></returns>
+        bool HasControl(string parameterName)
+        {
+            return !ParameterDict.Exemplar.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
         }
 
 

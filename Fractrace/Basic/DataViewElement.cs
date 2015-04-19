@@ -54,6 +54,13 @@ namespace Fractrace.Basic
                 }
                 lblName.Text = sName;
             }
+            if (description != string.Empty)
+            {
+                ToolTip toolTip = new ToolTip();
+                toolTip.SetToolTip(lblName, description);
+                
+            }
+           
             PreInit();
         }
 
@@ -91,6 +98,18 @@ namespace Fractrace.Basic
         /// Name of this element (should be equal to the name of the corresponding ParameterDict entry).
         /// </summary>
         protected string mName = "";
+
+
+        /// <summary>
+        /// Return name of associated parameter.
+        /// </summary>
+        public string ParameterName
+        {
+            get
+            {
+                return mName;
+            }
+        }
 
 
         /// <summary>

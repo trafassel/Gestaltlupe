@@ -14,8 +14,12 @@ namespace Fractrace.Basic
             switch (type)
             {
                 case "Bool":
-                 retVal = new DataViewBoolElement();
-                break;
+                  retVal = new DataViewBoolElement();
+                  break;
+
+                case "Headline":
+                  retVal = new DataViewHeadlineElement();
+                  break;
 
             }
 

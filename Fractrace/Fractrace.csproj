@@ -160,6 +160,9 @@
       <DependentUpon>DataViewElement.cs</DependentUpon>
     </Compile>
     <Compile Include="Basic\DataViewElementFactory.cs" />
+    <Compile Include="Basic\DataViewHeadlineElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Basic\DataViewStringElement.cs">
       <SubType>UserControl</SubType>
     </Compile>
