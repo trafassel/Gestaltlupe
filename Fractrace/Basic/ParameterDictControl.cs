@@ -55,7 +55,10 @@ namespace Fractrace.Basic
                                     else
                                         treeView1.Nodes.Add(Nodes[parentCat]);
                                 }
-                                Nodes[parentCat].Nodes.Add(tNode);
+                                // Test, if Parent Node page contains all elements of this node
+                                // in this case, the node as subtree is not nececcary.
+                                if (NeedSubNodes(parentCat))
+                                    Nodes[parentCat].Nodes.Add(tNode);
                             }
                         Nodes[cat] = tNode;
                     }
@@ -69,6 +72,29 @@ namespace Fractrace.Basic
         /// </summary>
         protected Dictionary<string, TreeNode> Nodes = new Dictionary<string, TreeNode>();
 
+
+        /// <summary>
+        /// Return true, if node corresponding to given category need subnodes to edit subentries.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        protected bool NeedSubNodes(string category)
+        {
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+            {
+                string parameterName = entry.Key;
+                if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName))
+                {
+                    string tempName = parameterName.Substring(category.Length + 1);
+                    if (!tempName.Contains("."))
+                    {
+                        return true;
+                    }
+                    System.Diagnostics.Debug.WriteLine(parameterName);
+                }
+            }
+            return false;
+        }
 
         /// <summary>
         /// Die Hirarchie wird in den Einträgen durch . abgetrennt. Hier wird der String 

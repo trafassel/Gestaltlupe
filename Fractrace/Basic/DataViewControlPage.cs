@@ -121,7 +121,7 @@ namespace Fractrace.Basic
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
                 string parameterName = entry.Key;
-                if (parameterName.StartsWith(category) && HasControl(parameterName))
+                if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName))
                 {
                     if (parameterName.Length > category.Length)
                     {
@@ -149,7 +149,7 @@ namespace Fractrace.Basic
                 foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
                 {
                     string parameterName = entry.Key;
-                    if (parameterName.StartsWith(category) && HasControl(parameterName) && !ParameterDict.IsAdditionalInfo(parameterName))
+                    if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName) && !ParameterDict.IsAdditionalInfo(parameterName))
                     {
                         string[] paraSplit = parameterName.Split('.');
                         if (paraSplit.Length > 1)
@@ -163,7 +163,7 @@ namespace Fractrace.Basic
                                 mComputedHeight += DataViewElementFactory.DefaultHeight;
                             }
                         }
-                        DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName), ParameterDict.Exemplar.GetDescription(parameterName), false);
+                        DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName), ParameterDict.Exemplar.GetDescription(parameterName), true);
                         dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
                         oldElements.Add(dElement);
                         dElement.TabIndex = oldElements.Count;
@@ -245,16 +245,6 @@ namespace Fractrace.Basic
 
         }
 
-
-        /// <summary>
-        /// Return true, if the corresponding control should be generated.
-        /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
-        bool HasControl(string parameterName)
-        {
-            return !ParameterDict.Exemplar.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
-        }
 
 
     }

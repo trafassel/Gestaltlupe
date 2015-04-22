@@ -570,5 +570,16 @@ namespace Fractrace.Basic
             return false;
         }
 
+
+        /// <summary>
+        /// Return true, if the corresponding control should be generated.
+        /// </summary>
+        /// <param name="parameterName"></param>
+        /// <returns></returns>
+        public static bool HasControl(string parameterName)
+        {
+            return !ParameterDict.Exemplar.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
+        }
+
     }
 }
