@@ -22,6 +22,20 @@ namespace Fractrace.Animation
         }
 
 
+
+        /// <summary>
+        /// Return true, if animation process is running.
+        /// </summary>
+        public static bool InAnimation
+        {
+            get
+            {
+                return inAnimation;
+            }
+        }
+
+        static bool inAnimation = false; 
+
         /// <summary>
         /// Verweis auf die global verwaltete Historie.
         /// </summary>
@@ -118,6 +132,7 @@ namespace Fractrace.Animation
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            inAnimation = true;
             CreateAnimationSteps();
             if (mAnimationSteps.Steps.Count == 0)
                 return;
@@ -145,6 +160,7 @@ namespace Fractrace.Animation
             btnStart.Enabled = true;
             lblAnimationProgress.Text = "ready";
             animationAbort = false;
+            inAnimation = false;
         }
 
 

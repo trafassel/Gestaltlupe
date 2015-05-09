@@ -634,6 +634,13 @@ namespace Fractrace
             {
                 if (iter != null && !iter.InAbort)
                 {
+                    if (Animation.AnimationControl.InAnimation)
+                    {
+                        while (inPaint)
+                        {
+                            System.Threading.Thread.Sleep(100);
+                        }
+                    }
                     System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
                     System.Threading.Thread thread = new System.Threading.Thread(tStart);
                     thread.Start();
@@ -657,9 +664,12 @@ namespace Fractrace
         /// </summary>
         void DrawPicture()
         {
+
+
             if (inPaint)
             {
-                currentPicturArt.StopAndWait();
+                if(currentPicturArt!=null)
+                    currentPicturArt.StopAndWait();
                 currentPicturArt = null;
             }
 
@@ -675,7 +685,7 @@ namespace Fractrace
                         System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
                     }
                     FastRenderingFilter fastRenderingFilter = null;
-                    if (IsSubStepRendering())
+                    if (IsSubStepRendering() && !Fractrace.Animation.AnimationControl.InAnimation)
                     {
                         fastRenderingFilter = new FastRenderingFilter();
                         fastRenderingFilter.Apply();
@@ -694,6 +704,7 @@ namespace Fractrace
                     currentPicturArt = null;
                     repaintRequested = false;
                     drawEnds();
+                    
                 }
                 catch (System.Exception ex)
                 {
@@ -798,6 +809,7 @@ namespace Fractrace
                 string fileName = FileSystem.Exemplar.GetFileName("pic.png");
                 this.Text = fileName;
                 pictureBox1.Image.Save(fileName);
+                ParameterInput.MainParameterInput.SaveHistory();
                 btnRepaint.Enabled = true;
 
             }

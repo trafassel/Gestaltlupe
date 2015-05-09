@@ -82,6 +82,15 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Legt die aktuellen Parameter in die History ab.
+        /// </summary>
+        public void SaveHistory()
+        {
+            mHistory.CurrentTime = mHistory.Save();
+        }
+
+
+        /// <summary>
         /// Enthält die History der letzten Parameter
         /// </summary>
         ParameterHistory mHistory = new ParameterHistory();
@@ -939,7 +948,7 @@ namespace Fractrace
             {
                 mPosterMode = false;
                 // Todo: Bild nur speichern, wenn der Haken gesetzt ist
-                if (cbSaveHistory.Checked)
+                //if (cbSaveHistory.Checked)
                 {
                     mHistory.CurrentTime = mHistory.Save();
                 }
