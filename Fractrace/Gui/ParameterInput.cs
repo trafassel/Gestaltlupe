@@ -91,6 +91,15 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Legt die aktuellen Parameter in die History ab.
+        /// </summary>
+        public void SaveHistory(string fileName)
+        {
+            mHistory.CurrentTime = mHistory.Save(fileName);
+        }
+
+
+        /// <summary>
         /// Enthält die History der letzten Parameter
         /// </summary>
         ParameterHistory mHistory = new ParameterHistory();
@@ -214,6 +223,15 @@ namespace Fractrace
         }
 
 
+        public bool AutomaticSaveInAnimation
+        {
+            get
+            {
+                return cbAutomaticSaveAnimation.Checked;
+            }
+        }
+
+
         /// <summary>
         /// Neuzeichnen über das übergeordentete Control.
         /// </summary>
@@ -266,6 +284,7 @@ namespace Fractrace
                     return;
                 }
             }
+
             if (mPosterMode)
             {
                 DrawNextPosterPart();

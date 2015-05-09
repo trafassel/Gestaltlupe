@@ -66,6 +66,8 @@ namespace Fractrace.Basic
             {
                 ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
             }
+            ParameterDict.Exemplar.SetValue("Intern.Filter", "", false);
+
         }
 
 

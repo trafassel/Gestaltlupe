@@ -13,12 +13,7 @@ namespace Fractrace.Basic
     {
 
 
-        /// <summary>
-        /// Save ParameterDict and return new time (as event count). 
-        /// </summary>
-        /// <param name="dict"></param>
-        /// <returns></returns>
-        public int Save()
+        public int Save(string fileName)
         {
             lock (refCountLock)
             {
@@ -28,7 +23,10 @@ namespace Fractrace.Basic
                     foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
                     {
                         dict[entry.Key] = entry.Value;
+
                     }
+                    if (fileName != "")
+                        dict["Intern.FileName"] = fileName;
                     mHistory.Add(dict);
                     return Time;
                 }
@@ -38,6 +36,16 @@ namespace Fractrace.Basic
                 }
             }
             return 0;
+        }
+
+        /// <summary>
+        /// Save ParameterDict and return new time (as event count). 
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <returns></returns>
+        public int Save()
+        {
+            return Save("");
         }
 
 
@@ -61,6 +69,12 @@ namespace Fractrace.Basic
                 // ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
                 ParameterDict.Exemplar[entry.Key] = entry.Value;
             }
+        }
+
+
+        public System.Collections.Generic.Dictionary<string, string> Get(int index)
+        {
+            return mHistory[index];
         }
 
 

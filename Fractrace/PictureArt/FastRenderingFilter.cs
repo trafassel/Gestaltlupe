@@ -19,6 +19,8 @@ namespace Fractrace.PictureArt
             ParameterDict.Exemplar.SetValue("Renderer.ShadowNumber","11",false);
             ParameterDict.Exemplar.SetValue("Renderer.AmbientIntensity","0",false);
             ParameterDict.Exemplar.SetValue("Renderer.SmoothNormalLevel","3",false);
+
+            ParameterDict.Exemplar.SetValue("Intern.Filter", "FastRenderingFilter", false);
         }
 
 

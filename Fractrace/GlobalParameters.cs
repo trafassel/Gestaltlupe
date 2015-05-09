@@ -16,6 +16,8 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
+            ParameterDict.Exemplar["Intern.Version"] = "1.3.0";
+
             // Minimal X-Value.
             ParameterDict.Exemplar["Border.Min.x"] = "-1.5";
             ParameterDict.Exemplar["Border.Min.x.PARAMETERINFO.Description"] = "Minimal X-Value.";

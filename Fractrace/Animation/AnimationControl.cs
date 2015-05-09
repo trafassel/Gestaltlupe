@@ -19,6 +19,32 @@ namespace Fractrace.Animation
         public AnimationControl()
         {
             InitializeComponent();
+            MainAnimationControl = this;
+        }
+
+
+        /// <summary>
+        /// Global instance of this unique window.
+        /// </summary>
+        public static AnimationControl MainAnimationControl = null;
+
+
+        /// <summary>
+        /// Append Entry to Animation
+        /// </summary>
+        public void AddCurrentHistoryEntry()
+        {
+            AnimationPoint point = new AnimationPoint();
+            point.Time = dataPerTime.CurrentTime;
+            point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");
+            string comment = "";
+            string file = dataPerTime.Get(point.Time)["Intern.FileName"];
+            if (file != "")
+            {
+                file = System.IO.Path.GetFileNameWithoutExtension(file);
+                comment = " #File " + file;
+            }
+            tbAnimationDescription.Text = tbAnimationDescription.Text + System.Environment.NewLine + "Run Steps " + point.Steps.ToString() + " Time " + point.Time.ToString() + comment ;
         }
 
 
@@ -64,11 +90,7 @@ namespace Fractrace.Animation
         /// <param name="e"></param>
         private void btnAddRow_Click(object sender, EventArgs e)
         {
-            // TODO: aktuelles Bild in History speichern
-            AnimationPoint point = new AnimationPoint();
-            point.Time = dataPerTime.CurrentTime;
-            point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");
-            tbAnimationDescription.Text = tbAnimationDescription.Text + System.Environment.NewLine + "Run Steps " + point.Steps.ToString() + " Time " + point.Time.ToString();
+            AddCurrentHistoryEntry();
         }
 
 

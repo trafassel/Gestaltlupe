@@ -809,11 +809,24 @@ namespace Fractrace
                 string fileName = FileSystem.Exemplar.GetFileName("pic.png");
                 this.Text = fileName;
                 pictureBox1.Image.Save(fileName);
-                ParameterInput.MainParameterInput.SaveHistory();
+                ParameterInput.MainParameterInput.SaveHistory(fileName);
+                if (Fractrace.ParameterInput.MainParameterInput.AutomaticSaveInAnimation)
+                {
+                    if (ParameterDict.Exemplar["Intern.Filter"] == "" && lastAnimationParameterHash != ParameterDict.Exemplar.GetHash(""))
+                    {
+                        Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
+                        lastAnimationParameterHash = ParameterDict.Exemplar.GetHash("");
+                    }
+                }
                 btnRepaint.Enabled = true;
-
             }
         }
+
+
+        /// <summary>
+        /// To determine, if parameter has changed since last saved animation step.
+        /// </summary>
+        string lastAnimationParameterHash = "";
 
 
         /// <summary>
