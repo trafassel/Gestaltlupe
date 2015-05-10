@@ -33,6 +33,9 @@
             this.btnAddRow = new System.Windows.Forms.Button();
             this.pnlPreview = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tbPreviewSize = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -46,15 +49,18 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.pnlSteps.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.pnlAnimationEntries.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -66,7 +72,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel2
@@ -83,7 +89,7 @@
             this.pnlSteps.Controls.Add(this.splitContainer2);
             this.pnlSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSteps.Location = new System.Drawing.Point(0, 0);
-            this.pnlSteps.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSteps.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSteps.Name = "pnlSteps";
             this.pnlSteps.Size = new System.Drawing.Size(420, 234);
             this.pnlSteps.TabIndex = 1;
@@ -92,7 +98,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -114,7 +120,7 @@
             this.pnlAnimationEntries.Controls.Add(this.tbAnimationDescription);
             this.pnlAnimationEntries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAnimationEntries.Location = new System.Drawing.Point(0, 0);
-            this.pnlAnimationEntries.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlAnimationEntries.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAnimationEntries.Name = "pnlAnimationEntries";
             this.pnlAnimationEntries.Size = new System.Drawing.Size(169, 216);
             this.pnlAnimationEntries.TabIndex = 2;
@@ -123,12 +129,13 @@
             // 
             this.tbAnimationDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbAnimationDescription.Location = new System.Drawing.Point(0, 0);
-            this.tbAnimationDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbAnimationDescription.Margin = new System.Windows.Forms.Padding(2);
             this.tbAnimationDescription.Multiline = true;
             this.tbAnimationDescription.Name = "tbAnimationDescription";
             this.tbAnimationDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbAnimationDescription.Size = new System.Drawing.Size(169, 216);
             this.tbAnimationDescription.TabIndex = 0;
+            this.tbAnimationDescription.WordWrap = false;
             // 
             // panel2
             // 
@@ -136,7 +143,7 @@
             this.panel2.Controls.Add(this.btnAddRow);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 216);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(169, 18);
             this.panel2.TabIndex = 0;
@@ -144,7 +151,7 @@
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(0, 0);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(56, 19);
             this.btnDelete.TabIndex = 0;
@@ -155,7 +162,7 @@
             // 
             this.btnAddRow.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnAddRow.Location = new System.Drawing.Point(0, 0);
-            this.btnAddRow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddRow.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddRow.Name = "btnAddRow";
             this.btnAddRow.Size = new System.Drawing.Size(24, 18);
             this.btnAddRow.TabIndex = 0;
@@ -165,23 +172,60 @@
             // 
             // pnlPreview
             // 
+            this.pnlPreview.AutoScroll = true;
             this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPreview.Location = new System.Drawing.Point(0, 0);
-            this.pnlPreview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPreview.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPreview.Name = "pnlPreview";
             this.pnlPreview.Size = new System.Drawing.Size(248, 150);
             this.pnlPreview.TabIndex = 2;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.panel6);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 150);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(248, 84);
             this.panel4.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tbPreviewSize);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(115, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(4);
+            this.panel3.Size = new System.Drawing.Size(133, 28);
+            this.panel3.TabIndex = 2;
+            // 
+            // tbPreviewSize
+            // 
+            this.tbPreviewSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPreviewSize.Location = new System.Drawing.Point(72, 4);
+            this.tbPreviewSize.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPreviewSize.Name = "tbPreviewSize";
+            this.tbPreviewSize.Size = new System.Drawing.Size(57, 20);
+            this.tbPreviewSize.TabIndex = 1;
+            this.tbPreviewSize.Text = "150";
+            this.tbPreviewSize.TextChanged += new System.EventHandler(this.tbPreviewSize_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Preview Size";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel7
             // 
@@ -189,7 +233,7 @@
             this.panel7.Controls.Add(this.panel10);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel7.Location = new System.Drawing.Point(0, 28);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(248, 24);
             this.panel7.TabIndex = 1;
@@ -198,7 +242,7 @@
             // 
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(0, 0);
-            this.panel11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel11.Margin = new System.Windows.Forms.Padding(2);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(115, 24);
             this.panel11.TabIndex = 1;
@@ -209,9 +253,9 @@
             this.panel10.Controls.Add(this.label1);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel10.Location = new System.Drawing.Point(115, 0);
-            this.panel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
-            this.panel10.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel10.Padding = new System.Windows.Forms.Padding(4);
             this.panel10.Size = new System.Drawing.Size(133, 24);
             this.panel10.TabIndex = 0;
             // 
@@ -219,7 +263,7 @@
             // 
             this.tbSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSize.Location = new System.Drawing.Point(31, 4);
-            this.tbSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSize.Margin = new System.Windows.Forms.Padding(2);
             this.tbSize.Name = "tbSize";
             this.tbSize.Size = new System.Drawing.Size(98, 20);
             this.tbSize.TabIndex = 1;
@@ -245,9 +289,9 @@
             this.panel6.Controls.Add(this.btnStart);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(0, 52);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel6.Padding = new System.Windows.Forms.Padding(4);
             this.panel6.Size = new System.Drawing.Size(248, 32);
             this.panel6.TabIndex = 0;
             // 
@@ -256,7 +300,7 @@
             this.panel9.Controls.Add(this.lblAnimationProgress);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(4, 4);
-            this.panel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(76, 24);
             this.panel9.TabIndex = 4;
@@ -276,7 +320,7 @@
             this.panel8.Controls.Add(this.btnPreview);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel8.Location = new System.Drawing.Point(80, 4);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(61, 24);
             this.panel8.TabIndex = 3;
@@ -285,7 +329,7 @@
             // 
             this.btnPreview.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnPreview.Location = new System.Drawing.Point(5, 0);
-            this.btnPreview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(2);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(56, 24);
             this.btnPreview.TabIndex = 0;
@@ -297,7 +341,7 @@
             // 
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStop.Location = new System.Drawing.Point(141, 4);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(51, 24);
             this.btnStop.TabIndex = 1;
@@ -310,7 +354,7 @@
             // 
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStart.Location = new System.Drawing.Point(192, 4);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(52, 24);
             this.btnStart.TabIndex = 0;
@@ -322,7 +366,7 @@
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 234);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(420, 10);
             this.panel1.TabIndex = 0;
@@ -332,19 +376,23 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AnimationControl";
             this.Size = new System.Drawing.Size(448, 244);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.pnlSteps.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.pnlAnimationEntries.ResumeLayout(false);
             this.pnlAnimationEntries.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
@@ -381,5 +429,8 @@
         private System.Windows.Forms.Panel pnlPreview;
         private System.Windows.Forms.Panel pnlAnimationEntries;
         private System.Windows.Forms.TextBox tbAnimationDescription;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox tbPreviewSize;
+        private System.Windows.Forms.Label label2;
     }
 }

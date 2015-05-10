@@ -137,6 +137,12 @@
       <DependentUpon>AnimationControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Animation\AnimationPoint.cs" />
+    <Compile Include="Animation\AnimationStepPreview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Animation\AnimationStepPreview.Designer.cs">
+      <DependentUpon>AnimationStepPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Animation\AnimationSteps.cs" />
     <Compile Include="Basic\DataViewBoolElement.cs">
       <SubType>UserControl</SubType>
@@ -260,6 +266,9 @@
     <Compile Include="X3dExporter.cs" />
     <EmbeddedResource Include="Animation\AnimationControl.resx">
       <DependentUpon>AnimationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Animation\AnimationStepPreview.resx">
+      <DependentUpon>AnimationStepPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\DataViewControl.resx">
       <DependentUpon>DataViewControl.cs</DependentUpon>

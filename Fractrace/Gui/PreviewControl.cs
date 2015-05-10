@@ -149,6 +149,11 @@ namespace Fractrace
             forceRedraw = false;
             btnPreview.Enabled = false;
             inDrawing = true;
+            if (btnPreview.Width < 1 && btnPreview.Height<1)
+            {
+                Form1.PublicForm.CurrentUpdateStep = 0;
+                return;
+            }
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(btnPreview.BackgroundImage);

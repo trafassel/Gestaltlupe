@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Exemplar["Intern.Version"] = "1.3.0";
+            ParameterDict.Exemplar["Intern.Version"] = "2";
 
             // Minimal X-Value.
             ParameterDict.Exemplar["Border.Min.x"] = "-1.5";
@@ -83,6 +83,7 @@ namespace Fractrace
             // Number of iterations used in the formula.
             ParameterDict.Exemplar["Formula.Static.Cycles"] = "8";
             ParameterDict.Exemplar["Formula.Static.Cycles.PARAMETERINFO.Description"] = "Number of iterations used in the formula.";
+            ParameterDict.Exemplar["Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON"] = "forward,backward,";
 
             // Number of iterations used in the formula, if the inside of the 3D object is rendered.
             ParameterDict.Exemplar["Formula.Static.MinCycle"] = "0";

@@ -42,11 +42,30 @@ namespace Fractrace.Animation
             if (file != "")
             {
                 file = System.IO.Path.GetFileNameWithoutExtension(file);
-                comment = " #File " + file;
+                comment = "         # File " + file;
             }
             tbAnimationDescription.Text = tbAnimationDescription.Text + System.Environment.NewLine + "Run Steps " + point.Steps.ToString() + " Time " + point.Time.ToString() + comment ;
         }
 
+
+        /// <summary>
+        /// Remov entry with given time from timeline.
+        /// </summary>
+        /// <param name="time"></param>
+        public void RemoveStep(int time)
+        {
+            // Remove Entry with given time from Text.
+            string animtext = tbAnimationDescription.Text;
+            string[] stringSeparators = new string[] { System.Environment.NewLine };
+            string[] lines = animtext.Split(stringSeparators, StringSplitOptions.None);
+            StringBuilder updatedText =new StringBuilder();
+            foreach (string line in lines)
+            {
+                if (!line.Contains(" Time " + time.ToString() + " "))
+                    updatedText.AppendLine(line);
+            }
+            tbAnimationDescription.Text = updatedText.ToString();
+        }
 
 
         /// <summary>
@@ -60,7 +79,9 @@ namespace Fractrace.Animation
             }
         }
 
+
         static bool inAnimation = false; 
+
 
         /// <summary>
         /// Verweis auf die global verwaltete Historie.
@@ -227,6 +248,7 @@ namespace Fractrace.Animation
                     ParameterInput.MainParameterInput.DeactivatePreview();
                     Form1.PublicForm.ComputeOneStep();
                     lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
+                    StepPreviewControls[from].UpdateComputedStep(i);
                     // Auf Beendigung der Berechnung warten.
                     if (animationAbort)
                         break;
@@ -286,8 +308,6 @@ namespace Fractrace.Animation
         }
 
 
-
-
         /// <summary>
         /// Die Einzelereignisse der Animation werden gezeigt.
         /// </summary>
@@ -304,7 +324,9 @@ namespace Fractrace.Animation
 
         private void RenderPreview()
         {
+            CreateAnimationSteps();
             pnlPreview.Controls.Clear();
+            StepPreviewControls.Clear();
             inRenderingPreview = true;
             currentPreviewStep = 0;
             mPreview1_RenderingEnds();
@@ -344,17 +366,39 @@ namespace Fractrace.Animation
             */
 
             PreviewControl mPreview1 = new Fractrace.PreviewControl();
-            mPreview1.Width = 50;
-            mPreview1.Height = 50;
-            mPreview1.Location = new System.Drawing.Point(50 * currentPreviewStep, 0);
+            mPreview1.Width = previewWidth ;
+            mPreview1.Height = previewHeight;
+            mPreview1.Location = new System.Drawing.Point(previewWidth * currentPreviewStep, 0);
             pnlPreview.Controls.Add(mPreview1);
             mPreview1.ShowProgressBar = false;
             mPreview1.RenderOnClick = false;
+
+            AnimationStepPreview stepInfo = new AnimationStepPreview();
+            stepInfo.Width = previewWidth;
+            stepInfo.Height = previewHeight;
+            stepInfo.Location = new System.Drawing.Point(previewWidth * currentPreviewStep, previewHeight);
+            pnlPreview.Controls.Add(stepInfo);
+            int steps=0;
+            if(mAnimationSteps.Steps.Count>currentPreviewStep+1)
+            steps = mAnimationSteps.Steps[currentPreviewStep+1].Steps;
+            stepInfo.Init(ap.Time, steps);
+            StepPreviewControls[ap.Time] = stepInfo;
+            
 
             currentPreviewStep++;
             mPreview1.RenderingEnds += new PictureRenderingIsReady(mPreview1_RenderingEnds);
             mPreview1.Draw();
         }
+
+
+        Dictionary<int, AnimationStepPreview> StepPreviewControls = new Dictionary<int, AnimationStepPreview>();
+
+
+        int previewWidth = 50;
+
+
+        int previewHeight = 50;
+
 
         private void tbSize_TextChanged(object sender, EventArgs e)
         {
@@ -365,6 +409,31 @@ namespace Fractrace.Animation
             else
                 tbSize.ForeColor = Color.Red;
 
+
+        }
+
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void tbPreviewSize_TextChanged(object sender, EventArgs e)
+        {
+            int height = 0;
+            if (int.TryParse(tbPreviewSize.Text, out height))
+            {
+                if(height>10 && height <256)
+                    previewHeight = height;
+            }
+            int width = 0;
+            if (int.TryParse(tbPreviewSize.Text, out width))
+            {
+                if (width > 10 && width < 256)
+                    previewWidth = width;
+            }
 
         }
 
