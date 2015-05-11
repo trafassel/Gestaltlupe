@@ -56,6 +56,8 @@ namespace Fractrace.Animation
 
         public void UpdateComputedStep(int currentStep)
         {
+            if (steps < 1)
+                return;
 
             Pen p = new Pen(System.Drawing.Color.Green);
             double width = this.Width;

@@ -1152,6 +1152,12 @@ namespace Fractrace
         }
 
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
+        }
+
+
 
     }
 }
