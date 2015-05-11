@@ -185,18 +185,34 @@ namespace Fractrace.Animation
             animationAbort = false;
             lblAnimationProgress.Text = "run ...";
 
+            // Prepare AnimationHistory
+            ParameterHistory animationHistory = new ParameterHistory();
             for (int i = 1; i < mAnimationSteps.Steps.Count; i++)
             {
 
                 AnimationPoint ap1 = mAnimationSteps.Steps[i - 1];
                 AnimationPoint ap2 = mAnimationSteps.Steps[i];
-                ComputeAnimationPart(ap1.Time, ap2.Time, ap2.Steps);
+                dataPerTime.Load(ap1.Time);
+                ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
+                animationHistory.Save();
+                dataPerTime.Load(ap2.Time);
+                ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
+                animationHistory.Save();
+            }
+
+
+            for (int i = 1; i < mAnimationSteps.Steps.Count; i++)
+            {
+
+                AnimationPoint ap1 = mAnimationSteps.Steps[i - 1];
+                AnimationPoint ap2 = mAnimationSteps.Steps[i];
+                ComputeAnimationPart(ap1.Time, ap2.Time, ap2.Steps, animationHistory,i-1);
                 if (animationAbort)
                     break;
             }
             if (mAnimationSteps.Steps.Count > 0)
             {
-                ComputeAnimationPart(mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, 1);
+                ComputeAnimationPart(mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, 1, animationHistory, mAnimationSteps.Steps.Count-1);
             }
 
             btnStop.Visible = false;
@@ -213,22 +229,17 @@ namespace Fractrace.Animation
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <param name="steps"></param>
-        private void ComputeAnimationPart(int from, int to, int steps)
+        private void ComputeAnimationPart(int from, int to, int steps, ParameterHistory animationHistory, int historyIndex)
         {
-            ParameterHistory animationHistory = new ParameterHistory();
-            dataPerTime.Load(from);
-            // Größe festlegen:
-            ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-            animationHistory.Save();
-            dataPerTime.Load(to);
-            ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-            animationHistory.Save();
             lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString();
             for (int i = 0; i < steps && !animationAbort; i++)
             {
                 double r = 1.0 / steps * (double)i;
                 Application.DoEvents();
-                animationHistory.Load(r);
+                if(cbSmooth.Checked)
+                  animationHistory.LoadSmoothed(r + historyIndex);
+                else
+                  animationHistory.Load(r + historyIndex);
 
                 int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
                 if (updateSteps <= 0)
@@ -248,7 +259,8 @@ namespace Fractrace.Animation
                     ParameterInput.MainParameterInput.DeactivatePreview();
                     Form1.PublicForm.ComputeOneStep();
                     lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
-                    StepPreviewControls[from].UpdateComputedStep(i);
+                    if(StepPreviewControls.ContainsKey(from))
+                        StepPreviewControls[from].UpdateComputedStep(i);
                     // Auf Beendigung der Berechnung warten.
                     if (animationAbort)
                         break;
@@ -324,6 +336,19 @@ namespace Fractrace.Animation
 
         private void RenderPreview()
         {
+            int height = 0;
+            if (int.TryParse(tbPreviewSize.Text, out height))
+            {
+                if (height > 10 && height < 256)
+                    previewHeight = height;
+            }
+            int width = 0;
+            if (int.TryParse(tbPreviewSize.Text, out width))
+            {
+                if (width > 10 && width < 256)
+                    previewWidth = width;
+            }
+
             CreateAnimationSteps();
             pnlPreview.Controls.Clear();
             StepPreviewControls.Clear();
@@ -417,26 +442,6 @@ namespace Fractrace.Animation
         {
 
         }
-
-
-
-        private void tbPreviewSize_TextChanged(object sender, EventArgs e)
-        {
-            int height = 0;
-            if (int.TryParse(tbPreviewSize.Text, out height))
-            {
-                if(height>10 && height <256)
-                    previewHeight = height;
-            }
-            int width = 0;
-            if (int.TryParse(tbPreviewSize.Text, out width))
-            {
-                if (width > 10 && width < 256)
-                    previewWidth = width;
-            }
-
-        }
-
 
 
 
