@@ -166,15 +166,19 @@ namespace Fractrace.Basic
                         lastlastDouble = GetDouble(indexAsInt + 2, entry.Key);
                     double t = (index - indexAsInt);
 
+                    double pdiff = lastDouble - firstDouble;
+
                     double p0 = firstDouble;
-                    double p1 = firstDouble + (firstDouble - firstfirstDouble) * 1.0 / 3.0;
-                    double p2 = lastDouble - (lastlastDouble - lastDouble) * 1.0 / 3.0;
+                    double p1 = firstDouble + ((firstDouble - firstfirstDouble) +pdiff) / 3.0;
+                    double p2 = lastDouble + (-(lastlastDouble - lastDouble) +2.0*pdiff) / 3.0;
                     double p3 = lastDouble;
 
                     double tm = 1 - t;
                     double tm2 = tm * tm;
                     double t2 = t * t;
                     double val = tm2 * tm * p0 + 3.0 * tm2 * t * p1 + 3.0 * tm * t2 * p2 + t2 * t * p3;
+
+                    
                     ParameterDict.Exemplar.SetDouble(entry.Key, val);
                 }
                 else
