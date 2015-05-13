@@ -173,9 +173,12 @@ namespace Fractrace.Basic
                     double pdiff = lastDouble - firstDouble;
 
                     double p0 = firstDouble;
-                    double p1 = firstDouble + ((firstDouble - firstfirstDouble) +pdiff) / 3.0;
-                    double p2 = lastDouble + (-(lastlastDouble - lastDouble) +2.0*pdiff) / 3.0;
+                    double p1 = firstDouble + ((firstDouble - firstfirstDouble) + pdiff) / 6.0;
+                    double p2 = lastDouble - ((lastlastDouble - lastDouble) +pdiff) / 6.0;
                     double p3 = lastDouble;
+                    // linear:
+                    //double p1 = ((firstDouble - firstfirstDouble) + pdiff) / 3.0;
+                    //double p2 = (-(lastlastDouble - lastDouble) + 2.0 * pdiff) / 3.0;
 
                     double tm = 1 - t;
                     double tm2 = tm * tm;

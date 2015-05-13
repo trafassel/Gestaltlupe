@@ -467,7 +467,7 @@ namespace Fractrace
 
 
             // Update with old Data don't makes sense with raster > 2 
-            if (mOldData != null)
+            //if (mOldData != null)
             {
                 raster = 1;
             }
@@ -551,6 +551,8 @@ namespace Fractrace
 
                         xx = xschl;
                         yy = MAXZ_ITER - zschl;
+                        if (double.IsNaN(x) )
+                            return ;
 
                         // Used for better start values in update iteration
                         double yAdd = rand.NextDouble() * yd;
@@ -636,7 +638,8 @@ namespace Fractrace
                                         y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl) / (raster);
 
                                         y += yAdd;
-
+                                        if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
+                                            return;
 
                                         fa1 = 0;
 
@@ -783,7 +786,8 @@ namespace Fractrace
                                                         pixelInfo.frontLight = -fa1;
                                                         pixelInfo.iterations = usedCycles;
                                                         PData.Points[xx, yy] = pixelInfo;
-
+                                                        if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
+                                                            return;
 
                                                         cycleAdd = minCycle;
                                                         fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,

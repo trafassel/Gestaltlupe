@@ -991,6 +991,10 @@ namespace Fractrace
                double wix, double wiy, double wiz,
                double jx, double jy, double jz, double jzz, int formula, bool invers)
         {
+            if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
+                return -1;
+
+
 
             old_jx = jx;
             old_jy = jy;
