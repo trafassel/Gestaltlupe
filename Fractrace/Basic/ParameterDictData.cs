@@ -13,6 +13,9 @@ namespace Fractrace.Basic
     {
 
 
+        /// <summary>
+        /// Save ParameterDict and return new time (as event count). 
+        /// </summary>
         public int Save(string fileName)
         {
             lock (refCountLock)
@@ -37,6 +40,7 @@ namespace Fractrace.Basic
             }
             return 0;
         }
+
 
         /// <summary>
         /// Save ParameterDict and return new time (as event count). 

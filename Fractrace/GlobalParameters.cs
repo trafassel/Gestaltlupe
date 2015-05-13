@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Exemplar["Intern.Version"] = "2";
+            ParameterDict.Exemplar["Intern.Version"] = "3";
 
             // Minimal X-Value.
             ParameterDict.Exemplar["Border.Min.x"] = "-1.5";
@@ -201,6 +201,9 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Exemplar["View.PosterZ"] = "0";
             ParameterDict.Exemplar["View.PosterZ.PARAMETERINFO.VIEW.Invisible"] = "1";
 
+            
+            
+
             // Number of update steps for better rendering quality.  
             ParameterDict.Exemplar["View.UpdateSteps"] = "3";
             ParameterDict.Exemplar["View.UpdateSteps.PARAMETERINFO.Description"] = " Number of update steps for better rendering quality.";
@@ -231,6 +234,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
             ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Description"] = " Activates Background darkening.";
+
+            ParameterDict.Exemplar["Renderer.SchadowGlow"] = "0.9";
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Exemplar["Renderer.ShadowNumber"] = "11";

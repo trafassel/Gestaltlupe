@@ -780,7 +780,8 @@ namespace Fractrace.PictureArt
         protected virtual void CreateShadowInfo()
         {
             // Noch nicht öffentliche Parameter:
-
+            Random rand = new Random();
+            double glow = ParameterDict.Exemplar.GetDouble("Render.SchadowGlow");
             // Drei "Schattenlichtquellen"
             // Eine für die Dunklen Tiefen
             // Eine für die breite Normalasicht
@@ -1117,12 +1118,12 @@ namespace Fractrace.PictureArt
                             if (i < pData.Width - currentIntXval && j < pData.Height - currentIntYval)
                             {
                                 double localShadow = shadowInfo11[i + currentIntXval, j + currentIntYval] - ydh;
-                                if (localShadow > shadowInfo11[i, j])
+                                if (localShadow > shadowInfo11[i, j] && (rand.NextDouble() < glow))
                                 {
                                     shadowInfo11[i, j] = localShadow;
                                 }
                                 localShadow = shadowInfo11sharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
-                                if (localShadow > shadowInfo11sharp[i, j])
+                                if (localShadow > shadowInfo11sharp[i, j] && (rand.NextDouble() < glow))
                                 {
                                     shadowInfo11sharp[i, j] = localShadow;
                                 }
@@ -1135,12 +1136,12 @@ namespace Fractrace.PictureArt
                             if (i < pData.Width - currentIntXval && j >= currentIntYval)
                             {
                                 double localShadow = shadowInfo01[i + currentIntXval, j - currentIntYval] - ydh;
-                                if (localShadow > shadowInfo01[i, j])
+                                if (localShadow > shadowInfo01[i, j] && (rand.NextDouble() < glow))
                                 {
                                     shadowInfo01[i, j] = localShadow;
                                 }
                                 localShadow = shadowInfo01sharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                if (localShadow > shadowInfo01sharp[i, j])
+                                if (localShadow > shadowInfo01sharp[i, j] && (rand.NextDouble() < glow))
                                 {
                                     shadowInfo01sharp[i, j] = localShadow;
                                 }
@@ -1158,10 +1159,10 @@ namespace Fractrace.PictureArt
                             if (i >= currentIntXval && j < pData.Height - currentIntYval)
                             {
                                 double localShadow = shadowInfo10[i - currentIntXval, j + currentIntYval] - ydv;
-                                if (localShadow > shadowInfo10[i, j])
+                                if (localShadow > shadowInfo10[i, j] && (rand.NextDouble() < glow))
                                     shadowInfo10[i, j] = localShadow;
                                 localShadow = shadowInfo10sharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
-                                if (localShadow > shadowInfo10sharp[i, j])
+                                if (localShadow > shadowInfo10sharp[i, j] && (rand.NextDouble() < glow))
                                     shadowInfo10sharp[i, j] = localShadow;
                             }
                         }
@@ -1172,10 +1173,10 @@ namespace Fractrace.PictureArt
                             if (i >= currentIntXval && j >= currentIntYval)
                             {
                                 double localShadow = shadowInfo00[i - currentIntXval, j - currentIntYval] - ydh;
-                                if (localShadow > shadowInfo00[i, j])
+                                if (localShadow > shadowInfo00[i, j] && (rand.NextDouble() < glow))
                                     shadowInfo00[i, j] = localShadow;
                                 localShadow = shadowInfo00sharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                if (localShadow > shadowInfo00sharp[i, j])
+                                if (localShadow > shadowInfo00sharp[i, j] && (rand.NextDouble() < glow))
                                     shadowInfo00sharp[i, j] = localShadow;
                             }
                         }

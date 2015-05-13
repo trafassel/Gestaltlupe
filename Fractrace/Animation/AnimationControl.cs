@@ -187,15 +187,10 @@ namespace Fractrace.Animation
 
             // Prepare AnimationHistory
             ParameterHistory animationHistory = new ParameterHistory();
-            for (int i = 1; i < mAnimationSteps.Steps.Count; i++)
+            for (int i = 0; i < mAnimationSteps.Steps.Count; i++)
             {
-
-                AnimationPoint ap1 = mAnimationSteps.Steps[i - 1];
-                AnimationPoint ap2 = mAnimationSteps.Steps[i];
-                dataPerTime.Load(ap1.Time);
-                ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-                animationHistory.Save();
-                dataPerTime.Load(ap2.Time);
+                AnimationPoint ap = mAnimationSteps.Steps[i];
+                dataPerTime.Load(ap.Time);
                 ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
                 animationHistory.Save();
             }
