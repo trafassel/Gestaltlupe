@@ -34,6 +34,17 @@ namespace Fractrace
 
 
         /// <summary>
+        /// get small preview control.
+        /// </summary>
+        public Fractrace.PreviewControl MainPreviewControl
+        {
+            get {
+                return this.preview2;
+            }
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ParameterInput"/> class.
         /// </summary>
         public ParameterInput()

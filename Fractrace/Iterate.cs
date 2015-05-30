@@ -231,13 +231,9 @@ namespace Fractrace
             m_screensize = screensize;
             m_formula = formula;
             m_perspective = perspective;
-
             availableY = 0;
 
             mTransformUpdate = transformUpdate;
-
-            // If all formula and view parameters stay the same, there is no need to compute the picture.
-
 
             int noOfThreads = ParameterDict.Exemplar.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
@@ -248,7 +244,6 @@ namespace Fractrace
             }
             startCount = noOfThreads;
             PData = new PictureData(width, height);
-
             for (int i = 0; i < noOfThreads; i++)
             {
                 System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(Start);
@@ -259,7 +254,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// ruft Generate(m_act_val,  m_zyklen,  m_raster,  m_screensize,  m_formula,  m_perspective) auf.
+        /// call Generate(m_act_val,  m_zyklen,  m_raster,  m_screensize,  m_formula,  m_perspective) auf.
         /// </summary>
         protected void Start()
         {
@@ -465,12 +460,7 @@ namespace Fractrace
             wiy = act_val.arc.y;
             wiz = act_val.arc.z;
 
-
-            // Update with old Data don't makes sense with raster > 2 
-            //if (mOldData != null)
-            {
-                raster = 1;
-            }
+            raster = 1;
 
             xd = raster * (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
             yd = raster * (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
@@ -480,13 +470,10 @@ namespace Fractrace
             if (mOldData != null)
             {
                 yd = yd / (mUpdateCount);
-
-                //raster = 1;
                 if (mUpdateCount < 5)
                 {
                     MAXY_ITER *= mUpdateCount;
                 }
-
             }
             if (mTransformUpdate)
             {
@@ -895,7 +882,6 @@ namespace Fractrace
                                 if (mOldPictureData != null)
                                 {
                                     PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
-                                    // TODO:  
                                     GData.ColorInfo2[xx, yy] = mOldData.ColorInfo2[xx, yy];
                                 }
                             }

@@ -52,13 +52,10 @@ namespace Fractrace.DataTypes
             arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
             arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
         }
-
-
         public XYZTupel initial_tupel = null;
         public XYZTupel start_tupel = null;
         public XYZTupel end_tupel = null;
         public XYZTupel arc = null;
-        public void print() { }
-
     }
+
 }

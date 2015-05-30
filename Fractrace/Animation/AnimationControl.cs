@@ -141,6 +141,7 @@ namespace Fractrace.Animation
         private void CreateAnimationSteps(string animationDescription)
         {
             mAnimationSteps.Steps.Clear();
+
             string tempstr = animationDescription.Replace(System.Environment.NewLine, " ");
             //string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine, " ");
             string[] entries = tempstr.Split(' ');
@@ -335,6 +336,7 @@ namespace Fractrace.Animation
         /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            btnPreview.Enabled = false;
             RenderPreview();
         }
 
@@ -382,21 +384,16 @@ namespace Fractrace.Animation
             {
                 inRenderingPreview = false;
                 currentPreviewStep = 0;
+                btnPreview.Enabled = true;
                 return;
             }
             if (!inRenderingPreview)
                 return;
-            // Die Daten von currentPreviewStep laden:
+            // Load data of currentPreviewStep:
             AnimationPoint ap = mAnimationSteps.Steps[currentPreviewStep];
             ParameterHistory animationHistory = new ParameterHistory();
             dataPerTime.Load(ap.Time);
             animationHistory.Save();
-            /* das nur für Zwischenschritte */
-            /*
-            dataPerTime.Load(to);
-            ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
-            animationHistory.Save();
-            */
 
             PreviewControl mPreview1 = new Fractrace.PreviewControl();
             mPreview1.Width = previewWidth ;
@@ -412,12 +409,10 @@ namespace Fractrace.Animation
             stepInfo.Location = new System.Drawing.Point(previewWidth * currentPreviewStep, previewHeight);
             pnlPreview.Controls.Add(stepInfo);
             int steps=0;
-            if(mAnimationSteps.Steps.Count>currentPreviewStep+1)
-            steps = mAnimationSteps.Steps[currentPreviewStep+1].Steps;
+            if ( mAnimationSteps.Steps.Count>currentPreviewStep+1 )
+              steps = mAnimationSteps.Steps[currentPreviewStep+1].Steps;
             stepInfo.Init(ap.Time, steps);
             StepPreviewControls[ap.Time] = stepInfo;
-            
-
             currentPreviewStep++;
             mPreview1.RenderingEnds += new PictureRenderingIsReady(mPreview1_RenderingEnds);
             mPreview1.Draw();

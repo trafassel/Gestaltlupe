@@ -38,11 +38,11 @@ namespace Fractrace
             this.btnPreview.Size = new System.Drawing.Size(50, 40);
             this.btnPreview.TabIndex = 1;
             this.btnPreview.UseVisualStyleBackColor = true;
-            //this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(labelImage);
         }
+
 
         public Button PreviewButton
         {
@@ -58,42 +58,14 @@ namespace Fractrace
         /// </summary>
         public void Clear()
         {
-
-
-            /*
-            if (mPictureBox == null) {
-                this.BackColor = Color.Red;
-                return;
-            }
-
-
-             //   Init();
-             */
-
-
-
-
-            //Image labelImage = new Bitmap((int)(Width), (int)(Height));
-            //mPictureBox.Image = labelImage;
             Pen p = new Pen(Color.Red);
             p.Width = 3;
-
-
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
-
-            //btnPreview.BackColor = Color.Red;
-            /*
-            Graphics grLabel = Graphics.FromImage(btnPreview.Image);
-            grLabel.DrawRectangle(p, 2, 2, (float)20, (float)20);
-            Application.DoEvents();
-             * */
             grLabel.DrawRectangle(p, 0, 0, (float)btnPreview.Width, (float)btnPreview.Height);
             this.Refresh();
-            // Redraw();
         }
-
 
 
         /// <summary>
@@ -107,8 +79,8 @@ namespace Fractrace
                 StartDrawing();
         }
 
-        protected bool mRenderOnClick = true;
 
+        protected bool mRenderOnClick = true;
 
 
         /// <summary>
@@ -137,13 +109,12 @@ namespace Fractrace
             grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
         }
 
+
         /// <summary>
         /// Neuzeichnen.
         /// </summary>
         protected override void StartDrawing()
         {
-
-            // TODO: nur, wenn preview läuft
             Form1.PublicForm.Stop();
 
             forceRedraw = false;
@@ -222,7 +193,7 @@ namespace Fractrace
             }
             btnPreview.Enabled = true;
             inDrawing = false;
-            if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview"))
+            if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl )
             {
                 ParameterInput.MainParameterInput.ComputePreview();
             }
