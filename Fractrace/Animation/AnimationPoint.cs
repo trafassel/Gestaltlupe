@@ -12,6 +12,11 @@ namespace Fractrace.Animation
     public class AnimationPoint
     {
 
+        /// <summary>
+        /// Filename (if exist)
+        /// </summary>
+        public string fileName = "";
+
         protected int mSteps = 0;
 
         /// <summary>

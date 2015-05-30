@@ -192,6 +192,7 @@
     <Compile Include="DataTypes\XYZTupel .cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="Geometry\Navigator.cs" />
+    <Compile Include="Scheduler\GrandScheduler.cs" />
     <Compile Include="Gui\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

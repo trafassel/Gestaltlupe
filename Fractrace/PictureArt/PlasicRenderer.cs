@@ -781,7 +781,7 @@ namespace Fractrace.PictureArt
         {
             // Noch nicht öffentliche Parameter:
             Random rand = new Random();
-            double glow = ParameterDict.Exemplar.GetDouble("Renderer.SchadowGlow");
+            double glow = ParameterDict.Exemplar.GetDouble("Renderer.ShadowGlow");
             // Drei "Schattenlichtquellen"
             // Eine für die Dunklen Tiefen
             // Eine für die breite Normalasicht

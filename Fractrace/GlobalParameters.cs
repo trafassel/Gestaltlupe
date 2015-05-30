@@ -233,9 +233,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // Activates Background darkening in PlasicRenderer
             ParameterDict.Exemplar["Renderer.UseDarken"] = "0";
             ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Description"] = " Activates Background darkening.";
+            ParameterDict.Exemplar["Renderer.UseDarken.PARAMETERINFO.Description"] = "Activates Background darkening.";
 
-            ParameterDict.Exemplar["Renderer.SchadowGlow"] = "0.9";
+            ParameterDict.Exemplar["Renderer.ShadowGlow"] = "0.94";
+            ParameterDict.Exemplar["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
+
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Exemplar["Renderer.ShadowNumber"] = "11";

@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.cbSmooth = new System.Windows.Forms.CheckBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,7 +50,8 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbSmooth = new System.Windows.Forms.CheckBox();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -76,6 +78,7 @@
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Panel1Collapsed = true;
             // 
             // splitContainer1.Panel2
             // 
@@ -93,7 +96,7 @@
             this.pnlSteps.Location = new System.Drawing.Point(0, 0);
             this.pnlSteps.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSteps.Name = "pnlSteps";
-            this.pnlSteps.Size = new System.Drawing.Size(755, 234);
+            this.pnlSteps.Size = new System.Drawing.Size(802, 234);
             this.pnlSteps.TabIndex = 1;
             // 
             // splitContainer2
@@ -112,8 +115,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlPreview);
             this.splitContainer2.Panel2.Controls.Add(this.panel4);
-            this.splitContainer2.Size = new System.Drawing.Size(755, 234);
-            this.splitContainer2.SplitterDistance = 303;
+            this.splitContainer2.Size = new System.Drawing.Size(802, 234);
+            this.splitContainer2.SplitterDistance = 321;
             this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -124,7 +127,7 @@
             this.pnlAnimationEntries.Location = new System.Drawing.Point(0, 0);
             this.pnlAnimationEntries.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAnimationEntries.Name = "pnlAnimationEntries";
-            this.pnlAnimationEntries.Size = new System.Drawing.Size(303, 216);
+            this.pnlAnimationEntries.Size = new System.Drawing.Size(321, 216);
             this.pnlAnimationEntries.TabIndex = 2;
             // 
             // tbAnimationDescription
@@ -135,7 +138,7 @@
             this.tbAnimationDescription.Multiline = true;
             this.tbAnimationDescription.Name = "tbAnimationDescription";
             this.tbAnimationDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbAnimationDescription.Size = new System.Drawing.Size(303, 216);
+            this.tbAnimationDescription.Size = new System.Drawing.Size(321, 216);
             this.tbAnimationDescription.TabIndex = 0;
             this.tbAnimationDescription.WordWrap = false;
             // 
@@ -147,7 +150,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 216);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(303, 18);
+            this.panel2.Size = new System.Drawing.Size(321, 18);
             this.panel2.TabIndex = 0;
             // 
             // btnDelete
@@ -179,7 +182,7 @@
             this.pnlPreview.Location = new System.Drawing.Point(0, 0);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.Size = new System.Drawing.Size(449, 150);
+            this.pnlPreview.Size = new System.Drawing.Size(478, 150);
             this.pnlPreview.TabIndex = 2;
             // 
             // panel4
@@ -191,7 +194,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 150);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(449, 84);
+            this.panel4.Size = new System.Drawing.Size(478, 84);
             this.panel4.TabIndex = 1;
             // 
             // panel3
@@ -199,11 +202,11 @@
             this.panel3.Controls.Add(this.tbPreviewSize);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(316, 0);
+            this.panel3.Location = new System.Drawing.Point(345, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(4);
-            this.panel3.Size = new System.Drawing.Size(133, 28);
+            this.panel3.Size = new System.Drawing.Size(133, 22);
             this.panel3.TabIndex = 2;
             // 
             // tbPreviewSize
@@ -233,33 +236,46 @@
             this.panel7.Controls.Add(this.panel11);
             this.panel7.Controls.Add(this.panel10);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 28);
+            this.panel7.Location = new System.Drawing.Point(0, 22);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(449, 24);
+            this.panel7.Size = new System.Drawing.Size(478, 30);
             this.panel7.TabIndex = 1;
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.btnSave);
+            this.panel11.Controls.Add(this.btnLoad);
             this.panel11.Controls.Add(this.cbSmooth);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Margin = new System.Windows.Forms.Padding(2);
             this.panel11.Name = "panel11";
             this.panel11.Padding = new System.Windows.Forms.Padding(3);
-            this.panel11.Size = new System.Drawing.Size(316, 24);
+            this.panel11.Size = new System.Drawing.Size(345, 30);
             this.panel11.TabIndex = 1;
+            // 
+            // cbSmooth
+            // 
+            this.cbSmooth.AutoSize = true;
+            this.cbSmooth.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cbSmooth.Location = new System.Drawing.Point(280, 3);
+            this.cbSmooth.Name = "cbSmooth";
+            this.cbSmooth.Size = new System.Drawing.Size(62, 24);
+            this.cbSmooth.TabIndex = 0;
+            this.cbSmooth.Text = "Smooth";
+            this.cbSmooth.UseVisualStyleBackColor = true;
             // 
             // panel10
             // 
             this.panel10.Controls.Add(this.tbSize);
             this.panel10.Controls.Add(this.label1);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(316, 0);
+            this.panel10.Location = new System.Drawing.Point(345, 0);
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
             this.panel10.Padding = new System.Windows.Forms.Padding(4);
-            this.panel10.Size = new System.Drawing.Size(133, 24);
+            this.panel10.Size = new System.Drawing.Size(133, 30);
             this.panel10.TabIndex = 0;
             // 
             // tbSize
@@ -295,7 +311,7 @@
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(4);
-            this.panel6.Size = new System.Drawing.Size(449, 32);
+            this.panel6.Size = new System.Drawing.Size(478, 32);
             this.panel6.TabIndex = 0;
             // 
             // panel9
@@ -305,7 +321,7 @@
             this.panel9.Location = new System.Drawing.Point(4, 4);
             this.panel9.Margin = new System.Windows.Forms.Padding(2);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(277, 24);
+            this.panel9.Size = new System.Drawing.Size(306, 24);
             this.panel9.TabIndex = 4;
             // 
             // lblAnimationProgress
@@ -322,7 +338,7 @@
             // 
             this.panel8.Controls.Add(this.btnPreview);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(281, 4);
+            this.panel8.Location = new System.Drawing.Point(310, 4);
             this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(61, 24);
@@ -343,7 +359,7 @@
             // btnStop
             // 
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStop.Location = new System.Drawing.Point(342, 4);
+            this.btnStop.Location = new System.Drawing.Point(371, 4);
             this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(51, 24);
@@ -356,7 +372,7 @@
             // btnStart
             // 
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStart.Location = new System.Drawing.Point(393, 4);
+            this.btnStart.Location = new System.Drawing.Point(422, 4);
             this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(52, 24);
@@ -371,19 +387,30 @@
             this.panel1.Location = new System.Drawing.Point(0, 234);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(755, 10);
+            this.panel1.Size = new System.Drawing.Size(802, 10);
             this.panel1.TabIndex = 0;
             // 
-            // cbSmooth
+            // btnLoad
             // 
-            this.cbSmooth.AutoSize = true;
-            this.cbSmooth.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cbSmooth.Location = new System.Drawing.Point(251, 3);
-            this.cbSmooth.Name = "cbSmooth";
-            this.cbSmooth.Size = new System.Drawing.Size(62, 18);
-            this.cbSmooth.TabIndex = 0;
-            this.cbSmooth.Text = "Smooth";
-            this.cbSmooth.UseVisualStyleBackColor = true;
+            this.btnLoad.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLoad.Location = new System.Drawing.Point(3, 3);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(63, 24);
+            this.btnLoad.TabIndex = 1;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSave.Location = new System.Drawing.Point(66, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(53, 24);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // AnimationControl
             // 
@@ -449,5 +476,7 @@
         private System.Windows.Forms.TextBox tbPreviewSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbSmooth;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnLoad;
     }
 }

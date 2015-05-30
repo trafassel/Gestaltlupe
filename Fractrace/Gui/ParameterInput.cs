@@ -99,6 +99,19 @@ namespace Fractrace
         }
 
 
+
+        /// <summary>
+        /// Get in historyControl used parameter history.
+        /// </summary>
+        public ParameterHistory History
+        {
+            get
+            {
+                return mHistory;
+            }
+        }
+
+
         /// <summary>
         /// Enthält die History der letzten Parameter
         /// </summary>
@@ -462,15 +475,21 @@ namespace Fractrace
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
-            od.Filter = "*.xml|*.xml;*.tomo|*.*|*.*";
+            od.Filter = "tomofile|*.xml;*.tomo;*.jpg;*.png|*.*|*.*";
             if (oldDirectory != "")
             {
                 od.InitialDirectory = oldDirectory;
             }
             if (od.ShowDialog() == DialogResult.OK)
             {
-                ParameterDict.Exemplar.Load(od.FileName);
-                ShowPicture(od.FileName);
+                string dataFileName = od.FileName;
+                if (dataFileName.ToLower().EndsWith(".jpg") || dataFileName.ToLower().EndsWith(".png"))
+                {
+                    dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
+                }
+
+                ParameterDict.Exemplar.Load(dataFileName);
+                ShowPicture(dataFileName);
                 Data.Update();
                 parameterDictControl1.UpdateFromData();
                 ParameterValuesChanged();
@@ -492,9 +511,6 @@ namespace Fractrace
             string fileName = System.IO.Path.GetFileNameWithoutExtension(parameterdictFile);
             string tempFileName = fileName.Substring(4); // Data ist vier Zeichen lang.
 
-            //gesData=int.Parse(
-
-
             int dataPos = tempFileName.IndexOf("pic");
             int picPos = dataPos + 3;
 
@@ -503,12 +519,9 @@ namespace Fractrace
 
             string gesDataString = tempFileName.Substring(0, dataPos);
             string gesPicString = tempFileName.Substring(picPos);
-            //	string str=fileName.Split([p])[0]);
-            //gesPic=int.Parse(fileName.Split("pic")[1]);
 
             string picDir = System.IO.Path.Combine(Fractrace.FileSystem.Exemplar.ExportDir, "Data" + gesDataString);
             string picFile = System.IO.Path.Combine(picDir, fileName + ".png");
-            //         string  gesPicFileName="|gesPic"+gesPic+"|"+"|gesData"+gesData+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|"+"|";
 
             Form1.PublicForm.ShowPictureFromFile(picFile);
 

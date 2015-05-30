@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 using Fractrace.Basic;
 
@@ -38,11 +39,18 @@ namespace Fractrace.Animation
             point.Time = dataPerTime.CurrentTime;
             point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");
             string comment = "";
-            string file = dataPerTime.Get(point.Time)["Intern.FileName"];
-            if (file != "")
+            try
             {
-                file = System.IO.Path.GetFileNameWithoutExtension(file);
-                comment = "         # File " + file;
+                string file = dataPerTime.Get(point.Time)["Intern.FileName"];
+                if (file != "")
+                {
+                    file = System.IO.Path.GetFileNameWithoutExtension(file);
+                    comment = "         # File " + file;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
             tbAnimationDescription.Text = tbAnimationDescription.Text + System.Environment.NewLine + "Run Steps " + point.Steps.ToString() + " Time " + point.Time.ToString() + comment ;
         }
@@ -130,10 +138,11 @@ namespace Fractrace.Animation
         /// <summary>
         /// Aus dem eingegebenen Text wird die Animation erzeugt.
         /// </summary>
-        private void CreateAnimationSteps()
+        private void CreateAnimationSteps(string animationDescription)
         {
             mAnimationSteps.Steps.Clear();
-            string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine, " ");
+            string tempstr = animationDescription.Replace(System.Environment.NewLine, " ");
+            //string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine, " ");
             string[] entries = tempstr.Split(' ');
             AnimationPoint currentAp = null;
             string lastEntry = "";
@@ -160,6 +169,10 @@ namespace Fractrace.Animation
                             currentAp.Time = int.Parse(str);
                         break;
 
+                    case "file":
+                        if (currentAp != null)
+                            currentAp.fileName = str;
+                        break;
                 }
                 lastEntry = str;
             }
@@ -176,7 +189,7 @@ namespace Fractrace.Animation
         private void btnStart_Click(object sender, EventArgs e)
         {
             inAnimation = true;
-            CreateAnimationSteps();
+            CreateAnimationSteps(tbAnimationDescription.Text);
             if (mAnimationSteps.Steps.Count == 0)
                 return;
             btnStart.Enabled = false;
@@ -344,7 +357,7 @@ namespace Fractrace.Animation
                     previewWidth = width;
             }
 
-            CreateAnimationSteps();
+            CreateAnimationSteps(tbAnimationDescription.Text);
             pnlPreview.Controls.Clear();
             StepPreviewControls.Clear();
             inRenderingPreview = true;
@@ -436,6 +449,65 @@ namespace Fractrace.Animation
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        /// <summary>
+        /// Load Animation file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog od = new OpenFileDialog();
+            od.Filter = "*.franim|*.franim";
+            if (od.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(od.FileName, Encoding.GetEncoding("iso-8859-1"));
+                String animstring = sr.ReadToEnd();
+                sr.Close();
+
+                // Load scenes given in comment
+                CreateAnimationSteps(animstring);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < mAnimationSteps.Steps.Count; i++)
+                {
+                    AnimationPoint ap = mAnimationSteps.Steps[i];
+                    // load file
+                    if (ap.fileName != "")
+                    {
+                        string dir = ap.fileName.Substring(0, ap.fileName.IndexOf("pic"));
+                        //picture filenename
+                        string picFileName = System.IO.Path.Combine(System.IO.Path.Combine(FileSystem.Exemplar.ExportDir, dir), ap.fileName);
+                        string fileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + ap.fileName + ".tomo";
+
+                        ParameterDict.Exemplar.Load(fileName);
+                        ParameterInput.MainParameterInput.SaveHistory(picFileName);
+                        // save in history
+                        sb.AppendLine("Run Steps " + ap.Steps.ToString() + " Time " + ParameterInput.MainParameterInput.History.CurrentTime.ToString() + "      # File " + ap.fileName);
+                    }
+                }
+
+                tbAnimationDescription.Text = sb.ToString();
+            }
+        }
+
+
+        /// <summary>
+        /// Saved animation file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sd = new SaveFileDialog();
+            sd.Filter = "*.franim|*.franim";
+            if (sd.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sw = new System.IO.StreamWriter(sd.FileName, false, Encoding.GetEncoding("iso-8859-1"));
+                sw.Write(tbAnimationDescription.Text);
+                sw.Close();
+            }
         }
 
 

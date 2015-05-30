@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Animation.Steps" Value="30" />
+  <Entry Key="Animation.Steps.PARAMETERINFO.Description" Value="Default animation steps while adding the frame in the animation control." />
+  <Entry Key="Border.Max.x" Value="-0.142484401802998" />
+  <Entry Key="Border.Max.x.PARAMETERINFO.Description" Value="Maximal X-Value." />
+  <Entry Key="Border.Max.y" Value="0.627886798761724" />
+  <Entry Key="Border.Max.y.PARAMETERINFO.Description" Value="Maximal y-Value." />
+  <Entry Key="Border.Max.z" Value="-0.148550511507923" />
+  <Entry Key="Border.Min.x" Value="-0.152900300971755" />
+  <Entry Key="Border.Min.x.PARAMETERINFO.Description" Value="Minimal X-Value." />
+  <Entry Key="Border.Min.y" Value="0.617470899592966" />
+  <Entry Key="Border.Min.y.PARAMETERINFO.Description" Value="Minimal Y-Value." />
+  <Entry Key="Border.Min.z" Value="-0.15896641067668" />
+  <Entry Key="Border.Min.z.PARAMETERINFO.Description" Value="Minimal Z-Value" />
+  <Entry Key="Computation.NoOfThreads" Value="4" />
+  <Entry Key="Computation.NoOfThreads.PARAMETERINFO.Description" Value="Number of threads used in computation. The recommended value is the number of processors." />
+  <Entry Key="Formula.Static.Cycles" Value="44" />
+  <Entry Key="Formula.Static.Cycles.PARAMETERINFO.Description" Value="Number of iterations used in the formula." />
+  <Entry Key="Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON" Value="forward,backward," />
+  <Entry Key="Formula.Static.Formula" Value="-1" />
+  <Entry Key="Formula.Static.Formula.PARAMETERINFO.Description" Value="-1: mandelbrot mode. -2: julia mode (Values from 1 to 26 corresponds to some inbuild formulas.)" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jx.PARAMETERINFO.Description" Value="X-component of the Julia Seed, if the formula is in julia mode. X-component of the start value , if the formula is in mandelbrot mode." />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jy.PARAMETERINFO.Description" Value="Y-component of the Julia Seed, if the formula is in julia mode. Y-component of the start value , if the formula is in mandelbrot mode." />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jz.PARAMETERINFO.Description" Value="Z-component of the Julia Seed, if the formula is in julia mode. Z-component of the start value , if the formula is in mandelbrot mode." />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.jzz.PARAMETERINFO.Description" Value="Q-component of the Julia Seed, if the formula is in julia mode." />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Formula.Static.MinCycle.PARAMETERINFO.Description" Value="Number of iterations used in the formula, if the inside of the 3D object is rendered." />
+  <Entry Key="Intern.Filter" Value="" />
+  <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() { &#xA;  base.Init();&#xA;  additionalPointInfo=new AdditionalPointInfo();&#xA;  gr1=GetDouble(&quot;Formula.Static.Cycles&quot;);&#xA;  int tempGr=(int)gr1;&#xA;  gr1=gr1- tempGr;&#xA;  gr1=1-gr1;&#xA;  gr1*=2.4;&#xA;}&#xA;&#xA;double gr1=0;&#xA;&#xA;public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;  double aar, aai, aaj;&#xA;  long tw;&#xA;  int n;&#xA;  int pow = 8; // n=8 default Mandelbulb&#xA;  double gr =Math.Pow(10,gr1)+1.0;  // Bailout&#xA;  double theta, phi;&#xA;  double r_n = 0;&#xA;  aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(aar + aai + aaj);&#xA;  double  phi_pow,theta_pow,sin_theta_pow,rn_sin_theta_pow;&#xA;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;    theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xA;    phi = Math.Atan2(ai, ar);&#xA;    r_n = Math.Pow(r, pow);&#xA;    phi_pow=phi*pow;&#xA;    theta_pow=theta*pow;&#xA;    sin_theta_pow=Math.Sin(theta_pow);&#xA;    rn_sin_theta_pow=r_n* sin_theta_pow;&#xA;    ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;&#xA;    ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;&#xA;    aj = r_n * Math.Cos(theta_pow)+bj;&#xA;    aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;    r = Math.Sqrt(aar + aai + aaj);&#xA;    if(n&gt;5 &amp;&amp; n&lt;18) &#xA;{&#xA;    additionalPointInfo.red+=aar/r;&#xA;    additionalPointInfo.green+=aai/r;&#xA;    additionalPointInfo.blue+=aaj/r;&#xA;}&#xA;&#xA;&#xA;    if (r &gt; gr) { tw = n; break; }&#xA;  }&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;      else&#xA;        tw = 0;&#xA;  }&#xA;  return (tw);&#xA;}&#xA;&#xA;&#xA;" />
+  <Entry Key="Intern.Version" Value="3" />
+  <Entry Key="Renderer.AmbientIntensity" Value="33" />
+  <Entry Key="Renderer.AmbientIntensity.PARAMETERINFO.Description" Value="Intensity of the FieldOfView." />
+  <Entry Key="Renderer.BackColor.Blue" Value="0" />
+  <Entry Key="Renderer.BackColor.Blue.PARAMETERINFO.Description" Value="Blue component of background color (0, ...,1)." />
+  <Entry Key="Renderer.BackColor.Green" Value="0" />
+  <Entry Key="Renderer.BackColor.Green.PARAMETERINFO.Description" Value="Green component of background color (0, ...,1)." />
+  <Entry Key="Renderer.BackColor.Red" Value="0" />
+  <Entry Key="Renderer.BackColor.Red.PARAMETERINFO.Description" Value="Red component of background color (0, ...,1)." />
+  <Entry Key="Renderer.BrightLightLevel" Value="0.8" />
+  <Entry Key="Renderer.BrightLightLevel.PARAMETERINFO.Description" Value="Light Level: light in bright areas." />
+  <Entry Key="Renderer.Brightness" Value="4" />
+  <Entry Key="Renderer.Brightness.PARAMETERINFO.Description" Value="Brightness (1 ...)" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Blue.PARAMETERINFO.Description" Value="To justify the color components." />
+  <Entry Key="Renderer.ColorFactor.Green" Value="0.2" />
+  <Entry Key="Renderer.ColorFactor.Green.PARAMETERINFO.Description" Value="To justify the color components." />
+  <Entry Key="Renderer.ColorFactor.Red" Value="2.7" />
+  <Entry Key="Renderer.ColorFactor.Red.PARAMETERINFO.Description" Value="To justify the color components." />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType.PARAMETERINFO.Description" Value="accepted integer values: 1, ..., 6  (all values&gt;1 :switch rgb components)" />
+  <Entry Key="Renderer.ColorGreyness" Value="0.4" />
+  <Entry Key="Renderer.ColorGreyness.PARAMETERINFO.Description" Value=" If ColorGreyness=1, no color is rendered." />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorIntensity.PARAMETERINFO.Description" Value="Intensity of the Surface Color." />
+  <Entry Key="Renderer.Contrast" Value="1" />
+  <Entry Key="Renderer.Contrast.PARAMETERINFO.Description" Value="Contrast (0 ... 1 ...)" />
+  <Entry Key="Renderer.Light.X" Value="0.2" />
+  <Entry Key="Renderer.Light.X.PARAMETERINFO.Description" Value="Normal of the light source." />
+  <Entry Key="Renderer.Light.Y" Value="1" />
+  <Entry Key="Renderer.Light.Y.PARAMETERINFO.Description" Value="Normal of the light source." />
+  <Entry Key="Renderer.Light.Z" Value="0.15" />
+  <Entry Key="Renderer.Light.Z.PARAMETERINFO.Description" Value="Normal of the light source." />
+  <Entry Key="Renderer.LightIntensity" Value="0" />
+  <Entry Key="Renderer.LightIntensity.PARAMETERINFO.Description" Value="If LightIntensity==1, no shadow renderers are used. If LightIntensity==0, only shadow renderers are used" />
+  <Entry Key="Renderer.MaxFieldOfView" Value="1.0" />
+  <Entry Key="Renderer.MaxFieldOfView.PARAMETERINFO.Description" Value="Maximal value of FieldOfView." />
+  <Entry Key="Renderer.MinFieldOfView" Value="0.5" />
+  <Entry Key="Renderer.MinFieldOfView.PARAMETERINFO.Description" Value="Minimal value of FieldOfView." />
+  <Entry Key="Renderer.Normalize" Value="0" />
+  <Entry Key="Renderer.Normalize.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="Renderer.Normalize.PARAMETERINFO.Description" Value="Color and light correction." />
+  <Entry Key="Renderer.ShadowGlow" Value="0.98" />
+  <Entry Key="Renderer.ShadowGlow.PARAMETERINFO.Description" Value="Used to light dark areas in shadow computing. If set to 1, no light falls through walls." />
+  <Entry Key="Renderer.ShadowJustify" Value="1" />
+  <Entry Key="Renderer.ShadowJustify.PARAMETERINFO.Description" Value="Shadow height factor." />
+  <Entry Key="Renderer.ShadowNumber" Value="11" />
+  <Entry Key="Renderer.ShadowNumber.PARAMETERINFO.Description" Value="Corresponds to the number of shadows." />
+  <Entry Key="Renderer.Shininess" Value="14" />
+  <Entry Key="Renderer.Shininess.PARAMETERINFO.Description" Value="Shininess ( 0... 1000)." />
+  <Entry Key="Renderer.ShininessFactor" Value="0.8" />
+  <Entry Key="Renderer.ShininessFactor.PARAMETERINFO.Description" Value="Shininess factor (0 ... 1)." />
+  <Entry Key="Renderer.SmoothNormalLevel" Value="8" />
+  <Entry Key="Renderer.SmoothNormalLevel.PARAMETERINFO.Description" Value="If Renderer.SmoothMormalLevel ==0 : Normals are not smoothed." />
+  <Entry Key="Renderer.UseDarken" Value="0" />
+  <Entry Key="Renderer.UseDarken.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="Renderer.UseDarken.PARAMETERINFO.Description" Value="Activates Background darkening." />
+  <Entry Key="Renderer.UseLight" Value="1" />
+  <Entry Key="Renderer.UseLight.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="Renderer.UseLight.PARAMETERINFO.Description" Value="Use Light." />
+  <Entry Key="Renderer.UseSharpShadow" Value="0" />
+  <Entry Key="Renderer.UseSharpShadow.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="Renderer.UseSharpShadow.PARAMETERINFO.Description" Value=" Enable sharp shadow rendering (warning: time consuming) " />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleX.PARAMETERINFO.Description" Value="Rotation angle (in degree) for axis x (rotation center is center of the given bounds)." />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY.PARAMETERINFO.Description" Value="Rotation angle (in degree) for axis y (rotation center is center of the given bounds)." />
+  <Entry Key="Transformation.Camera.AngleZ" Value="190" />
+  <Entry Key="Transformation.Camera.AngleZ.PARAMETERINFO.Description" Value="Rotation angle (in degree) for axis z (rotation center is center of the given bounds)." />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="0.6" />
+  <Entry Key="Transformation.Perspective.Cameraposition.PARAMETERINFO.Description" Value="Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view." />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.Angle.PARAMETERINFO.Description" Value="Angle difference in stereo mode." />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="Transformation.Stereo.EyeDistance.PARAMETERINFO.Description" Value="EyeDistance in stereo mode." />
+  <Entry Key="View.Deph" Value="400" />
+  <Entry Key="View.Deph.PARAMETERINFO.Description" Value="Virtual voxel space at the y-coordinate. Higher values :-&gt; more accurate rendering, but more time consuming." />
+  <Entry Key="View.DephAdd" Value="400" />
+  <Entry Key="View.DephAdd.PARAMETERINFO.Description" Value="Additional voxel space (removes black background parts of the rendered image)" />
+  <Entry Key="View.Height" Value="1200" />
+  <Entry Key="View.Height.PARAMETERINFO.Description" Value="View.Size*View.Height == height of the rendered bitmap." />
+  <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.Perspective.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="View.Perspective.PARAMETERINFO.Description" Value="Switch between 3D view and parallel view." />
+  <Entry Key="View.Pipeline.Preview" Value="1" />
+  <Entry Key="View.Pipeline.Preview.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="View.Pipeline.Preview.PARAMETERINFO.Description" Value="Start Preview Rendering just after small render display finishes." />
+  <Entry Key="View.Pipeline.UpdatePreview" Value="1" />
+  <Entry Key="View.Pipeline.UpdatePreview.PARAMETERINFO.Datatype" Value="Bool" />
+  <Entry Key="View.Pipeline.UpdatePreview.PARAMETERINFO.Description" Value="Updates also Preview rendering." />
+  <Entry Key="View.PosterX" Value="0" />
+  <Entry Key="View.PosterX.PARAMETERINFO.VIEW.Invisible" Value="1" />
+  <Entry Key="View.PosterZ" Value="0" />
+  <Entry Key="View.PosterZ.PARAMETERINFO.VIEW.Invisible" Value="1" />
+  <Entry Key="View.Raster" Value="2" />
+  <Entry Key="View.Raster.PARAMETERINFO.VIEW.Invisible" Value="1" />
+  <Entry Key="View.Size" Value="0.5" />
+  <Entry Key="View.Size.PARAMETERINFO.Description" Value="View.Size*View.Width == width of the rendered bitmap" />
+  <Entry Key="View.UpdateSteps" Value="7" />
+  <Entry Key="View.UpdateSteps.PARAMETERINFO.Description" Value=" Number of update steps for better rendering quality." />
+  <Entry Key="View.Width" Value="1200" />
+  <Entry Key="View.Width.PARAMETERINFO.Description" Value="View.Size*View.Width == width of the rendered bitmap." />
+  <Entry Key="xxxxx.PARAMETERINFO.Description" Value="Maximal Z-Value." />
+</ParameterDict>
