@@ -305,47 +305,58 @@ namespace Fractrace
             this.WindowState = FormWindowState.Normal;
             if (inComputeOneStep)
                 return;
-            inComputeOneStep = true;
-            SetPictureBoxSize();
-            string tempParameterHash = GetParameterHashWithoutPictureArt();
-            paras.Assign();
+            try
+            {
+               
+                inComputeOneStep = true;
+                SetPictureBoxSize();
+                string tempParameterHash = GetParameterHashWithoutPictureArt();
+                paras.Assign();
 
-            if (oldParameterHashWithoutPictureArt == tempParameterHash)
-            {
-                // Update last render for better quality
-                mCurrentUpdateStep++;
-                oldParameterHashWithoutPictureArt = tempParameterHash;
-                DataTypes.GraphicData oldData = null;
-                DataTypes.PictureData oldPictureData = null;
-                if (iter != null && !iter.InAbort)
+                if (oldParameterHashWithoutPictureArt == tempParameterHash)
                 {
-                    oldData = iter.GraphicInfo;
-                    oldPictureData = iter.PictureData;
-                }
-                iter = new Iterate(maxx, maxy, this, false);
-                mUpdateCount++;
-                iter.SetOldData(oldData, oldPictureData, mUpdateCount);
-                if (!ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
-                    iter.OneStepProgress = inPreview;
-                else
-                    iter.OneStepProgress = false;
-                if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
-                    iter.OneStepProgress = true;
-                iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
-            }
-            else
-            {
-                // Initiate new rendering
-                {
-                    mCurrentUpdateStep = 0;
+                    // Update last render for better quality
+                    mCurrentUpdateStep++;
                     oldParameterHashWithoutPictureArt = tempParameterHash;
-                    paras.Assign();
-                    mUpdateCount = 1;
+                    DataTypes.GraphicData oldData = null;
+                    DataTypes.PictureData oldPictureData = null;
+                    if (iter != null && !iter.InAbort)
+                    {
+                        oldData = iter.GraphicInfo;
+                        oldPictureData = iter.PictureData;
+                    }
                     iter = new Iterate(maxx, maxy, this, false);
-                    //   iter.OneStepProgress = inPreview;
-                    iter.OneStepProgress = false;
+                    mUpdateCount++;
+                    iter.SetOldData(oldData, oldPictureData, mUpdateCount);
+                    if (!ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
+                        iter.OneStepProgress = inPreview;
+                    else
+                        iter.OneStepProgress = false;
+                    if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
+                        iter.OneStepProgress = true;
                     iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
                 }
+                else
+                {
+                    // Initiate new rendering
+                    {
+                        mCurrentUpdateStep = 0;
+                        oldParameterHashWithoutPictureArt = tempParameterHash;
+                        paras.Assign();
+                        mUpdateCount = 1;
+                        iter = new Iterate(maxx, maxy, this, false);
+                        //   iter.OneStepProgress = inPreview;
+                        iter.OneStepProgress = false;
+                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"), false);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                if (paras != null)
+                    paras.InComputing = false;
+                inComputeOneStep = false;
             }
         }
 

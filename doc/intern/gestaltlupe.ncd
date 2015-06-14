@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:97-->
+<!--LastNote:103-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1391,7 +1391,7 @@ Hier wird die Formel aktualisert und die aktuelle Cursorposition verschwindet. <
 
 </DD>
 <DT><A name="Mxi2qlXT17xtRyQSwyB9RQ"></A>Unzulässiger Zustand bei Exception</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434041239-->
 <!--property:date_modified=1434041363-->
 <!--property:hash=4ca6c37127464b1a06c80dee66d713c5f6ecc835-->
@@ -1411,6 +1411,36 @@ Gibt man bei View.Size 0. ein kommt es zur Exception &quot;Unzulässiger Wert&qu
 View.DephAdd sollt unabhängig von View.Size sein.<BR>
 <BR>
 
+</DD>
+<DT><A name="Y8YtzuIFirc5F0giZGxxAg"></A>Fortschrittsbalken beim Small Preview</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1434303082-->
+<!--property:date_modified=1434303186-->
+<!--property:expanded-->
+<!--property:hash=bbe6c6c5144ae6e432810374809fccf6c03af8e1-->
+<!--property:hash_html=7687b39c5e33936519c78b041ba41d83d5bc4b33-->
+<DD>
+wird nur bis zum 1. drittel gezeichnet.<BR>
+<BR>
+(Wahrscheinlich anhängig von updatePreview Wert).<BR>
+<BR>
+<DL>
+<DT><A name="0vLOlXhsCOwEcXpvyVCq2A"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434303204-->
+<!--property:date_modified=1434303366-->
+<!--property:hash=12c6cd4271bc6226d8fd2069b4a4404c6a3ce227-->
+<!--property:hash_html=f702541bc6e45d6d528b29e454184c1f52264db0-->
+<DD>
+Die Fortschrittsanzeige wird in:<BR>
+<BR>
+Iterate.IsAvailable() gezeichnet.<BR>
+<BR>
+Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das small preview handelt.<BR>
+<BR>
+
+</DD>
+</DL>
 </DD>
 </DL>
 </DD>

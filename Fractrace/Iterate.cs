@@ -290,6 +290,16 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Return true, if corresponding image is used as small preview.
+        /// </summary>
+        /// <returns></returns>
+        protected bool IsSmallPreview()
+        {
+            return (width< 150 && height < 150);
+        }
+
+
+        /// <summary>
         /// True, if 
         /// </summary>
         public bool OneStepProgress = false;
@@ -319,7 +329,7 @@ namespace Fractrace
                 else
                 {
                     availableY = y + 1;
-                    if (maxUpdateSteps > 0 && !OneStepProgress)
+                    if (maxUpdateSteps > 0 && !OneStepProgress && !IsSmallPreview() )
                     {
                         double f = ((double)mUpdateCount) / ((double)maxUpdateSteps + 1);
                         double maxUpInvers = 1.0 / ((double)maxUpdateSteps + 2);
@@ -915,7 +925,6 @@ namespace Fractrace
                 }
             }
 
-            System.Diagnostics.Debug.WriteLine("end computing thread");
         }
 
 
