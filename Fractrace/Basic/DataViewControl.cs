@@ -52,8 +52,17 @@ namespace Fractrace.Basic
             if (mPages.ContainsKey(category))
             {
                 newPage = mPages[category];
-                newPage.UpdateElements();
-                newPage.Update();
+                if (newPage.NodeValueHash == ParameterDict.Exemplar.GetHashOfName(category))
+                {
+                    newPage.UpdateElements();
+                    newPage.Update();
+                }
+                else
+                {
+                    newPage = new DataViewControlPage(this);
+                    newPage.Create(category);
+                    mPages[category] = newPage;
+                }
             }
             else
             {

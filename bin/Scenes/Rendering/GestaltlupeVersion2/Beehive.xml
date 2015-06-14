@@ -87,15 +87,6 @@
   <Entry Key="Renderer.UseLight" Value="1" />
   <Entry Key="Renderer.UseSharpShadow" Value="0" />
   <Entry Key="test2" Value="df" />
-  <Entry Key="Transformation.3.AngleX" Value="0" />
-  <Entry Key="Transformation.3.AngleY" Value="0" />
-  <Entry Key="Transformation.3.AngleZ" Value="0" />
-  <Entry Key="Transformation.3.CenterX" Value="-0.407525953022069" />
-  <Entry Key="Transformation.3.CenterY" Value="2.56540588074062" />
-  <Entry Key="Transformation.3.CenterZ" Value="0.07803688462125" />
-  <Entry Key="Transformation.AngleX" Value="0" />
-  <Entry Key="Transformation.AngleY" Value="0" />
-  <Entry Key="Transformation.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="160" />

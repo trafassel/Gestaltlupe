@@ -184,6 +184,7 @@
     <Compile Include="Basic\ParameterDictData.cs" />
     <Compile Include="Basic\ParameterDictFilter.cs" />
     <Compile Include="Basic\ParameterHistory.cs" />
+    <Compile Include="Basic\ParameterUpdater.cs" />
     <Compile Include="DataTypes\ColorRGB.cs" />
     <Compile Include="DataTypes\FracValues .cs" />
     <Compile Include="DataTypes\GraphicData.cs" />

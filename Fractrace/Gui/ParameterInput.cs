@@ -1181,6 +1181,8 @@ namespace Fractrace
             Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
         }
 
+     
+
 
 
     }

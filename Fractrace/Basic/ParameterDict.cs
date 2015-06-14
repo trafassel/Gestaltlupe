@@ -161,6 +161,7 @@ namespace Fractrace.Basic
             mEntries.Clear();
             GlobalParameters.SetGlobalParameters();
             Append(fileName);
+            ParameterUpdater.Update();
         }
 
 

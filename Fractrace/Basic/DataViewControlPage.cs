@@ -103,25 +103,17 @@ namespace Fractrace.Basic
             mCategory = category;
             mNodeHash = ParameterDict.Exemplar.GetHashOfName(category);
             mNodeValueHash = ParameterDict.Exemplar.GetHash(category);
-            // this.BackColor = Color.Green;
 
             // Contain the edit entries before adding to the control
             List<DataViewElement> oldElements = new List<DataViewElement>();
-            /*
-            if (category == oldCategory) {
-              Update(category);
-              return;
-            }*/
 
             this.SuspendLayout();
-
             mComputedHeight = 0;
-
             bool elementAdded = false;
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
                 string parameterName = entry.Key;
-                if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName))
+                if (parameterName.StartsWith(category+".") && ParameterDict.HasControl(parameterName))
                 {
                     if (parameterName.Length > category.Length)
                     {
