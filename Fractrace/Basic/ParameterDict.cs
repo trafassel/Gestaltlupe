@@ -272,6 +272,7 @@ namespace Fractrace.Basic
         /// <param name="raiseChangeEvent"></param>
         public void SetValue(string name, string value, bool raiseChangeEvent)
         {
+
             lock (mEntries)
             {
                 mEntries[name] = value;

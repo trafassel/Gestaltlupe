@@ -23,6 +23,11 @@ namespace Fractrace.Basic
         /// </summary>
         Dictionary<string, string> mSavedDict = new Dictionary<string, string>();
 
+        /// <summary>
+        /// Contails all changed parameters in filter.
+        /// </summary>
+        Dictionary<string, bool> mChangedParameters = new Dictionary<string, bool>();
+
 
         /// <summary>
         /// Current values are saved and filter is applied to current values.
@@ -45,6 +50,12 @@ namespace Fractrace.Basic
             }
             Filter();
 
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+            {
+                if (mSavedDict[entry.Key] != entry.Value)
+                    mChangedParameters[entry.Key] = true;
+            }
+
         }
 
 
@@ -64,7 +75,8 @@ namespace Fractrace.Basic
         {
             foreach (KeyValuePair<string, string> entry in mSavedDict)
             {
-                ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
+                if( mChangedParameters.ContainsKey(entry.Key) )
+                  ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
             }
             ParameterDict.Exemplar.SetValue("Intern.Filter", "", false);
 

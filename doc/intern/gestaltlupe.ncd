@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:3-->
+<!--LastNote:97-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1337,25 +1337,58 @@ NeedSubNodes(string category) <BR>
 </DD>
 </DL>
 </DD>
-<DT><A name="L19poOuc29wRJCTAVBA2eg"></A>das Beenden des Rendern</DT>
-<!--property:icon_internal=bullet_black-->
+<DT><A name="L19poOuc29wRJCTAVBA2eg"></A>beim Beenden des Rendern</DT>
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1433102300-->
-<!--property:date_modified=1433139096-->
-<!--property:hash=13b7103350ebaff0e309ed5ca9922f470a31f2b7-->
-<!--property:hash_html=7e1ae2e8c6a4c5c9e0e101178b011b6f12b0acb3-->
+<!--property:date_modified=1434288240-->
+<!--property:hash=2cc1a475cf9172003c3999ff1735de9dd508a8e9-->
+<!--property:hash_html=19d41448e4de3de4a67e1653a801283337ddb858-->
 <DD>
 steht manchmal 0.2 bei size. Hier wird der Preview nicht korrekt zurückgesetzt.<BR>
 <BR>
-
+Prinzipiell sollte die Beendigung eines Rendervorganges keine Parameteränderung auslösen.<BR>
+<BR>
+Ursache ist:<BR>
+<BR>
+Form1: ln 698<BR>
+<BR>
+     if (fastRenderingFilter != null)<BR>
+                        fastRenderingFilter.Restore();<BR>
+<BR>
+Hier wird auch &quot;View.Size&quot; auf 0.2 gesetzt.<BR>
+<BR>
+// Hier bei Restore nur die geänderten Parameter setzen.<BR>
+<BR>
+<BR>
+<BR>
+In ParameterInput.ComputePreview()<BR>
+<BR>
+ ParameterDict.Exemplar[&quot;View.Size&quot;] = &quot;0.2&quot;;<BR>
+// Ab hier gilt: &quot;View.Size&quot;=0.2<BR>
+....<BR>
+ForceRedraw();<BR>
+....<BR>
+ParameterDict.Exemplar[&quot;View.Size&quot;] = sizeStr;<BR>
+<BR>
+<DL>
+<DT><A name="MlRoqGnsXe4rPFg8stXXoA"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434286342-->
+<!--property:date_modified=1434286344-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+</DL>
 </DD>
 <DT><A name="T7r70tdwvnYQ6sMSuiMksg"></A>Formeledit beim Drücken auf Small Preview</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434041176-->
-<!--property:date_modified=1434041237-->
-<!--property:hash=02949c58c17db12a4bb8305bc62ec2274287ada7-->
-<!--property:hash_html=02949c58c17db12a4bb8305bc62ec2274287ada7-->
+<!--property:date_modified=1434286830-->
+<!--property:hash=471d45b523ae6c47dfbe5b11e1a3d7314456aeb0-->
+<!--property:hash_html=d080c62d3bc83e38796adff389b6170515a2c28c-->
 <DD>
-Hier wird die Formel aktualisert und die aktuelle Cursorposition verschwindet. 
+Hier wird die Formel aktualisert und die aktuelle Cursorposition verschwindet. <BR>
+<BR>
+
 </DD>
 <DT><A name="Mxi2qlXT17xtRyQSwyB9RQ"></A>Unzulässiger Zustand bei Exception</DT>
 <!--property:icon_internal=bullet_black-->

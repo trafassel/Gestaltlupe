@@ -1000,6 +1000,7 @@ namespace Fractrace
                 string rasterStr = ParameterDict.Exemplar["View.Raster"];
                 ParameterDict.Exemplar["View.Size"] = "0.2";
                 ParameterDict.Exemplar["View.Raster"] = "2";
+
                 Form1.PublicForm.inPreview = true;
                 ForceRedraw();
                 Form1.PublicForm.inPreview = false;
@@ -1081,7 +1082,7 @@ namespace Fractrace
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             mHistory.CurrentTime = mHistory.Save();
-            LoadFromHistory();
+            //LoadFromHistory();
             preview1.btnPreview_Click(sender, e);
         }
 
