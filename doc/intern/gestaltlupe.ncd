@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:104-->
+<!--LastNote:105-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1459,9 +1459,23 @@ Prinzipiell soll die  Aktualisierung im Preview stets gestoppt werden, wenn sich
 <DT><A name="YePDXf7xNZcOVyx65TlJNg"></A>info</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434573324-->
-<!--property:date_modified=1434573326-->
-<!--property:hash=-->
-<!--property:hash_html=-->
+<!--property:date_modified=1434581940-->
+<!--property:hash=83e1ce422c391b39d5d40446136baaa8b896ed50-->
+<!--property:hash_html=2359e7fa0370d8615d597283c3f2d0bc9305b596-->
+<DD>
+In Form1. <BR>
+<BR>
+public void ComputeOneStep()<BR>
+        {<BR>
+<BR>
+wird korrekt erkannt, dass sich die Parameter geändert haben.<BR>
+Es wird aber ein neues Rendering angestoßen.<BR>
+<BR>
+Ein neues Rendering sollte aber nur bei der ersten Stufe ausgelöst werden. <BR>
+Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 <DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
