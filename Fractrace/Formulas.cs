@@ -1034,37 +1034,31 @@ namespace Fractrace
                 }
 
                 /* Einbeziehung des Winkels  */
-                f = Math.PI / 180.0;
-                /*xmi=(x1-x2)/2;ymi=(y1+y2)/2;zmi=(z1+z2)/2;*/
-                // Drehung
-                xmi = 0; ymi = 0; zmi = 0;
-                x -= xmi; y -= ymi; z -= zmi;
-                re = Math.Cos(wiz * f); im = Math.Sin(wiz * f);
-                a = re * x - im * y;
-                y = re * y + im * x;
-                x = a;
-                // Neigung
-                re = Math.Cos(wiy * f); im = Math.Sin(wiy * f);
-                a = re * z - im * x;
-                x = re * x + im * z;
-                z = a;
-                // Kippen
-                re = Math.Cos(wix * f); im = Math.Sin(wix * f);
-                a = re * y - im * z;
-                z = re * z + im * y;
-                y = a;
-                x += xmi; y += ymi; z += zmi;
+                // Backward compatibility to old formulas with rotation with center=(0,0,0)
+                if (wiz != 0 || wiy != 0.0 || wiz != 0)
+                {
+                    f = Math.PI / 180.0;
+                    // Drehung
+                    xmi = 0; ymi = 0; zmi = 0;
+                    x -= xmi; y -= ymi; z -= zmi;
+                    re = Math.Cos(wiz * f); im = Math.Sin(wiz * f);
+                    a = re * x - im * y;
+                    y = re * y + im * x;
+                    x = a;
+                    // Neigung
+                    re = Math.Cos(wiy * f); im = Math.Sin(wiy * f);
+                    a = re * z - im * x;
+                    x = re * x + im * z;
+                    z = a;
+                    // Kippen
+                    re = Math.Cos(wix * f); im = Math.Sin(wix * f);
+                    a = re * y - im * z;
+                    z = re * z + im * y;
+                    y = a;
+                    x += xmi; y += ymi; z += zmi;
+                }
 
                 // Weitere Transformationen:
-
-
-                /*
-              if (mProjection != null) {
-                  Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
-                  x = projPoint.X;
-                  y = projPoint.Y;
-                  z = projPoint.Z;
-              }*/
 
                 switch (formula)
                 {
@@ -1249,9 +1243,6 @@ namespace Fractrace
                     case 37: // Julia mit Vektorrotation
                         we = H7(x, y, z, zz, jx, jy, jz, jzz, zykl, invers);
                         break;
-
-
-
 
 
                 }
@@ -2267,6 +2258,218 @@ namespace Fractrace
             }
 
 
+            return ((int)col[0]);
+        }
+
+
+
+        /// <summary>
+        /// Copy of fixpoint (no normals are computed).
+        /// </summary>
+        /// <param name="zykl"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="zz"></param>
+        /// <param name="xd"></param>
+        /// <param name="yd"></param>
+        /// <param name="zd"></param>
+        /// <param name="zzd"></param>
+        /// <param name="wix"></param>
+        /// <param name="wiy"></param>
+        /// <param name="wiz"></param>
+        /// <param name="jx"></param>
+        /// <param name="jy"></param>
+        /// <param name="jz"></param>
+        /// <param name="jzz"></param>
+        /// <param name="formula"></param>
+        /// <param name="invers"></param>
+        /// <param name="pixelX"></param>
+        /// <param name="pixelY"></param>
+        /// <param name="use4Points"></param>
+        /// <returns></returns>
+        public double RayCastAt(long zykl, double x, double y, double z, double zz,
+        double xd, double yd, double zd, double zzd,
+        double wix, double wiy, double wiz,
+        double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY, bool use4Points)
+        {
+            if (zd == 0)
+            {
+                Console.WriteLine("Error in RayCastAt: zd==0");
+                return 0;
+            }
+
+            double m = 0;
+            double yn = 0, diff = 0;
+            double xn = 0, zn = 0, zzn = 0, xm = 0, ym = 0, zm = 0, zzm = 0;
+            double[] tief = new double[5];
+            double[] xpos = new double[5];
+            double[] ypos = new double[5]; // Die ungenaue Variante von tief[]
+            double[] zpos = new double[5];
+
+            double startwert = 0;
+            int k = 0;
+
+            double distance = 0.09;
+
+            double xDistance = distance * 6.0;
+            double zDistance = distance * 6.0;
+
+            // Eventuell während der Berechnung entstehende Zusatzinfos für alle 4 Punkte.
+            AdditionalPointInfo[] pinfoSet = null;
+
+            // Use combination of all computed AdditionalPointInfo for smoother colors.
+            AdditionalPointInfo additionalPointInfoCombination = new AdditionalPointInfo();
+            additionalPointInfoCombination.blue = 0;
+            additionalPointInfoCombination.red = 0;
+            additionalPointInfoCombination.green = 0;
+
+
+            if (mInternFormula != null && mInternFormula.additionalPointInfo != null)
+            {
+                pinfoSet = new AdditionalPointInfo[5];
+            }
+
+            //for (k = 4; k >= 0; k--)
+            k = 0;
+            {
+                        xn = x;
+                        yn = y;
+                        zn = z + zDistance * zd; zzn = zz + zDistance * zzd;
+
+                xpos[0] = xn;
+                ypos[0] = yn;
+                zpos[0] = zn;
+
+                if (Rechne(xn, yn, zn, zzn, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
+                {
+                    for (m = 0; m >= -4.0; m -= 0.2)
+                    {
+                        zm = zn; xm = xn;
+                        ym = yn + m * yd; zzm = zzn;
+                        if (!(Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
+                            break;
+                    }
+                }
+                else
+                {
+                    for (m = 0; m <= 4.0; m += 0.2)
+                    {
+                        zm = zn; xm = xn;
+                        ym = yn + m * yd; zzm = zzn;
+                        if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0) { m -= 0.2; break; }
+                    }
+                }
+                if ((m > -3.9) && (m < 3.9))
+                {
+                    startwert = m + 0.2; diff = 0.1;
+                    while (diff >= 0.00001)
+                    {
+                        m = startwert - diff;
+                        zm = zn; xm = xn;
+                        ym = yn + m * yd; zzm = zzn;
+                        if (0L == Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers))
+                            startwert = m + diff;
+                        else startwert = m;
+                        diff /= 2.0;
+                    }
+                    tief[0] = m;
+                }
+                else
+                {
+
+                    // Fast Kopie der obigen Formeln
+                    if (Rechne(xn, yn, zn, zzn, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
+                    {
+                        for (m = 0; m >= -8.0; m -= 0.02)
+                        {
+                            zm = zn; xm = xn;
+                            ym = yn + m * yd; zzm = zzn;
+                            if (!(Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
+                            {
+                                if (!(Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (m = 0; m <= 8.0; m += 0.02)
+                        {
+                            zm = zn; xm = xn;
+                            ym = yn + m * yd; zzm = zzn;
+                            if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
+                            {
+                                if (Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
+                                {
+                                    m -= 0.02;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if ((m > -7.9) && (m < 7.9))
+                    {
+                        startwert = m + 0.02; diff = 0.01;
+                        while (diff >= 0.00001)
+                        {
+                            m = startwert - diff;
+                            zm = zn; xm = xn;
+                            ym = yn + m * yd; zzm = zzn;
+                            if (0L == Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers))
+                                startwert = m + diff;
+                            else startwert = m;
+                            diff /= 2.0;
+                        }
+                        tief[0] = m;
+                    }
+                    else
+                    {
+                        tief[0] = 20;
+                    }
+
+
+                }
+
+                if (pinfoSet != null)
+                {
+                    pinfoSet[k] = new AdditionalPointInfo(mInternFormula.additionalPointInfo);
+                }
+            }
+
+
+            // Die Normalen der 4 Randpunkte
+            //Vec3[] normals = new Vec3[4];
+
+          
+                        PixelInfo pInfo = null;
+                        if (pData.Points[pixelX, pixelY] == null)
+                        {
+                            // TODO: Später Querschnitt aus allen Einzelwinkeln bestimmen
+                            pInfo = new PixelInfo();
+                            pData.Points[pixelX, pixelY] = pInfo;
+                            pInfo.Coord.X = xpos[0];
+                            pInfo.Coord.Y = ypos[0] + tief[0] * yd;
+                            pInfo.Coord.Z = zpos[0];
+                        }
+                        else
+                        {
+                            pInfo = pData.Points[pixelX, pixelY];
+                        }
+         
+                        if (pinfoSet != null)
+                            pInfo.AdditionalInfo = pinfoSet[0];
+
+            // Farben feiner machen:
+            if (pinfoSet != null)
+            {
+                if (pInfo != null)
+                {
+                    pInfo.AdditionalInfo = pinfoSet[0];
+                }
+            }
             return ((int)col[0]);
         }
 

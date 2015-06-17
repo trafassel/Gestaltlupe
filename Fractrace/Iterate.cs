@@ -436,12 +436,10 @@ namespace Fractrace
             col = formulas.col;
             MAXX_ITER = width;
             MAXY_ITER = (int)(ParameterDict.Exemplar.GetDouble("View.Deph") * screensize);
+            if(IsSmallPreview())
+                MAXY_ITER = MAXX_ITER;    
             MAXZ_ITER = height;
-            if (MAXY_ITER < 120)
-            {
-                MAXY_ITER = MAXX_ITER;
-            }
-
+              
             int MINX_ITER = 0;
             int MINY_ITER = 0;
             int MINZ_ITER = 0;
@@ -463,7 +461,6 @@ namespace Fractrace
 
             // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
             int cycleAdd = 128;
-
             int colour_type = 0;
 
             wix = act_val.arc.x;
@@ -553,7 +550,6 @@ namespace Fractrace
 
                         // Used for better start values in update iteration
                         double yAdd = rand.NextDouble() * yd;
-                        // double yAddTemp = 0;
                         // In last computation a voxel ist found at (xx,zz)
                         bool centerIsSet = false;
                         // In last computation at least on voxel ist found near (xx,zz)
@@ -621,7 +617,6 @@ namespace Fractrace
                             for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= raster)
                             {
 
-
                                 if (mAbort)
                                 {
                                     return;
@@ -633,7 +628,6 @@ namespace Fractrace
                                     { // aha, noch zeichnen
                                         // Test, ob Schnitt mit Begrenzung vorliegt  
                                         y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl) / (raster);
-
                                         y += yAdd;
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
                                             return;
@@ -715,29 +709,51 @@ namespace Fractrace
                                                 {
                                                     if (raster == 1)
                                                     {
-                                                        fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
-                                                       xd, yd, zd, zzd,
-                                                       wix, wiy, wiz,
-                                                       jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                        if (IsSmallPreview())
+                                                        {
+                                                            fa1 = formulas.RayCastAt(minCycle, x, y, z, zz,
+                                                           xd, yd, zd, zzd,
+                                                           wix, wiy, wiz,
+                                                           jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                        }
+                                                        else
+                                                        {
+                                                            fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
+                                                           xd, yd, zd, zzd,
+                                                           wix, wiy, wiz,
+                                                           jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                        }
                                                     }
                                                     else
                                                     {
+
+                                                      
                                                         fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
                                                           xd, yd, zd, zzd,
                                                           wix, wiy, wiz,
                                                           jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                         
                                                     }
                                                 }
                                                 else
                                                 {
                                                     if (raster == 1)
                                                     {
-                                                        fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
-                                 xd, yd, zd, zzd,
-                                 wix, wiy, wiz,
-                                 jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                                                        fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-
+                                                        if (IsSmallPreview())
+                                                        {
+                                                            fa1 = formulas.RayCastAt(zyklen, x, y, z, zz,
+                                   xd, yd, zd, zzd,
+                                   wix, wiy, wiz,
+                                   jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                        }
+                                                        else
+                                                        {
+                                                            fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
+                                     xd, yd, zd, zzd,
+                                     wix, wiy, wiz,
+                                     jx, jy, jz, jzz, formula, inverse, xx, yy, true);
+                                                            fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                                                        }
 
                                                     }
                                                     else

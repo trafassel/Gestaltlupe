@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:103-->
+<!--LastNote:104-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1413,10 +1413,9 @@ View.DephAdd sollt unabhängig von View.Size sein.<BR>
 
 </DD>
 <DT><A name="Y8YtzuIFirc5F0giZGxxAg"></A>Fortschrittsbalken beim Small Preview</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434303082-->
 <!--property:date_modified=1434303186-->
-<!--property:expanded-->
 <!--property:hash=bbe6c6c5144ae6e432810374809fccf6c03af8e1-->
 <!--property:hash_html=7687b39c5e33936519c78b041ba41d83d5bc4b33-->
 <DD>
@@ -1441,6 +1440,52 @@ Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das
 
 </DD>
 </DL>
+</DD>
+<DT><A name="KGQy7vAH7BONLxQq3zwZAg"></A>Wenn sich die Formel geändert hat</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1434491535-->
+<!--property:date_modified=1434573229-->
+<!--property:expanded-->
+<!--property:hash=333eb01598460894cd0d6cd1fb96badf9fd5769d-->
+<!--property:hash_html=eaee9e8b8b31ad18e644ea49cd68e7ef2606d32d-->
+<DD>
+... die Aktualisierung im Preview beenden.<BR>
+<BR>
+Aktuell werden während des Editierens Fehler im Code-Control angezeigt.<BR>
+<BR>
+Prinzipiell soll die  Aktualisierung im Preview stets gestoppt werden, wenn sich ein Parameter geändert hat, der nicht zur PictureArt gehört.<BR>
+<BR>
+<DL>
+<DT><A name="YePDXf7xNZcOVyx65TlJNg"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434573324-->
+<!--property:date_modified=1434573326-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+</DL>
+</DD>
+<DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434576602-->
+<!--property:date_modified=1434576820-->
+<!--property:hash=649123520437f43fbf8d6a37c679892185fa61e2-->
+<!--property:hash_html=b10380c0b76c12c0c9ee317e86c594fcc30e412f-->
+<DD>
+gibt es manchmal eine Exception.<BR>
+<BR>
+Ursache:<BR>
+<BR>
+// in Form1 (Ln 739):<BR>
+public void Progress(double progressInPercent)<BR>
+<BR>
+Wird aufgerufen, obwohl das Programm bereite beendet wurde.<BR>
+<BR>
+Lösung, beim Schließen, flag inClosing=true setzen und vor<BR>
+ this.Invoke(new ProgressDelegate(OnProgress));<BR>
+testen.<BR>
+<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

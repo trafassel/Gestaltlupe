@@ -741,6 +741,7 @@ namespace Fractrace
             if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
+                // TODO: Test, for program exit to avoid execption at program close.
                 this.Invoke(new ProgressDelegate(OnProgress));
             }
         }
