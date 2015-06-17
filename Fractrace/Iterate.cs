@@ -333,21 +333,25 @@ namespace Fractrace
                     {
                         double f = ((double)mUpdateCount) / ((double)maxUpdateSteps + 1);
                         double maxUpInvers = 1.0 / ((double)maxUpdateSteps + 2);
-
+                        if(!mAbort)
                         mStarter.Progress(100.0 * (
                             maxUpInvers * ((double)mUpdateCount + y / (double)MAXZ_ITER))
                             );
 
+
+                        /*
                         double a = (double)(mUpdateCount);
                         double b = y / (double)MAXZ_ITER;
                         double c = maxUpInvers * (a + b);
 
                         double progress = 100.0 * (maxUpInvers * ((double)mUpdateCount) + y / (double)MAXZ_ITER);
+                         */
 
                     }
                     else
                     {
-                        mStarter.Progress(100.0 * (y / (double)MAXZ_ITER));
+                        if (!mAbort)
+                            mStarter.Progress(100.0 * (y / (double)MAXZ_ITER));
                     }
                     retVal = true;
                 }

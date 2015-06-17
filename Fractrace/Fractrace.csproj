@@ -193,6 +193,8 @@
     <Compile Include="DataTypes\XYZTupel .cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="Geometry\Navigator.cs" />
+    <Compile Include="PictureArt\FastPreviewRenderer.cs" />
+    <Compile Include="PictureArt\ScienceRendererBase.cs" />
     <Compile Include="Scheduler\GrandScheduler.cs" />
     <Compile Include="Gui\Form1.cs">
       <SubType>Form</SubType>
@@ -212,20 +214,12 @@
     <Compile Include="Geometry\Transform3D.cs" />
     <Compile Include="Geometry\VecRotation.cs" />
     <Compile Include="InfoGenerator.cs" />
-    <Compile Include="PictureArt\BroadcastRenderer.cs" />
     <Compile Include="PictureArt\FastRenderingFilter.cs" />
-    <Compile Include="PictureArt\FastScienceRenderer.cs" />
     <Compile Include="PictureArt\FrontViewRenderer.cs" />
-    <Compile Include="PictureArt\NiceRenderer.cs" />
-    <Compile Include="PictureArt\NiceRendererMultiThread.cs" />
     <Compile Include="PictureArt\PlasicRenderer.cs" />
     <Compile Include="PictureArt\RenderBase.cs" />
-    <Compile Include="PictureArt\ScienceRendererBase.cs" />
-    <Compile Include="PictureArt\SharpRenderer.cs" />
-    <Compile Include="PictureArt\SmallRenderer.cs" />
     <Compile Include="PictureArt\PictureArtFactory.cs" />
     <Compile Include="PictureArt\Renderer.cs" />
-    <Compile Include="PictureArt\UniversalRenderer.cs" />
     <Compile Include="Gui\PreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,7 +250,6 @@
     <Compile Include="Gui\ParameterInput.Designer.cs">
       <DependentUpon>ParameterInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="PictureArt\ScienceRenderer.cs" />
     <Compile Include="Gui\RenderImage.cs">
       <SubType>UserControl</SubType>
     </Compile>

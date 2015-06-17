@@ -367,7 +367,11 @@ namespace Fractrace
         public void ComputationEnds()
         {
             iterForPictureArt = iter;
-            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            try
+            {
+                this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            }
+            catch { } 
             //            OneStepEnds();
         }
 
@@ -742,7 +746,10 @@ namespace Fractrace
             {
                 mProgress = progressInPercent;
                 // TODO: Test, for program exit to avoid execption at program close.
-                this.Invoke(new ProgressDelegate(OnProgress));
+                try
+                {
+                    this.Invoke(new ProgressDelegate(OnProgress));
+                } catch  {}
             }
         }
 
@@ -766,6 +773,7 @@ namespace Fractrace
         }
 
 
+   
         /// <summary>
         /// Dialogabfrage vor Beendigung der Anwendung.
         /// </summary>
@@ -776,6 +784,8 @@ namespace Fractrace
             {
                 if (MessageBox.Show("Close Application?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
+                    if (iter != null)
+                        iter.Abort();
                     base.OnClosing(e);
                 }
                 else e.Cancel = true;

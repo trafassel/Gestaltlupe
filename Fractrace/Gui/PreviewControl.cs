@@ -159,6 +159,17 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Return true, if corresponding image is used as small preview.
+        /// </summary>
+        /// <returns></returns>
+        protected bool IsSmallPreview()
+        {
+            return (Image.Width < 150 && Image.Height < 150);
+        }
+
+
+
+        /// <summary>
         /// Berechnung wurde beendet.
         /// </summary>
         protected override void OneStepEnds()
@@ -170,11 +181,26 @@ namespace Fractrace
                     try
                     {
                         Fractrace.PictureArt.Renderer pArt;
-                        if (fixedRenderer == -1)
-                            pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-                        else
-                            pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
-                        //  pArt.PaintEnds += pArt_PaintEnds;
+                     
+                       
+                            if (fixedRenderer == -1)
+                            {
+                                if (IsSmallPreview())
+                                {
+                                    pArt = new PictureArt.FastPreviewRenderer(iter.PictureData);
+                                    pArt.Init(iter.LastUsedFormulas);
+                                }
+                                else
+                                {
+                                    pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                                }
+                            }
+                            else
+                            {
+                                pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
+                            }
+                      
+                        //  pArt.PaintEnds += pArt_PaintEnds;this
                         pArt.Paint(grLabel);
 
                         Application.DoEvents();
