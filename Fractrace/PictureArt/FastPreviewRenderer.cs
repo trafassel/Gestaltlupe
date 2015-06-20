@@ -553,7 +553,7 @@ namespace Fractrace.PictureArt
             if (retVal.Z > 1)
                 retVal.Z = 1;
 
-            double brightLightLevel = ParameterDict.Exemplar.GetDouble("Renderer.BrightLightLevel");
+            double brightLightLevel = 0; //  ParameterDict.Exemplar.GetDouble("Renderer.BrightLightLevel");
             if (brightLightLevel > 0)
             {
                 retVal.X = (1 - brightLightLevel) * retVal.X + brightLightLevel * light.X * (1 - shadowPlane[x, y]);

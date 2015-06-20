@@ -340,7 +340,16 @@ namespace Fractrace
                 {
                     // Initiate new rendering
                     {
-                        mCurrentUpdateStep = 0;
+                        // Stop subrendering, if some formula paremters changed
+                        if (mCurrentUpdateStep > 0)
+                        {
+                            mCurrentUpdateStep = 0;
+                            if (paras != null)
+                                paras.InComputing = false;
+                            inComputeOneStep = false;
+                            oldParameterHashWithoutPictureArt = "";
+                            mUpdateCount = 1;
+                        }
                         oldParameterHashWithoutPictureArt = tempParameterHash;
                         paras.Assign();
                         mUpdateCount = 1;

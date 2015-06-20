@@ -641,8 +641,30 @@ namespace Fractrace
         /// <param name="e"></param>
         private void splitContainer1_Panel1_ClientSizeChanged(object sender, EventArgs e)
         {
-            preview1.Width = preview1.Height - 10;
-            preview2.Width = preview2.Height - 10;
+            SetSmallPreviewSize();
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetSmallPreviewSize()
+        {
+
+
+            double winput = ParameterDict.Exemplar.GetDouble("View.Width");
+            double hinput = ParameterDict.Exemplar.GetDouble("View.Height");
+            double aspectRatio = winput / hinput;
+
+            int width = 110;
+            preview2.Width = width;
+            preview1.Width = width;
+            
+            int height = (int)(width / aspectRatio) + 34;
+            this.splitContainer1.SplitterDistance = height-12;
+            preview1.Height = height;
+            preview2.Height = height;
         }
 
 
@@ -653,11 +675,8 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnSaveInHistory_Click(object sender, EventArgs e)
         {
-            //SavePicData(); 
             mHistory.CurrentTime = mHistory.Save();
-            //mHistory.Save();
             LoadFromHistory();
-
         }
 
 
@@ -765,6 +784,7 @@ namespace Fractrace
         /// </summary>
         private void preview1_RenderingEnds()
         {
+            SetSmallPreviewSize();
             // Counter is set to the last time entry.
             mHistory.CurrentTime = mHistory.Time;
             UpdateHistoryControl();
@@ -1083,6 +1103,7 @@ namespace Fractrace
         {
             mHistory.CurrentTime = mHistory.Save();
             //LoadFromHistory();
+            SetSmallPreviewSize();
             preview1.btnPreview_Click(sender, e);
         }
 

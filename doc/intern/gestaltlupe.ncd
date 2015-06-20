@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:105-->
+<!--LastNote:114-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1442,10 +1442,9 @@ Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das
 </DL>
 </DD>
 <DT><A name="KGQy7vAH7BONLxQq3zwZAg"></A>Wenn sich die Formel geändert hat</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434491535-->
 <!--property:date_modified=1434573229-->
-<!--property:expanded-->
 <!--property:hash=333eb01598460894cd0d6cd1fb96badf9fd5769d-->
 <!--property:hash_html=eaee9e8b8b31ad18e644ea49cd68e7ef2606d32d-->
 <DD>
@@ -1478,8 +1477,14 @@ Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
 </DD>
 </DL>
 </DD>
-<DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
+<DT><A name="Y9AqT4IMGrHuGd2J6KC4Vw"></A>Bei Fehlern in der Formel wird trotzdem die Pipeline weiterverfolgt</DT>
 <!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434582415-->
+<!--property:date_modified=1434582443-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434576602-->
 <!--property:date_modified=1434576820-->
 <!--property:hash=649123520437f43fbf8d6a37c679892185fa61e2-->
@@ -1500,6 +1505,92 @@ testen.<BR>
 <BR>
 <BR>
 
+</DD>
+<DT><A name="vIchVIJeMcNK6bx8orczTQ"></A>Falsche gespeicherte Parameterer bei Animationen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434583657-->
+<!--property:date_modified=1434583742-->
+<!--property:hash=a469f952805fad6d98c9bc8385183a342f5da8ce-->
+<!--property:hash_html=4d5a512684328792eeb9160c9f8a2bda71f5451d-->
+<DD>
+bei Animationen sind die Parameter zu den gespeicherten Bildern um genau 1 versetzt. Man muss also immer das um 1 ältere Bild laden.<BR>
+
+</DD>
+<DT><A name="xteyEwozZ7Ch8fGT0aQLDg"></A>Größenveränderung im Preview.</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434658050-->
+<!--property:date_modified=1434658146-->
+<!--property:expanded-->
+<!--property:hash=180f0753d3ea2c841ff2d10164aae50994746167-->
+<!--property:hash_html=5ec721c88e9068da1e838d679afdfca20ba7e691-->
+<DD>
+... Verbieten(funktioniert nicht). <BR>
+<BR>
+<DL>
+<DT><A name="Y3wWgeoNuO4olouMOApXJg"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434658366-->
+<!--property:date_modified=1434792195-->
+<!--property:hash=e3b6d32691e41620cd7fa248c9f79b5e328e892a-->
+<!--property:hash_html=7e240c53381c91141db931be4de849343850df78-->
+<DD>
+// Struktur bei der Anzeige.<BR>
+this.splitContainer1.Panel1.Controls.Add(this.preview1);<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="AK7lSeh3OfQfpe7Q6798GA"></A>PARAMETERINFO.Description aus Bulk entfernen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434739083-->
+<!--property:date_modified=1434739095-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="RQpI3PdSsfSQQhR6rjvh8w"></A>Farbe bei Phong Shading</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434762671-->
+<!--property:date_modified=1434763249-->
+<!--property:hash=3089d5f28e68ccb716d94aedaf987017298972d7-->
+<!--property:hash_html=50a0ee58fa94d05e848397706eabc204c90a99a3-->
+<DD>
+Beispiel siehe redSphere.<BR>
+<BR>
+Wenn die Oberfläche rot ist, ist die Farbe bei dem von Shinines betroffenen Gebieten weiss.<BR>
+<BR>
+Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben zu vereinigen.<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="4fnGcHKKgNLLnqfEBzWm3w"></A>Kein Start der Berechnung</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1434789087-->
+<!--property:date_modified=1434789121-->
+<!--property:expanded-->
+<!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
+<!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
+<DD>
+bei intern/bugs/computingDoesNotStart<DL>
+<DT><A name="NRpOVyRyQYYm3e5bpx4Cqw"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434832384-->
+<!--property:date_modified=1434832678-->
+<!--property:hash=3689b2810d5f3fb7c0b1a1fd4070a65cb450cc7c-->
+<!--property:hash_html=9e2274290624f650330f07bcd71880cce997d436-->
+<DD>
+Noch aufgerufen wird:<BR>
+<BR>
+ btnStart_Click<BR>
+<BR>
+Form1.ComputeOneStep()<BR>
+<BR>
+iter.StartAsync()
+</DD>
+</DL>
 </DD>
 </DL>
 </DD>
