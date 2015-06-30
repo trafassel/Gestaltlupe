@@ -800,7 +800,6 @@ namespace Fractrace
                                                         GData.ColorInfo2[xx, yy] = fa1;
 
                                                         PixelInfo pixelInfo = new PixelInfo();
-                                                        pixelInfo.frontLight = -fa1;
                                                         pixelInfo.iterations = usedCycles;
                                                         PData.Points[xx, yy] = pixelInfo;
                                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
@@ -818,8 +817,6 @@ namespace Fractrace
                                                             fa1 = 255.0 * fa1 / (zyklen + cycleAdd);
 
                                                         GData.ColorInfo2[xx + 1, yy] = fa1;
-
-                                                        pixelInfo.frontLight = -fa1;
                                                         PData.Points[xx + 1, yy] = pixelInfo;
 
                                                         fa1 = formulas.Rechne(x, y, z - zd / 2.0, zz, zyklen + cycleAdd,
@@ -833,8 +830,6 @@ namespace Fractrace
                                                             fa1 = 255 * fa1 / (zyklen + cycleAdd);
 
                                                         GData.ColorInfo2[xx, yy + 1] = fa1;
-
-                                                        pixelInfo.frontLight = -fa1;
                                                         PData.Points[xx, yy + 1] = pixelInfo;
 
                                                         fa1 = formulas.Rechne(x + xd / 2.0, y, z - zd / 2.0, zz, zyklen + cycleAdd,
@@ -848,10 +843,7 @@ namespace Fractrace
                                                             fa1 = 255 * fa1 / (zyklen + cycleAdd);
 
                                                         GData.ColorInfo2[xx + 1, yy + 1] = fa1;
-
-                                                        pixelInfo.frontLight = -fa1;
                                                         PData.Points[xx + 1, yy + 1] = pixelInfo;
-
                                                     }
                                                     else
                                                     {

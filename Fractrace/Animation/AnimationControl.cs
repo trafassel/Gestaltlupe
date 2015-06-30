@@ -143,7 +143,6 @@ namespace Fractrace.Animation
             mAnimationSteps.Steps.Clear();
 
             string tempstr = animationDescription.Replace(System.Environment.NewLine, " ");
-            //string tempstr = tbAnimationDescription.Text.Replace(System.Environment.NewLine, " ");
             string[] entries = tempstr.Split(' ');
             AnimationPoint currentAp = null;
             string lastEntry = "";
@@ -208,8 +207,7 @@ namespace Fractrace.Animation
                 ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
                 animationHistory.Save();
             }
-
-
+            // Compute each Animation frame.
             for (int i = 1; i < mAnimationSteps.Steps.Count; i++)
             {
 
@@ -266,7 +264,8 @@ namespace Fractrace.Animation
 
                     // Left View
                     ParameterInput.MainParameterInput.DeactivatePreview();
-                    Form1.PublicForm.ComputeOneStep();
+                    Fractrace.Scheduler.GrandScheduler.Exemplar.ComputeOneStep();
+                    //Form1.PublicForm.ComputeOneStep();
                     lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
                     if(StepPreviewControls.ContainsKey(from))
                         StepPreviewControls[from].UpdateComputedStep(i);

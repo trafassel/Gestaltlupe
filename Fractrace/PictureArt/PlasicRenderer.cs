@@ -464,36 +464,6 @@ namespace Fractrace.PictureArt
             }
 
             Vec3 light = new Vec3(0, 0, 0);
-
-
-            if (pInfo.frontLight < 0)
-            {
-
-                try
-                {
-                    retVal.X = 0.3;
-                    retVal.Y = -pInfo.frontLight / 255.0;
-                    if (retVal.Y < 0)
-                        retVal.Y = 0;
-                    if (retVal.Y > 255)
-                        retVal.Y = 255;
-
-                    retVal.Z = 0;
-
-                    return retVal;
-
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    retVal.X = 1;
-                    retVal.Y = 0;
-                    retVal.Z = 0;
-                    return retVal;
-
-                }
-            }
-
             Vec3 normal = null;
 
             normal = normalesSmooth1[x, y];

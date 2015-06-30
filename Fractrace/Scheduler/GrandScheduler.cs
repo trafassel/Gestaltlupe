@@ -10,10 +10,10 @@ namespace Fractrace.Scheduler
 {
 
 
-    class GrandSchedulerInstance
+    class GrandScheduler
     {
 
-        GrandSchedulerInstance()
+        GrandScheduler()
         {
             mainDisplayForm = Fractrace.Form1.PublicForm;
             mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
@@ -24,7 +24,7 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// Used by the singleton design pattern.
         /// </summary>
-        protected static GrandSchedulerInstance mExemplar = null;
+        protected static GrandScheduler mExemplar = null;
 
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Fractrace.Scheduler
         /// Gets the unique static instance of this class.
         /// </summary>
         /// <value>The exemplar.</value>
-        public static GrandSchedulerInstance Exemplar
+        public static GrandScheduler Exemplar
         {
             get
             {
@@ -69,12 +69,74 @@ namespace Fractrace.Scheduler
                 {
                     if (mExemplar == null)
                     {
-                        mExemplar = new GrandSchedulerInstance();
+                        mExemplar = new GrandScheduler();
                     }
                 }
                 return mExemplar;
             }
         }
+
+
+        /// <summary>
+        /// True, if current input values are freezed.
+        /// </summary>
+        protected bool historyFreezed = false;
+
+        protected object historyFreezedObj = new object();
+
+
+        /// <summary>
+        ///  Contains list of all running threads.
+        /// </summary>
+        protected System.Collections.Generic.List<System.Threading.Thread> threads;
+
+
+        /// <summary>
+        /// Add given thread to threads. Previously closed threads are removed from threads.
+        /// </summary>
+        /// <param name="thread"></param>
+        public void AddThread(System.Threading.Thread thread)
+        {
+            lock (threads)
+            {
+                System.Collections.Generic.List<System.Threading.Thread> toDel = new List<System.Threading.Thread>();
+                foreach (System.Threading.Thread oldThread in threads)
+                {
+                    if (!oldThread.IsAlive)
+                    {
+                        toDel.Add(oldThread);
+                    }
+                }
+                foreach (System.Threading.Thread oldThread in toDel)
+                    threads.Remove(oldThread);
+                if (threads.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error in GrandSchedulerInstance.AddThread(): Some old threads still running.");
+                }
+                threads.Add(thread);
+            }
+        }
+
+
+        /// <summary>
+        /// Starts computing surface model.
+        /// </summary>
+        public void ComputeOneStep()
+        {
+            lock (historyFreezedObj)
+            {
+                historyFreezed = true;
+                mainDisplayForm.ComputeOneStep();
+            }
+        }
+
+
+        public void ComputeOneStepEnds()
+        {
+
+        }
+
+
 
     }
 

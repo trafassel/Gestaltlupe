@@ -317,7 +317,6 @@ namespace Fractrace
                 {
                     // Update last render for better quality
                     mCurrentUpdateStep++;
-                    //oldParameterHashWithoutPictureArt = tempParameterHash;
                     DataTypes.GraphicData oldData = null;
                     DataTypes.PictureData oldPictureData = null;
                     if (iter != null && !iter.InAbort)

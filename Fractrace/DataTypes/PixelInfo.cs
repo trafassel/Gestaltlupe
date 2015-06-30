@@ -35,18 +35,6 @@ namespace Fractrace.DataTypes
 
 
         /// <summary>
-        /// Intensity of front light.
-        /// </summary>
-        public double frontLight = 0;
-
-
-        /// <summary>
-        /// First derivation on surface. If derivation=0, the surface is flat.
-        /// </summary>
-        public double derivation = 0;
-
-
-        /// <summary>
         /// Iteration cout . Used for colorize cut.
         /// </summary>
         public double iterations = -1;
@@ -66,8 +54,6 @@ namespace Fractrace.DataTypes
             retVal.Normal.X = Normal.X;
             retVal.Normal.Y = Normal.Y;
             retVal.Normal.Z = Normal.Z;
-            retVal.frontLight = frontLight;
-            retVal.derivation = derivation;
             retVal.iterations = iterations;
             if (AdditionalInfo != null)
                 retVal.AdditionalInfo = AdditionalInfo.Clone();

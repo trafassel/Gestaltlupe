@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:114-->
+<!--LastNote:3-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -22,8 +22,66 @@
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281074-->
 <!--property:date_modified=1434281082-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="41yXo5bZkDVUOeEvEHNM9A"></A>src</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435657416-->
+<!--property:date_modified=1435657418-->
+<!--property:expanded-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="6KvdWzMqwJLyyo9dnny4nA"></A>Verwendete Daten und Datentypen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435657427-->
+<!--property:date_modified=1435657875-->
+<!--property:hash=c9871ae72447125278adf8d333585e62f7c02ea9-->
+<!--property:hash_html=85b066a9492119c7108f9356cc6e7e68e52d7ebe-->
+<DD>
+In Form1:<BR>
+// Liefert Informationen zu den gezeichneten Pixeln.<BR>
+oldData = iter.GraphicInfo;<BR>
+<BR>
+oldPictureData = iter.PictureData;<BR>
+<BR>
+// Altes Format<BR>
+class GraphicData{<BR>
+int width = 1000;<BR>
+int height = 1000;<BR>
+int[,] Picture = null;// new int[dimx, dimy];<BR>
+VecInfo[,] Normals = null; // Enthält die Normalen der Geometrie in Punkt x,y<BR>
+        // PointInfo enthält die real benutzten Koordinaten (Werden später für den Zoom verwendet).<BR>
+public VoxelInfo[,]  PointInfo = null;<BR>
+public double[,] ColorInfo = null;<BR>
+public double[,] ColorInfo2 = null;<BR>
+public double[,] ColorInfoDeph = null;<BR>
+}<BR>
+<BR>
+<BR>
+// Altes Format <BR>
+class PictureData{<BR>
+   PixelInfo[,] Points = null;<BR>
+  Width<BR>
+  Height<BR>
+}<BR>
+<BR>
+<BR>
+ class PixelInfo() {<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+}
+</DD>
+</DL>
+</DD>
+</DL>
+</DD>
 <DT><A name="GueRkRySXwF3ZfPhSlm0yw"></A>Info</DT>
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281104-->
@@ -35,7 +93,6 @@
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -1520,7 +1577,6 @@ bei Animationen sind die Parameter zu den gespeicherten Bildern um genau 1 verse
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434658050-->
 <!--property:date_modified=1434658146-->
-<!--property:expanded-->
 <!--property:hash=180f0753d3ea2c841ff2d10164aae50994746167-->
 <!--property:hash_html=5ec721c88e9068da1e838d679afdfca20ba7e691-->
 <DD>
@@ -1570,7 +1626,6 @@ Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434789087-->
 <!--property:date_modified=1434789121-->
-<!--property:expanded-->
 <!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <DD>
@@ -1591,6 +1646,40 @@ Form1.ComputeOneStep()<BR>
 iter.StartAsync()
 </DD>
 </DL>
+</DD>
+<DT><A name="lMuO63N1cE7k6QGf2evppg"></A>Keine korreke Beendigung</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435339423-->
+<!--property:date_modified=1435654072-->
+<!--property:hash=1d8f1b9fd79b8703c7d98be09f27c389f7ebe744-->
+<!--property:hash_html=a9c9cb0ed3566d5fa1d5efb35d355356b421fbab-->
+<DD>
+sicher im Zusammenhang mit der Verhinderung des Absturzes am Ende.<BR>
+<BR>
+Tritt auf, wenn das Programm während einer Animation beendet wird.<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="cb6SqGgNtVMKFnH6ztpXKA"></A>Schwarze Bilder</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1435339481-->
+<!--property:date_modified=1435654145-->
+<!--property:hash=f53ed17303ee6882d7fb7157e4d2867fe2483a6d-->
+<!--property:hash_html=525f7f064ee5c3fd67a9c95cc8bad17e4cacc2ea-->
+<DD>
+z.B. in letzter todo Animation.<BR>
+<BR>
+Wahrscheinliche Ursache: Die hinzugefügten hinteren Zusatzbereiche.<BR>
+<BR>
+Tritt auch auf, bei C:\Users\Per\Desktop\todo\a1.anim<BR>
+<BR>
+Beobachtung: Sehr viel Fortschrittsbalkenaktualisierung<BR>
+<BR>
+<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

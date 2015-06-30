@@ -1605,7 +1605,6 @@ namespace Fractrace
                         pInfo.Coord.X = xpos[k];
                         pInfo.Coord.Y = ypos[k] + tief[k] * yd;
                         pInfo.Coord.Z = zpos[k];
-                        pInfo.frontLight = winkel;
                         pInfo.Normal = normals[k];
                         pInfo.IsInside = !invers;
 
@@ -1631,7 +1630,6 @@ namespace Fractrace
                             pInfo.IsInside = !invers;
                         }
                         pInfo.Normal = normals[k];
-                        pInfo.frontLight += winkel / 4.0;
                         if (k == 0 || k == 3)
                         { // Debug only (um die reale Position zu ermitteln)   
                             if (pinfoSet != null)
@@ -1737,7 +1735,6 @@ namespace Fractrace
                         pInfo.Coord.X = (otherP1.Coord.X + otherP2.Coord.X) / 2.0;
                         pInfo.Coord.Y = (otherP1.Coord.Y + otherP2.Coord.Y) / 2.0;
                         pInfo.Coord.Z = (otherP1.Coord.Z + otherP2.Coord.Z) / 2.0;
-                        pInfo.frontLight = (otherP1.frontLight + otherP2.frontLight) / 2.0;
                         pInfo.Normal.X = (otherP1.Normal.X + otherP2.Normal.X) / 2.0;
                         pInfo.Normal.Y = (otherP1.Normal.Y + otherP2.Normal.Y) / 2.0;
                         pInfo.Normal.Z = (otherP1.Normal.Z + otherP2.Normal.Z) / 2.0;
@@ -2101,7 +2098,6 @@ namespace Fractrace
                                     pInfo.Coord.X = xpos[k];
                                     pInfo.Coord.Y = ypos[k] + tief[k] * yd;
                                     pInfo.Coord.Z = zpos[k];
-                                    pInfo.frontLight = winkel;
                                     pInfo.Normal = normals[k];
                                     pData.Points[indexX, indexY] = pInfo;
                                     if (pinfoSet != null)
@@ -2127,7 +2123,6 @@ namespace Fractrace
                             pInfo = pData.Points[pixelX, pixelY];
                         }
                         pInfo.Normal = normals[k];
-                        pInfo.frontLight += winkel / 4.0;
                         if (pinfoSet != null)
                             pInfo.AdditionalInfo = pinfoSet[k];
                         // TODO: Auch die Normalen übertragen

@@ -109,6 +109,7 @@ namespace Fractrace.PictureArt {
 
       Vec3 light = new Vec3(0, 0, 0);
 
+    /*
       if (pInfo.frontLight < 0) {
         //return Color.FromArgb((int)255, (int)(0), (int)0);
         try {
@@ -128,6 +129,7 @@ namespace Fractrace.PictureArt {
 
         }
       }
+     */
 
       if (pInfo.Normal != null) {
         light = GetLight(pInfo.Normal);
