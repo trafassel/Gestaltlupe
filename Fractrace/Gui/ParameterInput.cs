@@ -293,8 +293,8 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-            if (Form1.PublicForm.dontActivateRender)
-                return;
+           // if (Form1.PublicForm.dontActivateRender)
+           //     return;
 
             if (!mPreviewMode || ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
             {

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:3-->
+<!--LastNote:121-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -93,6 +93,7 @@ class PictureData{<BR>
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -1666,6 +1667,7 @@ Tritt auf, wenn das Programm während einer Animation beendet wird.<BR>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1435339481-->
 <!--property:date_modified=1435654145-->
+<!--property:expanded-->
 <!--property:hash=f53ed17303ee6882d7fb7157e4d2867fe2483a6d-->
 <!--property:hash_html=525f7f064ee5c3fd67a9c95cc8bad17e4cacc2ea-->
 <DD>
@@ -1679,6 +1681,39 @@ Beobachtung: Sehr viel Fortschrittsbalkenaktualisierung<BR>
 <BR>
 <BR>
 <BR>
+<DL>
+<DT><A name="4PxukZNkVRL8WaEydXlAUA"></A>Aktuell</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435663617-->
+<!--property:date_modified=1435666406-->
+<!--property:hash=fd479fcf842086cfb2ef11f97bdb2723997ec2f2-->
+<!--property:hash_html=176107105eff286a74c715bdbc15d9bba635cb15-->
+<DD>
+Verwendung von GrandScheduler.<BR>
+<BR>
+Zum Zeitpunkt, an dem Form1.DrawPicture() aufgerufen wird, ist die neue Iteration bereits gestartet.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="hBVI82Ykxw26Fmpxe5DceQ"></A>repaintRequested</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435666760-->
+<!--property:date_modified=1435666796-->
+<!--property:hash=6d6b9aa863b8d85feab163e791100e3e55218041-->
+<!--property:hash_html=6d6b9aa863b8d85feab163e791100e3e55218041-->
+<DD>
+wird nicht mehr verwendet. Idee war: wenn 
+</DD>
+<DT><A name="H39OZBpqJutJ2htdVdhzZA"></A>PaintJob</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1435676891-->
+<!--property:date_modified=1435676986-->
+<!--property:hash=8b5c9e56a2639002bb89714dcba07f1a85c6a78b-->
+<!--property:hash_html=b52beedb5be845fdc09311d9944c354c9da1a5cf-->
+<DD>
+Beinhaltet eine Kopie der Parameter und Instanz von Iterate.<BR>
 
 </DD>
 </DL>

@@ -25,6 +25,13 @@ namespace Fractrace
 
         protected bool mAbort = false;
 
+
+        /// <summary>
+        /// True while running iteration.
+        /// </summary>
+        protected bool mStart = false;
+
+
         protected static bool mPause = false;
 
 
@@ -113,6 +120,20 @@ namespace Fractrace
         }
 
 
+
+        protected ParameterDict mParameterDict = null;
+
+        public Iterate(ParameterDict parameterDict, IAsyncComputationStarter starter, bool isRightView=false)
+        {
+            mParameterDict = parameterDict;
+            mStarter = starter;
+            width = parameterDict.GetWidth();
+            height=parameterDict.GetHeight();
+            GData = new GraphicData(width, height);
+            PData = new PictureData(width, height);
+            this.mIsRightView = isRightView;
+        }
+
         /// <summary>
         /// Das Steuerelement, dass die Berechnung angestoßen hat.
         /// </summary>
@@ -157,9 +178,6 @@ namespace Fractrace
             mOldPictureData = oldPictureData;
             mUpdateCount = updateCount;
         }
-
-
-
 
 
         /// <summary>
@@ -215,6 +233,39 @@ namespace Fractrace
 
 
         /// <summary>
+        /// Start asyncron computing with parameters mParameterDict.
+        /// </summary>
+        public void StartAsync()
+        {
+            if (mParameterDict == null)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in Iterate.StartAsync() mParameterDict is empty");
+                return;
+            }
+
+            FracValues fracValues = new FracValues();
+            fracValues.SetFromParameterDict();
+            StartAsync(fracValues, (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Cycles"), 2,
+                ParameterDict.Exemplar.GetDouble("View.Size"),
+                ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
+                ParameterDict.Exemplar.GetBool("View.Perspective"));
+
+        }
+
+
+        /// <summary>
+        /// Wait till async computation ends. 
+        /// </summary>
+        public void Wait()
+        {
+            while (mStart && !mAbort)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+
+
+        /// <summary>
         /// Von hier aus wird die Berechnung in Einzelthreads aufgesplittet.
         /// </summary>
         /// <param name="act_val"></param>
@@ -223,8 +274,10 @@ namespace Fractrace
         /// <param name="screensize"></param>
         /// <param name="formula"></param>
         /// <param name="perspective"></param>
-        public void StartAsync(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective, bool transformUpdate)
+        public void StartAsync(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective)
         {
+            mStart = true;
+            System.Diagnostics.Debug.WriteLine("Iter start");
             m_act_val = act_val;
             m_zyklen = zyklen;
             m_raster = raster;
@@ -232,8 +285,6 @@ namespace Fractrace
             m_formula = formula;
             m_perspective = perspective;
             availableY = 0;
-
-            mTransformUpdate = transformUpdate;
 
             int noOfThreads = ParameterDict.Exemplar.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
@@ -279,6 +330,8 @@ namespace Fractrace
                             PData = mOldPictureData;
                         }
                     }
+                    System.Diagnostics.Debug.WriteLine("Iter ends");
+                    mStart = false;
                     mStarter.ComputationEnds();
                 }
                 // Endereignis aufrufen
@@ -300,7 +353,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// True, if 
+        /// True, if iteration runs without updates.
         /// </summary>
         public bool OneStepProgress = false;
 

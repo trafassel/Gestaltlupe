@@ -21,6 +21,7 @@ namespace Fractrace.Scheduler
         }
 
 
+
         /// <summary>
         /// Used by the singleton design pattern.
         /// </summary>
@@ -31,6 +32,12 @@ namespace Fractrace.Scheduler
         ///  Used by the singleton design pattern.
         /// </summary>
         protected static Object lockVar = new Object();
+
+
+        /// <summary>
+        /// Runing jobs.
+        /// </summary>
+        protected List<PaintJob> jobs = new List<PaintJob>();
 
 
         /// <summary>
@@ -76,6 +83,8 @@ namespace Fractrace.Scheduler
             }
         }
 
+        
+
 
         /// <summary>
         /// True, if current input values are freezed.
@@ -88,7 +97,7 @@ namespace Fractrace.Scheduler
         /// <summary>
         ///  Contains list of all running threads.
         /// </summary>
-        protected System.Collections.Generic.List<System.Threading.Thread> threads;
+        protected System.Collections.Generic.List<System.Threading.Thread> threads=new List<System.Threading.Thread>();
 
 
         /// <summary>
@@ -111,7 +120,8 @@ namespace Fractrace.Scheduler
                     threads.Remove(oldThread);
                 if (threads.Count > 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error in GrandSchedulerInstance.AddThread(): Some old threads still running.");
+                    // If there is only one thread left, evythhing should be ok, because in redraw new pixel art ist startet before old pixel art stopped.
+                    System.Diagnostics.Debug.WriteLine("Error in GrandSchedulerInstance.AddThread(): Some old threads still running. (Count:" + threads.Count);
                 }
                 threads.Add(thread);
             }
@@ -123,6 +133,7 @@ namespace Fractrace.Scheduler
         /// </summary>
         public void ComputeOneStep()
         {
+            System.Diagnostics.Debug.WriteLine("GrandScheduler.ComputeOneStep");
             lock (historyFreezedObj)
             {
                 historyFreezed = true;
@@ -131,9 +142,35 @@ namespace Fractrace.Scheduler
         }
 
 
+        public bool dontActivateRender = false;
+
+
+        /// <summary>
+        /// Indicates, that the application is computing a bitmap of the "Gestalt". 
+        /// </summary>
+        public bool inComputeOneStep = false;
+
+
+
+        /// <summary>
+        /// Is called, if mainDisplayForm.ComputeOneStep ends.
+        /// </summary>
         public void ComputeOneStepEnds()
         {
+            if (!dontActivateRender)
+                mainDisplayForm.ActivatePictureArt();
+            inComputeOneStep = false;
+        }
 
+
+        /// <summary>
+        /// Is called, if drawing of image ist ready.
+        /// </summary>
+        protected void PictureArtEnds()
+        {
+            // TODO: Save image
+            // TODO: Save in history
+            // TODO: Start waiting threads
         }
 
 

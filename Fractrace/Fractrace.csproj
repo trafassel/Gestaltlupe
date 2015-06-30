@@ -229,6 +229,7 @@
     <Compile Include="Gui\StereoForm.Designer.cs">
       <DependentUpon>StereoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Scheduler\PaintJob.cs" />
     <Compile Include="TomoGeometry\AdditionalPointInfo.cs" />
     <Compile Include="TomoGeometry\VecRotMandel2d.cs" />
     <Compile Include="TomoGeometry\Mandelbulb.cs" />

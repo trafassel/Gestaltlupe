@@ -31,7 +31,7 @@ namespace Fractrace.Basic
     /// <summary>
     /// Contains all project data in a hirachical way.
     /// </summary>
-    class ParameterDict
+    public class ParameterDict
     {
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Fractrace.Basic
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterDict"/> class.
         /// </summary>
-        ParameterDict()
+        protected ParameterDict()
         {
 
         }
@@ -425,6 +425,26 @@ namespace Fractrace.Basic
 
 
         /// <summary>
+        /// Return View.Size * View.Width.
+        /// </summary>
+        /// <returns></returns>
+        public int GetWidth()
+        {
+            return (int) ( GetDouble("View.Width") * GetDouble("View.Size") );
+        }
+
+
+        /// <summary>
+        /// Return View.Size * View.Height.
+        /// </summary>
+        /// <returns></returns>
+        public int GetHeight()
+        {
+            return (int)(GetDouble("View.Height") * GetDouble("View.Size"));
+        }
+
+
+        /// <summary>
         /// Set integer entry.
         /// </summary>
         /// <param name="key"></param>
@@ -505,6 +525,21 @@ namespace Fractrace.Basic
         /// Internal dictionary.
         /// </summary>
         protected Dictionary<string, string> mEntries = new Dictionary<string, string>();
+
+
+        /// <summary>
+        /// Return a clone of this instance.
+        /// </summary>
+        /// <returns></returns>
+        public ParameterDict Clone()
+        {
+            ParameterDict retVal = new ParameterDict();
+            foreach (KeyValuePair<string, string> entry in mEntries)
+            {
+                retVal.mEntries[entry.Key]  = entry.Value;
+            }
+            return retVal;
+        }
 
 
         /// <summary>

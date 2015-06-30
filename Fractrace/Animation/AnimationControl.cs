@@ -230,6 +230,7 @@ namespace Fractrace.Animation
         }
 
 
+
         /// <summary>
         /// Berechnet einen Animationsteil, bestehend aus steps Einzelschritten.
         /// </summary>
@@ -237,6 +238,101 @@ namespace Fractrace.Animation
         /// <param name="to"></param>
         /// <param name="steps"></param>
         private void ComputeAnimationPart(int from, int to, int steps, ParameterHistory animationHistory, int historyIndex)
+        {
+            lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString();
+            for (int i = 0; i < steps && !animationAbort; i++)
+            {
+                lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
+                double r = 1.0 / steps * (double)i;
+                Application.DoEvents();
+                if (cbSmooth.Checked)
+                    animationHistory.LoadSmoothed(r + historyIndex);
+                else
+                    animationHistory.Load(r + historyIndex);
+
+                int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
+                if (updateSteps <= 0)
+                    updateSteps = 0;
+                if (updateSteps > 1)
+                    ParameterDict.Exemplar.SetInt("View.UpdateSteps", updateSteps - 1);
+
+                //Form1.PublicForm.dontActivateRender = false;
+                //Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
+
+                Form1.PublicForm.SetPictureBoxSize();
+                Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(Form1.PublicForm, Form1.PublicForm.GestaltPicture);
+                paintJob.Run(updateSteps);
+                Form1.PublicForm.CallDrawImage();
+
+                /*
+                for (int currentUpdateStep = 0; currentUpdateStep <= updateSteps; currentUpdateStep++)
+                {
+                    //if (currentUpdateStep < updateSteps)
+                    //    Scheduler.GrandScheduler.Exemplar.dontActivateRender = true;
+                    //else
+                    //    Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
+
+                    // Left View
+                    //ParameterInput.MainParameterInput.DeactivatePreview();
+                   
+
+                    //Fractrace.Scheduler.GrandScheduler.Exemplar.ComputeOneStep();
+                    //Form1.PublicForm.ComputeOneStep();
+                    
+                    if (StepPreviewControls.ContainsKey(from))
+                        StepPreviewControls[from].UpdateComputedStep(i);
+                    // Auf Beendigung der Berechnung warten.
+                    if (animationAbort)
+                        break;
+                    while (Form1.PublicForm.InComputation)
+                    {
+                        if (animationAbort)
+                            break;
+                        Application.DoEvents();
+                        System.Threading.Thread.Sleep(10);
+                        if (animationAbort)
+                            break;
+                    }
+                }*/
+
+                /*
+                Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
+
+                // Right View
+                if (ParameterInput.MainParameterInput.Stereo)
+                {
+                    ParameterInput.MainParameterInput.DrawStereo();
+
+
+                    //Form1.PublicForm.ComputeOneStep();
+                    lblAnimationProgress.Text = "compute right: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
+                    // Auf Beendigung der Berechnung warten.
+                    if (animationAbort)
+                        break;
+                    while (ParameterInput.MainParameterInput.StereoForm.ImageRenderer.InDrawing)
+                    {
+                        if (animationAbort)
+                            break;
+                        Application.DoEvents();
+                        if (animationAbort)
+                            break;
+                    }
+                }*/
+
+            }
+        }
+
+
+
+
+
+        /// <summary>
+        /// Berechnet einen Animationsteil, bestehend aus steps Einzelschritten.
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="steps"></param>
+        private void ComputeAnimationPart_old(int from, int to, int steps, ParameterHistory animationHistory, int historyIndex)
         {
             lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString();
             for (int i = 0; i < steps && !animationAbort; i++)
@@ -254,13 +350,14 @@ namespace Fractrace.Animation
                 if (updateSteps > 1)
                     ParameterDict.Exemplar.SetInt("View.UpdateSteps", updateSteps - 1);
 
-                Form1.PublicForm.dontActivateRender = false;
+                //Form1.PublicForm.dontActivateRender = false;
+                Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
                 for (int currentUpdateStep = 0; currentUpdateStep <= updateSteps; currentUpdateStep++)
                 {
                     if (currentUpdateStep < updateSteps)
-                        Form1.PublicForm.dontActivateRender = true;
+                        Scheduler.GrandScheduler.Exemplar.dontActivateRender = true;
                     else
-                        Form1.PublicForm.dontActivateRender = false;
+                        Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
 
                     // Left View
                     ParameterInput.MainParameterInput.DeactivatePreview();
@@ -283,7 +380,7 @@ namespace Fractrace.Animation
                     }
                 }
 
-                Form1.PublicForm.dontActivateRender = false;
+                Scheduler.GrandScheduler.Exemplar.dontActivateRender = false;
 
                 // Right View
                 if (ParameterInput.MainParameterInput.Stereo)

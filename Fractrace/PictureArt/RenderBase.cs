@@ -31,6 +31,8 @@ namespace Fractrace.PictureArt
         /// <param name="grLabel"></param>
         public override void Paint(Graphics grLabel)
         {
+            System.Diagnostics.Debug.WriteLine("RendererBase.Paint()");
+
             if (formula == null)
             {
                 System.Diagnostics.Debug.WriteLine("Warning in RenderBase.Paint() formula==null");
