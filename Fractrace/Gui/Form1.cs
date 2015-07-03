@@ -148,6 +148,9 @@ namespace Fractrace
         protected double mProgress = 0;
 
 
+
+        protected bool mProgressChanged = false;
+
         /// <summary>
         /// Used to fix inPaint while updating.
         /// </summary>
@@ -774,13 +777,12 @@ namespace Fractrace
         private void drawImage()
         {
 
-            //needUpdate = true;
 
             this.Refresh();
             string fileName = FileSystem.Exemplar.GetFileName("pic.png");
+            ParameterInput.MainParameterInput.SaveHistory(fileName);
             this.Text = fileName;
             pictureBox1.Image.Save(fileName);
-            ParameterInput.MainParameterInput.SaveHistory(fileName);
             if (Fractrace.ParameterInput.MainParameterInput.AutomaticSaveInAnimation)
             {
                 if (ParameterDict.Exemplar["Intern.Filter"] == "" && lastAnimationParameterHash != ParameterDict.Exemplar.GetHash(""))
@@ -805,11 +807,14 @@ namespace Fractrace
             if (progressInPercent > 0 && progressInPercent < 100)
             {
                 mProgress = progressInPercent;
+                mProgressChanged = true;
                 // TODO: Test, for program exit to avoid execption at program close.
+                /*
                 try
                 {
                     this.Invoke(new ProgressDelegate(OnProgress));
                 } catch  {}
+                 */
             }
         }
 
@@ -883,6 +888,13 @@ namespace Fractrace
         {
             if (inPaint)
                 btnRepaint.Enabled = false;
+
+            if (mProgressChanged)
+            {
+                mProgressChanged = false;
+                progressBar1.Value = (int)mProgress;
+            }
+          
 
             /*
             if (needUpdate)

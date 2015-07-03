@@ -40,6 +40,10 @@ namespace Fractrace.Scheduler
 
         Graphics mGraphics = null;
 
+        double mCurrentProgress = 0;
+
+        double mCurrentProgressd = 1;
+
         /// <summary>
         /// (master is used for progress bar).
         /// </summary>
@@ -71,11 +75,15 @@ namespace Fractrace.Scheduler
         /// <param name="updateSteps"></param>
         public void Run(int updateSteps)
         {
+            mCurrentProgress = 0;
+            mmaster.Progress(mCurrentProgress);
             System.Diagnostics.Debug.WriteLine("PaintJob.Run " + updateSteps.ToString());
             mParameters = ParameterDict.Exemplar.Clone();
             mUpdateSteps = updateSteps;
+            mCurrentProgressd = 100.0 / (double)(mUpdateSteps);
             for (int i = 0; i < mUpdateSteps; i++)
             {
+               
                 if (mAbort)
                     return;
                 mIterate = new Iterate(mParameters, this, false);
@@ -91,6 +99,8 @@ namespace Fractrace.Scheduler
                     return;
                 // TODO: View preview
                 mLastIterate = mIterate;
+                mCurrentProgress += mCurrentProgressd;
+                mmaster.Progress(mCurrentProgress);
             }
             // Hint: Clone() is not neccessary.
             Renderer renderer = new PlasicRenderer(mIterate.PictureData.Clone());
@@ -100,6 +110,8 @@ namespace Fractrace.Scheduler
                 return;
             // TODO: Show in Preview, save image and data
             System.Diagnostics.Debug.WriteLine("PaintJob.Run Ends");
+            mmaster.Progress(0);
+            // TODO: Draw progress bar
         }
 
 
@@ -123,7 +135,16 @@ namespace Fractrace.Scheduler
         /// <param name="progrssInPercent"></param>
         public void Progress(double progressInPercent)
         {
+           // mmaster.Progress(progressInPercent);
 
+            double progress = mCurrentProgress + progressInPercent / (double)(mUpdateSteps );
+
+            System.Diagnostics.Debug.WriteLine("Progress: " + progressInPercent.ToString() + " =" + progress);
+            if (progress > 100)
+                progress = 100;
+
+           mmaster.Progress(progress);
+             
         }
 
 

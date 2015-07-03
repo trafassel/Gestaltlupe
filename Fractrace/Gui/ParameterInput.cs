@@ -62,6 +62,7 @@ namespace Fractrace
                 version = infos[1];
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 1;
+            SetSmallPreviewSize();
         }
 
 
@@ -568,6 +569,7 @@ namespace Fractrace
             {
                 mStereoForm.Abort();
             }
+            animationControl1.Abort();
         }
 
 
@@ -1203,8 +1205,32 @@ namespace Fractrace
             Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
         }
 
-     
 
+
+        /// <summary>
+        /// Buttons are activated/deactivated as if start where running.
+        /// </summary>
+        public void SetButtonsToStart()
+        {
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            btnPause.Enabled = true;
+            btnCreatePoster.Enabled = false;
+            btnPreview.Enabled = false;
+        }
+
+
+        /// <summary>
+        /// Buttons are activated/deactivated as if start has just ended.
+        /// </summary>
+        public void SetButtonsToStop()
+        {
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+            btnPause.Enabled = true;
+            btnCreatePoster.Enabled = true;
+            btnPreview.Enabled = true;
+        }
 
 
     }

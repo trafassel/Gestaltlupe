@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 
 using Fractrace.Basic;
+using Fractrace.Scheduler;
 
 namespace Fractrace.Animation
 {
@@ -23,6 +24,15 @@ namespace Fractrace.Animation
             MainAnimationControl = this;
         }
 
+
+        public void Abort()
+        {
+            if (currentPaintJob != null)
+                currentPaintJob.Abort();
+        }
+
+
+        PaintJob currentPaintJob = null;
 
         /// <summary>
         /// Global instance of this unique window.
@@ -189,6 +199,7 @@ namespace Fractrace.Animation
         private void btnStart_Click(object sender, EventArgs e)
         {
             inAnimation = true;
+            ParameterInput.MainParameterInput.SetButtonsToStart();
             CreateAnimationSteps(tbAnimationDescription.Text);
             if (mAnimationSteps.Steps.Count == 0)
                 return;
@@ -227,6 +238,7 @@ namespace Fractrace.Animation
             lblAnimationProgress.Text = "ready";
             animationAbort = false;
             inAnimation = false;
+            ParameterInput.MainParameterInput.SetButtonsToStop();
         }
 
 
@@ -261,8 +273,11 @@ namespace Fractrace.Animation
 
                 Form1.PublicForm.SetPictureBoxSize();
                 Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(Form1.PublicForm, Form1.PublicForm.GestaltPicture);
+                currentPaintJob = paintJob;
                 paintJob.Run(updateSteps);
                 Form1.PublicForm.CallDrawImage();
+                if (StepPreviewControls.ContainsKey(from))
+                    StepPreviewControls[from].UpdateComputedStep(i);
 
                 /*
                 for (int currentUpdateStep = 0; currentUpdateStep <= updateSteps; currentUpdateStep++)

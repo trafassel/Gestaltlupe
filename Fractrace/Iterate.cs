@@ -260,6 +260,7 @@ namespace Fractrace
         {
             while (mStart && !mAbort)
             {
+                System.Windows.Forms.Application.DoEvents();
                 System.Threading.Thread.Sleep(100);
             }
         }
