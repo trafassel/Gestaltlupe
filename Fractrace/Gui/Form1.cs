@@ -38,7 +38,7 @@ namespace Fractrace
         {
             InitializeComponent();
             object o = FileSystem.Exemplar;
-            InitGlobalVariables();
+            GlobalParameters.SetGlobalParameters();
             paras = new ParameterInput();
             paras.Show();
             PublicForm = this;
@@ -76,7 +76,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Computes the surface data of the "Gestalt". 
+        /// Current computing algorithm of the surface data of the "Gestalt". 
         /// </summary>
         Iterate iter = null;
 
@@ -94,7 +94,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Left mouse button is pressed.
+        /// True, while left mouse button is pressed.
         /// </summary>
         private bool inMouseDown = false;
 
@@ -115,12 +115,6 @@ namespace Fractrace
         /// Delegate for the OneStepEnds event.
         /// </summary>
         delegate void OneStepEndsDelegate();
-
-
-        /// <summary>
-        /// Delegate for updating the progress bar.
-        /// </summary>
-        protected delegate void ProgressDelegate();
 
 
         /// <summary>
@@ -148,7 +142,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Used to fix inPaint while updating.
+        /// Used to save inPaint thread while updating.
         /// </summary>
         object paintMutex = new object();
 
@@ -163,15 +157,6 @@ namespace Fractrace
         /// True, if after end of DrawPicture() a new paint request should be startet. 
         /// </summary>
         bool repaintRequested = false;
-
-
-        /// <summary>
-        /// Global Variables are set.
-        /// </summary>
-        protected void InitGlobalVariables()
-        {
-            GlobalParameters.SetGlobalParameters();
-        }
 
 
         /// <summary>
@@ -197,7 +182,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Load bitmap from the given file.
+        /// Load bitmap from the given file and displays it.
         /// </summary>
         /// <param name="fileName"></param>
         public void ShowPictureFromFile(string fileName)
@@ -221,8 +206,6 @@ namespace Fractrace
         protected string GetParameterHashWithoutPictureArt()
         {
             StringBuilder tempHash = new StringBuilder();
-
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
@@ -236,34 +219,6 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
             // The following categories are not used: 
-            // Composite
-            // Computation.NoOfThreads
-            return tempHash.ToString();
-        }
-
-
-        /// <summary>
-        /// Parameterhash without PictureArt and without navigation change.
-        /// </summary>
-        /// <returns></returns>
-        protected string GetParameterHashWithoutPictureArtAndNavigation()
-        {
-            StringBuilder tempHash = new StringBuilder();
-
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Raster"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
-            //          tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
-            //tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
-            // The following categories are not used:
             // Composite
             // Computation.NoOfThreads
             return tempHash.ToString();
@@ -391,12 +346,6 @@ namespace Fractrace
             }
             catch { } 
         }
-
-
-        /// <summary>
-        /// Use by animation control to deactivate rendering outputs in low quality.
-        /// </summary>
-        public bool dontActivateRender = false;
 
 
         /// <summary>
@@ -606,8 +555,13 @@ namespace Fractrace
             paras.Parameter.end_tupel.z = maxZ;
             paras.Parameter.end_tupel.zz = maxZZ;
 
-            // Updating to display the new values in the parameter window.
-            paras.SetGlobalParameters();
+            ParameterDict.Exemplar.SetDouble("Border.Min.x", paras.Parameter.start_tupel.x);
+            ParameterDict.Exemplar.SetDouble("Border.Min.y", paras.Parameter.start_tupel.y);
+            ParameterDict.Exemplar.SetDouble("Border.Min.z", paras.Parameter.start_tupel.z);
+            ParameterDict.Exemplar.SetDouble("Border.Max.x", paras.Parameter.end_tupel.x);
+            ParameterDict.Exemplar.SetDouble("Border.Max.y", paras.Parameter.end_tupel.y);
+            ParameterDict.Exemplar.SetDouble("Border.Max.z", paras.Parameter.end_tupel.z);
+
             paras.UpdateFromData();
             Fractrace.Geometry.Navigator.SetAspectRatio();
             ParameterInput.MainParameterInput.DrawSmallPreview();
@@ -651,13 +605,6 @@ namespace Fractrace
             {
                 if (iter != null && !iter.InAbort)
                 {
-                    if (Animation.AnimationControl.InAnimation)
-                    {
-                        while (inPaint)
-                        {
-                            System.Threading.Thread.Sleep(100);
-                        }
-                    }
                     System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
                     System.Threading.Thread thread = new System.Threading.Thread(tStart);
                     Fractrace.Scheduler.GrandScheduler.Exemplar.AddThread(thread);
@@ -727,7 +674,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Call drawImage in Windows.Forms thrtead.
+        /// Call drawImage in Windows.Forms thread.
         /// </summary>
         public void CallDrawImage()
         {
@@ -741,6 +688,9 @@ namespace Fractrace
         delegate void DrawImageDelegate();
 
 
+        /// <summary>
+        /// Refresh view. This is necessary to display pictureBox1.Image.
+        /// </summary>
         private void drawImage()
         {
             this.Refresh();
@@ -761,7 +711,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Computation progress in percent.
+        /// Set computation progress in percent.
         /// </summary>
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)

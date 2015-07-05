@@ -39,7 +39,6 @@ namespace Fractrace.DataTypes
         // PointInfo enthält die real benutzten Koordinaten (Werden später für den Zoom verwendet).
         public VoxelInfo[,] PointInfo = null;
         public double[,] ColorInfo = null;
-        public double[,] ColorInfo2 = null;
         public double[,] ColorInfoDeph = null;
 
         public GraphicData(int width, int height)
@@ -50,7 +49,6 @@ namespace Fractrace.DataTypes
             Normals = new VecInfo[width + 1, height + 1];
             PointInfo = new VoxelInfo[width + 1, height + 1];
             ColorInfo = new double[width + 1, height + 1];
-            ColorInfo2 = new double[width + 1, height + 1];
             ColorInfoDeph = new double[width + 1, height + 1];
 
             for (int i = 0; i <= width; i++)
@@ -61,7 +59,6 @@ namespace Fractrace.DataTypes
                     Normals[i, j] = null;
                     Picture[i, j] = 0;
                     ColorInfo[i, j] = 0;
-                    ColorInfo2[i, j] = 0;
                     ColorInfoDeph[i, j] = 0;
                 }
             }

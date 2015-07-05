@@ -161,6 +161,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // Rendering Quality.
             // View.Raster=1: best quality
             // View.Raster=2, up to 8 times faster than View.Raster=1, but less nice - especially at the object borders. 
+            // Not used since 3.1
             ParameterDict.Exemplar["View.Raster"] = "2";
             ParameterDict.Exemplar["View.Raster.PARAMETERINFO.VIEW.Invisible"] = "1";
 

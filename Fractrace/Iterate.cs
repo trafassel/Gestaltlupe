@@ -813,10 +813,6 @@ namespace Fractrace
                                                    
                                                 }
                                             }
-
-                                            
-                                           
-                                                GData.ColorInfo2[xx, yy] = fa1;
                                           
                                         }
                                     }
@@ -828,7 +824,6 @@ namespace Fractrace
                                 if (mOldPictureData != null)
                                 {
                                     PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
-                                    GData.ColorInfo2[xx, yy] = mOldData.ColorInfo2[xx, yy];
                                 }
                             }
 
@@ -855,7 +850,6 @@ namespace Fractrace
                         {
                             // Get the old values:
                             PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
-                            GData.ColorInfo2[xx, yy] = mOldData.ColorInfo2[xx, yy];
                         }
                     }
                 }

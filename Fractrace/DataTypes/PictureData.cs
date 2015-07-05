@@ -36,6 +36,7 @@ namespace Fractrace.DataTypes
 
         private int mHeight = 0;
 
+
         public PictureData(int width, int height)
         {
             mWidth = width;

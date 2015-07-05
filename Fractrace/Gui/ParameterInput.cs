@@ -89,7 +89,6 @@ namespace Fractrace
         protected void SavePicData()
         {
             mHistoryImages[mHistory.Time] = preview1.Image;
-            Console.WriteLine("Save Pic to Time " + mHistory.Time.ToString());
         }
 
 
@@ -109,7 +108,6 @@ namespace Fractrace
         {
             mHistory.CurrentTime = mHistory.Save(fileName);
         }
-
 
 
         /// <summary>
@@ -141,9 +139,6 @@ namespace Fractrace
         }
 
 
-        protected bool inSetParameters = false;
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -154,7 +149,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Das Feld Parameter wird aus dem ParameterDict gelesen.
+        /// Fill mParameter from global ParameterDict.
         /// </summary>
         public void Assign()
         {
@@ -169,20 +164,6 @@ namespace Fractrace
             mParameter.arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
             mParameter.arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
             mParameter.arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
-        }
-
-
-        /// <summary>
-        /// Umkehrung von Assign: Der Inhalt von Parameter wird in das ParameterDict geschrieben.
-        /// </summary>
-        public void SetGlobalParameters()
-        {
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", mParameter.start_tupel.x);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", mParameter.start_tupel.y);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", mParameter.start_tupel.z);
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", mParameter.end_tupel.x);
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", mParameter.end_tupel.y);
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", mParameter.end_tupel.z);
         }
 
 
@@ -1020,17 +1001,12 @@ namespace Fractrace
                 }
                 // Size und Raster festlegen
                 string sizeStr = ParameterDict.Exemplar["View.Size"];
-                string rasterStr = ParameterDict.Exemplar["View.Raster"];
                 ParameterDict.Exemplar["View.Size"] = "0.2";
-                ParameterDict.Exemplar["View.Raster"] = "2";
-
                 Form1.PublicForm.inPreview = true;
                 ForceRedraw();
                 Form1.PublicForm.inPreview = false;
                 // Size und Raster auf die Ursprungswerte setzen
                 ParameterDict.Exemplar["View.Size"] = sizeStr;
-                ParameterDict.Exemplar["View.Raster"] = rasterStr;
-
             }
         }
 
@@ -1105,7 +1081,6 @@ namespace Fractrace
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             mHistory.CurrentTime = mHistory.Save();
-            //LoadFromHistory();
             SetSmallPreviewSize();
             preview1.btnPreview_Click(sender, e);
         }
@@ -1133,8 +1108,8 @@ namespace Fractrace
                 ParameterValuesChanged();
                 oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
             }
-
         }
+
 
         /// <summary>
         /// Save only Gestalt parameters. 

@@ -9,8 +9,7 @@ namespace Fractrace.DataTypes
 {
 
     /// <summary>
-    /// Enthält Zusatzinformationen, die später in einer Bildbearbeitung benutzt werden können,
-    /// um mehr Informationen sichtbar zu machen
+    /// Contains additional informations for each point in surface data.
     /// </summary>
     public class PixelInfo
     {
