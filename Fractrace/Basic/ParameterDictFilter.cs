@@ -23,6 +23,7 @@ namespace Fractrace.Basic
         /// </summary>
         Dictionary<string, string> mSavedDict = new Dictionary<string, string>();
 
+
         /// <summary>
         /// Contails all changed parameters in filter.
         /// </summary>
@@ -49,13 +50,11 @@ namespace Fractrace.Basic
                 return;
             }
             Filter();
-
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
             {
                 if (mSavedDict[entry.Key] != entry.Value)
                     mChangedParameters[entry.Key] = true;
             }
-
         }
 
 

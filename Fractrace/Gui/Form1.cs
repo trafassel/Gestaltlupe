@@ -46,19 +46,13 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Indicates, that the application is computing a bitmap of the "Gestalt". 
-        /// </summary>
-        //bool inComputeOneStep = false;
-
-
-        /// <summary>
         /// This graphic is used to generate the bitmap. 
         /// </summary>
         Graphics grLabel = null;
 
 
         /// <summary>
-        /// Return Graphics of the computed .
+        /// Return Graphics of the computed gestalt.
         /// </summary>
         public Graphics GestaltPicture
         {
@@ -67,7 +61,6 @@ namespace Fractrace
                 return grLabel;
             }
         }
-
 
 
         /// <summary>
@@ -148,8 +141,11 @@ namespace Fractrace
         protected double mProgress = 0;
 
 
-
+        /// <summary>
+        /// If true, mProgress has changed but progress is not updated.
+        /// </summary>
         protected bool mProgressChanged = false;
+
 
         /// <summary>
         /// Used to fix inPaint while updating.
@@ -185,12 +181,12 @@ namespace Fractrace
         {
             double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
             double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
-            int maxSizeX = (int)(widthInPixel * paras.ScreenSize);
-            int maxSizeY = (int)(heightInPixel * paras.ScreenSize);
-            if (gestaltWidth != maxSizeX || gestaltHeight != maxSizeY)
+            int sizeX = (int)(widthInPixel * paras.ScreenSize);
+            int sizeY = (int)(heightInPixel * paras.ScreenSize);
+            if (gestaltWidth != sizeX || gestaltHeight != sizeY)
             {
-                gestaltWidth = maxSizeX;
-                gestaltHeight = maxSizeY;
+                gestaltWidth = sizeX;
+                gestaltHeight = sizeY;
                 pictureBox1.Width = gestaltWidth;
                 pictureBox1.Height = gestaltHeight;
                 Image labelImage = new Bitmap((int)(gestaltWidth), (int)(gestaltHeight));
@@ -239,7 +235,7 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
-            // The following categories are not used 
+            // The following categories are not used: 
             // Composite
             // Computation.NoOfThreads
             return tempHash.ToString();
@@ -267,7 +263,7 @@ namespace Fractrace
             //tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
             tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
-            // The following categories are not used 
+            // The following categories are not used:
             // Composite
             // Computation.NoOfThreads
             return tempHash.ToString();
@@ -281,7 +277,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Get the number of pictures, which was updated on the same dataset.
+        /// Get or set the number of pictures, which was updated on the same dataset.
         /// </summary>
         public int CurrentUpdateStep
         {
@@ -316,7 +312,6 @@ namespace Fractrace
         /// </summary>
         public void ComputeOneStep()
         {
-            System.Diagnostics.Debug.WriteLine("Form1.ComputeOneStep");
             if (paras != null)
                 paras.InComputing = true;
             this.WindowState = FormWindowState.Normal;
@@ -324,12 +319,10 @@ namespace Fractrace
                 return;
             try
             {
-
                 Fractrace.Scheduler.GrandScheduler.Exemplar.inComputeOneStep = true;
                 SetPictureBoxSize();
                 string tempParameterHash = GetParameterHashWithoutPictureArt();
                 paras.Assign();
-
                 if (oldParameterHashWithoutPictureArt == tempParameterHash)
                 {
                     // Update last render for better quality
@@ -350,7 +343,7 @@ namespace Fractrace
                         iter.OneStepProgress = false;
                     if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
                         iter.OneStepProgress = true;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
                 }
                 else
                 {
@@ -370,9 +363,8 @@ namespace Fractrace
                         paras.Assign();
                         mUpdateCount = 1;
                         iter = new Iterate(gestaltWidth, gestaltHeight, this, false);
-                        //   iter.OneStepProgress = inPreview;
                         iter.OneStepProgress = false;
-                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.Raster, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
                     }
                 }
             }
@@ -383,7 +375,6 @@ namespace Fractrace
                     paras.InComputing = false;
                 Fractrace.Scheduler.GrandScheduler.Exemplar.inComputeOneStep = false;
             }
-            System.Diagnostics.Debug.WriteLine("Form1.ComputeOneStep ends");
         }
 
 
@@ -399,7 +390,6 @@ namespace Fractrace
                 this.Invoke(new OneStepEndsDelegate(OneStepEnds));
             }
             catch { } 
-            //            OneStepEnds();
         }
 
 
@@ -409,23 +399,11 @@ namespace Fractrace
         public bool dontActivateRender = false;
 
 
-
-
-
         /// <summary>
         /// Asyncrone computation is ready (but not the generation of the bitmap).
         /// </summary>
         protected void OneStepEnds()
         {
-            //if (!dontActivateRender)
-            //{
-            //    ActivatePictureArt();
-                /*
-                string fileName = FileSystem.Exemplar.GetFileName("pic.png");
-                this.Text = fileName;
-                pictureBox1.Image.Save(fileName);
-                 */
-            //}
             Fractrace.Scheduler.GrandScheduler.Exemplar.inComputeOneStep = false;
             if (paras != null)
                 paras.InComputing = false;
@@ -483,7 +461,6 @@ namespace Fractrace
         }
 
 
-
         /// <summary>
         /// Start zooming.
         /// </summary>
@@ -491,7 +468,6 @@ namespace Fractrace
         {
             inZoom = true;
         }
-
 
 
         /// <summary>
@@ -634,9 +610,6 @@ namespace Fractrace
             paras.SetGlobalParameters();
             paras.UpdateFromData();
             Fractrace.Geometry.Navigator.SetAspectRatio();
-
-            // TODO: draw small Preview 
-
             ParameterInput.MainParameterInput.DrawSmallPreview();
         }
 
@@ -653,7 +626,6 @@ namespace Fractrace
             if (iter != null)
             {
                 iter.Abort();
-                //iter = null;
             }
             // Warning: Compution in stereo window is not stopped.
         }
@@ -710,20 +682,15 @@ namespace Fractrace
         /// </summary>
         void DrawPicture()
         {
-
-
             if (inPaint)
             {
                 if(currentPicturArt!=null)
                     currentPicturArt.StopAndWait();
                 currentPicturArt = null;
             }
-
             lock (paintMutex)
             {
-
                 inPaint = true;
-
                 try
                 {
                     if (currentPicturArt != null)
@@ -736,7 +703,6 @@ namespace Fractrace
                         fastRenderingFilter = new FastRenderingFilter();
                         fastRenderingFilter.Apply();
                     }
-
                     currentPicturArt = PictureArtFactory.Create(iterForPictureArt.PictureData, iterForPictureArt.LastUsedFormulas);
                     currentPicturArt.Paint(grLabel);
                     while (repaintRequested)
@@ -768,6 +734,7 @@ namespace Fractrace
             this.Invoke(new DrawImageDelegate(drawImage));                    
         }
 
+
         /// <summary>
         /// Delegate for the drawEnds event.
         /// </summary>
@@ -776,8 +743,6 @@ namespace Fractrace
 
         private void drawImage()
         {
-
-
             this.Refresh();
             string fileName = FileSystem.Exemplar.GetFileName("pic.png");
             ParameterInput.MainParameterInput.SaveHistory(fileName);
@@ -792,10 +757,7 @@ namespace Fractrace
                 }
             }
             btnRepaint.Enabled = true;
-
         }
-
-
 
 
         /// <summary>
@@ -808,13 +770,6 @@ namespace Fractrace
             {
                 mProgress = progressInPercent;
                 mProgressChanged = true;
-                // TODO: Test, for program exit to avoid execption at program close.
-                /*
-                try
-                {
-                    this.Invoke(new ProgressDelegate(OnProgress));
-                } catch  {}
-                 */
             }
         }
 
@@ -838,7 +793,6 @@ namespace Fractrace
         }
 
 
-   
         /// <summary>
         /// Dialogabfrage vor Beendigung der Anwendung.
         /// </summary>
@@ -875,9 +829,6 @@ namespace Fractrace
             }
         }
 
-        //private bool needUpdate = false;
-
-
 
         /// <summary>
         /// Try to update in background (still with some sync problems).
@@ -893,15 +844,7 @@ namespace Fractrace
             {
                 mProgressChanged = false;
                 progressBar1.Value = (int)mProgress;
-            }
-          
-
-            /*
-            if (needUpdate)
-            {
-                needUpdate = false;
-            }
-             */
+            }  
         }
 
 
@@ -921,10 +864,6 @@ namespace Fractrace
             int lastStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps") + 1;
             return currentStep < lastStep;
         }
-
-
-
-
 
     }
 }

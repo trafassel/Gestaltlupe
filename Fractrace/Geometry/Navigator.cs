@@ -95,7 +95,6 @@ namespace Fractrace.Geometry
             ParameterDict.Exemplar.SetDouble("Border.Max.x", xmax);
             ParameterDict.Exemplar.SetDouble("Border.Max.y", ymax);
             ParameterDict.Exemplar.SetDouble("Border.Max.z", zmax);
-
         }
 
 

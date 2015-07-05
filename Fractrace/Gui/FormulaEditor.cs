@@ -13,7 +13,7 @@ namespace Fractrace {
         
         
         /// <summary>
-        /// 
+        /// Constructer.
         /// </summary>
         public FormulaEditor() {
             InitializeComponent();
@@ -23,8 +23,11 @@ namespace Fractrace {
         }
 
 
-
+        /// <summary>
+        /// Global instance of this class.
+        /// </summary>
         private static FormulaEditor mStaticInstance=null;
+
 
         /// <summary>
         /// Fehler beim Übersetzen des Quellcodes wird angezeigt.
@@ -38,7 +41,9 @@ namespace Fractrace {
         }
 
 
-
+        /// <summary>
+        /// Initialize text.
+        /// </summary>
         public void Init() {
             tbSource.Text = ParameterDict.Exemplar["Intern.Formula.Source"];
         }
@@ -47,20 +52,21 @@ namespace Fractrace {
         protected string mErrorText = "";
 
 
+        /// <summary>
+        /// Show error as text in panel1.
+        /// </summary>
         protected void ViewErrorInternal() {
             panel1.Visible = true;
             FormulaEditor.mStaticInstance.tbErrors.Text = mErrorText;
-        
         }
 
 
         /// <summary>
-        /// Wird aufgerufen, wenn die asynchrone Berechnung bendet wurde.
+        ///Show error as text and mark error line red.
         /// </summary>
         protected void ViewError(string errorText) {
             mErrorText = errorText;
             this.Invoke(new ShowErrorDelegate(ViewErrorInternal));
-            //OneStepEnds();
         }
 
 
@@ -88,19 +94,13 @@ namespace Fractrace {
                     if(currentline==line+1) {
                         endpos=currentpos;
                     }
-
                 }
-                
             }
             if (startpos < endpos && endpos < tbSource.Text.Length) {
                 this.tbSource.Select(startpos, endpos - startpos);
                 this.tbSource.SelectionColor = Color.Red;
-              //  this.tbSource.s
             }
-          //  this.tbSource.
         }
-
-
 
 
         delegate void ShowErrorDelegate();
@@ -109,7 +109,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Der Text hat sich geändert.
+        /// Is called, each time, the text has changed. Set "Intern.Formula.Source to source text.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,7 +119,7 @@ namespace Fractrace {
 
 
         /// <summary>
-        /// Fehleransicht wird ausgeschaltet.
+        /// Close error view.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

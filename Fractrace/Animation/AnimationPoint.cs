@@ -17,7 +17,12 @@ namespace Fractrace.Animation
         /// </summary>
         public string fileName = "";
 
+
+        /// <summary>
+        /// Number of interpolated animation steps from this to the next AnimationPoint. 
+        /// </summary>
         protected int mSteps = 0;
+
 
         /// <summary>
         /// Number of interpolated animation steps from this to the next AnimationPoint. 
@@ -35,12 +40,14 @@ namespace Fractrace.Animation
         }
 
 
+        /// <summary>
+        /// Digital point in time.
+        /// </summary>
         protected int mTime = 0;
 
 
-
         /// <summary>
-        /// Digital point in time.
+        /// Digital point in history corresponding to this frame.
         /// </summary>
         public int Time
         {

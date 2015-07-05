@@ -54,6 +54,7 @@ namespace Fractrace.DataTypes
             ColorInfoDeph = new double[width + 1, height + 1];
 
             for (int i = 0; i <= width; i++)
+            {
                 for (int j = 0; j <= height; j++)
                 {
                     PointInfo[i, j] = null;
@@ -63,7 +64,8 @@ namespace Fractrace.DataTypes
                     ColorInfo2[i, j] = 0;
                     ColorInfoDeph[i, j] = 0;
                 }
-
+            }
         }
+
     }
 }

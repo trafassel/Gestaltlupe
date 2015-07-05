@@ -1709,11 +1709,15 @@ wird nicht mehr verwendet. Idee war: wenn
 <DT><A name="H39OZBpqJutJ2htdVdhzZA"></A>PaintJob</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1435676891-->
-<!--property:date_modified=1435676986-->
-<!--property:hash=8b5c9e56a2639002bb89714dcba07f1a85c6a78b-->
-<!--property:hash_html=b52beedb5be845fdc09311d9944c354c9da1a5cf-->
+<!--property:date_modified=1436092977-->
+<!--property:hash=a694ed6e1f538349f3f370c1146b9ae07eadddb3-->
+<!--property:hash_html=7e2cee670e3422361572caef64572afb56fe834d-->
 <DD>
 Beinhaltet eine Kopie der Parameter und Instanz von Iterate.<BR>
+<BR>
+Verwendung bei Animation.<BR>
+<BR>
+<BR>
 
 </DD>
 </DL>

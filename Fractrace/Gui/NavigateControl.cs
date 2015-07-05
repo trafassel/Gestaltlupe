@@ -85,8 +85,6 @@ namespace Fractrace
         }
 
 
-
-
         /// <summary>
         /// Move left.
         /// </summary>
@@ -94,20 +92,16 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnLeft_Click(object sender, EventArgs e)
         {
-
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(-1, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
         }
 
@@ -120,9 +114,7 @@ namespace Fractrace
             double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
             double centerY = 0.5 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") + ParameterDict.Exemplar.GetDouble("Border.Min.y"));
             double centerZ = (ParameterDict.Exemplar.GetDouble("Border.Max.z") + ParameterDict.Exemplar.GetDouble("Border.Min.z")) / 2.0;
-
             Rotation rotView = null;
-
             double centerXChange = centerX + 1;
             double centerYChange = centerY + 1;
             double centerZChange = centerZ + 1;
@@ -337,17 +329,14 @@ namespace Fractrace
         {
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(1, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
         }
 
@@ -361,23 +350,20 @@ namespace Fractrace
         {
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(0, 0, -1), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
         }
 
 
         /// <summary>
-        /// Bewegung nach unten
+        /// Move down.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -385,23 +371,20 @@ namespace Fractrace
         {
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(0, 0, 1), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
         }
 
 
         /// <summary>
-        /// Vorwärts
+        /// Move forward.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -409,23 +392,20 @@ namespace Fractrace
         {
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(0, 1, 0), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
         }
 
 
         /// <summary>
-        /// Rückwärts
+        /// Move backwards.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -433,24 +413,20 @@ namespace Fractrace
         {
             if (mFactor == 0)
                 return;
-
             UpdateCenterDiff();
             Vec3 trans = SolveEqusyst(new Vec3(0, -1, 0), centerDiffX, centerDiffY, centerDiffZ);
-
             if (trans.X != 0)
                 SlideX(trans.X / mFactor);
             if (trans.Y != 0)
                 SlideY(trans.Y / mFactor);
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
-
             DrawAndWriteInHistory();
-
         }
 
 
         /// <summary>
-        /// X Zoom
+        /// X Zoom (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -468,7 +444,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Y-Zoom
+        /// Y-Zoom (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -482,12 +458,11 @@ namespace Fractrace
             ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
             ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
             DrawAndWriteInHistory();
-
         }
 
 
         /// <summary>
-        /// Z-Zoom
+        /// Z-Zoom (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -501,12 +476,11 @@ namespace Fractrace
             ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
             ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
             DrawAndWriteInHistory();
-
         }
 
 
         /// <summary>
-        /// Zoom out X
+        /// Zoom out X (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -520,12 +494,11 @@ namespace Fractrace
             ParameterDict.Exemplar.SetDouble("Border.Max.x", endX);
             ParameterDict.Exemplar.SetDouble("Border.Min.x", startX);
             DrawAndWriteInHistory();
-
         }
 
 
         /// <summary>
-        /// Zoom out Y
+        /// Zoom out Y (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -544,7 +517,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Zoom aout Z
+        /// Zoom aout Z (not used).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -558,7 +531,6 @@ namespace Fractrace
             ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
             ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
             DrawAndWriteInHistory();
-
         }
 
         /// <summary>
@@ -577,7 +549,6 @@ namespace Fractrace
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
             angleX -= mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX", angleX);
@@ -589,7 +560,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Zoomfaktor wird geparst
+        /// Parse Zoomfactor.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -599,13 +570,11 @@ namespace Fractrace
                 tbZoomFactor.ForeColor = Color.Black;
             else
                 tbZoomFactor.ForeColor = Color.Red;
-
             if (mZoomFactor <= 2)
             {
                 mZoomFactor = 2.0001;
                 tbZoomFactor.Text = "2.0001";
             }
-
         }
 
 
@@ -628,7 +597,6 @@ namespace Fractrace
 
         private void btnRotX_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
             angleX += mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX", angleX);
@@ -636,25 +604,8 @@ namespace Fractrace
         }
 
 
-        /// <summary>
-        /// Der Mittelpunkt der Rotation wird auf den (virtuellen) Bildschirmmittelpunkt gesetzt.
-        /// (Etwas näher an Maxy als an der Mittes des Voxelraumes).
-        /// </summary>
-        private void SetRotationCenter()
-        {
-            double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
-            double centerY = 0.15 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y"))
-                + ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double centerZ = (ParameterDict.Exemplar.GetDouble("Border.Max.z") + ParameterDict.Exemplar.GetDouble("Border.Min.z")) / 2.0;
-            ParameterDict.Exemplar.SetDouble("Transformation.3.CenterX", centerX);
-            ParameterDict.Exemplar.SetDouble("Transformation.3.CenterY", centerY);
-            ParameterDict.Exemplar.SetDouble("Transformation.3.CenterZ", centerZ);
-        }
-
-
         private void btnRotY_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
             angleY += mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY", angleY);
@@ -665,7 +616,6 @@ namespace Fractrace
 
         private void btnRotZ_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
             angleZ += mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
@@ -675,7 +625,6 @@ namespace Fractrace
 
         private void btnRotYneg_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
             angleY -= mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY", angleY);
@@ -684,7 +633,6 @@ namespace Fractrace
 
         private void btnRotZneg_Click(object sender, EventArgs e)
         {
-            //SetRotationCenter();
             double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
             angleZ -= mAngle;
             ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
@@ -717,6 +665,7 @@ namespace Fractrace
             btnZoomZ_Click(null, null);
         }
 
+
         private void btnZoomOut_Click(object sender, EventArgs e)
         {
             button1_Click(null, null);
@@ -733,7 +682,6 @@ namespace Fractrace
         private void btn_Click(object sender, EventArgs e)
         {
             Navigator.SetAspectRatio();
-
         }
 
 

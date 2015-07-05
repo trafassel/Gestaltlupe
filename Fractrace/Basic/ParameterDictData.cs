@@ -156,7 +156,6 @@ namespace Fractrace.Basic
 
                 if (isDouble)
                 {
-
                     int indexAsInt = (int)index;
                     double firstDouble = GetDouble(indexAsInt, entry.Key);
                     double firstfirstDouble = firstDouble;
@@ -169,23 +168,15 @@ namespace Fractrace.Basic
                     if (indexAsInt < Time - 1)
                         lastlastDouble = GetDouble(indexAsInt + 2, entry.Key);
                     double t = (index - indexAsInt);
-
                     double pdiff = lastDouble - firstDouble;
-
                     double p0 = firstDouble;
                     double p1 = firstDouble + ((firstDouble - firstfirstDouble) + pdiff) / 6.0;
                     double p2 = lastDouble - ((lastlastDouble - lastDouble) +pdiff) / 6.0;
                     double p3 = lastDouble;
-                    // linear:
-                    //double p1 = ((firstDouble - firstfirstDouble) + pdiff) / 3.0;
-                    //double p2 = (-(lastlastDouble - lastDouble) + 2.0 * pdiff) / 3.0;
-
                     double tm = 1 - t;
                     double tm2 = tm * tm;
                     double t2 = t * t;
                     double val = tm2 * tm * p0 + 3.0 * tm2 * t * p1 + 3.0 * tm * t2 * p2 + t2 * t * p3;
-
-                    
                     ParameterDict.Exemplar.SetDouble(entry.Key, val);
                 }
                 else
@@ -206,16 +197,13 @@ namespace Fractrace.Basic
         {
             string valuesAsString = mHistory[index][key];
             double retVal = 0;
-            // string var = mEntries[key];
             if (!double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal))
             {
                 if (!double.TryParse(valuesAsString, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out retVal))
                 {
-                    // System.Diagnostics.Debug.WriteLine("Error in GetDouble(" + key + ") can not convert " + var + " in double");
                     double.TryParse(valuesAsString, out retVal);
                 }
             }
-            //double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal);
             return retVal;
         }
 

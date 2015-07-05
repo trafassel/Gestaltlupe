@@ -53,19 +53,19 @@ namespace Fractrace.Animation
         }
 
 
-
+        /// <summary>
+        /// Indicate cumputed frame (with green rectangle).
+        /// </summary>
+        /// <param name="currentStep"></param>
         public void UpdateComputedStep(int currentStep)
         {
             if (steps < 1)
                 return;
-
             Pen p = new Pen(System.Drawing.Color.Green);
             double width = this.Width;
             double dsteps = width / ((double)steps);
-
             double pos = (currentStep+1) * dsteps;
             int ipos = (int)pos;
-
             for (int i = 0; i < pos; ++i)
             {
                 grSteps.DrawLine(p, i, 3, i, 6);
@@ -75,7 +75,7 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Remove corresponding entry in Animation.
+        /// Remove corresponding entry from animation script.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,9 +89,7 @@ namespace Fractrace.Animation
                 double pos = i * dsteps;
                 int ipos = (int)pos;
                 grSteps.DrawLine(p, ipos, 3, ipos, 6);
-
             }
-
             Fractrace.Animation.AnimationControl.MainAnimationControl.RemoveStep(time);
             this.Refresh();
         }

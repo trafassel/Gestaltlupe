@@ -185,7 +185,6 @@
     <Compile Include="Basic\ParameterDictFilter.cs" />
     <Compile Include="Basic\ParameterHistory.cs" />
     <Compile Include="Basic\ParameterUpdater.cs" />
-    <Compile Include="DataTypes\ColorRGB.cs" />
     <Compile Include="DataTypes\FracValues .cs" />
     <Compile Include="DataTypes\GraphicData.cs" />
     <Compile Include="DataTypes\PictureData.cs" />
@@ -360,9 +359,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Compatibility\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

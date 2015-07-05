@@ -96,9 +96,9 @@ namespace Fractrace
         }
 
 
-        protected int width = 1000;
+        protected int width = 0;
 
-        protected int height = 1000;
+        protected int height = 0;
 
 
         public Iterate()
@@ -134,6 +134,7 @@ namespace Fractrace
             this.mIsRightView = isRightView;
         }
 
+
         /// <summary>
         /// Das Steuerelement, dass die Berechnung angestoßen hat.
         /// </summary>
@@ -156,13 +157,20 @@ namespace Fractrace
         }
 
 
-
+        /// <summary>
+        /// GraphicData of previous iteration. Used for update.
+        /// </summary>
         DataTypes.GraphicData mOldData = null;
 
-        DataTypes.PictureData mOldPictureData = null;
 
         /// <summary>
-        /// Count the number of update steps
+        /// PictureData of previous iteration. Used for update.
+        /// </summary>
+        DataTypes.PictureData mOldPictureData = null;
+
+
+        /// <summary>
+        /// Count the number of update steps.
         /// </summary>
         int mUpdateCount = 0;
 
@@ -209,7 +217,6 @@ namespace Fractrace
 
         FracValues m_act_val = null;
         int m_zyklen = 0;
-        int m_raster = 0;
         double m_screensize = 0;
         int m_formula = 0;
         bool m_perspective = true;
@@ -245,7 +252,7 @@ namespace Fractrace
 
             FracValues fracValues = new FracValues();
             fracValues.SetFromParameterDict();
-            StartAsync(fracValues, (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Cycles"), 2,
+            StartAsync(fracValues, (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Cycles"),
                 ParameterDict.Exemplar.GetDouble("View.Size"),
                 ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
                 ParameterDict.Exemplar.GetBool("View.Perspective"));
@@ -275,13 +282,12 @@ namespace Fractrace
         /// <param name="screensize"></param>
         /// <param name="formula"></param>
         /// <param name="perspective"></param>
-        public void StartAsync(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective)
+        public void StartAsync(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
             mStart = true;
             System.Diagnostics.Debug.WriteLine("Iter start");
             m_act_val = act_val;
             m_zyklen = zyklen;
-            m_raster = raster;
             m_screensize = screensize;
             m_formula = formula;
             m_perspective = perspective;
@@ -290,7 +296,7 @@ namespace Fractrace
             int noOfThreads = ParameterDict.Exemplar.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
             {
-                Generate(act_val, zyklen, raster, screensize, formula, perspective);
+                Generate(act_val, zyklen, screensize, formula, perspective);
                 mStarter.ComputationEnds();
                 return;
             }
@@ -310,7 +316,7 @@ namespace Fractrace
         /// </summary>
         protected void Start()
         {
-            Generate(m_act_val, m_zyklen, m_raster, m_screensize, m_formula, m_perspective);
+            Generate(m_act_val, m_zyklen, m_screensize, m_formula, m_perspective);
             lock (startCountLock)
             {
                 startCount--;
@@ -445,7 +451,7 @@ namespace Fractrace
         /// <param name="screensize"></param>
         /// <param name="formula"></param>
         /// <param name="perspective"></param>
-        protected void Generate(FracValues act_val, int zyklen, int raster, double screensize, int formula, bool perspective)
+        protected void Generate(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
             Random rand = new Random();
             maxUpdateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
@@ -525,12 +531,12 @@ namespace Fractrace
             wiy = act_val.arc.y;
             wiz = act_val.arc.z;
 
-            raster = 1;
+            //raster = 1;
 
-            xd = raster * (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
-            yd = raster * (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
-            zd = raster * (act_val.end_tupel.z - act_val.start_tupel.z) / (MAXZ_ITER - MINZ_ITER);
-            zzd = raster * (act_val.end_tupel.zz - act_val.start_tupel.zz) / (MAXZ_ITER - MINZ_ITER);
+            xd = (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
+            yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
+            zd = (act_val.end_tupel.z - act_val.start_tupel.z) / (MAXZ_ITER - MINZ_ITER);
+            zzd = (act_val.end_tupel.zz - act_val.start_tupel.zz) / (MAXZ_ITER - MINZ_ITER);
 
             if (mOldData != null)
             {
@@ -577,7 +583,7 @@ namespace Fractrace
             z = act_val.end_tupel.z + zd;
             zz = act_val.end_tupel.zz + zzd;
 
-            for (zschl = (int)(MAXZ_ITER); zschl >= (MINZ_ITER); zschl -= raster)
+            for (zschl = (int)(MAXZ_ITER); zschl >= (MINZ_ITER); zschl -= 1)
             {
 
                 // Nur wenn der Scheduler die Erlaubnis gibt, zschl zu benutzen,
@@ -586,18 +592,18 @@ namespace Fractrace
                 {
 
                     System.Windows.Forms.Application.DoEvents();
-                    z = act_val.end_tupel.z - (double)zd * (MAXZ_ITER - zschl) / (raster);
-                    zz = act_val.end_tupel.zz - (double)zzd * (MAXZ_ITER - zschl) / (raster);
+                    z = act_val.end_tupel.z - (double)zd * (MAXZ_ITER - zschl);
+                    zz = act_val.end_tupel.zz - (double)zzd * (MAXZ_ITER - zschl);
 
                     bool minYDetected = false;
-                    for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += raster)
+                    for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += 1)
                     {
                         if (mAbort)
                         {
                             return;
                         }
 
-                        x = act_val.start_tupel.x + (double)xd * xschl / (raster);
+                        x = act_val.start_tupel.x + (double)xd * xschl;
                         double miny = 0;
                         isYborder = true;
 
@@ -672,7 +678,7 @@ namespace Fractrace
                         {
                             // yadd cannot be easy handled (because of inside rendering).
                             // yAdd = rand.NextDouble() * yd;
-                            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= raster)
+                            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= 1)
                             {
 
                                 if (mAbort)
@@ -685,7 +691,7 @@ namespace Fractrace
                                     if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2)
                                     { // aha, noch zeichnen
                                         // Test, ob Schnitt mit Begrenzung vorliegt  
-                                        y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl) / (raster);
+                                        y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl);
                                         y += yAdd;
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
                                             return;
@@ -765,8 +771,7 @@ namespace Fractrace
 
                                                 if (inverse)
                                                 {
-                                                    if (raster == 1)
-                                                    {
+                                                    
                                                         if (IsSmallPreview())
                                                         {
                                                             fa1 = formulas.RayCastAt(minCycle, x, y, z, zz,
@@ -781,22 +786,13 @@ namespace Fractrace
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
-                                                    }
-                                                    else
-                                                    {
-
-                                                      
-                                                        fa1 = formulas.WinkelPerspective(minCycle, x, y, z, zz,
-                                                          xd, yd, zd, zzd,
-                                                          wix, wiy, wiz,
-                                                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                                                         
-                                                    }
+                                                    
+                                                    
                                                 }
                                                 else
                                                 {
-                                                    if (raster == 1)
-                                                    {
+                                                    
+
                                                         if (IsSmallPreview())
                                                         {
                                                             fa1 = formulas.RayCastAt(zyklen, x, y, z, zz,
@@ -813,141 +809,15 @@ namespace Fractrace
                                                             fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
                                                         }
 
-                                                    }
-                                                    else
-                                                    {
-                                                        fa1 = formulas.WinkelPerspective(zyklen, x, y, z, zz,
-                                                          xd, yd, zd, zzd,
-                                                          wix, wiy, wiz,
-                                                          jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                                                        fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                                                    }
+                                                  
+                                                   
                                                 }
                                             }
 
-                                            if (raster > 2)
-                                            {
-                                                if (colour_type == 0)
-                                                {
-                                                    if (fa1 >= 0)
-                                                    {
-
-                                                        GData.ColorInfo2[xx, yy] = fa1;
-
-                                                    }
-                                                }
-                                                else
-                                                {
-
-                                                }
-
-                                            }
-                                            else if (raster == 2)
-                                            {
-                                                if (colour_type == 0)
-                                                {
-                                                    // Es liegt also Schnittpunkt mit dem virtuellen Bildschirm vor. In diesem Fall
-                                                    // wird die klassische 2D Darstellung des Fraktals verwendet.
-                                                    if (fa1 >= 0)
-                                                    {
-
-                                                        GData.ColorInfo2[xx, yy] = fa1;
-
-                                                        PixelInfo pixelInfo = new PixelInfo();
-                                                        pixelInfo.iterations = usedCycles;
-                                                        PData.Points[xx, yy] = pixelInfo;
-                                                        if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
-                                                            return;
-
-                                                        cycleAdd = minCycle;
-                                                        fa1 = formulas.Rechne(x + xd / 2.0, y, z, zz, zyklen + cycleAdd,
-                                                          wix, wiy, wiz,
-                                                          jx, jy, jz, jzz, formula, false);
-                                                        pixelInfo = new PixelInfo();
-                                                        pixelInfo.iterations = fa1;
-                                                        if (fa1 < 1)
-                                                            fa1 = 255;
-                                                        else
-                                                            fa1 = 255.0 * fa1 / (zyklen + cycleAdd);
-
-                                                        GData.ColorInfo2[xx + 1, yy] = fa1;
-                                                        PData.Points[xx + 1, yy] = pixelInfo;
-
-                                                        fa1 = formulas.Rechne(x, y, z - zd / 2.0, zz, zyklen + cycleAdd,
-                                                          wix, wiy, wiz,
-                                                          jx, jy, jz, jzz, formula, false);
-                                                        pixelInfo = new PixelInfo();
-                                                        pixelInfo.iterations = fa1;
-                                                        if (fa1 < 1)
-                                                            fa1 = 255;
-                                                        else
-                                                            fa1 = 255 * fa1 / (zyklen + cycleAdd);
-
-                                                        GData.ColorInfo2[xx, yy + 1] = fa1;
-                                                        PData.Points[xx, yy + 1] = pixelInfo;
-
-                                                        fa1 = formulas.Rechne(x + xd / 2.0, y, z - zd / 2.0, zz, zyklen + cycleAdd,
-                                                          wix, wiy, wiz,
-                                                          jx, jy, jz, jzz, formula, false);
-                                                        pixelInfo = new PixelInfo();
-                                                        pixelInfo.iterations = fa1;
-                                                        if (fa1 < 1)
-                                                            fa1 = 255;
-                                                        else
-                                                            fa1 = 255 * fa1 / (zyklen + cycleAdd);
-
-                                                        GData.ColorInfo2[xx + 1, yy + 1] = fa1;
-                                                        PData.Points[xx + 1, yy + 1] = pixelInfo;
-                                                    }
-                                                    else
-                                                    {
-
-                                                        (GData.Picture)[xx, yy] = 2;
-                                                    }
-                                                }
-                                                else
-                                                {
-
-                                                    if (PData.Points[xx, yy] != null)
-                                                        GData.ColorInfo[xx, yy] = col[3];
-                                                    else
-                                                    {
-                                                        // 
-                                                        GData.ColorInfo[xx, yy] = -1;
-
-                                                    }
-
-
-                                                    if (PData.Points[xx + 1, yy] != null)
-                                                        GData.ColorInfo[xx + 1, yy] = col[0];
-                                                    else
-                                                    {
-                                                        GData.ColorInfo[xx + 1, yy] = -1;
-
-                                                    }
-
-                                                    if (PData.Points[xx + 1, yy + 1] != null)
-                                                        GData.ColorInfo[xx + 1, yy + 1] = col[1];
-                                                    else
-                                                    {
-                                                        GData.ColorInfo[xx + 1, yy + 1] = -1;
-
-                                                    }
-                                                    if (PData.Points[xx, yy + 1] != null)
-                                                        GData.ColorInfo[xx, yy + 1] = col[2];
-                                                    else
-                                                    {
-                                                        GData.ColorInfo[xx, yy + 1] = -1;
-                                                    }
-
-
-
-                                                }
-                                            }
-                                            else
-                                            {
+                                            
+                                           
                                                 GData.ColorInfo2[xx, yy] = fa1;
-                                            }
+                                          
                                         }
                                     }
                                 }

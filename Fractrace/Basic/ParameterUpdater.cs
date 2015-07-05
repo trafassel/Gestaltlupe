@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fractrace.Basic
 {
+
+    /// <summary>
+    /// Used to update loaded parameters from old version.
+    /// </summary>
     public class ParameterUpdater
     {
 
@@ -33,7 +37,6 @@ namespace Fractrace.Basic
                 ParameterDict.Exemplar.RemoveProperty("Transformation.3.CenterY");
                 ParameterDict.Exemplar.RemoveProperty("Transformation.3.CenterZ");
             }
-
         }
 
     }

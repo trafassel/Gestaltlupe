@@ -947,6 +947,7 @@ namespace Fractrace
             AddToHistory();
         }
 
+
         /// <summary>
         /// Handles the Click event of the btnLoadLast control.
         /// Das letzte Projekt wird geladen.

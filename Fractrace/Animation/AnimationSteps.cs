@@ -21,6 +21,9 @@ namespace Fractrace.Animation
         private List<AnimationPoint> mSteps = new List<AnimationPoint>();
 
 
+        /// <summary>
+        /// List of all animation frames. 
+        /// </summary>
         public List<AnimationPoint> Steps
         {
             get
