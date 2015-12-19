@@ -42,11 +42,9 @@ namespace Fractrace.DataTypes
             start_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Min.x");
             start_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Min.y");
             start_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            start_tupel.zz = ParameterDict.Exemplar.GetDouble("Border.Min.zz");
             end_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Max.x");
             end_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Max.y");
             end_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            start_tupel.zz = ParameterDict.Exemplar.GetDouble("Border.Max.zz");
 
             arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
             arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");

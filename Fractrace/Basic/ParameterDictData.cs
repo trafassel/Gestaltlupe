@@ -12,13 +12,29 @@ namespace Fractrace.Basic
     public class ParameterDictData
     {
 
+        /// <summary>
+        /// Number of history entries.
+        /// </summary>
+        public int Time { get { return _history.Count - 1; } }
+
+        /// <summary>
+        /// Return parameter history at given time.
+        /// </summary>
+        public Dictionary<string, string> Get(int time) { return _history[time]; }
+        /// <summary>Parameter History.</summary>
+        List<Dictionary<string, string>> _history = new List<Dictionary<string, string>>();
+
+        /// <summary>
+        /// Used for lock other threads while Save().
+        /// </summary>
+        protected static object _refCountLock = new object();
 
         /// <summary>
         /// Save ParameterDict and return new time (as event count). 
         /// </summary>
         public int Save(string fileName)
         {
-            lock (refCountLock)
+            lock (_refCountLock)
             {
                 try
                 {
@@ -30,7 +46,7 @@ namespace Fractrace.Basic
                     }
                     if (fileName != "")
                         dict["Intern.FileName"] = fileName;
-                    mHistory.Add(dict);
+                    _history.Add(dict);
                     return Time;
                 }
                 catch (System.Exception ex)
@@ -54,12 +70,6 @@ namespace Fractrace.Basic
 
 
         /// <summary>
-        /// Parameter History.
-        /// </summary>
-        System.Collections.Generic.List<Dictionary<string, string>> mHistory = new List<Dictionary<string, string>>();
-
-
-        /// <summary>
         /// Entry at position index is moved to the global ParameterDict instance.
         /// </summary>
         /// <param name="Läd"></param>
@@ -67,29 +77,11 @@ namespace Fractrace.Basic
         {
             if (index < 0 | index > Time)
                 throw new ArgumentException("Index out of range");
-            foreach (KeyValuePair<string, string> entry in mHistory[index])
+            foreach (KeyValuePair<string, string> entry in _history[index])
             {
                 // Use the following, if no update events should be raised.
                 // ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
                 ParameterDict.Exemplar[entry.Key] = entry.Value;
-            }
-        }
-
-
-        public System.Collections.Generic.Dictionary<string, string> Get(int index)
-        {
-            return mHistory[index];
-        }
-
-
-        /// <summary>
-        /// Number of history entries.
-        /// </summary>
-        public int Time
-        {
-            get
-            {
-                return mHistory.Count - 1;
             }
         }
 
@@ -102,10 +94,10 @@ namespace Fractrace.Basic
         /// <param name="Läd"></param>
         public void Load(double index)
         {
-            foreach (KeyValuePair<string, string> entry in mHistory[(int)index])
+            foreach (KeyValuePair<string, string> entry in _history[(int)index])
             {
                 double doubleVal = 0;
-                string var = mHistory[(int)index][entry.Key];
+                string var = _history[(int)index][entry.Key];
                 bool isDouble = true;
                 if (!double.TryParse(var, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out doubleVal))
                 {
@@ -115,7 +107,6 @@ namespace Fractrace.Basic
                             isDouble = false;
                     }
                 }
-
                 if (isDouble)
                 {
                     double firstDouble = GetDouble((int)index, entry.Key);
@@ -137,13 +128,12 @@ namespace Fractrace.Basic
         /// Entry at position index is moved to the global ParameterDict instance.
         /// If index is no integer and the corresponding value is a number, the value of a bezier courve at point index is returned.
         /// </summary>
-        /// <param name="Läd"></param>
         public void LoadSmoothed(double index)
         {
-            foreach (KeyValuePair<string, string> entry in mHistory[(int)index])
+            foreach (KeyValuePair<string, string> entry in _history[(int)index])
             {
                 double doubleVal = 0;
-                string var = mHistory[(int)index][entry.Key];
+                string var = _history[(int)index][entry.Key];
                 bool isDouble = true;
                 if (!double.TryParse(var, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out doubleVal))
                 {
@@ -195,7 +185,7 @@ namespace Fractrace.Basic
         /// <returns></returns>
         protected double GetDouble(int index, string key)
         {
-            string valuesAsString = mHistory[index][key];
+            string valuesAsString = _history[index][key];
             double retVal = 0;
             if (!double.TryParse(valuesAsString, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out retVal))
             {
@@ -206,12 +196,6 @@ namespace Fractrace.Basic
             }
             return retVal;
         }
-
-
-        /// <summary>
-        /// Used for lock other threads while Save().
-        /// </summary>
-        protected static object refCountLock = new object();
 
 
     }

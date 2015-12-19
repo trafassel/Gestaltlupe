@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Fractrace.Basic
 {
@@ -12,6 +6,9 @@ namespace Fractrace.Basic
 
     public delegate void ElementChangedDelegate(string name, string value);
 
+    /// <summary>
+    /// Subcontrol, used in DataView form.
+    /// </summary>
     public partial class DataViewElement : UserControl
     {
 
@@ -22,21 +19,50 @@ namespace Fractrace.Basic
 
 
         /// <summary>
+        /// Return name of associated parameter.
+        /// </summary>
+        public string ParameterName { get { return _name; } }
+        /// <summary>Name of this element (should be equal to the name of the corresponding ParameterDict entry).</summary>
+        protected string _name = "";
+
+        /// <summary>
+        /// Value as string.
+        /// </summary>
+        protected string _value = "";
+
+        /// <summary>
+        /// Datatype of the value of this entry.
+        /// </summary>
+        protected string _type = "";
+
+        /// <summary>
+        /// Short english documentation of this entry. 
+        /// </summary>
+        protected string _description = "";
+
+        /// <summary>
+        /// Is used in subclasses to raise ElementChanged on user input.
+        /// </summary>
+        protected string _oldValue = "";
+
+        /// <summary>
+        /// Is raised, if the value of the corresponding entry is changed by user input.
+        /// </summary>
+        public event ElementChangedDelegate ElementChanged;
+
+
+        /// <summary>
         /// Initialisation.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="type"></param>
-        /// <param name="description"></param>
         public void Init(string name, string value, string type, string description, bool shortenName)
         {
-            mName = name;
-            mValue = value;
-            mType = type;
-            mDescription = description;
+            _name = name;
+            _value = value;
+            _type = type;
+            _description = description;
             if (shortenName)
             {
-                string[] strings = mName.Split('.');
+                string[] strings = _name.Split('.');
                 if (strings.Length > 0)
                     lblName.Text = strings[strings.Length - 1];
             }
@@ -59,16 +85,9 @@ namespace Fractrace.Basic
                 ToolTip toolTip = new ToolTip();
                 toolTip.SetToolTip(lblName, description);
                 
-            }
-           
+            }     
             PreInit();
         }
-
-
-        /// <summary>
-        /// Is used in subclasses to raise ElementChanged on user input.
-        /// </summary>
-        protected string oldValue = "";
 
 
         /// <summary>
@@ -77,11 +96,11 @@ namespace Fractrace.Basic
         /// </summary>
         public virtual void UpdateElements()
         {
-            string newValue = ParameterDict.Exemplar[mName];
-            if (oldValue != newValue)
+            string newValue = ParameterDict.Exemplar[_name];
+            if (_oldValue != newValue)
             {
-                mValue = newValue;
-                oldValue = newValue;
+                _value = newValue;
+                _oldValue = newValue;
             }
         }
 
@@ -92,49 +111,7 @@ namespace Fractrace.Basic
         protected virtual void PreInit()
         {
         }
-
-
-        /// <summary>
-        /// Name of this element (should be equal to the name of the corresponding ParameterDict entry).
-        /// </summary>
-        protected string mName = "";
-
-
-        /// <summary>
-        /// Return name of associated parameter.
-        /// </summary>
-        public string ParameterName
-        {
-            get
-            {
-                return mName;
-            }
-        }
-
-
-        /// <summary>
-        /// Value as string.
-        /// </summary>
-        protected string mValue = "";
-
-
-        /// <summary>
-        /// Datatype of the value of this entry.
-        /// </summary>
-        protected string mType = "";
-
-
-        /// <summary>
-        /// Short english documentation of this entry. 
-        /// </summary>
-        protected string mDescription = "";
-
-
-        /// <summary>
-        /// Is raised, if the value of the corresponding entry is changed by user input.
-        /// </summary>
-        public event ElementChangedDelegate ElementChanged;
-
+        
 
         /// <summary>
         /// Has to be called in subclasses to raise ElementChanged event.
@@ -145,6 +122,7 @@ namespace Fractrace.Basic
         {
             ElementChanged(key, value);
         }
+
 
     }
 }

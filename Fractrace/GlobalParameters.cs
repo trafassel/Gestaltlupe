@@ -211,7 +211,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
 
 
             // Start Preview Rendering just after small render display finishes
-            ParameterDict.Exemplar["View.Pipeline.Preview"] = "1";
+            ParameterDict.Exemplar["View.Pipeline.Preview"] = "0";
             ParameterDict.Exemplar["View.Pipeline.Preview.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Exemplar["View.Pipeline.Preview.PARAMETERINFO.Description"] = "Start Preview Rendering just after small render display finishes.";
 

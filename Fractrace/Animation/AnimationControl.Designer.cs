@@ -229,7 +229,6 @@
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Preview Size";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel7
             // 

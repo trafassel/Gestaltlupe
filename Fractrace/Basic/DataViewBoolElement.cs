@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Fractrace.Basic
 {
     class DataViewBoolElement : DataViewElement
     {
 
-        System.Windows.Forms.CheckBox cbValue = new System.Windows.Forms.CheckBox();
+        System.Windows.Forms.CheckBox _cbValue = new System.Windows.Forms.CheckBox();
 
         protected override void PreInit()
         {
-            cbValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEdit.Controls.Add(cbValue);
-            this.cbValue.Checked = Fractrace.Basic.ParameterDict.Exemplar.GetBool(mName);
-            this.cbValue.CheckedChanged += cbValue_CheckedChanged;
+            _cbValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEdit.Controls.Add(_cbValue);
+            this._cbValue.Checked = ParameterDict.Exemplar.GetBool(_name);
+            this._cbValue.CheckedChanged += cbValue_CheckedChanged;
         }
 
 
@@ -25,7 +24,7 @@ namespace Fractrace.Basic
         /// <param name="e"></param>
         void cbValue_CheckedChanged(object sender, EventArgs e)
         {
-            Fractrace.Basic.ParameterDict.Exemplar.SetBool(mName, this.cbValue.Checked);
+            ParameterDict.Exemplar.SetBool(_name, this._cbValue.Checked);
         }
 
 
@@ -34,7 +33,7 @@ namespace Fractrace.Basic
         /// </summary>
         public override void UpdateElements()
         {
-            this.cbValue.Checked = Fractrace.Basic.ParameterDict.Exemplar.GetBool(mName);
+            this._cbValue.Checked = ParameterDict.Exemplar.GetBool(_name);
         }
 
 

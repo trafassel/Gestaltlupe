@@ -25,6 +25,8 @@ namespace Fractrace
         protected System.Windows.Forms.Button btnPreview;
 
 
+        public event PictureRenderingIsReady RenderingEnds;
+
         /// <summary>
         /// Der Graphik-Kontext wird initialisiert.
         /// </summary>
@@ -38,6 +40,7 @@ namespace Fractrace
             this.btnPreview.Size = new System.Drawing.Size(50, 40);
             this.btnPreview.TabIndex = 1;
             this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.BackgroundImageLayout = ImageLayout.Stretch;
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(labelImage);
@@ -75,6 +78,8 @@ namespace Fractrace
         /// <param name="e"></param>
         public void btnPreview_Click(object sender, EventArgs e)
         {
+
+            smallPreviewCurrentDrawStep = 1;
             if (mRenderOnClick)
                 StartDrawing();
         }
@@ -110,25 +115,37 @@ namespace Fractrace
         }
 
 
+        Image currentImage = null;
+
+
+
         /// <summary>
         /// Neuzeichnen.
         /// </summary>
         protected override void StartDrawing()
         {
             Form1.PublicForm.Stop();
-
             forceRedraw = false;
             btnPreview.Enabled = false;
             inDrawing = true;
-            if (btnPreview.Width < 1 && btnPreview.Height<1)
+            if (btnPreview.Width < 1 && btnPreview.Height < 1)
             {
                 Form1.PublicForm.CurrentUpdateStep = 0;
                 return;
             }
-            Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
-            btnPreview.BackgroundImage = labelImage;
-            grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
-            iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+            if (iter != null)
+                iter.Abort();
+            
+            if (smallPreviewCurrentDrawStep == 1)
+            {
+                //currentImage = new Bitmap((int)(btnPreview.Width / 2), (int)(btnPreview.Height / 2));
+                iter = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+            }
+            else
+            {
+                //currentImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+                iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+            }
             iter.OneStepProgress = false;
             AssignParameters();
             iter.StartAsync(mParameter,
@@ -167,7 +184,6 @@ namespace Fractrace
         }
 
 
-
         /// <summary>
         /// Berechnung wurde beendet.
         /// </summary>
@@ -177,58 +193,88 @@ namespace Fractrace
             {
                 lock (iter)
                 {
+                    if (iter.InAbort)
+                        return;
                     try
                     {
                         Fractrace.PictureArt.Renderer pArt;
-                     
-                       
-                            if (fixedRenderer == -1)
+                        if (fixedRenderer == -1)
+                        {
+                            if (IsSmallPreview())
                             {
-                                if (IsSmallPreview())
-                                {
-                                    pArt = new PictureArt.FastPreviewRenderer(iter.PictureData);
-                                    pArt.Init(iter.LastUsedFormulas);
-                                }
-                                else
-                                {
-                                    pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
-                                }
+                                pArt = new PictureArt.FastPreviewRenderer(iter.PictureData);
+                                pArt.Init(iter.LastUsedFormulas);
                             }
                             else
                             {
-                                pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
+                                pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
                             }
-                      
-                        //  pArt.PaintEnds += pArt_PaintEnds;this
-                        pArt.Paint(grLabel);
+                        }
+                        else
+                        {
+                            pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
+                            pArt.Init(iter.LastUsedFormulas);
+                        }
+                        /*
+                        if (currentImage == null)
+                        {
+                            
+                            if (smallPreviewCurrentDrawStep == 1)
+                                currentImage = new Bitmap((int)(btnPreview.Width / 2), (int)(btnPreview.Height / 2));
+                            else
+                                currentImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+                        }*/
+                        currentImage = new Bitmap((int)(iter.Width), (int)(iter.Height));
 
+                        btnPreview.BackgroundImage = currentImage;
+                        grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
+                        pArt.Paint(grLabel);
                         Application.DoEvents();
                         this.Refresh();
-                        if (RenderingEnds != null)
-                            RenderingEnds();
+                        if (IsSmallPreview())
+                        {
+                            smallPreviewCurrentDrawStep++;
+                            if (smallPreviewCurrentDrawStep == 2 && fixedRenderer == -1)
+                            {
+                                if (RenderingEnds != null)
+                                    RenderingEnds();
 
-
+                                System.Diagnostics.Debug.WriteLine("Initiate next draw in high resolution.");
+                                StartDrawing();
+                            }
+                            else
+                            {
+                                if (fixedRenderer == -1)
+                                {
+                                    if (RenderingEnds != null)
+                                        RenderingEnds();
+                                }
+                            }
+                            if (smallPreviewCurrentDrawStep > 1)
+                                smallPreviewCurrentDrawStep = 0;
+                        }
+                        else
+                        {
+                            if (RenderingEnds != null)
+                                RenderingEnds();
+                        }
                     }
                     catch (Exception ex)
                     {
-                        // tritt auf, wenn iter null ist
                         System.Diagnostics.Debug.WriteLine(ex.ToString());
                     }
                 }
             }
             btnPreview.Enabled = true;
             inDrawing = false;
-            if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl )
+            if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl)
             {
                 ParameterInput.MainParameterInput.ComputePreview();
             }
 
-
-
             if (forceRedraw)
                 StartDrawing();
         }
-
 
 
         /// <summary>
@@ -236,12 +282,10 @@ namespace Fractrace
         /// </summary>
         void pArt_PaintEnds()
         {
-
             Application.DoEvents();
             this.Refresh();
             if (RenderingEnds != null)
                 RenderingEnds();
-
         }
 
 
@@ -261,7 +305,24 @@ namespace Fractrace
         }
 
 
-        public event PictureRenderingIsReady RenderingEnds;
+        private void InitializeComponent()
+        {
+            ((System.ComponentModel.ISupportInitialize)(this.mPictureBox)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // mPictureBox
+            // 
+            this.mPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            // 
+            // PreviewControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Name = "PreviewControl";
+            ((System.ComponentModel.ISupportInitialize)(this.mPictureBox)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
+        }
 
     }
 }

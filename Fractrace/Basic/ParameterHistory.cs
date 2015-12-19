@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Fractrace.Basic {
-
-
-  /// <summary>
-  /// Managed a list of all parameter changes.
-  /// </summary>
-  public class ParameterHistory: ParameterDictData {
+﻿namespace Fractrace.Basic
+{
 
 
     /// <summary>
-    /// Protected access to CurrentTime.
+    /// Managed a list of all parameter changes.
     /// </summary>
-    protected int mCurrentTime = 0;
+    public class ParameterHistory : ParameterDictData
+    {
 
 
-    /// <summary>
-    /// Current time as event count.
-    /// </summary>
-    public int CurrentTime {
-      get {
-        return mCurrentTime;
-      }
+        /// <summary>
+        /// Current time as event count.
+        /// </summary>
+        public int CurrentTime { get { return _currentTime; } set { _currentTime = value; } }
+        /// <summary> Protected access to CurrentTime.</summary>
+        protected int _currentTime = 0;
 
-      set {
-        mCurrentTime = value;
-      }
     }
-  }
 
 }

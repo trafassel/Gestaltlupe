@@ -1,33 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Fractrace.Animation
 {
+
+    /// <summary>
+    /// Control, which is used in the animation form to show a small pictur of some animation steps.
+    /// </summary>
     public partial class AnimationStepPreview : UserControl
     {
         public AnimationStepPreview()
         {
             InitializeComponent();
             Bitmap image = new Bitmap(200, 100);
-            grSteps = Graphics.FromImage(image);
+            _grSteps = Graphics.FromImage(image);
             pictureBox1.Image = image;
             this.ContextMenuStrip = contextMenuStrip1;
         }
 
 
-        protected Graphics grSteps = null;
+        /// <summary>
+        /// Graphics, used to draw the rendered imag.
+        /// </summary>
+        protected Graphics _grSteps = null;
 
-        int time = 0;
+        /// <summary>
+        /// Corresponding global history time.
+        /// </summary>
+        int _time = 0;
 
-        int steps = 0;
 
+        /// <summary>
+        /// Number of substeps until next animation step. 
+        /// </summary>
+        int _steps = 0;
+    
 
         /// <summary>
         /// Initialize with Animation time and number of steps used in Animation.
@@ -36,8 +44,8 @@ namespace Fractrace.Animation
         /// <param name="steps"></param>
         public void Init(int time,int steps)
         {
-            this.time = time;
-            this.steps = steps;
+            this._time = time;
+            this._steps = steps;
             label1.Text = time.ToString();
 
             Pen p = new Pen(System.Drawing.Color.Black);
@@ -47,7 +55,7 @@ namespace Fractrace.Animation
             {
                 double pos = i *dsteps;
                 int ipos = (int)pos;
-                grSteps.DrawLine(p, ipos, 3, ipos, 6);
+                _grSteps.DrawLine(p, ipos, 3, ipos, 6);
 
             }
         }
@@ -59,16 +67,16 @@ namespace Fractrace.Animation
         /// <param name="currentStep"></param>
         public void UpdateComputedStep(int currentStep)
         {
-            if (steps < 1)
+            if (_steps < 1)
                 return;
             Pen p = new Pen(System.Drawing.Color.Green);
             double width = this.Width;
-            double dsteps = width / ((double)steps);
+            double dsteps = width / ((double)_steps);
             double pos = (currentStep+1) * dsteps;
             int ipos = (int)pos;
             for (int i = 0; i < pos; ++i)
             {
-                grSteps.DrawLine(p, i, 3, i, 6);
+                _grSteps.DrawLine(p, i, 3, i, 6);
             }
             this.Refresh();
         }
@@ -83,16 +91,17 @@ namespace Fractrace.Animation
         {
             Pen p = new Pen(System.Drawing.Color.Red);
             double width = this.Width;
-            double dsteps = width / ((double)steps);
-            for (double i = 0; i < steps; ++i)
+            double dsteps = width / ((double)_steps);
+            for (double i = 0; i < _steps; ++i)
             {
                 double pos = i * dsteps;
                 int ipos = (int)pos;
-                grSteps.DrawLine(p, ipos, 3, ipos, 6);
+                _grSteps.DrawLine(p, ipos, 3, ipos, 6);
             }
-            Fractrace.Animation.AnimationControl.MainAnimationControl.RemoveStep(time);
+            AnimationControl.MainAnimationControl.RemoveStep(_time);
             this.Refresh();
         }
+
 
     }
 }

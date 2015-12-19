@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:121-->
+<!--LastNote:122-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1719,6 +1719,39 @@ Verwendung bei Animation.<BR>
 <BR>
 <BR>
 
+</DD>
+<DT><A name="JcqLUaJFjLFgZzVjl9unyw"></A>SmallPreview in halber Größe</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1436704614-->
+<!--property:date_modified=1436704665-->
+<!--property:expanded-->
+<!--property:hash=72a7fd0055d6e3c4c4b41f7d8fd031f1bc27978b-->
+<!--property:hash_html=64dfb75c24537c96709291124374e6d557ec836d-->
+<DD>
+evtl. Umsetzung als PaintJob.<BR>
+<BR>
+<DL>
+<DT><A name="O2LjZJ47gRMQfgwtAovKVw"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1436704712-->
+<!--property:date_modified=1436706026-->
+<!--property:hash=5acf324582bc0109d176c2941bda1f8424745d67-->
+<!--property:hash_html=293b27950694193ee7c25161483e2ba6ba734ffc-->
+<DD>
+PreviewControl.StartDrawing()<BR>
+<BR>
+// Umsetzung:<BR>
+// Wenn IsSmallPreview()<BR>
+// dann die Bilderzeugung in zwei Schritte einteilen<BR>
+// evtl. PaintJob verwenden.<BR>
+<BR>
+<BR>
+In PreviewControl.OneStepEnds()<BR>
+<BR>
+in (IsSmallPreview()) die zweite Iteration starten.<BR>
+
+</DD>
+</DL>
 </DD>
 </DL>
 </DD>

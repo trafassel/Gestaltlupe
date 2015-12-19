@@ -507,7 +507,7 @@ namespace Fractrace
             }
 
             //  iter.PictureData.Points
-            double x, y, z, zz;
+            double x, y, z;
             for (int i = ZoomX1; i <= ZoomX2; i++)
             {
                 for (int j = ZoomY1; j <= ZoomY2; j++)
@@ -517,7 +517,6 @@ namespace Fractrace
                         x = iter.GraphicInfo.PointInfo[i, j].i;
                         y = iter.GraphicInfo.PointInfo[i, j].j;
                         z = iter.GraphicInfo.PointInfo[i, j].k;
-                        zz = iter.GraphicInfo.PointInfo[i, j].l;
 
                         Geometry.Vec3 trans2 = iter.LastUsedFormulas.GetTransform(x, y, z);
                         x = trans2.X;
@@ -536,10 +535,6 @@ namespace Fractrace
                             minZ = z;
                         if (maxZ < z)
                             maxZ = z;
-                        if (minZZ > zz)
-                            minZZ = zz;
-                        if (maxZZ < zz)
-                            maxZZ = zz;
                     }
                 }
             }
@@ -548,12 +543,10 @@ namespace Fractrace
             paras.Parameter.start_tupel.x = minX;
             paras.Parameter.start_tupel.y = minY;
             paras.Parameter.start_tupel.z = minZ;
-            paras.Parameter.start_tupel.zz = minZZ;
 
             paras.Parameter.end_tupel.x = maxX;
             paras.Parameter.end_tupel.y = maxY;
             paras.Parameter.end_tupel.z = maxZ;
-            paras.Parameter.end_tupel.zz = maxZZ;
 
             ParameterDict.Exemplar.SetDouble("Border.Min.x", paras.Parameter.start_tupel.x);
             ParameterDict.Exemplar.SetDouble("Border.Min.y", paras.Parameter.start_tupel.y);

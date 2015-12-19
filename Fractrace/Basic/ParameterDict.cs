@@ -34,16 +34,7 @@ namespace Fractrace.Basic
     public class ParameterDict
     {
 
-        /// <summary>
-        /// Used by the singleton design pattern.
-        /// </summary>
-        protected static ParameterDict mExemplar = null;
-
-
-        /// <summary>
-        ///  Used by the singleton design pattern.
-        /// </summary>
-        protected static Object lockVar = new Object();
+      
 
 
         /// <summary>
@@ -54,6 +45,48 @@ namespace Fractrace.Basic
 
         }
 
+        /// <summary>
+        /// Used by the singleton design pattern.
+        /// </summary>
+        protected static ParameterDict _exemplar = null;
+
+        /// <summary>
+        ///  Used by the singleton design pattern.
+        /// </summary>
+        protected static Object _lockVar = new Object();
+
+        /// <summary>
+        /// Short documentation of the entry (in UK-english).
+        /// </summary>
+        public Dictionary<string, string> Description { get { return _description; } }
+        protected Dictionary<string, string> _description = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Jeder Eintrag kann einer Kategorie angehören. 
+        /// Verschiedene Kategorien werden z.B. bei der Parametereingabe unterschiedlich behandelt.
+        /// Kategorien werden üblichweise vom Programm aus gesetzt.
+        /// </summary>
+        public Dictionary<string, string> Categories { get { return _categories; } }
+        protected Dictionary<string, string> _categories = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Used in parsing of double entries ("en-US").
+        /// </summary>
+        /// <value>The X3D culture.</value>
+        public static System.Globalization.CultureInfo Culture { get { return mCulture; } }
+        /// <summary>en-US culture is used to save the float and double values.</summary>
+        protected static System.Globalization.CultureInfo mCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
+        ///<summary>Raised, if the value of an entry has changed.</summary>
+        public event ParameterDictChanged EventChanged = null;
+
+        /// <summary>
+        /// Public access to the internal dictionary.
+        /// </summary>
+        public Dictionary<string, string> Entries { get { return _entries; } }
+        /// <summary>Internal dictionary.</summary>
+        protected Dictionary<string, string> _entries = new Dictionary<string, string>();
+
 
         /// <summary>
         /// Gets the unique static instance of this class.
@@ -63,33 +96,14 @@ namespace Fractrace.Basic
         {
             get
             {
-                lock (lockVar)
+                lock (_lockVar)
                 {
-                    if (mExemplar == null)
+                    if (_exemplar == null)
                     {
-                        mExemplar = new ParameterDict();
+                        _exemplar = new ParameterDict();
                     }
                 }
-                return mExemplar;
-            }
-        }
-
-
-        /// <summary>
-        /// The en-US culture is used to save the float values. 
-        /// </summary>
-        protected static System.Globalization.CultureInfo mCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-
-
-        /// <summary>
-        /// Used in parsing of double entries ("en-US").
-        /// </summary>
-        /// <value>The X3D culture.</value>
-        public static System.Globalization.CultureInfo Culture
-        {
-            get
-            {
-                return mCulture;
+                return _exemplar;
             }
         }
 
@@ -120,7 +134,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Save all dictionary entries of given category into a file.
         /// </summary>
-        /// <param name="fileName"></param>
         public void Save(string fileName, List<String> categoriesToSave)
         {
             XmlTextWriter tw = new XmlTextWriter(fileName, System.Text.Encoding.UTF8);
@@ -158,7 +171,7 @@ namespace Fractrace.Basic
         /// <param name="fileName"></param>
         public void Load(string fileName)
         {
-            mEntries.Clear();
+            _entries.Clear();
             GlobalParameters.SetGlobalParameters();
             Append(fileName);
             ParameterUpdater.Update();
@@ -183,9 +196,9 @@ namespace Fractrace.Basic
                         {
                             string key = entryNode.Attributes.GetNamedItem("Key").Value;
                             string value = entryNode.Attributes.GetNamedItem("Value").Value;
-                            lock (mEntries)
+                            lock (_entries)
                             {
-                                mEntries[key] = value;
+                                _entries[key] = value;
                             }
                         }
                     }
@@ -200,7 +213,7 @@ namespace Fractrace.Basic
         /// <param name="text">The text.</param>
         public void AppendFromText(string text)
         {
-            lock (mEntries)
+            lock (_entries)
             {
                 XmlDocument xdoc = new XmlDocument();
                 XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
@@ -211,7 +224,7 @@ namespace Fractrace.Basic
                     {
                         string key = entryNode.Attributes.GetNamedItem("Key").Value;
                         string value = entryNode.Attributes.GetNamedItem("Value").Value;
-                        mEntries[key] = value;
+                        _entries[key] = value;
                     }
                 }
             }
@@ -242,8 +255,8 @@ namespace Fractrace.Basic
         /// <returns></returns>
         protected string GetValue(string name)
         {
-            if (mEntries.ContainsKey(name))
-                return mEntries[name];
+            if (_entries.ContainsKey(name))
+                return _entries[name];
             return string.Empty;
         }
 
@@ -255,9 +268,9 @@ namespace Fractrace.Basic
         /// <param name="value"></param>
         protected void SetValue(string name, string value)
         {
-            lock (mEntries)
+            lock (_entries)
             {
-                mEntries[name] = value;
+                _entries[name] = value;
             }
             if (EventChanged != null)
                 EventChanged(this, new ParameterDictChangedEventArgs(name, value));
@@ -267,15 +280,11 @@ namespace Fractrace.Basic
         /// <summary>
         /// Set entry with the possibility not to raise a change event. 
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="raiseChangeEvent"></param>
         public void SetValue(string name, string value, bool raiseChangeEvent)
         {
-
-            lock (mEntries)
+            lock (_entries)
             {
-                mEntries[name] = value;
+                _entries[name] = value;
             }
             if (EventChanged != null && raiseChangeEvent)
                 EventChanged(this, new ParameterDictChangedEventArgs(name, value));
@@ -288,21 +297,9 @@ namespace Fractrace.Basic
         /// <param name="name">The name.</param>
         public void RemoveProperty(string name)
         {
-            if (mEntries.ContainsKey(name))
+            if (_entries.ContainsKey(name))
             {
-                mEntries.Remove(name);
-            }
-        }
-
-
-        /// <summary>
-        /// Public access to the internal dictionary.
-        /// </summary>
-        public Dictionary<string, string> Entries
-        {
-            get
-            {
-                return mEntries;
+                _entries.Remove(name);
             }
         }
 
@@ -315,9 +312,9 @@ namespace Fractrace.Basic
             get
             {
                 SortedDictionary<string, string> retVal = new SortedDictionary<string, string>();
-                lock (mEntries)
+                lock (_entries)
                 {
-                    foreach (KeyValuePair<string, string> entry in mEntries)
+                    foreach (KeyValuePair<string, string> entry in _entries)
                     {
                         retVal[entry.Key] = entry.Value;
                     }
@@ -392,9 +389,9 @@ namespace Fractrace.Basic
         /// <param name="value"></param>
         public void SetDouble(string key, double value)
         {
-            lock (mEntries)
+            lock (_entries)
             {
-                mEntries[key] = value.ToString(Culture.NumberFormat);
+                _entries[key] = value.ToString(Culture.NumberFormat);
             }
             EventChanged(this, new ParameterDictChangedEventArgs(key, value.ToString()));
         }
@@ -408,9 +405,9 @@ namespace Fractrace.Basic
         public double GetDouble(string key)
         {
             double retVal = 0;
-            if (mEntries.ContainsKey(key))
+            if (_entries.ContainsKey(key))
             {
-                string var = mEntries[key];
+                string var = _entries[key];
                 if (!double.TryParse(var, System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal))
                 {
                     if (!double.TryParse(var, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out retVal))
@@ -451,9 +448,9 @@ namespace Fractrace.Basic
         /// <param name="value"></param>
         public void SetInt(string key, int value)
         {
-            lock (mEntries)
+            lock (_entries)
             {
-                mEntries[key] = value.ToString(Culture.NumberFormat);
+                _entries[key] = value.ToString(Culture.NumberFormat);
             }
             EventChanged(this, new ParameterDictChangedEventArgs(key, value.ToString()));
         }
@@ -467,14 +464,14 @@ namespace Fractrace.Basic
         public int GetInt(string key)
         {
             int retVal = 0;
-            if (mEntries.ContainsKey(key))
+            if (_entries.ContainsKey(key))
             {
-                if (!int.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal))
+                if (!int.TryParse(_entries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out retVal))
                 {
                     double dRetVal = 0;
                     try
                     {
-                        if (double.TryParse(mEntries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out dRetVal))
+                        if (double.TryParse(_entries[key], System.Globalization.NumberStyles.Number, Culture.NumberFormat, out dRetVal))
                         {
                             retVal = (int)dRetVal;
                         }
@@ -493,14 +490,14 @@ namespace Fractrace.Basic
         /// <param name="value"></param>
         public void SetBool(string key, bool value)
         {
-            lock (mEntries)
+            lock (_entries)
             {
                 if (value)
-                    mEntries[key] = "1";
+                    _entries[key] = "1";
                 else
-                    mEntries[key] = "0";
+                    _entries[key] = "0";
             }
-            EventChanged(this, new ParameterDictChangedEventArgs(key, mEntries[key]));
+            EventChanged(this, new ParameterDictChangedEventArgs(key, _entries[key]));
         }
 
 
@@ -511,20 +508,14 @@ namespace Fractrace.Basic
         /// <returns></returns>
         public bool GetBool(string key)
         {
-            if (mEntries.ContainsKey(key))
+            if (_entries.ContainsKey(key))
             {
-                string valueAsString = mEntries[key];
+                string valueAsString = _entries[key];
                 if (valueAsString == "1" || valueAsString.ToLower() == "true")
                     return true;
             }
             return false;
         }
-
-
-        /// <summary>
-        /// Internal dictionary.
-        /// </summary>
-        protected Dictionary<string, string> mEntries = new Dictionary<string, string>();
 
 
         /// <summary>
@@ -534,46 +525,14 @@ namespace Fractrace.Basic
         public ParameterDict Clone()
         {
             ParameterDict retVal = new ParameterDict();
-            foreach (KeyValuePair<string, string> entry in mEntries)
+            foreach (KeyValuePair<string, string> entry in _entries)
             {
-                retVal.mEntries[entry.Key]  = entry.Value;
+                retVal._entries[entry.Key]  = entry.Value;
             }
             return retVal;
         }
 
-
-        /// <summary>
-        /// Short documentation of the entry (in UK-english).
-        /// </summary>
-        public Dictionary<string, string> Description
-        {
-            get
-            {
-                return mDescription;
-            }
-        }
-        protected Dictionary<string, string> mDescription = new Dictionary<string, string>();
-
-
-        /// <summary>
-        /// Jeder Eintrag kann einer Kategorie angehören. 
-        /// Verschiedene Kategorien werden z.B. bei der Parametereingabe unterschiedlich behandelt.
-        /// Kategorien werden üblichweise vom Programm aus gesetzt.
-        /// </summary>
-        public Dictionary<string, string> Categories
-        {
-            get
-            {
-                return mCategories;
-            }
-        }
-        protected Dictionary<string, string> mCategories = new Dictionary<string, string>();
-
-
-        ///<summary>Raised, if the value of an entry has changed.</summary>
-        public event ParameterDictChanged EventChanged = null;
-
-
+        
         /// <summary>
         /// Return Datatype of given parameter. If Datatype is unknown an empty string is returned.
         /// </summary>

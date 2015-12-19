@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Fractrace.Basic
 {
+
+    /// <summary>
+    /// Control to view and edit all public ParameterDict Entries.
+    /// </summary>
     public partial class ParameterDictControl : UserControl
     {
 
@@ -17,6 +16,17 @@ namespace Fractrace.Basic
             InitializeComponent();
             Init();
         }
+        
+
+        /// <summary>
+        /// Nodes of this three with unique name of the entry as key.
+        /// </summary>
+        protected Dictionary<string, TreeNode> _nodes = new Dictionary<string, TreeNode>();
+
+        /// <summary>
+        /// Id of currently selected hirarchy.
+        /// </summary>
+        protected string _choosenHirarchy = "";
 
 
         /// <summary>
@@ -31,7 +41,7 @@ namespace Fractrace.Basic
                 {
                     string cat = GetCategory(parameterName);
                     string parentCat = GetCategory(cat);
-                    if (!Nodes.ContainsKey(cat))
+                    if (!_nodes.ContainsKey(cat))
                     {
                         TreeNode tNode = new TreeNode(GetName(cat));
                         tNode.Tag = cat;
@@ -42,35 +52,29 @@ namespace Fractrace.Basic
                         else
                             if (parentCat != "")
                             {
-                                if (!Nodes.ContainsKey(parentCat))
+                                if (!_nodes.ContainsKey(parentCat))
                                 {
-                                    Nodes[parentCat] = new TreeNode(parentCat);
-                                    Nodes[parentCat].Tag = parentCat;
+                                    _nodes[parentCat] = new TreeNode(parentCat);
+                                    _nodes[parentCat].Tag = parentCat;
                                     // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
                                     string testParentParent = GetCategory(parentCat);
-                                    if (testParentParent != "." && Nodes.ContainsKey(parentCat))
+                                    if (testParentParent != "." && _nodes.ContainsKey(parentCat))
                                     {
-                                        Nodes[testParentParent].Nodes.Add(Nodes[parentCat]);
+                                        _nodes[testParentParent].Nodes.Add(_nodes[parentCat]);
                                     }
                                     else
-                                        treeView1.Nodes.Add(Nodes[parentCat]);
+                                        treeView1.Nodes.Add(_nodes[parentCat]);
                                 }
                                 // Test, if Parent Node page contains all elements of this node
                                 // in this case, the node as subtree is not nececcary.
                                 if (NeedSubNodes(parentCat))
-                                    Nodes[parentCat].Nodes.Add(tNode);
+                                    _nodes[parentCat].Nodes.Add(tNode);
                             }
-                        Nodes[cat] = tNode;
+                        _nodes[cat] = tNode;
                     }
                 }
             }
         }
-
-
-        /// <summary>
-        /// Nodes of this three with unique name of the entry as key.
-        /// </summary>
-        protected Dictionary<string, TreeNode> Nodes = new Dictionary<string, TreeNode>();
 
 
         /// <summary>
@@ -95,6 +99,7 @@ namespace Fractrace.Basic
             }
             return false;
         }
+
 
         /// <summary>
         /// Die Hirarchie wird in den Einträgen durch . abgetrennt. Hier wird der String 
@@ -142,16 +147,12 @@ namespace Fractrace.Basic
         }
 
 
-
-        protected string mChoosenHirarchy = "";
-
-
         /// <summary>
         /// Die Daten werden neu gezeichnet.
         /// </summary>
         public void UpdateFromData()
         {
-            this.dataViewControl1.Select(mChoosenHirarchy);
+            this.dataViewControl1.Select(_choosenHirarchy);
         }
 
 
@@ -167,13 +168,10 @@ namespace Fractrace.Basic
         /// <param name="hirarchy"></param>
         public void SelectNode(string hirarchy)
         {
-            mChoosenHirarchy = hirarchy;
+            _choosenHirarchy = hirarchy;
             UpdateFromData();
         }
 
-
-
-        public bool Changed = false;
 
     }
 }

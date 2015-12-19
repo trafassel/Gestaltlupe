@@ -124,6 +124,11 @@ namespace Fractrace
         /// </summary>
         protected bool forceRedraw = false;
 
+        /// <summary>
+        /// smallPreviewCurrentDrawStep == 0 : iter(width/2,height/2) , FastPreviewRenderer
+        /// smallPreviewCurrentDrawStep == 1 : FastPreviewRenderer  
+        /// </summary>
+        protected int smallPreviewCurrentDrawStep = 0;
 
         /// <summary>
         /// Neuzeichnen.
@@ -158,6 +163,7 @@ namespace Fractrace
         /// </summary>
         public virtual void Draw()
         {
+            smallPreviewCurrentDrawStep = 1;
             fixedRenderer = -1;
             if (!inDrawing)
                 StartDrawing();
@@ -239,7 +245,8 @@ namespace Fractrace
         /// </summary>
         public void ComputationEnds()
         {
-            this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            if(iter==null || !iter.InAbort)
+              this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
 
 

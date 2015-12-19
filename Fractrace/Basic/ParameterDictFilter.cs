@@ -21,13 +21,13 @@ namespace Fractrace.Basic
         /// <summary>
         /// Saved dict which will be activated after using this filter.
         /// </summary>
-        Dictionary<string, string> mSavedDict = new Dictionary<string, string>();
+        Dictionary<string, string> _savedDict = new Dictionary<string, string>();
 
 
         /// <summary>
         /// Contails all changed parameters in filter.
         /// </summary>
-        Dictionary<string, bool> mChangedParameters = new Dictionary<string, bool>();
+        Dictionary<string, bool> _changedParameters = new Dictionary<string, bool>();
 
 
         /// <summary>
@@ -39,21 +39,21 @@ namespace Fractrace.Basic
             {
                 foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
                 {
-                    mSavedDict[entry.Key] = entry.Value;
+                    _savedDict[entry.Key] = entry.Value;
                 }
             }
             catch (System.Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("ParameterDict.Exemplar.Entries are updated while saving. Filter is not applyed.");
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                mSavedDict.Clear();
+                _savedDict.Clear();
                 return;
             }
             Filter();
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
             {
-                if (mSavedDict[entry.Key] != entry.Value)
-                    mChangedParameters[entry.Key] = true;
+                if (_savedDict[entry.Key] != entry.Value)
+                    _changedParameters[entry.Key] = true;
             }
         }
 
@@ -72,9 +72,9 @@ namespace Fractrace.Basic
         /// </summary>
         public void Restore()
         {
-            foreach (KeyValuePair<string, string> entry in mSavedDict)
+            foreach (KeyValuePair<string, string> entry in _savedDict)
             {
-                if( mChangedParameters.ContainsKey(entry.Key) )
+                if( _changedParameters.ContainsKey(entry.Key) )
                   ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
             }
             ParameterDict.Exemplar.SetValue("Intern.Filter", "", false);

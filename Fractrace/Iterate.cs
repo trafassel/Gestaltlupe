@@ -96,9 +96,29 @@ namespace Fractrace
         }
 
 
+
+
         protected int width = 0;
 
+        public int Width
+        {
+            get
+            {
+                return width;
+            }
+        }
+
+
         protected int height = 0;
+
+
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+        }
 
 
         public Iterate()
@@ -339,7 +359,8 @@ namespace Fractrace
                     }
                     System.Diagnostics.Debug.WriteLine("Iter ends");
                     mStart = false;
-                    mStarter.ComputationEnds();
+                  //  if(!mAbort)
+                      mStarter.ComputationEnds();
                 }
                 // Endereignis aufrufen
             }
@@ -456,8 +477,8 @@ namespace Fractrace
             Random rand = new Random();
             maxUpdateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
             double[] col = null;
-            double xd, yd, zd, zzd;
-            double x, y, z, zz;
+            double xd, yd, zd;
+            double x, y, z;
             double dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd") * screensize;
             act_val = act_val.Clone();
             Formulas formulas = new Formulas(PData);
@@ -516,7 +537,6 @@ namespace Fractrace
             jy = ParameterDict.Exemplar.GetDouble("Formula.Static.jy");
             jz = ParameterDict.Exemplar.GetDouble("Formula.Static.jz");
             jzz = ParameterDict.Exemplar.GetDouble("Formula.Static.jzz");
-            act_val.end_tupel.zz = act_val.start_tupel.zz = ParameterDict.Exemplar.GetDouble("Formula.zz");
 
             // Innenbereich
             int minCycle = (int)ParameterDict.Exemplar.GetDouble("Formula.Static.MinCycle");
@@ -525,7 +545,6 @@ namespace Fractrace
 
             // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
             int cycleAdd = 128;
-            int colour_type = 0;
 
             wix = act_val.arc.x;
             wiy = act_val.arc.y;
@@ -536,8 +555,7 @@ namespace Fractrace
             xd = (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
             yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
             zd = (act_val.end_tupel.z - act_val.start_tupel.z) / (MAXZ_ITER - MINZ_ITER);
-            zzd = (act_val.end_tupel.zz - act_val.start_tupel.zz) / (MAXZ_ITER - MINZ_ITER);
-
+           
             if (mOldData != null)
             {
                 yd = yd / (mUpdateCount);
@@ -581,7 +599,6 @@ namespace Fractrace
 
             // Start der Iteration in der Reihenfolge: z,x,y (y entspricht der Tiefe)
             z = act_val.end_tupel.z + zd;
-            zz = act_val.end_tupel.zz + zzd;
 
             for (zschl = (int)(MAXZ_ITER); zschl >= (MINZ_ITER); zschl -= 1)
             {
@@ -593,7 +610,6 @@ namespace Fractrace
 
                     System.Windows.Forms.Application.DoEvents();
                     z = act_val.end_tupel.z - (double)zd * (MAXZ_ITER - zschl);
-                    zz = act_val.end_tupel.zz - (double)zzd * (MAXZ_ITER - zschl);
 
                     bool minYDetected = false;
                     for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += 1)
@@ -706,14 +722,14 @@ namespace Fractrace
                                             return;
                                         }
                                         if ((GData.Picture)[xx, yy] == 0)
-                                            usedCycles = formulas.Rechne(x, y, z, zz, zyklen,
+                                            usedCycles = formulas.Rechne(x, y, z, 0, zyklen,
                                                   wix, wiy, wiz,
                                                   jx, jy, jz, jzz, formula, inverse);
 
                                         if ((GData.Picture)[xx, yy] == 2)
                                         {// Invers rechnen
                                             inverse = true;
-                                            usedCycles = formulas.Rechne(x, y, z, zz, minCycle,
+                                            usedCycles = formulas.Rechne(x, y, z, 0, minCycle,
                                                   wix, wiy, wiz,
                                                   jx, jy, jz, jzz, formula, inverse);
                                         }
@@ -732,7 +748,6 @@ namespace Fractrace
                                             vInfo.i = x;
                                             vInfo.j = y;
                                             vInfo.k = z;
-                                            vInfo.l = zz;
 
                                             cycleAdd = 1024;
                                             if (minCycle != 51 && minCycle >= 0)
@@ -741,9 +756,8 @@ namespace Fractrace
                                             }
                                             if (isYborder)
                                             { // es liegt Schnitt mit Begrenzung vor
-                                                colour_type = 0; // COL; // Farbige Darstellung
 
-                                                fa1 = formulas.Rechne(x, y, z, zz, zyklen + cycleAdd,
+                                                fa1 = formulas.Rechne(x, y, z, 0, zyklen + cycleAdd,
                                                  wix, wiy, wiz,
                                                  jx, jy, jz, jzz, formula, false);
 
@@ -767,22 +781,21 @@ namespace Fractrace
                                             }
                                             else
                                             {// innerer Punkt
-                                                colour_type = 1; // GREY;
 
                                                 if (inverse)
                                                 {
                                                     
                                                         if (IsSmallPreview())
                                                         {
-                                                            fa1 = formulas.RayCastAt(minCycle, x, y, z, zz,
-                                                           xd, yd, zd, zzd,
+                                                            fa1 = formulas.RayCastAt(minCycle, x, y, z, 0,
+                                                           xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
                                                         else
                                                         {
-                                                            fa1 = formulas.FixPoint(minCycle, x, y, z, zz,
-                                                           xd, yd, zd, zzd,
+                                                            fa1 = formulas.FixPoint(minCycle, x, y, z, 0,
+                                                           xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
@@ -795,15 +808,15 @@ namespace Fractrace
 
                                                         if (IsSmallPreview())
                                                         {
-                                                            fa1 = formulas.RayCastAt(zyklen, x, y, z, zz,
-                                   xd, yd, zd, zzd,
+                                                            fa1 = formulas.RayCastAt(zyklen, x, y, z, 0,
+                                   xd, yd, zd, 0,
                                    wix, wiy, wiz,
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
                                                         else
                                                         {
-                                                            fa1 = formulas.FixPoint(zyklen, x, y, z, zz,
-                                     xd, yd, zd, zzd,
+                                                            fa1 = formulas.FixPoint(zyklen, x, y, z, 0,
+                                     xd, yd, zd, 0,
                                      wix, wiy, wiz,
                                      jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                             fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;

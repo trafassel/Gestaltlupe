@@ -156,11 +156,9 @@ namespace Fractrace
             mParameter.start_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Min.x");
             mParameter.start_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Min.y");
             mParameter.start_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            mParameter.start_tupel.zz = ParameterDict.Exemplar.GetDouble("Border.Min.zz");
             mParameter.end_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Max.x");
             mParameter.end_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Max.y");
             mParameter.end_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            mParameter.start_tupel.zz = ParameterDict.Exemplar.GetDouble("Border.Max.zz");
             mParameter.arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
             mParameter.arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
             mParameter.arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
@@ -275,9 +273,7 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-           // if (Form1.PublicForm.dontActivateRender)
-           //     return;
-
+          
             if (!mPreviewMode || ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");

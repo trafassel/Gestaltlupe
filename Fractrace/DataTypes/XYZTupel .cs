@@ -9,7 +9,7 @@ namespace Fractrace.DataTypes
         public double x = 0;
         public double y = 0;
         public double z = 0;
-        public double zz = 0;
+    //    public double zz = 0;
         public void print() { }
 
 

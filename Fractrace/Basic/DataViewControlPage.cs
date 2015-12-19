@@ -15,13 +15,7 @@ namespace Fractrace.Basic
     /// </summary>
     public partial class DataViewControlPage : UserControl
     {
-
-
-        /// <summary>
-        /// Parent Control.
-        /// </summary>
-        protected DataViewControl mParent = null;
-
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataViewControlPage"/> class.
@@ -29,68 +23,48 @@ namespace Fractrace.Basic
         public DataViewControlPage(DataViewControl parent)
         {
             InitializeComponent();
-            mParent = parent;
+            _parent = parent;
         }
 
+        /// <summary>
+        /// Parent Control.
+        /// </summary>
+        protected DataViewControl _parent = null;
 
         /// <summary>
         /// Gets the unique string of the names of all entries.
-        ///  This property can be used to test, if this page contain all elements of the category.
+        /// This property can be used to test, if this page contain all elements of the category.
         /// </summary>
         /// <value>The node hash.</value>
-        public string NodeHash
-        {
-            get
-            {
-                return mNodeHash;
-            }
-        }
-
-
+        public string NodeHash { get { return _nodeHash; } }
         /// <summary>
         /// Intern access to NodeHash
         /// </summary>
-        protected string mNodeHash = "";
-
+        protected string _nodeHash = "";
 
         /// <summary>
         /// Gets the unique string of the names and values of all entries.
         /// This property can be used to test if all values are up to date.
         /// </summary>
         /// <value>The node value hash.</value>
-        public string NodeValueHash
-        {
-            get
-            {
-                return mNodeValueHash;
-            }
-        }
-
-
-        /// <summary>
-        /// Intern access to NodeValueHash
-        /// </summary>
-        protected string mNodeValueHash = "";
-
-
-        /// <summary>
-        /// The corresponding parameter category.
-        /// </summary>
-        protected string mCategory = "";
-
+        public string NodeValueHash { get { return _nodeValueHash; } }
+        /// <summary>Intern access to NodeValueHash</summary>
+        protected string _nodeValueHash = "";
 
         /// <summary>
         /// Gets the parameter category which corresponds to the subentries.
         /// </summary>
         /// <value>The category.</value>
-        public string Category
-        {
-            get
-            {
-                return mCategory;
-            }
-        }
+        public string Category { get { return _category; } }
+        /// <summary>The corresponding parameter category.</summary>
+        protected string _category = "";
 
+        /// <summary>
+        /// Gets the expected height of this control.
+        /// </summary>
+        /// <value>The height of the computed.</value>
+        public int ComputedHeight { get { return _computedHeight; } }
+        protected int _computedHeight = 1200;
 
         /// <summary>
         /// Control ist filled with all entries which corresponds to the given category.
@@ -100,15 +74,15 @@ namespace Fractrace.Basic
         {
             this.Dock = DockStyle.Fill;
 
-            mCategory = category;
-            mNodeHash = ParameterDict.Exemplar.GetHashOfName(category);
-            mNodeValueHash = ParameterDict.Exemplar.GetHash(category);
+            _category = category;
+            _nodeHash = ParameterDict.Exemplar.GetHashOfName(category);
+            _nodeValueHash = ParameterDict.Exemplar.GetHash(category);
 
             // Contain the edit entries before adding to the control
             List<DataViewElement> oldElements = new List<DataViewElement>();
 
             this.SuspendLayout();
-            mComputedHeight = 0;
+            _computedHeight = 0;
             bool elementAdded = false;
             foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
             {
@@ -122,10 +96,10 @@ namespace Fractrace.Basic
                         {
                             DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName),
                                 ParameterDict.Exemplar.GetDescription(parameterName), true);
-                            dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
+                            dElement.ElementChanged += new ElementChangedDelegate(_parent.dElement_ElementChanged);
                             oldElements.Add(dElement);
                             dElement.TabIndex = oldElements.Count;
-                            mComputedHeight += DataViewElementFactory.DefaultHeight;
+                            _computedHeight += DataViewElementFactory.DefaultHeight;
                             elementAdded = true;
                         }
                     }
@@ -137,7 +111,6 @@ namespace Fractrace.Basic
             string oldCategory = "";
             if (!elementAdded)
             {
-
                 foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
                 {
                     string parameterName = entry.Key;
@@ -152,19 +125,17 @@ namespace Fractrace.Basic
                                 DataViewElement helement = DataViewElementFactory.Create(currentCategory, "", "Headline", "", false);
                                 oldElements.Add(helement);
                                 oldCategory = currentCategory;
-                                mComputedHeight += DataViewElementFactory.DefaultHeight;
+                                _computedHeight += DataViewElementFactory.DefaultHeight;
                             }
                         }
                         DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName), ParameterDict.Exemplar.GetDescription(parameterName), true);
-                        dElement.ElementChanged += new ElementChangedDelegate(mParent.dElement_ElementChanged);
+                        dElement.ElementChanged += new ElementChangedDelegate(_parent.dElement_ElementChanged);
                         oldElements.Add(dElement);
                         dElement.TabIndex = oldElements.Count;
-                        mComputedHeight += DataViewElementFactory.DefaultHeight;
+                        _computedHeight += DataViewElementFactory.DefaultHeight;
                     }
                 }
             }
-
-
             for (int i = oldElements.Count - 1; i >= 0; i--)
             {
                 DataViewElement dElement = oldElements[i];
@@ -174,25 +145,8 @@ namespace Fractrace.Basic
         }
 
 
-        protected int mComputedHeight = 1200;
-
-
-        /// <summary>
-        /// Gets the expected height of this control.
-        /// </summary>
-        /// <value>The height of the computed.</value>
-        public int ComputedHeight
-        {
-            get
-            {
-                return mComputedHeight;
-            }
-        }
-
-
         public void UpdateElements()
         {
-
             foreach (UserControl subControl in Controls)
             {
                 if (subControl is DataViewElement)
@@ -211,14 +165,14 @@ namespace Fractrace.Basic
         /// <param name="category">The category.</param>
         public bool IterateElements()
         {
-            string newNodeHash = ParameterDict.Exemplar.GetHashOfName(mCategory);
-            string newNodeValueHash = ParameterDict.Exemplar.GetHash(mCategory);
-            if (newNodeHash != mNodeHash)
+            string newNodeHash = ParameterDict.Exemplar.GetHashOfName(_category);
+            string newNodeValueHash = ParameterDict.Exemplar.GetHash(_category);
+            if (newNodeHash != _nodeHash)
             { // At least one entry is added or deleted, so everything must new created 
-                Create(mCategory);
+                Create(_category);
                 return true;
             }
-            if (newNodeValueHash != mNodeValueHash)
+            if (newNodeValueHash != _nodeValueHash)
             { // At least one value has changed, so each subcontrol has to update itself 
                 foreach (UserControl subControl in Controls)
                 {
@@ -228,15 +182,12 @@ namespace Fractrace.Basic
                         dataView.UpdateElements();
                     }
                 }
-                mNodeValueHash = ParameterDict.Exemplar.GetHash(mCategory);
+                _nodeValueHash = ParameterDict.Exemplar.GetHash(_category);
                 return false;
             }
-
-            return false;
             // If nothing has changed, nothing has to update.
-
+            return false;
         }
-
 
 
     }

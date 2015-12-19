@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Fractrace.Basic
@@ -29,13 +24,13 @@ namespace Fractrace.Basic
         /// <summary>
         /// Some created pages for fast display on node selection. Key is the category.
         /// </summary>
-        protected Dictionary<string, DataViewControlPage> mPages = new Dictionary<string, DataViewControlPage>();
+        protected Dictionary<string, DataViewControlPage> _pages = new Dictionary<string, DataViewControlPage>();
 
 
         /// <summary>
         /// Current choosen category (of selected node).
         /// </summary>
-        protected string oldCategory = "";
+        protected string _oldCategory = "";
 
 
         /// <summary>
@@ -49,9 +44,9 @@ namespace Fractrace.Basic
                 return;
             this.SuspendLayout();
             DataViewControlPage newPage = null;
-            if (mPages.ContainsKey(category))
+            if (_pages.ContainsKey(category))
             {
-                newPage = mPages[category];
+                newPage = _pages[category];
                 if (newPage.NodeValueHash == ParameterDict.Exemplar.GetHashOfName(category))
                 {
                     newPage.UpdateElements();
@@ -61,31 +56,29 @@ namespace Fractrace.Basic
                 {
                     newPage = new DataViewControlPage(this);
                     newPage.Create(category);
-                    mPages[category] = newPage;
+                    _pages[category] = newPage;
                 }
             }
             else
             {
                 newPage = new DataViewControlPage(this);
                 newPage.Create(category);
-                mPages[category] = newPage;
+                _pages[category] = newPage;
             }
-            if (oldCategory != category)
+            if (_oldCategory != category)
             {
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(newPage);
                 this.Height = newPage.ComputedHeight;
             }
             this.ResumeLayout(true);
-            oldCategory = category;
+            _oldCategory = category;
         }
 
 
         /// <summary>
         /// SubElement has changed.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
         public void dElement_ElementChanged(string name, string value)
         {
             if (ElementChanged != null)
@@ -94,9 +87,10 @@ namespace Fractrace.Basic
 
 
         /// <summary>
-        /// Subentry change its value.
+        /// Called if a subentry value changed.
         /// </summary>
         public event ElementChangedDelegate ElementChanged;
+
 
     }
 }
