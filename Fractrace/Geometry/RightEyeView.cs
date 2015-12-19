@@ -6,38 +6,41 @@ using Fractrace.Basic;
 
 namespace Fractrace.Geometry
 {
+
+    /// <summary>
+    /// Used for stereo rendering.
+    /// </summary>
     class RightEyeView : Transform3D
     {
 
 
-        protected double mEyeDistance = 0.2;
+        protected double _eyeDistance = 0.2;
 
         /// <summary>
         /// Um diesen Wert wird die Ansicht nach rechts verschoben.
         /// </summary>
-        protected double xOffset = 0;
+        protected double _xOffset = 0;
 
-        protected double yCenter = 0;
+        protected double _yCenter = 0;
 
-        protected double xCenter = 0;
+        protected double _xCenter = 0;
 
 
         /* Einbeziehung des Winkels  */
         // Winkel, um den der Blick nach links gedreht ist
-        protected double mStereoAngle = 4.3 * (Math.PI / 180.0);
+        protected double _stereoAngle = 4.3 * (Math.PI / 180.0);
 
 
         /// <summary>
-        /// Initialisierung, hier können die Variablenwerte aus den globalen Einstellungen
-        /// geholt werden.
+        /// Set fields from current ParameterDict.Exemplar.
         /// </summary>
         public override void Init()
         {
-            mEyeDistance = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.EyeDistance");
-            mStereoAngle = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.Angle") * (Math.PI / 180.0);
-            xOffset = mEyeDistance * (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
-            xCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
-            yCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y"));
+            _eyeDistance = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.EyeDistance");
+            _stereoAngle = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.Angle") * (Math.PI / 180.0);
+            _xOffset = _eyeDistance * (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
+            _xCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
+            _yCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y"));
 
         }
 
@@ -49,22 +52,22 @@ namespace Fractrace.Geometry
         /// <returns></returns>
         public override Vec3 Transform(Vec3 input)
         {
-
             double x = input.X;
             double y = input.Y;
             double z = input.Z;
 
-            x -= xCenter; y -= yCenter;
-            double re = Math.Cos(mStereoAngle);
-            double im = Math.Sin(mStereoAngle);
+            x -= _xCenter; y -= _yCenter;
+            double re = Math.Cos(_stereoAngle);
+            double im = Math.Sin(_stereoAngle);
             double a = re * x - im * y;
             y = re * y + im * x;
             x = a;
-            x += xCenter; y += yCenter;
-            x += mEyeDistance;
+            x += _xCenter; y += _yCenter;
+            x += _eyeDistance;
 
             return new Vec3(x, y, z);
         }
+
 
     }
 }

@@ -351,15 +351,15 @@ namespace Fractrace
                 double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
                 double phi = Math.Atan2(y, x);
 
-                vecRot.x = y;
-                vecRot.y = x;
-                vecRot.z = z;
-                vecRot.angle = theta;
+                vecRot.X = y;
+                vecRot.Y = x;
+                vecRot.Z = z;
+                vecRot.Angle = theta;
                 //   vecRot.angle = 0.03;
-                vecRot.x = x;
-                vecRot.y = z;
-                vecRot.z = y;
-                vecRot.angle = phi;
+                vecRot.X = x;
+                vecRot.Y = z;
+                vecRot.Z = y;
+                vecRot.Angle = phi;
 
                 /*
                 vecRot.x = 0.4;

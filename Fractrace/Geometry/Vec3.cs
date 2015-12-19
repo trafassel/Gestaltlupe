@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Fractrace.Geometry
 {
 
     /// <summary>
-    /// Ein Punkt im 3D-Raum
+    /// A point with 3D coordinates.
     /// </summary>
     public class Vec3
     {
@@ -14,6 +13,8 @@ namespace Fractrace.Geometry
         public Vec3()
         {
         }
+
+
         public Vec3(double x, double y, double z)
         {
             this.X = x;
@@ -38,12 +39,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Return distance to other.
+        /// Return distance to other point.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
         public double Dist(Vec3 other)
         {
             return Diff(other).Norm;
@@ -51,10 +48,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Zieht other ab und liefert die Differenz.
+        /// Return path to other point as vector.
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
         public Vec3 Diff(Vec3 other)
         {
             return (new Vec3(this.X - other.X, Y - other.Y, Z - other.Z));
@@ -62,7 +57,7 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Liefert den Abstand zum Ursprung.
+        /// Return distance to (0,0,0).
         /// </summary>
         /// <returns></returns>
         public double Norm
@@ -75,7 +70,7 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Multipliziert jeden Eintrag mit t.
+        /// Multiply each component with t.
         /// </summary>
         /// <param name="t"></param>
         public Vec3 Mult(double t)
@@ -87,8 +82,6 @@ namespace Fractrace.Geometry
         /// <summary>
         /// + Operator
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
         public Vec3 Sum(Vec3 other)
         {
             return new Vec3(X + other.X, Y + other.Y, Z + other.Z);
@@ -96,10 +89,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Ein anderer Vektor wird zu diesem addiert.
+        /// Add point other.
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
         public void Add(Vec3 other)
         {
             X += other.X;
@@ -109,10 +100,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Zieht die Einträge eines anderen Vektors von diesem Verktor ab.
+        /// Subtract componentwise.
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
         public void Subtract(Vec3 other)
         {
             X -= other.X;
@@ -122,10 +111,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Zieht die Einträge eines anderen Vektors von diesem Verktor ab.
+        /// Subtract componentwise.
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
         public void Subtract(double x, double y, double z)
         {
             X -= x;
@@ -135,7 +122,7 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Alle Einträge werden nornmiert.
+        /// Normalize all entries.
         /// </summary>
         public void Normalize()
         {

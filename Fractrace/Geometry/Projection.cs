@@ -4,9 +4,12 @@ using System.Text;
 
 namespace Fractrace.Geometry
 {
+
+    /// <summary>
+    /// Use camera projection.
+    /// </summary>
     public class Projection : Transform3D
     {
-
 
         public Projection(Vec3 camera, Vec3 viewPoint)
         {

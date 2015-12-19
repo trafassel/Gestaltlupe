@@ -7,6 +7,9 @@ using Fractrace.Basic;
 namespace Fractrace.Geometry
 {
 
+    /// <summary>
+    /// Used for compatibility to old Gestallupe scenes.
+    /// </summary>
     public class Rotation : Transform3D
     {
 
@@ -133,5 +136,7 @@ namespace Fractrace.Geometry
 
             return new Vec3(x, y, z);
         }
+
+
     }
 }

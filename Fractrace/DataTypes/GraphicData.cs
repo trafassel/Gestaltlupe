@@ -27,6 +27,9 @@ namespace Fractrace.DataTypes
     }
 
 
+    /// <summary>
+    /// Information of computed surface.
+    /// </summary>
     public class GraphicData
     {
 

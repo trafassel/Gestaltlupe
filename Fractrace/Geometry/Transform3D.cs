@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Fractrace.Geometry
 {
+
+    /// <summary>
+    /// Base class for used transformations.
+    /// </summary>
     public class Transform3D
     {
 
@@ -14,22 +15,17 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Initialisierung, hier können die Variablenwerte aus den globalen Einstellungen
-        /// geholt werden.
+        /// Initialisation from current global parameters.
         /// </summary>
         public virtual void Init()
         {
-
-
         }
 
 
 
         /// <summary>
-        /// Dies ist einer reverse Transformation.
+        /// Apply transformation.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         public virtual Vec3 Transform(Vec3 input)
         {
             Vec3 p1 = new Vec3(input);

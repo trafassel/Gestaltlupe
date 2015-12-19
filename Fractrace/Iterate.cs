@@ -507,6 +507,7 @@ namespace Fractrace
             formulas.Transforms.Add(rotView);
             // ende Umschauen
 
+            // TODO: only use in compatibility mode.
             Rotation rot = new Rotation();
             rot.Init();
             formulas.Transforms.Add(rot);

@@ -28,14 +28,14 @@ namespace Fractrace.Geometry
         /// <param name="iter">The iter.</param>
         public void Init(Iterate iter)
         {
-            mIterate = iter;
+            _iterate = iter;
         }
 
 
         /// <summary>
         /// Center of the area to display.
         /// </summary>
-        protected Vec3 mCenter = new Vec3();
+        protected Vec3 _center = new Vec3();
 
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Fractrace.Geometry
         }
 
 
-        protected Iterate mIterate = null;
+        protected Iterate _iterate = null;
 
     }
 }

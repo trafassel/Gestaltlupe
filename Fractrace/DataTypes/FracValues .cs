@@ -7,6 +7,9 @@ using Fractrace.Basic;
 namespace Fractrace.DataTypes
 {
 
+    // Compatibility entries to original Fractrace.
+    // TODO: replace start_tupel, end_tupel with center and size.
+
     public class FracValues
     {
 

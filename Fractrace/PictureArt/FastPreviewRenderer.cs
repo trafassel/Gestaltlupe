@@ -13,7 +13,7 @@ namespace Fractrace.PictureArt
 
 
     /// <summary>
-    /// Gestaltlupe default Renderer.
+    /// Gestaltlupe default Renderer for fast previews.
     /// </summary>
     public class FastPreviewRenderer : ScienceRendererBase
     {
@@ -32,13 +32,13 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Coordninate of the bottom, left, front point of the Boundingbox (in original Coordinates).  
         /// </summary>
-        private Vec3 minPoint = new Vec3(0, 0, 0);
+        private Vec3 _minPoint = new Vec3(0, 0, 0);
 
 
         /// <summary>
         /// Coordninate of the top, right, backside point of the Boundingbox (in original Coordinates).  
         /// </summary>
-        private Vec3 maxPoint = new Vec3(0, 0, 0);
+        private Vec3 _maxPoint = new Vec3(0, 0, 0);
 
 
 
@@ -258,12 +258,12 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected void CreateStatisticInfo()
         {
-            minPoint.X = Double.MaxValue;
-            minPoint.Y = Double.MaxValue;
-            minPoint.Z = Double.MaxValue;
-            maxPoint.X = Double.MinValue;
-            maxPoint.Y = Double.MinValue;
-            maxPoint.Z = Double.MinValue;
+            _minPoint.X = Double.MaxValue;
+            _minPoint.Y = Double.MaxValue;
+            _minPoint.Z = Double.MaxValue;
+            _maxPoint.X = Double.MinValue;
+            _maxPoint.Y = Double.MinValue;
+            _maxPoint.Z = Double.MinValue;
             for (int i = 0; i < pData.Width; i++)
             {
                 for (int j = 0; j < pData.Height; j++)
@@ -272,18 +272,18 @@ namespace Fractrace.PictureArt
                     if (pInfo != null)
                     {
                         Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-                        if (coord.X < minPoint.X)
-                            minPoint.X = coord.X;
-                        if (coord.Y < minPoint.Y)
-                            minPoint.Y = coord.Y;
-                        if (coord.Z < minPoint.Z)
-                            minPoint.Z = coord.Z;
-                        if (coord.X > maxPoint.X)
-                            maxPoint.X = coord.X;
-                        if (coord.Y > maxPoint.Y)
-                            maxPoint.Y = coord.Y;
-                        if (coord.Z > maxPoint.Z)
-                            maxPoint.Z = coord.Z;
+                        if (coord.X < _minPoint.X)
+                            _minPoint.X = coord.X;
+                        if (coord.Y < _minPoint.Y)
+                            _minPoint.Y = coord.Y;
+                        if (coord.Z < _minPoint.Z)
+                            _minPoint.Z = coord.Z;
+                        if (coord.X > _maxPoint.X)
+                            _maxPoint.X = coord.X;
+                        if (coord.Y > _maxPoint.Y)
+                            _maxPoint.Y = coord.Y;
+                        if (coord.Z > _maxPoint.Z)
+                            _maxPoint.Z = coord.Z;
 
                     }
                 }
@@ -365,85 +365,6 @@ namespace Fractrace.PictureArt
                     }
                 }
             }
-        }
-
-
-
-
-        /// <summary>
-        /// Der Schlagschatten wird erzeugt.
-        /// </summary>
-        protected void CreateSharpShadow()
-        {
-            // Erst ab 4 Pixel handelt es sich um einen Schlagschatten
-            int shadowIntensityCount = 4;
-            // Je höher, desto größer die Rechenzeit und desto genau die Schlagschattenberechnung.
-            int shadowCorrectness = 100;
-            double rayDist = minPoint.Dist(maxPoint);
-            sharpShadow = new double[pData.Width, pData.Height];
-            double[,] sharpTempShadow = new double[pData.Width, pData.Height];
-
-            for (int i = 0; i < pData.Width; i++)
-            {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    picInfo[i, j] = 0;
-                    sharpShadow[i, j] = 0;
-                }
-            }
-
-            Vec3 normal = null;
-            for (int i = 0; i < pData.Width; i++)
-            {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    PixelInfo pInfo = pData.Points[i, j];
-                    if (pInfo != null)
-                    {
-                        normal = pInfo.Normal;
-                        sharpShadow[i, j] = 0;
-                        Vec3 coord = formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
-                        int sharpShadowIntensity = IsInSharpShadow(coord, lightRay, rayDist, pInfo.IsInside, shadowIntensityCount, shadowCorrectness);
-                        sharpShadow[i, j] = sharpShadowIntensity / ((double)shadowIntensityCount);
-                    }
-                }
-            }
-
-            double[,] sShad1 = sharpShadow;
-            double[,] sShad2 = sharpTempShadow;
-
-            for (int m = 0; m < 2; m++)
-            {
-
-                for (int i = 0; i < pData.Width; i++)
-                {
-                    for (int j = 0; j < pData.Height; j++)
-                    {
-                        double neighborsFound = 0;
-                        double sumNeighbors = 0;
-                        for (int k = -1; k <= 1; k++)
-                        {
-                            for (int l = -1; l <= 1; l++)
-                            {
-                                int posX = i + k;
-                                int posY = j + l;
-                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
-                                {
-                                    sumNeighbors += sShad1[posX, posY];
-                                    neighborsFound++;
-                                }
-                            }
-                        }
-                        if (neighborsFound > 0)
-                            sShad2[i, j] = 0.4 * sShad1[i, j] + 0.6 * sumNeighbors / neighborsFound;
-                    }
-                }
-
-                sShad1 = sharpTempShadow;
-                sShad2 = sharpShadow;
-            }
-            //sharpShadow
-
         }
 
 
@@ -1332,7 +1253,7 @@ namespace Fractrace.PictureArt
                                         {
                                             double dist = pInfo.Coord.Dist(pInfo2.Coord);
 
-                                            double dGlobal = maxPoint.Dist(minPoint);
+                                            double dGlobal = _maxPoint.Dist(_minPoint);
                                             dGlobal /= 1500;
                                             if (dist < dGlobal)
                                                 amount = 1.0;
@@ -1585,7 +1506,7 @@ namespace Fractrace.PictureArt
                                             {
                                                 double dist = pInfo.Coord.Dist(pInfo2.Coord);
 
-                                                double dGlobal = maxPoint.Dist(minPoint);
+                                                double dGlobal = _maxPoint.Dist(_minPoint);
                                                 dGlobal /= 1500;
                                                 if (dist < dGlobal)
                                                     amount = 1.0;

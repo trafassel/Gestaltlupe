@@ -13,13 +13,20 @@ namespace Fractrace.Geometry
         /// </summary>
         public VecRotation()
         {
-            x = y = 0;
-            z = 1;
-            angle = 0;
+            X = Y = 0;
+            Z = 1;
+            Angle = 0;
         }
 
 
-
+        /// <summary>Winkel in Bogenmaß</summary>	
+        public double Angle = 0;
+        /// <summary>x-Komponente der Drehachse</summary>	
+        public double X = 0;
+        /// <summary>y-Komponente der Drehachse</summary>	
+        public double Y = 0;
+        /// <summary>z-Komponente der Drehachse</summary>	
+        public double Z = 1;
 
 
         /// <summary>
@@ -34,15 +41,15 @@ namespace Fractrace.Geometry
         /// <returns>translated point</returns>
         public Vec3 getTransform(Vec3 p1)
         {
-            double wh = angle;
-            double xh = x;
-            double yh = y;
-            double zh = z;
-            double s = Math.Sin(angle / 2);
-            xh = x * s;
-            yh = y * s;
-            zh = z * s;
-            wh = Math.Cos(angle / 2);
+            double wh = Angle;
+            double xh = X;
+            double yh = Y;
+            double zh = Z;
+            double s = Math.Sin(Angle / 2);
+            xh = X * s;
+            yh = Y * s;
+            zh = Z * s;
+            wh = Math.Cos(Angle / 2);
             Vec3 p2 = new Vec3(0, 0, 0);
             p2.X = (double)(wh * wh * p1.X + 2 * yh * wh * p1.Z - 2 * zh * wh * p1.Y + xh * xh * p1.X + 2 * yh * xh * p1.Y + 2 * zh * xh * p1.Z - zh * zh * p1.X - yh * yh * p1.X);
             p2.Y = (double)(2 * xh * yh * p1.X + yh * yh * p1.Y + 2 * zh * yh * p1.Z + 2 * wh * zh * p1.X - zh * zh * p1.Y + wh * wh * p1.Y - 2 * xh * wh * p1.Z - xh * xh * p1.Y);
@@ -67,10 +74,10 @@ namespace Fractrace.Geometry
             double s3 = Math.Sin(bank / 2);
             double c1c2 = c1 * c2;
             double s1s2 = s1 * s2;
-            angle = (double)(c1c2 * c3 + s1s2 * s3);
-            x = (double)(c1c2 * s3 - s1s2 * c3);
-            y = (double)(c1 * s2 * c3 + s1 * c2 * s3);
-            z = (double)(s1 * c2 * c3 - c1 * s2 * s3);
+            Angle = (double)(c1c2 * c3 + s1s2 * s3);
+            X = (double)(c1c2 * s3 - s1s2 * c3);
+            Y = (double)(c1 * s2 * c3 + s1 * c2 * s3);
+            Z = (double)(s1 * c2 * c3 - c1 * s2 * s3);
             toAxisAngle();
         }
 
@@ -86,26 +93,22 @@ namespace Fractrace.Geometry
         {
             toQuaternion();
             if (r == null) return;
-            double qax = x;
-            double qay = y;
-            double qaz = z;
-            double qaw = angle;
-            double qbx;
-            double qby;
-            double qbz;
-            double qbw;
-
-            double s = Math.Sin(r.angle / 2);
-            qbx = r.x * s;
-            qby = r.y * s;
-            qbz = r.z * s;
-            qbw = Math.Cos(r.angle / 2);
+            double qax = X;
+            double qay = Y;
+            double qaz = Z;
+            double qaw = Angle;
+           
+            double s = Math.Sin(r.Angle / 2);
+            double qbx = r.X * s;
+            double qby = r.Y * s;
+            double qbz = r.Z * s;
+            double qbw = Math.Cos(r.Angle / 2);
 
             // now multiply the quaternions
-            angle = (double)(qaw * qbw - qax * qbx - qay * qby - qaz * qbz);
-            x = (double)(qax * qbw + qaw * qbx + qay * qbz - qaz * qby);
-            y = (double)(qaw * qby - qax * qbz + qay * qbw + qaz * qbx);
-            z = (double)(qaw * qbz + qax * qby - qay * qbx + qaz * qbw);
+            Angle = (double)(qaw * qbw - qax * qbx - qay * qby - qaz * qbz);
+            X = (double)(qax * qbw + qaw * qbx + qay * qbz - qaz * qby);
+            Y = (double)(qaw * qby - qax * qbz + qay * qbw + qaz * qbx);
+            Z = (double)(qaw * qbz + qax * qby - qay * qbx + qaz * qbw);
             toAxisAngle();
         }
 
@@ -136,15 +139,15 @@ namespace Fractrace.Geometry
             double qbz = s1 * c2 * c3 - c1 * s2 * s3;
             // then convert axis-angle to quaternion if required
             toQuaternion();
-            double qax = x;
-            double qay = y;
-            double qaz = z;
-            double qaw = angle;
+            double qax = X;
+            double qay = Y;
+            double qaz = Z;
+            double qaw = Angle;
             // now multiply the quaternions
-            angle = (double)(qaw * qbw - qax * qbx - qay * qby - qaz * qbz);
-            x = (double)(qax * qbw + qaw * qbx + qay * qbz - qaz * qby);
-            y = (double)(qaw * qby - qax * qbz + qay * qbw + qaz * qbx);
-            z = (double)(qaw * qbz + qax * qby - qay * qbx + qaz * qbw);
+            Angle = (double)(qaw * qbw - qax * qbx - qay * qby - qaz * qbz);
+            X = (double)(qax * qbw + qaw * qbx + qay * qbz - qaz * qby);
+            Y = (double)(qaw * qby - qax * qbz + qay * qbw + qaz * qbx);
+            Z = (double)(qaw * qbz + qax * qby - qay * qbx + qaz * qbw);
             toAxisAngle();
         }
 
@@ -154,12 +157,12 @@ namespace Fractrace.Geometry
         /// </summary>
         protected void toAxisAngle()
         {
-            double s = Math.Sqrt(1 - angle * angle);
+            double s = Math.Sqrt(1 - Angle * Angle);
             if (Math.Abs(s) < 0.001) s = 1;
-            angle = (double)(2 * Math.Acos(angle));
-            x = (double)(x / s);
-            y = (double)(y / s);
-            z = (double)(z / s);
+            Angle = (double)(2 * Math.Acos(Angle));
+            X = (double)(X / s);
+            Y = (double)(Y / s);
+            Z = (double)(Z / s);
         }
 
 
@@ -168,13 +171,12 @@ namespace Fractrace.Geometry
         /// </summary>
         protected void toQuaternion()
         {
-            double s = Math.Sin(angle / 2);
-            x = (double)(x * s);
-            y = (double)(y * s);
-            z = (double)(z * s);
-            angle = (double)Math.Cos(angle / 2);
+            double s = Math.Sin(Angle / 2);
+            X = (double)(X * s);
+            Y = (double)(Y * s);
+            Z = (double)(Z * s);
+            Angle = (double)Math.Cos(Angle / 2);
         }
-
 
 
         /// <summary>
@@ -186,43 +188,36 @@ namespace Fractrace.Geometry
         public void toEuler(ref double heading, ref double attitude, ref double bank)
         {
             toQuaternion();
-            double w = angle;
+            double w = Angle;
             // Test nach:
             // http://www.euclideanspace.com/maths/geometry/rotations/euler/AndyGoldstein.htm
-            double test = 2 * w * y - 2 * x * z;
+            double test = 2 * w * Y - 2 * X * Z;
             if (test > 1)
             {
                 attitude = Math.Asin(1);
             }
             else
-                attitude = Math.Asin(2 * w * y - 2 * x * z);
+                attitude = Math.Asin(2 * w * Y - 2 * X * Z);
 
-            double test2 = 2 * w * z + 2 * x * y;
-            double test3 = w * w + x * x - y * y - z * z;
-            heading = Math.Atan2(2 * w * z + 2 * x * y, w * w + x * x - y * y - z * z);
-            test2 = 2 * w * x + 2 * y * z;
-            test3 = w * w - x * x - y * y + z * z;
+            double test2 = 2 * w * Z + 2 * X * Y;
+            double test3 = w * w + X * X - Y * Y - Z * Z;
+            heading = Math.Atan2(2 * w * Z + 2 * X * Y, w * w + X * X - Y * Y - Z * Z);
+            test2 = 2 * w * X + 2 * Y * Z;
+            test3 = w * w - X * X - Y * Y + Z * Z;
 
-            bank = Math.Atan2(2 * w * x + 2 * y * z, w * w - x * x - y * y + z * z);
+            bank = Math.Atan2(2 * w * X + 2 * Y * Z, w * w - X * X - Y * Y + Z * Z);
             toAxisAngle();
         }
 
         public void Normalize()
         {
-            double r = Math.Sqrt(x * x + y * y + z * z);
-            x = x / r;
-            y = y / r;
-            z = z / r;
+            double r = Math.Sqrt(X * X + Y * Y + Z * Z);
+            X = X / r;
+            Y = Y / r;
+            Z = Z / r;
         }
 
 
-        /// <summary>Winkel in Bogenmaß</summary>	
-        public double angle = 0;
-        /// <summary>x-Komponente der Drehachse</summary>	
-        public double x = 0;
-        /// <summary>y-Komponente der Drehachse</summary>	
-        public double y = 0;
-        /// <summary>z-Komponente der Drehachse</summary>	
-        public double z = 1;
+
     }
 }

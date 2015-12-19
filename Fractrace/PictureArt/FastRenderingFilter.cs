@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Fractrace.Basic;
+﻿using Fractrace.Basic;
 
 namespace Fractrace.PictureArt
 {
+
+    /// <summary>
+    /// Reset some time consuming render values. 
+    /// </summary>
     public class FastRenderingFilter:  ParameterDictFilter
     {
 
@@ -19,7 +17,6 @@ namespace Fractrace.PictureArt
             ParameterDict.Exemplar.SetValue("Renderer.ShadowNumber","11",false);
             ParameterDict.Exemplar.SetValue("Renderer.AmbientIntensity","0",false);
             ParameterDict.Exemplar.SetValue("Renderer.SmoothNormalLevel","3",false);
-
             ParameterDict.Exemplar.SetValue("Intern.Filter", "FastRenderingFilter", false);
         }
 

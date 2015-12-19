@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Fractrace.DataTypes
 {
+
+    /// <summary>
+    /// Surface Data.
+    /// </summary>
     public class PictureData
     {
 

@@ -40,10 +40,10 @@ namespace Fractrace.TomoGeometry {
           double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
           double phi = Math.Atan2(y, x);
 
-          vecRot.x = 0;
-          vecRot.y = 0;
-          vecRot.z = 1;
-          vecRot.angle = phi;
+          vecRot.X = 0;
+          vecRot.Y = 0;
+          vecRot.Z = 1;
+          vecRot.Angle = phi;
 
           Fractrace.Geometry.Vec3 pos = new Fractrace.Geometry.Vec3(x, y, z);
           Fractrace.Geometry.Vec3 newPos = vecRot.getTransform(pos);
@@ -113,16 +113,16 @@ namespace Fractrace.TomoGeometry {
             vecRot.y = -z;
             vecRot.z = -y;
           }*/
-          vecRot.x = z;
-          vecRot.y = 0;
-          vecRot.z = y;
+          vecRot.X = z;
+          vecRot.Y = 0;
+          vecRot.Z = y;
 
-          vecRot.angle = phi;
-          double vecr=Math.Sqrt(vecRot.x*vecRot.x+vecRot.y*vecRot.y+vecRot.z*vecRot.z);
+          vecRot.Angle = phi;
+          double vecr=Math.Sqrt(vecRot.X*vecRot.X+vecRot.Y*vecRot.Y+vecRot.Z*vecRot.Z);
           if (vecr != 0) {
-            vecRot.x /= vecr;
-            vecRot.y /= vecr;
-            vecRot.z /= vecr;
+            vecRot.X /= vecr;
+            vecRot.Y /= vecr;
+            vecRot.Z /= vecr;
           }
 
           Fractrace.Geometry.Vec3 pos = new Fractrace.Geometry.Vec3(x, y, z);
