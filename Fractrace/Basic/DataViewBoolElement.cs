@@ -12,7 +12,7 @@ namespace Fractrace.Basic
         {
             _cbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEdit.Controls.Add(_cbValue);
-            this._cbValue.Checked = ParameterDict.Exemplar.GetBool(_name);
+            this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
             this._cbValue.CheckedChanged += cbValue_CheckedChanged;
         }
 
@@ -24,7 +24,7 @@ namespace Fractrace.Basic
         /// <param name="e"></param>
         void cbValue_CheckedChanged(object sender, EventArgs e)
         {
-            ParameterDict.Exemplar.SetBool(_name, this._cbValue.Checked);
+            ParameterDict.Current.SetBool(_name, this._cbValue.Checked);
         }
 
 
@@ -33,7 +33,7 @@ namespace Fractrace.Basic
         /// </summary>
         public override void UpdateElements()
         {
-            this._cbValue.Checked = ParameterDict.Exemplar.GetBool(_name);
+            this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
         }
 
 

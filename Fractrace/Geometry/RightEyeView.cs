@@ -36,11 +36,11 @@ namespace Fractrace.Geometry
         /// </summary>
         public override void Init()
         {
-            _eyeDistance = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.EyeDistance");
-            _stereoAngle = ParameterDict.Exemplar.GetDouble("Transformation.Stereo.Angle") * (Math.PI / 180.0);
-            _xOffset = _eyeDistance * (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
-            _xCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.x") - ParameterDict.Exemplar.GetDouble("Border.Min.x"));
-            _yCenter = (ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y"));
+            _eyeDistance = ParameterDict.Current.GetDouble("Transformation.Stereo.EyeDistance");
+            _stereoAngle = ParameterDict.Current.GetDouble("Transformation.Stereo.Angle") * (Math.PI / 180.0);
+            _xOffset = _eyeDistance * (ParameterDict.Current.GetDouble("Border.Max.x") - ParameterDict.Current.GetDouble("Border.Min.x"));
+            _xCenter = (ParameterDict.Current.GetDouble("Border.Max.x") - ParameterDict.Current.GetDouble("Border.Min.x"));
+            _yCenter = (ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y"));
 
         }
 

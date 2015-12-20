@@ -18,7 +18,7 @@ namespace Fractrace.PictureArt {
     public static Renderer Create(PictureData pdata,Formulas formula) {
         Renderer retVal = null;
 
-      switch (ParameterDict.Exemplar["Composite.Renderer"]) {
+      switch (ParameterDict.Current["Composite.Renderer"]) {
 
         case "":
         case "PlasicRenderer":

@@ -85,13 +85,13 @@ namespace Fractrace
 
         protected void SetPictureBoxSize()
         {
-            double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
-            double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
+            double widthInPixel = ParameterDict.Current.GetDouble("View.Width");
+            double heightInPixel = ParameterDict.Current.GetDouble("View.Height");
             //ParameterDict.Exemplar["View.Deph"] = "800";
 
 
-            int maxSizeX = (int)(widthInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
-            int maxSizeY = (int)(heightInPixel * ParameterDict.Exemplar.GetDouble("View.Size"));
+            int maxSizeX = (int)(widthInPixel * ParameterDict.Current.GetDouble("View.Size"));
+            int maxSizeY = (int)(heightInPixel * ParameterDict.Current.GetDouble("View.Size"));
             if (maxx != maxSizeX || maxy != maxSizeY)
             {
                 maxx = maxSizeX;
@@ -141,10 +141,10 @@ namespace Fractrace
             iter = new Iterate(maxx, maxy, this, IsRightView);
             AssignParameters();
             iter.StartAsync(mParameter,
-                    ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),
+                    ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
-                    ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-                    ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    ParameterDict.Current.GetInt("Formula.Static.Formula"),
+                    ParameterDict.Current.GetBool("View.Perspective"));
 
         }
 
@@ -243,14 +243,14 @@ namespace Fractrace
         /// <summary>
         /// Wird aufgerufen, wenn die asynchrone Berechnung bendet wurde.
         /// </summary>
-        public void ComputationEnds()
+        public virtual void ComputationEnds()
         {
             if(iter==null || !iter.InAbort)
               this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
 
 
-        delegate void OneStepEndsDelegate();
+        public delegate void OneStepEndsDelegate();
 
 
         /// <summary>

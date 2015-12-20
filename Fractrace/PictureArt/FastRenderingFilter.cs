@@ -14,10 +14,10 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override void Filter()
         {
-            ParameterDict.Exemplar.SetValue("Renderer.ShadowNumber","11",false);
-            ParameterDict.Exemplar.SetValue("Renderer.AmbientIntensity","0",false);
-            ParameterDict.Exemplar.SetValue("Renderer.SmoothNormalLevel","3",false);
-            ParameterDict.Exemplar.SetValue("Intern.Filter", "FastRenderingFilter", false);
+            ParameterDict.Current.SetValue("Renderer.ShadowNumber","11",false);
+            ParameterDict.Current.SetValue("Renderer.AmbientIntensity","0",false);
+            ParameterDict.Current.SetValue("Renderer.SmoothNormalLevel","3",false);
+            ParameterDict.Current.SetValue("Intern.Filter", "FastRenderingFilter", false);
         }
 
 

@@ -75,8 +75,8 @@ namespace Fractrace.Basic
             this.Dock = DockStyle.Fill;
 
             _category = category;
-            _nodeHash = ParameterDict.Exemplar.GetHashOfName(category);
-            _nodeValueHash = ParameterDict.Exemplar.GetHash(category);
+            _nodeHash = ParameterDict.Current.GetHashOfName(category);
+            _nodeValueHash = ParameterDict.Current.GetHash(category);
 
             // Contain the edit entries before adding to the control
             List<DataViewElement> oldElements = new List<DataViewElement>();
@@ -84,7 +84,7 @@ namespace Fractrace.Basic
             this.SuspendLayout();
             _computedHeight = 0;
             bool elementAdded = false;
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
             {
                 string parameterName = entry.Key;
                 if (parameterName.StartsWith(category+".") && ParameterDict.HasControl(parameterName))
@@ -94,8 +94,8 @@ namespace Fractrace.Basic
                         string tempName = parameterName.Substring(category.Length + 1);
                         if (!tempName.Contains("."))
                         {
-                            DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName),
-                                ParameterDict.Exemplar.GetDescription(parameterName), true);
+                            DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Current.GetDatatype(parameterName),
+                                ParameterDict.Current.GetDescription(parameterName), true);
                             dElement.ElementChanged += new ElementChangedDelegate(_parent.dElement_ElementChanged);
                             oldElements.Add(dElement);
                             dElement.TabIndex = oldElements.Count;
@@ -111,7 +111,7 @@ namespace Fractrace.Basic
             string oldCategory = "";
             if (!elementAdded)
             {
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
                 {
                     string parameterName = entry.Key;
                     if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName) && !ParameterDict.IsAdditionalInfo(parameterName))
@@ -128,7 +128,7 @@ namespace Fractrace.Basic
                                 _computedHeight += DataViewElementFactory.DefaultHeight;
                             }
                         }
-                        DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Exemplar.GetDatatype(parameterName), ParameterDict.Exemplar.GetDescription(parameterName), true);
+                        DataViewElement dElement = DataViewElementFactory.Create(parameterName, entry.Value, ParameterDict.Current.GetDatatype(parameterName), ParameterDict.Current.GetDescription(parameterName), true);
                         dElement.ElementChanged += new ElementChangedDelegate(_parent.dElement_ElementChanged);
                         oldElements.Add(dElement);
                         dElement.TabIndex = oldElements.Count;
@@ -165,8 +165,8 @@ namespace Fractrace.Basic
         /// <param name="category">The category.</param>
         public bool IterateElements()
         {
-            string newNodeHash = ParameterDict.Exemplar.GetHashOfName(_category);
-            string newNodeValueHash = ParameterDict.Exemplar.GetHash(_category);
+            string newNodeHash = ParameterDict.Current.GetHashOfName(_category);
+            string newNodeValueHash = ParameterDict.Current.GetHash(_category);
             if (newNodeHash != _nodeHash)
             { // At least one entry is added or deleted, so everything must new created 
                 Create(_category);
@@ -182,7 +182,7 @@ namespace Fractrace.Basic
                         dataView.UpdateElements();
                     }
                 }
-                _nodeValueHash = ParameterDict.Exemplar.GetHash(_category);
+                _nodeValueHash = ParameterDict.Current.GetHash(_category);
                 return false;
             }
             // If nothing has changed, nothing has to update.

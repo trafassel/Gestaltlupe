@@ -272,10 +272,10 @@ namespace Fractrace
 
             FracValues fracValues = new FracValues();
             fracValues.SetFromParameterDict();
-            StartAsync(fracValues, (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Cycles"),
-                ParameterDict.Exemplar.GetDouble("View.Size"),
-                ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-                ParameterDict.Exemplar.GetBool("View.Perspective"));
+            StartAsync(fracValues, (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles"),
+                ParameterDict.Current.GetDouble("View.Size"),
+                ParameterDict.Current.GetInt("Formula.Static.Formula"),
+                ParameterDict.Current.GetBool("View.Perspective"));
 
         }
 
@@ -313,7 +313,7 @@ namespace Fractrace
             m_perspective = perspective;
             availableY = 0;
 
-            int noOfThreads = ParameterDict.Exemplar.GetInt("Computation.NoOfThreads");
+            int noOfThreads = ParameterDict.Current.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
             {
                 Generate(act_val, zyklen, screensize, formula, perspective);
@@ -475,35 +475,35 @@ namespace Fractrace
         protected void Generate(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
             Random rand = new Random();
-            maxUpdateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
+            maxUpdateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
             double[] col = null;
             double xd, yd, zd;
             double x, y, z;
-            double dephAdd = ParameterDict.Exemplar.GetInt("View.DephAdd") * screensize;
+            double dephAdd = ParameterDict.Current.GetInt("View.DephAdd") * screensize;
             act_val = act_val.Clone();
             Formulas formulas = new Formulas(PData);
             mLastUsedFormulas = formulas;
-            if (ParameterDict.Exemplar["Intern.Formula.Source"].Trim() == "")
+            if (ParameterDict.Current["Intern.Formula.Source"].Trim() == "")
             {
                 formulas.InternFormula = new Fractrace.TomoGeometry.VecRotMandel2d();
             }
             else
             {
                 Fractrace.TomoGeometry.TomoFormulaFactory fac = new Fractrace.TomoGeometry.TomoFormulaFactory();
-                formulas.InternFormula = fac.CreateFromString(ParameterDict.Exemplar["Intern.Formula.Source"]);
+                formulas.InternFormula = fac.CreateFromString(ParameterDict.Current["Intern.Formula.Source"]);
             }
             if (formulas.InternFormula == null)
                 return;
             formulas.InternFormula.Init();
 
             // Umschauen
-            double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
-            double centerY = 0.5 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") + ParameterDict.Exemplar.GetDouble("Border.Min.y"));
-            double centerZ = (ParameterDict.Exemplar.GetDouble("Border.Max.z") + ParameterDict.Exemplar.GetDouble("Border.Min.z")) / 2.0;
+            double centerX = (ParameterDict.Current.GetDouble("Border.Max.x") + ParameterDict.Current.GetDouble("Border.Min.x")) / 2.0;
+            double centerY = 0.5 * (ParameterDict.Current.GetDouble("Border.Max.y") + ParameterDict.Current.GetDouble("Border.Min.y"));
+            double centerZ = (ParameterDict.Current.GetDouble("Border.Max.z") + ParameterDict.Current.GetDouble("Border.Min.z")) / 2.0;
 
             Rotation rotView = new Rotation();
-            rotView.Init(centerX, centerY, centerZ, ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
-                ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
+            rotView.Init(centerX, centerY, centerZ, ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
+                ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             formulas.Transforms.Add(rotView);
             // ende Umschauen
 
@@ -521,7 +521,7 @@ namespace Fractrace
 
             col = formulas.col;
             MAXX_ITER = width;
-            MAXY_ITER = (int)(ParameterDict.Exemplar.GetDouble("View.Deph") * screensize);
+            MAXY_ITER = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
             if(IsSmallPreview())
                 MAXY_ITER = MAXX_ITER;    
             MAXZ_ITER = height;
@@ -534,13 +534,13 @@ namespace Fractrace
             double wix = 0, wiy = 0, wiz = 0;
             double jx = 0, jy = 0, jz = 0, jzz = 0;
 
-            jx = ParameterDict.Exemplar.GetDouble("Formula.Static.jx");
-            jy = ParameterDict.Exemplar.GetDouble("Formula.Static.jy");
-            jz = ParameterDict.Exemplar.GetDouble("Formula.Static.jz");
-            jzz = ParameterDict.Exemplar.GetDouble("Formula.Static.jzz");
+            jx = ParameterDict.Current.GetDouble("Formula.Static.jx");
+            jy = ParameterDict.Current.GetDouble("Formula.Static.jy");
+            jz = ParameterDict.Current.GetDouble("Formula.Static.jz");
+            jzz = ParameterDict.Current.GetDouble("Formula.Static.jzz");
 
             // Innenbereich
-            int minCycle = (int)ParameterDict.Exemplar.GetDouble("Formula.Static.MinCycle");
+            int minCycle = (int)ParameterDict.Current.GetDouble("Formula.Static.MinCycle");
             if (minCycle == 0)
                 minCycle = zyklen;
 
@@ -579,17 +579,17 @@ namespace Fractrace
             // Projektion initialisieren und der Berechnung zuordnen:
             // TODO: Projektion über Einstellungen abwählbar machen           
             double cameraDeph = act_val.end_tupel.y - act_val.start_tupel.y;
-            cameraDeph *= ParameterDict.Exemplar.GetDouble("Transformation.Perspective.Cameraposition");
+            cameraDeph *= ParameterDict.Current.GetDouble("Transformation.Perspective.Cameraposition");
             Vec3 camera = new Vec3(xcenter, act_val.end_tupel.y + cameraDeph, zcenter);
             Vec3 viewPoint = new Vec3(xcenter, act_val.end_tupel.y, zcenter);
             Projection proj = new Projection(camera, viewPoint);
-            if (ParameterDict.Exemplar.GetBool("View.Perspective"))
+            if (ParameterDict.Current.GetBool("View.Perspective"))
                 formulas.Projection = proj;
 
             // Bei der Postererstellung werden die Parameter der räumlichen Projektion auf das mittlere Bild 
             // ausgerichtet und anschließend die Grenzen verschoben
-            double xPoster = ParameterDict.Exemplar.GetInt("View.PosterX");
-            double zPoster = ParameterDict.Exemplar.GetInt("View.PosterZ");
+            double xPoster = ParameterDict.Current.GetInt("View.PosterX");
+            double zPoster = ParameterDict.Current.GetInt("View.PosterZ");
 
             double xDiff = act_val.end_tupel.x - act_val.start_tupel.x;
             double zDiff = act_val.end_tupel.z - act_val.start_tupel.z;

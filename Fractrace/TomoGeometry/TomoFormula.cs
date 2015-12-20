@@ -40,31 +40,31 @@ namespace Fractrace.TomoGeometry {
 
 
         public void Set(string id, int value) {
-          ParameterDict.Exemplar.SetInt(id,value);
+          ParameterDict.Current.SetInt(id,value);
         }
 
         public void Set(string id, double value) {
-          ParameterDict.Exemplar.SetDouble(id, value);
+          ParameterDict.Current.SetDouble(id, value);
         }
 
 
         public void Set(string id, bool value) {
-          ParameterDict.Exemplar.SetBool(id, value);
+          ParameterDict.Current.SetBool(id, value);
         }
 
         public double GetDouble(string id) {
-          return ParameterDict.Exemplar.GetDouble(id);
+          return ParameterDict.Current.GetDouble(id);
         }
 
 
         public string GetString(string id) {
-          return ParameterDict.Exemplar[id];
+          return ParameterDict.Current[id];
         }
 
 
         public void AddValue(string id, double value) {
-          ParameterDict.Exemplar[id] = "";
-          ParameterDict.Exemplar.SetValue(id, value.ToString(),false);
+          ParameterDict.Current[id] = "";
+          ParameterDict.Current.SetValue(id, value.ToString(),false);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Fractrace.TomoGeometry {
         /// </summary>
         /// <param name="id">The id.</param>
         public void RemoveProperty(string id) {
-          ParameterDict.Exemplar.RemoveProperty(id);
+          ParameterDict.Current.RemoveProperty(id);
         }
 
 
@@ -81,7 +81,7 @@ namespace Fractrace.TomoGeometry {
         /// </summary>
         /// <param name="text">The text.</param>
         public void SetParameterBulk(string text) {
-          ParameterDict.Exemplar.AppendFromText(text);
+          ParameterDict.Current.AppendFromText(text);
         }
 
 

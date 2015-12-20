@@ -92,7 +92,7 @@ namespace Fractrace.Basic
         /// Gets the unique static instance of this class.
         /// </summary>
         /// <value>The exemplar.</value>
-        public static ParameterDict Exemplar
+        public static ParameterDict Current
         {
             get
             {
@@ -239,11 +239,11 @@ namespace Fractrace.Basic
         {
             get
             {
-                return Exemplar.GetValue(name);
+                return Current.GetValue(name);
             }
             set
             {
-                Exemplar.SetValue(name, value);
+                Current.SetValue(name, value);
             }
         }
 
@@ -574,7 +574,7 @@ namespace Fractrace.Basic
         /// <returns></returns>
         public static bool HasControl(string parameterName)
         {
-            return !ParameterDict.Exemplar.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
+            return !ParameterDict.Current.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
         }
 
     }

@@ -96,7 +96,7 @@ namespace Fractrace.Basic
         /// </summary>
         public virtual void UpdateElements()
         {
-            string newValue = ParameterDict.Exemplar[_name];
+            string newValue = ParameterDict.Current[_name];
             if (_oldValue != newValue)
             {
                 _value = newValue;

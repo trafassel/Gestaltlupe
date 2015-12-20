@@ -83,8 +83,8 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override void PreCalculate()
         {
-            _expectedMinY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            _expectedMaxY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+            _expectedMinY = ParameterDict.Current.GetDouble("Border.Min.y");
+            _expectedMaxY = ParameterDict.Current.GetDouble("Border.Max.y");
             _minY = double.MaxValue;
             _maxY = double.MinValue;
             for (int i = 0; i < pData.Width; i++)

@@ -21,7 +21,7 @@ namespace Fractrace.Basic
         /// </summary>
         public override void UpdateElements()
         {
-            string newValue = ParameterDict.Exemplar[_name];
+            string newValue = ParameterDict.Current[_name];
             if (_oldValue != newValue)
             {
                 _value = newValue;
@@ -36,7 +36,7 @@ namespace Fractrace.Basic
         /// </summary>
         void tbValue_TextChanged(object sender, EventArgs e)
         {
-            ParameterDict.Exemplar.Entries[_name] = _tbValue.Text;
+            ParameterDict.Current.Entries[_name] = _tbValue.Text;
             CallElementChanged(_name, _tbValue.Text);
         }
 

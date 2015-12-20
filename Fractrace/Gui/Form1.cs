@@ -164,8 +164,8 @@ namespace Fractrace
         /// </summary>
         public void SetPictureBoxSize()
         {
-            double widthInPixel = ParameterDict.Exemplar.GetDouble("View.Width");
-            double heightInPixel = ParameterDict.Exemplar.GetDouble("View.Height");
+            double widthInPixel = ParameterDict.Current.GetDouble("View.Width");
+            double heightInPixel = ParameterDict.Current.GetDouble("View.Height");
             int sizeX = (int)(widthInPixel * paras.ScreenSize);
             int sizeY = (int)(heightInPixel * paras.ScreenSize);
             if (gestaltWidth != sizeX || gestaltHeight != sizeY)
@@ -206,18 +206,18 @@ namespace Fractrace
         protected string GetParameterHashWithoutPictureArt()
         {
             StringBuilder tempHash = new StringBuilder();
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Size"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Perspective"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Width"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Height"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.Deph"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.DephAdd"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterX"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("View.PosterZ"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Border"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Transformation"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Formula"));
-            tempHash.Append(ParameterDict.Exemplar.GetHash("Intern.Formula"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Size"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Perspective"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Width"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Height"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Deph"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.DephAdd"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.PosterX"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.PosterZ"));
+            tempHash.Append(ParameterDict.Current.GetHash("Border"));
+            tempHash.Append(ParameterDict.Current.GetHash("Transformation"));
+            tempHash.Append(ParameterDict.Current.GetHash("Formula"));
+            tempHash.Append(ParameterDict.Current.GetHash("Intern.Formula"));
             // The following categories are not used: 
             // Composite
             // Computation.NoOfThreads
@@ -292,13 +292,13 @@ namespace Fractrace
                     iter = new Iterate(gestaltWidth, gestaltHeight, this, false);
                     mUpdateCount++;
                     iter.SetOldData(oldData, oldPictureData, mUpdateCount);
-                    if (!ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
+                    if (!ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
                         iter.OneStepProgress = inPreview;
                     else
                         iter.OneStepProgress = false;
-                    if (mUpdateCount > ParameterDict.Exemplar.GetDouble("View.UpdateSteps") + 1)
+                    if (mUpdateCount > ParameterDict.Current.GetDouble("View.UpdateSteps") + 1)
                         iter.OneStepProgress = true;
-                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
                 }
                 else
                 {
@@ -319,7 +319,7 @@ namespace Fractrace
                         mUpdateCount = 1;
                         iter = new Iterate(gestaltWidth, gestaltHeight, this, false);
                         iter.OneStepProgress = false;
-                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Exemplar.GetBool("View.Perspective"));
+                        iter.StartAsync(paras.Parameter, paras.Cycles, paras.ScreenSize, paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
                     }
                 }
             }
@@ -548,12 +548,12 @@ namespace Fractrace
             paras.Parameter.end_tupel.y = maxY;
             paras.Parameter.end_tupel.z = maxZ;
 
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", paras.Parameter.start_tupel.x);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", paras.Parameter.start_tupel.y);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", paras.Parameter.start_tupel.z);
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", paras.Parameter.end_tupel.x);
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", paras.Parameter.end_tupel.y);
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", paras.Parameter.end_tupel.z);
+            ParameterDict.Current.SetDouble("Border.Min.x", paras.Parameter.start_tupel.x);
+            ParameterDict.Current.SetDouble("Border.Min.y", paras.Parameter.start_tupel.y);
+            ParameterDict.Current.SetDouble("Border.Min.z", paras.Parameter.start_tupel.z);
+            ParameterDict.Current.SetDouble("Border.Max.x", paras.Parameter.end_tupel.x);
+            ParameterDict.Current.SetDouble("Border.Max.y", paras.Parameter.end_tupel.y);
+            ParameterDict.Current.SetDouble("Border.Max.z", paras.Parameter.end_tupel.z);
 
             paras.UpdateFromData();
             Fractrace.Geometry.Navigator.SetAspectRatio();
@@ -569,7 +569,7 @@ namespace Fractrace
         public void Stop()
         {
 
-            mCurrentUpdateStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps") + 1;
+            mCurrentUpdateStep = ParameterDict.Current.GetInt("View.UpdateSteps") + 1;
             if (iter != null)
             {
                 iter.Abort();
@@ -693,10 +693,10 @@ namespace Fractrace
             pictureBox1.Image.Save(fileName);
             if (Fractrace.ParameterInput.MainParameterInput.AutomaticSaveInAnimation)
             {
-                if (ParameterDict.Exemplar["Intern.Filter"] == "" && lastAnimationParameterHash != ParameterDict.Exemplar.GetHash(""))
+                if (ParameterDict.Current["Intern.Filter"] == "" && lastAnimationParameterHash != ParameterDict.Current.GetHash(""))
                 {
                     Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
-                    lastAnimationParameterHash = ParameterDict.Exemplar.GetHash("");
+                    lastAnimationParameterHash = ParameterDict.Current.GetHash("");
                 }
             }
             btnRepaint.Enabled = true;
@@ -804,7 +804,7 @@ namespace Fractrace
         private bool IsSubStepRendering()
         {
             int currentStep = mUpdateCount;
-            int lastStep = ParameterDict.Exemplar.GetInt("View.UpdateSteps") + 1;
+            int lastStep = ParameterDict.Current.GetInt("View.UpdateSteps") + 1;
             return currentStep < lastStep;
         }
 

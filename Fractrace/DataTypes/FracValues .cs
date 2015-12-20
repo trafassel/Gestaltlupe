@@ -42,16 +42,16 @@ namespace Fractrace.DataTypes
         /// </summary>
         public void SetFromParameterDict()
         {
-            start_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Min.x");
-            start_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            start_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            end_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Max.x");
-            end_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            end_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Max.z");
+            start_tupel.x = ParameterDict.Current.GetDouble("Border.Min.x");
+            start_tupel.y = ParameterDict.Current.GetDouble("Border.Min.y");
+            start_tupel.z = ParameterDict.Current.GetDouble("Border.Min.z");
+            end_tupel.x = ParameterDict.Current.GetDouble("Border.Max.x");
+            end_tupel.y = ParameterDict.Current.GetDouble("Border.Max.y");
+            end_tupel.z = ParameterDict.Current.GetDouble("Border.Max.z");
 
-            arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
-            arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
-            arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
+            arc.x = ParameterDict.Current.GetDouble("Transformation.AngleX");
+            arc.y = ParameterDict.Current.GetDouble("Transformation.AngleY");
+            arc.z = ParameterDict.Current.GetDouble("Transformation.AngleZ");
         }
         public XYZTupel initial_tupel = null;
         public XYZTupel start_tupel = null;

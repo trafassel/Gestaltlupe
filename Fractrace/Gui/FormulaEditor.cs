@@ -45,7 +45,7 @@ namespace Fractrace {
         /// Initialize text.
         /// </summary>
         public void Init() {
-            tbSource.Text = ParameterDict.Exemplar["Intern.Formula.Source"];
+            tbSource.Text = ParameterDict.Current["Intern.Formula.Source"];
         }
 
 
@@ -114,7 +114,7 @@ namespace Fractrace {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tbSource_TextChanged(object sender, EventArgs e) {
-            ParameterDict.Exemplar["Intern.Formula.Source"] = tbSource.Text;
+            ParameterDict.Current["Intern.Formula.Source"] = tbSource.Text;
         }
 
 

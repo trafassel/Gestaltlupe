@@ -47,7 +47,7 @@ namespace Fractrace.Animation
         {
             AnimationPoint point = new AnimationPoint();
             point.Time = dataPerTime.CurrentTime;
-            point.Steps = ParameterDict.Exemplar.GetInt("Animation.Steps");
+            point.Steps = ParameterDict.Current.GetInt("Animation.Steps");
             string comment = "";
             try
             {
@@ -213,7 +213,7 @@ namespace Fractrace.Animation
             {
                 AnimationPoint ap = mAnimationSteps.Steps[i];
                 dataPerTime.Load(ap.Time);
-                ParameterDict.Exemplar.SetDouble("View.Size", mPictureSize);
+                ParameterDict.Current.SetDouble("View.Size", mPictureSize);
                 animationHistory.Save();
             }
             // Compute each Animation frame.
@@ -260,11 +260,11 @@ namespace Fractrace.Animation
                 else
                     animationHistory.Load(r + historyIndex);
 
-                int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
+                int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
                 if (updateSteps <= 0)
                     updateSteps = 0;
                 if (updateSteps > 1)
-                    ParameterDict.Exemplar.SetInt("View.UpdateSteps", updateSteps - 1);
+                    ParameterDict.Current.SetInt("View.UpdateSteps", updateSteps - 1);
 
                 Form1.PublicForm.SetPictureBoxSize();
                 Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(Form1.PublicForm, Form1.PublicForm.GestaltPicture);
@@ -437,7 +437,7 @@ namespace Fractrace.Animation
                         string picFileName = System.IO.Path.Combine(System.IO.Path.Combine(FileSystem.Exemplar.ExportDir, dir), ap.fileName);
                         string fileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + ap.fileName + ".tomo";
 
-                        ParameterDict.Exemplar.Load(fileName);
+                        ParameterDict.Current.Load(fileName);
                         ParameterInput.MainParameterInput.SaveHistory(picFileName);
                         // save in history
                         sb.AppendLine("Run Steps " + ap.Steps.ToString() + " Time " + ParameterInput.MainParameterInput.History.CurrentTime.ToString() + "      # File " + ap.fileName);

@@ -8,25 +8,36 @@ namespace Fractrace
     public class FileSystem
     {
 
-        protected static Object lockVar = new Object();
+        /// <summary>
+        /// Lock access to Exemplar.
+        /// </summary>
+        protected static Object _lockVar = new Object();
 
-        protected static FileSystem mExemplar = null;
+        /// <summary>
+        /// Current File count (start with 10000 for easy sorting in video processing software)
+        /// </summary>
+        protected int _fileCount = 10000;
+
+        protected static FileSystem _exemplar = null;
         public static FileSystem Exemplar
         {
             get
             {
-                lock (lockVar)
+                lock (_lockVar)
                 {
-                    if (mExemplar == null)
-                        mExemplar = new FileSystem();
-                    return mExemplar;
+                    if (_exemplar == null)
+                        _exemplar = new FileSystem();
+                    return _exemplar;
 
                 }
-
             }
-
         }
 
+        /// <summary>
+        /// Return common diroctory of all with GetFileName() cretated Filenames in this program instance.
+        /// </summary>
+        protected string _projectDir = "";
+        public string ProjectDir { get { return _projectDir; } }
 
         /// <summary>
         /// Get the directory where the created bitmaps and the corresponding settings are stored.
@@ -35,10 +46,10 @@ namespace Fractrace
         {
             get
             {
-                string exportDir = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                exportDir = System.IO.Path.Combine(exportDir, "TomoTrace");
-                if (!System.IO.Directory.Exists(exportDir))
-                    System.IO.Directory.CreateDirectory(exportDir);
+                string exportDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                exportDir = Path.Combine(exportDir, "Gestaltlupe");
+                if (!Directory.Exists(exportDir))
+                    Directory.CreateDirectory(exportDir);
                 return exportDir;
             }
         }
@@ -52,7 +63,7 @@ namespace Fractrace
         protected FileSystem()
         {
             int i = 0;
-            foreach (string str in System.IO.Directory.GetDirectories(ExportDir))
+            foreach (string str in Directory.GetDirectories(ExportDir))
             {
                 string pattern = str.Substring(4);
                 int maxTest = 0;
@@ -64,63 +75,48 @@ namespace Fractrace
 
             do
             {
-                mProjectDir = System.IO.Path.Combine(ExportDir, "Data" + i.ToString());
+                _projectDir = Path.Combine(ExportDir, "Data" + i.ToString());
                 i++;
-            } while (System.IO.Directory.Exists(mProjectDir));
-
-            System.IO.Directory.CreateDirectory(mProjectDir);
+            } while (Directory.Exists(_projectDir));
+            Directory.CreateDirectory(_projectDir);
         }
 
 
         /// <summary>
-        /// Current File count (start with 10000 for easy sorting in video processing software)
+        /// Get full path of next available Filename. The result has the same extension as template extension. Gestaltlupe 1.3. template: "pic.png". 
         /// </summary>
-        protected int fileCount = 10000;
-
-
-        /// <summary>
-        /// Liefert einen passenden Dateinamen.
-        /// </summary>
-        /// <param name="shortFileName"></param>
+        /// <param name="template"></param>
         /// <returns></returns>
-        public string GetFileName(string shortFileName)
+        public string GetFileName(string template)
         {
-
             string retVal = "";
-            string file = Path.GetFileName(ProjectDir) + Path.GetFileNameWithoutExtension(shortFileName);
+            string file = Path.GetFileName(ProjectDir) + Path.GetFileNameWithoutExtension(template);
 
-            retVal = System.IO.Path.Combine(ProjectDir, file + fileCount.ToString() + Path.GetExtension(shortFileName));
+            retVal = Path.Combine(ProjectDir, file + _fileCount.ToString() + Path.GetExtension(template));
             // Darf eigentlich nicht vorkommen wenn mit leeren Verzeichnis begonnen wird.
             while (File.Exists(retVal))
             {
-                fileCount++;
-                retVal = System.IO.Path.Combine(ProjectDir, file + fileCount.ToString() + Path.GetExtension(shortFileName));
+                _fileCount++;
+                retVal = Path.Combine(ProjectDir, file + _fileCount.ToString() + Path.GetExtension(template));
             }
             // Die dazu passenden Parameter werden unter
             // data/parameters/ gespeichert.
-            string infoFilePath = System.IO.Path.Combine(ExportDir, "data");
-            if (!System.IO.Directory.Exists(infoFilePath))
-                System.IO.Directory.CreateDirectory(infoFilePath);
-            infoFilePath = System.IO.Path.Combine(infoFilePath, "parameters");
-            if (!System.IO.Directory.Exists(infoFilePath))
-                System.IO.Directory.CreateDirectory(infoFilePath);
-            Fractrace.Basic.ParameterDict.Exemplar.Save(System.IO.Path.Combine(infoFilePath, System.IO.Path.GetFileNameWithoutExtension(retVal) + ".tomo"));
+            string infoFilePath = Path.Combine(ExportDir, "data");
+            if (!Directory.Exists(infoFilePath))
+                Directory.CreateDirectory(infoFilePath);
+            infoFilePath = Path.Combine(infoFilePath, "parameters");
+            if (!Directory.Exists(infoFilePath))
+                Directory.CreateDirectory(infoFilePath);
+            Basic.ParameterDict.Current.Save(Path.Combine(infoFilePath, Path.GetFileNameWithoutExtension(retVal) + ".tomo"));
 
-            string exportDir = System.IO.Path.Combine(ExportDir, "TomoTrace");
-            if (!System.IO.Directory.Exists(exportDir))
-                System.IO.Directory.CreateDirectory(exportDir);
+            string exportDir = Path.Combine(ExportDir, "TomoTrace");
+            if (!Directory.Exists(exportDir))
+                Directory.CreateDirectory(exportDir);
 
             return retVal;
         }
 
-        protected string mProjectDir = "";
-        public string ProjectDir
-        {
-            get
-            {
-                return mProjectDir;
-            }
-        }
+
 
     }
 }

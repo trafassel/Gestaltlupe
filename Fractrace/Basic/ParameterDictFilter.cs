@@ -37,7 +37,7 @@ namespace Fractrace.Basic
         {
             try
             {
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.Entries)
                 {
                     _savedDict[entry.Key] = entry.Value;
                 }
@@ -50,7 +50,7 @@ namespace Fractrace.Basic
                 return;
             }
             Filter();
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.Entries)
             {
                 if (_savedDict[entry.Key] != entry.Value)
                     _changedParameters[entry.Key] = true;
@@ -75,9 +75,9 @@ namespace Fractrace.Basic
             foreach (KeyValuePair<string, string> entry in _savedDict)
             {
                 if( _changedParameters.ContainsKey(entry.Key) )
-                  ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
+                  ParameterDict.Current.SetValue(entry.Key, entry.Value, false);
             }
-            ParameterDict.Exemplar.SetValue("Intern.Filter", "", false);
+            ParameterDict.Current.SetValue("Intern.Filter", "", false);
         }
 
 

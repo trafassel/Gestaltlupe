@@ -15,23 +15,23 @@ namespace Fractrace.Basic
         /// </summary>
         public static void Update()
         {
-            if (ParameterDict.Exemplar["Transformation.AngleX"] == "0" &&
-                ParameterDict.Exemplar["Transformation.AngleY"] == "0" &&
-                ParameterDict.Exemplar["Transformation.AngleZ"] == "0")
+            if (ParameterDict.Current["Transformation.AngleX"] == "0" &&
+                ParameterDict.Current["Transformation.AngleY"] == "0" &&
+                ParameterDict.Current["Transformation.AngleZ"] == "0")
             {
-                ParameterDict.Exemplar.RemoveProperty("Transformation.AngleX");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.AngleY");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.AngleZ");
+                ParameterDict.Current.RemoveProperty("Transformation.AngleX");
+                ParameterDict.Current.RemoveProperty("Transformation.AngleY");
+                ParameterDict.Current.RemoveProperty("Transformation.AngleZ");
             }
 
-            if (ParameterDict.Exemplar["Transformation.3.AngleX"] != string.Empty )
+            if (ParameterDict.Current["Transformation.3.AngleX"] != string.Empty )
             {
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.AngleX");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.AngleY");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.AngleZ");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.CenterX");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.CenterY");
-                ParameterDict.Exemplar.RemoveProperty("Transformation.3.CenterZ");
+                ParameterDict.Current.RemoveProperty("Transformation.3.AngleX");
+                ParameterDict.Current.RemoveProperty("Transformation.3.AngleY");
+                ParameterDict.Current.RemoveProperty("Transformation.3.AngleZ");
+                ParameterDict.Current.RemoveProperty("Transformation.3.CenterX");
+                ParameterDict.Current.RemoveProperty("Transformation.3.CenterY");
+                ParameterDict.Current.RemoveProperty("Transformation.3.CenterZ");
             }
         }
 

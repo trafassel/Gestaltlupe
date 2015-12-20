@@ -32,12 +32,12 @@ namespace Fractrace.Geometry
         /// </summary>
         public override void Init()
         {
-            CenterX = ParameterDict.Exemplar.GetDouble("Transformation.3.CenterX");
-            CenterY = ParameterDict.Exemplar.GetDouble("Transformation.3.CenterY");
-            CenterZ = ParameterDict.Exemplar.GetDouble("Transformation.3.CenterZ");
-            AngleX = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleX");
-            AngleY = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleY");
-            AngleZ = ParameterDict.Exemplar.GetDouble("Transformation.3.AngleZ");
+            CenterX = ParameterDict.Current.GetDouble("Transformation.3.CenterX");
+            CenterY = ParameterDict.Current.GetDouble("Transformation.3.CenterY");
+            CenterZ = ParameterDict.Current.GetDouble("Transformation.3.CenterZ");
+            AngleX = ParameterDict.Current.GetDouble("Transformation.3.AngleX");
+            AngleY = ParameterDict.Current.GetDouble("Transformation.3.AngleY");
+            AngleZ = ParameterDict.Current.GetDouble("Transformation.3.AngleZ");
         }
 
 

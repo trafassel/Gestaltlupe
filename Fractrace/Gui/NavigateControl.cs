@@ -111,9 +111,9 @@ namespace Fractrace
         /// </summary>
         public void UpdateCenterDiff()
         {
-            double centerX = (ParameterDict.Exemplar.GetDouble("Border.Max.x") + ParameterDict.Exemplar.GetDouble("Border.Min.x")) / 2.0;
-            double centerY = 0.5 * (ParameterDict.Exemplar.GetDouble("Border.Max.y") + ParameterDict.Exemplar.GetDouble("Border.Min.y"));
-            double centerZ = (ParameterDict.Exemplar.GetDouble("Border.Max.z") + ParameterDict.Exemplar.GetDouble("Border.Min.z")) / 2.0;
+            double centerX = (ParameterDict.Current.GetDouble("Border.Max.x") + ParameterDict.Current.GetDouble("Border.Min.x")) / 2.0;
+            double centerY = 0.5 * (ParameterDict.Current.GetDouble("Border.Max.y") + ParameterDict.Current.GetDouble("Border.Min.y"));
+            double centerZ = (ParameterDict.Current.GetDouble("Border.Max.z") + ParameterDict.Current.GetDouble("Border.Min.z")) / 2.0;
             Rotation rotView = null;
             double centerXChange = centerX + 1;
             double centerYChange = centerY + 1;
@@ -124,18 +124,18 @@ namespace Fractrace
 
             // This does not work for angle combinations:
             rotView = new Rotation();
-            rotView.Init(0, 0, 0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
-                  ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
+            rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
+                  ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             centerDiffX = rotView.TransformForNavigation(new Vec3(1, 0, 0));
 
             rotView = new Rotation();
-            rotView.Init(0, 0, 0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
-                  ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
+            rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
+                  ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             centerDiffY = rotView.TransformForNavigation(new Vec3(0, -1, 0));
 
             rotView = new Rotation();
-            rotView.Init(0, 0, 0, -ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY"),
-                  ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ"));
+            rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
+                  ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             centerDiffZ = rotView.TransformForNavigation(new Vec3(0, 0, -1));
 
             // Set 0-Entries
@@ -279,13 +279,13 @@ namespace Fractrace
         /// <param name="xdiff"></param>
         private void SlideX(double xdiff)
         {
-            double endX = ParameterDict.Exemplar.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Exemplar.GetDouble("Border.Min.x");
+            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
+            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
             double ddiff = endX - startX;
             endX += xdiff * ddiff;
             startX += xdiff * ddiff;
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", endX);
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", startX);
+            ParameterDict.Current.SetDouble("Border.Max.x", endX);
+            ParameterDict.Current.SetDouble("Border.Min.x", startX);
         }
 
 
@@ -294,13 +294,13 @@ namespace Fractrace
         /// </summary>
         private void SlideY(double ydiff)
         {
-            double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
+            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
+            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
             double ddiff = endY - startY;
             endY += ydiff * ddiff;
             startY += ydiff * ddiff;
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
+            ParameterDict.Current.SetDouble("Border.Max.y", endY);
+            ParameterDict.Current.SetDouble("Border.Min.y", startY);
         }
 
 
@@ -310,13 +310,13 @@ namespace Fractrace
         /// <param name="zdiff"></param>
         private void SlideZ(double zdiff)
         {
-            double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
+            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
+            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
             double ddiff = endZ - startZ;
             endZ += zdiff * ddiff;
             startZ += zdiff * ddiff;
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
+            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
+            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
         }
 
 
@@ -432,13 +432,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnZoomX_Click(object sender, EventArgs e)
         {
-            double endX = ParameterDict.Exemplar.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Exemplar.GetDouble("Border.Min.x");
+            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
+            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
             double ddiff = endX - startX;
             endX -= ddiff / mZoomFactor;
             startX += ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", endX);
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", startX);
+            ParameterDict.Current.SetDouble("Border.Max.x", endX);
+            ParameterDict.Current.SetDouble("Border.Min.x", startX);
             DrawAndWriteInHistory();
         }
 
@@ -450,13 +450,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnZoomY_Click(object sender, EventArgs e)
         {
-            double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
+            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
+            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
             double ddiff = endY - startY;
             endY -= ddiff / mZoomFactor;
             startY += ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
+            ParameterDict.Current.SetDouble("Border.Max.y", endY);
+            ParameterDict.Current.SetDouble("Border.Min.y", startY);
             DrawAndWriteInHistory();
         }
 
@@ -468,13 +468,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnZoomZ_Click(object sender, EventArgs e)
         {
-            double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
+            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
+            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
             double ddiff = endZ - startZ;
             endZ -= ddiff / mZoomFactor;
             startZ += ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
+            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
+            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
             DrawAndWriteInHistory();
         }
 
@@ -486,13 +486,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            double endX = ParameterDict.Exemplar.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Exemplar.GetDouble("Border.Min.x");
+            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
+            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
             double ddiff = endX - startX;
             endX += ddiff / mZoomFactor;
             startX -= ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", endX);
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", startX);
+            ParameterDict.Current.SetDouble("Border.Max.x", endX);
+            ParameterDict.Current.SetDouble("Border.Min.x", startX);
             DrawAndWriteInHistory();
         }
 
@@ -504,13 +504,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnZoomYout_Click(object sender, EventArgs e)
         {
-            double endY = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Exemplar.GetDouble("Border.Min.y");
+            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
+            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
             double ddiff = endY - startY;
             endY += ddiff / mZoomFactor;
             startY -= ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", endY);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", startY);
+            ParameterDict.Current.SetDouble("Border.Max.y", endY);
+            ParameterDict.Current.SetDouble("Border.Min.y", startY);
             DrawAndWriteInHistory();
 
         }
@@ -523,13 +523,13 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnZoomZout_Click(object sender, EventArgs e)
         {
-            double endZ = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Exemplar.GetDouble("Border.Min.z");
+            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
+            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
             double ddiff = endZ - startZ;
             endZ += ddiff / mZoomFactor;
             startZ -= ddiff / mZoomFactor;
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", startZ);
+            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
+            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
             DrawAndWriteInHistory();
         }
 
@@ -549,9 +549,9 @@ namespace Fractrace
 
         private void button4_Click(object sender, EventArgs e)
         {
-            double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
+            double angleX = ParameterDict.Current.GetDouble("Transformation.Camera.AngleX");
             angleX -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX", angleX);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", angleX);
             DrawAndWriteInHistory();
         }
 
@@ -597,18 +597,18 @@ namespace Fractrace
 
         private void btnRotX_Click(object sender, EventArgs e)
         {
-            double angleX = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleX");
+            double angleX = ParameterDict.Current.GetDouble("Transformation.Camera.AngleX");
             angleX += mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleX", angleX);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", angleX);
             DrawAndWriteInHistory();
         }
 
 
         private void btnRotY_Click(object sender, EventArgs e)
         {
-            double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
+            double angleY = ParameterDict.Current.GetDouble("Transformation.Camera.AngleY");
             angleY += mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY", angleY);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", angleY);
             DrawAndWriteInHistory();
         }
 
@@ -616,26 +616,26 @@ namespace Fractrace
 
         private void btnRotZ_Click(object sender, EventArgs e)
         {
-            double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
+            double angleZ = ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ");
             angleZ += mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", angleZ);
             DrawAndWriteInHistory();
 
         }
 
         private void btnRotYneg_Click(object sender, EventArgs e)
         {
-            double angleY = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleY");
+            double angleY = ParameterDict.Current.GetDouble("Transformation.Camera.AngleY");
             angleY -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleY", angleY);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", angleY);
             DrawAndWriteInHistory();
         }
 
         private void btnRotZneg_Click(object sender, EventArgs e)
         {
-            double angleZ = ParameterDict.Exemplar.GetDouble("Transformation.Camera.AngleZ");
+            double angleZ = ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ");
             angleZ -= mAngle;
-            ParameterDict.Exemplar.SetDouble("Transformation.Camera.AngleZ", angleZ);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", angleZ);
             DrawAndWriteInHistory();
         }
 

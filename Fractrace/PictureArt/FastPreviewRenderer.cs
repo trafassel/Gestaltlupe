@@ -158,25 +158,25 @@ namespace Fractrace.PictureArt
         protected override void PreCalculate()
         {
             string parameterNode = "Renderer.";
-            shadowNumber = 11; ParameterDict.Exemplar.GetInt(parameterNode + "ShadowNumber");
-            ambientIntensity = 0; ParameterDict.Exemplar.GetInt(parameterNode + "AmbientIntensity");
-            minFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MinFieldOfView");
-            maxFieldOfView = ParameterDict.Exemplar.GetDouble(parameterNode + "MaxFieldOfView");
+            shadowNumber = 11; ParameterDict.Current.GetInt(parameterNode + "ShadowNumber");
+            ambientIntensity = 0; ParameterDict.Current.GetInt(parameterNode + "AmbientIntensity");
+            minFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MinFieldOfView");
+            maxFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MaxFieldOfView");
 
-            brightness = ParameterDict.Exemplar.GetDouble(parameterNode + "Brightness");
-            contrast = ParameterDict.Exemplar.GetDouble(parameterNode + "Contrast");
+            brightness = ParameterDict.Current.GetDouble(parameterNode + "Brightness");
+            contrast = ParameterDict.Current.GetDouble(parameterNode + "Contrast");
 
-            colorIntensity = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorIntensity");
-            useLight = ParameterDict.Exemplar.GetBool(parameterNode + "UseLight");
-            shadowJustify = 1;  ParameterDict.Exemplar.GetDouble(parameterNode + "ShadowJustify");
+            colorIntensity = ParameterDict.Current.GetDouble(parameterNode + "ColorIntensity");
+            useLight = ParameterDict.Current.GetBool(parameterNode + "UseLight");
+            shadowJustify = 1;  ParameterDict.Current.GetDouble(parameterNode + "ShadowJustify");
 
-            shininessFactor = ParameterDict.Exemplar.GetDouble(parameterNode + "ShininessFactor");
-            shininess = ParameterDict.Exemplar.GetDouble(parameterNode + "Shininess");
-            lightRay.X = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.X");
-            lightRay.Y = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Y");
-            lightRay.Z = ParameterDict.Exemplar.GetDouble(parameterNode + "Light.Z");
+            shininessFactor = ParameterDict.Current.GetDouble(parameterNode + "ShininessFactor");
+            shininess = ParameterDict.Current.GetDouble(parameterNode + "Shininess");
+            lightRay.X = ParameterDict.Current.GetDouble(parameterNode + "Light.X");
+            lightRay.Y = ParameterDict.Current.GetDouble(parameterNode + "Light.Y");
+            lightRay.Z = ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
 
-            areaDeph = ParameterDict.Exemplar.GetDouble("Border.Max.y") - ParameterDict.Exemplar.GetDouble("Border.Min.y");
+            areaDeph = ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y");
             // Rotate lightvec:
             Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
             Vec3 tempcoord2 = formula.GetTransformWithoutProjection(lightRay.X, lightRay.Y, lightRay.Z);
@@ -188,22 +188,22 @@ namespace Fractrace.PictureArt
             lightRay.Y = tempcoord2.Y;
             lightRay.Z = tempcoord2.Z;
 
-            useSharpShadow = ParameterDict.Exemplar.GetBool(parameterNode + "UseSharpShadow");
+            useSharpShadow = ParameterDict.Current.GetBool(parameterNode + "UseSharpShadow");
 
-            colorFactorRed = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Red");
-            colorFactorGreen = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Green");
-            colorFactorBlue = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorFactor.Blue");
+            colorFactorRed = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Red");
+            colorFactorGreen = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Green");
+            colorFactorBlue = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Blue");
 
             lightIntensity = 0; // ParameterDict.Exemplar.GetDouble(parameterNode + "LightIntensity");
             if (lightIntensity >= 1.0)
                 shadowNumber = 0;
 
-            colorGreyness = ParameterDict.Exemplar.GetDouble(parameterNode + "ColorGreyness");
-            rgbType = ParameterDict.Exemplar.GetInt(parameterNode + "ColorFactor.RgbType");
+            colorGreyness = ParameterDict.Current.GetDouble(parameterNode + "ColorGreyness");
+            rgbType = ParameterDict.Current.GetInt(parameterNode + "ColorFactor.RgbType");
 
-            backColorRed = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Red");
-            backColorGreen = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Green");
-            backColorBlue = ParameterDict.Exemplar.GetDouble("Renderer.BackColor.Blue");
+            backColorRed = ParameterDict.Current.GetDouble("Renderer.BackColor.Red");
+            backColorGreen = ParameterDict.Current.GetDouble("Renderer.BackColor.Green");
+            backColorBlue = ParameterDict.Current.GetDouble("Renderer.BackColor.Blue");
 
             if (lightIntensity > 1)
                 lightIntensity = 1;
@@ -673,7 +673,7 @@ namespace Fractrace.PictureArt
         {
             // Noch nicht öffentliche Parameter:
             Random rand = new Random();
-            double glow = ParameterDict.Exemplar.GetDouble("Renderer.ShadowGlow");
+            double glow = ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
             // Drei "Schattenlichtquellen"
             // Eine für die Dunklen Tiefen
             // Eine für die breite Normalasicht

@@ -43,21 +43,21 @@ namespace Fractrace.Geometry
         /// </summary>
         public static void SetAspectRatio()
         {
-            double xmin = ParameterDict.Exemplar.GetDouble("Border.Min.x");
-            double xmax = ParameterDict.Exemplar.GetDouble("Border.Max.x");
+            double xmin = ParameterDict.Current.GetDouble("Border.Min.x");
+            double xmax = ParameterDict.Current.GetDouble("Border.Max.x");
             if (xmin > xmax)
             {
                 double temPX = xmin; xmin = xmax; xmax = temPX;
             }
-            double ymin = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            double ymax = ParameterDict.Exemplar.GetDouble("Border.Max.y");
+            double ymin = ParameterDict.Current.GetDouble("Border.Min.y");
+            double ymax = ParameterDict.Current.GetDouble("Border.Max.y");
             if (ymin > ymax)
             {
                 double temPY = ymin; ymin = ymax; ymax = temPY;
             }
 
-            double zmin = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            double zmax = ParameterDict.Exemplar.GetDouble("Border.Max.z");
+            double zmin = ParameterDict.Current.GetDouble("Border.Min.z");
+            double zmax = ParameterDict.Current.GetDouble("Border.Max.z");
             if (xmin > xmax)
             {
                 double temPZ = zmin; zmin = zmax; zmax = temPZ;
@@ -74,8 +74,8 @@ namespace Fractrace.Geometry
             if (diffz > maxDiff)
                 maxDiff = diffz;
 
-            double screenWidth = ParameterDict.Exemplar.GetDouble("View.Width");
-            double screenHeight = ParameterDict.Exemplar.GetDouble("View.Height");
+            double screenWidth = ParameterDict.Current.GetDouble("View.Width");
+            double screenHeight = ParameterDict.Current.GetDouble("View.Height");
             double maxScreenSize = Math.Max(screenWidth, screenHeight);
 
             // diffx/diffz should be equal to screenWidth/screenHeight;
@@ -89,12 +89,12 @@ namespace Fractrace.Geometry
             ymin = centerY - diffy; ymax = centerY + diffy;
             zmin = centerZ - diffz; zmax = centerZ + diffz;
 
-            ParameterDict.Exemplar.SetDouble("Border.Min.x", xmin);
-            ParameterDict.Exemplar.SetDouble("Border.Min.y", ymin);
-            ParameterDict.Exemplar.SetDouble("Border.Min.z", zmin);
-            ParameterDict.Exemplar.SetDouble("Border.Max.x", xmax);
-            ParameterDict.Exemplar.SetDouble("Border.Max.y", ymax);
-            ParameterDict.Exemplar.SetDouble("Border.Max.z", zmax);
+            ParameterDict.Current.SetDouble("Border.Min.x", xmin);
+            ParameterDict.Current.SetDouble("Border.Min.y", ymin);
+            ParameterDict.Current.SetDouble("Border.Min.z", zmin);
+            ParameterDict.Current.SetDouble("Border.Max.x", xmax);
+            ParameterDict.Current.SetDouble("Border.Max.y", ymax);
+            ParameterDict.Current.SetDouble("Border.Max.z", zmax);
         }
 
 

@@ -78,7 +78,7 @@ namespace Fractrace.Scheduler
             mCurrentProgress = 0;
             mmaster.Progress(mCurrentProgress);
             System.Diagnostics.Debug.WriteLine("PaintJob.Run " + updateSteps.ToString());
-            mParameters = ParameterDict.Exemplar.Clone();
+            mParameters = ParameterDict.Current.Clone();
             mUpdateSteps = updateSteps;
             mCurrentProgressd = 100.0 / (double)(mUpdateSteps);
             for (int i = 0; i < mUpdateSteps; i++)

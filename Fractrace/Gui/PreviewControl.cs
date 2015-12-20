@@ -21,11 +21,23 @@ namespace Fractrace
     public class PreviewControl : RenderImage
     {
 
-
+        public Button PreviewButton { get { return this.btnPreview; } }
         protected System.Windows.Forms.Button btnPreview;
 
 
         public event PictureRenderingIsReady RenderingEnds;
+
+        /// <summary>
+        /// Umschaltung, ob bei Mausklick mit den aktuellen Parametern gerechnet werden soll.
+        /// </summary>
+        public bool RenderOnClick { get { return _renderOnClick; } set { _renderOnClick = value; } }
+        protected bool _renderOnClick = true;
+
+        /// <summary>
+        /// Fortschrittsbalken wird ein-bzw. ausgeschaltet.
+        /// </summary>
+        public bool ShowProgressBar { get { return panel1.Visible; } set { panel1.Visible = value; } }
+
 
         /// <summary>
         /// Der Graphik-Kontext wird initialisiert.
@@ -44,15 +56,6 @@ namespace Fractrace
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(labelImage);
-        }
-
-
-        public Button PreviewButton
-        {
-            get
-            {
-                return this.btnPreview;
-            }
         }
 
 
@@ -78,29 +81,9 @@ namespace Fractrace
         /// <param name="e"></param>
         public void btnPreview_Click(object sender, EventArgs e)
         {
-
             smallPreviewCurrentDrawStep = 1;
-            if (mRenderOnClick)
+            if (_renderOnClick)
                 StartDrawing();
-        }
-
-
-        protected bool mRenderOnClick = true;
-
-
-        /// <summary>
-        /// Umschaltung, ob bei Mausklick mit den aktuellen Parametern gerechnet werden soll.
-        /// </summary>
-        public bool RenderOnClick
-        {
-            get
-            {
-                return mRenderOnClick;
-            }
-            set
-            {
-                mRenderOnClick = value;
-            }
         }
 
 
@@ -113,10 +96,6 @@ namespace Fractrace
             btnPreview.BackgroundImage = labelImage;
             grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
         }
-
-
-        Image currentImage = null;
-
 
 
         /// <summary>
@@ -135,24 +114,22 @@ namespace Fractrace
             }
             if (iter != null)
                 iter.Abort();
-            
+
             if (smallPreviewCurrentDrawStep == 1)
             {
-                //currentImage = new Bitmap((int)(btnPreview.Width / 2), (int)(btnPreview.Height / 2));
                 iter = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
             }
             else
             {
-                //currentImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
                 iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
             }
             iter.OneStepProgress = false;
             AssignParameters();
             iter.StartAsync(mParameter,
-                    ParameterDict.Exemplar.GetInt("Formula.Static.Cycles"),
+                    ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
-                    ParameterDict.Exemplar.GetInt("Formula.Static.Formula"),
-                    ParameterDict.Exemplar.GetBool("View.Perspective"));
+                    ParameterDict.Current.GetInt("Formula.Static.Formula"),
+                    ParameterDict.Current.GetBool("View.Perspective"));
             Form1.PublicForm.CurrentUpdateStep = 0;
         }
 
@@ -181,6 +158,16 @@ namespace Fractrace
         protected bool IsSmallPreview()
         {
             return (Image.Width < 150 && Image.Height < 150);
+        }
+
+
+        /// <summary>
+        /// Wird aufgerufen, wenn die asynchrone Berechnung bendet wurde.
+        /// </summary>
+        public override void ComputationEnds()
+        {
+            if (iter == null || !iter.InAbort)
+                this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
 
 
@@ -215,18 +202,7 @@ namespace Fractrace
                             pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
                             pArt.Init(iter.LastUsedFormulas);
                         }
-                        /*
-                        if (currentImage == null)
-                        {
-                            
-                            if (smallPreviewCurrentDrawStep == 1)
-                                currentImage = new Bitmap((int)(btnPreview.Width / 2), (int)(btnPreview.Height / 2));
-                            else
-                                currentImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
-                        }*/
-                        currentImage = new Bitmap((int)(iter.Width), (int)(iter.Height));
-
-                        btnPreview.BackgroundImage = currentImage;
+                        btnPreview.BackgroundImage = new Bitmap((int)(iter.Width), (int)(iter.Height));
                         grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
                         pArt.Paint(grLabel);
                         Application.DoEvents();
@@ -239,8 +215,8 @@ namespace Fractrace
                                 if (RenderingEnds != null)
                                     RenderingEnds();
 
-                                System.Diagnostics.Debug.WriteLine("Initiate next draw in high resolution.");
-                                StartDrawing();
+                                // Uncomment following line for more accurate small preview rendering in next iteration. 
+                                //StartDrawing();
                             }
                             else
                             {
@@ -267,11 +243,10 @@ namespace Fractrace
             }
             btnPreview.Enabled = true;
             inDrawing = false;
-            if (ParameterDict.Exemplar.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl)
+            if (ParameterDict.Current.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl)
             {
                 ParameterInput.MainParameterInput.ComputePreview();
             }
-
             if (forceRedraw)
                 StartDrawing();
         }
@@ -286,22 +261,6 @@ namespace Fractrace
             this.Refresh();
             if (RenderingEnds != null)
                 RenderingEnds();
-        }
-
-
-        /// <summary>
-        /// Fortschrittsbalken wird ein-bzw. ausgeschaltet.
-        /// </summary>
-        public bool ShowProgressBar
-        {
-            get
-            {
-                return panel1.Visible;
-            }
-            set
-            {
-                panel1.Visible = value;
-            }
         }
 
 
@@ -323,6 +282,7 @@ namespace Fractrace
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
 
     }
 }

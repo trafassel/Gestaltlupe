@@ -34,7 +34,7 @@ namespace Fractrace.Basic
         /// </summary>
         protected void Init()
         {
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
             {
                 string parameterName=entry.Key;
                 if (   !ParameterDict.IsAdditionalInfo(parameterName) && HasEntryControl(parameterName))
@@ -84,7 +84,7 @@ namespace Fractrace.Basic
         /// <returns></returns>
         protected bool NeedSubNodes(string category)
         {
-            foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
             {
                 string parameterName = entry.Key;
                 if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName))

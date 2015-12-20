@@ -25,7 +25,7 @@ namespace Fractrace
         public static string GenerateCompressedFormula()
         {
             //return "// sorry not implemnted";
-            string formula = ParameterDict.Exemplar["Intern.Formula.Source"];
+            string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
             formulaSettingCategories.Add("Border");
@@ -40,8 +40,8 @@ namespace Fractrace
 
             // To make the new settings unique
 
-            ParameterDict.Exemplar["intern.Formula.TempUpdateVal"] = "vv";
-            string testHash = ParameterDict.Exemplar.GetHash("");
+            ParameterDict.Current["intern.Formula.TempUpdateVal"] = "vv";
+            string testHash = ParameterDict.Current.GetHash("");
 
             string insertSettingsStringHere = "base.Init();";
             if (formula.Contains(insertSettingsStringHere))
@@ -50,7 +50,7 @@ namespace Fractrace
                 StringBuilder settingsString = new StringBuilder();
                 settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
                 settingsString.Append("SetParameterBulk(\"");
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
                 {
                     bool isInCategorie = false;
                     foreach (string testCategorie in formulaSettingCategories)
@@ -90,7 +90,7 @@ namespace Fractrace
         public static string GenerateCompressedFormulaAndViewSettings()
         {
             //return "// sorry not implemnted";
-            string formula = ParameterDict.Exemplar["Intern.Formula.Source"];
+            string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
             formulaSettingCategories.Add("Border");
@@ -109,8 +109,8 @@ namespace Fractrace
 
             // To make the new settings unique
 
-            ParameterDict.Exemplar["intern.Formula.TempUpdateVal"] = "vv";
-            string testHash = ParameterDict.Exemplar.GetHash("");
+            ParameterDict.Current["intern.Formula.TempUpdateVal"] = "vv";
+            string testHash = ParameterDict.Current.GetHash("");
 
             string insertSettingsStringHere = "base.Init();";
             if (formula.Contains(insertSettingsStringHere))
@@ -119,7 +119,7 @@ namespace Fractrace
                 StringBuilder settingsString = new StringBuilder();
                 settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
                 settingsString.Append("SetParameterBulk(\"");
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.SortedEntries)
+                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
                 {
                     bool isInCategorie = false;
                     foreach (string testCategorie in formulaSettingCategories)

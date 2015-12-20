@@ -51,7 +51,7 @@ namespace Fractrace
         {
             MainParameterInput = this;
             InitializeComponent();
-            ParameterDict.Exemplar.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
+            ParameterDict.Current.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
             navigateControl1.Init(preview1, preview2, this);
             this.animationControl1.Init(mHistory);
             preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
@@ -153,15 +153,15 @@ namespace Fractrace
         /// </summary>
         public void Assign()
         {
-            mParameter.start_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Min.x");
-            mParameter.start_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Min.y");
-            mParameter.start_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Min.z");
-            mParameter.end_tupel.x = ParameterDict.Exemplar.GetDouble("Border.Max.x");
-            mParameter.end_tupel.y = ParameterDict.Exemplar.GetDouble("Border.Max.y");
-            mParameter.end_tupel.z = ParameterDict.Exemplar.GetDouble("Border.Max.z");
-            mParameter.arc.x = ParameterDict.Exemplar.GetDouble("Transformation.AngleX");
-            mParameter.arc.y = ParameterDict.Exemplar.GetDouble("Transformation.AngleY");
-            mParameter.arc.z = ParameterDict.Exemplar.GetDouble("Transformation.AngleZ");
+            mParameter.start_tupel.x = ParameterDict.Current.GetDouble("Border.Min.x");
+            mParameter.start_tupel.y = ParameterDict.Current.GetDouble("Border.Min.y");
+            mParameter.start_tupel.z = ParameterDict.Current.GetDouble("Border.Min.z");
+            mParameter.end_tupel.x = ParameterDict.Current.GetDouble("Border.Max.x");
+            mParameter.end_tupel.y = ParameterDict.Current.GetDouble("Border.Max.y");
+            mParameter.end_tupel.z = ParameterDict.Current.GetDouble("Border.Max.z");
+            mParameter.arc.x = ParameterDict.Current.GetDouble("Transformation.AngleX");
+            mParameter.arc.y = ParameterDict.Current.GetDouble("Transformation.AngleY");
+            mParameter.arc.z = ParameterDict.Current.GetDouble("Transformation.AngleZ");
         }
 
 
@@ -186,7 +186,7 @@ namespace Fractrace
         {
             get
             {
-                return (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Cycles");
+                return (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles");
             }
         }
 
@@ -198,7 +198,7 @@ namespace Fractrace
         {
             get
             {
-                return (int)ParameterDict.Exemplar.GetDouble("View.Raster");
+                return (int)ParameterDict.Current.GetDouble("View.Raster");
             }
         }
 
@@ -210,7 +210,7 @@ namespace Fractrace
         {
             get
             {
-                return ParameterDict.Exemplar.GetDouble("View.Size");
+                return ParameterDict.Current.GetDouble("View.Size");
             }
         }
 
@@ -222,7 +222,7 @@ namespace Fractrace
         {
             get
             {
-                return (int)ParameterDict.Exemplar.GetDouble("Formula.Static.Formula");
+                return (int)ParameterDict.Current.GetDouble("Formula.Static.Formula");
             }
         }
 
@@ -274,9 +274,9 @@ namespace Fractrace
         private void ComputationEnds()
         {
           
-            if (!mPreviewMode || ParameterDict.Exemplar.GetBool("View.Pipeline.UpdatePreview"))
+            if (!mPreviewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
             {
-                int updateSteps = ParameterDict.Exemplar.GetInt("View.UpdateSteps");
+                int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
                 if (Form1.PublicForm.CurrentUpdateStep < updateSteps)
                 {
                     if (mPreviewMode)
@@ -444,7 +444,7 @@ namespace Fractrace
             sd.Filter = "*.xml|*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
             if (sd.ShowDialog() == DialogResult.OK)
             {
-                ParameterDict.Exemplar.Save(sd.FileName);
+                ParameterDict.Current.Save(sd.FileName);
             }
         }
 
@@ -477,7 +477,7 @@ namespace Fractrace
                     dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
                 }
 
-                ParameterDict.Exemplar.Load(dataFileName);
+                ParameterDict.Current.Load(dataFileName);
                 ShowPicture(dataFileName);
                 Data.Update();
                 parameterDictControl1.UpdateFromData();
@@ -632,8 +632,8 @@ namespace Fractrace
         {
 
 
-            double winput = ParameterDict.Exemplar.GetDouble("View.Width");
-            double hinput = ParameterDict.Exemplar.GetDouble("View.Height");
+            double winput = ParameterDict.Current.GetDouble("View.Width");
+            double hinput = ParameterDict.Current.GetDouble("View.Height");
             double aspectRatio = winput / hinput;
 
             int width = 110;
@@ -878,13 +878,13 @@ namespace Fractrace
                     // Ende
                     mPosterStep = 0;
                     mPosterMode = false;
-                    ParameterDict.Exemplar.SetInt("View.PosterX", 0);
-                    ParameterDict.Exemplar.SetInt("View.PosterZ", 0);
+                    ParameterDict.Current.SetInt("View.PosterX", 0);
+                    ParameterDict.Current.SetInt("View.PosterZ", 0);
                     return;
             }
 
-            ParameterDict.Exemplar.SetInt("View.PosterX", xi);
-            ParameterDict.Exemplar.SetInt("View.PosterZ", yi);
+            ParameterDict.Current.SetInt("View.PosterX", xi);
+            ParameterDict.Current.SetInt("View.PosterZ", yi);
             Form1.PublicForm.inPreview = false;
             ForceRedraw();
             mPosterStep++;
@@ -963,7 +963,7 @@ namespace Fractrace
         /// <param name="fileName">Name of the file.</param>
         private void LoadConfiguration(string fileName)
         {
-            ParameterDict.Exemplar.Load(fileName);
+            ParameterDict.Current.Load(fileName);
             ShowPicture(fileName);
             Data.Update();
             parameterDictControl1.UpdateFromData();
@@ -996,13 +996,13 @@ namespace Fractrace
                     mHistory.CurrentTime = mHistory.Save();
                 }
                 // Size und Raster festlegen
-                string sizeStr = ParameterDict.Exemplar["View.Size"];
-                ParameterDict.Exemplar["View.Size"] = "0.2";
+                string sizeStr = ParameterDict.Current["View.Size"];
+                ParameterDict.Current["View.Size"] = "0.2";
                 Form1.PublicForm.inPreview = true;
                 ForceRedraw();
                 Form1.PublicForm.inPreview = false;
                 // Size und Raster auf die Ursprungswerte setzen
-                ParameterDict.Exemplar["View.Size"] = sizeStr;
+                ParameterDict.Current["View.Size"] = sizeStr;
             }
         }
 
@@ -1097,7 +1097,7 @@ namespace Fractrace
             }
             if (od.ShowDialog() == DialogResult.OK)
             {
-                ParameterDict.Exemplar.Append(od.FileName);
+                ParameterDict.Current.Append(od.FileName);
                 ShowPicture(od.FileName);
                 Data.Update();
                 parameterDictControl1.UpdateFromData();
@@ -1129,7 +1129,7 @@ namespace Fractrace
                 formulaSettingCategories.Add("Transformation");
                 formulaSettingCategories.Add("Formula");
                 formulaSettingCategories.Add("Intern.Formula");
-                ParameterDict.Exemplar.Save(sd.FileName, formulaSettingCategories);
+                ParameterDict.Current.Save(sd.FileName, formulaSettingCategories);
             }
         }
 

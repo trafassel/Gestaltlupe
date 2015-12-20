@@ -39,7 +39,7 @@ namespace Fractrace.Basic
                 try
                 {
                     Dictionary<string, string> dict = new Dictionary<string, string>();
-                    foreach (KeyValuePair<string, string> entry in ParameterDict.Exemplar.Entries)
+                    foreach (KeyValuePair<string, string> entry in ParameterDict.Current.Entries)
                     {
                         dict[entry.Key] = entry.Value;
 
@@ -81,7 +81,7 @@ namespace Fractrace.Basic
             {
                 // Use the following, if no update events should be raised.
                 // ParameterDict.Exemplar.SetValue(entry.Key, entry.Value, false);
-                ParameterDict.Exemplar[entry.Key] = entry.Value;
+                ParameterDict.Current[entry.Key] = entry.Value;
             }
         }
 
@@ -114,11 +114,11 @@ namespace Fractrace.Basic
                     if (index < Time)
                         lastDouble = GetDouble((int)index + 1, entry.Key);
                     double r = (index - (int)index);
-                    ParameterDict.Exemplar.SetDouble(entry.Key, (r * lastDouble + (1 - r) * firstDouble));
+                    ParameterDict.Current.SetDouble(entry.Key, (r * lastDouble + (1 - r) * firstDouble));
                 }
                 else
                 { // use first entry
-                    ParameterDict.Exemplar[entry.Key] = entry.Value;
+                    ParameterDict.Current[entry.Key] = entry.Value;
                 }
             }
         }
@@ -167,11 +167,11 @@ namespace Fractrace.Basic
                     double tm2 = tm * tm;
                     double t2 = t * t;
                     double val = tm2 * tm * p0 + 3.0 * tm2 * t * p1 + 3.0 * tm * t2 * p2 + t2 * t * p3;
-                    ParameterDict.Exemplar.SetDouble(entry.Key, val);
+                    ParameterDict.Current.SetDouble(entry.Key, val);
                 }
                 else
                 { // use first entry
-                    ParameterDict.Exemplar[entry.Key] = entry.Value;
+                    ParameterDict.Current[entry.Key] = entry.Value;
                 }
             }
         }
