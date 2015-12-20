@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 using Fractrace.Basic;
-using Fractrace.DataTypes;
 
 namespace Fractrace
 {
 
     public delegate void PictureRenderingIsReady();
 
+    public delegate void Progress(double progress);
 
     /// <summary>
     /// Control which displays the redered image.
@@ -24,8 +20,9 @@ namespace Fractrace
         public Button PreviewButton { get { return this.btnPreview; } }
         protected System.Windows.Forms.Button btnPreview;
 
-
         public event PictureRenderingIsReady RenderingEnds;
+
+        public event Progress ProgressEvent;
 
         /// <summary>
         /// Umschaltung, ob bei Mausklick mit den aktuellen Parametern gerechnet werden soll.
@@ -55,7 +52,7 @@ namespace Fractrace
             this.btnPreview.BackgroundImageLayout = ImageLayout.Stretch;
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
-            grLabel = Graphics.FromImage(labelImage);
+            _graphics = Graphics.FromImage(labelImage);
         }
 
 
@@ -68,8 +65,8 @@ namespace Fractrace
             p.Width = 3;
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
-            grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
-            grLabel.DrawRectangle(p, 0, 0, (float)btnPreview.Width, (float)btnPreview.Height);
+            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+            _graphics.DrawRectangle(p, 0, 0, (float)btnPreview.Width, (float)btnPreview.Height);
             this.Refresh();
         }
 
@@ -81,7 +78,7 @@ namespace Fractrace
         /// <param name="e"></param>
         public void btnPreview_Click(object sender, EventArgs e)
         {
-            smallPreviewCurrentDrawStep = 1;
+            _smallPreviewCurrentDrawStep = 1;
             if (_renderOnClick)
                 StartDrawing();
         }
@@ -94,7 +91,7 @@ namespace Fractrace
         {
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
-            grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
+            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
         }
 
 
@@ -104,28 +101,28 @@ namespace Fractrace
         protected override void StartDrawing()
         {
             Form1.PublicForm.Stop();
-            forceRedraw = false;
+            _forceRedraw = false;
             btnPreview.Enabled = false;
-            inDrawing = true;
+            _inDrawing = true;
             if (btnPreview.Width < 1 && btnPreview.Height < 1)
             {
                 Form1.PublicForm.CurrentUpdateStep = 0;
                 return;
             }
-            if (iter != null)
-                iter.Abort();
+            if (_iterate != null)
+                _iterate.Abort();
 
-            if (smallPreviewCurrentDrawStep == 1)
+            if (_smallPreviewCurrentDrawStep == 1)
             {
-                iter = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+                _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
             }
             else
             {
-                iter = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+                _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
             }
-            iter.OneStepProgress = false;
+            _iterate.OneStepProgress = false;
             AssignParameters();
-            iter.StartAsync(mParameter,
+            _iterate.StartAsync(_parameter,
                     ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
                     ParameterDict.Current.GetInt("Formula.Static.Formula"),
@@ -146,7 +143,7 @@ namespace Fractrace
             set
             {
                 btnPreview.BackgroundImage = value;
-                grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
+                _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             }
         }
 
@@ -166,7 +163,7 @@ namespace Fractrace
         /// </summary>
         public override void ComputationEnds()
         {
-            if (iter == null || !iter.InAbort)
+            if (_iterate == null || !_iterate.InAbort)
                 this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
 
@@ -176,41 +173,41 @@ namespace Fractrace
         /// </summary>
         protected override void OneStepEnds()
         {
-            if (iter != null)
+            if (_iterate != null)
             {
-                lock (iter)
+                lock (_iterate)
                 {
-                    if (iter.InAbort)
+                    if (_iterate.InAbort)
                         return;
                     try
                     {
                         Fractrace.PictureArt.Renderer pArt;
-                        if (fixedRenderer == -1)
+                        if (_fixedRenderer == -1)
                         {
                             if (IsSmallPreview())
                             {
-                                pArt = new PictureArt.FastPreviewRenderer(iter.PictureData);
-                                pArt.Init(iter.LastUsedFormulas);
+                                pArt = new PictureArt.FastPreviewRenderer(_iterate.PictureData);
+                                pArt.Init(_iterate.LastUsedFormulas);
                             }
                             else
                             {
-                                pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                                pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
                             }
+                            btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
+                            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+                            pArt.Paint(_graphics);
+                            Application.DoEvents();
+                            this.Refresh();
                         }
                         else
                         {
-                            pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
-                            pArt.Init(iter.LastUsedFormulas);
+                            DrawFromView();
                         }
-                        btnPreview.BackgroundImage = new Bitmap((int)(iter.Width), (int)(iter.Height));
-                        grLabel = Graphics.FromImage(btnPreview.BackgroundImage);
-                        pArt.Paint(grLabel);
-                        Application.DoEvents();
-                        this.Refresh();
+                       
                         if (IsSmallPreview())
                         {
-                            smallPreviewCurrentDrawStep++;
-                            if (smallPreviewCurrentDrawStep == 2 && fixedRenderer == -1)
+                            _smallPreviewCurrentDrawStep++;
+                            if (_smallPreviewCurrentDrawStep == 2 && _fixedRenderer == -1)
                             {
                                 if (RenderingEnds != null)
                                     RenderingEnds();
@@ -220,14 +217,14 @@ namespace Fractrace
                             }
                             else
                             {
-                                if (fixedRenderer == -1)
+                                if (_fixedRenderer == -1)
                                 {
                                     if (RenderingEnds != null)
                                         RenderingEnds();
                                 }
                             }
-                            if (smallPreviewCurrentDrawStep > 1)
-                                smallPreviewCurrentDrawStep = 0;
+                            if (_smallPreviewCurrentDrawStep > 1)
+                                _smallPreviewCurrentDrawStep = 0;
                         }
                         else
                         {
@@ -242,14 +239,39 @@ namespace Fractrace
                 }
             }
             btnPreview.Enabled = true;
-            inDrawing = false;
+            _inDrawing = false;
             if (ParameterDict.Current.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl)
             {
                 ParameterInput.MainParameterInput.ComputePreview();
             }
-            if (forceRedraw)
+            if (_forceRedraw)
                 StartDrawing();
         }
+
+        /// <summary>
+        /// Fortschritt in Prozent.
+        /// </summary>
+        /// <param name="progressInPercent"></param>
+        public override void Progress(double progressInPercent)
+        {
+            base.Progress(progressInPercent);
+            if(ProgressEvent!=null)
+                ProgressEvent(progressInPercent);
+        }
+
+
+        private void DrawFromView()
+        {
+            Fractrace.PictureArt.Renderer pArt;
+            pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
+            pArt.Init(_iterate.LastUsedFormulas);
+            btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
+            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+            pArt.Paint(_graphics);
+            Application.DoEvents();
+            this.Refresh();
+        }
+
 
 
         /// <summary>
@@ -266,19 +288,19 @@ namespace Fractrace
 
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this.mPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // mPictureBox
             // 
-            this.mPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this._pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             // 
             // PreviewControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "PreviewControl";
-            ((System.ComponentModel.ISupportInitialize)(this.mPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
         }

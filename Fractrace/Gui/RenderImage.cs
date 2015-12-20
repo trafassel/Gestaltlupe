@@ -20,9 +20,73 @@ namespace Fractrace
             Init();
         }
 
-        protected Image labelImage = null;
+        protected Graphics _graphics = null;
 
-        protected Graphics grLabel = null;
+        /// <summary>
+        /// Public access to the internal iterate object to reuse the iteration results.
+        /// </summary>
+        public Iterate Iterate  {  get   {  return _iterate; }  }
+        protected Iterate _iterate = null;
+
+        int _maxx = 0;
+
+        int _maxy = 0;
+
+        protected bool _isRightView = false;
+
+        public bool IsRightView  {  get {   return _isRightView;  }  set  {   _isRightView = value;  } }
+
+        protected PictureBox _pictureBox = null;
+
+        /// <summary>
+        /// Zugriff auf die Bearbeitungsparameter.
+        /// </summary>
+        protected FracValues _parameter = new FracValues();
+
+        /// <summary>
+        /// Gibt an, ob zur Zeit gezeichnet wird.
+        /// </summary>
+        protected bool _inDrawing = false;
+
+        /// <summary>
+        /// True, wenn von außen das Neuzeichnen aktiviert wurde.
+        /// Das bedeutet, nach der aktuellen Zeichnung ist neuzuzeichnen.
+        /// </summary>
+        protected bool _forceRedraw = false;
+
+        /// <summary>
+        /// smallPreviewCurrentDrawStep == 0 : iter(width/2,height/2) , FastPreviewRenderer
+        /// smallPreviewCurrentDrawStep == 1 : FastPreviewRenderer  
+        /// </summary>
+        protected int _smallPreviewCurrentDrawStep = 0;
+
+        /// <summary>
+        /// if fixedRenderer != -1 renderer to use for creating the bitmap.
+        /// </summary>
+        protected int _fixedRenderer = -1;
+
+        /// <summary>
+        /// Fortschritt der Berechnung in Prozent.
+        /// </summary>
+        protected double _progress = 0;
+
+        protected delegate void ProgressDelegate();
+
+        public delegate void OneStepEndsDelegate();
+
+        /// <summary>
+        /// While computation this value is set to true.
+        /// </summary>
+        public bool InDrawing { get { return _inDrawing; } }
+
+        /// <summary>
+        /// Der Graphik-Kontext wird initialisiert.
+        /// </summary>
+        protected virtual void Init()
+        {
+            _pictureBox = new PictureBox();
+            this.panel2.Controls.Add(_pictureBox);
+        }
 
 
         /// <summary>
@@ -30,122 +94,47 @@ namespace Fractrace
         /// </summary>
         public void Abort()
         {
-            if (iter != null)
+            if (_iterate != null)
             {
-                iter.Abort();
+                _iterate.Abort();
             }
         }
-
-
-        /// <summary>
-        /// Public access to the internal iterate object to reuse the iteration results.
-        /// </summary>
-        public Iterate Iterate
-        {
-            get
-            {
-                return iter;
-            }
-        }
-
-        protected Iterate iter = null;
-
-        int maxx = 0;
-
-        int maxy = 0;
-
-        protected bool isRightView = false;
-
-        public bool IsRightView
-        {
-            get
-            {
-                return isRightView;
-            }
-
-            set
-            {
-                isRightView = value;
-            }
-        }
-
-        /// <summary>
-        /// Der Graphik-Kontext wird initialisiert.
-        /// </summary>
-        protected virtual void Init()
-        {
-            mPictureBox = new PictureBox();
-            this.panel2.Controls.Add(mPictureBox);
-        }
-
-
-
-        protected PictureBox mPictureBox = null;
 
 
         protected void SetPictureBoxSize()
         {
             double widthInPixel = ParameterDict.Current.GetDouble("View.Width");
             double heightInPixel = ParameterDict.Current.GetDouble("View.Height");
-            //ParameterDict.Exemplar["View.Deph"] = "800";
-
-
             int maxSizeX = (int)(widthInPixel * ParameterDict.Current.GetDouble("View.Size"));
             int maxSizeY = (int)(heightInPixel * ParameterDict.Current.GetDouble("View.Size"));
-            if (maxx != maxSizeX || maxy != maxSizeY)
+            if (_maxx != maxSizeX || _maxy != maxSizeY)
             {
-                maxx = maxSizeX;
-                maxy = maxSizeY;
-                mPictureBox.Width = maxx;
-                mPictureBox.Height = maxy;
-                Image labelImage = new Bitmap((int)(maxx), (int)(maxy));
-                mPictureBox.Image = labelImage;
-                grLabel = Graphics.FromImage(labelImage);
+                _maxx = maxSizeX;
+                _maxy = maxSizeY;
+                _pictureBox.Width = _maxx;
+                _pictureBox.Height = _maxy;
+                Image labelImage = new Bitmap((int)(_maxx), (int)(_maxy));
+                _pictureBox.Image = labelImage;
+                _graphics = Graphics.FromImage(labelImage);
             }
-
         }
 
-
-        /// <summary>
-        /// Zugriff auf die Bearbeitungsparameter.
-        /// </summary>
-        protected FracValues mParameter = new FracValues();
-
-
-        /// <summary>
-        /// Gibt an, ob zur Zeit gezeichnet wird.
-        /// </summary>
-        protected bool inDrawing = false;
-
-
-        /// <summary>
-        /// True, wenn von außen das Neuzeichnen aktiviert wurde.
-        /// Das bedeutet, nach der aktuellen Zeichnung ist neuzuzeichnen.
-        /// </summary>
-        protected bool forceRedraw = false;
-
-        /// <summary>
-        /// smallPreviewCurrentDrawStep == 0 : iter(width/2,height/2) , FastPreviewRenderer
-        /// smallPreviewCurrentDrawStep == 1 : FastPreviewRenderer  
-        /// </summary>
-        protected int smallPreviewCurrentDrawStep = 0;
 
         /// <summary>
         /// Neuzeichnen.
         /// </summary>
         protected virtual void StartDrawing()
         {
-            forceRedraw = false;
-            inDrawing = true;
+            _forceRedraw = false;
+            _inDrawing = true;
             SetPictureBoxSize();
-            iter = new Iterate(maxx, maxy, this, IsRightView);
+            _iterate = new Iterate(_maxx, _maxy, this, IsRightView);
             AssignParameters();
-            iter.StartAsync(mParameter,
+            _iterate.StartAsync(_parameter,
                     ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
                     ParameterDict.Current.GetInt("Formula.Static.Formula"),
                     ParameterDict.Current.GetBool("View.Perspective"));
-
         }
 
 
@@ -154,7 +143,7 @@ namespace Fractrace
         /// </summary>
         protected virtual void AssignParameters()
         {
-            mParameter.SetFromParameterDict();
+            _parameter.SetFromParameterDict();
         }
 
 
@@ -163,26 +152,20 @@ namespace Fractrace
         /// </summary>
         public virtual void Draw()
         {
-            smallPreviewCurrentDrawStep = 1;
-            fixedRenderer = -1;
-            if (!inDrawing)
+            _smallPreviewCurrentDrawStep = 1;
+            _fixedRenderer = -1;
+            if (!_inDrawing)
                 StartDrawing();
             else
             {
-                if (iter != null)
+                if (_iterate != null)
                 {
-                    iter.Abort();
+                    _iterate.Abort();
                 }
-                iter = null;
-                forceRedraw = true;
+                _iterate = null;
+                _forceRedraw = true;
             }
         }
-
-
-        /// <summary>
-        /// if fixedRenderer != -1 renderer to use for creating the bitmap.
-        /// </summary>
-        protected int fixedRenderer = -1;
 
 
         /// <summary>
@@ -192,19 +175,9 @@ namespace Fractrace
         /// <param name="renderer"></param>
         public virtual void Redraw(Iterate otherIterate, int renderer)
         {
-            fixedRenderer = renderer;
-            iter = otherIterate;
+            _fixedRenderer = renderer;
+            _iterate = otherIterate;
             OneStepEnds();
-        }
-
-
-        /// <summary>
-        /// Will be ignored in preview.
-        /// </summary>
-        /// <param name="progressInPercent"></param>
-        public void SubProgress(double progressInPercent)
-        {
-
         }
 
 
@@ -212,32 +185,23 @@ namespace Fractrace
         /// Fortschritt in Prozent.
         /// </summary>
         /// <param name="progressInPercent"></param>
-        public void Progress(double progressInPercent)
+        public virtual void Progress(double progressInPercent)
         {
-            if (mProgress < progressInPercent - 2 || mProgress > progressInPercent)
+            if (_progress < progressInPercent - 2 || _progress > progressInPercent)
             {
-                mProgress = progressInPercent;
+                _progress = progressInPercent;
                 // TODO: Testen, ob Invoke die Ausführung verlangsamt
                 this.Invoke(new ProgressDelegate(OnProgress));
             }
         }
 
 
-        protected delegate void ProgressDelegate();
-
-
         protected void OnProgress()
         {
-            if (mProgress >= 0 && mProgress <= 100)
-                progressBar1.Value = (int)mProgress;
+            if (_progress >= 0 && _progress <= 100)
+                progressBar1.Value = (int)_progress;
 
         }
-
-        /// <summary>
-        /// Fortschritt der Berechnung in Prozent.
-        /// </summary>
-        protected double mProgress = 0;
-
 
 
         /// <summary>
@@ -245,12 +209,9 @@ namespace Fractrace
         /// </summary>
         public virtual void ComputationEnds()
         {
-            if(iter==null || !iter.InAbort)
+            if(_iterate==null || !_iterate.InAbort)
               this.Invoke(new OneStepEndsDelegate(OneStepEnds));
         }
-
-
-        public delegate void OneStepEndsDelegate();
 
 
         /// <summary>
@@ -258,41 +219,29 @@ namespace Fractrace
         /// </summary>
         protected virtual void OneStepEnds()
         {
-            if (iter != null)
+            if (_iterate != null)
             {
                 Fractrace.PictureArt.Renderer pArt;
-                if (fixedRenderer == -1)
-                    pArt = PictureArt.PictureArtFactory.Create(iter.PictureData, iter.LastUsedFormulas);
+                if (_fixedRenderer == -1)
+                    pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
                 else
-                    pArt = new PictureArt.FrontViewRenderer(iter.PictureData);
-                pArt.Paint(grLabel);
+                    pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
+                pArt.Paint(_graphics);
                 Application.DoEvents();
                 this.Refresh();
                 // In instance of RenderImage is used in the big stereo
                 // and in the small preview display. Which variant is used is (clumsy) detected
                 // by the picture size.
-                if (mPictureBox.Image.Width > 400)
+                if (_pictureBox.Image.Width > 400)
                 {
                     string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.png");
                     this.Text = fileName;
-                    mPictureBox.Image.Save(fileName);
+                    _pictureBox.Image.Save(fileName);
                 }
             }
-            inDrawing = false;
-            if (forceRedraw)
+            _inDrawing = false;
+            if (_forceRedraw)
                 StartDrawing();
-        }
-
-
-        /// <summary>
-        /// While computation this value is set to true.
-        /// </summary>
-        public bool InDrawing
-        {
-            get
-            {
-                return inDrawing;
-            }
         }
 
 

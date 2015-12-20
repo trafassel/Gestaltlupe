@@ -57,7 +57,7 @@
             // btnLeft
             // 
             this.btnLeft.Location = new System.Drawing.Point(13, 63);
-            this.btnLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLeft.Margin = new System.Windows.Forms.Padding(2);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(44, 28);
             this.btnLeft.TabIndex = 0;
@@ -68,7 +68,7 @@
             // btnRight
             // 
             this.btnRight.Location = new System.Drawing.Point(139, 63);
-            this.btnRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRight.Margin = new System.Windows.Forms.Padding(2);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(44, 28);
             this.btnRight.TabIndex = 1;
@@ -79,7 +79,7 @@
             // btnTop
             // 
             this.btnTop.Location = new System.Drawing.Point(83, 23);
-            this.btnTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTop.Margin = new System.Windows.Forms.Padding(2);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(26, 48);
             this.btnTop.TabIndex = 2;
@@ -90,7 +90,7 @@
             // btnDown
             // 
             this.btnDown.Location = new System.Drawing.Point(83, 81);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(26, 48);
             this.btnDown.TabIndex = 3;
@@ -101,7 +101,7 @@
             // btnForward
             // 
             this.btnForward.Location = new System.Drawing.Point(12, 23);
-            this.btnForward.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnForward.Margin = new System.Windows.Forms.Padding(2);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(44, 28);
             this.btnForward.TabIndex = 4;
@@ -112,7 +112,7 @@
             // btnBackwards
             // 
             this.btnBackwards.Location = new System.Drawing.Point(139, 23);
-            this.btnBackwards.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBackwards.Margin = new System.Windows.Forms.Padding(2);
             this.btnBackwards.Name = "btnBackwards";
             this.btnBackwards.Size = new System.Drawing.Size(44, 28);
             this.btnBackwards.TabIndex = 5;
@@ -123,7 +123,7 @@
             // btnZoomX
             // 
             this.btnZoomX.Location = new System.Drawing.Point(12, 243);
-            this.btnZoomX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZoomX.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomX.Name = "btnZoomX";
             this.btnZoomX.Size = new System.Drawing.Size(67, 28);
             this.btnZoomX.TabIndex = 6;
@@ -134,7 +134,7 @@
             // btnZoomY
             // 
             this.btnZoomY.Location = new System.Drawing.Point(83, 243);
-            this.btnZoomY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZoomY.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomY.Name = "btnZoomY";
             this.btnZoomY.Size = new System.Drawing.Size(67, 28);
             this.btnZoomY.TabIndex = 7;
@@ -145,7 +145,7 @@
             // btnZoomZ
             // 
             this.btnZoomZ.Location = new System.Drawing.Point(154, 243);
-            this.btnZoomZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZoomZ.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZ.Name = "btnZoomZ";
             this.btnZoomZ.Size = new System.Drawing.Size(67, 28);
             this.btnZoomZ.TabIndex = 8;
@@ -156,7 +156,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 274);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 28);
             this.button1.TabIndex = 9;
@@ -167,7 +167,7 @@
             // btnZoomYout
             // 
             this.btnZoomYout.Location = new System.Drawing.Point(83, 274);
-            this.btnZoomYout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZoomYout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomYout.Name = "btnZoomYout";
             this.btnZoomYout.Size = new System.Drawing.Size(67, 28);
             this.btnZoomYout.TabIndex = 10;
@@ -178,7 +178,7 @@
             // btnZoomZout
             // 
             this.btnZoomZout.Location = new System.Drawing.Point(154, 274);
-            this.btnZoomZout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnZoomZout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZout.Name = "btnZoomZout";
             this.btnZoomZout.Size = new System.Drawing.Size(67, 28);
             this.btnZoomZout.TabIndex = 11;
@@ -189,11 +189,11 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(243, 70);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(55, 20);
             this.textBox1.TabIndex = 12;
-            this.textBox1.Text = "16";
+            this.textBox1.Text = "6";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
@@ -219,17 +219,17 @@
             // tbZoomFactor
             // 
             this.tbZoomFactor.Location = new System.Drawing.Point(243, 106);
-            this.tbZoomFactor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbZoomFactor.Margin = new System.Windows.Forms.Padding(2);
             this.tbZoomFactor.Name = "tbZoomFactor";
             this.tbZoomFactor.Size = new System.Drawing.Size(55, 20);
             this.tbZoomFactor.TabIndex = 15;
-            this.tbZoomFactor.Text = "16";
+            this.tbZoomFactor.Text = "6";
             this.tbZoomFactor.TextChanged += new System.EventHandler(this.tbZoomFactor_TextChanged);
             // 
             // btnRotX
             // 
             this.btnRotX.Location = new System.Drawing.Point(13, 154);
-            this.btnRotX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotX.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotX.Name = "btnRotX";
             this.btnRotX.Size = new System.Drawing.Size(44, 28);
             this.btnRotX.TabIndex = 16;
@@ -240,7 +240,7 @@
             // btnRotY
             // 
             this.btnRotY.Location = new System.Drawing.Point(76, 154);
-            this.btnRotY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotY.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotY.Name = "btnRotY";
             this.btnRotY.Size = new System.Drawing.Size(44, 28);
             this.btnRotY.TabIndex = 17;
@@ -251,7 +251,7 @@
             // btnRotZ
             // 
             this.btnRotZ.Location = new System.Drawing.Point(136, 154);
-            this.btnRotZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotZ.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotZ.Name = "btnRotZ";
             this.btnRotZ.Size = new System.Drawing.Size(44, 28);
             this.btnRotZ.TabIndex = 18;
@@ -262,7 +262,7 @@
             // btnRotZneg
             // 
             this.btnRotZneg.Location = new System.Drawing.Point(136, 185);
-            this.btnRotZneg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotZneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotZneg.Name = "btnRotZneg";
             this.btnRotZneg.Size = new System.Drawing.Size(44, 28);
             this.btnRotZneg.TabIndex = 21;
@@ -273,7 +273,7 @@
             // btnRotYneg
             // 
             this.btnRotYneg.Location = new System.Drawing.Point(76, 185);
-            this.btnRotYneg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotYneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotYneg.Name = "btnRotYneg";
             this.btnRotYneg.Size = new System.Drawing.Size(44, 28);
             this.btnRotYneg.TabIndex = 20;
@@ -284,7 +284,7 @@
             // btnRotXneg
             // 
             this.btnRotXneg.Location = new System.Drawing.Point(12, 185);
-            this.btnRotXneg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRotXneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotXneg.Name = "btnRotXneg";
             this.btnRotXneg.Size = new System.Drawing.Size(44, 28);
             this.btnRotXneg.TabIndex = 19;
@@ -305,7 +305,7 @@
             // tbAngle
             // 
             this.tbAngle.Location = new System.Drawing.Point(243, 178);
-            this.tbAngle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbAngle.Margin = new System.Windows.Forms.Padding(2);
             this.tbAngle.Name = "tbAngle";
             this.tbAngle.Size = new System.Drawing.Size(55, 20);
             this.tbAngle.TabIndex = 23;
@@ -335,7 +335,7 @@
             // btnAspect
             // 
             this.btnAspect.Location = new System.Drawing.Point(230, 245);
-            this.btnAspect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAspect.Margin = new System.Windows.Forms.Padding(2);
             this.btnAspect.Name = "btnAspect";
             this.btnAspect.Size = new System.Drawing.Size(66, 56);
             this.btnAspect.TabIndex = 27;
@@ -347,7 +347,7 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(12, 142);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(284, 2);
             this.panel1.TabIndex = 28;
@@ -356,7 +356,7 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(13, 228);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(284, 2);
             this.panel2.TabIndex = 29;
@@ -394,7 +394,7 @@
             this.Controls.Add(this.btnTop);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NavigateControl";
             this.Size = new System.Drawing.Size(326, 328);
             this.ResumeLayout(false);

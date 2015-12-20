@@ -20,6 +20,7 @@ namespace Fractrace
     public partial class ParameterInput : Form
     {
 
+        public delegate void VoidDelegate();
 
         /// <summary>
         /// Global instance of this unique window.
@@ -55,6 +56,9 @@ namespace Fractrace
             navigateControl1.Init(preview1, preview2, this);
             this.animationControl1.Init(mHistory);
             preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
+            preview1.ShowProgressBar = false;
+            preview2.ShowProgressBar = false;
+            preview1.ProgressEvent += Preview1_ProgressEvent;
             string assembyInfo = System.Reflection.Assembly.GetExecutingAssembly().FullName;
             string[] infos = assembyInfo.Split(',');
             string version = "";
@@ -63,6 +67,20 @@ namespace Fractrace
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 1;
             SetSmallPreviewSize();
+        }
+
+        private void Preview1_ProgressEvent(double progress)
+        {
+            this.Invoke(new VoidDelegate(UpdateFrontView));
+         //   preview2.Progress(progress);
+        }
+
+
+        private void UpdateFrontView()
+        {
+            preview2.InitLabelImage();
+            preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
+
         }
 
 
@@ -335,7 +353,7 @@ namespace Fractrace
         private void OK()
         {
             Changed = true;
-            Form1.PublicForm.inPreview = false;
+            Form1.PublicForm._inPreview = false;
             ForceRedraw();
         }
 
@@ -527,7 +545,7 @@ namespace Fractrace
             {
                 mHistory.CurrentTime = mHistory.Save();
             }
-            Form1.PublicForm.inPreview = false;
+            Form1.PublicForm._inPreview = false;
             ForceRedraw();
 
         }
@@ -885,7 +903,7 @@ namespace Fractrace
 
             ParameterDict.Current.SetInt("View.PosterX", xi);
             ParameterDict.Current.SetInt("View.PosterZ", yi);
-            Form1.PublicForm.inPreview = false;
+            Form1.PublicForm._inPreview = false;
             ForceRedraw();
             mPosterStep++;
         }
@@ -998,9 +1016,9 @@ namespace Fractrace
                 // Size und Raster festlegen
                 string sizeStr = ParameterDict.Current["View.Size"];
                 ParameterDict.Current["View.Size"] = "0.2";
-                Form1.PublicForm.inPreview = true;
+                Form1.PublicForm._inPreview = true;
                 ForceRedraw();
-                Form1.PublicForm.inPreview = false;
+                Form1.PublicForm._inPreview = false;
                 // Size und Raster auf die Ursprungswerte setzen
                 ParameterDict.Current["View.Size"] = sizeStr;
             }
