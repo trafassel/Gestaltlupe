@@ -19,8 +19,6 @@ namespace Fractrace
     {
 
 
-     
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
         /// </summary>
@@ -34,11 +32,11 @@ namespace Fractrace
             PublicForm = this;
         }
 
+
         /// <summary>
         /// The input control.
         /// </summary>
         private ParameterInput _paras = null;
-
 
         /// <summary>
         /// Unique Instance of this Window.
@@ -55,96 +53,85 @@ namespace Fractrace
         /// </summary>
         public Graphics GestaltPicture { get { return _graphics; } }
 
-
         /// <summary>
         /// With of the bitmap.
         /// </summary>
         int _width = 0;
-
 
         /// <summary>
         /// Heigth of the Bitmap.
         /// </summary>
         int _height = 0;
 
-
         /// <summary>
         /// Current computing algorithm of the surface data of the "Gestalt". 
         /// </summary>
         Iterate _iterate = null;
-
 
         /// <summary>
         /// Copy of iter for using in picture art. 
         /// </summary>
         Iterate _iterateForPictureArt = null;
 
-
         /// <summary>
         /// Zoom Area
         /// </summary>
         int _zoomX1 = 0, _zoomX2 = 0, _zoomY1 = 0, _zoomY2 = 0;
-
 
         /// <summary>
         /// True, while left mouse button is pressed.
         /// </summary>
         private bool _inMouseDown = false;
 
-
         /// <summary>
         /// The Hash of the Parameters of the last rendering (but without picture art settings).
         /// </summary>
         protected string _oldParameterHashWithoutPictureArt = "";
-
 
         /// <summary>
         /// The Hash of the Parameters of the last rendering (but without picture art settings and navigation).
         /// </summary>
         protected string _oldParameterHashWithoutPictureArtAndNavigation = "";
 
-
         /// <summary>
         /// Delegate for the OneStepEnds event.
         /// </summary>
         delegate void OneStepEndsDelegate();
-
 
         /// <summary>
         /// If false, a warning message is shown before closing the application.
         /// </summary>
         protected bool _forceClosing = false;
 
-
         /// <summary>
         /// Indicates, that zooming is enabled.
         /// </summary>
         private bool _inZoom = false;
-
 
         /// <summary>
         /// Progress of surface computation in percent.
         /// </summary>
         protected double _progress = 0;
 
-
         /// <summary>
         /// If true, mProgress has changed but progress is not updated.
         /// </summary>
         protected bool _progressChanged = false;
-
 
         /// <summary>
         /// Used to save inPaint thread while updating.
         /// </summary>
         object _paintMutex = new object();
 
+        /// <summary>
+        /// Used to save inPaint thread while updating first preview.
+        /// </summary>
+        object _firstPaintMutex = new object();
 
         /// <summary>
         /// True while method Paint() runs.
         /// </summary>
         bool _inPaint = false;
-
 
         /// <summary>
         /// True, if after end of DrawPicture() a new paint request should be startet. 
@@ -182,7 +169,7 @@ namespace Fractrace
         /// Delegate for the drawEnds event.
         /// </summary>
         delegate void DrawImageDelegate();
-        
+
         /// <summary>
         /// To determine, if parameter has changed since last saved animation step.
         /// </summary>
@@ -596,10 +583,21 @@ namespace Fractrace
         {
             if (_inPaint)
             {
-                // TODO: beim ersten Aufruf die Vorschau trotzdem zeichnen.
-                if (_currentPicturArt != null)
-                    _currentPicturArt.StopAndWait();
-                _currentPicturArt = null;
+                lock (_firstPaintMutex)
+                {
+                    if (_currentPicturArt != null)
+                    {
+                        if(!IsSubStepRendering())
+                        {
+                            _currentPicturArt.StopAndWait();
+                            _currentPicturArt = null;
+                        }
+                        else
+                        { 
+                        return;
+                        }
+                    }
+                }
             }
             lock (_paintMutex)
             {

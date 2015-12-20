@@ -93,6 +93,15 @@ namespace Fractrace.PictureArt {
         }
 
 
+        /// <summary>
+        /// Wait for ending of Rendering.
+        /// </summary>
+        public void WaitUntilEnd()
+        {
+            while (!paintHasEnded)
+                System.Threading.Thread.Sleep(10);
+        }
+
 
 
     }
