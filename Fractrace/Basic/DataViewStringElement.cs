@@ -45,10 +45,6 @@ namespace Fractrace.Basic
         {
             this.SuspendLayout();
             // 
-            // pnlButtons
-            // 
-            this.pnlButtons.Location = new System.Drawing.Point(260, 0);
-            // 
             // DataViewStringElement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -56,5 +52,36 @@ namespace Fractrace.Basic
             this.ResumeLayout(false);
 
         }
+
+        public void AddFixedValueButton(string text)
+        {
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = text;
+            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button.ForeColor = System.Drawing.Color.DarkGray;
+            button.FlatAppearance.BorderSize = 0;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
+            if (text.Length < 3 || (text.Length==3 && text.Contains(".")))
+            {
+                button.Width = 30;
+                this.pnlButtons.Width += 32;
+            }
+            else
+            {
+                button.Width = 60;
+                this.pnlButtons.Width += 64;
+            }
+
+            button.Click += Button_Click;
+            this.pnlButtons.Controls.Add(button);
+
+            
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
+            this._tbValue.Text = button.Text;
+          }
     }
 }

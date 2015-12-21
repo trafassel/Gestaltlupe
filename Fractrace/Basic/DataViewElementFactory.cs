@@ -34,7 +34,18 @@ namespace Fractrace.Basic
             if (retVal == null)
             {
                 retVal = new DataViewStringElement();
+                if(ParameterDict.Current[name +".PARAMETERINFO.VIEW.FixedButtons"]!="")
+                {
+                    string buttonValues = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.FixedButtons"];
+                    foreach(string buttonText in buttonValues.Split(' '))
+                    {
+                        DataViewStringElement stringElement = (DataViewStringElement)retVal;
+                        stringElement.AddFixedValueButton(buttonText.Trim());
+                    }
+
+                }
             }
+
 
             retVal.Dock = System.Windows.Forms.DockStyle.Top;
             retVal.Height = _defaultHeight;
