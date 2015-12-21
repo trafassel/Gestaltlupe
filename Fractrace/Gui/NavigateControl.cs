@@ -43,31 +43,35 @@ namespace Fractrace
             tbAngle.Visible = false;
             label2.Visible = false;
             tbZoomFactor.Visible = false;
-           // btnAspect.Visible = false;
+            // btnAspect.Visible = false;
             panel2.Visible = false;
 
             UpdateMoveButtonAppearance();
             UpdateMoveAngleButtonAppearance();
 
             // test is for designer only
-            if(ParameterInput.MainParameterInput!=null && ParameterInput.MainParameterInput.MainDataViewControl!=null)
-            { 
-            _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
-
-            _propertyControl.Dock = DockStyle.Fill;
-            _propertyControl.Create("Transformation");
-            pnlProperties.Controls.Add(_propertyControl);
-
-            _propertyControlBbox = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
-            _propertyControlBbox.Dock = DockStyle.Fill;
-            _propertyControlBbox.Create("Border");
-            pnlBorderProperties.Controls.Add(_propertyControlBbox);
+            if (ParameterInput.MainParameterInput != null && ParameterInput.MainParameterInput.MainDataViewControl != null)
+            {
+                _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _propertyControl.Dock = DockStyle.Fill;
+                _propertyControl.Create("Transformation");
+                pnlProperties.Controls.Add(_propertyControl);
+                _propertyControlBbox = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _propertyControlBbox.Dock = DockStyle.Fill;
+                _propertyControlBbox.Create("Border");
+                pnlBorderProperties.Controls.Add(_propertyControlBbox);
             }
 
         }
 
+        /// <summary>
+        /// Control for "Transform" Parameters.
+        /// </summary>
         DataViewControlPage _propertyControl;
 
+        /// <summary>
+        /// Control for "Border" Parameters.
+        /// </summary>
         DataViewControlPage _propertyControlBbox;
 
         /// <summary>
@@ -75,30 +79,25 @@ namespace Fractrace
         /// </summary>
         PreviewControl mPreview = null;
 
-
         /// <summary>
         /// The "right eye"-view of the control.
         /// </summary>
         PreviewControl mPreviewStereo = null;
-
 
         /// <summary>
         /// Parent control.
         /// </summary>
         ParameterInput mParent = null;
 
-
         /// <summary>
         /// Difference in the center position, if x-Border ist changed by (1,0,0)
         /// </summary>
         Vec3 centerDiffX = new Vec3();
 
-
         /// <summary>
         /// Difference in the center position, if y-Border ist changed by (0,1,0)
         /// </summary>
         Vec3 centerDiffY = new Vec3();
-
 
         /// <summary>
         /// Difference in the center position, if z-Border ist canged by (0,0,1)
@@ -738,7 +737,6 @@ namespace Fractrace
         }
 
 
-
         /// <summary>
         /// Zeichnet und aktualisiert die History.
         /// </summary>
@@ -867,4 +865,4 @@ namespace Fractrace
 
 
     }
-  }
+}

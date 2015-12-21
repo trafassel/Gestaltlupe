@@ -214,12 +214,13 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["View.Pipeline.Preview"] = "0";
             ParameterDict.Current["View.Pipeline.Preview.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["View.Pipeline.Preview.PARAMETERINFO.Description"] = "Start Preview Rendering just after small render display finishes.";
+            ParameterDict.Current["View.Pipeline.Preview.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Updates also Preview rendering
             ParameterDict.Current["View.Pipeline.UpdatePreview"] = "1";
             ParameterDict.Current["View.Pipeline.UpdatePreview.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["View.Pipeline.UpdatePreview.PARAMETERINFO.Description"] = "Updates also Preview rendering.";
-
+            ParameterDict.Current["View.Pipeline.UpdatePreview.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Default animation steps while adding the frame in the animation control. 
             ParameterDict.Current["Animation.Steps"] = "30";

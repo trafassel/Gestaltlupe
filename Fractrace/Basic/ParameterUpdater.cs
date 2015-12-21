@@ -33,6 +33,9 @@ namespace Fractrace.Basic
                 ParameterDict.Current.RemoveProperty("Transformation.3.CenterY");
                 ParameterDict.Current.RemoveProperty("Transformation.3.CenterZ");
             }
+            ParameterDict.Current["View.Pipeline.UpdatePreview"] = "1";
+            ParameterDict.Current["View.Pipeline.Preview"] = "0";
+            ParameterDict.Current.RemoveProperty("View.Zoom");
         }
 
 

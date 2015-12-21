@@ -145,6 +145,8 @@ namespace Fractrace.Basic
         {
             if (parameterName.StartsWith("Intern."))
                 return false;
+            if (ParameterDict.Current.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible"))
+                return false;
             return true;
         }
 
