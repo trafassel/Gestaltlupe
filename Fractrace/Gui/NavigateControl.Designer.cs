@@ -29,7 +29,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnZoomYout = new System.Windows.Forms.Button();
             this.btnZoomZout = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbMove = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbZoomFactor = new System.Windows.Forms.TextBox();
@@ -52,6 +52,13 @@
             this.btnTop = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
+            this.btnMoveFast = new System.Windows.Forms.Button();
+            this.btnMoveNormal = new System.Windows.Forms.Button();
+            this.btnMoveSlow = new System.Windows.Forms.Button();
+            this.btnMoveFine = new System.Windows.Forms.Button();
+            this.btnMoveAngleFast = new System.Windows.Forms.Button();
+            this.btnMoveAngleNormal = new System.Windows.Forms.Button();
+            this.btnMoveAngleFine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnZoomX
@@ -120,15 +127,15 @@
             this.btnZoomZout.UseVisualStyleBackColor = true;
             this.btnZoomZout.Click += new System.EventHandler(this.btnZoomZout_Click);
             // 
-            // textBox1
+            // tbMove
             // 
-            this.textBox1.Location = new System.Drawing.Point(66, 243);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(55, 20);
-            this.textBox1.TabIndex = 12;
-            this.textBox1.Text = "6";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbMove.Location = new System.Drawing.Point(66, 243);
+            this.tbMove.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMove.Name = "tbMove";
+            this.tbMove.Size = new System.Drawing.Size(55, 20);
+            this.tbMove.TabIndex = 12;
+            this.tbMove.Text = "6";
+            this.tbMove.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -402,10 +409,108 @@
             this.btnLeft.UseVisualStyleBackColor = true;
             this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
+            // btnMoveFast
+            // 
+            this.btnMoveFast.FlatAppearance.BorderSize = 0;
+            this.btnMoveFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveFast.Location = new System.Drawing.Point(231, 14);
+            this.btnMoveFast.Name = "btnMoveFast";
+            this.btnMoveFast.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveFast.TabIndex = 30;
+            this.btnMoveFast.Text = "fast";
+            this.btnMoveFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveFast.UseVisualStyleBackColor = true;
+            this.btnMoveFast.Click += new System.EventHandler(this.btnMoveFast_Click);
+            // 
+            // btnMoveNormal
+            // 
+            this.btnMoveNormal.FlatAppearance.BorderSize = 0;
+            this.btnMoveNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveNormal.Location = new System.Drawing.Point(231, 39);
+            this.btnMoveNormal.Name = "btnMoveNormal";
+            this.btnMoveNormal.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveNormal.TabIndex = 31;
+            this.btnMoveNormal.Text = "normal";
+            this.btnMoveNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveNormal.UseVisualStyleBackColor = true;
+            this.btnMoveNormal.Click += new System.EventHandler(this.btnMoveNormal_Click);
+            // 
+            // btnMoveSlow
+            // 
+            this.btnMoveSlow.FlatAppearance.BorderSize = 0;
+            this.btnMoveSlow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveSlow.Location = new System.Drawing.Point(231, 64);
+            this.btnMoveSlow.Name = "btnMoveSlow";
+            this.btnMoveSlow.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveSlow.TabIndex = 32;
+            this.btnMoveSlow.Text = "slow";
+            this.btnMoveSlow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveSlow.UseVisualStyleBackColor = true;
+            this.btnMoveSlow.Click += new System.EventHandler(this.btnMoveSlow_Click);
+            // 
+            // btnMoveFine
+            // 
+            this.btnMoveFine.FlatAppearance.BorderSize = 0;
+            this.btnMoveFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveFine.Location = new System.Drawing.Point(231, 89);
+            this.btnMoveFine.Name = "btnMoveFine";
+            this.btnMoveFine.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveFine.TabIndex = 33;
+            this.btnMoveFine.Text = "fine";
+            this.btnMoveFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveFine.UseVisualStyleBackColor = true;
+            this.btnMoveFine.Click += new System.EventHandler(this.btnMoveFine_Click);
+            // 
+            // btnMoveAngleFast
+            // 
+            this.btnMoveAngleFast.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleFast.Location = new System.Drawing.Point(231, 152);
+            this.btnMoveAngleFast.Name = "btnMoveAngleFast";
+            this.btnMoveAngleFast.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleFast.TabIndex = 34;
+            this.btnMoveAngleFast.Text = "fast";
+            this.btnMoveAngleFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleFast.UseVisualStyleBackColor = true;
+            this.btnMoveAngleFast.Click += new System.EventHandler(this.btnMoveAngleFast_Click);
+            // 
+            // btnMoveAngleNormal
+            // 
+            this.btnMoveAngleNormal.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleNormal.Location = new System.Drawing.Point(231, 177);
+            this.btnMoveAngleNormal.Name = "btnMoveAngleNormal";
+            this.btnMoveAngleNormal.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleNormal.TabIndex = 35;
+            this.btnMoveAngleNormal.Text = "normal";
+            this.btnMoveAngleNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleNormal.UseVisualStyleBackColor = true;
+            this.btnMoveAngleNormal.Click += new System.EventHandler(this.btnMoveAngleNormal_Click);
+            // 
+            // btnMoveAngleFine
+            // 
+            this.btnMoveAngleFine.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleFine.Location = new System.Drawing.Point(231, 202);
+            this.btnMoveAngleFine.Name = "btnMoveAngleFine";
+            this.btnMoveAngleFine.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleFine.TabIndex = 36;
+            this.btnMoveAngleFine.Text = "fine";
+            this.btnMoveAngleFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleFine.UseVisualStyleBackColor = true;
+            this.btnMoveAngleFine.Click += new System.EventHandler(this.btnMoveAngleFine_Click);
+            // 
             // NavigateControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnMoveAngleFine);
+            this.Controls.Add(this.btnMoveAngleNormal);
+            this.Controls.Add(this.btnMoveAngleFast);
+            this.Controls.Add(this.btnMoveFine);
+            this.Controls.Add(this.btnMoveSlow);
+            this.Controls.Add(this.btnMoveNormal);
+            this.Controls.Add(this.btnMoveFast);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnAspect);
@@ -422,7 +527,7 @@
             this.Controls.Add(this.tbZoomFactor);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbMove);
             this.Controls.Add(this.btnZoomZout);
             this.Controls.Add(this.btnZoomYout);
             this.Controls.Add(this.button1);
@@ -457,7 +562,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnZoomYout;
         private System.Windows.Forms.Button btnZoomZout;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbMove;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbZoomFactor;
@@ -474,5 +579,12 @@
         private System.Windows.Forms.Button btnAspect;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnMoveFast;
+        private System.Windows.Forms.Button btnMoveNormal;
+        private System.Windows.Forms.Button btnMoveSlow;
+        private System.Windows.Forms.Button btnMoveFine;
+        private System.Windows.Forms.Button btnMoveAngleFast;
+        private System.Windows.Forms.Button btnMoveAngleNormal;
+        private System.Windows.Forms.Button btnMoveAngleFine;
     }
 }

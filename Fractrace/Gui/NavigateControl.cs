@@ -35,7 +35,19 @@ namespace Fractrace
             btnZoomZ.Visible = false;
             btnZoomZout.Visible = false;
 
-            tbAngle_TextChanged(null,null);
+            tbAngle_TextChanged(null, null);
+
+            label1.Visible = false;
+            tbMove.Visible = false;
+            label3.Visible = false;
+            tbAngle.Visible = false;
+            label2.Visible = false;
+            tbZoomFactor.Visible = false;
+            btnAspect.Visible = false;
+            panel2.Visible = false;
+
+            UpdateMoveButtonAppearance();
+            UpdateMoveAngleButtonAppearance();
         }
 
 
@@ -542,10 +554,10 @@ namespace Fractrace
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(textBox1.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mFactor))
-                textBox1.ForeColor = Color.Black;
+            if (double.TryParse(tbMove.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mFactor))
+                tbMove.ForeColor = Color.Black;
             else
-                textBox1.ForeColor = Color.Red;
+                tbMove.ForeColor = Color.Red;
 
         }
 
@@ -600,8 +612,8 @@ namespace Fractrace
         {
 
             Fractrace.Geometry.VecRotation rotation = new VecRotation();
-            
-            rotation.FromEuler(Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX")/180.0,
+
+            rotation.FromEuler(Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX") / 180.0,
                 -Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0,
                 Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") / 180.0);
 
@@ -625,14 +637,14 @@ namespace Fractrace
         {
 
             Fractrace.Geometry.VecRotation rotation = new VecRotation();
-          
+
             rotation.FromEuler(
-                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX") / 180.0, 
-               - Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0, 
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX") / 180.0,
+               -Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0,
                 Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") / 180.0
                 );
 
-            rotation.Normalize();       
+            rotation.Normalize();
             rotation.combine(0, angle, 0);
 
             double ax = 0, ay = 0, az = 0;
@@ -751,7 +763,88 @@ namespace Fractrace
             Navigator.SetAspectRatio();
         }
 
+        private void btnMoveFast_Click(object sender, EventArgs e)
+        {
+            tbMove.Text = "2";
+            tbZoomFactor.Text = "2";
+            UpdateMoveButtonAppearance();
+        }
+
+        private void UpdateMoveButtonAppearance()
+        {
+            btnMoveFast.FlatStyle = FlatStyle.Flat;
+            btnMoveNormal.FlatStyle = FlatStyle.Flat;
+            btnMoveSlow.FlatStyle = FlatStyle.Flat;
+            btnMoveFine.FlatStyle = FlatStyle.Flat;
+            if (tbMove.Text == "2")
+                btnMoveFast.FlatStyle = FlatStyle.Standard;
+            if (tbMove.Text == "6")
+                btnMoveNormal.FlatStyle = FlatStyle.Standard;
+            if (tbMove.Text == "16")
+                btnMoveSlow.FlatStyle = FlatStyle.Standard;
+            if (tbMove.Text == "64")
+                btnMoveFine.FlatStyle = FlatStyle.Standard;
+        }
+
+
+        private void btnMoveNormal_Click(object sender, EventArgs e)
+        {
+            tbMove.Text = "6";
+            tbZoomFactor.Text = "6";
+            UpdateMoveButtonAppearance();
+        }
+
+
+        private void btnMoveSlow_Click(object sender, EventArgs e)
+        {
+            tbMove.Text = "16";
+            tbZoomFactor.Text = "16";
+            UpdateMoveButtonAppearance();
+        }
+
+
+        private void btnMoveFine_Click(object sender, EventArgs e)
+        {
+            tbMove.Text = "64";
+            tbZoomFactor.Text = "64";
+            UpdateMoveButtonAppearance();
+        }
+
+
+        private void btnMoveAngleFast_Click(object sender, EventArgs e)
+        {
+            tbAngle.Text = "10";
+            UpdateMoveAngleButtonAppearance();
+        }
+
+
+        private void btnMoveAngleNormal_Click(object sender, EventArgs e)
+        {
+            tbAngle.Text = "2";
+            UpdateMoveAngleButtonAppearance();
+        }
+
+
+        private void btnMoveAngleFine_Click(object sender, EventArgs e)
+        {
+            tbAngle.Text = "0.1";
+            UpdateMoveAngleButtonAppearance();
+        }
+
+
+        private void UpdateMoveAngleButtonAppearance()
+        {
+            btnMoveAngleFast.FlatStyle = FlatStyle.Flat;
+            btnMoveAngleNormal.FlatStyle = FlatStyle.Flat;
+            btnMoveAngleFine.FlatStyle = FlatStyle.Flat;
+            if (tbAngle.Text == "10")
+                btnMoveAngleFast.FlatStyle = FlatStyle.Standard;
+            if (tbAngle.Text == "2")
+                btnMoveAngleNormal.FlatStyle = FlatStyle.Standard;
+            if (tbAngle.Text == "0.1")
+                btnMoveAngleFine.FlatStyle = FlatStyle.Standard;
+        }
 
 
     }
-}
+  }
