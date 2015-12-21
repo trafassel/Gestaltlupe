@@ -59,6 +59,8 @@
             this.btnMoveAngleFast = new System.Windows.Forms.Button();
             this.btnMoveAngleNormal = new System.Windows.Forms.Button();
             this.btnMoveAngleFine = new System.Windows.Forms.Button();
+            this.pnlProperties = new System.Windows.Forms.Panel();
+            this.pnlBorderProperties = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnZoomX
@@ -184,17 +186,17 @@
             this.tbAngle.Name = "tbAngle";
             this.tbAngle.Size = new System.Drawing.Size(55, 20);
             this.tbAngle.TabIndex = 23;
-            this.tbAngle.Text = "2";
+            this.tbAngle.Text = "10";
             this.tbAngle.TextChanged += new System.EventHandler(this.tbAngle_TextChanged);
             // 
             // btnAspect
             // 
-            this.btnAspect.Location = new System.Drawing.Point(236, 272);
+            this.btnAspect.Location = new System.Drawing.Point(13, 263);
             this.btnAspect.Margin = new System.Windows.Forms.Padding(2);
             this.btnAspect.Name = "btnAspect";
-            this.btnAspect.Size = new System.Drawing.Size(66, 31);
+            this.btnAspect.Size = new System.Drawing.Size(151, 31);
             this.btnAspect.TabIndex = 27;
-            this.btnAspect.Text = "Automatic";
+            this.btnAspect.Text = "correct Aspect Ratio";
             this.btnAspect.UseVisualStyleBackColor = true;
             this.btnAspect.Click += new System.EventHandler(this.btn_Click);
             // 
@@ -500,10 +502,26 @@
             this.btnMoveAngleFine.UseVisualStyleBackColor = true;
             this.btnMoveAngleFine.Click += new System.EventHandler(this.btnMoveAngleFine_Click);
             // 
+            // pnlProperties
+            // 
+            this.pnlProperties.Location = new System.Drawing.Point(332, 15);
+            this.pnlProperties.Name = "pnlProperties";
+            this.pnlProperties.Size = new System.Drawing.Size(146, 289);
+            this.pnlProperties.TabIndex = 37;
+            // 
+            // pnlBorderProperties
+            // 
+            this.pnlBorderProperties.Location = new System.Drawing.Point(496, 14);
+            this.pnlBorderProperties.Name = "pnlBorderProperties";
+            this.pnlBorderProperties.Size = new System.Drawing.Size(164, 289);
+            this.pnlBorderProperties.TabIndex = 38;
+            // 
             // NavigateControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlBorderProperties);
+            this.Controls.Add(this.pnlProperties);
             this.Controls.Add(this.btnMoveAngleFine);
             this.Controls.Add(this.btnMoveAngleNormal);
             this.Controls.Add(this.btnMoveAngleFast);
@@ -542,7 +560,7 @@
             this.Controls.Add(this.btnLeft);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NavigateControl";
-            this.Size = new System.Drawing.Size(326, 328);
+            this.Size = new System.Drawing.Size(617, 328);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -586,5 +604,7 @@
         private System.Windows.Forms.Button btnMoveAngleFast;
         private System.Windows.Forms.Button btnMoveAngleNormal;
         private System.Windows.Forms.Button btnMoveAngleFine;
+        private System.Windows.Forms.Panel pnlProperties;
+        private System.Windows.Forms.Panel pnlBorderProperties;
     }
 }

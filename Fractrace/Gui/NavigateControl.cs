@@ -43,13 +43,32 @@ namespace Fractrace
             tbAngle.Visible = false;
             label2.Visible = false;
             tbZoomFactor.Visible = false;
-            btnAspect.Visible = false;
+           // btnAspect.Visible = false;
             panel2.Visible = false;
 
             UpdateMoveButtonAppearance();
             UpdateMoveAngleButtonAppearance();
+
+            // test is for designer only
+            if(ParameterInput.MainParameterInput!=null && ParameterInput.MainParameterInput.MainDataViewControl!=null)
+            { 
+            _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+
+            _propertyControl.Dock = DockStyle.Fill;
+            _propertyControl.Create("Transformation");
+            pnlProperties.Controls.Add(_propertyControl);
+
+            _propertyControlBbox = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+            _propertyControlBbox.Dock = DockStyle.Fill;
+            _propertyControlBbox.Create("Border");
+            pnlBorderProperties.Controls.Add(_propertyControlBbox);
+            }
+
         }
 
+        DataViewControlPage _propertyControl;
+
+        DataViewControlPage _propertyControlBbox;
 
         /// <summary>
         /// A small control to display the preview of the rendered scene.
@@ -727,7 +746,8 @@ namespace Fractrace
         {
             mPreview.Draw();
             mParent.AddToHistory();
-
+            _propertyControl.UpdateElements();
+            _propertyControlBbox.UpdateElements();
         }
 
 

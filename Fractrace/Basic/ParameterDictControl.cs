@@ -28,6 +28,7 @@ namespace Fractrace.Basic
         /// </summary>
         protected string _choosenHirarchy = "";
 
+        public DataViewControl MainDataViewControl { get { return dataViewControl1; } }
 
         /// <summary>
         /// Build hierarchy from ParameterDict entries. 

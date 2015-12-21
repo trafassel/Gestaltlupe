@@ -69,6 +69,9 @@ namespace Fractrace
             SetSmallPreviewSize();
         }
 
+
+        public DataViewControl MainDataViewControl { get { return parameterDictControl1.MainDataViewControl; } }
+
         private void Preview1_ProgressEvent(double progress)
         {
             this.Invoke(new VoidDelegate(UpdateFrontView));

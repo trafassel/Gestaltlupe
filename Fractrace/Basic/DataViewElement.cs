@@ -65,6 +65,8 @@ namespace Fractrace.Basic
                 string[] strings = _name.Split('.');
                 if (strings.Length > 0)
                     lblName.Text = strings[strings.Length - 1];
+                if (lblName.Text.Length == 1)
+                    panel1.Width = 30;
             }
             else
             {
