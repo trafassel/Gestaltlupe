@@ -23,10 +23,6 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            this.btnLeft = new System.Windows.Forms.Button();
-            this.btnRight = new System.Windows.Forms.Button();
-            this.btnTop = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
             this.btnZoomX = new System.Windows.Forms.Button();
             this.btnZoomY = new System.Windows.Forms.Button();
             this.btnZoomZ = new System.Windows.Forms.Button();
@@ -37,10 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbZoomFactor = new System.Windows.Forms.TextBox();
-            this.btnRotX = new System.Windows.Forms.Button();
-            this.btnRotZ = new System.Windows.Forms.Button();
-            this.btnRotZneg = new System.Windows.Forms.Button();
-            this.btnRotXneg = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tbAngle = new System.Windows.Forms.TextBox();
             this.btnAspect = new System.Windows.Forms.Button();
@@ -48,67 +40,23 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnRotZneg = new System.Windows.Forms.Button();
             this.btnRotYneg = new System.Windows.Forms.Button();
+            this.btnRotXneg = new System.Windows.Forms.Button();
+            this.btnRotZ = new System.Windows.Forms.Button();
             this.btnRotY = new System.Windows.Forms.Button();
+            this.btnRotX = new System.Windows.Forms.Button();
             this.btnBackwards = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnRight = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnLeft
-            // 
-            this.btnLeft.FlatAppearance.BorderSize = 0;
-            this.btnLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeft.Location = new System.Drawing.Point(13, 63);
-            this.btnLeft.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(44, 28);
-            this.btnLeft.TabIndex = 0;
-            this.btnLeft.Text = "<-";
-            this.btnLeft.UseVisualStyleBackColor = true;
-            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // btnRight
-            // 
-            this.btnRight.FlatAppearance.BorderSize = 0;
-            this.btnRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRight.Location = new System.Drawing.Point(139, 63);
-            this.btnRight.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(44, 28);
-            this.btnRight.TabIndex = 1;
-            this.btnRight.Text = "->";
-            this.btnRight.UseVisualStyleBackColor = true;
-            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
-            // 
-            // btnTop
-            // 
-            this.btnTop.FlatAppearance.BorderSize = 0;
-            this.btnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTop.Location = new System.Drawing.Point(83, 23);
-            this.btnTop.Margin = new System.Windows.Forms.Padding(2);
-            this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(26, 48);
-            this.btnTop.TabIndex = 2;
-            this.btnTop.Text = "/\\";
-            this.btnTop.UseVisualStyleBackColor = true;
-            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
-            // 
-            // btnDown
-            // 
-            this.btnDown.FlatAppearance.BorderSize = 0;
-            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Location = new System.Drawing.Point(83, 81);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(26, 48);
-            this.btnDown.TabIndex = 3;
-            this.btnDown.Text = "\\/";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnZoomX
             // 
-            this.btnZoomX.Location = new System.Drawing.Point(12, 243);
+            this.btnZoomX.Location = new System.Drawing.Point(23, 291);
             this.btnZoomX.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomX.Name = "btnZoomX";
             this.btnZoomX.Size = new System.Drawing.Size(67, 28);
@@ -119,7 +67,7 @@
             // 
             // btnZoomY
             // 
-            this.btnZoomY.Location = new System.Drawing.Point(83, 243);
+            this.btnZoomY.Location = new System.Drawing.Point(94, 291);
             this.btnZoomY.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomY.Name = "btnZoomY";
             this.btnZoomY.Size = new System.Drawing.Size(67, 28);
@@ -130,7 +78,7 @@
             // 
             // btnZoomZ
             // 
-            this.btnZoomZ.Location = new System.Drawing.Point(154, 243);
+            this.btnZoomZ.Location = new System.Drawing.Point(165, 291);
             this.btnZoomZ.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZ.Name = "btnZoomZ";
             this.btnZoomZ.Size = new System.Drawing.Size(67, 28);
@@ -141,7 +89,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 274);
+            this.button1.Location = new System.Drawing.Point(23, 322);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 28);
@@ -152,7 +100,7 @@
             // 
             // btnZoomYout
             // 
-            this.btnZoomYout.Location = new System.Drawing.Point(83, 274);
+            this.btnZoomYout.Location = new System.Drawing.Point(94, 322);
             this.btnZoomYout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomYout.Name = "btnZoomYout";
             this.btnZoomYout.Size = new System.Drawing.Size(67, 28);
@@ -163,7 +111,7 @@
             // 
             // btnZoomZout
             // 
-            this.btnZoomZout.Location = new System.Drawing.Point(154, 274);
+            this.btnZoomZout.Location = new System.Drawing.Point(165, 322);
             this.btnZoomZout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZout.Name = "btnZoomZout";
             this.btnZoomZout.Size = new System.Drawing.Size(67, 28);
@@ -174,7 +122,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(243, 12);
+            this.textBox1.Location = new System.Drawing.Point(66, 243);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(55, 20);
@@ -185,7 +133,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(197, 12);
+            this.label1.Location = new System.Drawing.Point(20, 243);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
@@ -195,7 +143,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(197, 41);
+            this.label2.Location = new System.Drawing.Point(20, 272);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
@@ -204,7 +152,7 @@
             // 
             // tbZoomFactor
             // 
-            this.tbZoomFactor.Location = new System.Drawing.Point(242, 41);
+            this.tbZoomFactor.Location = new System.Drawing.Point(65, 272);
             this.tbZoomFactor.Margin = new System.Windows.Forms.Padding(2);
             this.tbZoomFactor.Name = "tbZoomFactor";
             this.tbZoomFactor.Size = new System.Drawing.Size(55, 20);
@@ -212,54 +160,10 @@
             this.tbZoomFactor.Text = "6";
             this.tbZoomFactor.TextChanged += new System.EventHandler(this.tbZoomFactor_TextChanged);
             // 
-            // btnRotX
-            // 
-            this.btnRotX.Location = new System.Drawing.Point(13, 154);
-            this.btnRotX.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRotX.Name = "btnRotX";
-            this.btnRotX.Size = new System.Drawing.Size(44, 28);
-            this.btnRotX.TabIndex = 16;
-            this.btnRotX.Text = "RotX+";
-            this.btnRotX.UseVisualStyleBackColor = true;
-            this.btnRotX.Click += new System.EventHandler(this.btnRotX_Click);
-            // 
-            // btnRotZ
-            // 
-            this.btnRotZ.Location = new System.Drawing.Point(139, 169);
-            this.btnRotZ.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRotZ.Name = "btnRotZ";
-            this.btnRotZ.Size = new System.Drawing.Size(44, 28);
-            this.btnRotZ.TabIndex = 18;
-            this.btnRotZ.Text = "RotZ+";
-            this.btnRotZ.UseVisualStyleBackColor = true;
-            this.btnRotZ.Click += new System.EventHandler(this.btnRotZ_Click);
-            // 
-            // btnRotZneg
-            // 
-            this.btnRotZneg.Location = new System.Drawing.Point(83, 169);
-            this.btnRotZneg.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRotZneg.Name = "btnRotZneg";
-            this.btnRotZneg.Size = new System.Drawing.Size(44, 28);
-            this.btnRotZneg.TabIndex = 21;
-            this.btnRotZneg.Text = "RotZ-";
-            this.btnRotZneg.UseVisualStyleBackColor = true;
-            this.btnRotZneg.Click += new System.EventHandler(this.btnRotZneg_Click);
-            // 
-            // btnRotXneg
-            // 
-            this.btnRotXneg.Location = new System.Drawing.Point(12, 185);
-            this.btnRotXneg.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRotXneg.Name = "btnRotXneg";
-            this.btnRotXneg.Size = new System.Drawing.Size(44, 28);
-            this.btnRotXneg.TabIndex = 19;
-            this.btnRotXneg.Text = "RotX-";
-            this.btnRotXneg.UseVisualStyleBackColor = true;
-            this.btnRotXneg.Click += new System.EventHandler(this.button4_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(197, 74);
+            this.label3.Location = new System.Drawing.Point(133, 246);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
@@ -268,7 +172,7 @@
             // 
             // tbAngle
             // 
-            this.tbAngle.Location = new System.Drawing.Point(241, 71);
+            this.tbAngle.Location = new System.Drawing.Point(177, 243);
             this.tbAngle.Margin = new System.Windows.Forms.Padding(2);
             this.tbAngle.Name = "tbAngle";
             this.tbAngle.Size = new System.Drawing.Size(55, 20);
@@ -278,10 +182,10 @@
             // 
             // btnAspect
             // 
-            this.btnAspect.Location = new System.Drawing.Point(230, 245);
+            this.btnAspect.Location = new System.Drawing.Point(236, 272);
             this.btnAspect.Margin = new System.Windows.Forms.Padding(2);
             this.btnAspect.Name = "btnAspect";
-            this.btnAspect.Size = new System.Drawing.Size(66, 56);
+            this.btnAspect.Size = new System.Drawing.Size(66, 31);
             this.btnAspect.TabIndex = 27;
             this.btnAspect.Text = "Automatic";
             this.btnAspect.UseVisualStyleBackColor = true;
@@ -295,6 +199,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(284, 2);
             this.panel1.TabIndex = 28;
+            this.panel1.Visible = false;
             // 
             // panel2
             // 
@@ -307,85 +212,195 @@
             // 
             // btnZoomOut
             // 
-            this.btnZoomOut.BackgroundImage = global::Fractrace.Properties.Resources.ZoomOut_12927;
+            this.btnZoomOut.BackgroundImage = global::Fractrace.Properties.Resources.Minus_32x;
             this.btnZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnZoomOut.FlatAppearance.BorderSize = 0;
             this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomOut.Location = new System.Drawing.Point(139, 102);
+            this.btnZoomOut.Location = new System.Drawing.Point(151, 102);
             this.btnZoomOut.Name = "btnZoomOut";
-            this.btnZoomOut.Size = new System.Drawing.Size(44, 28);
+            this.btnZoomOut.Size = new System.Drawing.Size(32, 32);
             this.btnZoomOut.TabIndex = 26;
             this.btnZoomOut.UseVisualStyleBackColor = true;
             this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
             // 
             // btnZoomIn
             // 
-            this.btnZoomIn.BackgroundImage = global::Fractrace.Properties.Resources.Zoom_5442;
+            this.btnZoomIn.BackgroundImage = global::Fractrace.Properties.Resources.Plus_32x;
             this.btnZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnZoomIn.FlatAppearance.BorderSize = 0;
             this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZoomIn.Location = new System.Drawing.Point(13, 102);
             this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(44, 28);
+            this.btnZoomIn.Size = new System.Drawing.Size(32, 32);
             this.btnZoomIn.TabIndex = 25;
             this.btnZoomIn.UseVisualStyleBackColor = true;
             this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
             // 
+            // btnRotZneg
+            // 
+            this.btnRotZneg.BackgroundImage = global::Fractrace.Properties.Resources.RotateLeft;
+            this.btnRotZneg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRotZneg.FlatAppearance.BorderSize = 0;
+            this.btnRotZneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRotZneg.Location = new System.Drawing.Point(66, 169);
+            this.btnRotZneg.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRotZneg.Name = "btnRotZneg";
+            this.btnRotZneg.Size = new System.Drawing.Size(32, 32);
+            this.btnRotZneg.TabIndex = 21;
+            this.btnRotZneg.UseVisualStyleBackColor = true;
+            this.btnRotZneg.Click += new System.EventHandler(this.btnRotZneg_Click);
+            // 
             // btnRotYneg
             // 
-            this.btnRotYneg.BackgroundImage = global::Fractrace.Properties.Resources.CameraOrbit_reverse_32x;
+            this.btnRotYneg.BackgroundImage = global::Fractrace.Properties.Resources.RotateCounterClockwise;
             this.btnRotYneg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotYneg.FlatAppearance.BorderSize = 0;
             this.btnRotYneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotYneg.Location = new System.Drawing.Point(211, 185);
+            this.btnRotYneg.Location = new System.Drawing.Point(151, 185);
             this.btnRotYneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotYneg.Name = "btnRotYneg";
-            this.btnRotYneg.Size = new System.Drawing.Size(44, 28);
+            this.btnRotYneg.Size = new System.Drawing.Size(32, 32);
             this.btnRotYneg.TabIndex = 20;
             this.btnRotYneg.UseVisualStyleBackColor = true;
             this.btnRotYneg.Click += new System.EventHandler(this.btnRotYneg_Click);
             // 
+            // btnRotXneg
+            // 
+            this.btnRotXneg.BackgroundImage = global::Fractrace.Properties.Resources.RotateUp;
+            this.btnRotXneg.FlatAppearance.BorderSize = 0;
+            this.btnRotXneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRotXneg.Location = new System.Drawing.Point(12, 185);
+            this.btnRotXneg.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRotXneg.Name = "btnRotXneg";
+            this.btnRotXneg.Size = new System.Drawing.Size(32, 32);
+            this.btnRotXneg.TabIndex = 19;
+            this.btnRotXneg.UseVisualStyleBackColor = true;
+            this.btnRotXneg.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnRotZ
+            // 
+            this.btnRotZ.BackgroundImage = global::Fractrace.Properties.Resources.RotateRight;
+            this.btnRotZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRotZ.FlatAppearance.BorderSize = 0;
+            this.btnRotZ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRotZ.Location = new System.Drawing.Point(102, 169);
+            this.btnRotZ.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRotZ.Name = "btnRotZ";
+            this.btnRotZ.Size = new System.Drawing.Size(32, 32);
+            this.btnRotZ.TabIndex = 18;
+            this.btnRotZ.UseVisualStyleBackColor = true;
+            this.btnRotZ.Click += new System.EventHandler(this.btnRotZ_Click);
+            // 
             // btnRotY
             // 
-            this.btnRotY.BackgroundImage = global::Fractrace.Properties.Resources.CameraOrbit_32x;
+            this.btnRotY.BackgroundImage = global::Fractrace.Properties.Resources.RotateClockwise;
             this.btnRotY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotY.FlatAppearance.BorderSize = 0;
             this.btnRotY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotY.Location = new System.Drawing.Point(254, 154);
+            this.btnRotY.Location = new System.Drawing.Point(187, 154);
             this.btnRotY.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotY.Name = "btnRotY";
-            this.btnRotY.Size = new System.Drawing.Size(44, 28);
+            this.btnRotY.Size = new System.Drawing.Size(32, 32);
             this.btnRotY.TabIndex = 17;
             this.btnRotY.UseVisualStyleBackColor = true;
             this.btnRotY.Click += new System.EventHandler(this.btnRotY_Click);
             // 
+            // btnRotX
+            // 
+            this.btnRotX.BackgroundImage = global::Fractrace.Properties.Resources.RotateDown;
+            this.btnRotX.FlatAppearance.BorderSize = 0;
+            this.btnRotX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRotX.Location = new System.Drawing.Point(13, 154);
+            this.btnRotX.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRotX.Name = "btnRotX";
+            this.btnRotX.Size = new System.Drawing.Size(32, 32);
+            this.btnRotX.TabIndex = 16;
+            this.btnRotX.UseVisualStyleBackColor = true;
+            this.btnRotX.Click += new System.EventHandler(this.btnRotX_Click);
+            // 
             // btnBackwards
             // 
-            this.btnBackwards.BackgroundImage = global::Fractrace.Properties.Resources.Intellitrace_stepover;
+            this.btnBackwards.BackgroundImage = global::Fractrace.Properties.Resources.MoveBackArrows;
             this.btnBackwards.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnBackwards.FlatAppearance.BorderSize = 0;
             this.btnBackwards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackwards.Location = new System.Drawing.Point(139, 23);
+            this.btnBackwards.Location = new System.Drawing.Point(151, 22);
             this.btnBackwards.Margin = new System.Windows.Forms.Padding(2);
             this.btnBackwards.Name = "btnBackwards";
-            this.btnBackwards.Size = new System.Drawing.Size(44, 28);
+            this.btnBackwards.Size = new System.Drawing.Size(32, 32);
             this.btnBackwards.TabIndex = 5;
             this.btnBackwards.UseVisualStyleBackColor = true;
             this.btnBackwards.Click += new System.EventHandler(this.btnBackwards_Click);
             // 
             // btnForward
             // 
-            this.btnForward.BackgroundImage = global::Fractrace.Properties.Resources.Intellitrace_stepback;
-            this.btnForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnForward.BackgroundImage = global::Fractrace.Properties.Resources.MoveForwardArrows;
+            this.btnForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnForward.FlatAppearance.BorderSize = 0;
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForward.Location = new System.Drawing.Point(12, 23);
             this.btnForward.Margin = new System.Windows.Forms.Padding(2);
             this.btnForward.Name = "btnForward";
-            this.btnForward.Size = new System.Drawing.Size(44, 28);
+            this.btnForward.Size = new System.Drawing.Size(32, 32);
             this.btnForward.TabIndex = 4;
             this.btnForward.UseVisualStyleBackColor = true;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.BackgroundImage = global::Fractrace.Properties.Resources.ArrowDown_32x;
+            this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnDown.FlatAppearance.BorderSize = 0;
+            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDown.Location = new System.Drawing.Point(83, 85);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(32, 32);
+            this.btnDown.TabIndex = 3;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnTop
+            // 
+            this.btnTop.BackgroundImage = global::Fractrace.Properties.Resources.ArrowTop_32x;
+            this.btnTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTop.FlatAppearance.BorderSize = 0;
+            this.btnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTop.Location = new System.Drawing.Point(83, 23);
+            this.btnTop.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(32, 32);
+            this.btnTop.TabIndex = 2;
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnRight
+            // 
+            this.btnRight.BackgroundImage = global::Fractrace.Properties.Resources.ArrowRight_32x;
+            this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRight.FlatAppearance.BorderSize = 0;
+            this.btnRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRight.Location = new System.Drawing.Point(118, 55);
+            this.btnRight.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRight.Name = "btnRight";
+            this.btnRight.Size = new System.Drawing.Size(32, 32);
+            this.btnRight.TabIndex = 1;
+            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // btnLeft
+            // 
+            this.btnLeft.BackgroundImage = global::Fractrace.Properties.Resources.ArrowLeft_32x;
+            this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnLeft.FlatAppearance.BorderSize = 0;
+            this.btnLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeft.Location = new System.Drawing.Point(48, 55);
+            this.btnLeft.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(32, 32);
+            this.btnLeft.TabIndex = 0;
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
             // NavigateControl
             // 

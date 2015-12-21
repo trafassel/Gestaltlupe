@@ -392,6 +392,69 @@
   <ItemGroup>
     <None Include="Resources\ZoomOut_12927.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowLeft_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowTop_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowRight_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowDown_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveForward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\NoMove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateClockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateCounterClockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\RotateUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveForwardArrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\MoveBackArrows.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
