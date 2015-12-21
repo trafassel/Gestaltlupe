@@ -26,6 +26,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblName = new System.Windows.Forms.Label();
             this.pnlEdit = new System.Windows.Forms.Panel();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -36,7 +37,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.panel1.Size = new System.Drawing.Size(104, 79);
             this.panel1.TabIndex = 0;
             // 
@@ -44,7 +45,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblName.Location = new System.Drawing.Point(4, 4);
+            this.lblName.Location = new System.Drawing.Point(4, 0);
             this.lblName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(35, 13);
@@ -57,13 +58,24 @@
             this.pnlEdit.Location = new System.Drawing.Point(104, 0);
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
+            this.pnlEdit.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.pnlEdit.Size = new System.Drawing.Size(156, 79);
             this.pnlEdit.TabIndex = 1;
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtons.Location = new System.Drawing.Point(260, 0);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(0, 79);
+            this.pnlButtons.TabIndex = 1;
             // 
             // DataViewElement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.pnlEdit);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -79,6 +91,9 @@
 
     private System.Windows.Forms.Panel panel1;
     protected System.Windows.Forms.Panel pnlEdit;
+    protected System.Windows.Forms.Panel pnlButtons;
     protected System.Windows.Forms.Label lblName;
-  }
+
+
+    }
 }

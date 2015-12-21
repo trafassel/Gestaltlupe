@@ -28,6 +28,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlEdit = new System.Windows.Forms.Panel();
             this.dataViewControl1 = new Fractrace.Basic.DataViewControl();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -58,6 +59,9 @@
             this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
+            this.treeView1.ShowLines = false;
+            this.treeView1.ShowPlusMinus = false;
+            this.treeView1.ShowRootLines = false;
             this.treeView1.Size = new System.Drawing.Size(112, 311);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -77,7 +81,7 @@
             this.pnlEdit.Controls.Add(this.dataViewControl1);
             this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEdit.Location = new System.Drawing.Point(0, 0);
-            this.pnlEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
             this.pnlEdit.Size = new System.Drawing.Size(227, 311);
             this.pnlEdit.TabIndex = 1;
@@ -100,6 +104,7 @@
             this.Size = new System.Drawing.Size(343, 311);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.pnlEdit.ResumeLayout(false);

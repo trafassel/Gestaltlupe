@@ -75,6 +75,7 @@ namespace Fractrace.Basic
                     }
                 }
             }
+            treeView1.ExpandAll();
         }
 
 

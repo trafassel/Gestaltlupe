@@ -265,6 +265,9 @@
     <EmbeddedResource Include="Animation\AnimationStepPreview.resx">
       <DependentUpon>AnimationStepPreview.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Basic\DataViewBoolElement.resx">
+      <DependentUpon>DataViewBoolElement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Basic\DataViewControl.resx">
       <DependentUpon>DataViewControl.cs</DependentUpon>
     </EmbeddedResource>

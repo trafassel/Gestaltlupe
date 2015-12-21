@@ -786,7 +786,7 @@ namespace Fractrace
         private void btnMoveFast_Click(object sender, EventArgs e)
         {
             tbMove.Text = "2";
-            tbZoomFactor.Text = "2";
+            tbZoomFactor.Text = "5";
             UpdateMoveButtonAppearance();
         }
 
@@ -810,7 +810,7 @@ namespace Fractrace
         private void btnMoveNormal_Click(object sender, EventArgs e)
         {
             tbMove.Text = "6";
-            tbZoomFactor.Text = "6";
+            tbZoomFactor.Text = "7";
             UpdateMoveButtonAppearance();
         }
 

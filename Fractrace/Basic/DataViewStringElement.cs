@@ -11,6 +11,7 @@ namespace Fractrace.Basic
         {
             _tbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEdit.Controls.Add(_tbValue);
+            _tbValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._tbValue.Text = _value;
             this._tbValue.TextChanged += new EventHandler(tbValue_TextChanged);
         }
@@ -40,6 +41,20 @@ namespace Fractrace.Basic
             CallElementChanged(_name, _tbValue.Text);
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Location = new System.Drawing.Point(260, 0);
+            // 
+            // DataViewStringElement
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.Name = "DataViewStringElement";
+            this.ResumeLayout(false);
 
+        }
     }
 }
