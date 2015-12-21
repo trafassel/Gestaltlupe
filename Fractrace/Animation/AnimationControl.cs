@@ -21,23 +21,85 @@ namespace Fractrace.Animation
         public AnimationControl()
         {
             InitializeComponent();
-            MainAnimationControl = this;
+            _mainAnimationControl = this;
         }
 
 
-        public void Abort()
-        {
-            if (currentPaintJob != null)
-                currentPaintJob.Abort();
-        }
-
-
-        PaintJob currentPaintJob = null;
+        PaintJob _currentPaintJob = null;
 
         /// <summary>
         /// Global instance of this unique window.
         /// </summary>
-        public static AnimationControl MainAnimationControl = null;
+        public static AnimationControl MainAnimationControl { get { return _mainAnimationControl;  }  }
+        private static AnimationControl _mainAnimationControl = null;
+
+        /// <summary>
+        /// Return true, if animation process is running.
+        /// </summary>
+        public static bool InAnimation { get { return _inAnimation; } }
+        static bool _inAnimation = false;
+
+        /// <summary>
+        /// Verweis auf die global verwaltete Historie.
+        /// </summary>
+        ParameterHistory _dataPerTime = null;
+
+        /// <summary>
+        /// The Timeline.
+        /// </summary>
+        private AnimationSteps _animationSteps = new AnimationSteps();   
+
+        /// <summary>
+        /// Size of the picture in each frame.
+        /// </summary>
+        protected double _pictureSize = 1;
+
+        /// <summary>
+        /// Enthält die Formel des ersten Eintrages
+        /// </summary>
+        protected string _formula = "";
+
+        /// <summary>
+        /// Wird gesetzt, wenn der Nutzer die Berechnung der Animation abgebrochen hat.
+        /// </summary>
+        private bool _animationAbort = false;
+  
+        // Preview parameters:
+
+        /// <summary>
+        /// True while rendering of preview images. 
+        /// </summary>
+        protected bool _inRenderingPreview = false;
+
+        protected int _currentPreviewStep = 0;
+
+        /// <summary>
+        /// Teilschritte, wenn nicht nur die Eckdaten geladen werden sollen.
+        /// </summary>
+        protected double _currentPreviewSubStep = 0;
+
+        Dictionary<int, AnimationStepPreview> _stepPreviewControls = new Dictionary<int, AnimationStepPreview>();
+
+        int _previewWidth = 50;
+
+        int _previewHeight = 50;
+
+        /// <summary>
+        /// Initialisierung.
+        /// </summary>
+        public void Init(ParameterHistory data)
+        {
+            _dataPerTime = data;
+        }
+
+
+        /// <summary>
+        /// Zeile wird an der aktuellen Position eingefügt.
+        /// </summary>
+        private void btnAddRow_Click(object sender, EventArgs e)
+        {
+            AddCurrentHistoryEntry();
+        }
 
 
         /// <summary>
@@ -46,12 +108,12 @@ namespace Fractrace.Animation
         public void AddCurrentHistoryEntry()
         {
             AnimationPoint point = new AnimationPoint();
-            point.Time = dataPerTime.CurrentTime;
+            point.Time = _dataPerTime.CurrentTime;
             point.Steps = ParameterDict.Current.GetInt("Animation.Steps");
             string comment = "";
             try
             {
-                string file = dataPerTime.Get(point.Time)["Intern.FileName"];
+                string file = _dataPerTime.Get(point.Time)["Intern.FileName"];
                 if (file != "")
                 {
                     file = System.IO.Path.GetFileNameWithoutExtension(file);
@@ -85,71 +147,13 @@ namespace Fractrace.Animation
             tbAnimationDescription.Text = updatedText.ToString();
         }
 
-
-        /// <summary>
-        /// Return true, if animation process is running.
-        /// </summary>
-        public static bool InAnimation
-        {
-            get
-            {
-                return inAnimation;
-            }
-        }
-
-
-        static bool inAnimation = false; 
-
-
-        /// <summary>
-        /// Verweis auf die global verwaltete Historie.
-        /// </summary>
-        ParameterHistory dataPerTime = null;
-
-
-        /// <summary>
-        /// Initialisierung.
-        /// </summary>
-        public void Init(ParameterHistory data)
-        {
-            dataPerTime = data;
-        }
-
-
-        /// <summary>
-        /// The Timeline.
-        /// </summary>
-        private AnimationSteps mAnimationSteps = new AnimationSteps();
-
-
-        /// <summary>
-        /// Zeile wird an der aktuellen Position eingefügt.
-        /// </summary>
-        private void btnAddRow_Click(object sender, EventArgs e)
-        {
-            AddCurrentHistoryEntry();
-        }
-
-
-        /// <summary>
-        /// Size of the picture in each frame.
-        /// </summary>
-        protected double mPictureSize = 1;
-
-
-        /// <summary>
-        /// Enthält die Formel des ersten Eintrages
-        /// </summary>
-        protected string mFormula = "";
-
-
+      
         /// <summary>
         /// Aus dem eingegebenen Text wird die Animation erzeugt.
         /// </summary>
         private void CreateAnimationSteps(string animationDescription)
         {
-            mAnimationSteps.Steps.Clear();
-
+            _animationSteps.Steps.Clear();
             string tempstr = animationDescription.Replace(System.Environment.NewLine, " ");
             string[] entries = tempstr.Split(' ');
             AnimationPoint currentAp = null;
@@ -160,11 +164,10 @@ namespace Fractrace.Animation
                 {
                     case "run":
                         if (currentAp != null)
-                            mAnimationSteps.Steps.Add(currentAp);
+                            _animationSteps.Steps.Add(currentAp);
                         currentAp = new AnimationPoint();
                         break;
                 }
-
                 switch (lastEntry.ToLower())
                 {
                     case "steps":
@@ -185,60 +188,56 @@ namespace Fractrace.Animation
                 lastEntry = str;
             }
             if (currentAp != null)
-                mAnimationSteps.Steps.Add(currentAp);
+                _animationSteps.Steps.Add(currentAp);
         }
 
 
         /// <summary>
-        /// Start der Animation
+        /// Start rendering full Animation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
-            inAnimation = true;
+            _inAnimation = true;
             ParameterInput.MainParameterInput.SetButtonsToStart();
             CreateAnimationSteps(tbAnimationDescription.Text);
-            if (mAnimationSteps.Steps.Count == 0)
+            if (_animationSteps.Steps.Count == 0)
                 return;
             btnStart.Enabled = false;
             btnStop.Enabled = true;
             btnStop.Visible = true;
-            animationAbort = false;
+            _animationAbort = false;
             lblAnimationProgress.Text = "run ...";
-
             // Prepare AnimationHistory
             ParameterHistory animationHistory = new ParameterHistory();
-            for (int i = 0; i < mAnimationSteps.Steps.Count; i++)
+            for (int i = 0; i < _animationSteps.Steps.Count; i++)
             {
-                AnimationPoint ap = mAnimationSteps.Steps[i];
-                dataPerTime.Load(ap.Time);
-                ParameterDict.Current.SetDouble("View.Size", mPictureSize);
+                AnimationPoint ap = _animationSteps.Steps[i];
+                _dataPerTime.Load(ap.Time);
+                ParameterDict.Current.SetDouble("View.Size", _pictureSize);
                 animationHistory.Save();
             }
             // Compute each Animation frame.
-            for (int i = 1; i < mAnimationSteps.Steps.Count; i++)
+            for (int i = 1; i < _animationSteps.Steps.Count; i++)
             {
-
-                AnimationPoint ap1 = mAnimationSteps.Steps[i - 1];
-                AnimationPoint ap2 = mAnimationSteps.Steps[i];
+                AnimationPoint ap1 = _animationSteps.Steps[i - 1];
+                AnimationPoint ap2 = _animationSteps.Steps[i];
                 ComputeAnimationPart(ap1.Time, ap2.Time, ap2.Steps, animationHistory,i-1);
-                if (animationAbort)
+                if (_animationAbort)
                     break;
             }
-            if (mAnimationSteps.Steps.Count > 0)
+            if (_animationSteps.Steps.Count > 0)
             {
-                ComputeAnimationPart(mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, mAnimationSteps.Steps[mAnimationSteps.Steps.Count - 1].Time, 1, animationHistory, mAnimationSteps.Steps.Count-1);
+                ComputeAnimationPart(_animationSteps.Steps[_animationSteps.Steps.Count - 1].Time, _animationSteps.Steps[_animationSteps.Steps.Count - 1].Time, 1, animationHistory, _animationSteps.Steps.Count-1);
             }
-
             btnStop.Visible = false;
             btnStart.Enabled = true;
             lblAnimationProgress.Text = "ready";
-            animationAbort = false;
-            inAnimation = false;
+            _animationAbort = false;
+            _inAnimation = false;
             ParameterInput.MainParameterInput.SetButtonsToStop();
         }
-
 
 
         /// <summary>
@@ -250,7 +249,7 @@ namespace Fractrace.Animation
         private void ComputeAnimationPart(int from, int to, int steps, ParameterHistory animationHistory, int historyIndex)
         {
             lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString();
-            for (int i = 0; i < steps && !animationAbort; i++)
+            for (int i = 0; i < steps && !_animationAbort; i++)
             {
                 lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
                 double r = 1.0 / steps * (double)i;
@@ -259,29 +258,20 @@ namespace Fractrace.Animation
                     animationHistory.LoadSmoothed(r + historyIndex);
                 else
                     animationHistory.Load(r + historyIndex);
-
                 int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
                 if (updateSteps <= 0)
                     updateSteps = 0;
                 if (updateSteps > 1)
                     ParameterDict.Current.SetInt("View.UpdateSteps", updateSteps - 1);
-
                 Form1.PublicForm.SetPictureBoxSize();
                 Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(Form1.PublicForm, Form1.PublicForm.GestaltPicture);
-                currentPaintJob = paintJob;
+                _currentPaintJob = paintJob;
                 paintJob.Run(updateSteps);
                 Form1.PublicForm.CallDrawImage();
-                if (StepPreviewControls.ContainsKey(from))
-                    StepPreviewControls[from].UpdateComputedStep(i);
-
+                if (_stepPreviewControls.ContainsKey(from))
+                    _stepPreviewControls[from].UpdateComputedStep(i);
             }
         } 
-
-
-        /// <summary>
-        /// Wird gesetzt, wenn der Nutzer die Berechnung der Animation abgebrochen hat.
-        /// </summary>
-        private bool animationAbort = false;
 
 
         /// <summary>
@@ -291,7 +281,7 @@ namespace Fractrace.Animation
         /// <param name="e"></param>
         private void btnStop_Click(object sender, EventArgs e)
         {
-            animationAbort = true;
+            _animationAbort = true;
             btnStop.Enabled = false;
         }
 
@@ -308,38 +298,30 @@ namespace Fractrace.Animation
         }
 
 
-        protected bool inRenderingPreview = false;
-
-
+        /// <summary>
+        /// Draws all preview images.
+        /// </summary>
         private void RenderPreview()
         {
             int height = 0;
             if (int.TryParse(tbPreviewSize.Text, out height))
             {
                 if (height > 10 && height < 256)
-                    previewHeight = height;
+                    _previewHeight = height;
             }
             int width = 0;
             if (int.TryParse(tbPreviewSize.Text, out width))
             {
                 if (width > 10 && width < 256)
-                    previewWidth = width;
+                    _previewWidth = width;
             }
-
             CreateAnimationSteps(tbAnimationDescription.Text);
             pnlPreview.Controls.Clear();
-            StepPreviewControls.Clear();
-            inRenderingPreview = true;
-            currentPreviewStep = 0;
+            _stepPreviewControls.Clear();
+            _inRenderingPreview = true;
+            _currentPreviewStep = 0;
             mPreview1_RenderingEnds();
         }
-
-        protected int currentPreviewStep = 0;
-
-        /// <summary>
-        /// Teilschritte, wenn nicht nur die Eckdaten geladen werden sollen.
-        /// </summary>
-        protected double currentPreviewSubStep = 0;
 
 
         /// <summary>
@@ -347,64 +329,53 @@ namespace Fractrace.Animation
         /// </summary>
         void mPreview1_RenderingEnds()
         {
-            if (currentPreviewStep >= mAnimationSteps.Steps.Count)
+            if (_currentPreviewStep >= _animationSteps.Steps.Count)
             {
-                inRenderingPreview = false;
-                currentPreviewStep = 0;
+                _inRenderingPreview = false;
+                _currentPreviewStep = 0;
                 btnPreview.Enabled = true;
                 return;
             }
-            if (!inRenderingPreview)
+            if (!_inRenderingPreview)
                 return;
             // Load data of currentPreviewStep:
-            AnimationPoint ap = mAnimationSteps.Steps[currentPreviewStep];
+            AnimationPoint ap = _animationSteps.Steps[_currentPreviewStep];
             ParameterHistory animationHistory = new ParameterHistory();
-            dataPerTime.Load(ap.Time);
+            _dataPerTime.Load(ap.Time);
             animationHistory.Save();
 
             PreviewControl mPreview1 = new Fractrace.PreviewControl();
-            mPreview1.Width = previewWidth ;
-            mPreview1.Height = previewHeight;
-            mPreview1.Location = new System.Drawing.Point(previewWidth * currentPreviewStep, 0);
+            mPreview1.Width = _previewWidth ;
+            mPreview1.Height = _previewHeight;
+            mPreview1.Location = new System.Drawing.Point(_previewWidth * _currentPreviewStep, 0);
             pnlPreview.Controls.Add(mPreview1);
             mPreview1.ShowProgressBar = false;
             mPreview1.RenderOnClick = false;
 
             AnimationStepPreview stepInfo = new AnimationStepPreview();
-            stepInfo.Width = previewWidth;
-            stepInfo.Height = previewHeight;
-            stepInfo.Location = new System.Drawing.Point(previewWidth * currentPreviewStep, previewHeight);
+            stepInfo.Width = _previewWidth;
+            stepInfo.Height = _previewHeight;
+            stepInfo.Location = new System.Drawing.Point(_previewWidth * _currentPreviewStep, _previewHeight);
             pnlPreview.Controls.Add(stepInfo);
             int steps=0;
-            if ( mAnimationSteps.Steps.Count>currentPreviewStep+1 )
-              steps = mAnimationSteps.Steps[currentPreviewStep+1].Steps;
+            if ( _animationSteps.Steps.Count>_currentPreviewStep+1 )
+              steps = _animationSteps.Steps[_currentPreviewStep+1].Steps;
             stepInfo.Init(ap.Time, steps);
-            StepPreviewControls[ap.Time] = stepInfo;
-            currentPreviewStep++;
+            _stepPreviewControls[ap.Time] = stepInfo;
+            _currentPreviewStep++;
             mPreview1.RenderingEnds += new PictureRenderingIsReady(mPreview1_RenderingEnds);
             mPreview1.Draw();
         }
 
 
-        Dictionary<int, AnimationStepPreview> StepPreviewControls = new Dictionary<int, AnimationStepPreview>();
-
-
-        int previewWidth = 50;
-
-
-        int previewHeight = 50;
-
-
         private void tbSize_TextChanged(object sender, EventArgs e)
         {
-            if (double.TryParse(tbSize.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mPictureSize))
+            if (double.TryParse(tbSize.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out _pictureSize))
             {
                 tbSize.ForeColor = Color.Black;
             }
             else
                 tbSize.ForeColor = Color.Red;
-
-
         }
 
 
@@ -426,9 +397,9 @@ namespace Fractrace.Animation
                 // Load scenes given in comment
                 CreateAnimationSteps(animstring);
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < mAnimationSteps.Steps.Count; i++)
+                for (int i = 0; i < _animationSteps.Steps.Count; i++)
                 {
-                    AnimationPoint ap = mAnimationSteps.Steps[i];
+                    AnimationPoint ap = _animationSteps.Steps[i];
                     // load file
                     if (ap.fileName != "")
                     {
@@ -463,6 +434,13 @@ namespace Fractrace.Animation
                 sw.Write(tbAnimationDescription.Text);
                 sw.Close();
             }
+        }
+
+
+        public void Abort()
+        {
+            if (_currentPaintJob != null)
+                _currentPaintJob.Abort();
         }
 
 

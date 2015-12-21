@@ -34,6 +34,8 @@ namespace Fractrace
             btnZoomYout.Visible = false;
             btnZoomZ.Visible = false;
             btnZoomZout.Visible = false;
+
+            tbAngle_TextChanged(null,null);
         }
 
 
@@ -549,9 +551,7 @@ namespace Fractrace
 
         private void button4_Click(object sender, EventArgs e)
         {
-            double angleX = ParameterDict.Current.GetDouble("Transformation.Camera.AngleX");
-            angleX -= mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", angleX);
+            RotateX(-Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
         }
 
@@ -595,20 +595,93 @@ namespace Fractrace
 
         }
 
+
+        void RotateX(double angle)
+        {
+
+            Fractrace.Geometry.VecRotation rotation = new VecRotation();
+            
+            rotation.FromEuler(Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX")/180.0,
+                -Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0,
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") / 180.0);
+
+            rotation.Normalize();
+            rotation.combine(-angle, 0, 0);
+
+            double ax = 0, ay = 0, az = 0;
+            rotation.toEuler(ref ax, ref ay, ref az);
+
+            ax = 180 * ax / Math.PI;
+            ay = 180 * ay / Math.PI;
+            az = 180 * az / Math.PI;
+
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", ax);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", -ay);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", az);
+        }
+
+
+        void RotateY(double angle)
+        {
+
+            Fractrace.Geometry.VecRotation rotation = new VecRotation();
+          
+            rotation.FromEuler(
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX") / 180.0, 
+               - Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0, 
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") / 180.0
+                );
+
+            rotation.Normalize();       
+            rotation.combine(0, angle, 0);
+
+            double ax = 0, ay = 0, az = 0;
+            rotation.toEuler(ref ax, ref ay, ref az);
+
+            ax = 180 * ax / Math.PI;
+            ay = 180 * ay / Math.PI;
+            az = 180 * az / Math.PI;
+
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", ax);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", -ay);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", az);
+        }
+
+
+        void RotateZ(double angle)
+        {
+
+            Fractrace.Geometry.VecRotation rotation = new VecRotation();
+            rotation.FromEuler(Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleX") / 180.0,
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleY") / 180.0,
+                Math.PI * ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") / 180.0);
+
+            rotation.Normalize();
+            rotation.combine(0, 0, angle);
+
+            double ax = 0, ay = 0, az = 0;
+            rotation.toEuler(ref ax, ref ay, ref az);
+
+            ax = 180 * ax / Math.PI;
+            ay = 180 * ay / Math.PI;
+            az = 180 * az / Math.PI;
+
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", ax);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", ay);
+            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", az);
+        }
+
+
         private void btnRotX_Click(object sender, EventArgs e)
         {
-            double angleX = ParameterDict.Current.GetDouble("Transformation.Camera.AngleX");
-            angleX += mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", angleX);
+            RotateX(Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
         }
 
 
         private void btnRotY_Click(object sender, EventArgs e)
         {
-            double angleY = ParameterDict.Current.GetDouble("Transformation.Camera.AngleY");
-            angleY += mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", angleY);
+            RotateY(Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
         }
 
@@ -616,26 +689,20 @@ namespace Fractrace
 
         private void btnRotZ_Click(object sender, EventArgs e)
         {
-            double angleZ = ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ");
-            angleZ += mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", angleZ);
+            RotateZ(Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
 
         }
 
         private void btnRotYneg_Click(object sender, EventArgs e)
         {
-            double angleY = ParameterDict.Current.GetDouble("Transformation.Camera.AngleY");
-            angleY -= mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", angleY);
+            RotateY(-Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
         }
 
         private void btnRotZneg_Click(object sender, EventArgs e)
         {
-            double angleZ = ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ");
-            angleZ -= mAngle;
-            ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", angleZ);
+            RotateZ(-Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
         }
 

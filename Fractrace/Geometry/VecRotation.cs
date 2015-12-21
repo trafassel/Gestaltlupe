@@ -212,9 +212,12 @@ namespace Fractrace.Geometry
         public void Normalize()
         {
             double r = Math.Sqrt(X * X + Y * Y + Z * Z);
-            X = X / r;
-            Y = Y / r;
-            Z = Z / r;
+            if (r != 0)
+            {
+                X = X / r;
+                Y = Y / r;
+                Z = Z / r;
+            }
         }
 
 

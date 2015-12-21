@@ -1485,7 +1485,6 @@ namespace Fractrace.PictureArt
         protected void SmoothPlane()
         {
             double fieldOfViewStart = minFieldOfView;
-            double neighborDist = 5; // Look at neighbors with distance <=5 pixel
             ydGlobal = (areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
             rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
             rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
@@ -1609,19 +1608,12 @@ namespace Fractrace.PictureArt
 
                                             nColor.Add(nColor1);
                                             neighborsFound++;
-                                        }
-                                        else
-                                        {
-                                            //    nColor = currentPlane[i, j];
-
-                                        }
+                                        }                                   
                                     }
                                 }
                             }
                         }
-                        //      }
-
-
+                       
                         if (neighborsFound > 1)
                         {
                             nColor = nColor.Mult(1 / sumColor);
@@ -1630,29 +1622,14 @@ namespace Fractrace.PictureArt
                         {
                             nColor = currentPlane[i, j];
                         }
-                        //rgbSmoothPlane2[i, j] = nColor;
                         nextPlane[i, j] = nColor;
                     }
                 }
 
-
                 resultPlane = nextPlane;
                 nextPlane = currentPlane;
                 currentPlane = resultPlane;
-
-                /*
-                Vec3[,] currentPlane = rgbSmoothPlane2;
-                Vec3[,] nextPlane = rgbSmoothPlane1;
-                // contain the result colors
-                Vec3[,] resultPlane = rgbSmoothPlane1;
-                */
-
-
-
             }
-
-
-
 
             for (int i = 0; i < pData.Width; i++)
             {
@@ -1730,12 +1707,8 @@ namespace Fractrace.PictureArt
             ydNormalized = Math.Sqrt(ydNormalized);
             ydNormalized = Math.Sqrt(ydNormalized);
             ydNormalized = Math.Sqrt(ydNormalized);
-            //  ydNormalized = Math.Sqrt(ydNormalized);
-
 
             return ydNormalized;
-
-            return 0;
         }
 
 

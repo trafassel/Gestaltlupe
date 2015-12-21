@@ -1407,7 +1407,6 @@ namespace Fractrace.PictureArt
         protected void SmoothPlane()
         {
             double fieldOfViewStart = minFieldOfView;
-            double neighborDist = 5; // Look at neighbors with distance <=5 pixel
             ydGlobal = (areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
             rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
             rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
@@ -1656,8 +1655,6 @@ namespace Fractrace.PictureArt
 
 
             return ydNormalized;
-
-            return 0;
         }
 
 

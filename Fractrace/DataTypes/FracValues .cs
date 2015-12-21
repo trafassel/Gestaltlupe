@@ -57,6 +57,19 @@ namespace Fractrace.DataTypes
         public XYZTupel start_tupel = null;
         public XYZTupel end_tupel = null;
         public XYZTupel arc = null;
-    }
 
+        public XYZTupel Center
+        {
+            get
+            {
+                XYZTupel retVal = new XYZTupel();
+                retVal.x = (end_tupel.x + start_tupel.x) / 2.0;
+                retVal.y = (end_tupel.y + start_tupel.y) / 2.0;
+                retVal.z = (end_tupel.z + start_tupel.z) / 2.0;
+                return retVal;
+            }
+        }
+
+
+    }
 }

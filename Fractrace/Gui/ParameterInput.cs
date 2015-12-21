@@ -990,9 +990,6 @@ namespace Fractrace
         }
 
 
-        private bool inPreview = false;
-
-
         /// <summary>
         /// Stop the to the preview control assigned iter
         /// </summary>

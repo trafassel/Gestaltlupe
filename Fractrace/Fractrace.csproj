@@ -362,7 +362,36 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Intellitrace_stepback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Intellitrace_stepover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Intellitrace_stepout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Intellitrace_stepinto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CameraOrbit_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CameraOrbit_reverse_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DecreaseMipMap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom_5442.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut_15x15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut_12927.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
