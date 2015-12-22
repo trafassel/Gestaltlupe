@@ -359,10 +359,8 @@ namespace Fractrace
                     }
                     System.Diagnostics.Debug.WriteLine("Iter ends");
                     mStart = false;
-                  //  if(!mAbort)
-                      mStarter.ComputationEnds();
+                    mStarter.ComputationEnds();
                 }
-                // Endereignis aufrufen
             }
         }
 

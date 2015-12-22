@@ -36,7 +36,6 @@ namespace Fractrace
             formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("Transformation");
             formulaSettingCategories.Add("Formula");
-            //formulaSettingCategories.Add("Intern.Formula");
 
             // To make the new settings unique
 

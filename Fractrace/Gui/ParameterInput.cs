@@ -68,15 +68,18 @@ namespace Fractrace
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 1;
             SetSmallPreviewSize();
+            parameterDictControl1.SelectNode("View");
         }
 
-
+        /// <summary>
+        /// Public Acces to DataViewControl.
+        /// </summary>
         public DataViewControl MainDataViewControl { get { return parameterDictControl1.MainDataViewControl; } }
+
 
         private void Preview1_ProgressEvent(double progress)
         {
             this.Invoke(new VoidDelegate(UpdateFrontView));
-            //   preview2.Progress(progress);
         }
 
 
@@ -1273,5 +1276,13 @@ namespace Fractrace
                 LoadFromHistory();
             }
         }
+
+        public void EnableRepaint(bool enable)
+        {
+            button4.Enabled = enable;
+            Application.DoEvents();
+        }
+
+
     }
 }

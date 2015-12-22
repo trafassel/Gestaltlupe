@@ -630,7 +630,7 @@ namespace Fractrace
                     _currentPicturArt = null;
                     _repaintRequested = false;
                     CallDrawImage();
-                }
+                }   
                 catch (System.Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -667,7 +667,8 @@ namespace Fractrace
                     _lastAnimationParameterHash = ParameterDict.Current.GetHash("");
                 }
             }
-            btnRepaint.Enabled = true;
+            Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
+//            btnRepaint.Enabled = true;
         }
 
 
@@ -677,7 +678,7 @@ namespace Fractrace
         /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
-            if (progressInPercent > 0 && progressInPercent < 100)
+            if (progressInPercent >= 0 && progressInPercent <= 100)
             {
                 _progress = progressInPercent;
                 _progressChanged = true;
@@ -749,7 +750,8 @@ namespace Fractrace
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (_inPaint)
-                btnRepaint.Enabled = false;
+                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);
+          //  btnRepaint.Enabled = false;
 
             if (_progressChanged)
             {

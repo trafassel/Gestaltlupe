@@ -39,7 +39,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(5, 5);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -49,8 +49,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(343, 311);
-            this.splitContainer1.SplitterDistance = 92;
+            this.splitContainer1.Size = new System.Drawing.Size(333, 301);
+            this.splitContainer1.SplitterDistance = 89;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeView1
@@ -63,7 +63,7 @@
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(92, 311);
+            this.treeView1.Size = new System.Drawing.Size(89, 301);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -73,7 +73,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(247, 311);
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(240, 301);
             this.panel1.TabIndex = 1;
             // 
             // pnlEdit
@@ -81,10 +82,10 @@
             this.pnlEdit.AutoScroll = true;
             this.pnlEdit.Controls.Add(this.dataViewControl1);
             this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEdit.Location = new System.Drawing.Point(0, 0);
+            this.pnlEdit.Location = new System.Drawing.Point(5, 5);
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
-            this.pnlEdit.Size = new System.Drawing.Size(247, 311);
+            this.pnlEdit.Size = new System.Drawing.Size(230, 291);
             this.pnlEdit.TabIndex = 1;
             // 
             // dataViewControl1
@@ -93,7 +94,7 @@
             this.dataViewControl1.Location = new System.Drawing.Point(0, 0);
             this.dataViewControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataViewControl1.Name = "dataViewControl1";
-            this.dataViewControl1.Size = new System.Drawing.Size(247, 0);
+            this.dataViewControl1.Size = new System.Drawing.Size(230, 0);
             this.dataViewControl1.TabIndex = 0;
             // 
             // ParameterDictControl
@@ -102,6 +103,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Name = "ParameterDictControl";
+            this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(343, 311);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
