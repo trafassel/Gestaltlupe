@@ -156,8 +156,22 @@ namespace Fractrace.Basic
         /// </summary>
         public void UpdateFromData()
         {
+            lock (_updateFromDataMutex)
+            {
+                if (_inUpdateFromData)
+                    return;
+                _inUpdateFromData = true;
+            }
             this.dataViewControl1.Select(_choosenHirarchy);
+            lock (_updateFromDataMutex)
+            {
+                _inUpdateFromData = false;
+            }
         }
+
+
+        object _updateFromDataMutex=new object();
+        bool _inUpdateFromData = false;
 
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
