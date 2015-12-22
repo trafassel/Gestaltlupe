@@ -65,14 +65,14 @@ namespace Fractrace.Basic
                 newPage.Create(category);
                 _pages[category] = newPage;
             }
-            if (_oldCategory != category)
+            if (_oldCategory != newPage.NodeHash)
             {
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(newPage);
                 this.Height = newPage.ComputedHeight;
             }
             this.ResumeLayout(true);
-            _oldCategory = category;
+            _oldCategory = newPage.NodeHash;
         }
 
 

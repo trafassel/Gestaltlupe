@@ -172,11 +172,18 @@ namespace Fractrace.Basic
         public void Load(string fileName)
         {
             _entries.Clear();
+            _noUpdateEvents = true;
             GlobalParameters.SetGlobalParameters();
             Append(fileName);
             ParameterUpdater.Update();
+            _noUpdateEvents = false;
         }
 
+
+        /// <summary>
+        /// If true, no outgoing update events are raised.
+        /// </summary>
+        private bool _noUpdateEvents = false;
 
         /// <summary>
         /// Append all dictionary entries from the given file.
@@ -297,7 +304,7 @@ namespace Fractrace.Basic
             {
                 _entries[name] = value;
             }
-            if (EventChanged != null)
+            if (EventChanged != null && !_noUpdateEvents)
                 EventChanged(this, new ParameterDictChangedEventArgs(name, value));
         }
 

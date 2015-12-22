@@ -429,10 +429,33 @@ namespace Fractrace
             //SavePicData();  // Bild retten
             mHistory.Load(mHistory.CurrentTime);
             UpdateHistoryControl();
-            UpdateFromData();
-            formulaEditor1.Init();
+            //  UpdateFromData();
+
+
+            UpdateCurrentTab();
+
             // TODO: Bild aktualisieren
 
+        }
+
+
+        /// <summary>
+        /// Update selected tab control.
+        /// </summary>
+        private void UpdateCurrentTab()
+        {
+            switch (tabControl1.SelectedTab.Name)
+            {
+                case "tpNavigate":
+                    navigateControl1.UpdateFromChangeProperty();
+                    break;
+                case "tpSource":
+                    formulaEditor1.Init();
+                    break;
+                case "Data":
+                    parameterDictControl1.UpdateFromData();
+                    break;
+            }
         }
 
 
@@ -623,12 +646,24 @@ namespace Fractrace
         /// <param name="e"></param>
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateCurrentTab();
+
+            /*
             if (tabControl1.SelectedTab == Data)
             {
                 parameterDictControl1.UpdateFromData();
             }
             if (tabControl1.SelectedTab == tpSource)
                 formulaEditor1.Init();
+
+            switch (tabControl1.SelectedTab.Name)
+            {
+                case "tpNavigate":
+                    navigateControl1.UpdateFromChangeProperty();
+                    break;
+            }
+            */
+
         }
 
 
@@ -1241,6 +1276,8 @@ namespace Fractrace
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            btnExport.Enabled = false;
+            Application.DoEvents();
             SaveFileDialog sd = new SaveFileDialog();
             sd.Filter = "*.wrl|*.wrl|*.*|all";
             if (sd.ShowDialog() == DialogResult.OK)
@@ -1248,7 +1285,9 @@ namespace Fractrace
                 X3dExporter export = new X3dExporter(Form1.PublicForm.Iterate);
                 export.Save(sd.FileName);
             }
+            btnExport.Enabled = true;
         }
+
 
         private void tbCurrentStep_TextChanged(object sender, EventArgs e)
         {
@@ -1283,6 +1322,6 @@ namespace Fractrace
             Application.DoEvents();
         }
 
-
+      
     }
 }

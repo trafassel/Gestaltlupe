@@ -742,8 +742,25 @@ namespace Fractrace
         /// </summary>
         private void DrawAndWriteInHistory()
         {
-            mPreview.Draw();
+            DrawPreview();
             mParent.AddToHistory();
+            UpdateFromChangeProperty();
+        }
+
+
+        private void DrawPreview()
+        {
+            Form1.PublicForm.Stop();
+            if (ParameterInput.MainParameterInput.StereoForm != null)     
+                 ParameterInput.MainParameterInput.StereoForm.Abort();
+            mPreview.Draw();
+        }
+
+        /// <summary>
+        /// Is called, if some properties changed.
+        /// </summary>
+        public void UpdateFromChangeProperty()
+        {
             _propertyControl.UpdateElements();
             _propertyControlBbox.UpdateElements();
         }

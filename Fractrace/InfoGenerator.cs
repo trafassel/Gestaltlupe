@@ -62,7 +62,8 @@ namespace Fractrace
                     }
                     if (isInCategorie)
                     {
-                        settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                        if(!ParameterDict.IsAdditionalInfo(entry.Key))
+                          settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
                     }
                 }
 
@@ -131,7 +132,8 @@ namespace Fractrace
                     }
                     if (isInCategorie)
                     {
-                        settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                        if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                            settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
                     }
                 }
 
