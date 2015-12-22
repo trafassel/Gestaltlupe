@@ -64,8 +64,10 @@ namespace Fractrace
         int _height = 0;
 
         /// <summary>
-        /// Current computing algorithm of the surface data of the "Gestalt". 
+        ///  Get current computing algorithm of the surface data of the "Gestalt". 
         /// </summary>
+        public Iterate Iterate { get { return _iterate;  }  }
+        /// <summary>Current computing algorithm of the surface data of the "Gestalt". </summary>
         Iterate _iterate = null;
 
         /// <summary>
@@ -393,7 +395,8 @@ namespace Fractrace
         /// <param name="e"></param>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (_inZoom)
+            // Always zoom
+           // if (_inZoom)
             {
                 _zoomX1 = e.X;
                 _zoomY1 = e.Y;

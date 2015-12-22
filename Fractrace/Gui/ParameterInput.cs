@@ -39,7 +39,8 @@ namespace Fractrace
         /// </summary>
         public Fractrace.PreviewControl MainPreviewControl
         {
-            get {
+            get
+            {
                 return this.preview2;
             }
         }
@@ -75,7 +76,7 @@ namespace Fractrace
         private void Preview1_ProgressEvent(double progress)
         {
             this.Invoke(new VoidDelegate(UpdateFrontView));
-         //   preview2.Progress(progress);
+            //   preview2.Progress(progress);
         }
 
 
@@ -294,7 +295,7 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-          
+
             if (!mPreviewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
@@ -390,9 +391,12 @@ namespace Fractrace
         /// <param name="e"></param>
         private void btnBack_Click_1(object sender, EventArgs e)
         {
-            mHistory.CurrentTime = 0;
-            UpdateHistoryPic();
-            LoadFromHistory();
+            if (mHistory.Time >= 0)
+            {
+                mHistory.CurrentTime = 0;
+                UpdateHistoryPic();
+                LoadFromHistory();
+            }
         }
 
 
@@ -405,8 +409,11 @@ namespace Fractrace
         {
             //SavePicData(); 
             mHistory.CurrentTime = mHistory.Time;
-            UpdateHistoryPic();
-            LoadFromHistory();
+            if (mHistory.CurrentTime >= 0)
+            {
+                UpdateHistoryPic();
+                LoadFromHistory();
+            }
         }
 
 
@@ -432,6 +439,7 @@ namespace Fractrace
         protected void UpdateHistoryControl()
         {
             lblCurrentStep.Text = mHistory.CurrentTime.ToString();
+            tbCurrentStep.Text= mHistory.CurrentTime.ToString();
             if (mHistory.CurrentTime > 0)
             {
                 btnLastStep.Text = ((int)(mHistory.CurrentTime - 1)).ToString();
@@ -660,9 +668,9 @@ namespace Fractrace
             int width = 110;
             preview2.Width = width;
             preview1.Width = width;
-            
+
             int height = (int)(width / aspectRatio) + 34;
-            this.splitContainer1.SplitterDistance = height-12;
+            this.splitContainer1.SplitterDistance = height - 12;
             preview1.Height = height;
             preview2.Height = height;
         }
@@ -1220,6 +1228,28 @@ namespace Fractrace
             btnPause.Enabled = true;
             btnCreatePoster.Enabled = true;
             btnPreview.Enabled = true;
+        }
+
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form1.PublicForm.ActivatePictureArt();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sd = new SaveFileDialog();
+            sd.Filter = "*.wrl|*.wrl|*.*|all";
+            if (sd.ShowDialog() == DialogResult.OK)
+            {
+                X3dExporter export = new X3dExporter(Form1.PublicForm.Iterate);
+                export.Save(sd.FileName);
+            }
+        }
+
+        private void tbCurrentStep_TextChanged(object sender, EventArgs e)
+        {
+            // TODO: Load editet entry.
         }
 
 
