@@ -187,20 +187,24 @@ namespace Fractrace.Basic
             XmlDocument xdoc = new XmlDocument();
             if(!System.IO.File.Exists(fileName))
             {
+                return;
                 // Todo Backwart Compatibility
                
                // string path = System.IO.Path.GetFullPath("\Documents\\Gestaltlupe / data / parameters");
-                string path = System.IO.Path.GetFullPath(fileName);
+               // string path = System.IO.Path.GetFullPath(fileName);
                 //
                 {
-                // "C:\Users\ich\Documents\TomoTrace\data\parameters"
-                // C: \Users\ich\Documents\Tumotrace\data\parameters\Data20pic10009.tomo
-                    string origFilename = path.Replace("Documents\\Gestaltlupe\\data\\parameters", "Documents\\Tumotrace\\data\\parameters");
-                    if (System.IO.File.Exists(origFilename))
-                    {
+                    // "C:\Users\ich\Documents\TomoTrace\data\parameters"
+                    // C: \Users\ich\Documents\Tumotrace\data\parameters\Data20pic10009.tomo
+                    /*
+                        string origFilename = path.Replace("Documents\\Gestaltlupe\\data\\parameters", "Documents\\Tumotrace\\data\\parameters");
+                        if (System.IO.File.Exists(origFilename))
+                        {
 
 
-                    }
+                        }
+                                        */
+
                 }
 
             }
@@ -399,7 +403,19 @@ namespace Fractrace.Basic
             byte[] buffer = new byte[Encoding.ASCII.GetByteCount(bigstr)];
             buffer = Encoding.ASCII.GetBytes(bigstr);
             byte[] buffer2 = sha.ComputeHash(buffer);
-            return Encoding.ASCII.GetString(buffer2);
+
+            string temp = "";
+            StringBuilder retVal = new StringBuilder();
+            for (int i = 0; i < buffer2.Length; i++)
+            {
+                temp = Convert.ToString(buffer2[i], 16);
+                if (temp.Length == 1)
+                    temp = "0" + temp;
+                retVal.Append(temp);
+            }
+            return retVal.ToString();
+
+            //return Encoding.ASCII.GetString(buffer2);
         }
 
 

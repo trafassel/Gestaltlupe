@@ -47,7 +47,7 @@ namespace Fractrace.Basic
             if (_pages.ContainsKey(category))
             {
                 newPage = _pages[category];
-                if (newPage.NodeValueHash == ParameterDict.Current.GetHashOfName(category))
+                if (newPage.NodeHash == ParameterDict.Current.GetHashOfName(category))
                 {
                     newPage.UpdateElements();
                     newPage.Update();

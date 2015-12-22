@@ -1253,5 +1253,25 @@ namespace Fractrace
         }
 
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (mHistory.Time >= 0)
+            {
+                mHistory.CurrentTime = 0;
+                UpdateHistoryPic();
+                LoadFromHistory();
+            }
+        }
+
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            mHistory.CurrentTime = mHistory.Time;
+            if (mHistory.CurrentTime >= 0)
+            {
+                UpdateHistoryPic();
+                LoadFromHistory();
+            }
+        }
     }
 }
