@@ -863,6 +863,6 @@ namespace Fractrace
                 btnMoveAngleFine.FlatStyle = FlatStyle.Standard;
         }
 
-
+       
     }
 }

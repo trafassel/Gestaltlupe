@@ -57,6 +57,7 @@ namespace Fractrace.Basic
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = text;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;

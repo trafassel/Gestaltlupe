@@ -37,7 +37,11 @@
             this.tbAngle = new System.Windows.Forms.TextBox();
             this.btnAspect = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnRotZneg = new System.Windows.Forms.Button();
@@ -61,11 +65,17 @@
             this.btnMoveAngleFine = new System.Windows.Forms.Button();
             this.pnlProperties = new System.Windows.Forms.Panel();
             this.pnlBorderProperties = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnZoomX
             // 
-            this.btnZoomX.Location = new System.Drawing.Point(23, 291);
+            this.btnZoomX.Location = new System.Drawing.Point(327, 397);
             this.btnZoomX.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomX.Name = "btnZoomX";
             this.btnZoomX.Size = new System.Drawing.Size(67, 28);
@@ -76,7 +86,7 @@
             // 
             // btnZoomY
             // 
-            this.btnZoomY.Location = new System.Drawing.Point(94, 291);
+            this.btnZoomY.Location = new System.Drawing.Point(398, 397);
             this.btnZoomY.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomY.Name = "btnZoomY";
             this.btnZoomY.Size = new System.Drawing.Size(67, 28);
@@ -87,7 +97,7 @@
             // 
             // btnZoomZ
             // 
-            this.btnZoomZ.Location = new System.Drawing.Point(165, 291);
+            this.btnZoomZ.Location = new System.Drawing.Point(469, 397);
             this.btnZoomZ.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZ.Name = "btnZoomZ";
             this.btnZoomZ.Size = new System.Drawing.Size(67, 28);
@@ -98,7 +108,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(23, 322);
+            this.button1.Location = new System.Drawing.Point(327, 428);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 28);
@@ -109,7 +119,7 @@
             // 
             // btnZoomYout
             // 
-            this.btnZoomYout.Location = new System.Drawing.Point(94, 322);
+            this.btnZoomYout.Location = new System.Drawing.Point(398, 428);
             this.btnZoomYout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomYout.Name = "btnZoomYout";
             this.btnZoomYout.Size = new System.Drawing.Size(67, 28);
@@ -120,7 +130,7 @@
             // 
             // btnZoomZout
             // 
-            this.btnZoomZout.Location = new System.Drawing.Point(165, 322);
+            this.btnZoomZout.Location = new System.Drawing.Point(469, 428);
             this.btnZoomZout.Margin = new System.Windows.Forms.Padding(2);
             this.btnZoomZout.Name = "btnZoomZout";
             this.btnZoomZout.Size = new System.Drawing.Size(67, 28);
@@ -131,7 +141,7 @@
             // 
             // tbMove
             // 
-            this.tbMove.Location = new System.Drawing.Point(66, 243);
+            this.tbMove.Location = new System.Drawing.Point(377, 336);
             this.tbMove.Margin = new System.Windows.Forms.Padding(2);
             this.tbMove.Name = "tbMove";
             this.tbMove.Size = new System.Drawing.Size(55, 20);
@@ -142,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 243);
+            this.label1.Location = new System.Drawing.Point(331, 336);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
@@ -152,7 +162,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 272);
+            this.label2.Location = new System.Drawing.Point(331, 365);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
@@ -161,7 +171,7 @@
             // 
             // tbZoomFactor
             // 
-            this.tbZoomFactor.Location = new System.Drawing.Point(65, 272);
+            this.tbZoomFactor.Location = new System.Drawing.Point(376, 365);
             this.tbZoomFactor.Margin = new System.Windows.Forms.Padding(2);
             this.tbZoomFactor.Name = "tbZoomFactor";
             this.tbZoomFactor.Size = new System.Drawing.Size(55, 20);
@@ -172,7 +182,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(133, 246);
+            this.label3.Location = new System.Drawing.Point(444, 339);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
@@ -181,7 +191,7 @@
             // 
             // tbAngle
             // 
-            this.tbAngle.Location = new System.Drawing.Point(177, 243);
+            this.tbAngle.Location = new System.Drawing.Point(488, 336);
             this.tbAngle.Margin = new System.Windows.Forms.Padding(2);
             this.tbAngle.Name = "tbAngle";
             this.tbAngle.Size = new System.Drawing.Size(55, 20);
@@ -191,10 +201,10 @@
             // 
             // btnAspect
             // 
-            this.btnAspect.Location = new System.Drawing.Point(13, 263);
+            this.btnAspect.Location = new System.Drawing.Point(408, 273);
             this.btnAspect.Margin = new System.Windows.Forms.Padding(2);
             this.btnAspect.Name = "btnAspect";
-            this.btnAspect.Size = new System.Drawing.Size(151, 31);
+            this.btnAspect.Size = new System.Drawing.Size(116, 31);
             this.btnAspect.TabIndex = 27;
             this.btnAspect.Text = "correct Aspect Ratio";
             this.btnAspect.UseVisualStyleBackColor = true;
@@ -203,21 +213,61 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(12, 142);
+            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Location = new System.Drawing.Point(12, 315);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(284, 2);
+            this.panel1.Size = new System.Drawing.Size(300, 2);
             this.panel1.TabIndex = 28;
-            this.panel1.Visible = false;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Location = new System.Drawing.Point(-1, 177);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 2);
+            this.panel6.TabIndex = 30;
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Location = new System.Drawing.Point(105, 11);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 2);
+            this.panel7.TabIndex = 29;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Location = new System.Drawing.Point(105, 11);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 2);
+            this.panel5.TabIndex = 29;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(13, 228);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Location = new System.Drawing.Point(48, 367);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(284, 2);
+            this.panel2.Size = new System.Drawing.Size(200, 83);
             this.panel2.TabIndex = 29;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(-7, -37);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 2);
+            this.panel4.TabIndex = 30;
             // 
             // btnZoomOut
             // 
@@ -225,7 +275,7 @@
             this.btnZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnZoomOut.FlatAppearance.BorderSize = 0;
             this.btnZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomOut.Location = new System.Drawing.Point(151, 102);
+            this.btnZoomOut.Location = new System.Drawing.Point(162, 102);
             this.btnZoomOut.Name = "btnZoomOut";
             this.btnZoomOut.Size = new System.Drawing.Size(32, 32);
             this.btnZoomOut.TabIndex = 26;
@@ -238,7 +288,7 @@
             this.btnZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnZoomIn.FlatAppearance.BorderSize = 0;
             this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomIn.Location = new System.Drawing.Point(13, 102);
+            this.btnZoomIn.Location = new System.Drawing.Point(24, 102);
             this.btnZoomIn.Name = "btnZoomIn";
             this.btnZoomIn.Size = new System.Drawing.Size(32, 32);
             this.btnZoomIn.TabIndex = 25;
@@ -251,7 +301,7 @@
             this.btnRotZneg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotZneg.FlatAppearance.BorderSize = 0;
             this.btnRotZneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotZneg.Location = new System.Drawing.Point(66, 169);
+            this.btnRotZneg.Location = new System.Drawing.Point(66, 216);
             this.btnRotZneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotZneg.Name = "btnRotZneg";
             this.btnRotZneg.Size = new System.Drawing.Size(32, 32);
@@ -265,7 +315,7 @@
             this.btnRotYneg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotYneg.FlatAppearance.BorderSize = 0;
             this.btnRotYneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotYneg.Location = new System.Drawing.Point(151, 185);
+            this.btnRotYneg.Location = new System.Drawing.Point(151, 232);
             this.btnRotYneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotYneg.Name = "btnRotYneg";
             this.btnRotYneg.Size = new System.Drawing.Size(32, 32);
@@ -278,7 +328,7 @@
             this.btnRotXneg.BackgroundImage = global::Fractrace.Properties.Resources.RotateUp;
             this.btnRotXneg.FlatAppearance.BorderSize = 0;
             this.btnRotXneg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotXneg.Location = new System.Drawing.Point(12, 185);
+            this.btnRotXneg.Location = new System.Drawing.Point(12, 232);
             this.btnRotXneg.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotXneg.Name = "btnRotXneg";
             this.btnRotXneg.Size = new System.Drawing.Size(32, 32);
@@ -292,7 +342,7 @@
             this.btnRotZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotZ.FlatAppearance.BorderSize = 0;
             this.btnRotZ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotZ.Location = new System.Drawing.Point(102, 169);
+            this.btnRotZ.Location = new System.Drawing.Point(102, 216);
             this.btnRotZ.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotZ.Name = "btnRotZ";
             this.btnRotZ.Size = new System.Drawing.Size(32, 32);
@@ -306,7 +356,7 @@
             this.btnRotY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotY.FlatAppearance.BorderSize = 0;
             this.btnRotY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotY.Location = new System.Drawing.Point(187, 154);
+            this.btnRotY.Location = new System.Drawing.Point(187, 201);
             this.btnRotY.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotY.Name = "btnRotY";
             this.btnRotY.Size = new System.Drawing.Size(32, 32);
@@ -319,7 +369,7 @@
             this.btnRotX.BackgroundImage = global::Fractrace.Properties.Resources.RotateDown;
             this.btnRotX.FlatAppearance.BorderSize = 0;
             this.btnRotX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotX.Location = new System.Drawing.Point(13, 154);
+            this.btnRotX.Location = new System.Drawing.Point(13, 201);
             this.btnRotX.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotX.Name = "btnRotX";
             this.btnRotX.Size = new System.Drawing.Size(32, 32);
@@ -333,7 +383,7 @@
             this.btnBackwards.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnBackwards.FlatAppearance.BorderSize = 0;
             this.btnBackwards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackwards.Location = new System.Drawing.Point(151, 22);
+            this.btnBackwards.Location = new System.Drawing.Point(162, 22);
             this.btnBackwards.Margin = new System.Windows.Forms.Padding(2);
             this.btnBackwards.Name = "btnBackwards";
             this.btnBackwards.Size = new System.Drawing.Size(32, 32);
@@ -347,7 +397,7 @@
             this.btnForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnForward.FlatAppearance.BorderSize = 0;
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForward.Location = new System.Drawing.Point(12, 23);
+            this.btnForward.Location = new System.Drawing.Point(23, 23);
             this.btnForward.Margin = new System.Windows.Forms.Padding(2);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(32, 32);
@@ -361,7 +411,7 @@
             this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnDown.FlatAppearance.BorderSize = 0;
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.Location = new System.Drawing.Point(83, 85);
+            this.btnDown.Location = new System.Drawing.Point(94, 85);
             this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(32, 32);
@@ -375,7 +425,7 @@
             this.btnTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnTop.FlatAppearance.BorderSize = 0;
             this.btnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTop.Location = new System.Drawing.Point(83, 23);
+            this.btnTop.Location = new System.Drawing.Point(94, 23);
             this.btnTop.Margin = new System.Windows.Forms.Padding(2);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(32, 32);
@@ -389,7 +439,7 @@
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRight.FlatAppearance.BorderSize = 0;
             this.btnRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRight.Location = new System.Drawing.Point(118, 55);
+            this.btnRight.Location = new System.Drawing.Point(129, 55);
             this.btnRight.Margin = new System.Windows.Forms.Padding(2);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(32, 32);
@@ -403,7 +453,7 @@
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnLeft.FlatAppearance.BorderSize = 0;
             this.btnLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeft.Location = new System.Drawing.Point(48, 55);
+            this.btnLeft.Location = new System.Drawing.Point(59, 55);
             this.btnLeft.Margin = new System.Windows.Forms.Padding(2);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(32, 32);
@@ -415,9 +465,9 @@
             // 
             this.btnMoveFast.FlatAppearance.BorderSize = 0;
             this.btnMoveFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveFast.Location = new System.Drawing.Point(231, 14);
+            this.btnMoveFast.Location = new System.Drawing.Point(13, 151);
             this.btnMoveFast.Name = "btnMoveFast";
-            this.btnMoveFast.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveFast.Size = new System.Drawing.Size(46, 23);
             this.btnMoveFast.TabIndex = 30;
             this.btnMoveFast.Text = "fast";
             this.btnMoveFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -428,9 +478,9 @@
             // 
             this.btnMoveNormal.FlatAppearance.BorderSize = 0;
             this.btnMoveNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveNormal.Location = new System.Drawing.Point(231, 39);
+            this.btnMoveNormal.Location = new System.Drawing.Point(61, 151);
             this.btnMoveNormal.Name = "btnMoveNormal";
-            this.btnMoveNormal.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveNormal.Size = new System.Drawing.Size(46, 23);
             this.btnMoveNormal.TabIndex = 31;
             this.btnMoveNormal.Text = "normal";
             this.btnMoveNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -441,9 +491,9 @@
             // 
             this.btnMoveSlow.FlatAppearance.BorderSize = 0;
             this.btnMoveSlow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveSlow.Location = new System.Drawing.Point(231, 64);
+            this.btnMoveSlow.Location = new System.Drawing.Point(124, 151);
             this.btnMoveSlow.Name = "btnMoveSlow";
-            this.btnMoveSlow.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveSlow.Size = new System.Drawing.Size(46, 23);
             this.btnMoveSlow.TabIndex = 32;
             this.btnMoveSlow.Text = "slow";
             this.btnMoveSlow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -454,9 +504,9 @@
             // 
             this.btnMoveFine.FlatAppearance.BorderSize = 0;
             this.btnMoveFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveFine.Location = new System.Drawing.Point(231, 89);
+            this.btnMoveFine.Location = new System.Drawing.Point(179, 151);
             this.btnMoveFine.Name = "btnMoveFine";
-            this.btnMoveFine.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveFine.Size = new System.Drawing.Size(46, 23);
             this.btnMoveFine.TabIndex = 33;
             this.btnMoveFine.Text = "fine";
             this.btnMoveFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -467,9 +517,9 @@
             // 
             this.btnMoveAngleFast.FlatAppearance.BorderSize = 0;
             this.btnMoveAngleFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleFast.Location = new System.Drawing.Point(231, 152);
+            this.btnMoveAngleFast.Location = new System.Drawing.Point(12, 285);
             this.btnMoveAngleFast.Name = "btnMoveAngleFast";
-            this.btnMoveAngleFast.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleFast.Size = new System.Drawing.Size(55, 23);
             this.btnMoveAngleFast.TabIndex = 34;
             this.btnMoveAngleFast.Text = "fast";
             this.btnMoveAngleFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -480,9 +530,9 @@
             // 
             this.btnMoveAngleNormal.FlatAppearance.BorderSize = 0;
             this.btnMoveAngleNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleNormal.Location = new System.Drawing.Point(231, 177);
+            this.btnMoveAngleNormal.Location = new System.Drawing.Point(90, 285);
             this.btnMoveAngleNormal.Name = "btnMoveAngleNormal";
-            this.btnMoveAngleNormal.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleNormal.Size = new System.Drawing.Size(55, 23);
             this.btnMoveAngleNormal.TabIndex = 35;
             this.btnMoveAngleNormal.Text = "normal";
             this.btnMoveAngleNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -493,9 +543,9 @@
             // 
             this.btnMoveAngleFine.FlatAppearance.BorderSize = 0;
             this.btnMoveAngleFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleFine.Location = new System.Drawing.Point(231, 202);
+            this.btnMoveAngleFine.Location = new System.Drawing.Point(179, 285);
             this.btnMoveAngleFine.Name = "btnMoveAngleFine";
-            this.btnMoveAngleFine.Size = new System.Drawing.Size(75, 23);
+            this.btnMoveAngleFine.Size = new System.Drawing.Size(55, 23);
             this.btnMoveAngleFine.TabIndex = 36;
             this.btnMoveAngleFine.Text = "fine";
             this.btnMoveAngleFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -504,22 +554,42 @@
             // 
             // pnlProperties
             // 
-            this.pnlProperties.Location = new System.Drawing.Point(332, 15);
+            this.pnlProperties.Location = new System.Drawing.Point(273, 15);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(146, 289);
+            this.pnlProperties.Size = new System.Drawing.Size(131, 289);
             this.pnlProperties.TabIndex = 37;
             // 
             // pnlBorderProperties
             // 
-            this.pnlBorderProperties.Location = new System.Drawing.Point(496, 14);
+            this.pnlBorderProperties.Location = new System.Drawing.Point(407, 14);
             this.pnlBorderProperties.Name = "pnlBorderProperties";
-            this.pnlBorderProperties.Size = new System.Drawing.Size(164, 289);
+            this.pnlBorderProperties.Size = new System.Drawing.Size(164, 249);
             this.pnlBorderProperties.TabIndex = 38;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.panel8);
+            this.panel3.Location = new System.Drawing.Point(267, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2, 320);
+            this.panel3.TabIndex = 30;
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Location = new System.Drawing.Point(-52, 30);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(2, 320);
+            this.panel8.TabIndex = 31;
             // 
             // NavigateControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlBorderProperties);
             this.Controls.Add(this.pnlProperties);
             this.Controls.Add(this.btnMoveAngleFine);
@@ -560,7 +630,11 @@
             this.Controls.Add(this.btnLeft);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NavigateControl";
-            this.Size = new System.Drawing.Size(617, 328);
+            this.Size = new System.Drawing.Size(670, 462);
+            this.panel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,5 +680,11 @@
         private System.Windows.Forms.Button btnMoveAngleFine;
         private System.Windows.Forms.Panel pnlProperties;
         private System.Windows.Forms.Panel pnlBorderProperties;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel8;
     }
 }
