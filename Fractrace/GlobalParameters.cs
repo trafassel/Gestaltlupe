@@ -47,16 +47,19 @@ namespace Fractrace
             ParameterDict.Current["Transformation.Camera.AngleX"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis x (rotation center is center of the given bounds).";
             // ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            //ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Rotation angle (in degree) for axis y (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleY"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis y (rotation center is center of the given bounds).";
             // ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            //ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Rotation angle (in degree) for axis z (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleZ"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis z (rotation center is center of the given bounds).";
             // ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            //ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Distance to the virtual screen. Small values gives a more 3D effect. Large values
             // gives the scene a parallel projection view.
@@ -69,34 +72,40 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jx"] = "0";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.Description"] = "X-component of the Julia Seed, if the formula is in julia mode. X-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+
 
             // Y-component of the Julia Seed, if the formula is in julia mode.
             // Y-component of the start value , if the formula is in mandelbrot mode.
             ParameterDict.Current["Formula.Static.jy"] = "0";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.Description"] = "Y-component of the Julia Seed, if the formula is in julia mode. Y-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
 
             // Z-component of the Julia Seed, if the formula is in julia mode.
             // Z-component of the start value , if the formula is in mandelbrot mode.
             ParameterDict.Current["Formula.Static.jz"] = "0";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.Description"] = "Z-component of the Julia Seed, if the formula is in julia mode. Z-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
 
             // Q-component of the Julia Seed, if the formula is in julia mode.
             ParameterDict.Current["Formula.Static.jzz"] = "0";
             ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.Description"] = "Q-component of the Julia Seed, if the formula is in julia mode.";
             ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
 
             // Number of iterations used in the formula.
             ParameterDict.Current["Formula.Static.Cycles"] = "8";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.Description"] = "Number of iterations used in the formula.";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON"] = "forward,backward,";
-
+            ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Number of iterations used in the formula, if the inside of the 3D object is rendered.
             ParameterDict.Current["Formula.Static.MinCycle"] = "0";
             ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.Description"] = "Number of iterations used in the formula, if the inside of the 3D object is rendered.";
             ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // The used formula.
             // Values from 1 to 26 corresponds to some inbuild formulas.
@@ -205,6 +214,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["View.DephAdd"] = "0";
             ParameterDict.Current["View.DephAdd.PARAMETERINFO.Description"] = "Additional voxel space (removes black background parts of the rendered image)";
             ParameterDict.Current["View.DephAdd.PARAMETERINFO.VIEW.FixedButtons"] = "0 250 1000";
+            ParameterDict.Current["View.DephAdd.PARAMETERINFO.VIEW.PlusButton"] = "100";
 
             // Used internally in creating a poster.
             // PosterX=-1: Render the bitmap left the given bounds.
@@ -221,6 +231,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["View.UpdateSteps"] = "3";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.Description"] = " Number of update steps for better rendering quality.";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "3 7";
+            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
 
             // Start Preview Rendering just after small render display finishes
@@ -239,7 +250,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Animation.Steps"] = "30";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.Description"] = "Default animation steps while adding the frame in the animation control.";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.FixedButtons"] = "1 15 30";
-
+            ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Color and light correction.
             ParameterDict.Current["Renderer.Normalize"] = "1";
@@ -259,6 +270,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.ShadowNumber"] = "11";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.Description"] = "Corresponds to the number of shadows.";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.FixedButtons"] = "11 22";
+            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
             // Intensity of the FieldOfView
             ParameterDict.Current["Renderer.AmbientIntensity"] = "0";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.Description"] = "Intensity of the FieldOfView.";
@@ -267,19 +280,26 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.MinFieldOfView"] = "0.0";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.Description"] = "Minimal value of FieldOfView.";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.5";
+            ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // Maximal value of FieldOfView
             ParameterDict.Current["Renderer.MaxFieldOfView"] = "1.0";
             ParameterDict.Current["Renderer.MaxFieldOfView.PARAMETERINFO.Description"] = "Maximal value of FieldOfView.";
             ParameterDict.Current["Renderer.MaxFieldOfView.PARAMETERINFO.VIEW.FixedButtons"] = "0.9 1";
+            ParameterDict.Current["Renderer.MaxFieldOfView.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Intensity of the Surface Color
             ParameterDict.Current["Renderer.ColorIntensity"] = "0.0";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.Description"] = "Intensity of the Surface Color.";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // If ColorGreyness=1, no color is rendered
             ParameterDict.Current["Renderer.ColorGreyness"] = "0";
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.Description"] = " If ColorGreyness=1, no color is rendered.";
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // Use Light
             ParameterDict.Current["Renderer.UseLight"] = "1";
             ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Datatype"] = "Bool";
@@ -289,6 +309,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8";
+            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // Shadow height factor
             ParameterDict.Current["Renderer.ShadowJustify"] = "1";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.Description"] = "Shadow height factor.";
@@ -296,21 +318,26 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // Shininess factor (0 ... 1)
             ParameterDict.Current["Renderer.ShininessFactor"] = "0.8";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.Description"] = "Shininess factor (0 ... 1).";
-            ParameterDict.Current["Renderer.ShininessFacto.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.8";
+            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.8";
+            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // Shininess ( 0... 1000)
             ParameterDict.Current["Renderer.Shininess"] = "14";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.Description"] = "Shininess ( 0... 1000).";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.FixedButtons"] = "9 14 28";
+            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Brightness (1 ...)
             ParameterDict.Current["Renderer.Brightness"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Contrast (0 ... 1 ...)
             ParameterDict.Current["Renderer.Contrast"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
             ParameterDict.Current["Renderer.SmoothNormalLevel"] = "8";
@@ -321,14 +348,17 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.Light.X"] = "0.2";
             ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Renderer.Light.Y"] = "1";
             ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Renderer.Light.Z"] = "0.15";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
             ParameterDict.Current["Renderer.UseSharpShadow"] = "0";
@@ -337,15 +367,18 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // To justify the color components 
             ParameterDict.Current["Renderer.ColorFactor.Red"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.Description"] = "To justify the color components.";
-            ParameterDict.Current["Renderer.ColorFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Renderer.ColorFactor.Green"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.Description"] = "To justify the color components.";
             ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Renderer.ColorFactor.Blue"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.Description"] = "To justify the color components.";
             ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // accepted integer values: 1, ..., 6  (all values>1 :switch rgb components)
             ParameterDict.Current["Renderer.ColorFactor.RgbType"] = "1";
@@ -356,22 +389,26 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.BackColor.Red"] = "0";
             ParameterDict.Current["Renderer.BackColor.Red.PARAMETERINFO.Description"] = "Red component of background color (0, ...,1).";
             ParameterDict.Current["Renderer.BackColor.Red.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Renderer.BackColor.Red.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Green component of background color 
             ParameterDict.Current["Renderer.BackColor.Green"] = "0";
             ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.Description"] = "Green component of background color (0, ...,1).";
             ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Blue component of background color 
             ParameterDict.Current["Renderer.BackColor.Blue"] = "0";
             ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.Description"] = "Blue component of background color (0, ...,1).";
             ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // If LightIntensity==1, no shadow renderers are used
             // If LightIntensity==0, only shadow renderers are used
             ParameterDict.Current["Renderer.LightIntensity"] = "0.2";
             ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.Description"] = "If LightIntensity==1, no shadow renderers are used. If LightIntensity==0, only shadow renderers are used";
             ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 1";
+            ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Number of threads used in computation. The recommended value is the number of processors.
             ParameterDict.Current["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();
@@ -396,8 +433,8 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
         /// <returns></returns>
         public static bool IsSceneProperty(string name)
         {
-            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name.StartsWith("View.Height") || name.StartsWith("View.Perspective") ||
-                name.StartsWith("Transformation.") || name.StartsWith("Formula."));
+            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name=="View.Height" || name=="View.Perspective" ||
+                name.StartsWith("Transformation.") || name.StartsWith("Formula.") || name== "View.DephAdd");
         }
 
 

@@ -76,10 +76,62 @@ namespace Fractrace.Basic
             }
 
             button.Click += Button_Click;
-            this.pnlButtons.Controls.Add(button);
-
-            
+            this.pnlButtons.Controls.Add(button);    
         }
+
+
+        public void AddPlusButton(string value)
+        {
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = "+";
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button.ForeColor = System.Drawing.Color.DarkGray;
+            button.FlatAppearance.BorderSize = 0;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
+            button.Tag = value;
+            button.Click += PlusButton_Click;
+            button.Width = 30;
+            this.pnlButtons.Width += 32;
+            this.pnlButtons.Controls.Add(button);
+        }
+
+        private void PlusButton_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
+            double currentValue = Double.Parse(this._tbValue.Text, ParameterDict.Culture);
+            double valueToAdd= Double.Parse(button.Tag.ToString(), ParameterDict.Culture);
+            currentValue += valueToAdd;
+            this._tbValue.Text = currentValue.ToString(ParameterDict.Culture);
+        }
+
+
+        public void AddMinusButton(string value)
+        {
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = "-";
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button.ForeColor = System.Drawing.Color.DarkGray;
+            button.FlatAppearance.BorderSize = 0;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
+            button.Tag = value;
+            button.Click += MinusButton_Click;
+            button.Width = 30;
+            this.pnlButtons.Width += 32;
+            this.pnlButtons.Controls.Add(button);
+        }
+
+
+        private void MinusButton_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
+            double currentValue = Double.Parse(this._tbValue.Text, ParameterDict.Culture);
+            double valueToSubtract = Double.Parse(button.Tag.ToString(), ParameterDict.Culture);
+            currentValue -= valueToSubtract;
+            this._tbValue.Text = currentValue.ToString(ParameterDict.Culture);
+        }
+
 
         private void Button_Click(object sender, EventArgs e)
         {

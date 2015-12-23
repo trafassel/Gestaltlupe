@@ -33,16 +33,21 @@ namespace Fractrace.Basic
             // Use string as default datatype
             if (retVal == null)
             {
-                retVal = new DataViewStringElement();
-                if(ParameterDict.Current[name +".PARAMETERINFO.VIEW.FixedButtons"]!="")
+                DataViewStringElement stringElement = new DataViewStringElement();
+                retVal = stringElement;
+                if (ParameterDict.Current[name +".PARAMETERINFO.VIEW.FixedButtons"]!="")
                 {
                     string buttonValues = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.FixedButtons"];
                     foreach(string buttonText in buttonValues.Split(' '))
                     {
-                        DataViewStringElement stringElement = (DataViewStringElement)retVal;
                         stringElement.AddFixedValueButton(buttonText.Trim());
                     }
-
+                }
+                if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusButton"] != "")
+                {
+                    string buttonValue = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusButton"];
+                    stringElement.AddPlusButton(buttonValue.Trim());
+                    stringElement.AddMinusButton(buttonValue.Trim());
                 }
             }
 
