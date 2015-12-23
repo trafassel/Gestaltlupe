@@ -546,19 +546,27 @@ namespace Fractrace
             }
             if (od.ShowDialog() == DialogResult.OK)
             {
-                string dataFileName = od.FileName;
-                if (dataFileName.ToLower().EndsWith(".jpg") || dataFileName.ToLower().EndsWith(".png"))
-                {
-                    dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
-                }
-
-                ParameterDict.Current.Load(dataFileName);
-                ShowPicture(dataFileName);
-                Data.Update();
-                parameterDictControl1.UpdateFromData();
-                ParameterValuesChanged();
+                LoadScene(od.FileName);
                 oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
             }
+        }
+
+
+        /// <summary>
+        /// Load Gestaltlupe project.
+        /// </summary>
+        private void LoadScene(string dataFileName)
+        {
+            if (dataFileName.ToLower().EndsWith(".jpg") || dataFileName.ToLower().EndsWith(".png"))
+            {
+                dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
+            }
+
+            ParameterDict.Current.Load(dataFileName);
+            ShowPicture(dataFileName);
+            Data.Update();
+            parameterDictControl1.UpdateFromData();
+            ParameterValuesChanged();
         }
 
 
@@ -1342,6 +1350,16 @@ namespace Fractrace
             Application.DoEvents();
         }
 
-      
+        private void btnLoadExamples_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog od = new OpenFileDialog();
+            od.Filter = "tomofile|*.xml;*.tomo;*.jpg;*.png|*.*|*.*";     
+            od.InitialDirectory = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes");
+          
+            if (od.ShowDialog() == DialogResult.OK)
+            {
+                LoadScene(od.FileName);
+            }
+        }
     }
 }
