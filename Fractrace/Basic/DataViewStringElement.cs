@@ -26,7 +26,9 @@ namespace Fractrace.Basic
             if (_oldValue != newValue)
             {
                 _value = newValue;
+                _dontRaiseElementChangedEvent = true;
                 this._tbValue.Text = _value;
+                _dontRaiseElementChangedEvent = false;
                 _oldValue = newValue;
             }
         }

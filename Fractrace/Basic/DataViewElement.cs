@@ -113,7 +113,12 @@ namespace Fractrace.Basic
         protected virtual void PreInit()
         {
         }
-        
+
+
+        /// <summary>
+        /// If true, no ElementChanged will be raised on update.
+        /// </summary>
+        protected bool _dontRaiseElementChangedEvent = false;
 
         /// <summary>
         /// Has to be called in subclasses to raise ElementChanged event.
@@ -122,7 +127,8 @@ namespace Fractrace.Basic
         /// <param name="value"></param>
         protected void CallElementChanged(string key, string value)
         {
-            ElementChanged(key, value);
+            if(!_dontRaiseElementChangedEvent)
+              ElementChanged(key, value);
         }
 
 

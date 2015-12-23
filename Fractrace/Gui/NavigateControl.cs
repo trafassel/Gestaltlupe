@@ -774,17 +774,62 @@ namespace Fractrace
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
-            btnZoomX_Click(null, null);
-            btnZoomY_Click(null, null);
-            btnZoomZ_Click(null, null);
+
+            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
+            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
+            double ddiff = endX - startX;
+            endX -= ddiff / mZoomFactor;
+            startX += ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.x", endX);
+            ParameterDict.Current.SetDouble("Border.Min.x", startX);
+       
+            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
+            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
+            ddiff = endY - startY;
+            endY -= ddiff / mZoomFactor;
+            startY += ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.y", endY);
+            ParameterDict.Current.SetDouble("Border.Min.y", startY);
+       
+            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
+            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
+            ddiff = endZ - startZ;
+            endZ -= ddiff / mZoomFactor;
+            startZ += ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
+            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
+            DrawAndWriteInHistory();
+
         }
 
 
         private void btnZoomOut_Click(object sender, EventArgs e)
         {
-            button1_Click(null, null);
-            btnZoomYout_Click(null, null);
-            btnZoomZout_Click(null, null);
+
+            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
+            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
+            double ddiff = endX - startX;
+            endX += ddiff / mZoomFactor;
+            startX -= ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.x", endX);
+            ParameterDict.Current.SetDouble("Border.Min.x", startX);
+  
+            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
+            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
+            ddiff = endY - startY;
+            endY += ddiff / mZoomFactor;
+            startY -= ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.y", endY);
+            ParameterDict.Current.SetDouble("Border.Min.y", startY);
+    
+            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
+            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
+            ddiff = endZ - startZ;
+            endZ += ddiff / mZoomFactor;
+            startZ -= ddiff / mZoomFactor;
+            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
+            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
+            DrawAndWriteInHistory();
         }
 
 

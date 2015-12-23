@@ -25,6 +25,7 @@ namespace Fractrace.Basic
         void cbValue_CheckedChanged(object sender, EventArgs e)
         {
             ParameterDict.Current.SetBool(_name, this._cbValue.Checked);
+            CallElementChanged(_name, this._cbValue.Checked.ToString());
         }
 
 
@@ -33,7 +34,15 @@ namespace Fractrace.Basic
         /// </summary>
         public override void UpdateElements()
         {
-            this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
+            string newValue = ParameterDict.Current.GetBool(_name).ToString();
+            if (_oldValue != newValue)
+            {
+                _value = newValue;
+                _dontRaiseElementChangedEvent = true;
+                this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
+                _dontRaiseElementChangedEvent = false;
+                _oldValue = newValue;
+            }
         }
 
 

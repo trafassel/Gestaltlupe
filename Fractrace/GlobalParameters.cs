@@ -408,7 +408,7 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
         /// <returns></returns>
         public static bool NeedRecalculateAspect(string name)
         {
-            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name.StartsWith("View.Height"));
+            return ( /*name.StartsWith("Border.") || */ name.StartsWith("View.Width") || name.StartsWith("View.Height"));
         }
 
 
