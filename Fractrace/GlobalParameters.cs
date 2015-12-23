@@ -389,5 +389,35 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
         }
 
 
+        /// <summary>
+        /// Return true if ParameterDict Element with name has effect to scene.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsSceneProperty(string name)
+        {
+            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name.StartsWith("View.Height") || name.StartsWith("View.Perspective") ||
+                name.StartsWith("Transformation.") || name.StartsWith("Formula."));
+        }
+
+
+        /// <summary>
+        ///  Return true if Aspect Ratio has to recalculate.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool NeedRecalculateAspect(string name)
+        {
+            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name.StartsWith("View.Height"));
+        }
+
+
+        public static bool IsMaterialProperty(string name)
+        {
+            return (name.StartsWith("Renderer."));
+        }
+
+
+
     }
 }

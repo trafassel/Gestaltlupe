@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using Fractrace.DataTypes;
 using Fractrace.Basic;
+using Fractrace.Geometry;
 
 namespace Fractrace
 {
@@ -69,6 +70,25 @@ namespace Fractrace
             tabControl1.SelectedIndex = 1;
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
+            parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
+        }
+
+
+        private void ParameterDictControl1_ElementChanged(string name, string value)
+        {
+
+            if(GlobalParameters.IsMaterialProperty(name))
+            {
+                Form1.PublicForm.ActivatePictureArt();
+                return;
+            }
+
+            if (GlobalParameters.NeedRecalculateAspect(name))
+              Navigator.SetAspectRatio();
+
+            if (GlobalParameters.IsSceneProperty(name))
+                DrawSmallPreview();
+
         }
 
         /// <summary>

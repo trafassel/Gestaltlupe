@@ -15,8 +15,11 @@ namespace Fractrace.Basic
         {
             InitializeComponent();
             Init();
+            dataViewControl1.ElementChanged += DataViewControl1_ElementChanged;
         }
-        
+
+       
+
 
         /// <summary>
         /// Nodes of this three with unique name of the entry as key.
@@ -29,6 +32,12 @@ namespace Fractrace.Basic
         protected string _choosenHirarchy = "";
 
         public DataViewControl MainDataViewControl { get { return dataViewControl1; } }
+
+        /// <summary>
+        /// Called if a subentry value changed.
+        /// </summary>
+        public event ElementChangedDelegate ElementChanged;
+
 
         /// <summary>
         /// Build hierarchy from ParameterDict entries. 
@@ -76,6 +85,12 @@ namespace Fractrace.Basic
                 }
             }
             treeView1.ExpandAll();
+        }
+
+
+        private void DataViewControl1_ElementChanged(string name, string value)
+        {
+            ElementChanged(name, value);
         }
 
 

@@ -31,9 +31,9 @@ namespace Fractrace
             formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("View.Width");
             formulaSettingCategories.Add("View.Height");
-            formulaSettingCategories.Add("Border");
+            //formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("View.Perspective");
-            formulaSettingCategories.Add("Border");
+            //formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("Transformation");
             formulaSettingCategories.Add("Formula");
 

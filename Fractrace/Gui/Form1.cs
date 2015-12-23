@@ -542,6 +542,7 @@ namespace Fractrace
             {
                 _iterate.Abort();
             }
+            Progress(0);
             // Warning: Compution in stereo window is not stopped.
         }
 
