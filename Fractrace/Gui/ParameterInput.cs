@@ -516,7 +516,7 @@ namespace Fractrace
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
-            sd.Filter = "*.xml|*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
+            sd.Filter = "*.xml|*.xml;*.gestalt|*.gestalt|*.gestalt|*.*|*.*";
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 ParameterDict.Current.Save(sd.FileName);
@@ -539,7 +539,7 @@ namespace Fractrace
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
-            od.Filter = "tomofile|*.xml;*.tomo;*.jpg;*.png|*.*|*.*";
+            od.Filter = "Gestalt|*.gestalt;*.xml;*.tomo;*.jpg;*.png|*.*|*.*";
             if (oldDirectory != "")
             {
                 od.InitialDirectory = oldDirectory;
@@ -559,9 +559,13 @@ namespace Fractrace
         {
             if (dataFileName.ToLower().EndsWith(".jpg") || dataFileName.ToLower().EndsWith(".png"))
             {
-                dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
+                dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".gestalt";
+                // Backward compatibility
+                if (!System.IO.File.Exists(dataFileName))
+                    dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
+                if (!System.IO.File.Exists(dataFileName))
+                    dataFileName = dataFileName.Replace("Gestaltlupe", "Tomotrace");
             }
-
             ParameterDict.Current.Load(dataFileName);
             ShowPicture(dataFileName);
             Data.Update();
@@ -1182,7 +1186,7 @@ namespace Fractrace
         private void btnAppend_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
-            od.Filter = "*.xml|*.xml;*.tomo|*.*|*.*";
+            od.Filter = "*.xml|*.gestalt;*.xml;*.tomo|*.*|*.*";
             if (oldDirectory != "")
             {
                 od.InitialDirectory = oldDirectory;
@@ -1207,7 +1211,7 @@ namespace Fractrace
         private void btnSaveFormula_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
-            sd.Filter = "*.xml|*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
+            sd.Filter = "*.gestalt|*.gestalt;*.xml;*.tomo|*.tomo|*.tomo|*.*|*.*";
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 List<string> formulaSettingCategories = new List<string>();
@@ -1353,7 +1357,7 @@ namespace Fractrace
         private void btnLoadExamples_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
-            od.Filter = "tomofile|*.xml;*.tomo;*.jpg;*.png|*.*|*.*";     
+            od.Filter = "Gestalt|*.gestalt;*.xml;*.tomo;*.jpg;*.png|*.*|*.*";     
             od.InitialDirectory = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes");
           
             if (od.ShowDialog() == DialogResult.OK)

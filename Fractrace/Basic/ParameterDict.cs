@@ -195,27 +195,8 @@ namespace Fractrace.Basic
             if(!System.IO.File.Exists(fileName))
             {
                 return;
-                // Todo Backwart Compatibility
-               
-               // string path = System.IO.Path.GetFullPath("\Documents\\Gestaltlupe / data / parameters");
-               // string path = System.IO.Path.GetFullPath(fileName);
-                //
-                {
-                    // "C:\Users\ich\Documents\TomoTrace\data\parameters"
-                    // C: \Users\ich\Documents\Tumotrace\data\parameters\Data20pic10009.tomo
-                    /*
-                        string origFilename = path.Replace("Documents\\Gestaltlupe\\data\\parameters", "Documents\\Tumotrace\\data\\parameters");
-                        if (System.IO.File.Exists(origFilename))
-                        {
-
-
-                        }
-                                        */
-
-                }
-
+                // Todo: Backwart Compatibility
             }
-
 
             xdoc.Load(fileName);
             foreach (XmlNode xNode in xdoc)

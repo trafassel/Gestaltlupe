@@ -107,7 +107,7 @@ namespace Fractrace
             infoFilePath = Path.Combine(infoFilePath, "parameters");
             if (!Directory.Exists(infoFilePath))
                 Directory.CreateDirectory(infoFilePath);
-            Basic.ParameterDict.Current.Save(Path.Combine(infoFilePath, Path.GetFileNameWithoutExtension(retVal) + ".tomo"));
+            Basic.ParameterDict.Current.Save(Path.Combine(infoFilePath, Path.GetFileNameWithoutExtension(retVal) + ".gestalt"));
 
             string exportDir = Path.Combine(ExportDir, "TomoTrace");
             if (!Directory.Exists(exportDir))

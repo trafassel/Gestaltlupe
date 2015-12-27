@@ -406,7 +406,11 @@ namespace Fractrace.Animation
                         string dir = ap.fileName.Substring(0, ap.fileName.IndexOf("pic"));
                         //picture filenename
                         string picFileName = System.IO.Path.Combine(System.IO.Path.Combine(FileSystem.Exemplar.ExportDir, dir), ap.fileName);
-                        string fileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + ap.fileName + ".tomo";
+                        string fileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + ap.fileName + ".gestalt";
+                        if (!System.IO.File.Exists(fileName))
+                            fileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + ap.fileName + ".tomo";
+                        if (!System.IO.File.Exists(fileName))
+                            fileName = fileName.Replace("Gestaltlupe", "Tomotrace");
 
                         ParameterDict.Current.Load(fileName);
                         ParameterInput.MainParameterInput.SaveHistory(picFileName);
