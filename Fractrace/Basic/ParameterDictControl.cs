@@ -10,6 +10,7 @@ namespace Fractrace.Basic
     public partial class ParameterDictControl : UserControl
     {
 
+        public delegate void VoidDelegate();
 
         public ParameterDictControl()
         {
@@ -167,9 +168,18 @@ namespace Fractrace.Basic
 
 
         /// <summary>
-        /// Die Daten werden neu gezeichnet.
+        /// Redraw Data Page.
         /// </summary>
         public void UpdateFromData()
+        {
+            this.Invoke(new VoidDelegate(UpdateFromDataIntern));
+        }
+
+
+        /// <summary>
+        /// Redraw Data Page.
+        /// </summary>
+        private void UpdateFromDataIntern()
         {
             lock (_updateFromDataMutex)
             {
@@ -202,7 +212,7 @@ namespace Fractrace.Basic
         public void SelectNode(string hirarchy)
         {
             _choosenHirarchy = hirarchy;
-            UpdateFromData();
+            UpdateFromDataIntern();
         }
 
 

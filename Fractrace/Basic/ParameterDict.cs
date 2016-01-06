@@ -34,7 +34,7 @@ namespace Fractrace.Basic
     public class ParameterDict
     {
 
-      
+
 
 
         /// <summary>
@@ -120,10 +120,13 @@ namespace Fractrace.Basic
             tw.WriteStartElement("ParameterDict");
             foreach (KeyValuePair<string, string> entry in SortedEntries)
             {
-                tw.WriteStartElement("Entry");
-                tw.WriteAttributeString("Key", entry.Key);
-                tw.WriteAttributeString("Value", entry.Value);
-                tw.WriteEndElement();
+                if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                {
+                    tw.WriteStartElement("Entry");
+                    tw.WriteAttributeString("Key", entry.Key);
+                    tw.WriteAttributeString("Value", entry.Value);
+                    tw.WriteEndElement();
+                }
             }
             tw.WriteEndElement();
             tw.WriteEndDocument();
@@ -142,21 +145,24 @@ namespace Fractrace.Basic
             tw.WriteStartElement("ParameterDict");
             foreach (KeyValuePair<string, string> entry in SortedEntries)
             {
-                bool fits = false;
-                foreach (string str in categoriesToSave)
+                if (!ParameterDict.IsAdditionalInfo(entry.Key))
                 {
-                    if (entry.Key.StartsWith(str))
+                    bool fits = false;
+                    foreach (string str in categoriesToSave)
                     {
-                        fits = true;
-                        break;
+                        if (entry.Key.StartsWith(str))
+                        {
+                            fits = true;
+                            break;
+                        }
                     }
-                }
-                if (fits)
-                {
-                    tw.WriteStartElement("Entry");
-                    tw.WriteAttributeString("Key", entry.Key);
-                    tw.WriteAttributeString("Value", entry.Value);
-                    tw.WriteEndElement();
+                    if (fits)
+                    {
+                        tw.WriteStartElement("Entry");
+                        tw.WriteAttributeString("Key", entry.Key);
+                        tw.WriteAttributeString("Value", entry.Value);
+                        tw.WriteEndElement();
+                    }
                 }
             }
             tw.WriteEndElement();
@@ -192,7 +198,7 @@ namespace Fractrace.Basic
         public void Append(string fileName)
         {
             XmlDocument xdoc = new XmlDocument();
-            if(!System.IO.File.Exists(fileName))
+            if (!System.IO.File.Exists(fileName))
             {
                 return;
                 // Todo: Backwart Compatibility
@@ -410,8 +416,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Set double entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         public void SetDouble(string key, double value)
         {
             lock (_entries)
@@ -425,8 +429,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get double entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public double GetDouble(string key)
         {
             double retVal = 0;
@@ -447,12 +449,34 @@ namespace Fractrace.Basic
 
 
         /// <summary>
+        /// Get double entry. Set entry, if not exists.
+        /// </summary>
+        public double GetOrSetDouble(string key, double defaultValue = 0, string description = "", bool addDefaultButtons = false)
+        {
+            if (!_entries.ContainsKey(key))
+            {
+                ParameterDict.Current[key] = defaultValue.ToString(mCulture);
+            }
+            if (description != null && description != "")
+            {
+                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.Description", description, false);
+            }
+            if (addDefaultButtons)
+            {
+                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.FixedButtons", "0", false);
+                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusButton", "0.1", false);
+            }
+            return GetDouble(key);
+        }
+
+
+        /// <summary>
         /// Return View.Size * View.Width.
         /// </summary>
         /// <returns></returns>
         public int GetWidth()
         {
-            return (int) ( GetDouble("View.Width") * GetDouble("View.Size") );
+            return (int)(GetDouble("View.Width") * GetDouble("View.Size"));
         }
 
 
@@ -552,12 +576,12 @@ namespace Fractrace.Basic
             ParameterDict retVal = new ParameterDict();
             foreach (KeyValuePair<string, string> entry in _entries)
             {
-                retVal._entries[entry.Key]  = entry.Value;
+                retVal._entries[entry.Key] = entry.Value;
             }
             return retVal;
         }
 
-        
+
         /// <summary>
         /// Return Datatype of given parameter. If Datatype is unknown an empty string is returned.
         /// </summary>

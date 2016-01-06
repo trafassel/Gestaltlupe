@@ -450,8 +450,11 @@ namespace Fractrace
             {
                 return;
             }
-            // compute Min and Max
-            double minX = double.MaxValue;
+
+            try
+            {
+                // compute Min and Max
+                double minX = double.MaxValue;
             double minY = double.MaxValue;
             double minZ = double.MaxValue;
 
@@ -527,6 +530,12 @@ namespace Fractrace
             _paras.UpdateFromData();
             Geometry.Navigator.SetAspectRatio();
             ParameterInput.MainParameterInput.DrawSmallPreview();
+            }
+            catch (System.Exception ex)
+            {
+                // Array out of bounds
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
 
 
@@ -668,8 +677,13 @@ namespace Fractrace
                     _lastAnimationParameterHash = ParameterDict.Current.GetHash("");
                 }
             }
+
             Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
-//            btnRepaint.Enabled = true;
+            // On Mono: the Image ist not shown. Quickfix is to reload the saved image.
+            if (!Environment.OSVersion.ToString().ToLower().Contains("microsoft"))
+            {
+                ShowPictureFromFile(fileName);
+            }
         }
 
 

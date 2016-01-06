@@ -4,8 +4,10 @@ using System.Text;
 
 using Fractrace.Basic;
 
-namespace Fractrace.TomoGeometry {
-    public class TomoFormula {
+namespace Fractrace.TomoGeometry
+{
+    public class TomoFormula
+    {
 
 
         /// <summary>
@@ -29,7 +31,8 @@ namespace Fractrace.TomoGeometry {
         /// <param name="zkl"></param>
         /// <param name="invers"></param>
         /// <returns></returns>
-        public virtual long InSet(double x, double y, double z, double br, double bi, double bj, double bk, long zkl, bool invers) {
+        public virtual long InSet(double x, double y, double z, double br, double bi, double bj, double bk, long zkl, bool invers)
+        {
             long retVal = 0;
 
             return retVal;
@@ -39,40 +42,52 @@ namespace Fractrace.TomoGeometry {
         public AdditionalPointInfo additionalPointInfo = null;
 
 
-        public void Set(string id, int value) {
-          ParameterDict.Current.SetInt(id,value);
+        public void Set(string id, int value)
+        {
+            ParameterDict.Current.SetInt(id, value);
         }
 
-        public void Set(string id, double value) {
-          ParameterDict.Current.SetDouble(id, value);
-        }
-
-
-        public void Set(string id, bool value) {
-          ParameterDict.Current.SetBool(id, value);
-        }
-
-        public double GetDouble(string id) {
-          return ParameterDict.Current.GetDouble(id);
+        public void Set(string id, double value)
+        {
+            ParameterDict.Current.SetDouble(id, value);
         }
 
 
-        public string GetString(string id) {
-          return ParameterDict.Current[id];
+        public void Set(string id, bool value)
+        {
+            ParameterDict.Current.SetBool(id, value);
+        }
+
+        public double GetDouble(string id)
+        {
+            return ParameterDict.Current.GetDouble(id);
+        }
+
+        public double GetOrSetDouble(string id, double defaultValue = 0, string description = "")
+        {
+            return ParameterDict.Current.GetOrSetDouble("Formula.Parameters."+id, defaultValue, description, true);
         }
 
 
-        public void AddValue(string id, double value) {
-          ParameterDict.Current[id] = "";
-          ParameterDict.Current.SetValue(id, value.ToString(),false);
+        public string GetString(string id)
+        {
+            return ParameterDict.Current[id];
+        }
+
+
+        public void AddValue(string id, double value)
+        {
+            ParameterDict.Current[id] = "";
+            ParameterDict.Current.SetValue(id, value.ToString(), false);
         }
 
         /// <summary>
         /// Delete the entry with given id complete from the Properties. 
         /// </summary>
         /// <param name="id">The id.</param>
-        public void RemoveProperty(string id) {
-          ParameterDict.Current.RemoveProperty(id);
+        public void RemoveProperty(string id)
+        {
+            ParameterDict.Current.RemoveProperty(id);
         }
 
 
@@ -80,16 +95,20 @@ namespace Fractrace.TomoGeometry {
         /// Sets a bulk of parameters 
         /// </summary>
         /// <param name="text">The text.</param>
-        public void SetParameterBulk(string text) {
-          ParameterDict.Current.AppendFromText(text);
+        public void SetParameterBulk(string text)
+        {
+            ParameterDict.Current.AppendFromText(text);
         }
 
 
         /// <summary>
         /// Wird aufgerufen, kurz bevor der Scanalgorithmus beginnt. Zu diesem Zeitpunkt sind alle festen Parameter der
         /// </summary>
-        public virtual void Init() {
-
+        public virtual void Init()
+        {
+            additionalPointInfo = new AdditionalPointInfo();
         }
+
+
     }
 }
