@@ -63,9 +63,9 @@ namespace Fractrace.TomoGeometry
             return ParameterDict.Current.GetDouble(id);
         }
 
-        public double GetOrSetDouble(string id, double defaultValue = 0, string description = "")
+        public double GetOrSetDouble(string id, double defaultValue = 0, string description = "",bool showInfo=true)
         {
-            return ParameterDict.Current.GetOrSetDouble("Formula.Parameters."+id, defaultValue, description, true);
+            return ParameterDict.Current.GetOrSetDouble("Formula.Parameters."+id, defaultValue, description, showInfo);
         }
 
 

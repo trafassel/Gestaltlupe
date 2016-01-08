@@ -106,11 +106,6 @@ namespace Fractrace
         protected bool _forceClosing = false;
 
         /// <summary>
-        /// Indicates, that zooming is enabled.
-        /// </summary>
-        private bool _inZoom = false;
-
-        /// <summary>
         /// Progress of surface computation in percent.
         /// </summary>
         protected double _progress = 0;
@@ -369,26 +364,6 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Zoom is activated.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Zoom();
-        }
-
-
-        /// <summary>
-        /// Start zooming.
-        /// </summary>
-        private void Zoom()
-        {
-            _inZoom = true;
-        }
-
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -434,7 +409,6 @@ namespace Fractrace
             {
                 _zoomX2 = e.X;
                 _zoomY2 = e.Y;
-                _inZoom = false;
                 _inMouseDown = false;
                 SetZoom();
             }

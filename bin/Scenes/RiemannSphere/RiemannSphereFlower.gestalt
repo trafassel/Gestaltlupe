@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Border.Max.x" Value="0.00807205527106047" />
+  <Entry Key="Border.Max.y" Value="-0.399321692093789" />
+  <Entry Key="Border.Max.z" Value="1.81032074595069" />
+  <Entry Key="Border.Min.x" Value="-2.37799278971546" />
+  <Entry Key="Border.Min.y" Value="-2.7853865370803" />
+  <Entry Key="Border.Min.z" Value="-0.575744099035843" />
+  <Entry Key="Formula.Parameters.Parameter1" Value="1" />
+  <Entry Key="Formula.Parameters.Parameter2" Value="0.5" />
+  <Entry Key="Formula.Parameters.Parameter3" Value="0.5" />
+  <Entry Key="Formula.Parameters.Parameter4" Value="3.2" />
+  <Entry Key="Formula.Parameters.Parameter5" Value="3.2" />
+  <Entry Key="Formula.Parameters.Parameter6" Value="0.52" />
+  <Entry Key="Formula.Static.Cycles" Value="6" />
+  <Entry Key="Formula.Static.Formula" Value="-2" />
+  <Entry Key="Formula.Static.jx" Value="0.16" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="double _parameter1=0;&#xA;double _parameter2=0;&#xA;double _parameter3=0;&#xA;double _parameter4=0;&#xA;double _parameter5=0;&#xA;double _parameter6=0;&#xA;&#xA;&#xA;&#xA;public override void Init() {&#xA;  base.Init();&#xA;  _parameter1=GetOrSetDouble(&quot;Parameter1&quot;,1,&quot;Parameter 1&quot;);&#xA;  _parameter2=GetOrSetDouble(&quot;Parameter2&quot;,0.5,&quot;Parameter 2&quot;);&#xA;  _parameter3=GetOrSetDouble(&quot;Parameter3&quot;,0.5,&quot;Parameter 3&quot;);&#xA;  _parameter4=GetOrSetDouble(&quot;Parameter4&quot;,4,&quot;Parameter 4&quot;);&#xA;  _parameter5=GetOrSetDouble(&quot;Parameter5&quot;,4,&quot;Parameter 5&quot;);&#xA;  _parameter6=GetOrSetDouble(&quot;Parameter6&quot;,1,&quot;Parameter 6&quot;);&#xA;}&#xA;&#xA;&#xA;// http://www.fractalforums.com/new-theories-and-research/revisiting-the-riemann-sphere-(again)/&#xA;// Riemann sphere flower by msltoe&#xA;public override long InSet(double x, double y, double z,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;  double aar, aai, aaj;&#xA;  long tw=0;&#xA;  double gr =20;  // Bailout&#xA;  aar = x * x; aai = y * y; aaj = z * z;&#xA;  double r = Math.Sqrt(aar + aai + aaj);&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA; r = Math.Sqrt(x*x+y*y+z*z);&#xA;&#xA;  for (int n = 1; n &lt; zkl; n++) {&#xA;&#xA;  double r1 = 1.0/r;&#xA;  x=x*r1;y=y*r1;z=z*r1;&#xA;  double x1 = x/(1.0-z);&#xA;  double  y1 = y/(1.0-z);&#xA;  double  z1 = (r-_parameter1)*(1.0+x1*x1+y1*y1);&#xA;  x1 = x1 - Math.Floor(x1+_parameter2);&#xA;  y1 = y1 - Math.Floor(y1+_parameter3);&#xA;  x=_parameter4*x1;y=_parameter5*y1;z=_parameter6*z1;&#xA;&#xA;  double xx=x*x;&#xA;  double yy=y*y;&#xA;  double zz=z*z;&#xA;&#xA;  r = Math.Sqrt(xx+yy+zz);&#xA;&#xA;  if(n&gt;3 &amp;&amp; n &lt;8)&#xA;  {&#xA;    additionalPointInfo.red+=xx/r;&#xA;    additionalPointInfo.green+=yy/r;&#xA;    additionalPointInfo.blue+=zz/r;&#xA;  }&#xA;&#xA;  x+=br;y+=bi;z+=bj;&#xA;&#xA;  if (r &gt; gr) { tw = n; break; }&#xA;  }&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;      else&#xA;        tw = 0;&#xA;  }&#xA;  return (tw);&#xA;}&#xA;&#xA;&#xA;" />
+  <Entry Key="Transformation.Camera.AngleX" Value="140" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="390" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="0.6" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="View.Height" Value="1200" />
+  <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.Width" Value="1200" />
+</ParameterDict>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Border.Max.x" Value="-1.49737597330749" />
+  <Entry Key="Border.Max.y" Value="-1.54755498034575" />
+  <Entry Key="Border.Max.z" Value="-1.53961790777335" />
+  <Entry Key="Border.Min.x" Value="-1.54131925118825" />
+  <Entry Key="Border.Min.y" Value="-1.59149825822651" />
+  <Entry Key="Border.Min.z" Value="-1.58356118565411" />
+  <Entry Key="Formula.Static.Cycles" Value="60" />
+  <Entry Key="Formula.Static.Formula" Value="-1" />
+  <Entry Key="Formula.Static.jx" Value="1.3" />
+  <Entry Key="Formula.Static.jy" Value="1.198" />
+  <Entry Key="Formula.Static.jz" Value="1.39766666666667" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Mandelbox&#xA;public override long InSet(double x, double y, double z,  &#xA;                           double br, double bi, double bj, double bk, &#xA;                           long zkl, bool inverse) &#xA;{&#xA;&#xA;double bailout=1112.5; &#xA;double xx = x * x; &#xA;double yy = y * y; &#xA;double zz = z * z;       &#xA;long returnValue = 0; &#xA;double r = Math.Sqrt(xx + yy + zz);&#xA;double scale = -1.5;&#xA;for (int n = 1; n &lt; zkl; n++) &#xA;{&#xA;               &#xA;  if (x &gt; 1) &#xA;    x = 2.0 - x;&#xA;  else if (x &lt; -1) &#xA;    x = -2.0 - x;&#xA;                         &#xA;  if (y &gt; 1) &#xA;    y = 2.0 - y;&#xA;  else if (y &lt; -1) &#xA;    y = -2.0 - y;             &#xA;              &#xA;  if (z &gt; 1) &#xA;    z = 2.0 - z;&#xA;  else if (z &lt; -1) &#xA;    z = -2.0 - z;&#xA;          &#xA;   r = Math.Sqrt(x*x + y*y + z*z);&#xA;   if (r &gt; bailout) &#xA;   { &#xA;     returnValue = n; &#xA;     break;          &#xA;   }&#xA;&#xA;   double mult=1;&#xA;   &#xA;   if (r &lt; 1 &amp;&amp; r&gt;0) &#xA;   {      &#xA;      mult=1 /Math.Sqrt(r);&#xA;   }&#xA;   mult*=scale;&#xA;   x*=mult;&#xA;   y*=mult;&#xA;   z*=mult;&#xA; &#xA;   x+=br;&#xA;   y+=bi;&#xA;   z+=bj;&#xA;}&#xA;          &#xA;if (inverse) &#xA;{&#xA;if (returnValue == 0)              &#xA;  returnValue = 1;          &#xA;else     &#xA;  returnValue = 0;      &#xA;}&#xA;          &#xA;return returnValue ; &#xA;}&#xA;&#xA;" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="-150" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="View.Height" Value="1200" />
+  <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.Width" Value="1200" />
+</ParameterDict>
