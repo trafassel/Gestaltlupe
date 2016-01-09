@@ -49,6 +49,12 @@ namespace Fractrace.Basic
                     stringElement.AddPlusButton(buttonValue.Trim());
                     stringElement.AddMinusButton(buttonValue.Trim());
                 }
+                if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusPlusButton"] != "")
+                {
+                    string buttonValue = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusPlusButton"];
+                    stringElement.AddPlusPlusButton(buttonValue.Trim());
+                    stringElement.AddMinusMinusButton(buttonValue.Trim());
+                }
             }
 
 

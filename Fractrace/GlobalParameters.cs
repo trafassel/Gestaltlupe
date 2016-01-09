@@ -73,6 +73,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.Description"] = "X-component of the Julia Seed, if the formula is in julia mode. X-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
 
             // Y-component of the Julia Seed, if the formula is in julia mode.
@@ -81,6 +82,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.Description"] = "Y-component of the Julia Seed, if the formula is in julia mode. Y-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             // Z-component of the Julia Seed, if the formula is in julia mode.
             // Z-component of the start value , if the formula is in mandelbrot mode.
@@ -88,12 +90,11 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.Description"] = "Z-component of the Julia Seed, if the formula is in julia mode. Z-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             // Q-component of the Julia Seed, if the formula is in julia mode.
-            ParameterDict.Current["Formula.Static.jzz"] = "0";
-            ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.Description"] = "Q-component of the Julia Seed, if the formula is in julia mode.";
-            ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            //ParameterDict.Current["Formula.Static.jzz"] = "0";
+            ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Number of iterations used in the formula.
             ParameterDict.Current["Formula.Static.Cycles"] = "8";
@@ -117,63 +118,79 @@ namespace Fractrace
 
             // Source code of the formula, if Formula.Static.Formula < 0.
             ParameterDict.Current["Intern.Formula.Source"] = @"
-public override void Init() { 
-  base.Init();
-  additionalPointInfo=new AdditionalPointInfo();
-  gr1=GetDouble(""Formula.Static.Cycles"");
-  int tempGr=(int)gr1;
-  gr1=gr1- tempGr;
-  gr1=1-gr1;
-  gr1*=2.4;
+
+double _bailout = 20;
+double _power = 8;
+
+public override void Init() 
+{
+base.Init();
+_power=GetOrSetDouble(""Power"",8,""Mandelbulb Power."");
+
+// Set bailout to handle none integer iterations.
+// Works well for _power=8
+double gr1 = GetDouble(""Formula.Static.Cycles"");
+int tempGr = (int)gr1;
+gr1 = gr1 - tempGr;
+gr1 = 1 - gr1;
+gr1 *= 2.4;
+_bailout = Math.Pow(10, gr1) + 1.0;
 }
 
-double gr1=0;
 
-public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {
-  double aar, aai, aaj;
-  long tw;
-  int n;
-  int pow = 8; // n=8 default Mandelbulb
-  double gr =Math.Pow(10,gr1)+1.0;  // Bailout
-  double theta, phi;
-  double r_n = 0;
+// Daniel Whites cosine Mandelbulb 
+// http://www.skytopia.com/project/fractal/mandelbulb.html
+
+public override bool GetBool(double x, double y, double z)
+{
+
+double br, bi, bj;
+double ar, ai, aj;
+
+if (_isJulia)
+{
+  br = _jx; bi = _jy; bj = _jz;
+  ar = x; ai = y; aj = z;
+}
+else
+{
+  br = x; bi = y; bj = z;
+  ar = _jx; ai = _jy; aj = _jz;
+}
+
+double aar, aai, aaj;
+double r_n = 0;
+aar = ar * ar; aai = ai * ai; aaj = aj * aj;
+double r = Math.Sqrt(aar + aai + aaj);
+double theta, phi, phi_pow, theta_pow, sin_theta_pow, rn_sin_theta_pow;
+
+for (int n = 1; n < _cycles; n++)
+{
+  theta = Math.Atan2(Math.Sqrt(aar + aai), aj);
+  phi = Math.Atan2(ai, ar);
+  r_n = Math.Pow(r, _power);
+  phi_pow = phi * _power;
+  theta_pow = theta * _power;
+  sin_theta_pow = Math.Sin(theta_pow);
+  rn_sin_theta_pow = r_n * sin_theta_pow;
+  ar = rn_sin_theta_pow * Math.Cos(phi_pow) + br;
+  ai = rn_sin_theta_pow * Math.Sin(phi_pow) + bi;
+  aj = r_n * Math.Cos(theta_pow) + bj;
   aar = ar * ar; aai = ai * ai; aaj = aj * aj;
-  tw = 0L;
-  double r = Math.Sqrt(aar + aai + aaj);
-  double  phi_pow,theta_pow,sin_theta_pow,rn_sin_theta_pow;
+  r = Math.Sqrt(aar + aai + aaj);
 
-  additionalPointInfo.red=0;
-  additionalPointInfo.green=0;
-  additionalPointInfo.blue=0;
-
-  for (n = 1; n < zkl; n++) {
-    theta = Math.Atan2(Math.Sqrt(aar + aai), aj);
-    phi = Math.Atan2(ai, ar);
-    r_n = Math.Pow(r, pow);
-    phi_pow=phi*pow;
-    theta_pow=theta*pow;
-    sin_theta_pow=Math.Sin(theta_pow);
-    rn_sin_theta_pow=r_n* sin_theta_pow;
-    ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;
-    ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;
-    aj = r_n * Math.Cos(theta_pow)+bj;
-    aar = ar * ar; aai = ai * ai; aaj = aj * aj;
-    r = Math.Sqrt(aar + aai + aaj);
-    additionalPointInfo.red+=aar/r;
-    additionalPointInfo.green+=aai/r;
-    additionalPointInfo.blue+=aaj/r;
-    if (r > gr) { tw = n; break; }
+  if (n > _cycles / 3 && n < _cycles / 1.2)
+  {
+    additionalPointInfo.red += aar / r;
+    additionalPointInfo.green += aai / r;
+    additionalPointInfo.blue += aaj / r;
   }
 
-  if (invers) {
-     if (tw == 0)
-        tw = 1;
-      else
-        tw = 0;
+  if (r > _bailout) { return false; }
   }
-  return (tw);
+
+  return true;
 }
-
 
 ";
 
@@ -315,7 +332,9 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             // Shadow height factor
             ParameterDict.Current["Renderer.ShadowJustify"] = "1";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.Description"] = "Shadow height factor.";
-            ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.FixedButtons"] = "-1 0 1 2 6";
+            ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
             // Shininess factor (0 ... 1)
             ParameterDict.Current["Renderer.ShininessFactor"] = "0.8";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.Description"] = "Shininess factor (0 ... 1).";
@@ -362,9 +381,11 @@ public override long InSet(double ar, double ai, double aj,  double br, double b
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
-            ParameterDict.Current["Renderer.UseSharpShadow"] = "0";
-            ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Description"] = " Enable sharp shadow rendering (warning: time consuming) ";
+            //ParameterDict.Current["Renderer.UseSharpShadow"] = "0";
+            //ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Datatype"] = "Bool";
+            //ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Description"] = " Enable sharp shadow rendering (warning: time consuming) ";
+            ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.VIEW.Invisible"] = "1";
+
             // To justify the color components 
             ParameterDict.Current["Renderer.ColorFactor.Red"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.Description"] = "To justify the color components.";

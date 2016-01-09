@@ -96,6 +96,22 @@ namespace Fractrace.Basic
             this.pnlButtons.Controls.Add(button);
         }
 
+        public void AddPlusPlusButton(string value)
+        {
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = "++";
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button.ForeColor = System.Drawing.Color.DarkGray;
+            button.FlatAppearance.BorderSize = 0;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
+            button.Tag = value;
+            button.Click += PlusButton_Click;
+            button.Width = 30;
+            this.pnlButtons.Width += 32;
+            this.pnlButtons.Controls.Add(button);
+        }
+
         private void PlusButton_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
@@ -122,6 +138,21 @@ namespace Fractrace.Basic
             this.pnlButtons.Controls.Add(button);
         }
 
+        public void AddMinusMinusButton(string value)
+        {
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = "--";
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button.ForeColor = System.Drawing.Color.DarkGray;
+            button.FlatAppearance.BorderSize = 0;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
+            button.Tag = value;
+            button.Click += MinusButton_Click;
+            button.Width = 30;
+            this.pnlButtons.Width += 32;
+            this.pnlButtons.Controls.Add(button);
+        }
 
         private void MinusButton_Click(object sender, EventArgs e)
         {

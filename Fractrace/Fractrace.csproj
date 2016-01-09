@@ -253,6 +253,7 @@
     </Compile>
     <Compile Include="Scheduler\PaintJob.cs" />
     <Compile Include="TomoGeometry\AdditionalPointInfo.cs" />
+    <Compile Include="TomoGeometry\GestaltFormula.cs" />
     <Compile Include="TomoGeometry\VecRotMandel2d.cs" />
     <Compile Include="TomoGeometry\Mandelbulb.cs" />
     <Compile Include="TomoGeometry\TomoFormula.cs" />

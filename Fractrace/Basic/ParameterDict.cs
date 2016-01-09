@@ -465,6 +465,7 @@ namespace Fractrace.Basic
             {
                 ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.FixedButtons", "0", false);
                 ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusButton", "0.1", false);
+                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusPlusButton", "0.001", false);
             }
             return GetDouble(key);
         }

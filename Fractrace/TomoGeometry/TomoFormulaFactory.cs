@@ -74,21 +74,7 @@ namespace Fractrace.TomoGeometry {
 
             parameters.ReferencedAssemblies.AddRange(refs);
             provider = new Microsoft.VisualBasic.VBCodeProvider();
-
-
-            /*
-            string tomoSource = @"
-using System;
-using Fractrace.TomoGeometry;
-public class CSTomoFormula : TomoFormula {
-public CSTomoFormula() {
-
-    }
-
-    " + code + @"
-}
-";
-             */
+           
             string tomoSource = @"
 Imports System
 Imports Fractrace.TomoGeometry
@@ -127,10 +113,10 @@ End Class
         }
 
 
+        
         /// <summary>
         /// Compiles the code in C# assembly.
         /// </summary>
-        /// <param name="funcName">Name of the func.</param>
         /// <param name="code">The code.</param>
         /// <param name="provider">The provider.</param>
         protected void CompileCS(string code, out Microsoft.CSharp.CSharpCodeProvider provider) {
@@ -148,7 +134,7 @@ End Class
             string tomoSource = @"
 using System;
 using Fractrace.TomoGeometry;
-public class CSTomoFormula : TomoFormula {
+public class CSTomoFormula : "+ GuessFormulaClass(code) + @" {
 public CSTomoFormula() {
 
     }
@@ -181,5 +167,20 @@ public CSTomoFormula() {
             }
 
         }
+
+
+        /// <summary>
+        /// Guess type of base formula ( TomoFormula or GestaltFormula )
+        /// </summary>
+        /// <param name="formulaSource"></param>
+        /// <returns></returns>
+        protected string GuessFormulaClass(string formulaSource)
+        {
+            if (formulaSource.Contains("GetBool"))
+                return "GestaltFormula";
+            return "TomoFormula";
+        }
+
+
     }
 }

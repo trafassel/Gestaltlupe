@@ -24,6 +24,16 @@ namespace Fractrace.TomoGeometry
         public double blue = 0;
 
 
+        /// <summary>
+        /// Set all color components to 0.
+        /// </summary>
+        public void Clear()
+        {
+            red = 0;
+            green = 0;
+            blue = 0;
+        }
+
         public AdditionalPointInfo Clone()
         {
             AdditionalPointInfo retVal = new AdditionalPointInfo();

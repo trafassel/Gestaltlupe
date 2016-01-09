@@ -938,14 +938,40 @@ namespace Fractrace
                 case -2: /* Interne Formel verwenden: als Jula-Menge */
                     we = 1;
                     if (mInternFormula != null)
-                        we = mInternFormula.InSet(x, y, z, old_jx, old_jy, old_jz, old_jzz, old_zykl, inverse);
+                    {
+                        if(mInternFormula is GestaltFormula)
+                        {
+                            if (mInternFormula.additionalPointInfo != null)
+                                mInternFormula.additionalPointInfo.Clear();
+                            GestaltFormula gestaltFormula = (GestaltFormula)mInternFormula;
+                            bool notinset = !gestaltFormula.GetBool(x, y, z);
+                            if (notinset)
+                                we = 0;
+                            if (inverse) { if (we == 0) we = 1; else we = 0; }
+                        }
+                        else
+                          we = mInternFormula.InSet(x, y, z, old_jx, old_jy, old_jz, old_jzz, old_zykl, inverse);
+                    }
                     break;
 
 
                 case -1: /* Interne Formel verwenden: als Mandelbrotmenge */
                     we = 1;
                     if (mInternFormula != null)
-                        we = mInternFormula.InSet(old_jx, old_jy, old_jz, x, y, z, old_jzz, old_zykl, inverse);
+                    {
+                        if (mInternFormula is GestaltFormula)
+                        {
+                            if (mInternFormula.additionalPointInfo != null)
+                                mInternFormula.additionalPointInfo.Clear();
+                            GestaltFormula gestaltFormula = (GestaltFormula)mInternFormula;
+                            bool notinset = !gestaltFormula.GetBool(x, y, z);
+                            if (notinset)
+                                we = 0;
+                            if (inverse) { if (we == 0) we = 1; else we = 0; }
+                        }
+                        else
+                          we = mInternFormula.InSet(old_jx, old_jy, old_jz, x, y, z, old_jzz, old_zykl, inverse);
+                    }
                     break;
             }
 
@@ -1065,14 +1091,40 @@ namespace Fractrace
                     case -2: /* Interne Formel verwenden: als Jula-Menge */
                         we = 1;
                         if (mInternFormula != null)
-                            we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
+                        {
+                            if (mInternFormula is GestaltFormula)
+                            {
+                                if (mInternFormula.additionalPointInfo != null)
+                                    mInternFormula.additionalPointInfo.Clear();
+                                GestaltFormula gestaltFormula = (GestaltFormula)mInternFormula;
+                                bool inset = gestaltFormula.GetBool(x, y, z);
+                                if (inset)
+                                    we = 0;
+                                if (invers) { if (we == 0) we = 1; else we = 0; }
+                            }
+                            else
+                              we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
+                        }
                         break;
 
 
                     case -1: /* Interne Formel verwenden: als Mandelbrotmenge */
                         we = 1;
                         if (mInternFormula != null)
-                            we = mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
+                        {
+                            if (mInternFormula is GestaltFormula)
+                            {
+                                if (mInternFormula.additionalPointInfo != null)
+                                    mInternFormula.additionalPointInfo.Clear();
+                                GestaltFormula gestaltFormula = (GestaltFormula)mInternFormula;
+                                bool inset = gestaltFormula.GetBool(x, y, z);
+                                if (inset)
+                                    we = 0;
+                                if (invers) { if (we == 0) we = 1; else we = 0; }
+                            }
+                            else
+                              we = mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
+                        }
                         break;
 
 
