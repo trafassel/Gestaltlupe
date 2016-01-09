@@ -15,7 +15,8 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() { &#xA;  base.Init();&#xA;  additionalPointInfo=new AdditionalPointInfo();&#xA;  gr1=GetDouble(&quot;Formula.Static.Cycles&quot;);&#xA;  int tempGr=(int)gr1;&#xA;  gr1=gr1- tempGr;&#xA;  gr1=1-gr1;&#xA;  gr1*=2.4;&#xA;}&#xA;&#xA;double gr1=0;&#xA;&#xA;public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;  double aar, aai, aaj;&#xA;  long tw;&#xA;  int n;&#xA;  int pow = 8; // n=8 default Mandelbulb&#xA;  double gr =Math.Pow(10,gr1)+1.0;  // Bailout&#xA;  double theta, phi;&#xA;  double r_n = 0;&#xA;  aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(aar + aai + aaj);&#xA;  double  phi_pow,theta_pow,sin_theta_pow,rn_sin_theta_pow;&#xA;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;    theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xA;    phi = Math.Atan2(ai, ar);&#xA;    r_n = Math.Pow(r, pow);&#xA;    phi_pow=phi*pow;&#xA;    theta_pow=theta*pow;&#xA;    sin_theta_pow=Math.Sin(theta_pow);&#xA;    rn_sin_theta_pow=r_n* sin_theta_pow;&#xA;    ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;&#xA;    ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;&#xA;    aj = r_n * Math.Cos(theta_pow)+bj;&#xA;    aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;    r = Math.Sqrt(aar + aai + aaj);&#xA;if(n&gt;35 &amp;&amp; n&lt;55) {&#xA;    additionalPointInfo.red+=aar/r;&#xA;    additionalPointInfo.green+=aai/r;&#xA;    additionalPointInfo.blue+=aaj/r;&#xA;}&#xA;    if (r &gt; gr) { tw = n; break; }&#xA;  }&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;      else&#xA;        tw = 0;&#xA;  }&#xA;  return (tw);&#xA;}&#xA;&#xA;&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="// Daniel Whites Power 8 cosine Mandelbulb &#xA;// http://www.skytopia.com/project/fractal/mandelbulb.html&#xA;public override void Init() { &#xA;  base.Init();&#xA;  additionalPointInfo=new AdditionalPointInfo();&#xA;  gr1=GetDouble(&quot;Formula.Static.Cycles&quot;);&#xA;  int tempGr=(int)gr1;&#xA;  gr1=gr1- tempGr;&#xA;  gr1=1-gr1;&#xA;  gr1*=2.4;&#xA;}&#xA;&#xA;double gr1=0;&#xA;&#xA;public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;  double aar, aai, aaj;&#xA;  long tw;&#xA;  int n;&#xA;  int pow = 8; // n=8 default Mandelbulb&#xA;  double gr =Math.Pow(10,gr1)+1.0;  // Bailout&#xA;  double theta, phi;&#xA;  double r_n = 0;&#xA;  aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(aar + aai + aaj);&#xA;  double  phi_pow,theta_pow,sin_theta_pow,rn_sin_theta_pow;&#xA;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;    theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xA;    phi = Math.Atan2(ai, ar);&#xA;    r_n = Math.Pow(r, pow);&#xA;    phi_pow=phi*pow;&#xA;    theta_pow=theta*pow;&#xA;    sin_theta_pow=Math.Sin(theta_pow);&#xA;    rn_sin_theta_pow=r_n* sin_theta_pow;&#xA;    ar =  rn_sin_theta_pow * Math.Cos(phi_pow)+br;&#xA;    ai = rn_sin_theta_pow * Math.Sin(phi_pow)+bi;&#xA;    aj = r_n * Math.Cos(theta_pow)+bj;&#xA;    aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xA;    r = Math.Sqrt(aar + aai + aaj);&#xA;if(n&gt;35 &amp;&amp; n&lt;55) {&#xA;    additionalPointInfo.red+=aar/r;&#xA;    additionalPointInfo.green+=aai/r;&#xA;    additionalPointInfo.blue+=aaj/r;&#xA;}&#xA;    if (r &gt; gr) { tw = n; break; }&#xA;  }&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;      else&#xA;        tw = 0;&#xA;  }&#xA;  return (tw);&#xA;}&#xA;&#xA;&#xA;" />
+  <Entry Key="Intern.Version" Value="3" />
   <Entry Key="Renderer.AmbientIntensity" Value="1" />
   <Entry Key="Renderer.BackColor.Blue" Value="0" />
   <Entry Key="Renderer.BackColor.Green" Value="0" />
@@ -36,6 +37,7 @@
   <Entry Key="Renderer.MaxFieldOfView" Value="1" />
   <Entry Key="Renderer.MinFieldOfView" Value="0.15" />
   <Entry Key="Renderer.Normalize" Value="0" />
+  <Entry Key="Renderer.ShadowGlow" Value="0.94" />
   <Entry Key="Renderer.ShadowJustify" Value="0.7" />
   <Entry Key="Renderer.ShadowNumber" Value="11" />
   <Entry Key="Renderer.Shininess" Value="12" />
@@ -54,6 +56,8 @@
   <Entry Key="View.DephAdd" Value="0" />
   <Entry Key="View.Height" Value="720" />
   <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.Pipeline.Preview" Value="0" />
+  <Entry Key="View.Pipeline.UpdatePreview" Value="1" />
   <Entry Key="View.PosterX" Value="0" />
   <Entry Key="View.PosterZ" Value="0" />
   <Entry Key="View.Raster" Value="2" />

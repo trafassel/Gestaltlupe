@@ -32,6 +32,9 @@
   <Entry Key="Composite.UseDarken" Value="1" />
   <Entry Key="Composite.UseDerivation" Value="1" />
   <Entry Key="Composite.UseMedian" Value="1" />
+  <Entry Key="Computation.NoOfThreads" Value="4" />
+  <Entry Key="Formula.Parameters.Scale" Value="1.1" />
+  <Entry Key="Formula.Parameters.Xcount" Value="4" />
   <Entry Key="Formula.Static.Cycles" Value="250" />
   <Entry Key="Formula.Static.Formula" Value="-2" />
   <Entry Key="Formula.Static.jx" Value="-117.8190609544" />
@@ -39,7 +42,9 @@
   <Entry Key="Formula.Static.jz" Value="41.8925769748642" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="250" />
-  <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() {&#xA;     base.Init();&#xA;     additionalPointInfo=new AdditionalPointInfo();&#xA;}&#xA;&#xA;&#xA;// Mandelbox&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;&#xA;  double gr=50000;&#xA;  double xx, yy, zz;&#xA;  long tw;&#xA;  int n;&#xA;  double x=ar,y=ai,z=aj;&#xA;   double r_n = 0;&#xA;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(xx + yy + zz);&#xA;  double scale = 1.1;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;&#xA;//              ; fold box onto itself  &#xA;&#xA;bool xChanged=false;&#xA;for (int i=0;i&lt;4;i++) {&#xA;xChanged=false;&#xA;   if (x &gt; 1){&#xA;      x = 2.0 - x;&#xA;xChanged=true;&#xA;&#xA;}&#xA;   else if (x &lt; -1){&#xA;      x = -2.0 - x;&#xA;xChanged=true;&#xA;&#xA;}&#xA;if(!xChanged)&#xA;  break;&#xA;}&#xA;&#xA;   if (y &gt; 1)&#xA;     y = 2.0 - y;&#xA;   else if (y &lt; -1)&#xA;      y = -2.0 - y;&#xA;             &#xA;   if (z &gt; 1)&#xA;     z = 2.0 - z;&#xA;   else if (z &lt; -1)&#xA;      z = -2.0 - z;&#xA;              &#xA;//  ; fold sphere onto itself&#xA;    double fixedRadius = 1;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;   double length=   r = xx + yy + zz;&#xA;&#xA;&#xA;if(r!=0 &amp;&amp; n&gt;50 &amp;&amp; n&lt;110) {&#xA;  additionalPointInfo.red+=xx/r;&#xA;  additionalPointInfo.green+=yy/r;&#xA;  additionalPointInfo.blue+=zz/r;&#xA;}&#xA;&#xA;if (length &gt; gr) { &#xA;   tw = n; break; &#xA;}&#xA;&#xA;   double mult=1;&#xA;&#xA; if (length &lt; fixedRadius &amp;&amp; length &gt;0) {&#xA;        mult=fixedRadius/(length);&#xA;  }&#xA;&#xA;   mult*=scale;&#xA;   x*=mult;&#xA;   y*=mult;&#xA;   z*=mult;&#xA;&#xA;if(x&lt;0) {x=-x;}&#xA;   x+=br;&#xA;   y+=bi;&#xA;   z+=bj;&#xA;}&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;     else&#xA;        tw = 0;&#xA;   }&#xA;   return (tw);&#xA;&#xA;}&#xA;&#xA;" />
+  <Entry Key="Intern.FileName" Value="C:\Users\perwi_000\Documents\Gestaltlupe\Data225\Data225pic10128.png" />
+  <Entry Key="Intern.Filter" Value="" />
+  <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() {&#xA;  base.Init();&#xA;  _scale=GetOrSetDouble(&quot;Scale&quot;,1.1,&quot;Mandelbox scale factor.&quot;);&#xA;  _xcount=(int) GetOrSetDouble(&quot;Xcount&quot;,5,&quot;Number of foldings in x (large numbers might be time consuming).&quot;,false);&#xA;  Fractrace.Basic.ParameterDict.Current.SetValue(&quot;Formula.Parameters.Xcount.PARAMETERINFO.VIEW.PlusButton&quot;, &quot;1&quot;, false);&#xA;}&#xA;&#xA;double _scale=1.1;&#xA;int _xcount=1;&#xA;&#xA;// Mandelbox&#xA;public override long InSet( double x, double y, double z,  &#xA;                            double br, double bi, double bj, double bk, &#xA;                            long zkl, bool inverse) &#xA;{&#xA;&#xA; double bailout=50000;&#xA; double xx, yy, zz;&#xA; long returnValue=0;&#xA; double r = 0;&#xA;&#xA; additionalPointInfo.red=0;&#xA; additionalPointInfo.green=0;&#xA; additionalPointInfo.blue=0;&#xA;          &#xA; for (int n = 1; n &lt; zkl; n++) &#xA; {&#xA;         &#xA;   bool xChanged=false;&#xA;   for (int i=0;i&lt;_xcount;i++) &#xA;   {&#xA;     xChanged=false;&#xA;     if (x &gt; 1)&#xA;     {&#xA;       x = 2.0 - x;&#xA;       xChanged=true;&#xA;     }&#xA;     else if (x &lt; -1){&#xA;       x = -2.0 - x;&#xA;       xChanged=true;&#xA;   }&#xA;   if(!xChanged)&#xA;     break;&#xA;   }&#xA;                      &#xA;   if (y &gt; 1)            &#xA;     y = 2.0 - y;        &#xA;   else if (y &lt; -1)             &#xA;     y = -2.0 - y;&#xA;                        &#xA;   if (z &gt; 1)              &#xA;     z = 2.0 - z;            &#xA;   else if (z &lt; -1)             &#xA;     z = -2.0 - z;&#xA;                                   &#xA;   xx = x * x; yy = y * y; zz = z * z;&#xA;   r = xx + yy + zz;&#xA;&#xA;   if(r!=0) &#xA;   {&#xA;     additionalPointInfo.red+=xx/r;&#xA;     additionalPointInfo.green+=yy/r;&#xA;     additionalPointInfo.blue+=zz/r;&#xA;   }&#xA;         &#xA;   if (r &gt; bailout) &#xA;   {            &#xA;     returnValue = n; &#xA;     break;          &#xA;   }&#xA;&#xA;   double mult = _scale;&#xA;   if (r &lt; 1 &amp;&amp; r!=0)&#xA;     mult = _scale/r;&#xA;&#xA;   x*=mult; y*=mult; z*=mult;&#xA;   if(x&lt;0) &#xA;     x=-x;&#xA;   x+=br; y+=bi; z+=bj;&#xA; }&#xA;        &#xA; if (inverse) &#xA; {         &#xA;  if (returnValue == 0)          &#xA;    returnValue = 1;          &#xA;  else            &#xA;    returnValue = 0;        &#xA; }        &#xA; return returnValue;    &#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="3" />
   <Entry Key="Renderer.AmbientIntensity" Value="0" />
   <Entry Key="Renderer.BackColor.Blue" Value="0.3" />
@@ -80,5 +85,12 @@
   <Entry Key="View.DephAdd" Value="1000" />
   <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="0" />
+  <Entry Key="View.Pipeline.Preview" Value="0" />
+  <Entry Key="View.Pipeline.UpdatePreview" Value="1" />
+  <Entry Key="View.PosterX" Value="0" />
+  <Entry Key="View.PosterZ" Value="0" />
+  <Entry Key="View.Raster" Value="2" />
+  <Entry Key="View.Size" Value="1" />
+  <Entry Key="View.UpdateSteps" Value="3" />
   <Entry Key="View.Width" Value="1200" />
 </ParameterDict>

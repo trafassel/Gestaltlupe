@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Border.Max.x" Value="-0.869626790028221" />
+  <Entry Key="Border.Max.y" Value="-0.301649298419972" />
+  <Entry Key="Border.Max.z" Value="-0.21402283018021" />
+  <Entry Key="Border.Min.x" Value="-2.3091740653715" />
+  <Entry Key="Border.Min.y" Value="-1.74119657376323" />
+  <Entry Key="Border.Min.z" Value="-1.65357010552333" />
+  <Entry Key="Formula.Static.Cycles" Value="656" />
+  <Entry Key="Formula.Static.Formula" Value="-2" />
+  <Entry Key="Formula.Static.jx" Value="0.075" />
+  <Entry Key="Formula.Static.jy" Value="-1.38" />
+  <Entry Key="Formula.Static.jz" Value="0.041" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Mutated Mandelbox with scale=1.&#xA;&#xA;public override long InSet(double x, double y, double z,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;&#xA;  double bailout=3000;&#xA;  long returnValue=0;  &#xA;&#xA;  for (int n = 1; n &lt; zkl; n++) &#xA;  {&#xA;    if (x &lt; -1) x = -2.0 - x;&#xA;    if (y &lt; -1) y = -2.0 - y;             &#xA;    if (z &lt; -1) z = -2.0 - z;             &#xA;    double r = x*x + y*y + z*z;          &#xA;    if (r &gt; bailout) {  returnValue = 1; break; }&#xA;    if (r &lt; 1 &amp;&amp; r &gt;0 ) &#xA;    {&#xA;      x/=r; y/=r; z/=r;&#xA;    }&#xA;    x+=br; y+=bi; z+=bj;&#xA; }&#xA;&#xA;  // For inside rendering&#xA;  if (invers) {if (returnValue == 0) returnValue = 1; else returnValue = 0; } &#xA;&#xA;  return returnValue;&#xA;}&#xA;&#xA;" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="-90" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="View.Height" Value="1200" />
+  <Entry Key="View.Perspective" Value="1" />
+  <Entry Key="View.Width" Value="1200" />
+</ParameterDict>
