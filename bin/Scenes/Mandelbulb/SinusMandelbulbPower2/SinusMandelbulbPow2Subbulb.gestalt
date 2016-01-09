@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Border.Max.x" Value="-0.728845765164754" />
-  <Entry Key="Border.Max.y" Value="-0.232260941411319" />
-  <Entry Key="Border.Max.z" Value="4.15413945147683E-05" />
-  <Entry Key="Border.Min.x" Value="-0.728929542183598" />
-  <Entry Key="Border.Min.y" Value="-0.232344718430164" />
-  <Entry Key="Border.Min.z" Value="-4.22356243297935E-05" />
-  <Entry Key="Formula.Static.Cycles" Value="60" />
+  <Entry Key="Border.Max.x" Value="-0.725548365244319" />
+  <Entry Key="Border.Max.y" Value="-0.23072061403895" />
+  <Entry Key="Border.Max.z" Value="0.00158186876685713" />
+  <Entry Key="Border.Min.x" Value="-0.728712797007889" />
+  <Entry Key="Border.Min.y" Value="-0.233885045802529" />
+  <Entry Key="Border.Min.z" Value="-0.00158256299667212" />
+  <Entry Key="Formula.Static.Cycles" Value="43" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
   <Entry Key="Formula.Static.jy" Value="0" />

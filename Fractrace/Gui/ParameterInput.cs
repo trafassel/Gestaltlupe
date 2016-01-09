@@ -516,7 +516,7 @@ namespace Fractrace
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
-            sd.Filter = "*.xml|*.xml;*.gestalt|*.gestalt|*.gestalt|*.*|*.*";
+            sd.Filter = "Gestalt|*.gestalt;*.*";
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 ParameterDict.Current.Save(sd.FileName);
@@ -1186,7 +1186,7 @@ namespace Fractrace
         private void btnAppend_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
-            od.Filter = "*.xml|*.gestalt;*.xml;*.tomo|*.*|*.*";
+            od.Filter = "Gestalt|*.gestalt;*.xml;*.tomo|*.*|*.*";
             if (oldDirectory != "")
             {
                 od.InitialDirectory = oldDirectory;
