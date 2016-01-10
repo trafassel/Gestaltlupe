@@ -1314,7 +1314,7 @@ namespace Fractrace
             sd.Filter = "*.wrl|*.wrl|*.*|all";
             if (sd.ShowDialog() == DialogResult.OK)
             {
-                X3dExporter export = new X3dExporter(Form1.PublicForm.Iterate);
+                X3dExporter export = new X3dExporter(Form1.PublicForm.IterateForPictureArt, Form1.PublicForm.LastPicturArt.PictureData);
                 export.Save(sd.FileName);
             }
             btnExport.Enabled = true;

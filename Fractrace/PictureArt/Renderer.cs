@@ -18,6 +18,7 @@ namespace Fractrace.PictureArt {
 
         public event PaintEndsDelegate PaintEnds;
 
+        public PictureData PictureData { get { return pData; } }
         protected PictureData pData = null;
 
         protected Formulas formula = null;

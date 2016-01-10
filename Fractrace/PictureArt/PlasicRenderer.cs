@@ -687,6 +687,14 @@ namespace Fractrace.PictureArt
                 retVal.Y = 1;
             if (retVal.Z > 1)
                 retVal.Z = 1;
+
+            if (pInfo != null && pInfo.AdditionalInfo != null)
+            {
+                pInfo.AdditionalInfo.red2 = retVal.X;
+                pInfo.AdditionalInfo.green2 = retVal.Y;
+                pInfo.AdditionalInfo.blue2 = retVal.Z;
+            }
+
             return retVal;
         }
 

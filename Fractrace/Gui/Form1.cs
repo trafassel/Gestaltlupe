@@ -73,6 +73,7 @@ namespace Fractrace
         /// <summary>
         /// Copy of iter for using in picture art. 
         /// </summary>
+        public Iterate IterateForPictureArt { get { return _iterateForPictureArt; } }
         Iterate _iterateForPictureArt = null;
 
         /// <summary>
@@ -155,6 +156,9 @@ namespace Fractrace
         /// <summary>
         /// Currently running picture art.
         /// </summary>
+        public Renderer LastPicturArt { get { return _lastPicturArt; } }
+        Renderer _lastPicturArt = null;
+
         Renderer _currentPicturArt = null;
 
         /// <summary>
@@ -577,6 +581,7 @@ namespace Fractrace
                         if(!IsSubStepRendering())
                         {
                             _currentPicturArt.StopAndWait();
+                            _lastPicturArt = _currentPicturArt;
                             _currentPicturArt = null;
                         }
                         else
@@ -601,16 +606,19 @@ namespace Fractrace
                         fastRenderingFilter = new FastRenderingFilter();
                         fastRenderingFilter.Apply();
                     }
+                    //_lastPicturArt = _currentPicturArt;
                     _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
                     _currentPicturArt.Paint(_graphics);
                     while (_repaintRequested)
                     {
+                        _lastPicturArt = _currentPicturArt;
                         _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
                         _currentPicturArt.Paint(_graphics);
                     }
                     if (fastRenderingFilter != null)
                         fastRenderingFilter.Restore();
 
+                    _lastPicturArt = _currentPicturArt;
                     _currentPicturArt = null;
                     _repaintRequested = false;
                     CallDrawImage();
@@ -709,24 +717,6 @@ namespace Fractrace
                     base.OnClosing(e);
                 }
                 else e.Cancel = true;
-            }
-        }
-
-
-        /// <summary>
-        /// Handles the Click event of the button3 control.
-        /// Export surface data in 3D file (only supported format is VRML95) 
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog sd = new SaveFileDialog();
-            sd.Filter = "*.wrl|*.wrl|*.*|all";
-            if (sd.ShowDialog() == DialogResult.OK)
-            {
-                X3dExporter export = new X3dExporter(_iterate);
-                export.Save(sd.FileName);
             }
         }
 

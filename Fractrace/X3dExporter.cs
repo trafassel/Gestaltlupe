@@ -20,11 +20,16 @@ namespace Fractrace
         /// Initializes a new instance of the <see cref="X3dExporter"/> class.
         /// </summary>
         /// <param name="iter">The iter.</param>
-        public X3dExporter(Iterate iter)
+        public X3dExporter(Iterate iter,PictureData pictureData)
         {
             mIterate = iter;
+            _pictureData = pictureData;
         }
 
+        /// <summary>
+        /// PictureData of iter with surface coloring from PictureArt
+        /// </summary>
+        PictureData _pictureData=null;
 
         protected Iterate mIterate = null;
 
@@ -93,7 +98,7 @@ namespace Fractrace
             List<KeyValuePair<int, int>> pointList = new List<KeyValuePair<int, int>>();
             Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
 
-            int[,] pointIndex = new int[mIterate.PictureData.Width + 1, mIterate.PictureData.Height + 1];
+            int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
 
             double minx = Double.MaxValue;
             double miny = Double.MaxValue;
@@ -103,13 +108,13 @@ namespace Fractrace
             double maxz = Double.MinValue;
 
             int currentIndex = 0;
-            for (int i = 0; i < mIterate.PictureData.Width; i++)
+            for (int i = 0; i < _pictureData.Width; i++)
             {
-                for (int j = 0; j < mIterate.PictureData.Height; j++)
+                for (int j = 0; j < _pictureData.Height; j++)
                 {
-                    if (mIterate.PictureData.Points[i, j] != null)
+                    if (_pictureData.Points[i, j] != null)
                     {
-                        PixelInfo point = AddTransform(mIterate.PictureData.Points[i, j]);
+                        PixelInfo point = AddTransform(_pictureData.Points[i, j]);
 
                         if (minx > point.Coord.X)
                             minx = point.Coord.X;
@@ -148,7 +153,7 @@ namespace Fractrace
             if (maxDist < tempDist)
                 maxDist = tempDist;
 
-            double noOfPoints = Math.Max(mIterate.PictureData.Width, mIterate.PictureData.Height);
+            double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
             maxDist = 5.0 * maxDist / noOfPoints;
 
             sw.WriteLine(@"
@@ -176,9 +181,9 @@ point [
 
             foreach (KeyValuePair<int, int> entry in pointList)
             {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                if (_pictureData.Points[entry.Key, entry.Value] != null)
                 {
-                    PixelInfo pInfo = AddTransform(mIterate.PictureData.Points[entry.Key, entry.Value]);
+                    PixelInfo pInfo = AddTransform(_pictureData.Points[entry.Key, entry.Value]);
                     if (pInfo != null)
                     {
                         if (pInfo.Coord != null)
@@ -216,9 +221,9 @@ color [
 
             foreach (KeyValuePair<int, int> entry in pointList)
             {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                if (_pictureData.Points[entry.Key, entry.Value] != null)
                 {
-                    PixelInfo pInfo = mIterate.PictureData.Points[entry.Key, entry.Value];
+                    PixelInfo pInfo = _pictureData.Points[entry.Key, entry.Value];
                     if (pInfo != null)
                     {
                         if (pInfo != null)
@@ -227,10 +232,11 @@ color [
                             {
                                 if (pInfo.AdditionalInfo != null)
                                 {
-                                    double red = pInfo.AdditionalInfo.red;
-                                    double green = pInfo.AdditionalInfo.green;
-                                    double blue = pInfo.AdditionalInfo.blue;
+                                    double red = pInfo.AdditionalInfo.red2;
+                                    double green = pInfo.AdditionalInfo.green2;
+                                    double blue = pInfo.AdditionalInfo.blue2;
 
+                                    /*
                                     double norm = Math.Sqrt(red * red + green * green + blue * blue);
                                     if (norm != 0)
                                     {
@@ -244,6 +250,7 @@ color [
                                         green = 0;
                                         blue = 0;
                                     }
+                                    */
 
                                     string line = red.ToString(mNumberFormatInfo) + " " + green.ToString(mNumberFormatInfo) + " " + blue.ToString(mNumberFormatInfo) + ", ";
 
@@ -272,9 +279,9 @@ colorIndex [
 
             foreach (KeyValuePair<int, int> entry in pointList)
             {
-                if (mIterate.PictureData.Points[entry.Key, entry.Value] != null)
+                if (_pictureData.Points[entry.Key, entry.Value] != null)
                 {
-                    PixelInfo pInfo = mIterate.PictureData.Points[entry.Key, entry.Value];
+                    PixelInfo pInfo = _pictureData.Points[entry.Key, entry.Value];
                     if (pInfo != null)
                     {
                         if (pInfo != null)
@@ -300,30 +307,30 @@ coordIndex [
             // Die Koordinaten anpassen: 
             // z.B: coordIndex [0, 1, 2, 3, -1]
 
-            for (int i = 0; i < mIterate.PictureData.Width; i++)
+            for (int i = 0; i < _pictureData.Width; i++)
             {
-                for (int j = 0; j < mIterate.PictureData.Height; j++)
+                for (int j = 0; j < _pictureData.Height; j++)
                 {
-                    if (mIterate.PictureData.Points[i, j] != null)
+                    if (_pictureData.Points[i, j] != null)
                     {
                         // Dreieck 1:
-                        if (i > 0 && j > 0 && mIterate.PictureData.Points[i - 1, j - 1] != null)
+                        if (i > 0 && j > 0 && _pictureData.Points[i - 1, j - 1] != null)
                         {
-                            if (mIterate.PictureData.Points[i - 1, j] != null)
+                            if (_pictureData.Points[i - 1, j] != null)
                             {
                                 // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet.
-                                PixelInfo point1 = mIterate.PictureData.Points[i, j];
-                                PixelInfo point2 = mIterate.PictureData.Points[i - 1, j];
-                                PixelInfo point3 = mIterate.PictureData.Points[i - 1, j - 1];
+                                PixelInfo point1 = _pictureData.Points[i, j];
+                                PixelInfo point2 = _pictureData.Points[i - 1, j];
+                                PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
                                 if (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist)
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " -1 ");
                             }
-                            if (mIterate.PictureData.Points[i, j - 1] != null)
+                            if (_pictureData.Points[i, j - 1] != null)
                             {
                                 // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet
-                                PixelInfo point1 = mIterate.PictureData.Points[i, j];
-                                PixelInfo point2 = mIterate.PictureData.Points[i - 1, j - 1];
-                                PixelInfo point3 = mIterate.PictureData.Points[i, j - 1];
+                                PixelInfo point1 = _pictureData.Points[i, j];
+                                PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
+                                PixelInfo point3 = _pictureData.Points[i, j - 1];
                                 if (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist)
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " " + pointIndex[i, j - 1].ToString() + " -1 ");
                             }
@@ -347,10 +354,10 @@ appearance
 DEF Appearance  Appearance{
 material
 DEF Material  Material{
-ambientIntensity 0.2
+ambientIntensity 1
 diffuseColor 0.8 0.8 0.8
-emissiveColor 0 0 0
-shininess 0.2
+emissiveColor 1 1 1
+shininess 0
 specularColor 0 0 0
 transparency 0
 }
