@@ -140,6 +140,7 @@ namespace Fractrace
                 }
             }
 
+            /*
             // Maximal Distance to draw triangle.
             double maxDist = 0;
             double tempDist = maxx - minx;
@@ -151,9 +152,11 @@ namespace Fractrace
             tempDist = maxz - minz;
             if (maxDist < tempDist)
                 maxDist = tempDist;
+                
 
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            maxDist = 355.0 * maxDist / noOfPoints;
+            maxDist = 15.0 * maxDist / noOfPoints;
+            */
 
             sw.WriteLine(@"
       Transform{
@@ -171,34 +174,57 @@ coord
 point [
 ");
 
-            // Coordinates
-            double oldx = 0;
-            double oldy = 0;
-            double oldz = 0;
+           
+
+            double radius = maxz - minz + maxy - miny + maxx - minx;
+            double centerx = (maxx + minx) / 2.0;
+            double centery = (maxy + miny) / 2.0;
+            double centerz = (maxz + minz) / 2.0;
+
+            bool needScaling = radius < 0.0001;
+
+            // Rounding scale parameters to allow combine different 3d scenes. 
+            int noOfDigits = 1;
+            double d = 1;
+            if (needScaling)
+            {
+                while (d > radius)
+                {
+                    d /= 10.0;
+                    noOfDigits++;
+                }
+                noOfDigits -= 3;
+                radius = Math.Round(radius, noOfDigits);
+                radius = d;
+                centerx = Math.Round(centerx, noOfDigits);
+                centery = Math.Round(centery, noOfDigits);
+                centerz = Math.Round(centerz, noOfDigits);
+            }
 
             foreach (Coord2D coord in pointList)
             {
                 PixelInfo pInfo = Transform(_pictureData.Points[coord.X, coord.Y]);
                 if (pInfo != null && pInfo.Coord != null && pInfo.AdditionalInfo != null)
                 {
-                    // Scale by 1000
-                    double x = 1000.0 * pInfo.Coord.X;
-                    double y = 1000.0 * pInfo.Coord.Y;
-                    double z = 1000.0 * pInfo.Coord.Z;
-                    // Exclude large point coordinates 
-                    if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && 
-                        pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 && 
-                        pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000)
+
+                    double x, y, z;
+                    if(needScaling)
                     {
-                        sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
-                        oldx = x;
-                        oldy = y;
-                        oldz = z;
+                        x = (pInfo.Coord.X - centerx) / radius;
+                        y = (pInfo.Coord.Y - centery) / radius;
+                        z = (pInfo.Coord.Z - centerz) / radius;
                     }
                     else
                     {
-                        sw.WriteLine(oldx.ToString(_numberFormatInfo) + " " + oldy.ToString(_numberFormatInfo) + " " + oldz.ToString(_numberFormatInfo) + ", ");
+                        // Scale by 1000
+
+                        x = 1000.0 * pInfo.Coord.X;
+                         y = 1000.0 * pInfo.Coord.Y;
+                         z = 1000.0 * pInfo.Coord.Z;
                     }
+
+                    
+                        sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
                 }
             }
 
@@ -240,6 +266,10 @@ normalPerVertex FALSE");
 coordIndex [
 ");
 
+            // Maximal Distance to draw triangle.
+            double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
+            double maxDist = radius/ noOfPoints;
+
             // surface mesh
             for (int i = 0; i < _pictureData.Width; i++)
             {
@@ -274,8 +304,8 @@ coordIndex [
 
             sw.WriteLine(@"
 ]
-ccw FALSE
-solid FALSE
+ccw TRUE
+solid TRUE
 texCoordIndex []
 creaseAngle 0
 convex TRUE
