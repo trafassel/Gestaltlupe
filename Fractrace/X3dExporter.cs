@@ -3,47 +3,50 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-using Fractrace.Basic;
 using Fractrace.DataTypes;
 
 namespace Fractrace
 {
 
     /// <summary>
-    /// Dient dem Export der dargestellten 3D Geometrie.
+    /// Export surface data of last iterate with color, surface color, defined in last picture art rendering.
     /// </summary>
     public class X3dExporter
     {
 
+        /// <summary>
+        /// 2D integer coordinate.
+        /// </summary>
+        struct Coord2D { public Coord2D(int x, int y) { this.X = x; this.Y = y; } public int X; public int Y; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X3dExporter"/> class.
         /// </summary>
-        /// <param name="iter">The iter.</param>
-        public X3dExporter(Iterate iter,PictureData pictureData)
+        public X3dExporter(Iterate iter, PictureData pictureData)
         {
-            mIterate = iter;
+            _iterate = iter;
             _pictureData = pictureData;
         }
 
         /// <summary>
         /// PictureData of iter with surface coloring from PictureArt
         /// </summary>
-        PictureData _pictureData=null;
+        PictureData _pictureData = null;
 
-        protected Iterate mIterate = null;
+        /// <summary>
+        /// Used iterate
+        /// </summary>
+        protected Iterate _iterate = null;
 
-
-        protected static System.Globalization.NumberFormatInfo mNumberFormatInfo = System.Globalization.CultureInfo.CreateSpecificCulture("en-US").NumberFormat;
-
+        /// <summary>
+        /// In VRML used number format.
+        /// </summary>
+        protected static System.Globalization.NumberFormatInfo _numberFormatInfo = System.Globalization.CultureInfo.CreateSpecificCulture("en-US").NumberFormat;
 
 
         /// <summary>
-        /// Liefert den Punktabstand
+        /// Return distance between point1 and point2.
         /// </summary>
-        /// <param name="point1">The point1.</param>
-        /// <param name="point2">The point2.</param>
-        /// <returns></returns>
         protected double Dist(PixelInfo point1, PixelInfo point2)
         {
             if (point1 == null || point2 == null)
@@ -61,22 +64,19 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Wendet die mIterate.LastUsedFormulas verwendete Transformation auf die übergebenen Punktkoordinaten an.
-        /// Wenn die Transformationsinformationen nicht vorliegen werden die Ursprungskoordinaten geliefert.
+        /// Use transformations of _iterate.LastUsedFormulas to transfrom given point.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public PixelInfo AddTransform(PixelInfo input)
+        public PixelInfo Transform(PixelInfo input)
         {
-            if (mIterate != null)
+            if (_iterate != null)
             {
-                if (mIterate.LastUsedFormulas != null)
+                if (_iterate.LastUsedFormulas != null)
                 {
-                    Geometry.Vec3 vec = mIterate.LastUsedFormulas.GetTransform(input.Coord.X, input.Coord.Y, input.Coord.Z);
+                    Geometry.Vec3 vec = _iterate.LastUsedFormulas.GetTransform(input.Coord.X, input.Coord.Y, input.Coord.Z);
                     PixelInfo tempPoint = new PixelInfo();
                     tempPoint.Coord = vec;
                     tempPoint.AdditionalInfo = input.AdditionalInfo;
-                    tempPoint.Normal = input.Normal; // Die normale wird noch nicht berücksichtigt.
+                    tempPoint.Normal = input.Normal;
                     return tempPoint;
                 }
             }
@@ -85,17 +85,16 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Die Geometrie aus iter wird in der VRML-Datei fileName abgelegt.
+        /// Create and save VRML file.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
         public void Save(string fileName)
         {
-            if (mIterate == null)
+            if (_iterate == null)
                 return;
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             sw.WriteLine("#VRML V2.0 utf8");
 
-            List<KeyValuePair<int, int>> pointList = new List<KeyValuePair<int, int>>();
+            List <Coord2D> pointList = new List<Coord2D>();
             Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
 
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
@@ -114,7 +113,7 @@ namespace Fractrace
                 {
                     if (_pictureData.Points[i, j] != null)
                     {
-                        PixelInfo point = AddTransform(_pictureData.Points[i, j]);
+                        PixelInfo point = Transform(_pictureData.Points[i, j]);
 
                         if (minx > point.Coord.X)
                             minx = point.Coord.X;
@@ -129,7 +128,7 @@ namespace Fractrace
                         if (maxz < point.Coord.Z)
                             maxz = point.Coord.Z;
 
-                        KeyValuePair<int, int> coord = new KeyValuePair<int, int>(i, j);
+                        Coord2D coord = new Coord2D(i, j);
                         pointIndex[i, j] = currentIndex;
                         pointList.Add(coord);
                         currentIndex++;
@@ -141,7 +140,7 @@ namespace Fractrace
                 }
             }
 
-            // Nachbarpunkte mit diesem Abstand werden als nicht zusammenhängend betrachtet.
+            // Maximal Distance to draw triangle.
             double maxDist = 0;
             double tempDist = maxx - minx;
             if (maxDist < tempDist)
@@ -154,56 +153,51 @@ namespace Fractrace
                 maxDist = tempDist;
 
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            maxDist = 5.0 * maxDist / noOfPoints;
+            maxDist = 355.0 * maxDist / noOfPoints;
 
             sw.WriteLine(@"
-      DEF Transform  Transform{
+      Transform{
 translation 0 0 0
 center 0 0 0
 rotation 0 0 1 0
 scale 1 1 1
 children
  [
-DEF Shape  Shape{
+ Shape{
 geometry
-DEF IndexedFaceSet  IndexedFaceSet{
+IndexedFaceSet{
 coord
  Coordinate{
 point [
 ");
 
-            // Hier die Koordinaten eintragen:
-            // z.B: point [ 0 0 0.3, 1 0 0, 1 1 0, 0 1 0]
-
+            // Coordinates
             double oldx = 0;
             double oldy = 0;
             double oldz = 0;
 
-            foreach (KeyValuePair<int, int> entry in pointList)
+            foreach (Coord2D coord in pointList)
             {
-                if (_pictureData.Points[entry.Key, entry.Value] != null)
+                PixelInfo pInfo = Transform(_pictureData.Points[coord.X, coord.Y]);
+                if (pInfo != null && pInfo.Coord != null && pInfo.AdditionalInfo != null)
                 {
-                    PixelInfo pInfo = AddTransform(_pictureData.Points[entry.Key, entry.Value]);
-                    if (pInfo != null)
+                    // Scale by 1000
+                    double x = 1000.0 * pInfo.Coord.X;
+                    double y = 1000.0 * pInfo.Coord.Y;
+                    double z = 1000.0 * pInfo.Coord.Z;
+                    // Exclude large point coordinates 
+                    if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && 
+                        pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 && 
+                        pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000)
                     {
-                        if (pInfo.Coord != null)
-                        {
-                            // Skalierung unter Einstellungen festlegen
-                            double x = 1000.0 * pInfo.Coord.X;
-                            double y = 1000.0 * pInfo.Coord.Y;
-                            double z = 1000.0 * pInfo.Coord.Z;
-                            if (pInfo.Coord.X < 1000 && pInfo.Coord.X > -1000 && pInfo.Coord.Y < 1000 && pInfo.Coord.Y > -1000 && pInfo.Coord.Z < 1000 && pInfo.Coord.Z > -1000)
-                            { // nicht der beste Schutz vor Ausreißern
-                                sw.WriteLine(x.ToString(mNumberFormatInfo) + " " + y.ToString(mNumberFormatInfo) + " " + z.ToString(mNumberFormatInfo) + ", ");
-                                oldx = x;
-                                oldy = y;
-                                oldz = z;
-                            }
-                            else
-                            {
-                                sw.WriteLine(oldx.ToString(mNumberFormatInfo) + " " + oldy.ToString(mNumberFormatInfo) + " " + oldz.ToString(mNumberFormatInfo) + ", ");
-                            }
-                        }
+                        sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
+                        oldx = x;
+                        oldy = y;
+                        oldz = z;
+                    }
+                    else
+                    {
+                        sw.WriteLine(oldx.ToString(_numberFormatInfo) + " " + oldy.ToString(_numberFormatInfo) + " " + oldz.ToString(_numberFormatInfo) + ", ");
                     }
                 }
             }
@@ -216,109 +210,48 @@ color
 color [
 ");
 
-            // Hier die Farben eintragen:
-            // z.B: color [ 0 1 0, 1 1 0, 1 0 0, 0 0 1]
-
-            foreach (KeyValuePair<int, int> entry in pointList)
+            // Colors
+            foreach (Coord2D coord in pointList)
             {
-                if (_pictureData.Points[entry.Key, entry.Value] != null)
+                PixelInfo pInfo = _pictureData.Points[coord.X, coord.Y];
+                if (pInfo != null && pInfo.Coord != null && pInfo.AdditionalInfo != null)
                 {
-                    PixelInfo pInfo = _pictureData.Points[entry.Key, entry.Value];
-                    if (pInfo != null)
-                    {
-                        if (pInfo != null)
-                        {
-                            if (pInfo.Coord != null)
-                            {
-                                if (pInfo.AdditionalInfo != null)
-                                {
-                                    double red = pInfo.AdditionalInfo.red2;
-                                    double green = pInfo.AdditionalInfo.green2;
-                                    double blue = pInfo.AdditionalInfo.blue2;
+                    double red = pInfo.AdditionalInfo.red2;
+                    double green = pInfo.AdditionalInfo.green2;
+                    double blue = pInfo.AdditionalInfo.blue2;
+                   
+                    string line = ((float)red).ToString(_numberFormatInfo) + " " +
+                                  ((float)green).ToString(_numberFormatInfo) + " " +
+                                  ((float)blue).ToString(_numberFormatInfo) + ", ";
 
-                                    /*
-                                    double norm = Math.Sqrt(red * red + green * green + blue * blue);
-                                    if (norm != 0)
-                                    {
-                                        red = Math.Abs(red / norm);
-                                        green = Math.Abs(green / norm);
-                                        blue = Math.Abs(blue / norm);
-                                    }
-                                    else
-                                    {
-                                        red = 0;
-                                        green = 0;
-                                        blue = 0;
-                                    }
-                                    */
-
-                                    string line = red.ToString(mNumberFormatInfo) + " " + green.ToString(mNumberFormatInfo) + " " + blue.ToString(mNumberFormatInfo) + ", ";
-
-                                    // Sollte eigentlich nicht mehr notwendig sein: bei Problemen wird die rote Farbe gezeigt.
-                                    if (line.ToLower().Contains("nan"))
-                                        line = " 1 0 0, ";
-                                    sw.WriteLine(line);
-                                }
-                            }
-                        }
-
-                    }
+                    // Mark errors with red color.
+                    if (line.ToLower().Contains("nan"))
+                        line = " 1 0 0, ";
+                    sw.WriteLine(line);
                 }
             }
 
             sw.WriteLine(@"
 ]
 }
-normalPerVertex FALSE
-colorIndex [
-");
-
-            // Jetzt die Farben den Punkten zuweisen (einfaches Hochzählen):
-            // z.B: colorIndex [0, 1, 2]
-            currentIndex = 0;
-
-            foreach (KeyValuePair<int, int> entry in pointList)
-            {
-                if (_pictureData.Points[entry.Key, entry.Value] != null)
-                {
-                    PixelInfo pInfo = _pictureData.Points[entry.Key, entry.Value];
-                    if (pInfo != null)
-                    {
-                        if (pInfo != null)
-                        {
-                            if (pInfo.Coord != null)
-                            {
-                                if (pInfo.AdditionalInfo != null)
-                                {
-                                    sw.Write(currentIndex.ToString() + ", ");
-                                    currentIndex++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
+normalPerVertex FALSE");
+    
             sw.WriteLine(@"
-]
 coordIndex [
 ");
 
-            // Die Koordinaten anpassen: 
-            // z.B: coordIndex [0, 1, 2, 3, -1]
-
+            // surface mesh
             for (int i = 0; i < _pictureData.Width; i++)
             {
                 for (int j = 0; j < _pictureData.Height; j++)
                 {
                     if (_pictureData.Points[i, j] != null)
                     {
-                        // Dreieck 1:
                         if (i > 0 && j > 0 && _pictureData.Points[i - 1, j - 1] != null)
                         {
                             if (_pictureData.Points[i - 1, j] != null)
                             {
-                                // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet.
+                                // triangle 1
                                 PixelInfo point1 = _pictureData.Points[i, j];
                                 PixelInfo point2 = _pictureData.Points[i - 1, j];
                                 PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
@@ -327,7 +260,7 @@ coordIndex [
                             }
                             if (_pictureData.Points[i, j - 1] != null)
                             {
-                                // Nur dann Kante einfügen, wenn sich der Punktabstand nicht wesentlich vom vorherigen Punkt unterscheidet
+                                // triangle 2
                                 PixelInfo point1 = _pictureData.Points[i, j];
                                 PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
                                 PixelInfo point3 = _pictureData.Points[i, j - 1];
@@ -338,7 +271,6 @@ coordIndex [
                     }
                 }
             }
-
 
             sw.WriteLine(@"
 ]
@@ -351,11 +283,11 @@ normalIndex []
 colorPerVertex TRUE
 }
 appearance
-DEF Appearance  Appearance{
+Appearance{
 material
-DEF Material  Material{
+Material{
 ambientIntensity 1
-diffuseColor 0.8 0.8 0.8
+diffuseColor 1 1 1
 emissiveColor 1 1 1
 shininess 0
 specularColor 0 0 0
@@ -365,7 +297,7 @@ transparency 0
 }
 ]
 }
-DEF Background0  Background{
+Background{
 groundColor []
 skyColor [ 0.2 0.2 0.25]
 skyAngle []
@@ -381,8 +313,8 @@ topUrl []
 
             sw.Close();
 
-
         }
+
 
     }
 }

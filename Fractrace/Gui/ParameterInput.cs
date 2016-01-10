@@ -1314,6 +1314,11 @@ namespace Fractrace
             sd.Filter = "*.wrl|*.wrl|*.*|all";
             if (sd.ShowDialog() == DialogResult.OK)
             {
+                if (Form1.PublicForm.LastPicturArt==null)
+                {
+                    MessageBox.Show("No Surface Data available.");
+                    return;
+                }
                 X3dExporter export = new X3dExporter(Form1.PublicForm.IterateForPictureArt, Form1.PublicForm.LastPicturArt.PictureData);
                 export.Save(sd.FileName);
             }
