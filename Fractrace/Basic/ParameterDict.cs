@@ -626,6 +626,20 @@ namespace Fractrace.Basic
                 return true;
             if (parameterName == "Computation.NoOfThreads")
                 return true;
+            if (parameterName == "View.PosterX")
+                return true;
+            if (parameterName == "View.PosterZ")
+                return true;
+            if (parameterName == "View.Raster")
+                return true;
+            if (parameterName == "View.Size")
+                return true;
+            if (parameterName == "View.Pipeline.Preview")
+                return true;
+            if (parameterName == "View.Pipeline.UpdatePreview")
+                return true;
+            if (parameterName == "Animation.Steps")
+                return true;
             if (parameterName.StartsWith("Export."))
                 return true;
             return false;

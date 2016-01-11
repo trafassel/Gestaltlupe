@@ -305,7 +305,6 @@ coordIndex [
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " " + pointIndex[i, j - 1].ToString() + " -1 ");
                             }
 
-
                         }
                     }
                 }
