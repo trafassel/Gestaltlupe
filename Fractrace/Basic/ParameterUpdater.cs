@@ -15,6 +15,9 @@ namespace Fractrace.Basic
         /// </summary>
         public static void Update()
         {
+
+            ParameterDict.Current.SetInt("View.PosterX", 0);
+            ParameterDict.Current.SetInt("View.PosterZ", 0);
             if (ParameterDict.Current["Transformation.AngleX"] == "0" &&
                 ParameterDict.Current["Transformation.AngleY"] == "0" &&
                 ParameterDict.Current["Transformation.AngleZ"] == "0")

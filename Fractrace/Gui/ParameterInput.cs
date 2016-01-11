@@ -1225,6 +1225,7 @@ namespace Fractrace
                 formulaSettingCategories.Add("Transformation");
                 formulaSettingCategories.Add("Formula");
                 formulaSettingCategories.Add("Intern.Formula");
+                formulaSettingCategories.Add("Intern.Version");
                 ParameterDict.Current.Save(sd.FileName, formulaSettingCategories);
             }
         }

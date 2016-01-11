@@ -120,7 +120,7 @@ namespace Fractrace.Basic
             tw.WriteStartElement("ParameterDict");
             foreach (KeyValuePair<string, string> entry in SortedEntries)
             {
-                if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                if (!ParameterDict.IsAdditionalInfo(entry.Key) && !ParameterDict.IsUserSetting(entry.Key))
                 {
                     tw.WriteStartElement("Entry");
                     tw.WriteAttributeString("Key", entry.Key);
@@ -612,6 +612,21 @@ namespace Fractrace.Basic
         public static bool IsAdditionalInfo(string parameterName)
         {
             if (parameterName.Contains(".PARAMETERINFO"))
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Return true, if corresponding parameter entry is user setting and does not belongs to .
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsUserSetting(string parameterName)
+        {
+            if (parameterName=="Intern.Filter")
+                return true;
+            if (parameterName == "Computation.NoOfThreads")
+                return true;
+            if (parameterName.StartsWith("Export."))
                 return true;
             return false;
         }

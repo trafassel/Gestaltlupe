@@ -63,7 +63,7 @@ namespace Fractrace
 
             // Distance to the virtual screen. Small values gives a more 3D effect. Large values
             // gives the scene a parallel projection view.
-            ParameterDict.Current["Transformation.Perspective.Cameraposition"] = "0.6";
+            ParameterDict.Current["Transformation.Perspective.Cameraposition"] = "1";
             ParameterDict.Current["Transformation.Perspective.Cameraposition.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
 
 
@@ -285,7 +285,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "1";
 
             // Corresponds to the number of shadows in PlasicRenderer
-            ParameterDict.Current["Renderer.ShadowNumber"] = "11";
+            ParameterDict.Current["Renderer.ShadowNumber"] = "22";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.Description"] = "Corresponds to the number of shadows.";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.FixedButtons"] = "11 22";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.PlusButton"] = "1";
@@ -295,7 +295,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.Description"] = "Intensity of the FieldOfView.";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 5 22";
             // Minimal value of FieldOfView
-            ParameterDict.Current["Renderer.MinFieldOfView"] = "0.0";
+            ParameterDict.Current["Renderer.MinFieldOfView"] = "0.4";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.Description"] = "Minimal value of FieldOfView.";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.5";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -324,7 +324,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Description"] = "Use Light.";
 
             // Light Level: light in bright areas
-            ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
+            ParameterDict.Current["Renderer.BrightLightLevel"] = "0.5";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -336,13 +336,13 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Shininess factor (0 ... 1)
-            ParameterDict.Current["Renderer.ShininessFactor"] = "0.8";
+            ParameterDict.Current["Renderer.ShininessFactor"] = "0.5";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.Description"] = "Shininess factor (0 ... 1).";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.8";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Shininess ( 0... 1000)
-            ParameterDict.Current["Renderer.Shininess"] = "14";
+            ParameterDict.Current["Renderer.Shininess"] = "28";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.Description"] = "Shininess ( 0... 1000).";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.FixedButtons"] = "9 14 28";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
@@ -445,6 +445,11 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Transformation.Stereo.Angle"] = "-9";
             ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.Description"] = "Angle difference in stereo mode.";
             // ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.FixedButtons"] = "-9";
+
+            ParameterDict.Current["Export.X3d.ClosedSurface"] = "1";
+            ParameterDict.Current["Export.X3d.ClosedSurface.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "1";
+
         }
 
 

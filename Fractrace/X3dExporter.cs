@@ -268,7 +268,7 @@ coordIndex [
 
             // Maximal Distance to draw triangle.
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            double maxDist = radius/ noOfPoints;
+            double maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * radius/ noOfPoints;
 
             // surface mesh
             for (int i = 0; i < _pictureData.Width; i++)
@@ -277,26 +277,35 @@ coordIndex [
                 {
                     if (_pictureData.Points[i, j] != null)
                     {
+
+                        PixelInfo point1 = _pictureData.Points[i, j];
+                        if(point1.Coord.X>1000 && point1.Coord.X<-1000 && point1.Coord.Y > 1000 && point1.Coord.Y < -1000 && point1.Coord.Z > 1000 && point1.Coord.Z < -1000)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Error");
+                        }
                         if (i > 0 && j > 0 && _pictureData.Points[i - 1, j - 1] != null)
                         {
+
+                            bool useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface"); 
                             if (_pictureData.Points[i - 1, j] != null)
                             {
                                 // triangle 1
-                                PixelInfo point1 = _pictureData.Points[i, j];
+                               
                                 PixelInfo point2 = _pictureData.Points[i - 1, j];
                                 PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
-                                if (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist)
+                                if ( !useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist) )
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " -1 ");
                             }
                             if (_pictureData.Points[i, j - 1] != null)
                             {
                                 // triangle 2
-                                PixelInfo point1 = _pictureData.Points[i, j];
                                 PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
                                 PixelInfo point3 = _pictureData.Points[i, j - 1];
-                                if (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist)
+                                if (!useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist) )
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " " + pointIndex[i, j - 1].ToString() + " -1 ");
                             }
+
+
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:157-->
+<!--LastNote:159-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2047,19 +2047,19 @@ Gestalt von mehrere Seiten (oben, links, unten...) einzeln aufnehmen und in eine
 <DT><A name="5g4eKxaExDBDZb8Ceoqnzw"></A>Bugbehebung X3D Export</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452418676-->
-<!--property:date_modified=1452442546-->
+<!--property:date_modified=1452450571-->
 <!--property:expanded-->
-<!--property:hash=aed7072f51c7e840097de08c7329ba5d6e6f459f-->
-<!--property:hash_html=3f87034fba047eb9625da588d3582b54d9702799-->
+<!--property:hash=215d96e62596208380ca85ab708b7bda2e77c05a-->
+<!--property:hash_html=48a41db53b72dd0a74fbd1d44b713519b1fa3498-->
 <DD>
 &quot;Streifen&quot; in einem Bereich des Exportes beheben.<BR>
 <BR>
 Egal, in welchem Format, es gibt immer links einen etwa 15% breiten streifen mit falschen Farben.<BR>
 <BR>
+// nicht umgesetzt:<BR>
 // Lücken beheben:<BR>
 wenn  _pictureData.Points[i, j]==null:<BR>
 _pictureData.Points[i, j] als Mittelwert aus den Umgebungsknoten bestimmen.<BR>
-<BR>
 <DL>
 <DT><A name="xkgKxkdRh6TANcJF1rEYJQ"></A>temp</DT>
 <!--property:icon_internal=bullet_white-->
@@ -2086,9 +2086,49 @@ Daten:<BR>
 <DT><A name="vG8TJzLunz8yeHbVt4WEIg"></A>Create Poster funktioniert nicht mehr</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452449853-->
-<!--property:date_modified=1452449867-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:date_modified=1452451371-->
+<!--property:hash=f46db45f4909afda3bcf51485f1b899bf3b9465f-->
+<!--property:hash_html=be90f7d89c628a65cc28273d1c283453c2235852-->
+<DD>
+... erstmal ausblenden.<BR>
+<BR>
+
+</DD>
+<DT><A name="ePIg3HtyIujuxmCmXHDiYg"></A>Scene in X3d Export skalieren</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452451312-->
+<!--property:date_modified=1452493598-->
+<!--property:hash=87b44b4dcb664c9655e84a4f4cdba41e08c67cc3-->
+<!--property:hash_html=62ee6462e615b52d6a49a3699091f1dab21e1f91-->
+<DD>
+<BR>
+wenn der Bereich nicht mehr in float-bereich passt. <BR>
+<BR>
+Nachteil: Teilbereiche lassen sich nicht mehr zusammensetzen.<BR>
+<BR>
+Lösung: Den Skalierungs-, und Bewegungsparameter aus &quot;gerundeten&quot; Elementen ermitteln.<BR>
+<BR>
+also <BR>
+radius, centerx, centery, centerz sollten sich bei Bildern in ähnlichen Regionen nicht unterscheiden.<BR>
+<BR>
+
+</DD>
+<DT><A name="UwtyknoxTHUrbX0gKqFbvA"></A>Andere default-Einstellungen für Renderer</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452493598-->
+<!--property:date_modified=1452493931-->
+<!--property:hash=c66b789f898ae1f0260e3539bcd5616803a08602-->
+<!--property:hash_html=1701ab8cd896dbea97315366401c83fce9fa19a2-->
+<DD>
+Cameraposition 1<BR>
+<BR>
+MinFieldOfView 0.3<BR>
+BrightLightLevel 0.5<BR>
+ShadowNumber 22<BR>
+Shininess 28<BR>
+Shininess factor 0.5<BR>
+
+</DD>
 </DL>
 </DD>
 </DL>
