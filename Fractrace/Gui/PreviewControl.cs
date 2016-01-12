@@ -120,7 +120,7 @@ namespace Fractrace
             {
                 _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
             }
-            _iterate.OneStepProgress = false;
+            _iterate._oneStepProgress = false;
             AssignParameters();
             _iterate.StartAsync(_parameter,
                     ParameterDict.Current.GetInt("Formula.Static.Cycles"),

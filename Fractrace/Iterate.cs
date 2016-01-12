@@ -19,20 +19,17 @@ namespace Fractrace
     {
 
 
-        GraphicData GData = null;
+        GraphicData _gData = null;
 
-        PictureData PData = null;
+        PictureData _pData = null;
 
-        protected bool mAbort = false;
+        protected bool _abort = false;
 
 
         /// <summary>
         /// True while running iteration.
         /// </summary>
-        protected bool mStart = false;
-
-
-        protected static bool mPause = false;
+        protected bool _start = false;
 
 
         /// <summary>
@@ -42,13 +39,14 @@ namespace Fractrace
         {
             get
             {
-                return mPause;
+                return _pause;
             }
             set
             {
-                mPause = value;
+                _pause = value;
             }
         }
+        protected static bool _pause = false;
 
 
         /// <summary>
@@ -56,7 +54,7 @@ namespace Fractrace
         /// </summary>
         public void Abort()
         {
-            mAbort = true;
+            _abort = true;
         }
 
 
@@ -67,7 +65,7 @@ namespace Fractrace
         {
             get
             {
-                return mAbort;
+                return _abort;
             }
         }
 
@@ -79,7 +77,7 @@ namespace Fractrace
         {
             get
             {
-                return GData;
+                return _gData;
             }
         }
 
@@ -91,34 +89,28 @@ namespace Fractrace
         {
             get
             {
-                return PData;
+                return _pData;
             }
         }
 
 
 
 
-        protected int width = 0;
 
         public int Width
         {
             get
             {
-                return width;
+                return _width;
             }
         }
+        protected int _width = 0;
 
 
-        protected int height = 0;
 
 
-        public int Height
-        {
-            get
-            {
-                return height;
-            }
-        }
+        public int Height {  get  {  return _height; } }
+        protected int _height = 0;
 
 
         public Iterate()
@@ -129,71 +121,68 @@ namespace Fractrace
         /// <summary>
         /// Initialisation
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
         public Iterate(int width, int height)
         {
-            GData = new GraphicData(width, height);
-            PData = new PictureData(width, height);
-            this.width = width;
-            this.height = height;
+            _gData = new GraphicData(width, height);
+            _pData = new PictureData(width, height);
+            this._width = width;
+            this._height = height;
         }
 
 
 
-        protected ParameterDict mParameterDict = null;
+        protected ParameterDict _parameterDict = null;
 
         public Iterate(ParameterDict parameterDict, IAsyncComputationStarter starter, bool isRightView=false)
         {
-            mParameterDict = parameterDict;
-            mStarter = starter;
-            width = parameterDict.GetWidth();
-            height=parameterDict.GetHeight();
-            GData = new GraphicData(width, height);
-            PData = new PictureData(width, height);
-            this.mIsRightView = isRightView;
+            _parameterDict = parameterDict;
+            _starter = starter;
+            _width = parameterDict.GetWidth();
+            _height=parameterDict.GetHeight();
+            _gData = new GraphicData(_width, _height);
+            _pData = new PictureData(_width, _height);
+            this._isRightView = isRightView;
         }
 
 
         /// <summary>
-        /// Das Steuerelement, dass die Berechnung angestoßen hat.
+        /// Control which startet this iteration.
         /// </summary>
-        IAsyncComputationStarter mStarter = null;
+        IAsyncComputationStarter _starter = null;
 
 
         /// <summary>
         /// Initialisation
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
         public Iterate(int width, int height, IAsyncComputationStarter starter, bool isRightView)
         {
-            mStarter = starter;
-            GData = new GraphicData(width, height);
-            PData = new PictureData(width, height);
-            this.width = width;
-            this.height = height;
-            this.mIsRightView = isRightView;
+            _starter = starter;
+            _gData = new GraphicData(width, height);
+            _pData = new PictureData(width, height);
+            this._width = width;
+            this._height = height;
+            this._isRightView = isRightView;
         }
 
 
         /// <summary>
         /// GraphicData of previous iteration. Used for update.
         /// </summary>
-        DataTypes.GraphicData mOldData = null;
+        DataTypes.GraphicData _oldData = null;
 
 
         /// <summary>
         /// PictureData of previous iteration. Used for update.
         /// </summary>
-        DataTypes.PictureData mOldPictureData = null;
+        DataTypes.PictureData _oldPictureData = null;
 
 
         /// <summary>
         /// Count the number of update steps.
         /// </summary>
-        int mUpdateCount = 0;
+        int _updateCount = 0;
 
+        protected int _availableY = 0;
 
         /// <summary>
         /// Set data of the last iteration with the same rendering parameters.
@@ -202,9 +191,9 @@ namespace Fractrace
         /// <param name="oldPictureData"></param>
         public void SetOldData(DataTypes.GraphicData oldData, DataTypes.PictureData oldPictureData, int updateCount)
         {
-            mOldData = oldData;
-            mOldPictureData = oldPictureData;
-            mUpdateCount = updateCount;
+            _oldData = oldData;
+            _oldPictureData = oldPictureData;
+            _updateCount = updateCount;
         }
 
 
@@ -212,14 +201,14 @@ namespace Fractrace
         /// Wird bei der Stereoansicht verwendet. Hier wird unterschieden, ob
         /// es sich um eine Sicht vom rechten Auge handelt. 
         /// </summary>
-        protected bool mIsRightView = false;
+        protected bool _isRightView = false;
 
 
 
         /// <summary>
         /// Liefert den Status der Berechnung (von 0-100)
         /// </summary>
-        double percent = 0;
+        double _percent = 0;
 
 
         /// <summary>
@@ -230,33 +219,49 @@ namespace Fractrace
         {
             get
             {
-                return percent;
+                return _percent;
             }
         }
 
 
-        FracValues m_act_val = null;
-        int m_zyklen = 0;
-        double m_screensize = 0;
-        int m_formula = 0;
-        bool m_perspective = true;
-
+        FracValues _actVal = null;
+        int _cycles = 0;
+        double _screensize = 0;
+        int _formula = 0;
+        bool _perspective = true;
 
 
         /// <summary>
-        /// Dient als Lock variable.
+        /// Lock IsAvailable().
         /// </summary>
-        protected object generateLock = new object();
+        protected object _generateLock = new object();
 
-        protected object startCountLock = new object();
+        protected object _startCountLock = new object();
 
-        protected int startCount = 0;
-
+        protected int _startCount = 0;
 
         /// <summary>
         /// True if oldPictureDasta has bad quality 
         /// </summary>
-        protected bool mTransformUpdate = false;
+        protected bool _transformUpdate = false;
+
+        /// <summary>
+        /// True, if iteration runs without updates.
+        /// </summary>
+        public bool _oneStepProgress = false;
+
+        protected int _maxxIter = 0;
+        protected int _maxyIter = 0;
+        protected int _maxzIter = 0;
+
+        /// <summary>
+        /// Die im zuletzt gestarteten Thread verwendete Formula-Klasse kann benutzt werden, um aus den x,y,z-Raumkoordinaten
+        /// die benutzten Koordinaten der mathematischen Menge zu ermitteln.
+        /// </summary>
+        public Formulas LastUsedFormulas { get { return _lastUsedFormulas; } }
+        protected Formulas _lastUsedFormulas = null;
+
+        int _maxUpdateSteps = 1;
 
 
         /// <summary>
@@ -264,7 +269,7 @@ namespace Fractrace
         /// </summary>
         public void StartAsync()
         {
-            if (mParameterDict == null)
+            if (_parameterDict == null)
             {
                 System.Diagnostics.Debug.WriteLine("Error in Iterate.StartAsync() mParameterDict is empty");
                 return;
@@ -276,7 +281,6 @@ namespace Fractrace
                 ParameterDict.Current.GetDouble("View.Size"),
                 ParameterDict.Current.GetInt("Formula.Static.Formula"),
                 ParameterDict.Current.GetBool("View.Perspective"));
-
         }
 
 
@@ -285,7 +289,7 @@ namespace Fractrace
         /// </summary>
         public void Wait()
         {
-            while (mStart && !mAbort)
+            while (_start && !_abort)
             {
                 System.Windows.Forms.Application.DoEvents();
                 System.Threading.Thread.Sleep(100);
@@ -294,34 +298,28 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Von hier aus wird die Berechnung in Einzelthreads aufgesplittet.
+        /// Split computing in threads.
         /// </summary>
-        /// <param name="act_val"></param>
-        /// <param name="zyklen"></param>
-        /// <param name="raster"></param>
-        /// <param name="screensize"></param>
-        /// <param name="formula"></param>
-        /// <param name="perspective"></param>
         public void StartAsync(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
-            mStart = true;
+            _start = true;
             System.Diagnostics.Debug.WriteLine("Iter start");
-            m_act_val = act_val;
-            m_zyklen = zyklen;
-            m_screensize = screensize;
-            m_formula = formula;
-            m_perspective = perspective;
-            availableY = 0;
+            _actVal = act_val;
+            _cycles = zyklen;
+            _screensize = screensize;
+            _formula = formula;
+            _perspective = perspective;
+            _availableY = 0;
 
             int noOfThreads = ParameterDict.Current.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
             {
                 Generate(act_val, zyklen, screensize, formula, perspective);
-                mStarter.ComputationEnds();
+                _starter.ComputationEnds();
                 return;
             }
-            startCount = noOfThreads;
-            PData = new PictureData(width, height);
+            _startCount = noOfThreads;
+            _pData = new PictureData(_width, _height);
             for (int i = 0; i < noOfThreads; i++)
             {
                 System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(Start);
@@ -336,36 +334,33 @@ namespace Fractrace
         /// </summary>
         protected void Start()
         {
-            Generate(m_act_val, m_zyklen, m_screensize, m_formula, m_perspective);
-            lock (startCountLock)
+            Generate(_actVal, _cycles, _screensize, _formula, _perspective);
+            lock (_startCountLock)
             {
-                startCount--;
+                _startCount--;
             }
 
-            if (startCount == 0)
+            if (_startCount == 0)
             {
-                if (mStarter != null)
+                if (_starter != null)
                 {
-                    if (mAbort)
+                    if (_abort)
                     {
-                        if (mOldData != null)
+                        if (_oldData != null)
                         {
-                            GData = mOldData;
+                            _gData = _oldData;
                         }
-                        if (mOldPictureData != null)
+                        if (_oldPictureData != null)
                         {
-                            PData = mOldPictureData;
+                            _pData = _oldPictureData;
                         }
                     }
                     System.Diagnostics.Debug.WriteLine("Iter ends");
-                    mStart = false;
-                    mStarter.ComputationEnds();
+                    _start = false;
+                    _starter.ComputationEnds();
                 }
             }
         }
-
-
-        protected int availableY = 0;
 
 
         /// <summary>
@@ -374,14 +369,8 @@ namespace Fractrace
         /// <returns></returns>
         protected bool IsSmallPreview()
         {
-            return (width< 150 && height < 150);
+            return (_width< 150 && _height < 150);
         }
-
-
-        /// <summary>
-        /// True, if iteration runs without updates.
-        /// </summary>
-        public bool OneStepProgress = false;
 
 
         /// <summary>
@@ -391,46 +380,36 @@ namespace Fractrace
         /// <returns></returns>
         protected bool IsAvailable(int y)
         {
-            if (mAbort)
+            if (_abort)
                 return false;
             bool retVal = true;
-            lock (generateLock)
+            lock (_generateLock)
             {
-                while (mPause)
+                while (_pause)
                 {
                     System.Threading.Thread.Sleep(10);
                     System.Windows.Forms.Application.DoEvents();
-                    if (mAbort)
+                    if (_abort)
                         return false;
                 }
-                if (y < availableY)
+                if (y < _availableY)
                     retVal = false;
                 else
                 {
-                    availableY = y + 1;
-                    if (maxUpdateSteps > 0 && !OneStepProgress && !IsSmallPreview() )
+                    _availableY = y + 1;
+                    if (_maxUpdateSteps > 0 && !_oneStepProgress && !IsSmallPreview() )
                     {
-                        double f = ((double)mUpdateCount) / ((double)maxUpdateSteps + 1);
-                        double maxUpInvers = 1.0 / ((double)maxUpdateSteps + 2);
-                        if(!mAbort)
-                        mStarter.Progress(100.0 * (
-                            maxUpInvers * ((double)mUpdateCount + y / (double)MAXZ_ITER))
+                        double f = ((double)_updateCount) / ((double)_maxUpdateSteps + 1);
+                        double maxUpInvers = 1.0 / ((double)_maxUpdateSteps + 2);
+                        if(!_abort)
+                        _starter.Progress(100.0 * (
+                            maxUpInvers * ((double)_updateCount + y / (double)_maxzIter))
                             );
-
-
-                        /*
-                        double a = (double)(mUpdateCount);
-                        double b = y / (double)MAXZ_ITER;
-                        double c = maxUpInvers * (a + b);
-
-                        double progress = 100.0 * (maxUpInvers * ((double)mUpdateCount) + y / (double)MAXZ_ITER);
-                         */
-
                     }
                     else
                     {
-                        if (!mAbort)
-                            mStarter.Progress(100.0 * (y / (double)MAXZ_ITER));
+                        if (!_abort)
+                            _starter.Progress(100.0 * (y / (double)_maxzIter));
                     }
                     retVal = true;
                 }
@@ -438,49 +417,21 @@ namespace Fractrace
             return retVal;
         }
 
-        protected int MAXX_ITER = 0;
-        protected int MAXY_ITER = 0;
-        protected int MAXZ_ITER = 0;
-
-        protected Formulas mLastUsedFormulas = null;
-
 
         /// <summary>
-        /// Die im zuletzt gestarteten Thread verwendete Formula-Klasse kann benutzt werden, um aus den x,y,z-Raumkoordinaten
-        /// die benutzten Koordinaten der mathematischen Menge zu ermitteln.
+        /// Compute surface data.
         /// </summary>
-        public Formulas LastUsedFormulas
-        {
-            get
-            {
-                return mLastUsedFormulas;
-            }
-        }
-
-
-        int maxUpdateSteps = 1;
-
-
-        /// <summary>
-        /// Berechung eines Einzelbildes.
-        /// </summary>
-        /// <param name="act_val"></param>
-        /// <param name="zyklen"></param>
-        /// <param name="raster"></param>
-        /// <param name="screensize"></param>
-        /// <param name="formula"></param>
-        /// <param name="perspective"></param>
         protected void Generate(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
             Random rand = new Random();
-            maxUpdateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
+            _maxUpdateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
             double[] col = null;
             double xd, yd, zd;
             double x, y, z;
             double dephAdd = ParameterDict.Current.GetInt("View.DephAdd") * screensize;
             act_val = act_val.Clone();
-            Formulas formulas = new Formulas(PData);
-            mLastUsedFormulas = formulas;
+            Formulas formulas = new Formulas(_pData);
+            _lastUsedFormulas = formulas;
             if (ParameterDict.Current["Intern.Formula.Source"].Trim() == "")
             {
                 formulas.InternFormula = new Fractrace.TomoGeometry.VecRotMandel2d();
@@ -510,7 +461,7 @@ namespace Fractrace
             rot.Init();
             formulas.Transforms.Add(rot);
 
-            if (mIsRightView)
+            if (_isRightView)
             {
                 RightEyeView stereoTransform = new RightEyeView();
                 stereoTransform.Init();
@@ -518,11 +469,11 @@ namespace Fractrace
             }
 
             col = formulas.col;
-            MAXX_ITER = width;
-            MAXY_ITER = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
+            _maxxIter = _width;
+            _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
             if(IsSmallPreview())
-                MAXY_ITER = MAXX_ITER;    
-            MAXZ_ITER = height;
+                _maxyIter = _maxxIter;    
+            _maxzIter = _height;
               
             int MINX_ITER = 0;
             int MINY_ITER = 0;
@@ -549,25 +500,22 @@ namespace Fractrace
             wiy = act_val.arc.y;
             wiz = act_val.arc.z;
 
-            //raster = 1;
-
-            xd = (act_val.end_tupel.x - act_val.start_tupel.x) / (MAXX_ITER - MINX_ITER);
-            yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (MAXY_ITER - MINY_ITER);
-            zd = (act_val.end_tupel.z - act_val.start_tupel.z) / (MAXZ_ITER - MINZ_ITER);
+            xd = (act_val.end_tupel.x - act_val.start_tupel.x) / (_maxxIter - MINX_ITER);
+            yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (_maxyIter - MINY_ITER);
+            zd = (act_val.end_tupel.z - act_val.start_tupel.z) / (_maxzIter - MINZ_ITER);
            
-            if (mOldData != null)
+            if (_oldData != null)
             {
-                yd = yd / (mUpdateCount);
-                if (mUpdateCount < 5)
+                yd = yd / (_updateCount);
+                if (_updateCount < 5)
                 {
-                    MAXY_ITER *= mUpdateCount;
+                    _maxyIter *= _updateCount;
                 }
             }
-            if (mTransformUpdate)
+            if (_transformUpdate)
             {
                 yd *= 3.0;
             }
-
 
             double xcenter = (act_val.start_tupel.x + act_val.end_tupel.x) / 2.0;
             double ycenter = (act_val.start_tupel.y + act_val.end_tupel.y) / 2.0;
@@ -599,21 +547,21 @@ namespace Fractrace
             // Start der Iteration in der Reihenfolge: z,x,y (y entspricht der Tiefe)
             z = act_val.end_tupel.z + zd;
 
-            for (zschl = (int)(MAXZ_ITER); zschl >= (MINZ_ITER); zschl -= 1)
+            for (zschl = (int)(_maxzIter); zschl >= (MINZ_ITER); zschl -= 1)
             {
 
                 // Nur wenn der Scheduler die Erlaubnis gibt, zschl zu benutzen,
                 // die Berechnung ausführen (sonst nächste Iteration)
-                if (IsAvailable(MAXZ_ITER - zschl))
+                if (IsAvailable(_maxzIter - zschl))
                 {
 
                     System.Windows.Forms.Application.DoEvents();
-                    z = act_val.end_tupel.z - (double)zd * (MAXZ_ITER - zschl);
+                    z = act_val.end_tupel.z - (double)zd * (_maxzIter - zschl);
 
                     bool minYDetected = false;
-                    for (xschl = (int)(MINX_ITER); xschl <= MAXX_ITER; xschl += 1)
+                    for (xschl = (int)(MINX_ITER); xschl <= _maxxIter; xschl += 1)
                     {
-                        if (mAbort)
+                        if (_abort)
                         {
                             return;
                         }
@@ -623,7 +571,7 @@ namespace Fractrace
                         isYborder = true;
 
                         xx = xschl;
-                        yy = MAXZ_ITER - zschl;
+                        yy = _maxzIter - zschl;
                         if (double.IsNaN(x) )
                             return ;
 
@@ -636,10 +584,10 @@ namespace Fractrace
                         double yAddCenter = 0;
 
                         bool needComputing = true;
-                        if (mOldPictureData != null)
+                        if (_oldPictureData != null)
                         {
                             needComputing = false;
-                            PixelInfo pxInfoTest = mOldPictureData.Points[xx, yy];
+                            PixelInfo pxInfoTest = _oldPictureData.Points[xx, yy];
                             if (pxInfoTest != null && pxInfoTest.Coord != null)
                             {
                                 yAddCenter = pxInfoTest.Coord.Y;
@@ -653,9 +601,9 @@ namespace Fractrace
                                 {
                                     int xxposi = xx + xxi;
                                     int yyposi = yy + yyi;
-                                    if (xxposi >= 0 && xxposi <= MAXX_ITER && yyposi >= 0 && yyposi <= MAXZ_ITER)
+                                    if (xxposi >= 0 && xxposi <= _maxxIter && yyposi >= 0 && yyposi <= _maxzIter)
                                     {
-                                        PixelInfo pxInfo = mOldPictureData.Points[xxposi, yyposi];
+                                        PixelInfo pxInfo = _oldPictureData.Points[xxposi, yyposi];
                                         if (pxInfo != null && pxInfo.Coord != null)
                                         {
                                             areaIsSet = true;
@@ -675,8 +623,8 @@ namespace Fractrace
                                 if (yAddCenter + 4.0 * yd < yAdd)
                                 {
                                     needComputing = true;
-                                    yAdd = yAdd - act_val.end_tupel.y + 2.0 * ((double)mUpdateCount) * yd + rand.NextDouble() * yd;
-                                    GData.Picture[xx, yy] = mOldData.Picture[xx, yy];
+                                    yAdd = yAdd - act_val.end_tupel.y + 2.0 * ((double)_updateCount) * yd + rand.NextDouble() * yd;
+                                    _gData.Picture[xx, yy] = _oldData.Picture[xx, yy];
                                 }
                             }
                             else
@@ -692,21 +640,17 @@ namespace Fractrace
                         if (needComputing)
                         {
                             // yadd cannot be easy handled (because of inside rendering).
-                            // yAdd = rand.NextDouble() * yd;
-                            for (yschl = (int)(MAXY_ITER); yschl >= MINY_ITER - dephAdd; yschl -= 1)
+                            for (yschl = (int)(_maxyIter); yschl >= MINY_ITER - dephAdd; yschl -= 1)
                             {
-
-                                if (mAbort)
-                                {
+                                if (_abort)
                                     return;
-                                }
 
-                                if (xx >= 0 && xx < width && yy >= 0 && yy < height)
+                                if (xx >= 0 && xx < _width && yy >= 0 && yy < _height)
                                 {
-                                    if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2)
+                                    if ((_gData.Picture)[xx, yy] == 0 || (_gData.Picture)[xx, yy] == 2)
                                     { // aha, noch zeichnen
                                         // Test, ob Schnitt mit Begrenzung vorliegt  
-                                        y = act_val.end_tupel.y - (double)yd * (MAXY_ITER - yschl);
+                                        y = act_val.end_tupel.y - (double)yd * (_maxyIter - yschl);
                                         y += yAdd;
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
                                             return;
@@ -715,18 +659,18 @@ namespace Fractrace
 
                                         int usedCycles = 0;
                                         bool inverse = false;
-                                        if (GData == null)
+                                        if (_gData == null)
                                         {
                                             System.Diagnostics.Debug.WriteLine("Error: GData == null");
                                             return;
                                         }
-                                        if ((GData.Picture)[xx, yy] == 0)
+                                        if ((_gData.Picture)[xx, yy] == 0)
                                             usedCycles = formulas.Rechne(x, y, z, 0, zyklen,
                                                   wix, wiy, wiz,
                                                   jx, jy, jz, jzz, formula, inverse);
 
-                                        if ((GData.Picture)[xx, yy] == 2)
-                                        {// Invers rechnen
+                                        if ((_gData.Picture)[xx, yy] == 2)
+                                        {// Inverse computing
                                             inverse = true;
                                             usedCycles = formulas.Rechne(x, y, z, 0, minCycle,
                                                   wix, wiy, wiz,
@@ -739,17 +683,17 @@ namespace Fractrace
                                                 miny = yschl;
                                             minYDetected = true;
                                             // Iteration ist nicht abgebrochen, also weiterrechnen:
-                                            int oldPictureInfo = (GData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
+                                            int oldPictureInfo = (_gData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
                                             // die Farbberechnung wiederholt wird.
-                                            (GData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
+                                            (_gData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
                                             VoxelInfo vInfo = new VoxelInfo();
-                                            GData.PointInfo[xx, yy] = vInfo;
+                                            _gData.PointInfo[xx, yy] = vInfo;
                                             vInfo.i = x;
                                             vInfo.j = y;
                                             vInfo.k = z;
 
                                             cycleAdd = 1024;
-                                            if (minCycle != 51 && minCycle >= 0)
+                                            if (minCycle >= 0)
                                             {
                                                 cycleAdd = minCycle - zyklen;
                                             }
@@ -762,15 +706,8 @@ namespace Fractrace
 
                                                 if (fa1 == 0)
                                                 {
-                                                    if (minCycle != 51)
-                                                    {
-                                                        fa1 = -1;
-                                                        (GData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
-                                                    }
-                                                    else
-                                                    {
-                                                        fa1 = 255;
-                                                    }
+                                                    fa1 = -1;
+                                                    (_gData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
                                                 }
                                                 else
                                                     fa1 = 255 * fa1 / (zyklen + cycleAdd);
@@ -798,13 +735,9 @@ namespace Fractrace
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
-                                                    
-                                                    
                                                 }
                                                 else
                                                 {
-                                                    
-
                                                         if (IsSmallPreview())
                                                         {
                                                             fa1 = formulas.RayCastAt(zyklen, x, y, z, 0,
@@ -819,40 +752,35 @@ namespace Fractrace
                                      wix, wiy, wiz,
                                      jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                             fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
-                                                        }
-
-                                                  
-                                                   
+                                                        } 
                                                 }
                                             }
-                                          
                                         }
                                     }
                                 }
                                 isYborder = false;
                             }
-                            if ((GData.Picture)[xx, yy] == 0 || (GData.Picture)[xx, yy] == 2)
+                            if ((_gData.Picture)[xx, yy] == 0 || (_gData.Picture)[xx, yy] == 2)
                             {
-                                if (mOldPictureData != null)
+                                if (_oldPictureData != null)
                                 {
-                                    PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                                    _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
                                 }
                             }
 
-
-                            if (mOldData != null && mUpdateCount > 2)
+                            if (_oldData != null && _updateCount > 2)
                             {
-                                if (mOldPictureData.Points[xx, yy] != null)
+                                if (_oldPictureData.Points[xx, yy] != null)
                                 {
-                                    if (PData.Points[xx, yy] == null)
+                                    if (_pData.Points[xx, yy] == null)
                                     {
-                                        PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                                        _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
                                     }
                                     else
                                     {
-                                        if (PData.Points[xx, yy].Coord.Y < mOldPictureData.Points[xx, yy].Coord.Y)
+                                        if (_pData.Points[xx, yy].Coord.Y < _oldPictureData.Points[xx, yy].Coord.Y)
                                         {
-                                            PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                                            _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
                                         }
                                     }
                                 }
@@ -861,12 +789,11 @@ namespace Fractrace
                         else
                         {
                             // Get the old values:
-                            PData.Points[xx, yy] = mOldPictureData.Points[xx, yy];
+                            _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
                         }
                     }
                 }
             }
-
         }
 
 

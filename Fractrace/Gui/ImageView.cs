@@ -25,7 +25,7 @@ namespace Fractrace
         public ImageView()
         {
             InitializeComponent();
-            object o = FileSystem.Exemplar;
+//            object o = FileSystem.Exemplar;
             GlobalParameters.SetGlobalParameters();
             _paras = new ParameterInput();
             _paras.Show();
@@ -273,11 +273,11 @@ namespace Fractrace
                     _updateCount++;
                     _iterate.SetOldData(oldData, oldPictureData, _updateCount);
                     if (!ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
-                        _iterate.OneStepProgress = _inPreview;
+                        _iterate._oneStepProgress = _inPreview;
                     else
-                        _iterate.OneStepProgress = false;
+                        _iterate._oneStepProgress = false;
                     if (_updateCount > ParameterDict.Current.GetDouble("View.UpdateSteps") + 1)
-                        _iterate.OneStepProgress = true;
+                        _iterate._oneStepProgress = true;
                     _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
                 }
                 else
@@ -298,7 +298,7 @@ namespace Fractrace
                         _paras.Assign();
                         _updateCount = 1;
                         _iterate = new Iterate(_width, _height, this, false);
-                        _iterate.OneStepProgress = false;
+                        _iterate._oneStepProgress = false;
                         _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
                     }
                 }
