@@ -13,16 +13,16 @@ namespace Fractrace
 {
 
     /// <summary>
-    /// Control which displays the rendered image and one additional tool button to redraw the picture.
+    /// Control which displays the rendered image.
     /// </summary>
-    public partial class Form1 : Form, IAsyncComputationStarter
+    public partial class ImageView : Form, IAsyncComputationStarter
     {
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// Initializes a new instance of the <see cref="ImageView"/> class.
         /// </summary>
-        public Form1()
+        public ImageView()
         {
             InitializeComponent();
             object o = FileSystem.Exemplar;
@@ -41,7 +41,7 @@ namespace Fractrace
         /// <summary>
         /// Unique Instance of this Window.
         /// </summary>
-        public static Form1 PublicForm = null;
+        public static ImageView PublicForm = null;
 
         /// <summary>
         /// This graphic is used to generate the bitmap. 

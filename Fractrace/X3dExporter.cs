@@ -9,7 +9,7 @@ namespace Fractrace
 {
 
     /// <summary>
-    /// Export surface data of last iterate with color, surface color, defined in last picture art rendering.
+    /// Export surface data of last iterate with surface color, defined in last picture art rendering.
     /// </summary>
     public class X3dExporter
     {
@@ -91,10 +91,12 @@ namespace Fractrace
         {
             if (_iterate == null)
                 return;
+            bool createNormales = true;
+
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             sw.WriteLine("#VRML V2.0 utf8");
 
-            List <Coord2D> pointList = new List<Coord2D>();
+            List<Coord2D> pointList = new List<Coord2D>();
             Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
 
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
@@ -140,24 +142,6 @@ namespace Fractrace
                 }
             }
 
-            /*
-            // Maximal Distance to draw triangle.
-            double maxDist = 0;
-            double tempDist = maxx - minx;
-            if (maxDist < tempDist)
-                maxDist = tempDist;
-            tempDist = maxy - miny;
-            if (maxDist < tempDist)
-                maxDist = tempDist;
-            tempDist = maxz - minz;
-            if (maxDist < tempDist)
-                maxDist = tempDist;
-                
-
-            double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            maxDist = 15.0 * maxDist / noOfPoints;
-            */
-
             sw.WriteLine(@"
       Transform{
 translation 0 0 0
@@ -174,7 +158,7 @@ coord
 point [
 ");
 
-           
+
 
             double radius = maxz - minz + maxy - miny + maxx - minx;
             double centerx = (maxx + minx) / 2.0;
@@ -183,7 +167,7 @@ point [
 
             bool needScaling = radius < 0.0001;
 
-            // Rounding scale parameters to allow combine different 3d scenes. 
+            // Rounding scale parameters to allow combine different 3d scenes at later time. 
             int noOfDigits = 1;
             double d = 1;
             if (needScaling)
@@ -208,7 +192,7 @@ point [
                 {
 
                     double x, y, z;
-                    if(needScaling)
+                    if (needScaling)
                     {
                         x = (pInfo.Coord.X - centerx) / radius;
                         y = (pInfo.Coord.Y - centery) / radius;
@@ -219,12 +203,12 @@ point [
                         // Scale by 1000
 
                         x = 1000.0 * pInfo.Coord.X;
-                         y = 1000.0 * pInfo.Coord.Y;
-                         z = 1000.0 * pInfo.Coord.Z;
+                        y = 1000.0 * pInfo.Coord.Y;
+                        z = 1000.0 * pInfo.Coord.Z;
                     }
 
-                    
-                        sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
+
+                    sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
                 }
             }
 
@@ -245,7 +229,7 @@ color [
                     double red = pInfo.AdditionalInfo.red2;
                     double green = pInfo.AdditionalInfo.green2;
                     double blue = pInfo.AdditionalInfo.blue2;
-                   
+
                     string line = ((float)red).ToString(_numberFormatInfo) + " " +
                                   ((float)green).ToString(_numberFormatInfo) + " " +
                                   ((float)blue).ToString(_numberFormatInfo) + ", ";
@@ -261,14 +245,14 @@ color [
 ]
 }
 normalPerVertex FALSE");
-    
+
             sw.WriteLine(@"
 coordIndex [
 ");
 
             // Maximal Distance to draw triangle.
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            double maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * radius/ noOfPoints;
+            double maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * radius / noOfPoints;
 
             // surface mesh
             for (int i = 0; i < _pictureData.Width; i++)
@@ -279,21 +263,21 @@ coordIndex [
                     {
 
                         PixelInfo point1 = _pictureData.Points[i, j];
-                        if(point1.Coord.X>1000 && point1.Coord.X<-1000 && point1.Coord.Y > 1000 && point1.Coord.Y < -1000 && point1.Coord.Z > 1000 && point1.Coord.Z < -1000)
+                        if (point1.Coord.X > 1000 && point1.Coord.X < -1000 && point1.Coord.Y > 1000 && point1.Coord.Y < -1000 && point1.Coord.Z > 1000 && point1.Coord.Z < -1000)
                         {
                             System.Diagnostics.Debug.WriteLine("Error");
                         }
                         if (i > 0 && j > 0 && _pictureData.Points[i - 1, j - 1] != null)
                         {
 
-                            bool useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface"); 
+                            bool useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
                             if (_pictureData.Points[i - 1, j] != null)
                             {
                                 // triangle 1
-                               
+
                                 PixelInfo point2 = _pictureData.Points[i - 1, j];
                                 PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
-                                if ( !useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist) )
+                                if (!useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist))
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " -1 ");
                             }
                             if (_pictureData.Points[i, j - 1] != null)
@@ -301,7 +285,7 @@ coordIndex [
                                 // triangle 2
                                 PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
                                 PixelInfo point3 = _pictureData.Points[i, j - 1];
-                                if (!useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist) )
+                                if (!useDistance || (Dist(point1, point2) < maxDist && Dist(point2, point3) < maxDist && Dist(point3, point2) < maxDist))
                                     sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " " + pointIndex[i, j - 1].ToString() + " -1 ");
                             }
 

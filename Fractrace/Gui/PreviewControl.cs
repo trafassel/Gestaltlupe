@@ -100,13 +100,13 @@ namespace Fractrace
         /// </summary>
         protected override void StartDrawing()
         {
-            Form1.PublicForm.Stop();
+            ImageView.PublicForm.Stop();
             _forceRedraw = false;
             btnPreview.Enabled = false;
             _inDrawing = true;
             if (btnPreview.Width < 1 && btnPreview.Height < 1)
             {
-                Form1.PublicForm.CurrentUpdateStep = 0;
+                ImageView.PublicForm.CurrentUpdateStep = 0;
                 return;
             }
             if (_iterate != null)
@@ -127,7 +127,7 @@ namespace Fractrace
                     1,
                     ParameterDict.Current.GetInt("Formula.Static.Formula"),
                     ParameterDict.Current.GetBool("View.Perspective"));
-            Form1.PublicForm.CurrentUpdateStep = 0;
+            ImageView.PublicForm.CurrentUpdateStep = 0;
         }
 
 

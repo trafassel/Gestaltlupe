@@ -15,7 +15,7 @@ namespace Fractrace.Scheduler
 
         GrandScheduler()
         {
-            mainDisplayForm = Fractrace.Form1.PublicForm;
+            mainDisplayForm = Fractrace.ImageView.PublicForm;
             mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
             history = mainParameterInput.History;
         }
@@ -43,7 +43,7 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// Reference to the Form which display Rendered image.
         /// </summary>
-        Fractrace.Form1 mainDisplayForm = null;
+        Fractrace.ImageView mainDisplayForm = null;
 
 
         /// <summary>

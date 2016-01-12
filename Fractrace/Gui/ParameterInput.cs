@@ -79,7 +79,7 @@ namespace Fractrace
 
             if(GlobalParameters.IsMaterialProperty(name))
             {
-                Form1.PublicForm.ActivatePictureArt();
+                ImageView.PublicForm.ActivatePictureArt();
                 return;
             }
 
@@ -286,7 +286,7 @@ namespace Fractrace
         /// </summary>
         private void ForceRedraw()
         {
-            Form1.PublicForm.ComputeOneStep();
+            ImageView.PublicForm.ComputeOneStep();
             if (Stereo)
                 DrawStereo();
         }
@@ -322,12 +322,12 @@ namespace Fractrace
             if (!mPreviewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
-                if (Form1.PublicForm.CurrentUpdateStep < updateSteps)
+                if (ImageView.PublicForm.CurrentUpdateStep < updateSteps)
                 {
                     if (mPreviewMode)
                         ComputePreview();
                     else
-                        Form1.PublicForm.ComputeOneStep();
+                        ImageView.PublicForm.ComputeOneStep();
                     return;
                 }
             }
@@ -339,7 +339,7 @@ namespace Fractrace
             else
             {
                 // Use the picture in the render frame to display in preview (for history)
-                Image image = Form1.PublicForm.GetImage();
+                Image image = ImageView.PublicForm.GetImage();
                 int imageWidth = preview1.Width;
                 int imageHeight = preview1.Height;
                 Image newImage = new Bitmap(imageWidth, imageHeight);
@@ -380,7 +380,7 @@ namespace Fractrace
         private void OK()
         {
             Changed = true;
-            Form1.PublicForm._inPreview = false;
+            ImageView.PublicForm._inPreview = false;
             ForceRedraw();
         }
 
@@ -599,7 +599,7 @@ namespace Fractrace
             string picDir = System.IO.Path.Combine(Fractrace.FileSystem.Exemplar.ExportDir, "Data" + gesDataString);
             string picFile = System.IO.Path.Combine(picDir, fileName + ".png");
 
-            Form1.PublicForm.ShowPictureFromFile(picFile);
+            ImageView.PublicForm.ShowPictureFromFile(picFile);
 
 
         }
@@ -614,7 +614,7 @@ namespace Fractrace
             {
                 mHistory.CurrentTime = mHistory.Save();
             }
-            Form1.PublicForm._inPreview = false;
+            ImageView.PublicForm._inPreview = false;
             ForceRedraw();
 
         }
@@ -628,7 +628,7 @@ namespace Fractrace
         private void button27_Click(object sender, EventArgs e)
         {
             mPosterMode = false;
-            Form1.PublicForm.Stop();
+            ImageView.PublicForm.Stop();
             if (mStereoForm != null)
             {
                 mStereoForm.Abort();
@@ -640,7 +640,7 @@ namespace Fractrace
 
         private void btnStopAnimation_Click_1(object sender, EventArgs e)
         {
-            Form1.PublicForm.Stop();
+            ImageView.PublicForm.Stop();
         }
 
 
@@ -654,7 +654,7 @@ namespace Fractrace
             {
                 RemoveEmptyDirectory();
                 base.OnClosing(e);
-                Form1.PublicForm.ForceClosing();
+                ImageView.PublicForm.ForceClosing();
             }
             else e.Cancel = true;
         }
@@ -984,7 +984,7 @@ namespace Fractrace
 
             ParameterDict.Current.SetInt("View.PosterX", xi);
             ParameterDict.Current.SetInt("View.PosterZ", yi);
-            Form1.PublicForm._inPreview = false;
+            ImageView.PublicForm._inPreview = false;
             ForceRedraw();
             mPosterStep++;
         }
@@ -1076,7 +1076,7 @@ namespace Fractrace
         /// </summary>
         public void AbortPreview()
         {
-            Form1.PublicForm.Stop();
+            ImageView.PublicForm.Stop();
         }
 
 
@@ -1094,9 +1094,9 @@ namespace Fractrace
                 // Size und Raster festlegen
                 string sizeStr = ParameterDict.Current["View.Size"];
                 ParameterDict.Current["View.Size"] = "0.2";
-                Form1.PublicForm._inPreview = true;
+                ImageView.PublicForm._inPreview = true;
                 ForceRedraw();
-                Form1.PublicForm._inPreview = false;
+                ImageView.PublicForm._inPreview = false;
                 // Size und Raster auf die Ursprungswerte setzen
                 ParameterDict.Current["View.Size"] = sizeStr;
             }
@@ -1304,7 +1304,7 @@ namespace Fractrace
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form1.PublicForm.ActivatePictureArt();
+            ImageView.PublicForm.ActivatePictureArt();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -1315,12 +1315,12 @@ namespace Fractrace
             sd.Filter = "*.wrl|*.wrl|*.*|all";
             if (sd.ShowDialog() == DialogResult.OK)
             {
-                if (Form1.PublicForm.LastPicturArt==null)
+                if (ImageView.PublicForm.LastPicturArt==null)
                 {
                     MessageBox.Show("No Surface Data available.");
                     return;
                 }
-                X3dExporter export = new X3dExporter(Form1.PublicForm.IterateForPictureArt, Form1.PublicForm.LastPicturArt.PictureData);
+                X3dExporter export = new X3dExporter(ImageView.PublicForm.IterateForPictureArt, ImageView.PublicForm.LastPicturArt.PictureData);
                 export.Save(sd.FileName);
             }
             btnExport.Enabled = true;
