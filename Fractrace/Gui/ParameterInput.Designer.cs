@@ -100,6 +100,7 @@ namespace Fractrace {
             this.tpSource = new System.Windows.Forms.TabPage();
             this.formulaEditor1 = new Fractrace.FormulaEditor();
             this.tpFile = new System.Windows.Forms.TabPage();
+            this.btnLoadExamples = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btnAppend = new System.Windows.Forms.Button();
             this.btnSaveFormula = new System.Windows.Forms.Button();
@@ -117,7 +118,7 @@ namespace Fractrace {
             this.btBulk = new System.Windows.Forms.Button();
             this.tpDoc = new System.Windows.Forms.TabPage();
             this.btnShowDocumentation = new System.Windows.Forms.Button();
-            this.btnLoadExamples = new System.Windows.Forms.Button();
+            this.btnBatchExport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -801,6 +802,7 @@ namespace Fractrace {
             // 
             // pnlSpecial1
             // 
+            this.pnlSpecial1.Controls.Add(this.btnBatchExport);
             this.pnlSpecial1.Controls.Add(this.btnExport);
             this.pnlSpecial1.Controls.Add(this.btnCreatePoster);
             this.pnlSpecial1.Controls.Add(this.cbStereo);
@@ -977,7 +979,6 @@ namespace Fractrace {
             this.navigateControl1.Name = "navigateControl1";
             this.navigateControl1.Size = new System.Drawing.Size(534, 323);
             this.navigateControl1.TabIndex = 0;
-            this.navigateControl1.Load += new System.EventHandler(this.navigateControl1_Load_1);
             // 
             // tpSource
             // 
@@ -1014,6 +1015,19 @@ namespace Fractrace {
             this.tpFile.TabIndex = 6;
             this.tpFile.Text = "File";
             this.tpFile.UseVisualStyleBackColor = true;
+            // 
+            // btnLoadExamples
+            // 
+            this.btnLoadExamples.FlatAppearance.BorderSize = 0;
+            this.btnLoadExamples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadExamples.Location = new System.Drawing.Point(16, 15);
+            this.btnLoadExamples.Name = "btnLoadExamples";
+            this.btnLoadExamples.Size = new System.Drawing.Size(89, 25);
+            this.btnLoadExamples.TabIndex = 6;
+            this.btnLoadExamples.Text = "Load Examples";
+            this.btnLoadExamples.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoadExamples.UseVisualStyleBackColor = true;
+            this.btnLoadExamples.Click += new System.EventHandler(this.btnLoadExamples_Click);
             // 
             // button3
             // 
@@ -1217,18 +1231,16 @@ namespace Fractrace {
             this.btnShowDocumentation.UseVisualStyleBackColor = true;
             this.btnShowDocumentation.Click += new System.EventHandler(this.btnShowDocumentation_Click);
             // 
-            // btnLoadExamples
+            // btnBatchExport
             // 
-            this.btnLoadExamples.FlatAppearance.BorderSize = 0;
-            this.btnLoadExamples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadExamples.Location = new System.Drawing.Point(16, 15);
-            this.btnLoadExamples.Name = "btnLoadExamples";
-            this.btnLoadExamples.Size = new System.Drawing.Size(89, 25);
-            this.btnLoadExamples.TabIndex = 6;
-            this.btnLoadExamples.Text = "Load Examples";
-            this.btnLoadExamples.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoadExamples.UseVisualStyleBackColor = true;
-            this.btnLoadExamples.Click += new System.EventHandler(this.btnLoadExamples_Click);
+            this.btnBatchExport.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBatchExport.Location = new System.Drawing.Point(5, 67);
+            this.btnBatchExport.Name = "btnBatchExport";
+            this.btnBatchExport.Size = new System.Drawing.Size(128, 23);
+            this.btnBatchExport.TabIndex = 4;
+            this.btnBatchExport.Text = "Batch Export";
+            this.btnBatchExport.UseVisualStyleBackColor = true;
+            this.btnBatchExport.Click += new System.EventHandler(this.btnBatchExport_Click);
             // 
             // ParameterInput
             // 
@@ -1398,5 +1410,6 @@ namespace Fractrace {
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnLoadExamples;
+        private System.Windows.Forms.Button btnBatchExport;
     }
 }

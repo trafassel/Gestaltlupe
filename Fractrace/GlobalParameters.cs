@@ -82,7 +82,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.Description"] = "Y-component of the Julia Seed, if the formula is in julia mode. Y-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
-            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
             // Z-component of the Julia Seed, if the formula is in julia mode.
             // Z-component of the start value , if the formula is in mandelbrot mode.
@@ -90,7 +90,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.Description"] = "Z-component of the Julia Seed, if the formula is in julia mode. Z-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
-            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
             // Q-component of the Julia Seed, if the formula is in julia mode.
             //ParameterDict.Current["Formula.Static.jzz"] = "0";
@@ -271,7 +271,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Color and light correction.
-            ParameterDict.Current["Renderer.Normalize"] = "1";
+            ParameterDict.Current["Renderer.Normalize"] = "0";
             ParameterDict.Current["Renderer.Normalize.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Renderer.Normalize.PARAMETERINFO.Description"] = "Color and light correction.";
 
@@ -348,7 +348,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Brightness (1 ...)
-            ParameterDict.Current["Renderer.Brightness"] = "1";
+            ParameterDict.Current["Renderer.Brightness"] = "1.5";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";

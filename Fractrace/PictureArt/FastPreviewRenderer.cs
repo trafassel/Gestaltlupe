@@ -163,7 +163,8 @@ namespace Fractrace.PictureArt
             minFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MinFieldOfView");
             maxFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MaxFieldOfView");
 
-            brightness = ParameterDict.Current.GetDouble(parameterNode + "Brightness");
+            //brightness = ParameterDict.Current.GetDouble(parameterNode + "Brightness");
+            brightness = 1;
             contrast = ParameterDict.Current.GetDouble(parameterNode + "Contrast");
 
             colorIntensity = ParameterDict.Current.GetDouble(parameterNode + "ColorIntensity");

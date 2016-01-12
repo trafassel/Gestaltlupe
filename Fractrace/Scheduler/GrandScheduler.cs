@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Fractrace.Basic;
+using Fractrace.DataTypes;
 
 namespace Fractrace.Scheduler
 {
@@ -15,7 +16,7 @@ namespace Fractrace.Scheduler
 
         GrandScheduler()
         {
-            mainDisplayForm = Fractrace.ImageView.PublicForm;
+            mainDisplayForm = Fractrace.ResultImageView.PublicForm;
             mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
             history = mainParameterInput.History;
         }
@@ -43,7 +44,7 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// Reference to the Form which display Rendered image.
         /// </summary>
-        Fractrace.ImageView mainDisplayForm = null;
+        Fractrace.ResultImageView mainDisplayForm = null;
 
 
         /// <summary>
@@ -168,11 +169,41 @@ namespace Fractrace.Scheduler
         /// </summary>
         protected void PictureArtEnds()
         {
+
+         
+
             // TODO: Save image
             // TODO: Save in history
             // TODO: Start waiting threads
         }
 
+
+
+        /// <summary>
+        /// Is called, if result picture is created.
+        /// Return true if new rendering should be startet.
+        /// </summary>
+        public bool PictureIsCreated(Iterate iter, PictureData pictureData)
+        {
+            if (_batchProcess!=null)
+            {
+                return _batchProcess.OnPictureCreated( iter,  pictureData);
+            }
+            return false;
+        }
+
+
+        BatchProcess.BatchProcess _batchProcess = null;
+
+
+        public void SetBatch(BatchProcess.BatchProcess batchProcess)
+        {
+            if(_batchProcess==null)
+            {
+                System.Diagnostics.Debug.WriteLine("Error in GrandScheduler.SetBatch() old batchProcess is still running.");
+            }
+            _batchProcess = batchProcess;
+        }
 
 
     }

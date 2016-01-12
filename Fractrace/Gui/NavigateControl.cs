@@ -750,7 +750,7 @@ namespace Fractrace
 
         private void DrawPreview()
         {
-            ImageView.PublicForm.Stop();
+            ResultImageView.PublicForm.Stop();
             if (ParameterInput.MainParameterInput.StereoForm != null)     
                  ParameterInput.MainParameterInput.StereoForm.Abort();
             mPreview.Draw();

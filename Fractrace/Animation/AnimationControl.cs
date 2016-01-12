@@ -263,11 +263,11 @@ namespace Fractrace.Animation
                     updateSteps = 0;
                 if (updateSteps > 1)
                     ParameterDict.Current.SetInt("View.UpdateSteps", updateSteps - 1);
-                ImageView.PublicForm.SetPictureBoxSize();
-                Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(ImageView.PublicForm, ImageView.PublicForm.GestaltPicture);
+                ResultImageView.PublicForm.SetPictureBoxSize();
+                Fractrace.Scheduler.PaintJob paintJob = new Scheduler.PaintJob(ResultImageView.PublicForm, ResultImageView.PublicForm.GestaltPicture);
                 _currentPaintJob = paintJob;
                 paintJob.Run(updateSteps);
-                ImageView.PublicForm.CallDrawImage();
+                ResultImageView.PublicForm.CallDrawImage();
                 if (_stepPreviewControls.ContainsKey(from))
                     _stepPreviewControls[from].UpdateComputedStep(i);
             }

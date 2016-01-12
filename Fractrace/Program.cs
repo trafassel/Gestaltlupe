@@ -14,7 +14,7 @@ namespace Fractrace
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImageView());
+            Application.Run(new ResultImageView());
         }
     }
 }
