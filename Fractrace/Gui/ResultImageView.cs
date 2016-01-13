@@ -661,10 +661,22 @@ namespace Fractrace
             }
 
             Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
+            /*
             // On Mono: the Image ist not shown. Quickfix is to reload the saved image.
             if (!Environment.OSVersion.ToString().ToLower().Contains("microsoft"))
             {
                 ShowPictureFromFile(fileName);
+            }
+            */
+            if (ResultImageView.PublicForm.LastPicturArt != null)
+            {
+                if (_progress == 100) // TODO: Better test of last rendering process
+                {
+                    if (Fractrace.Scheduler.GrandScheduler.Exemplar.PictureIsCreated(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData))
+                    {
+                        ParameterInput.MainParameterInput.StartRendering();
+                    }
+                }
             }
         }
 

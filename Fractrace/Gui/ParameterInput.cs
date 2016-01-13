@@ -346,14 +346,7 @@ namespace Fractrace
                 Graphics gr = Graphics.FromImage(newImage);
                 gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
                 mHistoryImages[mHistory.Time] = newImage;
-                if(ResultImageView.PublicForm.LastPicturArt!=null)
-                { 
-                  if (Fractrace.Scheduler.GrandScheduler.Exemplar.PictureIsCreated(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData))
-                    {
-                        // TODO: new restart
-                    }
-                   
-                }
+              
 
             }
         }
@@ -623,7 +616,7 @@ namespace Fractrace
         /// <summary>
         /// Start process of rendering.
         /// </summary>
-        private void StartRendering()
+        public void StartRendering()
         {
             mPreviewMode = false;
             mPosterMode = false;
@@ -644,6 +637,7 @@ namespace Fractrace
         /// <param name="e"></param>
         private void button27_Click(object sender, EventArgs e)
         {
+            Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(null);
             mPosterMode = false;
             ResultImageView.PublicForm.Stop();
             if (mStereoForm != null)

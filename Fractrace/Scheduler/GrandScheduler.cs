@@ -187,7 +187,10 @@ namespace Fractrace.Scheduler
         {
             if (_batchProcess!=null)
             {
-                return _batchProcess.OnPictureCreated( iter,  pictureData);
+                bool retVal= _batchProcess.OnPictureCreated( iter,  pictureData);
+                if (!retVal)
+                    _batchProcess = null;
+                return retVal;
             }
             return false;
         }
