@@ -1314,8 +1314,11 @@ namespace Fractrace
                         MessageBox.Show("No Surface Data available.");
                         return;
                     }
-                    X3dExporter export = new X3dExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                    export.Save(sd.FileName);
+
+                    Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                    exporter.Export(sd.FileName);
+                    //X3dExporter export = new X3dExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                    //export.Save(sd.FileName);
                 }
             }
             catch (Exception ex)

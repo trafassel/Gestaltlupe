@@ -178,7 +178,6 @@ point [
                     noOfDigits++;
                 }
                 noOfDigits -= 3;
-                radius = Math.Round(radius, noOfDigits);
                 radius = d;
                 centerx = Math.Round(centerx, noOfDigits);
                 centery = Math.Round(centery, noOfDigits);

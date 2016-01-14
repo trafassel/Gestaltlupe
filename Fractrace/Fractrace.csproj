@@ -217,6 +217,12 @@
     <Compile Include="Geometry\Navigator.cs" />
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
+    <Compile Include="SceneGraph\FColor.cs" />
+    <Compile Include="SceneGraph\FPoint.cs" />
+    <Compile Include="SceneGraph\Mesh.cs" />
+    <Compile Include="SceneGraph\MeshTool.cs" />
+    <Compile Include="SceneGraph\SceneExporter.cs" />
+    <Compile Include="SceneGraph\VrmlSceneExporter.cs" />
     <Compile Include="Scheduler\BatchProcess\BatchProcess.cs" />
     <Compile Include="Scheduler\BatchProcess\X3dExportBatchProcess.cs" />
     <Compile Include="Scheduler\GrandScheduler.cs" />
