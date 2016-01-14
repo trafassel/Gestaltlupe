@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "3";
+            ParameterDict.Current["Intern.Version"] = "4";
 
             // Minimal X-Value.
             ParameterDict.Current["Border.Min.x"] = "-1.5";
@@ -248,7 +248,7 @@ for (int n = 1; n < _cycles; n++)
             // Number of update steps for better rendering quality.  
             ParameterDict.Current["View.UpdateSteps"] = "3";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.Description"] = " Number of update steps for better rendering quality.";
-            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "3 7";
+            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "1 3 7 12";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
 
@@ -307,7 +307,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.MaxFieldOfView.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Intensity of the Surface Color
-            ParameterDict.Current["Renderer.ColorIntensity"] = "0.0";
+            ParameterDict.Current["Renderer.ColorIntensity"] = "1";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.Description"] = "Intensity of the Surface Color.";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -318,13 +318,21 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
+            ParameterDict.Current["Renderer.ColorInside"] = "0";
+            ParameterDict.Current["Renderer.ColorInside.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Renderer.ColorInside.PARAMETERINFO.Description"] = "Color inside Surface";
+
+            ParameterDict.Current["Renderer.ColorOutside"] = "0";
+            ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Description"] = "Color Surface";
+
             // Use Light
             ParameterDict.Current["Renderer.UseLight"] = "1";
             ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Description"] = "Use Light.";
 
             // Light Level: light in bright areas
-            ParameterDict.Current["Renderer.BrightLightLevel"] = "0.5";
+            ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -348,7 +356,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Brightness (1 ...)
-            ParameterDict.Current["Renderer.Brightness"] = "1.5";
+            ParameterDict.Current["Renderer.Brightness"] = "1.2";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";

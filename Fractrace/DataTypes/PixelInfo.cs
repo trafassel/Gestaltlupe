@@ -54,6 +54,7 @@ namespace Fractrace.DataTypes
             retVal.Normal.Y = Normal.Y;
             retVal.Normal.Z = Normal.Z;
             retVal.iterations = iterations;
+            retVal.IsInside = IsInside;
             if (AdditionalInfo != null)
                 retVal.AdditionalInfo = AdditionalInfo.Clone();
             return retVal;

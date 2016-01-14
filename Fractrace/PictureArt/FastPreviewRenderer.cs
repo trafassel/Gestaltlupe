@@ -151,6 +151,8 @@ namespace Fractrace.PictureArt
 
         private double contrast = 1;
 
+        bool _colorOutside = false;
+        bool _colorInside = false;
 
         /// <summary>
         /// Allgemeine Informationen werden erzeugt
@@ -168,6 +170,9 @@ namespace Fractrace.PictureArt
             contrast = ParameterDict.Current.GetDouble(parameterNode + "Contrast");
 
             colorIntensity = ParameterDict.Current.GetDouble(parameterNode + "ColorIntensity");
+            _colorOutside = ParameterDict.Current.GetBool("Renderer.ColorInside");
+            _colorInside = ParameterDict.Current.GetBool("Renderer.ColorOutside");
+
             useLight = ParameterDict.Current.GetBool(parameterNode + "UseLight");
             shadowJustify = 1;  ParameterDict.Current.GetDouble(parameterNode + "ShadowJustify");
 
@@ -472,7 +477,18 @@ namespace Fractrace.PictureArt
             bool useAdditionalColorinfo = true;
             if (colorIntensity <= 0)
                 useAdditionalColorinfo = false;
-            if (useAdditionalColorinfo)
+
+            if(pInfo.IsInside)
+            {
+
+            }
+            else
+            {
+
+            }
+
+
+            if (useAdditionalColorinfo && ((pInfo.IsInside&&_colorInside)||(!pInfo.IsInside && _colorOutside)))
             {
                 if (pInfo != null && pInfo.AdditionalInfo != null)
                 {
@@ -487,35 +503,36 @@ namespace Fractrace.PictureArt
                     if (b1 < 0)
                         b1 = -b1;
 
-                    // Normalize:
-                    double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1);
+                    double norm = Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1) / Math.Sqrt(2.5);
                     r1 = r1 / norm;
                     g1 = g1 / norm;
                     b1 = b1 / norm;
 
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (r1 > 1)
+                        {
+                            b1 += (r1 - 1) / 2.0;
+                            g1 += (r1 - 1) / 2.0;
+                            r1 = 1;
+                        }
+                        if (b1 > 1)
+                        {
 
-                    /*
-                    double redLumen = 0.08;
-                    double greenLumen = 0.9;
-                    double blueLumen = 0.1;
-                     */
-                    double redLumen = 1.5;
-                    double greenLumen = 1.1;
-                    double blueLumen = 0.15;
+                            r1 += (b1 - 1) / 2.0;
+                            g1 += (b1 - 1) / 2.0;
+                            b1 = 1;
 
+                        }
+                        if (g1 > 1)
+                        {
 
-                    /*
-                    double redLumen = 0.08;
-                    double greenLumen = 0.9;
-                    double blueLumen = 0.03;
-                     */
+                            r1 += (g1 - 1) / 2.0;
+                            b1 += (g1 - 1) / 2.0;
+                            g1 = 1;
+                        }
+                    }
 
-
-                    double norm1 = redLumen * r1 + greenLumen * g1 + blueLumen * b1;
-
-                    r1 = r1 / norm1;
-                    g1 = g1 / norm1;
-                    b1 = b1 / norm1;
 
                     if (r1 > 1)
                         r1 = 1;
@@ -526,10 +543,17 @@ namespace Fractrace.PictureArt
 
                     if (colorGreyness > 0)
                     {
-                        r1 = 0.5 * colorGreyness + (1 - colorGreyness) * r1;
-                        g1 = 0.5 * colorGreyness + (1 - colorGreyness) * g1;
-                        b1 = 0.5 * colorGreyness + (1 - colorGreyness) * b1;
+                        r1 = colorGreyness + (1 - colorGreyness) * r1;
+                        g1 = colorGreyness + (1 - colorGreyness) * g1;
+                        b1 = colorGreyness + (1 - colorGreyness) * b1;
                     }
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
 
                     if (norm != 0)
                     {

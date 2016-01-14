@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:159-->
+<!--LastNote:170-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,8 +7,9 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=hgySeQr4dpIlbzP7k4txDQ-->
+<!--property:UID=HCx9JPnxsH9vMXBWmkXitg-->
 <!--property:prop_modified=0-->
+<!--property:note_deleted=AugFK3Kt9vn33o1ixjiHpg-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -2045,9 +2046,9 @@ Gestalt von mehrere Seiten (oben, links, unten...) einzeln aufnehmen und in eine
 
 </DD>
 <DT><A name="5g4eKxaExDBDZb8Ceoqnzw"></A>Bugbehebung X3D Export</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452418676-->
-<!--property:date_modified=1452450571-->
+<!--property:date_modified=1452496558-->
 <!--property:expanded-->
 <!--property:hash=215d96e62596208380ca85ab708b7bda2e77c05a-->
 <!--property:hash_html=48a41db53b72dd0a74fbd1d44b713519b1fa3498-->
@@ -2095,9 +2096,9 @@ Daten:<BR>
 
 </DD>
 <DT><A name="ePIg3HtyIujuxmCmXHDiYg"></A>Scene in X3d Export skalieren</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452451312-->
-<!--property:date_modified=1452493598-->
+<!--property:date_modified=1452496570-->
 <!--property:hash=87b44b4dcb664c9655e84a4f4cdba41e08c67cc3-->
 <!--property:hash_html=62ee6462e615b52d6a49a3699091f1dab21e1f91-->
 <DD>
@@ -2114,11 +2115,11 @@ radius, centerx, centery, centerz sollten sich bei Bildern in ähnlichen Regione
 
 </DD>
 <DT><A name="UwtyknoxTHUrbX0gKqFbvA"></A>Andere default-Einstellungen für Renderer</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452493598-->
-<!--property:date_modified=1452493931-->
-<!--property:hash=c66b789f898ae1f0260e3539bcd5616803a08602-->
-<!--property:hash_html=1701ab8cd896dbea97315366401c83fce9fa19a2-->
+<!--property:date_modified=1452641634-->
+<!--property:hash=2fa42b5be5833eada973965a029d071e1189942c-->
+<!--property:hash_html=23cd195b2e2354077621ce1b108e80220d3e38fd-->
 <DD>
 Cameraposition 1<BR>
 <BR>
@@ -2127,6 +2128,232 @@ BrightLightLevel 0.5<BR>
 ShadowNumber 22<BR>
 Shininess 28<BR>
 Shininess factor 0.5<BR>
+<BR>
+<BR>
+Brightness 1.5<BR>
+Normalize 0<BR>
+<BR>
+// Im renderer für small preview Brightness auf 1 setzen<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="8A99XOGlLX4GgiSIf2xTog"></A>Computation.NoOfThreads nicht mit speichern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452547369-->
+<!--property:date_modified=1452554998-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="zCVSwtfvDZ5QvRqdLAFZSQ"></A>Batch Prozesse</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452549826-->
+<!--property:date_modified=1452641803-->
+<!--property:hash=5583916aafaaffa12bdece29b2b8adeb73f77775-->
+<!--property:hash_html=bfc3b559cb4633f52f1f8134af512b3bd14e3e52-->
+<DD>
+ALs Klasse umsetzen<BR>
+<BR>
+Von hier aus können:<BR>
+OriginalParameter gespeichert werden (zum Start)<BR>
+Teilschritte definiert werden<BR>
+ (z.B. 8 Steps. Oben, links, rechts...)<BR>
+Auf Paint-Ereignisse reagiert werden:<BR>
+  *Wenn Bild berechnet wurde (z.B. Exportieren)<BR>
+  *Bevor die Berechnung gestartet wird<BR>
+<BR>
+OriginalParameter widerhergestellt werden <BR>
+  (nach Beendigung)<BR>
+<BR>
+<BR>
+// Test erstmal mit zwei Einstellungen: Vorderseite Rückseite
+</DD>
+<DT><A name="G6LVPd4yPULR41fRdE28AA"></A>Normalen im X3D-Export speichern</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452550541-->
+<!--property:date_modified=1452556281-->
+<!--property:hash=9ca67da7253ea4073b70a9ede985e7cfa2919448-->
+<!--property:hash_html=bdc99c2fe6dd6257122f812d6cdccac121258157-->
+<DD>
+Normale pro Fläche<BR>
+<BR>
+// Hier werden die Normalen geschrieben:<BR>
+exposedField  SFNode  normal            NULL<BR>
+<BR>
+// <BR>
+field MFInt32 normalIndex [] # [-1,INF)<BR>
+<BR>
+<BR>
+// False; da Normale pro Fläche definiert wird<BR>
+field SFBool normalPerVertex TRUE field SFBool solid TRUE  <BR>
+<BR>
+
+</DD>
+<DT><A name="7HSKq6PDGj2oyCIUjqzRLA"></A>Zoom erst erlauben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452560304-->
+<!--property:date_modified=1452560386-->
+<!--property:hash=41e270e8212606b4c1a73c4ec730ba7f92c72411-->
+<!--property:hash_html=06b8de53e822723e5cb43e576c5af6b587096dfa-->
+<DD>
+... wenn Berechnung abgeschlossen ist.<BR>
+<BR>
+
+</DD>
+<DT><A name="3zyxtY9UbDttxzqX5rflxA"></A>try catch bei Export</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452621061-->
+<!--property:date_modified=1452641644-->
+<!--property:hash=879bf3e038872b0633598a46126386e9c1f0e11c-->
+<!--property:hash_html=1fa84cfa33bc3b94bdc94013e9b5ec5b6493a3a0-->
+<DD>
+... um z.B. enabled bei Button bei zu voller Festplatte zurückzusetzen.<BR>
+<BR>
+ <BR>
+<BR>
+
+</DD>
+<DT><A name="EPNzTNrn6ywbnA4Jydxf1g"></A>Mesh</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452713732-->
+<!--property:date_modified=1452713736-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="G0I8Vus2lMwu6o8yUwh7WQ"></A>src</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452713702-->
+<!--property:date_modified=1452752409-->
+<!--property:hash=044ff8d5172e8fd01b1b8df86dd14ef0fb82be6b-->
+<!--property:hash_html=f1ee1274366ca16bec7a95a367e4e115a0fa404c-->
+<DD>
+class FPoint()<BR>
+{<BR>
+public float x=0;<BR>
+public float y=0;<BR>
+public float z=0;<BR>
+}<BR>
+<BR>
+class FColor()<BR>
+{<BR>
+public float red=0;<BR>
+public float green=0;<BR>
+public float blue=0;<BR>
+}<BR>
+<BR>
+class Mesh<BR>
+<BR>
+List&lt;float&gt; _coordinates=new List&lt;float&gt;();<BR>
+<BR>
+List&lt;float&gt; _colors = new List&lt;float&gt;();<BR>
+<BR>
+List&lt;int&gt; _faces = new List&lt;int&gt;();<BR>
+<BR>
+// Normale pro face<BR>
+List&lt;float&gt; _normales = new List&lt;float&gt;();<BR>
+<BR>
+<BR>
+float GetX(i) <BR>
+{<BR>
+    return _coordinates[3*i];<BR>
+}<BR>
+<BR>
+float GetY(i) <BR>
+{<BR>
+    return _coordinates[3*i+1];<BR>
+}<BR>
+float GetZ(i) <BR>
+{<BR>
+    return _coordinates[3*i+2];<BR>
+}<BR>
+<BR>
+float GetRed(i) <BR>
+{<BR>
+    return _colors[3*i];<BR>
+}<BR>
+float GetGreen(i) <BR>
+{<BR>
+    return _colors[3*i+1];<BR>
+}<BR>
+float GetBlue(i) <BR>
+{<BR>
+    return _colors[3*i+2];<BR>
+}<BR>
+int GetPoint1(i) <BR>
+{<BR>
+    return _faces[3*i];<BR>
+}<BR>
+int GetPoint2(i) <BR>
+{<BR>
+    return _faces[3*i+1];<BR>
+}<BR>
+int GetPoint3(i) <BR>
+{<BR>
+    return _faces[3*i+2];<BR>
+}<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="CHNN7WWo7gfd1fCDdGKfPA"></A>Optimierung</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452752044-->
+<!--property:date_modified=1452752872-->
+<!--property:hash=6915f78644c52030912311c9ab506369ec63eee9-->
+<!--property:hash_html=a75779dbd69b4d64def68f0296d4c21b8720a47b-->
+<DD>
+class MeshSubSpace<BR>
+{<BR>
+Dictionary&lt;string, <BR>
+}<BR>
+<BR>
+<BR>
+// Schnellzugriff auf alle Dreiecke eines betimmten Gebietes:<BR>
+class MeshSpace<BR>
+{<BR>
+<BR>
+Mesh _mesh; // das zugeordnete Mesh <BR>
+<BR>
+Dictionary&lt;string,MeshSubSpace&gt; _subSpace; // Grobaufteilung des Raumes (z.B: 100x100x100)<BR>
+<BR>
+}
+</DD>
+</DL>
+</DD>
+<DT><A name="ikmoguPxZ9DmWxeBOdFDEQ"></A>WebGl Export</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452748681-->
+<!--property:date_modified=1452748861-->
+<!--property:hash=1534438368f43efc640fa80eb0b0c9c26c86b67f-->
+<!--property:hash_html=480aaba78f44db8947748e227aa80a413fb3e01e-->
+<DD>
+Doc: http://www.peter-strohm.de/webgl/webgltutorial1.php<BR>
+<BR>
+
+</DD>
+<DT><A name="GLxz92EvKCK9sit4djTOYA"></A>Ursprungsbild als Kommentar in X3D Export schreiben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452752410-->
+<!--property:date_modified=1452752511-->
+<!--property:hash=72012c158ee43526f8dc02eb8e582f684a03dbbf-->
+<!--property:hash_html=d91192a514d899288ec1dafbc5b74baf3140783c-->
+<DD>
+bzw. Ursprungsbilder (wenn Ergebnis zusammengesetzt ist).<BR>
+<BR>
+Für die Zuordnung zur Formel und des Gebietes genügt das erste Bild.<BR>
+<BR>
+
+</DD>
+<DT><A name="Yudf98UjvqWz3ryRWRYnqQ"></A>System.ExecutionEngineException</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452759122-->
+<!--property:date_modified=1452759149-->
+<!--property:hash=0b881d7ce4ae874559cd06f6c177f0f26b0d0f70-->
+<!--property:hash_html=c4db65eacdbaae3674c260753febf09e57558d45-->
+<DD>
+... tritt manchmal bei X3D Batch Export auf<BR>
 
 </DD>
 </DL>

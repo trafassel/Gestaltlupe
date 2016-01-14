@@ -2301,9 +2301,9 @@ namespace Fractrace
 
                         }
                     }
+                    pInfo.IsInside = !invers;
                 }
             }
-
 
             return ((int)col[0]);
         }
@@ -2340,6 +2340,7 @@ namespace Fractrace
         double wix, double wiy, double wiz,
         double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY, bool use4Points)
         {
+
             if (zd == 0)
             {
                 Console.WriteLine("Error in RayCastAt: zd==0");
@@ -2515,8 +2516,10 @@ namespace Fractrace
                 if (pInfo != null)
                 {
                     pInfo.AdditionalInfo = pinfoSet[0];
+                    pInfo.IsInside = !invers;
                 }
             }
+            
             return ((int)col[0]);
         }
 

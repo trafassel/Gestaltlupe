@@ -93,10 +93,6 @@ namespace Fractrace
             }
         }
 
-
-
-
-
         public int Width
         {
             get
@@ -106,64 +102,15 @@ namespace Fractrace
         }
         protected int _width = 0;
 
-
-
-
         public int Height {  get  {  return _height; } }
         protected int _height = 0;
 
-
-        public Iterate()
-        {
-
-        }
-
-        /// <summary>
-        /// Initialisation
-        /// </summary>
-        public Iterate(int width, int height)
-        {
-            _gData = new GraphicData(width, height);
-            _pData = new PictureData(width, height);
-            this._width = width;
-            this._height = height;
-        }
-
-
-
         protected ParameterDict _parameterDict = null;
-
-        public Iterate(ParameterDict parameterDict, IAsyncComputationStarter starter, bool isRightView=false)
-        {
-            _parameterDict = parameterDict;
-            _starter = starter;
-            _width = parameterDict.GetWidth();
-            _height=parameterDict.GetHeight();
-            _gData = new GraphicData(_width, _height);
-            _pData = new PictureData(_width, _height);
-            this._isRightView = isRightView;
-        }
-
 
         /// <summary>
         /// Control which startet this iteration.
         /// </summary>
         IAsyncComputationStarter _starter = null;
-
-
-        /// <summary>
-        /// Initialisation
-        /// </summary>
-        public Iterate(int width, int height, IAsyncComputationStarter starter, bool isRightView)
-        {
-            _starter = starter;
-            _gData = new GraphicData(width, height);
-            _pData = new PictureData(width, height);
-            this._width = width;
-            this._height = height;
-            this._isRightView = isRightView;
-        }
-
 
         /// <summary>
         /// GraphicData of previous iteration. Used for update.
@@ -183,19 +130,6 @@ namespace Fractrace
         int _updateCount = 0;
 
         protected int _availableY = 0;
-
-        /// <summary>
-        /// Set data of the last iteration with the same rendering parameters.
-        /// </summary>
-        /// <param name="oldData"></param>
-        /// <param name="oldPictureData"></param>
-        public void SetOldData(DataTypes.GraphicData oldData, DataTypes.PictureData oldPictureData, int updateCount)
-        {
-            _oldData = oldData;
-            _oldPictureData = oldPictureData;
-            _updateCount = updateCount;
-        }
-
 
         /// <summary>
         /// Wird bei der Stereoansicht verwendet. Hier wird unterschieden, ob
@@ -223,13 +157,11 @@ namespace Fractrace
             }
         }
 
-
         FracValues _actVal = null;
         int _cycles = 0;
         double _screensize = 0;
         int _formula = 0;
         bool _perspective = true;
-
 
         /// <summary>
         /// Lock IsAvailable().
@@ -262,6 +194,63 @@ namespace Fractrace
         protected Formulas _lastUsedFormulas = null;
 
         int _maxUpdateSteps = 1;
+
+
+        public Iterate()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Initialisation
+        /// </summary>
+        public Iterate(int width, int height)
+        {
+            _gData = new GraphicData(width, height);
+            _pData = new PictureData(width, height);
+            this._width = width;
+            this._height = height;
+        }
+
+        
+        public Iterate(ParameterDict parameterDict, IAsyncComputationStarter starter, bool isRightView=false)
+        {
+            _parameterDict = parameterDict;
+            _starter = starter;
+            _width = parameterDict.GetWidth();
+            _height=parameterDict.GetHeight();
+            _gData = new GraphicData(_width, _height);
+            _pData = new PictureData(_width, _height);
+            this._isRightView = isRightView;
+        }
+
+
+        /// <summary>
+        /// Initialisation
+        /// </summary>
+        public Iterate(int width, int height, IAsyncComputationStarter starter, bool isRightView)
+        {
+            _starter = starter;
+            _gData = new GraphicData(width, height);
+            _pData = new PictureData(width, height);
+            this._width = width;
+            this._height = height;
+            this._isRightView = isRightView;
+        }
+
+
+        /// <summary>
+        /// Set data of the last iteration with the same rendering parameters.
+        /// </summary>
+        /// <param name="oldData"></param>
+        /// <param name="oldPictureData"></param>
+        public void SetOldData(DataTypes.GraphicData oldData, DataTypes.PictureData oldPictureData, int updateCount)
+        {
+            _oldData = oldData;
+            _oldPictureData = oldPictureData;
+            _updateCount = updateCount;
+        }
 
 
         /// <summary>
@@ -685,7 +674,8 @@ namespace Fractrace
                                             // Iteration ist nicht abgebrochen, also weiterrechnen:
                                             int oldPictureInfo = (_gData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
                                             // die Farbberechnung wiederholt wird.
-                                            (_gData.Picture)[xx, yy] = 1; // Punkt als gesetzt markieren
+                                           
+                                            _gData.Picture[xx, yy] = 1; // Punkt als gesetzt markieren
                                             VoxelInfo vInfo = new VoxelInfo();
                                             _gData.PointInfo[xx, yy] = vInfo;
                                             vInfo.i = x;

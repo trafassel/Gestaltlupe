@@ -12,84 +12,104 @@ namespace Fractrace.Scheduler.BatchProcess
     public class X3dExportBatchProcess : BatchProcess
     {
 
+        /// <summary>
+        /// type == 2: front, backside.
+        /// type == 3: front, backside, top, bottom,right,left.
+        /// type == 4: front, backside, top, bottom,right,left,top-left,top-right....
+        /// </summary>
+        protected int _type = 4;
 
-        public X3dExportBatchProcess()
-        {
-            if (type == 2)
-            {
-                steps = 2;
-            }
-            if (type == 3)
-            {
-                steps = 6;
-            }
-            if (type == 4)
-            {
-                steps = 14;
-            }
-            PrepareStep();
-        }
+        /// <summary>
+        /// Number of batch steps
+        /// </summary>
+        protected int _steps = 0;
 
+        /// <summary>
+        /// Current batch step. (start with 1).
+        /// </summary>
+        protected int _currentStep = 0;
 
-        public override string Description()
-        {
-            return "BatchProcess";
-        }
-
+        public string ExportFile = "";
 
         protected List<string> _createdFiles = new List<string>();
 
+        public override string Description() {  return "X3d Export"; }
+
+        Iterate _iter = null;
+
+        PictureData _pictureData = null;
+
+
+        public X3dExportBatchProcess()
+        {
+            _type = ParameterDict.Current.GetInt("Export.X3d.BatchType");
+
+            if (_type == 2)
+            {
+                _steps = 2;
+            }
+            if (_type == 3)
+            {
+                _steps = 6;
+            }
+            if (_type == 4)
+            {
+                _steps = 14;
+            }
+            PrepareStep();
+        }
+       
+
         protected void PrepareStep()
         {
-            if (currentStep == 0)
+            if (_currentStep == 0)
             {
                 // TODO: save current ParameterDict.
             }
-            currentStep++;
-            if (type == 2)
+            _currentStep++;
+            if (_type == 2)
             {
-                if (currentStep == 2)
+                if (_currentStep == 2)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ",
                         ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ") + 180.0);
                 }
             }
 
-            if (type == 3)
+            if (_type == 3)
             {
-                if (currentStep == 1)
+                if (_currentStep == 1)
                 {
                     ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
-                  //  ParameterDict.Current.SetDouble("Export.X3d.ClosedSurfaceDist", 1.3);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 0);
                 }
-                if (currentStep == 2)
+                if (_currentStep == 2)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 90);
                 }
-                if (currentStep == 3)
+                if (_currentStep == 3)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 180);
                 }
-                if (currentStep == 4)
+                if (_currentStep == 4)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 270);
                 }
-                if (currentStep == 5)
+                if (_currentStep == 5)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 90);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 0);
                 }
-                if (currentStep == 6)
+                if (_currentStep == 6)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
@@ -97,89 +117,88 @@ namespace Fractrace.Scheduler.BatchProcess
                 }
             }
 
-            if (type == 4)
+            if (_type == 4)
             {
-                if (currentStep == 1)
+                if (_currentStep == 1)
                 {
                     ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
-                   // ParameterDict.Current.SetDouble("Export.X3d.ClosedSurfaceDist", 1.3);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 0);
                 }
-                if (currentStep == 2)
+                if (_currentStep == 2)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 90);
                 }
-                if (currentStep == 3)
+                if (_currentStep == 3)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 180);
                 }
-                if (currentStep == 4)
+                if (_currentStep == 4)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 270);
                 }
-                if (currentStep == 5)
+                if (_currentStep == 5)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 90);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 0);
                 }
-                if (currentStep == 6)
+                if (_currentStep == 6)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 0);
                 }
-                if (currentStep == 7)
+                if (_currentStep == 7)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45);
                 }
-                if (currentStep == 8)
+                if (_currentStep == 8)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45+90);
                 }
-                if (currentStep == 9)
+                if (_currentStep == 9)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45+180);
                 }
-                if (currentStep == 10)
+                if (_currentStep == 10)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45+270);
                 }
-                if (currentStep == 11)
+                if (_currentStep == 11)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270-45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45);
                 }
-                if (currentStep == 12)
+                if (_currentStep == 12)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270 - 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45+90);
                 }
-                if (currentStep == 13)
+                if (_currentStep == 13)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270 - 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", 45+180);
                 }
-                if (currentStep == 14)
+                if (_currentStep == 14)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", 270 - 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", 0);
@@ -193,7 +212,7 @@ namespace Fractrace.Scheduler.BatchProcess
         {
             X3dExporter export = new X3dExporter(_iter, _pictureData);
             string filename = ExportFile;
-            filename = filename.Replace(".wrl", "_temp"+currentStep.ToString() + ".wrl");
+            filename = filename.Replace(".wrl", "_temp"+_currentStep.ToString() + ".wrl");
             export.Save(filename);
             _createdFiles.Add(filename);
         }
@@ -224,32 +243,10 @@ namespace Fractrace.Scheduler.BatchProcess
         }
 
 
-        /// <summary>
-        /// type == 2: front, backside.
-        /// type == 3: front, backside, top, bottom,right,left.
-        /// type == 4: front, backside, top, bottom,right,left,top-left,top-right....
-        /// </summary>
-        protected int type = 4;
-
-        /// <summary>
-        /// Number of batch steps
-        /// </summary>
-        protected int steps = 0;
-
-        /// <summary>
-        /// Current batch step. (start with 1).
-        /// </summary>
-        protected int currentStep = 0;
-
-        public string ExportFile = "";
-
         public override void OnStart()
         {
 
         }
-
-        Iterate _iter = null;
-        PictureData _pictureData = null;
 
 
         /// <summary>
@@ -262,7 +259,7 @@ namespace Fractrace.Scheduler.BatchProcess
             _pictureData = pictureData;
             StepEnds();
 
-            bool retVal = currentStep < steps;
+            bool retVal = _currentStep < _steps;
             if (retVal)
                 PrepareStep();
             else
