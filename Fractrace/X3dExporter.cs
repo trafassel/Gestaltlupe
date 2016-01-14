@@ -165,7 +165,7 @@ point [
             double centery = (maxy + miny) / 2.0;
             double centerz = (maxz + minz) / 2.0;
 
-            bool needScaling = radius < 0.0005;
+            bool needScaling = radius < 0.002;
 
             // Rounding scale parameters to allow combine different 3d scenes at later time. 
             int noOfDigits = 1;
