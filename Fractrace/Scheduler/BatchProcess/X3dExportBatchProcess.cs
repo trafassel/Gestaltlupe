@@ -216,10 +216,10 @@ namespace Fractrace.Scheduler.BatchProcess
 
         protected void StepEnds()
         {
-            X3dExporter export = new X3dExporter(_iter, _pictureData);
+            Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
             string filename = ExportFile;
             filename = filename.Replace(".wrl", "_temp"+_currentStep.ToString() + ".wrl");
-            export.Save(filename);
+            exporter.Export(filename);
             _createdFiles.Add(filename);
         }
 
@@ -229,6 +229,7 @@ namespace Fractrace.Scheduler.BatchProcess
         /// </summary>
         protected void BatchEnds()
         {
+            try { 
             // combine created files
             FileStream resultFile = File.Open(ExportFile, FileMode.Create);
             foreach (string file in _createdFiles)
@@ -245,6 +246,11 @@ namespace Fractrace.Scheduler.BatchProcess
                 System.IO.File.Delete(file);
             }
             System.Windows.Forms.MessageBox.Show("File " + ExportFile + " created.");
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
             // restore current ParameterDict.
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX);
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY);

@@ -25,7 +25,7 @@ namespace Fractrace
         public ResultImageView()
         {
             InitializeComponent();
-//            object o = FileSystem.Exemplar;
+            //            object o = FileSystem.Exemplar;
             GlobalParameters.SetGlobalParameters();
             _paras = new ParameterInput();
             _paras.Show();
@@ -66,7 +66,7 @@ namespace Fractrace
         /// <summary>
         ///  Get current computing algorithm of the surface data of the "Gestalt". 
         /// </summary>
-        public Iterate Iterate { get { return _iterate;  }  }
+        public Iterate Iterate { get { return _iterate; } }
         /// <summary>Current computing algorithm of the surface data of the "Gestalt". </summary>
         Iterate _iterate = null;
 
@@ -375,7 +375,7 @@ namespace Fractrace
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Always zoom
-           // if (_inZoom)
+            // if (_inZoom)
             {
                 _zoomX1 = e.X;
                 _zoomY1 = e.Y;
@@ -433,81 +433,83 @@ namespace Fractrace
             {
                 // compute Min and Max
                 double minX = double.MaxValue;
-            double minY = double.MaxValue;
-            double minZ = double.MaxValue;
+                double minY = double.MaxValue;
+                double minZ = double.MaxValue;
 
-            double maxX = double.MinValue;
-            double maxY = double.MinValue;
-            double maxZ = double.MinValue;
+                double maxX = double.MinValue;
+                double maxY = double.MinValue;
+                double maxZ = double.MinValue;
 
-            if (_zoomX2 - _zoomX1 < 4)
-            {
-                _zoomX1 -= _width / 10;
-                _zoomX2 += _width / 10;
-                if (_zoomX1 < 0)
-                    _zoomX1 = 0;
-                if (_zoomX2 >= _width)
-                    _zoomX2 = _width - 1;
-                _zoomY1 -= _height / 10;
-                _zoomY2 += _height / 10;
-                if (_zoomY1 < 0)
-                    _zoomY1 = 0;
-                if (_zoomY2 >= _height)
-                    _zoomY2 = _height - 1;
-            }
-
-            //  iter.PictureData.Points
-            double x, y, z;
-            for (int i = _zoomX1; i <= _zoomX2; i++)
-            {
-                for (int j = _zoomY1; j <= _zoomY2; j++)
+                if (_zoomX2 - _zoomX1 < 4)
                 {
-                    if (_iterate.GraphicInfo.PointInfo[i, j] != null)
+                    _zoomX1 -= _width / 10;
+                    _zoomX2 += _width / 10;
+                    if (_zoomX1 < 0)
+                        _zoomX1 = 0;
+                    if (_zoomX2 >= _width)
+                        _zoomX2 = _width - 1;
+                    _zoomY1 -= _height / 10;
+                    _zoomY2 += _height / 10;
+                    if (_zoomY1 < 0)
+                        _zoomY1 = 0;
+                    if (_zoomY2 >= _height)
+                        _zoomY2 = _height - 1;
+                }
+
+                //  iter.PictureData.Points
+                double x, y, z;
+                int noOfPixelsFound = 0;
+                for (int i = _zoomX1; i <= _zoomX2; i++)
+                {
+                    for (int j = _zoomY1; j <= _zoomY2; j++)
                     {
-                        x = _iterate.GraphicInfo.PointInfo[i, j].i;
-                        y = _iterate.GraphicInfo.PointInfo[i, j].j;
-                        z = _iterate.GraphicInfo.PointInfo[i, j].k;
+                        if (_iterate.GraphicInfo.PointInfo[i, j] != null)
+                        {
+                            x = _iterate.GraphicInfo.PointInfo[i, j].i;
+                            y = _iterate.GraphicInfo.PointInfo[i, j].j;
+                            z = _iterate.GraphicInfo.PointInfo[i, j].k;
 
-                        Geometry.Vec3 trans2 = _iterate.LastUsedFormulas.GetTransform(x, y, z);
-                        x = trans2.X;
-                        y = trans2.Y;
-                        z = trans2.Z;
+                            Geometry.Vec3 trans2 = _iterate.LastUsedFormulas.GetTransform(x, y, z);
+                            x = trans2.X;
+                            y = trans2.Y;
+                            z = trans2.Z;
 
-                        if (minX > x)
-                            minX = x;
-                        if (maxX < x)
-                            maxX = x;
-                        if (minY > y)
-                            minY = y;
-                        if (maxY < y)
-                            maxY = y;
-                        if (minZ > z)
-                            minZ = z;
-                        if (maxZ < z)
-                            maxZ = z;
+                            if (minX > x)
+                                minX = x;
+                            if (maxX < x)
+                                maxX = x;
+                            if (minY > y)
+                                minY = y;
+                            if (maxY < y)
+                                maxY = y;
+                            if (minZ > z)
+                                minZ = z;
+                            if (maxZ < z)
+                                maxZ = z;
+
+                            noOfPixelsFound++;
+                        }
                     }
                 }
-            }
 
-            // Set parameters:
-            _paras.Parameter.start_tupel.x = minX;
-            _paras.Parameter.start_tupel.y = minY;
-            _paras.Parameter.start_tupel.z = minZ;
+                if (noOfPixelsFound < 5)
+                {
+                    System.Diagnostics.Debug.WriteLine("No Pixel found in zoom.");
+                    return;
+                }
+                // Set parameters:
+                _paras.Parameter.start_tupel.x = minX;
+                _paras.Parameter.start_tupel.y = minY;
+                _paras.Parameter.start_tupel.z = minZ;
 
-            _paras.Parameter.end_tupel.x = maxX;
-            _paras.Parameter.end_tupel.y = maxY;
-            _paras.Parameter.end_tupel.z = maxZ;
+                _paras.Parameter.end_tupel.x = maxX;
+                _paras.Parameter.end_tupel.y = maxY;
+                _paras.Parameter.end_tupel.z = maxZ;
 
-            ParameterDict.Current.SetDouble("Border.Min.x", _paras.Parameter.start_tupel.x);
-            ParameterDict.Current.SetDouble("Border.Min.y", _paras.Parameter.start_tupel.y);
-            ParameterDict.Current.SetDouble("Border.Min.z", _paras.Parameter.start_tupel.z);
-            ParameterDict.Current.SetDouble("Border.Max.x", _paras.Parameter.end_tupel.x);
-            ParameterDict.Current.SetDouble("Border.Max.y", _paras.Parameter.end_tupel.y);
-            ParameterDict.Current.SetDouble("Border.Max.z", _paras.Parameter.end_tupel.z);
+                _paras.Parameter.TransferToParameterDict();
 
-            _paras.UpdateFromData();
-            Geometry.Navigator.SetAspectRatio();
-            ParameterInput.MainParameterInput.DrawSmallPreview();
+                _paras.UpdateFromData();
+                ParameterInput.MainParameterInput.DrawSmallPreview();
             }
             catch (System.Exception ex)
             {
@@ -578,15 +580,15 @@ namespace Fractrace
                 {
                     if (_currentPicturArt != null)
                     {
-                        if(!IsSubStepRendering())
+                        if (!IsSubStepRendering())
                         {
                             _currentPicturArt.StopAndWait();
                             _lastPicturArt = _currentPicturArt;
                             _currentPicturArt = null;
                         }
                         else
-                        { 
-                        return;
+                        {
+                            return;
                         }
                     }
                 }
@@ -606,7 +608,6 @@ namespace Fractrace
                         fastRenderingFilter = new FastRenderingFilter();
                         fastRenderingFilter.Apply();
                     }
-                    //_lastPicturArt = _currentPicturArt;
                     _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
                     _currentPicturArt.Paint(_graphics);
                     while (_repaintRequested)
@@ -622,7 +623,7 @@ namespace Fractrace
                     _currentPicturArt = null;
                     _repaintRequested = false;
                     CallDrawImage();
-                }   
+                }
                 catch (System.Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
@@ -742,7 +743,7 @@ namespace Fractrace
         {
             if (_inPaint)
                 Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);
-          //  btnRepaint.Enabled = false;
+            //  btnRepaint.Enabled = false;
 
             if (_progressChanged)
             {

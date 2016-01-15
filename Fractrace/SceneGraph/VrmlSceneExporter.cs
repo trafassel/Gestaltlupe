@@ -1,4 +1,5 @@
-﻿using Fractrace.DataTypes;
+﻿using Fractrace.Basic;
+using Fractrace.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,24 +47,7 @@ namespace Fractrace.SceneGraph
         Mesh _mesh = null;
 
 
-        /// <summary>
-        /// Return distance between point1 and point2.
-        /// </summary>
-        protected double Dist(PixelInfo point1, PixelInfo point2)
-        {
-            if (point1 == null || point2 == null)
-                return -1;
-
-            if (point1.Coord == null || point2.Coord == null)
-                return -1;
-
-            double dx = point2.Coord.X - point1.Coord.X;
-            double dy = point2.Coord.Y - point1.Coord.Y;
-            double dz = point2.Coord.Z - point1.Coord.Z;
-
-            return Math.Sqrt(dx * dx + dy * dy + dz * dz);
-        }
-
+       
 
 
         public override void Export(string fileName)
@@ -71,19 +55,17 @@ namespace Fractrace.SceneGraph
             MeshTool _meshTool = new MeshTool(_iterate, _pictureData);
             _mesh = _meshTool.CreateMesh();
 
-         
-
-            // _mesh._colors
-            // string line = ((float)red).ToString(_numberFormatInfo) + " " +
-            // ((float)green).ToString(_numberFormatInfo) + " " +
-            // ((float)blue).ToString(_numberFormatInfo) + ", ";
-            //  // Mark errors with red color.
-            // if (line.ToLower().Contains("nan"))
-            //    line = " 1 0 0, ";
+            StringBuilder normalString = new StringBuilder();
+            StringBuilder normalIndex = new StringBuilder();
 
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             sw.WriteLine("#VRML V2.0 utf8");
 
+            if(!_meshTool.Valid)
+            {
+                sw.Close();
+                return;
+            }
 
             sw.WriteLine(@"
       Transform{
@@ -102,20 +84,18 @@ point [
 ");
 
             //  _mesh._coordinates
-            // sw.WriteLine(x.ToString(_numberFormatInfo) + " " + y.ToString(_numberFormatInfo) + " " + z.ToString(_numberFormatInfo) + ", ");
             int coordSubIndex = 0;
             foreach(float coord in _mesh._coordinates)
             {
                 coordSubIndex++;
                 sw.WriteLine(coord.ToString(_numberFormatInfo)+" ");
+
                 if(coordSubIndex==3)
                 {
                     coordSubIndex = 0;
                     sw.WriteLine(", ");
                 }
             }
-           
-
             sw.WriteLine(@"
 ]
 }
@@ -123,27 +103,25 @@ color
  Color{
 color [
 ");
-
-            /*
-             string line = ((float)red).ToString(_numberFormatInfo) + " " +
-                                  ((float)green).ToString(_numberFormatInfo) + " " +
-                                  ((float)blue).ToString(_numberFormatInfo) + ", ";
-
+            
+            // Color per face:
+            for(int faceIndex = 0; faceIndex < _mesh._faces.Count; faceIndex = faceIndex + 3)
+            {
+                    // use color of first point in face
+                    int pointIndex = _mesh._faces[faceIndex];
+                    int colorIndex = 3 * pointIndex;
+                    string line = _mesh._colors[colorIndex].ToString(_numberFormatInfo) + " " + _mesh._colors[colorIndex + 1].ToString(_numberFormatInfo) +
+                        " " + _mesh._colors[colorIndex + 2].ToString(_numberFormatInfo) + ", ";
                     // Mark errors with red color.
                     if (line.ToLower().Contains("nan"))
                         line = " 1 0 0, ";
-                        */
+                    sw.WriteLine(line);
 
-            coordSubIndex = 0;
-            foreach (float color in _mesh._colors)
-            {
-                coordSubIndex++;
-                sw.WriteLine(color.ToString(_numberFormatInfo) + " ");
-                if (coordSubIndex == 3)
-                {
-                    coordSubIndex = 0;
-                    sw.WriteLine(", ");
-                }
+                normalString.AppendLine(_mesh._normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh._normales[faceIndex + 1].ToString(_numberFormatInfo) +
+                        " " + _mesh._normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
+
+                int face = faceIndex / 3;
+                normalIndex.Append(face.ToString()+" ");
             }
 
             sw.WriteLine(@"
@@ -155,7 +133,6 @@ normalPerVertex FALSE");
 coordIndex [
 ");
 
-            // sw.WriteLine(pointIndex[i, j].ToString() + " " + pointIndex[i - 1, j].ToString() + " " + pointIndex[i - 1, j - 1].ToString() + " -1 ");
             coordSubIndex = 0;
             foreach (int face in _mesh._faces)
             {
@@ -174,21 +151,49 @@ ccw TRUE
 solid TRUE
 texCoordIndex []
 creaseAngle 0
-convex TRUE
-normalIndex []
-colorPerVertex TRUE
+convex TRUE");
+
+            sw.WriteLine(@"
+normal Normal {
+      vector[");
+            sw.WriteLine(normalString.ToString());
+            sw.WriteLine("]}");
+
+
+            sw.WriteLine(@"
+normalIndex [");
+            sw.WriteLine(normalIndex.ToString());
+
+            sw.WriteLine(@"]
+colorPerVertex FALSE
 }
 appearance
 Appearance{
 material
 Material{
+");
+
+            double shininess = ParameterDict.Current.GetDouble("Export.X3d.Shininess");
+            if (shininess>0)
+                sw.WriteLine(@"
+ambientIntensity 0.5
+diffuseColor 1 1 1
+emissiveColor 0 0 0
+shininess "+ shininess.ToString(_numberFormatInfo) + @"
+specularColor 1 1 1
+transparency 0");
+            else
+                sw.WriteLine(@"
 ambientIntensity 1
 diffuseColor 1 1 1
 emissiveColor 1 1 1
 shininess 0
-specularColor 0 0 0
-transparency 0
-}
+specularColor 1 1 1
+transparency 0");
+
+
+            sw.WriteLine(@"
+        }
 }
 }
 ]
@@ -208,7 +213,6 @@ topUrl []
 ");
 
             sw.Close();
-
 
         }
 

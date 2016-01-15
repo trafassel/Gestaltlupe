@@ -34,9 +34,6 @@ namespace Fractrace.Basic
     public class ParameterDict
     {
 
-
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterDict"/> class.
         /// </summary>
@@ -279,6 +276,11 @@ namespace Fractrace.Basic
             return string.Empty;
         }
 
+
+        public bool Exists(string name)
+        {
+            return _entries.ContainsKey(name);
+        }
 
         /// <summary>
         /// Set the value of the entry with given name. 

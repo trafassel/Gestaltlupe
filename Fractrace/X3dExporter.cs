@@ -91,7 +91,6 @@ namespace Fractrace
         {
             if (_iterate == null)
                 return;
-            bool createNormales = true;
 
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             sw.WriteLine("#VRML V2.0 utf8");

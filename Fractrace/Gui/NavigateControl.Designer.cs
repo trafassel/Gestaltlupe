@@ -23,19 +23,6 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            this.btnZoomX = new System.Windows.Forms.Button();
-            this.btnZoomY = new System.Windows.Forms.Button();
-            this.btnZoomZ = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnZoomYout = new System.Windows.Forms.Button();
-            this.btnZoomZout = new System.Windows.Forms.Button();
-            this.tbMove = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbZoomFactor = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbAngle = new System.Windows.Forms.TextBox();
-            this.btnAspect = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -67,148 +54,12 @@
             this.pnlBorderProperties = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnZoomX
-            // 
-            this.btnZoomX.Location = new System.Drawing.Point(327, 397);
-            this.btnZoomX.Margin = new System.Windows.Forms.Padding(2);
-            this.btnZoomX.Name = "btnZoomX";
-            this.btnZoomX.Size = new System.Drawing.Size(67, 28);
-            this.btnZoomX.TabIndex = 6;
-            this.btnZoomX.Text = "ZoomX";
-            this.btnZoomX.UseVisualStyleBackColor = true;
-            this.btnZoomX.Click += new System.EventHandler(this.btnZoomX_Click);
-            // 
-            // btnZoomY
-            // 
-            this.btnZoomY.Location = new System.Drawing.Point(398, 397);
-            this.btnZoomY.Margin = new System.Windows.Forms.Padding(2);
-            this.btnZoomY.Name = "btnZoomY";
-            this.btnZoomY.Size = new System.Drawing.Size(67, 28);
-            this.btnZoomY.TabIndex = 7;
-            this.btnZoomY.Text = "ZoomY";
-            this.btnZoomY.UseVisualStyleBackColor = true;
-            this.btnZoomY.Click += new System.EventHandler(this.btnZoomY_Click);
-            // 
-            // btnZoomZ
-            // 
-            this.btnZoomZ.Location = new System.Drawing.Point(469, 397);
-            this.btnZoomZ.Margin = new System.Windows.Forms.Padding(2);
-            this.btnZoomZ.Name = "btnZoomZ";
-            this.btnZoomZ.Size = new System.Drawing.Size(67, 28);
-            this.btnZoomZ.TabIndex = 8;
-            this.btnZoomZ.Text = "ZoomZ";
-            this.btnZoomZ.UseVisualStyleBackColor = true;
-            this.btnZoomZ.Click += new System.EventHandler(this.btnZoomZ_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(327, 428);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 28);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "ZoomXOut";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnZoomYout
-            // 
-            this.btnZoomYout.Location = new System.Drawing.Point(398, 428);
-            this.btnZoomYout.Margin = new System.Windows.Forms.Padding(2);
-            this.btnZoomYout.Name = "btnZoomYout";
-            this.btnZoomYout.Size = new System.Drawing.Size(67, 28);
-            this.btnZoomYout.TabIndex = 10;
-            this.btnZoomYout.Text = "ZoomYOut";
-            this.btnZoomYout.UseVisualStyleBackColor = true;
-            this.btnZoomYout.Click += new System.EventHandler(this.btnZoomYout_Click);
-            // 
-            // btnZoomZout
-            // 
-            this.btnZoomZout.Location = new System.Drawing.Point(469, 428);
-            this.btnZoomZout.Margin = new System.Windows.Forms.Padding(2);
-            this.btnZoomZout.Name = "btnZoomZout";
-            this.btnZoomZout.Size = new System.Drawing.Size(67, 28);
-            this.btnZoomZout.TabIndex = 11;
-            this.btnZoomZout.Text = "ZoomZout";
-            this.btnZoomZout.UseVisualStyleBackColor = true;
-            this.btnZoomZout.Click += new System.EventHandler(this.btnZoomZout_Click);
-            // 
-            // tbMove
-            // 
-            this.tbMove.Location = new System.Drawing.Point(377, 336);
-            this.tbMove.Margin = new System.Windows.Forms.Padding(2);
-            this.tbMove.Name = "tbMove";
-            this.tbMove.Size = new System.Drawing.Size(55, 20);
-            this.tbMove.TabIndex = 12;
-            this.tbMove.Text = "6";
-            this.tbMove.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(331, 336);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Move";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(331, 365);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Zoom";
-            // 
-            // tbZoomFactor
-            // 
-            this.tbZoomFactor.Location = new System.Drawing.Point(376, 365);
-            this.tbZoomFactor.Margin = new System.Windows.Forms.Padding(2);
-            this.tbZoomFactor.Name = "tbZoomFactor";
-            this.tbZoomFactor.Size = new System.Drawing.Size(55, 20);
-            this.tbZoomFactor.TabIndex = 15;
-            this.tbZoomFactor.Text = "6";
-            this.tbZoomFactor.TextChanged += new System.EventHandler(this.tbZoomFactor_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(444, 339);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Angle";
-            // 
-            // tbAngle
-            // 
-            this.tbAngle.Location = new System.Drawing.Point(488, 336);
-            this.tbAngle.Margin = new System.Windows.Forms.Padding(2);
-            this.tbAngle.Name = "tbAngle";
-            this.tbAngle.Size = new System.Drawing.Size(55, 20);
-            this.tbAngle.TabIndex = 23;
-            this.tbAngle.Text = "10";
-            this.tbAngle.TextChanged += new System.EventHandler(this.tbAngle_TextChanged);
-            // 
-            // btnAspect
-            // 
-            this.btnAspect.Location = new System.Drawing.Point(408, 273);
-            this.btnAspect.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAspect.Name = "btnAspect";
-            this.btnAspect.Size = new System.Drawing.Size(116, 31);
-            this.btnAspect.TabIndex = 27;
-            this.btnAspect.Text = "correct Aspect Ratio";
-            this.btnAspect.UseVisualStyleBackColor = true;
-            this.btnAspect.Click += new System.EventHandler(this.btn_Click);
             // 
             // panel1
             // 
@@ -554,23 +405,23 @@
             // 
             // pnlProperties
             // 
-            this.pnlProperties.Location = new System.Drawing.Point(273, 15);
+            this.pnlProperties.Location = new System.Drawing.Point(252, 15);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(131, 289);
+            this.pnlProperties.Size = new System.Drawing.Size(133, 289);
             this.pnlProperties.TabIndex = 37;
             // 
             // pnlBorderProperties
             // 
-            this.pnlBorderProperties.Location = new System.Drawing.Point(407, 14);
+            this.pnlBorderProperties.Location = new System.Drawing.Point(382, 36);
             this.pnlBorderProperties.Name = "pnlBorderProperties";
-            this.pnlBorderProperties.Size = new System.Drawing.Size(164, 249);
+            this.pnlBorderProperties.Size = new System.Drawing.Size(251, 261);
             this.pnlBorderProperties.TabIndex = 38;
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.panel8);
-            this.panel3.Location = new System.Drawing.Point(267, 2);
+            this.panel3.Location = new System.Drawing.Point(236, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(2, 320);
@@ -585,10 +436,21 @@
             this.panel8.Size = new System.Drawing.Size(2, 320);
             this.panel8.TabIndex = 31;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(411, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "Scene";
+            // 
             // NavigateControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnlBorderProperties);
             this.Controls.Add(this.pnlProperties);
@@ -601,27 +463,14 @@
             this.Controls.Add(this.btnMoveFast);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnAspect);
             this.Controls.Add(this.btnZoomOut);
             this.Controls.Add(this.btnZoomIn);
-            this.Controls.Add(this.tbAngle);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnRotZneg);
             this.Controls.Add(this.btnRotYneg);
             this.Controls.Add(this.btnRotXneg);
             this.Controls.Add(this.btnRotZ);
             this.Controls.Add(this.btnRotY);
             this.Controls.Add(this.btnRotX);
-            this.Controls.Add(this.tbZoomFactor);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbMove);
-            this.Controls.Add(this.btnZoomZout);
-            this.Controls.Add(this.btnZoomYout);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnZoomZ);
-            this.Controls.Add(this.btnZoomY);
-            this.Controls.Add(this.btnZoomX);
             this.Controls.Add(this.btnBackwards);
             this.Controls.Add(this.btnForward);
             this.Controls.Add(this.btnDown);
@@ -648,27 +497,14 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnForward;
         private System.Windows.Forms.Button btnBackwards;
-        private System.Windows.Forms.Button btnZoomX;
-        private System.Windows.Forms.Button btnZoomY;
-        private System.Windows.Forms.Button btnZoomZ;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnZoomYout;
-        private System.Windows.Forms.Button btnZoomZout;
-        private System.Windows.Forms.TextBox tbMove;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbZoomFactor;
         private System.Windows.Forms.Button btnRotX;
         private System.Windows.Forms.Button btnRotY;
         private System.Windows.Forms.Button btnRotZ;
         private System.Windows.Forms.Button btnRotZneg;
         private System.Windows.Forms.Button btnRotYneg;
         private System.Windows.Forms.Button btnRotXneg;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbAngle;
         private System.Windows.Forms.Button btnZoomIn;
         private System.Windows.Forms.Button btnZoomOut;
-        private System.Windows.Forms.Button btnAspect;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnMoveFast;
@@ -686,5 +522,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label1;
     }
 }

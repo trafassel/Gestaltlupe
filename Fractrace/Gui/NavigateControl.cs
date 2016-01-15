@@ -26,24 +26,6 @@ namespace Fractrace
         public NavigateControl()
         {
             InitializeComponent();
-
-            // disable some problemtic buttons
-            btnZoomX.Visible = false;
-            button1.Visible = false;
-            btnZoomY.Visible = false;
-            btnZoomYout.Visible = false;
-            btnZoomZ.Visible = false;
-            btnZoomZout.Visible = false;
-
-            tbAngle_TextChanged(null, null);
-
-            label1.Visible = false;
-            tbMove.Visible = false;
-            label3.Visible = false;
-            tbAngle.Visible = false;
-            label2.Visible = false;
-            tbZoomFactor.Visible = false;
-            // btnAspect.Visible = false;
             panel2.Visible = false;
 
             UpdateMoveButtonAppearance();
@@ -58,10 +40,10 @@ namespace Fractrace
                 pnlProperties.Controls.Add(_propertyControl);
                 _propertyControlBbox = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
                 _propertyControlBbox.Dock = DockStyle.Fill;
-                _propertyControlBbox.Create("Border");
+                _propertyControlBbox.Create("Scene");
                 pnlBorderProperties.Controls.Add(_propertyControlBbox);
             }
-
+            mZoomFactor = 1.2;
         }
 
         /// <summary>
@@ -77,17 +59,17 @@ namespace Fractrace
         /// <summary>
         /// A small control to display the preview of the rendered scene.
         /// </summary>
-        PreviewControl mPreview = null;
+        PreviewControl _preview = null;
 
         /// <summary>
         /// The "right eye"-view of the control.
         /// </summary>
-        PreviewControl mPreviewStereo = null;
+        PreviewControl _previewStereo = null;
 
         /// <summary>
         /// Parent control.
         /// </summary>
-        ParameterInput mParent = null;
+        ParameterInput _parent = null;
 
         /// <summary>
         /// Difference in the center position, if x-Border ist changed by (1,0,0)
@@ -111,9 +93,9 @@ namespace Fractrace
         /// <param name="preview"></param>
         public void Init(PreviewControl preview, PreviewControl preview2, ParameterInput parent)
         {
-            mPreview = preview;
-            mPreviewStereo = preview2;
-            mParent = parent;
+            _preview = preview;
+            _previewStereo = preview2;
+            _parent = parent;
         }
 
 
@@ -143,9 +125,11 @@ namespace Fractrace
         /// </summary>
         public void UpdateCenterDiff()
         {
-            double centerX = (ParameterDict.Current.GetDouble("Border.Max.x") + ParameterDict.Current.GetDouble("Border.Min.x")) / 2.0;
-            double centerY = 0.5 * (ParameterDict.Current.GetDouble("Border.Max.y") + ParameterDict.Current.GetDouble("Border.Min.y"));
-            double centerZ = (ParameterDict.Current.GetDouble("Border.Max.z") + ParameterDict.Current.GetDouble("Border.Min.z")) / 2.0;
+
+            double centerX = ParameterDict.Current.GetDouble("Scene.CenterX");
+            double centerY = ParameterDict.Current.GetDouble("Scene.CenterY");
+            double centerZ = ParameterDict.Current.GetDouble("Scene.CenterZ");
+
             Rotation rotView = null;
             double centerXChange = centerX + 1;
             double centerYChange = centerY + 1;
@@ -197,11 +181,6 @@ namespace Fractrace
         /// <summary>
         /// Solve the equation system a*pp1+b*pp2+c*pp3=pp0 
         /// </summary>
-        /// <param name="pp0"></param>
-        /// <param name="pp1"></param>
-        /// <param name="pp2"></param>
-        /// <param name="pp3"></param>
-        /// <returns></returns>
         Vec3 SolveEqusyst(Vec3 pp0, Vec3 pp1, Vec3 pp2, Vec3 pp3)
         {
             double s = 0, t = 0, u = 0;
@@ -306,57 +285,41 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Slide X-border (not used anymore).
+        /// Move Scene.CenterX.
         /// </summary>
-        /// <param name="xdiff"></param>
         private void SlideX(double xdiff)
         {
-            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
-            double ddiff = endX - startX;
-            endX += xdiff * ddiff;
-            startX += xdiff * ddiff;
-            ParameterDict.Current.SetDouble("Border.Max.x", endX);
-            ParameterDict.Current.SetDouble("Border.Min.x", startX);
+            double centerX = ParameterDict.Current.GetDouble("Scene.CenterX");
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.CenterX", centerX + xdiff * radius);
         }
 
 
         /// <summary>
-        /// Slide Y-border (not used anymore).
+        /// Move Scene.CenterY.
         /// </summary>
         private void SlideY(double ydiff)
         {
-            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
-            double ddiff = endY - startY;
-            endY += ydiff * ddiff;
-            startY += ydiff * ddiff;
-            ParameterDict.Current.SetDouble("Border.Max.y", endY);
-            ParameterDict.Current.SetDouble("Border.Min.y", startY);
+            double centerY = ParameterDict.Current.GetDouble("Scene.CenterY");
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.CenterY", centerY + ydiff * radius);
         }
 
 
         /// <summary>
-        /// Slide Z-border (not used anymore).
+        /// Move Scene.CenterZ.
         /// </summary>
-        /// <param name="zdiff"></param>
         private void SlideZ(double zdiff)
         {
-            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
-            double ddiff = endZ - startZ;
-            endZ += zdiff * ddiff;
-            startZ += zdiff * ddiff;
-            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
+            double centerZ = ParameterDict.Current.GetDouble("Scene.CenterZ");
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.CenterZ", centerZ + zdiff * radius);
         }
 
 
         /// <summary>
         /// Move right.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnRight_Click(object sender, EventArgs e)
         {
             if (mFactor == 0)
@@ -376,8 +339,6 @@ namespace Fractrace
         /// <summary>
         /// Move up.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnTop_Click(object sender, EventArgs e)
         {
             if (mFactor == 0)
@@ -397,8 +358,6 @@ namespace Fractrace
         /// <summary>
         /// Move down.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnDown_Click(object sender, EventArgs e)
         {
             if (mFactor == 0)
@@ -418,8 +377,6 @@ namespace Fractrace
         /// <summary>
         /// Move forward.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnForward_Click(object sender, EventArgs e)
         {
             if (mFactor == 0)
@@ -439,8 +396,6 @@ namespace Fractrace
         /// <summary>
         /// Move backwards.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnBackwards_Click(object sender, EventArgs e)
         {
             if (mFactor == 0)
@@ -458,126 +413,9 @@ namespace Fractrace
 
 
         /// <summary>
-        /// X Zoom (not used).
+        /// Factor used in move.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnZoomX_Click(object sender, EventArgs e)
-        {
-            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
-            double ddiff = endX - startX;
-            endX -= ddiff / mZoomFactor;
-            startX += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.x", endX);
-            ParameterDict.Current.SetDouble("Border.Min.x", startX);
-            DrawAndWriteInHistory();
-        }
-
-
-        /// <summary>
-        /// Y-Zoom (not used).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnZoomY_Click(object sender, EventArgs e)
-        {
-            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
-            double ddiff = endY - startY;
-            endY -= ddiff / mZoomFactor;
-            startY += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.y", endY);
-            ParameterDict.Current.SetDouble("Border.Min.y", startY);
-            DrawAndWriteInHistory();
-        }
-
-
-        /// <summary>
-        /// Z-Zoom (not used).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnZoomZ_Click(object sender, EventArgs e)
-        {
-            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
-            double ddiff = endZ - startZ;
-            endZ -= ddiff / mZoomFactor;
-            startZ += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
-            DrawAndWriteInHistory();
-        }
-
-
-        /// <summary>
-        /// Zoom out X (not used).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
-            double ddiff = endX - startX;
-            endX += ddiff / mZoomFactor;
-            startX -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.x", endX);
-            ParameterDict.Current.SetDouble("Border.Min.x", startX);
-            DrawAndWriteInHistory();
-        }
-
-
-        /// <summary>
-        /// Zoom out Y (not used).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnZoomYout_Click(object sender, EventArgs e)
-        {
-            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
-            double ddiff = endY - startY;
-            endY += ddiff / mZoomFactor;
-            startY -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.y", endY);
-            ParameterDict.Current.SetDouble("Border.Min.y", startY);
-            DrawAndWriteInHistory();
-
-        }
-
-
-        /// <summary>
-        /// Zoom aout Z (not used).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnZoomZout_Click(object sender, EventArgs e)
-        {
-            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
-            double ddiff = endZ - startZ;
-            endZ += ddiff / mZoomFactor;
-            startZ -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
-            DrawAndWriteInHistory();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected double mFactor = 6;
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (double.TryParse(tbMove.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mFactor))
-                tbMove.ForeColor = Color.Black;
-            else
-                tbMove.ForeColor = Color.Red;
-
-        }
+        protected double mFactor = 4;
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -586,44 +424,9 @@ namespace Fractrace
         }
 
 
-        protected double mZoomFactor = 6;
-
-
-        /// <summary>
-        /// Parse Zoomfactor.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbZoomFactor_TextChanged(object sender, EventArgs e)
-        {
-            if (double.TryParse(tbZoomFactor.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mZoomFactor))
-                tbZoomFactor.ForeColor = Color.Black;
-            else
-                tbZoomFactor.ForeColor = Color.Red;
-            if (mZoomFactor <= 2)
-            {
-                mZoomFactor = 2.0001;
-                tbZoomFactor.Text = "2.0001";
-            }
-        }
-
+        protected double mZoomFactor = 1.2;
 
         protected double mAngle = 10;
-
-
-        /// <summary>
-        /// Rotationswinkel wird geparst
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbAngle_TextChanged(object sender, EventArgs e)
-        {
-            if (double.TryParse(tbAngle.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out mAngle))
-                tbAngle.ForeColor = Color.Black;
-            else
-                tbAngle.ForeColor = Color.Red;
-
-        }
 
 
         void RotateX(double angle)
@@ -721,7 +524,6 @@ namespace Fractrace
         {
             RotateZ(Math.PI * mAngle / 180.0);
             DrawAndWriteInHistory();
-
         }
 
         private void btnRotYneg_Click(object sender, EventArgs e)
@@ -743,7 +545,7 @@ namespace Fractrace
         private void DrawAndWriteInHistory()
         {
             DrawPreview();
-            mParent.AddToHistory();
+            _parent.AddToHistory();
             UpdateFromChangeProperty();
         }
 
@@ -751,10 +553,11 @@ namespace Fractrace
         private void DrawPreview()
         {
             ResultImageView.PublicForm.Stop();
-            if (ParameterInput.MainParameterInput.StereoForm != null)     
-                 ParameterInput.MainParameterInput.StereoForm.Abort();
-            mPreview.Draw();
+            if (ParameterInput.MainParameterInput.StereoForm != null)
+                ParameterInput.MainParameterInput.StereoForm.Abort();
+            _preview.Draw();
         }
+
 
         /// <summary>
         /// Is called, if some properties changed.
@@ -767,88 +570,34 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Handles the Click event of the btnZoomIn control.
-        /// Hineinzoomen
+        /// Zoom in.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
-
-            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
-            double ddiff = endX - startX;
-            endX -= ddiff / mZoomFactor;
-            startX += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.x", endX);
-            ParameterDict.Current.SetDouble("Border.Min.x", startX);
-       
-            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
-            ddiff = endY - startY;
-            endY -= ddiff / mZoomFactor;
-            startY += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.y", endY);
-            ParameterDict.Current.SetDouble("Border.Min.y", startY);
-       
-            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
-            ddiff = endZ - startZ;
-            endZ -= ddiff / mZoomFactor;
-            startZ += ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
-            DrawAndWriteInHistory();
-
-        }
-
-
-        private void btnZoomOut_Click(object sender, EventArgs e)
-        {
-
-            double endX = ParameterDict.Current.GetDouble("Border.Max.x");
-            double startX = ParameterDict.Current.GetDouble("Border.Min.x");
-            double ddiff = endX - startX;
-            endX += ddiff / mZoomFactor;
-            startX -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.x", endX);
-            ParameterDict.Current.SetDouble("Border.Min.x", startX);
-  
-            double endY = ParameterDict.Current.GetDouble("Border.Max.y");
-            double startY = ParameterDict.Current.GetDouble("Border.Min.y");
-            ddiff = endY - startY;
-            endY += ddiff / mZoomFactor;
-            startY -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.y", endY);
-            ParameterDict.Current.SetDouble("Border.Min.y", startY);
-    
-            double endZ = ParameterDict.Current.GetDouble("Border.Max.z");
-            double startZ = ParameterDict.Current.GetDouble("Border.Min.z");
-            ddiff = endZ - startZ;
-            endZ += ddiff / mZoomFactor;
-            startZ -= ddiff / mZoomFactor;
-            ParameterDict.Current.SetDouble("Border.Max.z", endZ);
-            ParameterDict.Current.SetDouble("Border.Min.z", startZ);
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.Radius", radius / mZoomFactor);
             DrawAndWriteInHistory();
         }
 
 
         /// <summary>
-        /// Create an automatic aspect corresponding the screen size. 
+        /// Zoom out.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_Click(object sender, EventArgs e)
+        private void btnZoomOut_Click(object sender, EventArgs e)
         {
-            Navigator.SetAspectRatio();
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.Radius", radius * mZoomFactor);
+            DrawAndWriteInHistory();
         }
+
 
         private void btnMoveFast_Click(object sender, EventArgs e)
         {
-            tbMove.Text = "2";
-            tbZoomFactor.Text = "5";
+            mFactor = 4;
+            mZoomFactor = 1.2;
             UpdateMoveButtonAppearance();
         }
+
 
         private void UpdateMoveButtonAppearance()
         {
@@ -856,58 +605,58 @@ namespace Fractrace
             btnMoveNormal.FlatStyle = FlatStyle.Flat;
             btnMoveSlow.FlatStyle = FlatStyle.Flat;
             btnMoveFine.FlatStyle = FlatStyle.Flat;
-            if (tbMove.Text == "2")
+            if (mFactor == 4)
                 btnMoveFast.FlatStyle = FlatStyle.Standard;
-            if (tbMove.Text == "6")
+            if (mFactor == 12)
                 btnMoveNormal.FlatStyle = FlatStyle.Standard;
-            if (tbMove.Text == "16")
+            if (mFactor == 32)
                 btnMoveSlow.FlatStyle = FlatStyle.Standard;
-            if (tbMove.Text == "64")
+            if (mFactor == 128)
                 btnMoveFine.FlatStyle = FlatStyle.Standard;
         }
 
 
         private void btnMoveNormal_Click(object sender, EventArgs e)
         {
-            tbMove.Text = "6";
-            tbZoomFactor.Text = "7";
+            mFactor = 12;
+            mZoomFactor = 1.1;
             UpdateMoveButtonAppearance();
         }
 
 
         private void btnMoveSlow_Click(object sender, EventArgs e)
         {
-            tbMove.Text = "16";
-            tbZoomFactor.Text = "16";
+            mFactor = 32;
+            mZoomFactor = 1.05;
             UpdateMoveButtonAppearance();
         }
 
 
         private void btnMoveFine_Click(object sender, EventArgs e)
         {
-            tbMove.Text = "64";
-            tbZoomFactor.Text = "64";
+            mFactor = 128;
+            mZoomFactor = 1.01;
             UpdateMoveButtonAppearance();
         }
 
 
         private void btnMoveAngleFast_Click(object sender, EventArgs e)
         {
-            tbAngle.Text = "10";
+            mAngle = 10;
             UpdateMoveAngleButtonAppearance();
         }
 
 
         private void btnMoveAngleNormal_Click(object sender, EventArgs e)
         {
-            tbAngle.Text = "2";
+            mAngle = 2;
             UpdateMoveAngleButtonAppearance();
         }
 
 
         private void btnMoveAngleFine_Click(object sender, EventArgs e)
         {
-            tbAngle.Text = "0.1";
+            mAngle = 0.1;
             UpdateMoveAngleButtonAppearance();
         }
 
@@ -917,14 +666,14 @@ namespace Fractrace
             btnMoveAngleFast.FlatStyle = FlatStyle.Flat;
             btnMoveAngleNormal.FlatStyle = FlatStyle.Flat;
             btnMoveAngleFine.FlatStyle = FlatStyle.Flat;
-            if (tbAngle.Text == "10")
+            if (mAngle == 10)
                 btnMoveAngleFast.FlatStyle = FlatStyle.Standard;
-            if (tbAngle.Text == "2")
+            if (mAngle == 2)
                 btnMoveAngleNormal.FlatStyle = FlatStyle.Standard;
-            if (tbAngle.Text == "0.1")
+            if (mAngle == 0.1)
                 btnMoveAngleFine.FlatStyle = FlatStyle.Standard;
         }
 
-       
+
     }
 }

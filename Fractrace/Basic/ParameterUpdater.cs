@@ -16,6 +16,33 @@ namespace Fractrace.Basic
         public static void Update()
         {
 
+            if (ParameterDict.Current.Exists("Border.Min.y"))
+            {
+                ParameterDict.Current.SetDouble("Scene.CenterX",
+                   (ParameterDict.Current.GetDouble("Border.Min.x") + ParameterDict.Current.GetDouble("Border.Max.x")) / 2.0);
+                ParameterDict.Current.SetDouble("Scene.CenterY",
+                   (ParameterDict.Current.GetDouble("Border.Min.y") + ParameterDict.Current.GetDouble("Border.Max.y")) / 2.0);
+                ParameterDict.Current.SetDouble("Scene.CenterZ",
+                   (ParameterDict.Current.GetDouble("Border.Min.z") + ParameterDict.Current.GetDouble("Border.Max.z")) / 2.0);
+
+                double xradius = ParameterDict.Current.GetDouble("Border.Max.x") - ParameterDict.Current.GetDouble("Border.Min.x");
+                double yradius = ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y");
+                double zradius = ParameterDict.Current.GetDouble("Border.Max.z") - ParameterDict.Current.GetDouble("Border.Min.z");
+
+                double radius = xradius;
+                if (yradius > radius)
+                    radius = yradius;
+                if (zradius > radius)
+                    radius = zradius;
+                ParameterDict.Current.SetDouble("Scene.Radius", radius);
+                ParameterDict.Current.RemoveProperty("Border.Max.x");
+                ParameterDict.Current.RemoveProperty("Border.Max.y");
+                ParameterDict.Current.RemoveProperty("Border.Max.z");
+                ParameterDict.Current.RemoveProperty("Border.Min.x");
+                ParameterDict.Current.RemoveProperty("Border.Min.y");
+                ParameterDict.Current.RemoveProperty("Border.Min.z");
+            }
+
             ParameterDict.Current.SetInt("View.PosterX", 0);
             ParameterDict.Current.SetInt("View.PosterZ", 0);
             if (ParameterDict.Current["Transformation.AngleX"] == "0" &&

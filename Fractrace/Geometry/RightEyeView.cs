@@ -38,9 +38,17 @@ namespace Fractrace.Geometry
         {
             _eyeDistance = ParameterDict.Current.GetDouble("Transformation.Stereo.EyeDistance");
             _stereoAngle = ParameterDict.Current.GetDouble("Transformation.Stereo.Angle") * (Math.PI / 180.0);
+            /*
             _xOffset = _eyeDistance * (ParameterDict.Current.GetDouble("Border.Max.x") - ParameterDict.Current.GetDouble("Border.Min.x"));
             _xCenter = (ParameterDict.Current.GetDouble("Border.Max.x") - ParameterDict.Current.GetDouble("Border.Min.x"));
             _yCenter = (ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y"));
+            */
+            _xOffset = _eyeDistance * ParameterDict.Current.GetDouble("Scene.Radius");
+            // Better use Scene.CenterX, Scene.CenterY ????
+            _xCenter = ParameterDict.Current.GetDouble("Scene.Radius");
+            _yCenter = ParameterDict.Current.GetDouble("Scene.Radius");
+
+
 
         }
 

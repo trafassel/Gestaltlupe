@@ -83,9 +83,6 @@ namespace Fractrace
                 return;
             }
 
-            if (GlobalParameters.NeedRecalculateAspect(name))
-              Navigator.SetAspectRatio();
-
             if (GlobalParameters.IsSceneProperty(name))
                 DrawSmallPreview();
 
@@ -198,6 +195,9 @@ namespace Fractrace
         /// </summary>
         public void Assign()
         {
+            mParameter.SetFromParameterDict();
+
+            /*
             mParameter.start_tupel.x = ParameterDict.Current.GetDouble("Border.Min.x");
             mParameter.start_tupel.y = ParameterDict.Current.GetDouble("Border.Min.y");
             mParameter.start_tupel.z = ParameterDict.Current.GetDouble("Border.Min.z");
@@ -207,6 +207,8 @@ namespace Fractrace
             mParameter.arc.x = ParameterDict.Current.GetDouble("Transformation.AngleX");
             mParameter.arc.y = ParameterDict.Current.GetDouble("Transformation.AngleY");
             mParameter.arc.z = ParameterDict.Current.GetDouble("Transformation.AngleZ");
+            */
+
         }
 
 
@@ -1212,13 +1214,8 @@ namespace Fractrace
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 List<string> formulaSettingCategories = new List<string>();
-                formulaSettingCategories.Add("Border");
-                // The both following parameters has always to be saved if Border is saved.
-                formulaSettingCategories.Add("View.Width");
-                formulaSettingCategories.Add("View.Height");
-                formulaSettingCategories.Add("Border");
+                formulaSettingCategories.Add("Scene");
                 formulaSettingCategories.Add("View.Perspective");
-                formulaSettingCategories.Add("Border");
                 formulaSettingCategories.Add("Transformation");
                 formulaSettingCategories.Add("Formula");
                 formulaSettingCategories.Add("Intern.Formula");
@@ -1234,8 +1231,6 @@ namespace Fractrace
         /// which can later be copied into the formula text window to get the current
         /// formula configuration.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btBulk_Click(object sender, EventArgs e)
         {
             tbInfoOutput.Text = InfoGenerator.GenerateCompressedFormula();
@@ -1299,6 +1294,7 @@ namespace Fractrace
             ResultImageView.PublicForm.ActivatePictureArt();
         }
 
+
         private void btnExport_Click(object sender, EventArgs e)
         {
             btnExport.Enabled = false;
@@ -1314,11 +1310,9 @@ namespace Fractrace
                         MessageBox.Show("No Surface Data available.");
                         return;
                     }
-
                     Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                     exporter.Export(sd.FileName);
-                    //X3dExporter export = new X3dExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                    //export.Save(sd.FileName);
+                    MessageBox.Show(sd.FileName+" exported.");
                 }
             }
             catch (Exception ex)
@@ -1362,12 +1356,12 @@ namespace Fractrace
             Application.DoEvents();
         }
 
+
         private void btnLoadExamples_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
             od.Filter = "Gestalt|*.gestalt;*.xml;*.tomo;*.jpg;*.png|*.*|*.*";     
-            od.InitialDirectory = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes");
-          
+            od.InitialDirectory = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes");     
             if (od.ShowDialog() == DialogResult.OK)
             {
                 LoadScene(od.FileName);
@@ -1388,6 +1382,6 @@ namespace Fractrace
             }
         }
 
-
+      
     }
 }

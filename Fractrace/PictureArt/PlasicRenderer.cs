@@ -181,7 +181,9 @@ namespace Fractrace.PictureArt
             lightRay.Y = ParameterDict.Current.GetDouble(parameterNode + "Light.Y");
             lightRay.Z = ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
 
-            areaDeph = ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y");
+            //areaDeph = ParameterDict.Current.GetDouble("Border.Max.y") - ParameterDict.Current.GetDouble("Border.Min.y");
+            areaDeph = ParameterDict.Current.GetDouble("Scene.Radius");
+
             // Rotate lightvec:
             Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
             Vec3 tempcoord2 = formula.GetTransformWithoutProjection(lightRay.X, lightRay.Y, lightRay.Z);
