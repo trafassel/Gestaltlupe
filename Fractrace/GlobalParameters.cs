@@ -462,12 +462,15 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Export.X3d.ClosedSurface"] = "1";
             ParameterDict.Current["Export.X3d.ClosedSurface.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "1";
+            ParameterDict.Current["Export.X3d.ClosedSurfaceDist.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 1 1.2";
+
             ParameterDict.Current["Export.X3d.BatchType"] = "3";
             ParameterDict.Current["Export.X3d.BatchType.PARAMETERINFO.Description"] = "2: front, back 3:front,back,top... 4:front,top-front,...";
             ParameterDict.Current["Export.X3d.BatchType.PARAMETERINFO.VIEW.FixedButtons"] = "2 3 4";
 
             ParameterDict.Current["Export.X3d.Shininess"] = "0.9";
-            
+            ParameterDict.Current["Export.X3d.Shininess.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.8 1";
+
         }
 
 

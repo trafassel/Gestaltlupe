@@ -76,7 +76,6 @@ namespace Fractrace
 
         private void ParameterDictControl1_ElementChanged(string name, string value)
         {
-
             if(GlobalParameters.IsMaterialProperty(name))
             {
                 ResultImageView.PublicForm.ActivatePictureArt();
@@ -85,7 +84,6 @@ namespace Fractrace
 
             if (GlobalParameters.IsSceneProperty(name))
                 DrawSmallPreview();
-
         }
 
         /// <summary>
@@ -196,19 +194,6 @@ namespace Fractrace
         public void Assign()
         {
             mParameter.SetFromParameterDict();
-
-            /*
-            mParameter.start_tupel.x = ParameterDict.Current.GetDouble("Border.Min.x");
-            mParameter.start_tupel.y = ParameterDict.Current.GetDouble("Border.Min.y");
-            mParameter.start_tupel.z = ParameterDict.Current.GetDouble("Border.Min.z");
-            mParameter.end_tupel.x = ParameterDict.Current.GetDouble("Border.Max.x");
-            mParameter.end_tupel.y = ParameterDict.Current.GetDouble("Border.Max.y");
-            mParameter.end_tupel.z = ParameterDict.Current.GetDouble("Border.Max.z");
-            mParameter.arc.x = ParameterDict.Current.GetDouble("Transformation.AngleX");
-            mParameter.arc.y = ParameterDict.Current.GetDouble("Transformation.AngleY");
-            mParameter.arc.z = ParameterDict.Current.GetDouble("Transformation.AngleZ");
-            */
-
         }
 
 
@@ -320,7 +305,6 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-
             if (!mPreviewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
@@ -333,7 +317,6 @@ namespace Fractrace
                     return;
                 }
             }
-
             if (mPosterMode)
             {
                 DrawNextPosterPart();
@@ -347,11 +330,10 @@ namespace Fractrace
                 Image newImage = new Bitmap(imageWidth, imageHeight);
                 Graphics gr = Graphics.FromImage(newImage);
                 gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
-                mHistoryImages[mHistory.Time] = newImage;
-              
-
+                mHistoryImages[mHistory.Time] = newImage;          
             }
         }
+
 
         public void DrawStereo()
         {
@@ -380,7 +362,6 @@ namespace Fractrace
         public bool Changed = false;
 
 
-
         private void OK()
         {
             Changed = true;
@@ -394,21 +375,17 @@ namespace Fractrace
 
         }
 
+
         private void tbAngle_TextChanged(object sender, EventArgs e)
         {
 
         }
 
+
         private void tbVar2_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-
-        /// <summary>
-        /// Verweis auf den Bezug zu Data
-        /// </summary>
-        //   private int mHistoryTime = 0;
 
 
         /// <summary>
@@ -434,7 +411,6 @@ namespace Fractrace
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            //SavePicData(); 
             mHistory.CurrentTime = mHistory.Time;
             if (mHistory.CurrentTime >= 0)
             {
@@ -449,17 +425,9 @@ namespace Fractrace
         /// </summary>
         private void LoadFromHistory()
         {
-            //ParameterValuesChanged(); // Bild retten
-            //SavePicData();  // Bild retten
             mHistory.Load(mHistory.CurrentTime);
             UpdateHistoryControl();
-            //  UpdateFromData();
-
-
             UpdateCurrentTab();
-
-            // TODO: Bild aktualisieren
-
         }
 
 
@@ -581,9 +549,7 @@ namespace Fractrace
         /// <summary>
         /// Sucht das passende Bild zur Parameterdict-Datei und zeigt es
         /// (wenn die Suche erfolgreich war) in Fenster1 an.
-        /// 
         /// </summary>
-        /// <param name="parameterdictFilen"></param>
         private void ShowPicture(string parameterdictFile)
         {
             if (!parameterdictFile.ToLower().StartsWith(Fractrace.FileSystem.Exemplar.ExportDir.ToLower()))
@@ -604,8 +570,6 @@ namespace Fractrace
             string picFile = System.IO.Path.Combine(picDir, fileName + ".png");
 
             ResultImageView.PublicForm.ShowPictureFromFile(picFile);
-
-
         }
 
 
@@ -635,9 +599,13 @@ namespace Fractrace
         /// <summary>
         /// Berechnung stoppen
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void button27_Click(object sender, EventArgs e)
+        {
+            Stop();
+        }
+
+
+        private void Stop()
         {
             Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(null);
             mPosterMode = false;
@@ -650,7 +618,6 @@ namespace Fractrace
         }
 
 
-
         private void btnStopAnimation_Click_1(object sender, EventArgs e)
         {
             ResultImageView.PublicForm.Stop();
@@ -660,7 +627,6 @@ namespace Fractrace
         /// <summary>
         /// Dialogabfrage vor Beendigung der Anwendung.
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnClosing(CancelEventArgs e)
         {
             if (MessageBox.Show("Close Application?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -687,28 +653,9 @@ namespace Fractrace
         /// <summary>
         /// Tab-Auswahl
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateCurrentTab();
-
-            /*
-            if (tabControl1.SelectedTab == Data)
-            {
-                parameterDictControl1.UpdateFromData();
-            }
-            if (tabControl1.SelectedTab == tpSource)
-                formulaEditor1.Init();
-
-            switch (tabControl1.SelectedTab.Name)
-            {
-                case "tpNavigate":
-                    navigateControl1.UpdateFromChangeProperty();
-                    break;
-            }
-            */
-
         }
 
 
@@ -728,13 +675,10 @@ namespace Fractrace
         /// Höhe wurde verschoben.
         /// Breite der Preview Controls setzen:
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void splitContainer1_Panel1_ClientSizeChanged(object sender, EventArgs e)
         {
             SetSmallPreviewSize();
         }
-
 
 
         /// <summary>
@@ -742,7 +686,6 @@ namespace Fractrace
         /// </summary>
         private void SetSmallPreviewSize()
         {
-
 
             double winput = ParameterDict.Current.GetDouble("View.Width");
             double hinput = ParameterDict.Current.GetDouble("View.Height");
@@ -762,8 +705,6 @@ namespace Fractrace
         /// <summary>
         /// History wird um die aktuellen Daten erweitert.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSaveInHistory_Click(object sender, EventArgs e)
         {
             mHistory.CurrentTime = mHistory.Save();
@@ -780,11 +721,10 @@ namespace Fractrace
             UpdateHistoryControl();
         }
 
+
         /// <summary>
         /// Vorgängerschritt wurde ausgewählt.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLastStep_Click(object sender, EventArgs e)
         {
             btnLastStep.Enabled = true;
@@ -838,7 +778,6 @@ namespace Fractrace
                     if (!UpdateHistoryPic())
                     {
                         preview1.Clear();
-                        //preview1.Visible = false;
                     }
                     else
                     {
@@ -901,8 +840,6 @@ namespace Fractrace
         /// <summary>
         /// Ein anderer Karteikastenreiter wurde ausgewählt.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl2.SelectedTab == tpRender)
@@ -910,7 +847,6 @@ namespace Fractrace
                 // View-Eigenschaften bei den globalen Einstellungen auswählen.
                 this.parameterDictControl1.SelectNode("View");
             }
-
         }
 
 
@@ -938,6 +874,7 @@ namespace Fractrace
             mPosterMode = true;
             DrawNextPosterPart();
         }
+
 
         /// <summary>
         /// Erstellt das nächste Einzelbild des Posters.
@@ -1167,8 +1104,6 @@ namespace Fractrace
         /// <summary>
         /// Handles the Click event of the preview1 control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             mHistory.CurrentTime = mHistory.Save();
@@ -1180,8 +1115,6 @@ namespace Fractrace
         /// <summary>
         /// Add file data to the current data. 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAppend_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
@@ -1205,8 +1138,6 @@ namespace Fractrace
         /// <summary>
         /// Save only Gestalt parameters. 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSaveFormula_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
@@ -1308,6 +1239,7 @@ namespace Fractrace
                     if (ResultImageView.PublicForm.LastPicturArt == null)
                     {
                         MessageBox.Show("No Surface Data available.");
+                        btnExport.Enabled = true;
                         return;
                     }
                     Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);

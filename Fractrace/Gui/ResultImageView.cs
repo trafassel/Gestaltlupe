@@ -25,7 +25,6 @@ namespace Fractrace
         public ResultImageView()
         {
             InitializeComponent();
-            //            object o = FileSystem.Exemplar;
             GlobalParameters.SetGlobalParameters();
             _paras = new ParameterInput();
             _paras.Show();
