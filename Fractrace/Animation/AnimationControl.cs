@@ -16,12 +16,24 @@ namespace Fractrace.Animation
     {
 
         /// <summary>
+        /// Control for "Animation" Parameters.
+        /// </summary>
+        DataViewControlPage _propertyControl;
+
+        /// <summary>
         /// Constructer.
         /// </summary>
         public AnimationControl()
         {
             InitializeComponent();
             _mainAnimationControl = this;
+            if (ParameterInput.MainParameterInput != null && ParameterInput.MainParameterInput.MainDataViewControl != null)
+            {
+                _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _propertyControl.Dock = DockStyle.Fill;
+                _propertyControl.Create("Animation");
+                panel3.Controls.Add(_propertyControl);
+            }
         }
 
 
@@ -98,6 +110,9 @@ namespace Fractrace.Animation
         /// </summary>
         private void btnAddRow_Click(object sender, EventArgs e)
         {
+            string fileName = FileSystem.Exemplar.GetFileName("pic.png");
+            ParameterInput.MainParameterInput.SaveHistory(fileName);
+            ParameterInput.MainParameterInput.MainPreviewControl.Image.Save(fileName);
             AddCurrentHistoryEntry();
         }
 
@@ -303,6 +318,7 @@ namespace Fractrace.Animation
         /// </summary>
         private void RenderPreview()
         {
+            /*
             int height = 0;
             if (int.TryParse(tbPreviewSize.Text, out height))
             {
@@ -314,7 +330,10 @@ namespace Fractrace.Animation
             {
                 if (width > 10 && width < 256)
                     _previewWidth = width;
-            }
+            }*/
+            _previewHeight = 100;
+            _previewWidth = 100;
+
             CreateAnimationSteps(tbAnimationDescription.Text);
             pnlPreview.Controls.Clear();
             _stepPreviewControls.Clear();
@@ -445,6 +464,15 @@ namespace Fractrace.Animation
         {
             if (_currentPaintJob != null)
                 _currentPaintJob.Abort();
+        }
+
+
+        /// <summary>
+        /// Is called, if some properties changed.
+        /// </summary>
+        public void UpdateFromChangeProperty()
+        {
+            _propertyControl.UpdateElements();
         }
 
 

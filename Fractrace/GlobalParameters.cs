@@ -481,8 +481,8 @@ for (int n = 1; n < _cycles; n++)
         /// <returns></returns>
         public static bool IsSceneProperty(string name)
         {
-            return (name.StartsWith("Border.") || name.StartsWith("View.Width") || name=="View.Height" || name=="View.Perspective" ||
-                name.StartsWith("Transformation.") || name.StartsWith("Formula.") || name== "View.DephAdd");
+            return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" || name=="View.Perspective" ||
+                name.StartsWith("Transformation.Camera.") || name.StartsWith("Transformation.Perspective.") || name.StartsWith("Formula.") || name== "View.DephAdd");
         }
 
 

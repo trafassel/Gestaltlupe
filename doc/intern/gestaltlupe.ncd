@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:170-->
+<!--LastNote:184-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -1629,6 +1629,7 @@ Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434789087-->
 <!--property:date_modified=1434789121-->
+<!--property:expanded-->
 <!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <DD>
@@ -1781,20 +1782,22 @@ Nur die Grobauflösung reicht völlig. Die automatische Verfeinerung kann späte
 </DL>
 </DD>
 <DT><A name="NEb4ihJzGWmc2ayvBRJR7g"></A>Start mit aktivierten File Tab</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1450667793-->
-<!--property:date_modified=1450668084-->
-<!--property:hash=0ea97f3b93d0beb1be200658d896d2071eb5b1f0-->
-<!--property:hash_html=a662b27b0e264dac65e8e9e1954d0ece6b167b1f-->
+<!--property:date_modified=1452760006-->
+<!--property:hash=01a7342e7db6072863c082607d24a2ddc036bc77-->
+<!--property:hash_html=295613bfd63dea3c73de7b5c384ff9f3768eb2c0-->
 <DD>
 Auf der rechten Seite werden die unter start/ liegenden Vorgabeprojekte und das letzte Projekt (jeweils als Thumbnails angezeigt).<BR>
 <BR>
-Nach Laden eines Projektes wird auf den Reiter Navigate umgestellt.
+Nach Laden eines Projektes wird auf den Reiter Navigate umgestellt.<BR>
+<BR>
+// Änderung: Es wird mit Navigate Tab gestartet
 </DD>
 <DT><A name="Dp35JFYdkfqs8Iw0Cmp2EA"></A>View.Pipeline</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1450705204-->
-<!--property:date_modified=1450705285-->
+<!--property:date_modified=1452759957-->
 <!--property:hash=c4f91b3fa02684b670b226991a887b053684f242-->
 <!--property:hash_html=d57f4dc9df27ebb76c9fe94b97e95eeff1abc5ba-->
 <DD>
@@ -1803,9 +1806,9 @@ Preview=false<BR>
 und UpdatePreview = true setzen.
 </DD>
 <DT><A name="bX3QG37oxpwtYZltiFMFIQ"></A>Programmicon</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1450792923-->
-<!--property:date_modified=1450792943-->
+<!--property:date_modified=1452759966-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="9cGCN5usuqkaxcjpe57rSA"></A>Windows Installer</DT>
@@ -1834,9 +1837,9 @@ Transformation und Border ausblenden.<BR>
 ... vorher testen, ob das zuletzt geschriebene Bild dieselben Parameter hatte. Falls ja, das vorhergerige (Nach erfogreicher Speicherung des aktuellen) laden.
 </DD>
 <DT><A name="j4OvK1ApwDJHA27cL2UCWA"></A>Zoom sollte immer aktiviert sein.</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1450802965-->
-<!--property:date_modified=1450804858-->
+<!--property:date_modified=1452759941-->
 <!--property:hash=e4150be986dd95687a10e62d1aa64645fecc34f6-->
 <!--property:hash_html=e4150be986dd95687a10e62d1aa64645fecc34f6-->
 <DD>
@@ -1890,9 +1893,9 @@ Den Button wieder aktivieren.
 Bisher steht hier Fractrace
 </DD>
 <DT><A name="uQyKpPwDPYJPNwRxpUSsvw"></A>Einträge in Tab Navigate aktualisieren</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1450817515-->
-<!--property:date_modified=1450820228-->
+<!--property:date_modified=1452760020-->
 <!--property:hash=15a51c7b6e231288b231eff9f727c35822ebcdce-->
 <!--property:hash_html=15a51c7b6e231288b231eff9f727c35822ebcdce-->
 <DD>
@@ -1961,11 +1964,16 @@ parameter1=GetDouble(&quot;Formula.Common.Parameter1&quot;);<BR>
 
 </DD>
 <DT><A name="Gwdtvd4jqfrzOJGOK5fErA"></A>Preview Berechung anhalten, wenn small preview aktualisiert wird</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452340490-->
-<!--property:date_modified=1452340566-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:date_modified=1452872590-->
+<!--property:hash=18d47c30ade2382b2bed45a37e4a0880851311c7-->
+<!--property:hash_html=32d0f0edb038c3b9073ccdba183a8a5100976364-->
+<DD>
+ResultImageView.Stop();<BR>
+<BR>
+
+</DD>
 <DT><A name="i7TtMBRggqSP4sU2JUyd8g"></A>Fall, dass bei Rotation NaN entsteht beheben</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452341278-->
@@ -2356,6 +2364,223 @@ Für die Zuordnung zur Formel und des Gebietes genügt das erste Bild.<BR>
 ... tritt manchmal bei X3D Batch Export auf<BR>
 
 </DD>
+<DT><A name="BY8A1yGrSW1WeZo7yeGLyw"></A>Gestaltlupe Homepage</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452760056-->
+<!--property:date_modified=1452760066-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="RdiN4q3BiCjGLyyZCIAEVw"></A>ColorInside ColorOutside</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452761732-->
+<!--property:date_modified=1452767582-->
+<!--property:hash=d47939278bbc96414369a9ec2024e116a056687d-->
+<!--property:hash_html=087fbe3daf5816c802077afb231b2965c334595c-->
+<DD>
+Über<BR>
+Renderer.ColorInside[]<BR>
+und<BR>
+Renderer.ColorOutside[]<BR>
+die Möglichkeit geben, nur die  Innen oder die Außenseite zu färben.<BR>
+<BR>
+Läßt sich anhand der an den Renderer übergebenen Daten nachvollziehen, ob der Punkt innen oder außen ist?<BR>
+<BR>
+Eventuell: _gData.Picture)[xx, yy] <BR>
+Kann Werte 0 1 2 annehmen.<BR>
+<BR>
+0: Initial Wert, Punkt nicht gesetzt<BR>
+1: Punkt gesetzt<BR>
+2: Punkt nicht gesetzt (aus inversen Bereich heraus)<BR>
+<BR>
+<BR>
+// wert existiert:<BR>
+pInfo.IsInside<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="DevkdkJ9i4kvztx86Djfjw"></A>Bug: Einstellungen des FastRenderingFilters werden nicht immer zurückgesetzt</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452764793-->
+<!--property:date_modified=1452764882-->
+<!--property:hash=c91af5ad8ca875775bb09f7346c612919db4cb23-->
+<!--property:hash_html=af30e4e8fb93febe09286dd3020defcd20f29320-->
+<DD>
+eventuell, wenn letzter Rendervorgang abgebrochen wurde??<BR>
+<BR>
+
+</DD>
+<DT><A name="2wKgPtcPKJ3QWM5Nc8Yq5w"></A>Nach Load</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1452780222-->
+<!--property:date_modified=1452780275-->
+<!--property:hash=c73b5c7dc22d7b106001683a393c2b05a3d87955-->
+<!--property:hash_html=cade43fa7b412cbfae8b986ec490fa70477fd9ba-->
+<DD>
+auf den Navigate Tab wechseln.<BR>
+<BR>
+
+</DD>
+<DT><A name="LfSxfEsogz29BfElzrdXTw"></A>Animationseinstellungen in Animation Tab</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452781352-->
+<!--property:date_modified=1452781392-->
+<!--property:hash=e003b5e847c740ab96a1b84e6ef9c910965d0d86-->
+<!--property:hash_html=6372a7b8af076c9492b30ab728d766e0329d25e4-->
+<DD>
+Betrifft: Anzahl der Schritte<BR>
+<BR>
+
+</DD>
+<DT><A name="Z1r7JOT2qnbkXL87ZPozrw"></A>Ausgabe im Batch Prozess</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1452781434-->
+<!--property:date_modified=1452845563-->
+<!--property:hash=64ee91b60c04e97fde9d42d839a960c26c096c77-->
+<!--property:hash_html=a4df77c5064f50fa9388314bedf180d823844752-->
+<DD>
+Create 4/5 Pictures<BR>
+<BR>
+ready<BR>
+<BR>
+
+</DD>
+<DT><A name="ONyot4sc3MtQfHVoP1a01Q"></A>Float Picture Art</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452781970-->
+<!--property:date_modified=1452782072-->
+<!--property:hash=cedcd6c11e478377de04843db6d25c1b80a392cf-->
+<!--property:hash_html=c08653c4b11984cebd9b41f655cb6bb49c76094f-->
+<DD>
+Die Eingangsvariablen nach float Konvertieren und ein auf float basierendes Picture Art umsetzen.<BR>
+<BR>
+
+</DD>
+<DT><A name="DvWoQnZp9W3SI0kxppyZ2g"></A>Manchmal ist color 0</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452801355-->
+<!--property:date_modified=1452801573-->
+<!--property:hash=a6140e60024d3d9b06f2e33624b1bed862efc6f1-->
+<!--property:hash_html=bf80adb6ceae2807587f3859858bbd186a61356b-->
+<DD>
+wahrscheinlich passt last picture nicht???<BR>
+<BR>
+
+</DD>
+<DT><A name="LHWwHZZJa7qnewlzFGwxWg"></A>Normalen mit exportieren</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452803088-->
+<!--property:date_modified=1452845545-->
+<!--property:hash=f5d6f7a1939d503a45be7d76a0bda157d16a82d2-->
+<!--property:hash_html=94a9efade33eea57f044c9002289959e4729a606-->
+<DD>
+// <BR>
+normal Normal { . . . }<BR>
+<BR>
+Normal { <BR>
+  exposedField MFVec3f vector  []   # (-INF,INF)<BR>
+}<BR>
+<BR>
+<BR>
+// Bei der erstllung der faces setzen    <BR>
+normalIndex [ . . . ]<BR>
+    normalPerVertex FALSE<BR>
+<BR>
+<BR>
+<BR>
+also<BR>
+normal Normal { vector [ <BR>
+   0.3 0.5 0.5 -1<BR>
+  0.67 0.99 0.34 -1<BR>
+---<BR>
+] }<BR>
+<BR>
+<BR>
+normalIndex [ 1 2 3 ]<BR>
+<BR>
+    normalPerVertex FALSE<BR>
+<BR>
+
+</DD>
+<DT><A name="yvypBG5qljkuFaaUCNetyw"></A>Center,Radius</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1452846538-->
+<!--property:date_modified=1452851732-->
+<!--property:hash=de92089b74100f872a701c49425b80430da848b4-->
+<!--property:hash_html=b93950c50b6439f87fbd1a19623c1166e827bd97-->
+<DD>
+... statt Min.X ... verwenden.<BR>
+<BR>
+Navigater.SetAspectRatio()<BR>
+<BR>
+double screenWidth = ParameterDict.Current.GetDouble(&quot;View.Width&quot;);<BR>
+            double screenHeight = ParameterDict.Current.GetDouble(&quot;View.Height&quot;);<BR>
+            double maxScreenSize = Math.Max(screenWidth, screenHeight);<BR>
+<BR>
+            // diffx/diffz should be equal to screenWidth/screenHeight;<BR>
+            diffx = maxDiff * screenWidth / maxScreenSize;<BR>
+            diffz = maxDiff * screenHeight / maxScreenSize;<BR>
+            diffy = Math.Max(diffx, diffz);<BR>
+<BR>
+            diffx /= 2.0; diffy /= 2.0; diffz /= 2.0;<BR>
+<BR>
+            xmin = centerX - diffx; xmax = centerX + diffx;<BR>
+            ymin = centerY - diffy; ymax = centerY + diffy;<BR>
+            zmin = centerZ - diffz; zmax = centerZ + diffz;<BR>
+<BR>
+<BR>
+<BR>
+    double centerX = ParameterDict.Current.GetDouble(&quot;Scene.CenterX&quot;);<BR>
+            double centerY = ParameterDict.Current.GetDouble(&quot;Scene.CenterY&quot;);<BR>
+            double centerZ = ParameterDict.Current.GetDouble(&quot;Scene.CenterZ&quot;);<BR>
+            double radius= ParameterDict.Current.GetDouble(&quot;Scene.Radius&quot;);<BR>
+<BR>
+// Aktuell: je größer der Zoom, desto flacher die Darstellung<BR>
+<BR>
+<BR>
+  start_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Min.x&quot;);<BR>
+            start_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Min.y&quot;);<BR>
+            start_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Min.z&quot;);<BR>
+            end_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Max.x&quot;);<BR>
+            end_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Max.y&quot;);<BR>
+            end_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Max.z&quot;);<BR>
+<BR>
+
+</DD>
+<DT><A name="JxDPY8Cyxqn76Nux96y8fg"></A>Stereo und Poster als Batch Prozess umsetzen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452847677-->
+<!--property:date_modified=1452847701-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="w06xWpJsJ4qsMz8Lq4qymQ"></A>ResultImageView.pictureBox1_MouseUp</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452865210-->
+<!--property:date_modified=1452865553-->
+<!--property:hash=5297af3b3e1cef2bd76b22bc32588f3e03fbe18a-->
+<!--property:hash_html=8cca19cb8dc266917270b7ed41f5b3b5826bae13-->
+<DD>
+bei nachchen Bereichen ist _iterate.GraphicInfo.PointInfo[i, j] stets null.<BR>
+<BR>
+eventuell lastiterate verwenden???<BR>
+<BR>
+
+</DD>
+<DT><A name="SxO7nDqsNvVuk9vD8h67kA"></A>Automatic Add To Animation ...</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452873056-->
+<!--property:date_modified=1452873166-->
+<!--property:hash=937d7bb07dc1d2df84af95f298355459f744a0f6-->
+<!--property:hash_html=937d7bb07dc1d2df84af95f298355459f744a0f6-->
+<DD>
+fügt während der Animation Einträge hinzu.
+</DD>
+<DT><A name="DUXYqxyVnHk3FRThOiBuoA"></A>Stop sollte auch laufende Animation beenden</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452873166-->
+<!--property:date_modified=1452873182-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>

@@ -444,6 +444,9 @@ namespace Fractrace
                 case "tpSource":
                     formulaEditor1.Init();
                     break;
+                case "tpAnimationTop":
+                    this.animationControl1.UpdateFromChangeProperty();
+                    break;
                 case "Data":
                     parameterDictControl1.UpdateFromData();
                     break;

@@ -653,10 +653,13 @@ namespace Fractrace
             pictureBox1.Image.Save(fileName);
             if (Fractrace.ParameterInput.MainParameterInput.AutomaticSaveInAnimation)
             {
-                if (ParameterDict.Current["Intern.Filter"] == "" && _lastAnimationParameterHash != ParameterDict.Current.GetHash(""))
+                if (!Animation.AnimationControl.InAnimation)
                 {
-                    Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
-                    _lastAnimationParameterHash = ParameterDict.Current.GetHash("");
+                    if (ParameterDict.Current["Intern.Filter"] == "" && _lastAnimationParameterHash != ParameterDict.Current.GetHash(""))
+                    {
+                        Animation.AnimationControl.MainAnimationControl.AddCurrentHistoryEntry();
+                        _lastAnimationParameterHash = ParameterDict.Current.GetHash("");
+                    }
                 }
             }
 
