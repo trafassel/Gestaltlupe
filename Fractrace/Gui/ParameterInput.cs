@@ -1236,7 +1236,7 @@ namespace Fractrace
             {
                 Application.DoEvents();
                 SaveFileDialog sd = new SaveFileDialog();
-                sd.Filter = "*.wrl|*.wrl|*.*|all";
+                sd.Filter = "VRML|*.wrl|Web|*.html;*.xhtml|*.*|*.*";
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
                     if (ResultImageView.PublicForm.LastPicturArt == null)
@@ -1249,11 +1249,16 @@ namespace Fractrace
                     {
                         Fractrace.SceneGraph.WebGlExporter exporter = new SceneGraph.WebGlExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                         exporter.Export(sd.FileName);
-
                     }
                     else
-                    { 
-                    Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                    if (sd.FileName.ToLower().EndsWith(".xhtml"))
+                    {
+                        Fractrace.SceneGraph.X3DomExporter exporter = new SceneGraph.X3DomExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                        exporter.Export(sd.FileName);
+                    }
+                    else
+                    {
+                        Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                     exporter.Export(sd.FileName);
                     }
                     MessageBox.Show(sd.FileName+" exported.");

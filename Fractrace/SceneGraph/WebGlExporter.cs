@@ -26,6 +26,8 @@ namespace Fractrace.SceneGraph
             if (!_meshTool.Valid)
                 _valid = false;
         }
+
+
         /// <summary>
         /// In VRML used number format.
         /// </summary>

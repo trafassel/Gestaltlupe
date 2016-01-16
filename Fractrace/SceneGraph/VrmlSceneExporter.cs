@@ -76,6 +76,8 @@ point [
                     sw.WriteLine(", ");
                 }
             }
+
+
             sw.WriteLine(@"
 ]
 }

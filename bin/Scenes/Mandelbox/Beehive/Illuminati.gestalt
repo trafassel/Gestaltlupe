@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Mandelbulb.Pow1" Value="2" />
+  <Entry Key="Formula.Mandelbulb.Pow2" Value="2" />
+  <Entry Key="Formula.Mandelbulb.Pow3" Value="2" />
+  <Entry Key="Formula.Static.Cycles" Value="200" />
+  <Entry Key="Formula.Static.Formula" Value="-1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Formula.VecRot.Angle1Mult" Value="" />
+  <Entry Key="Formula.VecRot.Angle1Rot" Value="" />
+  <Entry Key="Formula.VecRot.Angle1Type" Value="" />
+  <Entry Key="Formula.VecRot.Angle2Mul" Value="" />
+  <Entry Key="Formula.VecRot.Angle2Mult" Value="" />
+  <Entry Key="Formula.VecRot.Angle2Rot" Value="" />
+  <Entry Key="Formula.VecRot.Angle2Type" Value="" />
+  <Entry Key="Formula.VecRot.Angle3Mult" Value="" />
+  <Entry Key="Formula.VecRot.Angle3Rot" Value="" />
+  <Entry Key="Formula.VecRot.Angle3Type" Value="" />
+  <Entry Key="Formula.VecRot.Mult1" Value="" />
+  <Entry Key="Formula.VecRot.Mult2" Value="" />
+  <Entry Key="Formula.VecRot.Mult3" Value="" />
+  <Entry Key="Formula.VecRot.Power" Value="" />
+  <Entry Key="Intern.Formula.Source" Value="&#xA;public override void Init() {&#xA;     base.Init();&#xA;     additionalPointInfo=new AdditionalPointInfo();&#xA;}&#xA;&#xA;&#xA;// Mandelbox&#xA;        public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool invers) {&#xA;&#xA;  double gr=50000;&#xA;  double xx, yy, zz;&#xA;  long tw;&#xA;  int n;&#xA;  double x=ar,y=ai,z=aj;&#xA;   double r_n = 0;&#xA;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;  tw = 0L;&#xA;  double r = Math.Sqrt(xx + yy + zz);&#xA;  double scale = 1.1;&#xA;  additionalPointInfo.red=0;&#xA;  additionalPointInfo.green=0;&#xA;  additionalPointInfo.blue=0;&#xA;&#xA;  for (n = 1; n &lt; zkl; n++) {&#xA;&#xA;//              ; fold box onto itself  &#xA;&#xA;bool xChanged=false;&#xA;for (int i=0;i&lt;5;i++) {&#xA;xChanged=false;&#xA;   if (x &gt; 1){&#xA;      x = 2.0 - x;&#xA;xChanged=true;&#xA;&#xA;}&#xA;   else if (x &lt; -1){&#xA;      x = -2.0 - x;&#xA;xChanged=true;&#xA;&#xA;}&#xA;if(!xChanged)&#xA;  break;&#xA;}&#xA;&#xA;   if (y &gt; 1)&#xA;     y = 2.0 - y;&#xA;   else if (y &lt; -1)&#xA;      y = -2.0 - y;&#xA;             &#xA;   if (z &gt; 1)&#xA;     z = 2.0 - z;&#xA;   else if (z &lt; -1)&#xA;      z = -2.0 - z;&#xA;              &#xA;//  ; fold sphere onto itself&#xA;    double fixedRadius = 1;&#xA;  xx = x * x; yy = y * y; zz = z * z; &#xA;   double length=   r = xx + yy + zz;&#xA;&#xA;&#xA;if(r!=0 &amp;&amp; n&gt;40 &amp;&amp; n&lt;150) {&#xA;  additionalPointInfo.red+=xx/r;&#xA;  additionalPointInfo.green+=yy/r;&#xA;  additionalPointInfo.blue+=zz/r;&#xA;}&#xA;&#xA;if (length &gt; gr) { &#xA;   tw = n; break; &#xA;}&#xA;&#xA;   double mult=1;&#xA;&#xA; if (length &lt; fixedRadius &amp;&amp; length &gt;0) {&#xA;        mult=fixedRadius/(length);&#xA;  }&#xA;&#xA;   mult*=scale;&#xA;   x*=mult;&#xA;   y*=mult;&#xA;   z*=mult;&#xA;&#xA;if(x&lt;0) {x=-x;}&#xA;   x+=br;&#xA;   y+=bi;&#xA;   z+=bj;&#xA;}&#xA;&#xA;  if (invers) {&#xA;     if (tw == 0)&#xA;        tw = 1;&#xA;     else&#xA;        tw = 0;&#xA;   }&#xA;   return (tw);&#xA;&#xA;}&#xA;&#xA;" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Scene.CenterX" Value="-117.18026929289" />
+  <Entry Key="Scene.CenterY" Value="42.0000000161118" />
+  <Entry Key="Scene.CenterZ" Value="41.6366602643771" />
+  <Entry Key="Scene.Radius" Value="1.56105213529374E-07" />
+  <Entry Key="Transformation.Camera.AngleX" Value="-2.87942701016323" />
+  <Entry Key="Transformation.Camera.AngleY" Value="1.26673532642682" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="0.682632565487939" />
+  <Entry Key="Transformation.Perspective.Cameraposition" Value="0.8" />
+  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
+  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
+  <Entry Key="View.Perspective" Value="0" />
+</ParameterDict>

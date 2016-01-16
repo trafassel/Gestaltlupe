@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:185-->
+<!--LastNote:191-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2604,6 +2604,58 @@ in panel3:<BR>
 <!--property:hash_html=e776ea29ce3678faa877a421954230253f09505f-->
 <DD>
 Reaktion auf Änderung an Scene Parameter<BR>
+<BR>
+
+</DD>
+<DT><A name="EtCa2ifIglxuimFaCnQcdQ"></A>3D Export ist gespiegelt</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452945507-->
+<!--property:date_modified=1452945654-->
+<!--property:hash=9cbb22f3c375e673cff7892f7c6eb3c34e845e0a-->
+<!--property:hash_html=f0c4c24b1bc1c1f24e625315c7f249b21f400630-->
+<DD>
+Im 3D Export sind oben und unten gespiegelt.<BR>
+<BR>
+(Evtl. bei der Mesherzeugung y durch -y ersetzen?)<BR>
+<BR>
+
+</DD>
+<DT><A name="MzdQwGFCxFNa5vrAVqP0Bw"></A>Dünner Innen-Rückseitenexport</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452945669-->
+<!--property:date_modified=1452945938-->
+<!--property:hash=d5edb533d8b2ba477825206c7863dc3768b2cd10-->
+<!--property:hash_html=f59e3113b9292332861ea1c4bec07a755c14889b-->
+<DD>
+Es wird zweiseitig gespeichert, die Rückseite bekommt statt der Farbe nur die Normale.<BR>
+<BR>
+
+</DD>
+<DT><A name="FO51ljyoUuoq6Ueei8q0iQ"></A>GUI: Start, Preview immer anzeigen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452945940-->
+<!--property:date_modified=1452945994-->
+<!--property:hash=98c0fbe1a71d54b5cfea26d55ae2d137a85f7d4c-->
+<!--property:hash_html=457fdd7dbdcdb878467a2d30d9dfe46fdc06a561-->
+<DD>
+z.B. links neben dem unteren Tab.<BR>
+<BR>
+
+</DD>
+<DT><A name="xpUQk59Add8X2F32G5ajvQ"></A>Size und Export werden nicht mitgespeichert</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1452963992-->
+<!--property:date_modified=1452964026-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="6y5xxXXiWzQ9tNkW89VFAg"></A>Update Material Button</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452974980-->
+<!--property:date_modified=1452975036-->
+<!--property:hash=1ab2d8f8d5989adb8a54660cd81ecb84f073c077-->
+<!--property:hash_html=ff21145b6c761ec75cacdc73e29baa44e9cafc3e-->
+<DD>
+wird manchmal nach der Bilderzeugung nicht mehr auf enabled=true gesetzt.<BR>
 <BR>
 
 </DD>
