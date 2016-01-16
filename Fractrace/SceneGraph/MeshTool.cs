@@ -25,6 +25,11 @@ namespace Fractrace.SceneGraph
         }
 
         /// <summary>
+        /// If true needScaling is always set to true
+        /// </summary>
+        public bool AlwaysScale = false;
+
+        /// <summary>
         /// PictureData of iter with surface coloring from PictureArt
         /// </summary>
         PictureData _pictureData = null;
@@ -143,7 +148,7 @@ namespace Fractrace.SceneGraph
             // Rounding scale parameters to allow combine different 3d scenes at later time. 
             int noOfDigits = 1;
             double d = 1;
-            if (needScaling)
+            if (needScaling || AlwaysScale)
             {
                 while (d > radius)
                 {
@@ -152,9 +157,12 @@ namespace Fractrace.SceneGraph
                 }
                 noOfDigits -= 3;
                 radius = d;
+                if(noOfDigits>1)
+                { 
                 centerx = Math.Round(centerx, noOfDigits);
                 centery = Math.Round(centery, noOfDigits);
                 centerz = Math.Round(centerz, noOfDigits);
+                }
             }
 
             // Maximal Distance to draw triangle.
@@ -172,7 +180,7 @@ namespace Fractrace.SceneGraph
 
                     double x, y, z;
 
-                    if (needScaling)
+                    if (needScaling || AlwaysScale)
                     {
                         x = (pInfo.Coord.X - centerx) / radius;
                         y = (pInfo.Coord.Y - centery) / radius;

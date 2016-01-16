@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:184-->
+<!--LastNote:185-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,9 +7,8 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=HCx9JPnxsH9vMXBWmkXitg-->
+<!--property:UID=ZFx8P7rlbgoGLxGrojH5kQ-->
 <!--property:prop_modified=0-->
-<!--property:note_deleted=AugFK3Kt9vn33o1ixjiHpg-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -2567,9 +2566,9 @@ eventuell lastiterate verwenden???<BR>
 
 </DD>
 <DT><A name="SxO7nDqsNvVuk9vD8h67kA"></A>Automatic Add To Animation ...</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452873056-->
-<!--property:date_modified=1452873166-->
+<!--property:date_modified=1452875032-->
 <!--property:hash=937d7bb07dc1d2df84af95f298355459f744a0f6-->
 <!--property:hash_html=937d7bb07dc1d2df84af95f298355459f744a0f6-->
 <DD>
@@ -2581,6 +2580,33 @@ fügt während der Animation Einträge hinzu.
 <!--property:date_modified=1452873182-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="4wywTUi5afLmKSbJiFWPpg"></A>Animationsparameter im Animationcontrol verwenden</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1452875151-->
+<!--property:date_modified=1452876424-->
+<!--property:hash=7cfc2d79c2bc93a74a21b1db9deaf4b5abbf4bb1-->
+<!--property:hash_html=9e777c9ec1e4e93332a778d22565a65c033b07d1-->
+<DD>
+Wie bei der NaviagationControl<BR>
+NaviagationControl.UpdateFromChangeProperty<BR>
+<BR>
+info:<BR>
+<BR>
+in panel3:<BR>
+<BR>
+
+</DD>
+<DT><A name="ufK313xzCLf2GeQUuESGww"></A>Im NavigationControl</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452875418-->
+<!--property:date_modified=1452876169-->
+<!--property:hash=8587ec581c3aa91d0793283709e4891b35d65e0b-->
+<!--property:hash_html=e776ea29ce3678faa877a421954230253f09505f-->
+<DD>
+Reaktion auf Änderung an Scene Parameter<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 </DL>

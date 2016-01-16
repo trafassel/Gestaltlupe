@@ -1245,8 +1245,17 @@ namespace Fractrace
                         btnExport.Enabled = true;
                         return;
                     }
+                    if(sd.FileName.ToLower().EndsWith(".html"))
+                    {
+                        Fractrace.SceneGraph.WebGlExporter exporter = new SceneGraph.WebGlExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                        exporter.Export(sd.FileName);
+
+                    }
+                    else
+                    { 
                     Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                     exporter.Export(sd.FileName);
+                    }
                     MessageBox.Show(sd.FileName+" exported.");
                 }
             }

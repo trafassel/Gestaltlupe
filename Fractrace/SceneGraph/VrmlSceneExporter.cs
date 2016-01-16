@@ -20,48 +20,28 @@ namespace Fractrace.SceneGraph
         /// <summary>
         /// Initializes a new instance of the <see cref="X3dExporter"/> class.
         /// </summary>
-        public VrmlSceneExporter(Iterate iter, PictureData pictureData)
+        public VrmlSceneExporter(Iterate iter, PictureData pictureData):base(iter,pictureData)
         {
-            _iterate = iter;
-            _pictureData = pictureData;
         }
 
-        /// <summary>
-        /// PictureData of iter with surface coloring from PictureArt
-        /// </summary>
-        PictureData _pictureData = null;
-
-        /// <summary>
-        /// Used iterate
-        /// </summary>
-        protected Iterate _iterate = null;
-
+     
         /// <summary>
         /// In VRML used number format.
         /// </summary>
         protected static System.Globalization.NumberFormatInfo _numberFormatInfo = System.Globalization.CultureInfo.CreateSpecificCulture("en-US").NumberFormat;
 
-        /// <summary>
-        /// Will be created in method Export()
-        /// </summary>
-        Mesh _mesh = null;
-
-
        
-
 
         public override void Export(string fileName)
         {
-            MeshTool _meshTool = new MeshTool(_iterate, _pictureData);
-            _mesh = _meshTool.CreateMesh();
-
+            CreateMesh();
             StringBuilder normalString = new StringBuilder();
             StringBuilder normalIndex = new StringBuilder();
 
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             sw.WriteLine("#VRML V2.0 utf8");
 
-            if(!_meshTool.Valid)
+            if(!_valid)
             {
                 sw.Close();
                 return;
