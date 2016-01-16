@@ -36,7 +36,7 @@ namespace Fractrace.SceneGraph
         {
             CreateMesh();
 
-            float size = 4;
+            float size = 6;
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.
             _mesh.ComputeBoundingBox();
             float centerx=(_mesh.MaxBBox.X+_mesh.MinBBox.X)/ 2.0f;
@@ -67,6 +67,7 @@ namespace Fractrace.SceneGraph
 
             StringBuilder sbColors = new StringBuilder();
             StringBuilder sbVertices = new StringBuilder();
+            StringBuilder sbNormales = new StringBuilder();
 
             int noFaces = _mesh._faces.Count / 3;
             // Color per face:
@@ -100,15 +101,20 @@ namespace Fractrace.SceneGraph
                     x.ToString(_numberFormatInfo) + ", " + y.ToString(_numberFormatInfo) +
                     ", " + z.ToString(_numberFormatInfo) + ", "
                     );
-                    
                 }
-                int face = faceIndex / 3;
+
+                line = _mesh._normales[faceIndex].ToString(_numberFormatInfo) + ", " + _mesh._normales[faceIndex + 1].ToString(_numberFormatInfo) +
+                      ", " + _mesh._normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ";
+                sbNormales.AppendLine(line);
+                sbNormales.AppendLine(line);
+                sbNormales.AppendLine(line);
             }
 
 
 
             int noColors = noFaces * 3;
             int noCoords = noFaces * 3;
+            int noNormals = noFaces * 3;
 
             sw.WriteLine(@"
 var vertices = [
@@ -134,8 +140,20 @@ var vertices = [
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
 	triangleVertexColorBufferID.itemSize = 4;
 	triangleVertexColorBufferID.numItems = "+ noColors.ToString() + @";
-}");
+");
 
+            sw.WriteLine(@"
+	triangleVertexNormalBufferID = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexNormalBufferID);
+    var vertexNormals = [
+");
+            sw.WriteLine(sbNormales.ToString());
+            sw.WriteLine(@"
+   ];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexNormals), gl.STATIC_DRAW);
+    triangleVertexNormalBufferID.itemSize = 3;
+    triangleVertexNormalBufferID.numItems = "+ noNormals.ToString()+ @";
+  }");
             sw.WriteLine(_htmlEnd);
             sw.Close();
 
@@ -149,30 +167,50 @@ var vertices = [
 <meta http-equiv=""content-type"" content=""text/html; charset=ISO-8859-1"">
 
 <script type = ""text/javascript"" src=""sylvester.js""></script>
-<script type = ""text/javascript"" src=""glutils.js""></script>
+<script type = ""text/javascript"" src=""glpsutils.js""></script>
 
 <script id = ""shader-fs"" type=""x-shader/x-fragment"">
   #ifdef GL_ES
   precision highp float;
   #endif
   varying vec4 vColor;
+  
+  varying vec3 vLightWeighting;
 	void main(void)
         {
-            gl_FragColor = vColor;
+            gl_FragColor = vec4(vColor.rgb * vLightWeighting, vColor.a);
         }
 </script>
 
 <script id = ""shader-vs"" type=""x-shader/x-vertex"">
   attribute vec3 aVertexPosition;
   attribute vec4 aVertexColor;
+  attribute vec3 aVertexNormal;
 
   uniform mat4 uMVMatrix;
   uniform mat4 uPMatrix;
+  uniform mat4 uNMatrix; // Normal Matrix
   varying vec4 vColor;
+  uniform vec3 u_vAmbientColor;
+  uniform vec3 u_vLightingDirection;
+  uniform vec3 u_vDirectionalLightColor;
+  uniform bool u_bUseLighting;
+        varying vec3 vLightWeighting;
+  
+  
   void main(void)
         {
-            gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
             vColor = aVertexColor;
+            gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+            if (!u_bUseLighting)
+            {
+                vLightWeighting = vec3(1.0, 1.0, 1.0);
+            }
+            else {
+                vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
+                float fDirectionalLightWeighting = max(dot(transformedNormal.xyz, u_vLightingDirection), 0.0);
+                vLightWeighting = u_vAmbientColor + u_vDirectionalLightColor * fDirectionalLightWeighting;
+            }
         }
 </script>
 
@@ -183,15 +221,16 @@ var vertices = [
             this.y = y;
         }
 
-        var gl; 
+        var gl;
         var shaderProgram;
         var vertexPositionAttribute;
-        var pMatrix;   
-        var mvMatrix;  
-        var fZnear = 0.1;   
-        var fZfar = 100.0;  
+        var pMatrix;
+        var mvMatrix;
 
-        var triangleVertexPositionBufferID;  
+        var fZnear = 0.1;
+        var fZfar = 100.0;
+
+        var triangleVertexPositionBufferID;
         var triangleVertexColorBufferID;
 
         var g_fAnimationXPos = 0.0;
@@ -213,10 +252,10 @@ var vertices = [
             ";
 
         private string _htmlEnd = @"
-function drawScene()  {
+  function drawScene()  {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    pMatrix = createPerspectiveMatrix(45, 1.0, fZnear, fZfar);
+    pMatrix = createPerspectiveMatrix(45, 1.0, fZnear, fZfar); 
     mvMatrix =Matrix.I(4);
     mvMatrix = mvMatrix.x(create3DTranslationMatrix(Vector.create([g_fTranslatX, g_fTranslatY, g_fZZoomlevel])).ensure4x4());
 	mvMatrix = mvMatrix.x(create3DTranslationMatrix(Vector.create([g_fAnimationXPos, 0.0, 0.0])).ensure4x4());
@@ -228,69 +267,95 @@ function drawScene()  {
  
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBufferID);
  	gl.vertexAttribPointer(vertexPositionAttribute, triangleVertexPositionBufferID.itemSize, gl.FLOAT, false, 0, 0);
+	
+	// Normales:
+    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexNormalBufferID);
+    gl.vertexAttribPointer(vertexNormalAttribute, triangleVertexNormalBufferID.itemSize, gl.FLOAT, false, 0, 0);
+
+	var lighting = true; 
+	var bLightingUniform = gl.getUniformLocation(shaderProgram, ""u_bUseLighting"");
+    gl.uniform1i(bLightingUniform, lighting);
+    if (lighting) {
+      gl.uniform3f(
+        ambientColorUniform,
+		0,0,0
+      );
+
+	  // Headlight
+      var lightingDirection = Vector.create([0, 0, -1.0]);
+        lightingDirection.elements[0]=0;
+      lightingDirection.elements[1]=0;
+      lightingDirection.elements[2]=-1.0;
+      var adjustedLD = lightingDirection.toUnitVector().x(-1);
+        gl.uniform3f( lightingDirectionUniform,     adjustedLD.elements[0], adjustedLD.elements[1], adjustedLD.elements[2] );
+
+      gl.uniform3f(
+        directionalColorUniform,
+		1, 1, 1 
+      );
+	}
     setMatrixUniforms();
     gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBufferID.numItems);
   }
 
-  function webGLStart()  {
+function webGLStart()
+{
     initGL();
     initShaders();
 
-	var canvas = document.getElementById(""WebGL-canvas"");
-	canvas.onmousedown=mouseDown;
-    canvas.onmouseup=mouseUp;
-    canvas.onmousemove=mouseMove;
-   	canvas.addEventListener('DOMMouseScroll', mouseWheel, false);
+    var canvas = document.getElementById(""WebGL-canvas"");
+    canvas.onmousedown = mouseDown;
+    canvas.onmouseup = mouseUp;
+    canvas.onmousemove = mouseMove;
+    canvas.addEventListener('DOMMouseScroll', mouseWheel, false);
     document.addEventListener(""keydown"", keyDown, false);
-
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
-    gl.depthFunc(gl.LEQUAL); 
-
+    gl.depthFunc(gl.LEQUAL);
     initBuffers();
     drawScene();
-    }
+}
 
-    function mouseWheel(wheelEvent)
+function mouseWheel(wheelEvent)
+{
+    if (wheelEvent.detail > 0)
+        g_fZZoomlevel += 0.3;
+    else
+        g_fZZoomlevel -= 0.3;
+    drawScene();
+}
+
+function mouseMove(einEvent)
+{
+    if (g_bMousedown == true)
     {
-        if (wheelEvent.detail > 0)
-            g_fZZoomlevel += 0.3;
-        else
-            g_fZZoomlevel -= 0.3;
-        drawScene();
+        g_fAnimationYAngle += (einEvent.clientX - g_lastpoint.x);
+        g_fAnimationXAngle += (einEvent.clientY - g_lastpoint.y);
+        //drawScene();
     }
+    g_lastpoint.x = einEvent.clientX;
+    g_lastpoint.y = einEvent.clientY;
+}
 
-    function mouseMove(event)
+function mouseDown(einEvent)
+{
+    g_bMousedown = true;
+    g_DrawInterval = setInterval(drawScene, 40);
+}
+
+function mouseUp(einEvent)
+{
+    g_bMousedown = false;
+    clearInterval(g_DrawInterval);
+}
+
+function keyDown(einEvent)
+{
+    switch (einEvent.keyCode)
     {
-        if (g_bMousedown == true)
-        {
-            g_fAnimationYAngle += (event.clientX - g_lastpoint.x);
-            g_fAnimationXAngle += (event.clientY - g_lastpoint.y);
-        }
 
-        g_lastpoint.x = event.clientX;
-        g_lastpoint.y = event.clientY;
-    }
-
-    function mouseDown(event)
-    {
-        g_bMousedown = true;
-        g_DrawInterval = setInterval(drawScene, 40);
-    }
-
-    function mouseUp(event)
-    {
-        g_bMousedown = false;
-        clearInterval(g_DrawInterval);
-    }
-
-    function keyDown(event)
-    {
-        switch (event.keyCode)
-        {
-
-            case 37:  //  left cursor
+        case 37:  //  left cursor
                 g_fTranslatX -= 0.2;
                 break;
             case 38:  //  up cursor
@@ -304,22 +369,13 @@ function drawScene()  {
                 break;
             default:
                 break;
-        }
-        drawScene();
     }
+    drawScene();
+}
 </script>
 </head>
 <body onload = ""webGLStart()"" >
-  <table>
-  <tr>
-  <td>
-  <canvas id = ""WebGL-canvas"" style=""border: none;"" width=""1000"" height=""1000""></canvas>
-  </td>
-  <td>
-  </td>
-  </tr>
-  </table>
-  <br/>
+  <canvas id=""WebGL-canvas"" style=""border: none;"" width=""1000"" height=""1000""></canvas>
 <br><br>
 </body>
 </html>
