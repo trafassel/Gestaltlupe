@@ -71,6 +71,7 @@ namespace Fractrace
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
+            InitLastSessionsPictures();
         }
 
 
@@ -1345,5 +1346,68 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Show images of last Sessions.
+        /// </summary>
+        private void InitLastSessionsPictures()
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Dock = DockStyle.Left;
+            this.panel33.Controls.Add(pictureBox);
+            pictureBox.Width = 100;
+          
+
+            string exportDir = FileSystem.Exemplar.ExportDir;
+            exportDir = System.IO.Path.Combine(exportDir, "data");
+            exportDir = System.IO.Path.Combine(exportDir, "parameters");
+            if (System.IO.Directory.Exists(exportDir))
+            {
+                DateTime maxDateTime = DateTime.MinValue;
+                string fileName = "";
+                foreach (string file in System.IO.Directory.GetFiles(exportDir))
+                {
+                    DateTime dt = System.IO.File.GetCreationTime(file);
+                    if (dt > maxDateTime)
+                    {
+                        maxDateTime = dt;
+                        fileName = file;
+                    }
+                }
+                if (fileName != "")
+                {
+                    //        LoadConfiguration(fileName);
+                    string imageFileId = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                    int did = imageFileId.IndexOf("pic");
+                    if(did>0)
+                    { 
+                    string fileDir = imageFileId.Substring(0, did);
+                        string imageFile = fileName.Replace("\\data\\parameters\\", "\\"+fileDir+"\\");
+                        imageFile = imageFile.Replace(".gestalt", ".png");
+                        if(System.IO.File.Exists(imageFile))
+                        {
+                            Image image = Image.FromFile(imageFile);
+                            Size size = new Size(100, 100);
+                            pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
+                            pictureBox.Tag = fileName;
+                            Graphics graphics = Graphics.FromImage(pictureBox.Image);
+                            
+                            this.Refresh();
+                            this.WindowState = FormWindowState.Normal;
+                        }
+
+                    }
+                }
+            }
+
+            pictureBox.Click += PictureBox_Click;
+        }
+
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            LoadScene(pictureBox.Tag.ToString());
+//            MessageBox.Show("PictureBox_Click "+ pictureBox.Tag.ToString());
+//            throw new NotImplementedException();
+        }
     }
 }
