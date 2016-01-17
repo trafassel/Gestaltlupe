@@ -67,7 +67,7 @@ namespace Fractrace
             if (infos.Length > 1)
                 version = infos[1];
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
-            tabControl1.SelectedIndex = 1;
+            tabControl1.SelectedIndex = 3;
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
@@ -524,6 +524,7 @@ namespace Fractrace
                 LoadScene(od.FileName);
                 oldDirectory = System.IO.Path.GetDirectoryName(od.FileName);
             }
+            tabControl1.SelectedIndex = 1;
         }
 
 
@@ -840,19 +841,6 @@ namespace Fractrace
         }
 
 
-        /// <summary>
-        /// Ein anderer Karteikastenreiter wurde ausgewählt.
-        /// </summary>
-        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl2.SelectedTab == tpRender)
-            {
-                // View-Eigenschaften bei den globalen Einstellungen auswählen.
-                this.parameterDictControl1.SelectNode("View");
-            }
-        }
-
-
         protected int mPosterStep = 0;
 
         protected bool mPosterMode = false;
@@ -998,6 +986,7 @@ namespace Fractrace
                     LoadConfiguration(fileName);
                 }
             }
+            tabControl1.SelectedIndex = 1;
         }
 
 
@@ -1317,6 +1306,7 @@ namespace Fractrace
             {
                 LoadScene(od.FileName);
             }
+            tabControl1.SelectedIndex = 1;
         }
 
 
