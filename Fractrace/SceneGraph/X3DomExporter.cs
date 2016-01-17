@@ -21,13 +21,19 @@ namespace Fractrace.SceneGraph
         }
 
 
+        MeshTool _meshTool = null;
+
         protected override void CreateMesh()
         {
-            MeshTool _meshTool = new MeshTool(_iterate, _pictureData);
+            _meshTool = new MeshTool(_iterate, _pictureData);
             _meshTool.AlwaysScale = true;
+            _meshTool.InitMesh();
+
+            /*
             _mesh = _meshTool.CreateMesh();
             if (!_meshTool.Valid)
                 _valid = false;
+                */
         }
 
 
@@ -37,9 +43,22 @@ namespace Fractrace.SceneGraph
         protected static System.Globalization.NumberFormatInfo _numberFormatInfo = System.Globalization.CultureInfo.CreateSpecificCulture("en-US").NumberFormat;
 
 
-        public override void Export(string fileName)
+        public void Init(Iterate iter, PictureData pictureData)
         {
             CreateMesh();
+            _meshTool.Init(iter, pictureData);
+        }
+
+
+        public void Update(Iterate iter, PictureData pictureData)
+        {
+           _mesh = _meshTool.Update( iter,  pictureData);
+        }
+
+
+        public override void Export(string fileName)
+        {
+          
 
             float size = 100;
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.

@@ -1236,7 +1236,7 @@ namespace Fractrace
             {
                 Application.DoEvents();
                 SaveFileDialog sd = new SaveFileDialog();
-                sd.Filter = "VRML|*.wrl|Web|*.html;*.xhtml|*.*|*.*";
+                sd.Filter = "VRML|*.wrl|Web|*.xhtml|*.*|*.*";
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
                     if (ResultImageView.PublicForm.LastPicturArt == null)
@@ -1254,6 +1254,8 @@ namespace Fractrace
                     if (sd.FileName.ToLower().EndsWith(".xhtml"))
                     {
                         Fractrace.SceneGraph.X3DomExporter exporter = new SceneGraph.X3DomExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                        exporter.Init(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
+                        exporter.Update(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                         exporter.Export(sd.FileName);
                     }
                     else
@@ -1321,16 +1323,37 @@ namespace Fractrace
         private void btnBatchExport_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
-            sd.Filter = "*.wrl|*.wrl|*.*|all";
+            sd.Filter = "*.wrl|*.wrl|Web|*.xhtml";
             if (sd.ShowDialog() == DialogResult.OK)
             {
-                Fractrace.Scheduler.BatchProcess.X3dExportBatchProcess x3dExportBatchProcess = new Scheduler.BatchProcess.X3dExportBatchProcess();
-                x3dExportBatchProcess.ExportFile = sd.FileName;
-                Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(x3dExportBatchProcess);
-                StartRendering();
+
+                if (sd.FileName.ToLower().EndsWith(".xhtml"))
+                {
+                    Fractrace.Scheduler.BatchProcess.X3DomExportBatchProcess x3DomExportBatchProcess = new Scheduler.BatchProcess.X3DomExportBatchProcess();
+                    x3DomExportBatchProcess.ExportFile = sd.FileName;
+                    Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(x3DomExportBatchProcess);
+                    StartRendering();
+                }
+                else if (sd.FileName.ToLower().EndsWith(".wrl"))
+                {
+                    Fractrace.Scheduler.BatchProcess.X3dExportBatchProcess x3dExportBatchProcess = new Scheduler.BatchProcess.X3dExportBatchProcess();
+                    x3dExportBatchProcess.ExportFile = sd.FileName;
+                    Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(x3dExportBatchProcess);
+                    StartRendering();
+                }
+                else
+                {
+                    MessageBox.Show("Unknown Fileformat.");
+                }
             }
         }
 
-      
+
+        private void btnAddToAnimation_Click(object sender, EventArgs e)
+        {
+            this.animationControl1.AddToAnimation();
+        }
+
+
     }
 }

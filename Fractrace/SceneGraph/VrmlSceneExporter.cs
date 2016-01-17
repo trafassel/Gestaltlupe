@@ -182,7 +182,7 @@ transparency 0");
 }
 Background{
 groundColor []
-skyColor [ 0.2 0.2 0.25]
+skyColor [ 0 0 0]
 skyAngle []
 backUrl []
 frontUrl []

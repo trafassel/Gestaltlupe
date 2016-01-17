@@ -270,6 +270,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ShadowGlow"] = "0.94";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.PlusButton"] = "0.001";
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Current["Renderer.ShadowNumber"] = "22";
@@ -459,10 +460,10 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.Description"] = "Angle difference in stereo mode.";
             // ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.FixedButtons"] = "-9";
 
-            ParameterDict.Current["Export.X3d.ClosedSurface"] = "1";
+            ParameterDict.Current["Export.X3d.ClosedSurface"] = "0";
             ParameterDict.Current["Export.X3d.ClosedSurface.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "1";
-            ParameterDict.Current["Export.X3d.ClosedSurfaceDist.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 1 1.2";
+            ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "4";
+            ParameterDict.Current["Export.X3d.ClosedSurfaceDist.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 1 1.2 2 4 8";
 
             ParameterDict.Current["Export.X3d.BatchType"] = "3";
             ParameterDict.Current["Export.X3d.BatchType.PARAMETERINFO.Description"] = "2: front, back 3:front,back,top... 4:front,top-front,...";

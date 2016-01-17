@@ -110,6 +110,12 @@ namespace Fractrace.Animation
         /// </summary>
         private void btnAddRow_Click(object sender, EventArgs e)
         {
+            AddToAnimation();
+        }
+
+
+        public void AddToAnimation()
+        {
             string fileName = FileSystem.Exemplar.GetFileName("pic.png");
             ParameterInput.MainParameterInput.SaveHistory(fileName);
             ParameterInput.MainParameterInput.MainPreviewControl.Image.Save(fileName);

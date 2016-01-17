@@ -86,7 +86,7 @@ namespace Fractrace.Scheduler.BatchProcess
             {
                 if (_currentStep == 1)
                 {
-                    ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
+                    //ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX+0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY+0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ+0);
@@ -127,7 +127,7 @@ namespace Fractrace.Scheduler.BatchProcess
             {
                 if (_currentStep == 1)
                 {
-                    ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
+                    //ParameterDict.Current.SetBool("Export.X3d.ClosedSurface", false);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 0);

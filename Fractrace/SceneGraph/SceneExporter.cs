@@ -23,6 +23,7 @@ namespace Fractrace.SceneGraph
         protected virtual void CreateMesh()
         {
             MeshTool _meshTool = new MeshTool(_iterate, _pictureData);
+            _meshTool.InitMesh();
             _mesh = _meshTool.CreateMesh();
             if (!_meshTool.Valid)
                 _valid = false;

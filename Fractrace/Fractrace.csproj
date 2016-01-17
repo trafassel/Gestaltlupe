@@ -226,6 +226,7 @@
     <Compile Include="SceneGraph\WebGlExporter.cs" />
     <Compile Include="SceneGraph\X3DomExporter.cs" />
     <Compile Include="Scheduler\BatchProcess\BatchProcess.cs" />
+    <Compile Include="Scheduler\BatchProcess\X3DomExportBatchProcess.cs" />
     <Compile Include="Scheduler\BatchProcess\X3dExportBatchProcess.cs" />
     <Compile Include="Scheduler\GrandScheduler.cs" />
     <Compile Include="Gui\ResultImageView.cs">
