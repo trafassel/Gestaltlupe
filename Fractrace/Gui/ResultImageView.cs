@@ -29,6 +29,8 @@ namespace Fractrace
             _paras = new ParameterInput();
             _paras.Show();
             PublicForm = this;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(10, 200);
         }
 
 
@@ -230,7 +232,7 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Current.GetHash("View.DephAdd"));
             tempHash.Append(ParameterDict.Current.GetHash("View.PosterX"));
             tempHash.Append(ParameterDict.Current.GetHash("View.PosterZ"));
-            tempHash.Append(ParameterDict.Current.GetHash("Border"));
+            tempHash.Append(ParameterDict.Current.GetHash("Scene"));
             tempHash.Append(ParameterDict.Current.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Current.GetHash("Formula"));
             tempHash.Append(ParameterDict.Current.GetHash("Intern.Formula"));

@@ -43,9 +43,9 @@
             // 
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 477);
+            this.panel1.Location = new System.Drawing.Point(0, 464);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(841, 19);
+            this.panel1.Size = new System.Drawing.Size(583, 19);
             this.panel1.TabIndex = 0;
             // 
             // panel7
@@ -55,7 +55,7 @@
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5);
-            this.panel7.Size = new System.Drawing.Size(841, 19);
+            this.panel7.Size = new System.Drawing.Size(583, 19);
             this.panel7.TabIndex = 14;
             // 
             // progressBar1
@@ -65,7 +65,7 @@
             this.progressBar1.Location = new System.Drawing.Point(5, 5);
             this.progressBar1.MarqueeAnimationSpeed = 0;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(831, 9);
+            this.progressBar1.Size = new System.Drawing.Size(573, 9);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 0;
             // 
@@ -75,7 +75,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(841, 477);
+            this.panel2.Size = new System.Drawing.Size(583, 464);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -85,7 +85,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(841, 477);
+            this.panel3.Size = new System.Drawing.Size(583, 464);
             this.panel3.TabIndex = 1;
             // 
             // pictureBox1
@@ -104,15 +104,15 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Form1
+            // ResultImageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 496);
+            this.ClientSize = new System.Drawing.Size(583, 483);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "ResultImageView";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.panel1.ResumeLayout(false);

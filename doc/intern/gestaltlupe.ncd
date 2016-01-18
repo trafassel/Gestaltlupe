@@ -2809,14 +2809,22 @@ Die Bilder der zuletzt geöffnenten unter panel33<BR>
 <DT><A name="s4DR9xMKwc55n0wv0eqqyA"></A>Angezeigte Parameternamen</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1453072585-->
-<!--property:date_modified=1453072775-->
-<!--property:hash=450ef27cda61ef13df6d8c2b95b8d6e441632233-->
-<!--property:hash_html=f542041fce4a3affac71976510f46404a7c72451-->
+<!--property:date_modified=1453098443-->
+<!--property:hash=636a6161dd08e0ad854d3f0641f17c876139dc22-->
+<!--property:hash_html=7b6870570e4c67e277f1e93ace84df5df61f2e96-->
 <DD>
 automatisch aus groß- kleinschreibung ermitteln.<BR>
 <BR>
 CenterX -&gt; Center X<BR>
 BrightLightLevel -&gt; Bright Light Level<BR>
+<BR>
+Umzusetzen:<BR>
+In DataViewElement.Init()<BR>
+<BR>
+vor:<BR>
+lblName.Text = sName;<BR>
+<BR>
+sName Buchstabenweise durchgehen und if(s==s.ToLower()) verwenden<BR>
 <BR>
 
 </DD>

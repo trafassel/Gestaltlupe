@@ -72,6 +72,8 @@ namespace Fractrace
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
             InitLastSessionsPictures();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(600, 200);
         }
 
 
@@ -1354,9 +1356,7 @@ namespace Fractrace
             PictureBox pictureBox = new PictureBox();
             pictureBox.Dock = DockStyle.Left;
             this.panel33.Controls.Add(pictureBox);
-            pictureBox.Width = 100;
-          
-
+            
             string exportDir = FileSystem.Exemplar.ExportDir;
             exportDir = System.IO.Path.Combine(exportDir, "data");
             exportDir = System.IO.Path.Combine(exportDir, "parameters");
@@ -1375,7 +1375,6 @@ namespace Fractrace
                 }
                 if (fileName != "")
                 {
-                    //        LoadConfiguration(fileName);
                     string imageFileId = System.IO.Path.GetFileNameWithoutExtension(fileName);
                     int did = imageFileId.IndexOf("pic");
                     if(did>0)
@@ -1386,7 +1385,9 @@ namespace Fractrace
                         if(System.IO.File.Exists(imageFile))
                         {
                             Image image = Image.FromFile(imageFile);
-                            Size size = new Size(100, 100);
+                            double width = 100.0 * ((double)image.Width) / ((double)image.Height);
+                            pictureBox.Width = 100 * image.Width / image.Height;
+                            Size size = new Size(pictureBox.Width, 100);
                             pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
                             pictureBox.Tag = fileName;
                             Graphics graphics = Graphics.FromImage(pictureBox.Image);
@@ -1406,8 +1407,20 @@ namespace Fractrace
         {
             PictureBox pictureBox = (PictureBox)sender;
             LoadScene(pictureBox.Tag.ToString());
-//            MessageBox.Show("PictureBox_Click "+ pictureBox.Tag.ToString());
-//            throw new NotImplementedException();
+        }
+
+
+        private void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            // Save Image
+            SaveFileDialog sd = new SaveFileDialog();
+            sd.Filter = "Image|*.png";
+            if (sd.ShowDialog() == DialogResult.OK)
+            {
+                ResultImageView.PublicForm.GetImage().Save(sd.FileName);
+            }
+
+
         }
     }
 }

@@ -28,13 +28,14 @@ namespace Fractrace
             string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
-            formulaSettingCategories.Add("Border");
-            formulaSettingCategories.Add("View.Width");
-            formulaSettingCategories.Add("View.Height");
+            formulaSettingCategories.Add("Scene");
+            //formulaSettingCategories.Add("View.Width");
+            //formulaSettingCategories.Add("View.Height");
             //formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("View.Perspective");
             //formulaSettingCategories.Add("Border");
-            formulaSettingCategories.Add("Transformation");
+            formulaSettingCategories.Add("Transformation.Camera");
+            formulaSettingCategories.Add("Transformation.Perspectice");
             formulaSettingCategories.Add("Formula");
 
             // To make the new settings unique
@@ -93,13 +94,13 @@ namespace Fractrace
             string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
-            formulaSettingCategories.Add("Border");
-            formulaSettingCategories.Add("View.Width");
-            formulaSettingCategories.Add("View.Height");
-            formulaSettingCategories.Add("Border");
+            //formulaSettingCategories.Add("Border");
+            //formulaSettingCategories.Add("View.Width");
+            //formulaSettingCategories.Add("View.Height");
+            formulaSettingCategories.Add("Scene");
             formulaSettingCategories.Add("View.Perspective");
-            formulaSettingCategories.Add("Border");
-            formulaSettingCategories.Add("Transformation");
+            formulaSettingCategories.Add("Transformation.Camera");
+            formulaSettingCategories.Add("Transformation.Perspectice");
             formulaSettingCategories.Add("Formula");
             formulaSettingCategories.Add("Renderer");
             formulaSettingCategories.Add("Renderer.BackColor");

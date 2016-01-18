@@ -634,8 +634,8 @@ namespace Fractrace.Basic
                 return true;
             if (parameterName == "View.Raster")
                 return true;
-            if (parameterName == "View.Size")
-                return true;
+          //  if (parameterName == "View.Size")
+         //       return true;
             if (parameterName == "View.Pipeline.Preview")
                 return true;
             if (parameterName == "View.Pipeline.UpdatePreview")
