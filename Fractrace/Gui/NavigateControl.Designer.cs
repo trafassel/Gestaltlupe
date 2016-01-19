@@ -407,14 +407,14 @@
             // 
             this.pnlProperties.Location = new System.Drawing.Point(252, 15);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(133, 289);
+            this.pnlProperties.Size = new System.Drawing.Size(164, 289);
             this.pnlProperties.TabIndex = 37;
             // 
             // pnlBorderProperties
             // 
-            this.pnlBorderProperties.Location = new System.Drawing.Point(382, 36);
+            this.pnlBorderProperties.Location = new System.Drawing.Point(431, 37);
             this.pnlBorderProperties.Name = "pnlBorderProperties";
-            this.pnlBorderProperties.Size = new System.Drawing.Size(251, 261);
+            this.pnlBorderProperties.Size = new System.Drawing.Size(230, 261);
             this.pnlBorderProperties.TabIndex = 38;
             // 
             // panel3
@@ -440,7 +440,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(411, 17);
+            this.label1.Location = new System.Drawing.Point(432, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 39;

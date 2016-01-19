@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:199-->
+<!--LastNote:200-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2827,6 +2827,15 @@ lblName.Text = sName;<BR>
 sName Buchstabenweise durchgehen und if(s==s.ToLower()) verwenden<BR>
 <BR>
 
+</DD>
+<DT><A name="yXPzyrQ3wKyfaQVyHTYNOA"></A>Update Material</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1453159934-->
+<!--property:date_modified=1453159969-->
+<!--property:hash=420a8cadb122166c094211c546a4bf16c12278dd-->
+<!--property:hash_html=420a8cadb122166c094211c546a4bf16c12278dd-->
+<DD>
+... hängt enabling des Start Buttons hinterher.
 </DD>
 </DL>
 </DD>

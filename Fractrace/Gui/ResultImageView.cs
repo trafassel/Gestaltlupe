@@ -677,7 +677,7 @@ namespace Fractrace
             {
                 if (_progress == 100) // TODO: Better test of last rendering process
                 {
-                    if (Fractrace.Scheduler.GrandScheduler.Exemplar.PictureIsCreated(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData))
+                    if (ResultImageView.PublicForm.LastPicturArt!=null && Fractrace.Scheduler.GrandScheduler.Exemplar.PictureIsCreated(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData))
                     {
                         ParameterInput.MainParameterInput.StartRendering();
                     }

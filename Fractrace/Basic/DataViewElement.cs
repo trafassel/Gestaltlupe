@@ -51,6 +51,20 @@ namespace Fractrace.Basic
         public event ElementChangedDelegate ElementChanged;
 
 
+        private string DisplayName(string str)
+        {
+            string displayName = "";
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] != str.ToLower()[i] && i > 0)
+                {
+                    displayName += " ";
+                }
+                displayName += str[i];
+            }
+            return displayName;
+        }
+
         /// <summary>
         /// Initialisation.
         /// </summary>
@@ -64,7 +78,7 @@ namespace Fractrace.Basic
             {
                 string[] strings = _name.Split('.');
                 if (strings.Length > 0)
-                    lblName.Text = strings[strings.Length - 1];
+                    lblName.Text = DisplayName(strings[strings.Length - 1]);
                 if (lblName.Text.Length == 1)
                     panel1.Width = 30;
             }
@@ -80,7 +94,8 @@ namespace Fractrace.Basic
                     }
                     sName = sName.Substring(ppos + 1);
                 }
-                lblName.Text = sName;
+               
+                lblName.Text = DisplayName(sName);
             }
             if (description != string.Empty)
             {

@@ -38,7 +38,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(104, 79);
+            this.panel1.Size = new System.Drawing.Size(127, 79);
             this.panel1.TabIndex = 0;
             // 
             // lblName
@@ -55,11 +55,11 @@
             // pnlEdit
             // 
             this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEdit.Location = new System.Drawing.Point(104, 0);
+            this.pnlEdit.Location = new System.Drawing.Point(127, 0);
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
             this.pnlEdit.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.pnlEdit.Size = new System.Drawing.Size(156, 79);
+            this.pnlEdit.Size = new System.Drawing.Size(133, 79);
             this.pnlEdit.TabIndex = 1;
             // 
             // pnlButtons
