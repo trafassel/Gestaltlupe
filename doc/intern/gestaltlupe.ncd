@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:200-->
+<!--LastNote:199-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2837,6 +2837,12 @@ sName Buchstabenweise durchgehen und if(s==s.ToLower()) verwenden<BR>
 <DD>
 ... hängt enabling des Start Buttons hinterher.
 </DD>
+<DT><A name="iDZrbIJv7i8y8qKN9Jf5ZQ"></A>Save Formula Fehlt</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1453160038-->
+<!--property:date_modified=1453160047-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>

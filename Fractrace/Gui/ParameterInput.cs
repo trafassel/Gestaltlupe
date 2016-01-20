@@ -72,6 +72,7 @@ namespace Fractrace
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
             InitLastSessionsPictures();
+            InitDefaultScenesPictures();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(600, 200);
         }
@@ -1386,7 +1387,6 @@ namespace Fractrace
                         if(System.IO.File.Exists(imageFile))
                         {
                             Image image = Image.FromFile(imageFile);
-                            double width = 100.0 * ((double)image.Width) / ((double)image.Height);
                             pictureBox.Width = 100 * image.Width / image.Height;
                             Size size = new Size(pictureBox.Width, 100);
                             pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
@@ -1396,13 +1396,68 @@ namespace Fractrace
                             this.Refresh();
                             this.WindowState = FormWindowState.Normal;
                         }
-
                     }
                 }
             }
-
             pictureBox.Click += PictureBox_Click;
         }
+
+
+        private void InitDefaultScenesPictures()
+        {
+
+            List<string> currentDirs = new List<string>();
+            currentDirs.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes"));
+
+            int currentXpos = 0;
+            int currentYpos = 0;
+            int bordersize = 0;
+            int maxXpos = 480;
+
+            while (currentDirs.Count > 0)
+            {
+                List<string> subDirs = new List<string>();
+                foreach (string currentDir in currentDirs)
+                {
+                    if (System.IO.Directory.Exists(currentDir))
+                    {
+                        foreach (string subDirectory in System.IO.Directory.GetDirectories(currentDir))
+                        {
+                            subDirs.Add(subDirectory);
+                        }
+                        foreach (string imageFile in System.IO.Directory.GetFiles(currentDir, "*.png"))
+                        {
+                            System.Diagnostics.Debug.WriteLine(imageFile);
+
+                            string gestaltFile = currentDir + "/" + System.IO.Path.GetFileNameWithoutExtension(imageFile) + ".gestalt";
+
+                            PictureBox pictureBox = new PictureBox();
+                            pictureBox.Left = currentXpos;
+                            pictureBox.Top = currentYpos;
+                            this.panel30.Controls.Add(pictureBox);
+
+                            Image image = Image.FromFile(imageFile);
+                            pictureBox.Width = 100 * image.Width / image.Height;
+                            pictureBox.Height = 100;
+                            Size size = new Size(pictureBox.Width, 100);
+                            pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
+                            pictureBox.Tag = gestaltFile;
+                            Graphics graphics = Graphics.FromImage(pictureBox.Image);
+                            pictureBox.Click += PictureBox_Click;
+
+                            currentXpos += pictureBox.Width + bordersize;
+                            if (currentXpos > maxXpos)
+                            {
+                                currentXpos = 0;
+                                currentYpos += 100 + bordersize;
+                            }
+                        }
+                    }
+                }
+                currentDirs = subDirs;
+            }
+        }
+
 
         private void PictureBox_Click(object sender, EventArgs e)
         {

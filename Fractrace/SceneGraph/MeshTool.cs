@@ -277,6 +277,13 @@ namespace Fractrace.SceneGraph
                 }
             }
 
+            if (currentIndex == 0)
+            {
+                _valid = false; 
+                return;
+            }
+
+
             radius = maxz - minz + maxy - miny + maxx - minx;
             centerx = (maxx + minx) / 2.0;
             centery = (maxy + miny) / 2.0;
