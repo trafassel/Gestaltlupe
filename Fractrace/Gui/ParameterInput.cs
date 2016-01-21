@@ -539,7 +539,11 @@ namespace Fractrace
         {
             if (dataFileName.ToLower().EndsWith(".jpg") || dataFileName.ToLower().EndsWith(".png"))
             {
-                dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".gestalt";
+                string testFile= System.IO.Path.GetDirectoryName(dataFileName)+"/"+ System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".gestalt";
+                if (System.IO.File.Exists(testFile))
+                    dataFileName = testFile;
+                else
+                    dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".gestalt";
                 // Backward compatibility
                 if (!System.IO.File.Exists(dataFileName))
                     dataFileName = FileSystem.Exemplar.ExportDir + "/data/parameters/" + System.IO.Path.GetFileNameWithoutExtension(dataFileName) + ".tomo";
@@ -1148,6 +1152,7 @@ namespace Fractrace
                 formulaSettingCategories.Add("Formula");
                 formulaSettingCategories.Add("Intern.Formula");
                 formulaSettingCategories.Add("Intern.Version");
+                formulaSettingCategories.Add("Renderer.Color");
                 ParameterDict.Current.Save(sd.FileName, formulaSettingCategories);
             }
         }
@@ -1310,8 +1315,8 @@ namespace Fractrace
             if (od.ShowDialog() == DialogResult.OK)
             {
                 LoadScene(od.FileName);
-            }
-            tabControl1.SelectedIndex = 1;
+                tabControl1.SelectedIndex = 1;
+            }    
         }
 
 
@@ -1407,13 +1412,17 @@ namespace Fractrace
         {
 
             List<string> currentDirs = new List<string>();
+            Dictionary<string, string> gestaltFiles = new Dictionary<string, string>();
             currentDirs.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes"));
 
             int currentXpos = 0;
-            int currentYpos = 0;
-            int bordersize = 0;
+            int currentYpos = 6;
+            int bordersize = 6;
             int maxXpos = 480;
+            int maxYpos = 160;
 
+            Random rand = new Random();
+            SortedDictionary<double, string> files = new SortedDictionary<double, string>();
             while (currentDirs.Count > 0)
             {
                 List<string> subDirs = new List<string>();
@@ -1427,34 +1436,41 @@ namespace Fractrace
                         }
                         foreach (string imageFile in System.IO.Directory.GetFiles(currentDir, "*.png"))
                         {
-                            System.Diagnostics.Debug.WriteLine(imageFile);
-
-                            string gestaltFile = currentDir + "/" + System.IO.Path.GetFileNameWithoutExtension(imageFile) + ".gestalt";
-
-                            PictureBox pictureBox = new PictureBox();
-                            pictureBox.Left = currentXpos;
-                            pictureBox.Top = currentYpos;
-                            this.panel30.Controls.Add(pictureBox);
-
-                            Image image = Image.FromFile(imageFile);
-                            pictureBox.Width = 100 * image.Width / image.Height;
-                            pictureBox.Height = 100;
-                            Size size = new Size(pictureBox.Width, 100);
-                            pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
-                            pictureBox.Tag = gestaltFile;
-                            Graphics graphics = Graphics.FromImage(pictureBox.Image);
-                            pictureBox.Click += PictureBox_Click;
-
-                            currentXpos += pictureBox.Width + bordersize;
-                            if (currentXpos > maxXpos)
-                            {
-                                currentXpos = 0;
-                                currentYpos += 100 + bordersize;
-                            }
+                            files[rand.NextDouble()] = imageFile;
+                            gestaltFiles[imageFile] = currentDir + "/" + System.IO.Path.GetFileNameWithoutExtension(imageFile) + ".gestalt";
                         }
                     }
                 }
                 currentDirs = subDirs;
+            }
+            foreach(KeyValuePair<double,string> fileEntry in files)
+            {
+                string imageFile = fileEntry.Value;
+                System.Diagnostics.Debug.WriteLine(imageFile);
+                string gestaltFile = gestaltFiles[imageFile];
+
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Left = currentXpos;
+                pictureBox.Top = currentYpos;
+                this.panel30.Controls.Add(pictureBox);
+
+                Image image = Image.FromFile(imageFile);
+                pictureBox.Width = 100 * image.Width / image.Height;
+                pictureBox.Height = 100;
+                Size size = new Size(pictureBox.Width, 100);
+                pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
+                pictureBox.Tag = gestaltFile;
+                Graphics graphics = Graphics.FromImage(pictureBox.Image);
+                pictureBox.Click += PictureBox_Click;
+
+                currentXpos += pictureBox.Width + bordersize;
+                if (currentXpos > maxXpos)
+                {
+                    currentXpos = 0;
+                    currentYpos += 100 + bordersize;
+                    if (currentYpos > maxYpos)
+                        return;
+                }
             }
         }
 

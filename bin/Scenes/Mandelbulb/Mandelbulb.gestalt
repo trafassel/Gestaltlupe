@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Border.Max.x" Value="1.5" />
-  <Entry Key="Border.Max.y" Value="1.5" />
-  <Entry Key="Border.Max.z" Value="1.5" />
-  <Entry Key="Border.Min.x" Value="-1.5" />
-  <Entry Key="Border.Min.y" Value="-1.5" />
-  <Entry Key="Border.Min.z" Value="-1.5" />
   <Entry Key="Formula.Parameters.Power" Value="8" />
   <Entry Key="Formula.Static.Cycles" Value="8" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
@@ -14,13 +8,14 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="&#xD;&#xA;&#xD;&#xA;double _bailout = 20;&#xD;&#xA;double _power = 8;&#xD;&#xA;&#xD;&#xA;public override void Init() &#xD;&#xA;{&#xD;&#xA;base.Init();&#xD;&#xA;_power=GetOrSetDouble(&quot;Power&quot;,8,&quot;Mandelbulb Power.&quot;);&#xD;&#xA;&#xD;&#xA;// Set bailout to handle none integer iterations.&#xD;&#xA;// Works well for _power=8&#xD;&#xA;double gr1 = GetDouble(&quot;Formula.Static.Cycles&quot;);&#xD;&#xA;int tempGr = (int)gr1;&#xD;&#xA;gr1 = gr1 - tempGr;&#xD;&#xA;gr1 = 1 - gr1;&#xD;&#xA;gr1 *= 2.4;&#xD;&#xA;_bailout = Math.Pow(10, gr1) + 1.0;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;// Daniel Whites cosine Mandelbulb &#xD;&#xA;// http://www.skytopia.com/project/fractal/mandelbulb.html&#xD;&#xA;&#xD;&#xA;public override bool GetBool(double x, double y, double z)&#xD;&#xA;{&#xD;&#xA;&#xD;&#xA;double br, bi, bj;&#xD;&#xA;double ar, ai, aj;&#xD;&#xA;&#xD;&#xA;if (_isJulia)&#xD;&#xA;{&#xD;&#xA;  br = _jx; bi = _jy; bj = _jz;&#xD;&#xA;  ar = x; ai = y; aj = z;&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  br = x; bi = y; bj = z;&#xD;&#xA;  ar = _jx; ai = _jy; aj = _jz;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;double aar, aai, aaj;&#xD;&#xA;double r_n = 0;&#xD;&#xA;aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;double r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;double theta, phi, phi_pow, theta_pow, sin_theta_pow, rn_sin_theta_pow;&#xD;&#xA;&#xD;&#xA;for (int n = 1; n &lt; _cycles; n++)&#xD;&#xA;{&#xD;&#xA;  theta = Math.Atan2(Math.Sqrt(aar + aai), aj);&#xD;&#xA;  phi = Math.Atan2(ai, ar);&#xD;&#xA;  r_n = Math.Pow(r, _power);&#xD;&#xA;  phi_pow = phi * _power;&#xD;&#xA;  theta_pow = theta * _power;&#xD;&#xA;  sin_theta_pow = Math.Sin(theta_pow);&#xD;&#xA;  rn_sin_theta_pow = r_n * sin_theta_pow;&#xD;&#xA;  ar = rn_sin_theta_pow * Math.Cos(phi_pow) + br;&#xD;&#xA;  ai = rn_sin_theta_pow * Math.Sin(phi_pow) + bi;&#xD;&#xA;  aj = r_n * Math.Cos(theta_pow) + bj;&#xD;&#xA;  aar = ar * ar; aai = ai * ai; aaj = aj * aj;&#xD;&#xA;  r = Math.Sqrt(aar + aai + aaj);&#xD;&#xA;&#xD;&#xA;  if (n &gt; _cycles / 3 &amp;&amp; n &lt; _cycles / 1.2)&#xD;&#xA;  {&#xD;&#xA;    additionalPointInfo.red += aar / r;&#xD;&#xA;    additionalPointInfo.green += aai / r;&#xD;&#xA;    additionalPointInfo.blue += aaj / r;&#xD;&#xA;  }&#xD;&#xA;&#xD;&#xA;  if (r &gt; _bailout) { return false; }&#xD;&#xA;  }&#xD;&#xA;&#xD;&#xA;  return true;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Scene.CenterX" Value="0" />
+  <Entry Key="Scene.CenterY" Value="0.95486111111111" />
+  <Entry Key="Scene.CenterZ" Value="0" />
+  <Entry Key="Scene.Radius" Value="1.73611111111111" />
   <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="0" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.6" />
-  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
-  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
-  <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.Width" Value="1200" />
 </ParameterDict>

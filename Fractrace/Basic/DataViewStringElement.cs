@@ -13,6 +13,7 @@ namespace Fractrace.Basic
             this.pnlEdit.Controls.Add(_tbValue);
             _tbValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._tbValue.Text = _value;
+            _oldValue = _value;
             this._tbValue.TextChanged += new EventHandler(tbValue_TextChanged);
         }
 
@@ -40,6 +41,7 @@ namespace Fractrace.Basic
         void tbValue_TextChanged(object sender, EventArgs e)
         {
             ParameterDict.Current.Entries[_name] = _tbValue.Text;
+            _oldValue= _tbValue.Text;
             CallElementChanged(_name, _tbValue.Text);
         }
 

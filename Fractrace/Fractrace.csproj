@@ -216,7 +216,10 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="Geometry\Navigator.cs" />
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
+    <Compile Include="PictureArt\FloatPictureData.cs" />
+    <Compile Include="PictureArt\FloatPixelInfo.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
+    <Compile Include="PictureArt\SmallMemoryRenderer.cs" />
     <Compile Include="SceneGraph\FColor.cs" />
     <Compile Include="SceneGraph\FPoint.cs" />
     <Compile Include="SceneGraph\Mesh.cs" />
