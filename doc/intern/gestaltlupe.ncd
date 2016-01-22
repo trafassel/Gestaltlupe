@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:199-->
+<!--LastNote:204-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -817,9 +817,9 @@ Es sieht so aus, als ob x, und y in der Standard-Mandelbulb Formel vertauscht si
 ... und nicht zurückgesetzt. 
 </DD>
 <DT><A name="UhBl04QmA75jcDx1ifj03g"></A>Small Preview sollte Vorrang haben</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465199-->
-<!--property:date_modified=1429465365-->
+<!--property:date_modified=1453415281-->
 <!--property:hash=8731e7fd614d064c347c5847471393d90baf5908-->
 <!--property:hash_html=1a41011aeab897e1d2615aea66e7fdc8ae9b39d7-->
 <DD>
@@ -827,9 +827,9 @@ Bisher werden beide Renderings gleichzeitig gestartet.<BR>
 
 </DD>
 <DT><A name="2Gcfj9rmC8jxfgowZF7Jqw"></A>Preview aktualisieren bei Änderung in Render</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465601-->
-<!--property:date_modified=1429465730-->
+<!--property:date_modified=1453415293-->
 <!--property:hash=9576fc3244a01d238250d07f277d0a11f7944913-->
 <!--property:hash_html=16fe046bfdb777174cffa9d79585b7d937ff54e8-->
 <DD>
@@ -2838,9 +2838,42 @@ sName Buchstabenweise durchgehen und if(s==s.ToLower()) verwenden<BR>
 ... hängt enabling des Start Buttons hinterher.
 </DD>
 <DT><A name="iDZrbIJv7i8y8qKN9Jf5ZQ"></A>Save Formula Fehlt</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1453160038-->
-<!--property:date_modified=1453160047-->
+<!--property:date_modified=1453415246-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="yNmgl3Nye7nx9WMyEoN6sA"></A>Ansicht von Data wird nicht immer aktualisiert</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453415319-->
+<!--property:date_modified=1453417622-->
+<!--property:hash=f0433f58065e5f2dec2c807dc610ca4f27ef961c-->
+<!--property:hash_html=a7dca86b3e161666b7b12978e028179a09569cd2-->
+<DD>
+das betrifft z.B. &quot;View&quot; nach Laden einer Formel.
+</DD>
+<DT><A name="vInuH6ddYaYPY4VO79Sb6w"></A>Beim Speichern der Formel auch Farbinfos mitspeichern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453419168-->
+<!--property:date_modified=1453419920-->
+<!--property:hash=823f1e11244a663b1636064c965b4246ca1c0d94-->
+<!--property:hash_html=8359aba5659fd6dd313a18ec567e48dde80e7e89-->
+<DD>
+&quot;Renderer.ColorIntensity&quot;<BR>
+&quot;Renderer.ColorGreyness&quot;<BR>
+Renderer.ColorInside<BR>
+&quot;Renderer.ColorOutside&quot;<BR>
+&quot;Renderer.ColorFactor.Red&quot;<BR>
+&quot;Renderer.ColorFactor.Green&quot;<BR>
+&quot;Renderer.ColorFactor.Blue&quot;<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="x5f0enyRr1Ly31aLnFDxYA"></A>Parameter bk in 2p3dJulia</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1453421894-->
+<!--property:date_modified=1453421921-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Border.Max.x" Value="-0.136339877343168" />
-  <Entry Key="Border.Max.y" Value="0.365688568096666" />
-  <Entry Key="Border.Max.z" Value="0.887945311203861" />
-  <Entry Key="Border.Min.x" Value="-0.136339877627164" />
-  <Entry Key="Border.Min.y" Value="0.365688567812672" />
-  <Entry Key="Border.Min.z" Value="0.887945310919866" />
   <Entry Key="Formula.Static.Cycles" Value="256" />
   <Entry Key="Formula.Static.Formula" Value="-1" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -14,13 +8,22 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
   <Entry Key="Intern.Formula.Source" Value="// Mandelex by Hiato&#xA;// http://www.fractalforums.com/new-theories-and-research/an-interesting-fractal-the-mandelex-(inspired-by-the-box)/ &#xA;        &#xA;public override long InSet(double x, double y, double z,  &#xA;                           double br, double bi, double bj, double bk, &#xA;                           long zkl, bool invers) &#xA;{&#xA;&#xA; double bailout=50000;&#xA; double xx, yy, zz;&#xA; long returnValue=0;&#xA; xx = x * x; yy = y * y; zz = z * z; &#xA; double r = Math.Sqrt(xx + yy + zz);&#xA; double scale = 2;&#xA; double fixedRadius = 1;&#xA; double mult=1;&#xA; double red=0;&#xA; double green=0;&#xA; double blue=0;&#xA;&#xA;&#xA;// Mandelex paras:&#xA;double linear_ax=2;&#xA;double linear_ay=2;&#xA;double linear_az=2;&#xA;double linear_bx=2;&#xA;double linear_by=2;&#xA;double linear_bz=2;&#xA;double wrap_x=0.5;&#xA;double wrap_y=0.5;&#xA;double wrap_z=0.5;&#xA;double radius=0.5;&#xA;double radiusSquare=radius*radius;&#xA;double angle =180;&#xA;double h=0;&#xA;double w=0;&#xA;&#xA; &#xA;for (int n = 1; n &lt; zkl; n++) {&#xA;&#xA;&#xA;  // linear pull:&#xA;&#xA;  if(Math.Abs(br)&lt;linear_ax &amp;&amp; Math.Abs(bi)&lt;linear_ay &amp;&amp; Math.Abs(bj)&lt;linear_az) {&#xA;    if(Math.Abs(x)&gt;linear_ax &amp;&amp; Math.Abs(y)&gt;linear_ay &amp;&amp; Math.Abs(z)&gt;linear_az) {&#xA;      if(x&lt;0) {&#xA;        x+=2.0*linear_ax;&#xA;      } else {&#xA;        x-=2.0*linear_ax;&#xA;      }&#xA;&#xA;      if(y&lt;0) {&#xA;        y+=2.0*linear_ay;&#xA;      } else {&#xA;        y-=2.0*linear_ay;&#xA;      }&#xA;&#xA;      if(z&lt;0) {&#xA;        z+=2.0*linear_az;&#xA;      } else {&#xA;        z-=2.0*linear_az;&#xA;      }&#xA;    }&#xA;  }   &#xA;&#xA;&#xA;  // wrapBox:&#xA;  if (x &gt; 1)&#xA;    x = 2.0 - x;&#xA;  else if (x &lt; -1)&#xA;    x = -2.0 - x;&#xA;             &#xA;  if (y &gt; 1)&#xA;    y = 2.0 - y;&#xA;  else if (y &lt; -1)&#xA;    y = -2.0 - y;&#xA;             &#xA;  if (z &gt; 1)&#xA;    z = 2.0 - z;&#xA;  else if (z &lt; -1)&#xA;    z = -2.0 - z;&#xA;                       &#xA;  xx=x*x;&#xA;  yy=y*y;&#xA;  zz=z*z;&#xA;  r = xx + yy + zz;&#xA;&#xA;  if(r!=0 &amp;&amp; n&gt;4 &amp;&amp; n&lt;100) {&#xA;    red+=xx/r;&#xA;    green+=yy/r;&#xA;    blue+=zz/r;&#xA;  }&#xA;&#xA;  if (r &gt; bailout) { &#xA;    returnValue = n; break; &#xA;  }&#xA;&#xA;  mult=1;&#xA;  if (r &lt; radius &amp;&amp; r&gt;0) {&#xA;        mult=radiusSquare/r;&#xA;  }&#xA;  mult*=scale;&#xA;  x*=mult;&#xA;  y*=mult;&#xA;  z*=mult;&#xA;  x+=br;&#xA;  y+=bi;&#xA;  z+=bj;&#xA;}&#xA;&#xA;if (invers) {&#xA; if (returnValue == 0)&#xA;   returnValue= 1;&#xA; else&#xA;   returnValue= 0;&#xA;}&#xA;&#xA;if(returnValue&gt;0) {&#xA;  additionalPointInfo.red=red;&#xA;  additionalPointInfo.green=green;&#xA;  additionalPointInfo.blue=blue;&#xA;}&#xA;&#xA;return returnValue;&#xA;&#xA;}&#xA;&#xA;" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1.6" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0.5" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="1" />
+  <Entry Key="Scene.CenterX" Value="-0.136339877485166" />
+  <Entry Key="Scene.CenterY" Value="0.365688567954669" />
+  <Entry Key="Scene.CenterZ" Value="0.887945311061863" />
+  <Entry Key="Scene.Radius" Value="2.83996021144262E-10" />
   <Entry Key="Transformation.Camera.AngleX" Value="130" />
   <Entry Key="Transformation.Camera.AngleY" Value="40" />
   <Entry Key="Transformation.Camera.AngleZ" Value="-100" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
-  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
-  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
-  <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.Width" Value="1200" />
 </ParameterDict>

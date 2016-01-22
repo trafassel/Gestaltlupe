@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Border.Max.x" Value="0.70881603324473" />
-  <Entry Key="Border.Max.y" Value="-0.185579763499548" />
-  <Entry Key="Border.Max.z" Value="1.18610716027091" />
-  <Entry Key="Border.Min.x" Value="-1.54446500908586" />
-  <Entry Key="Border.Min.y" Value="-2.43886080583012" />
-  <Entry Key="Border.Min.z" Value="-1.06717388205969" />
   <Entry Key="Formula.Static.Cycles" Value="30" />
   <Entry Key="Formula.Static.Formula" Value="-2" />
   <Entry Key="Formula.Static.jx" Value="0.1" />
@@ -14,13 +8,22 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="30" />
   <Entry Key="Intern.Formula.Source" Value="' Kali Set&#xA;' Original Thread: http://www.fractalforums.com/new-theories-and-research/very-simple-formula-for-fractal-patterns/&#xA;&#xA;Overrides Function InSet(x as Double,y as Double,z as Double,br as Double, bi as double, bj as Double,  bk as Double, zkl as long, inverse as Boolean) As long&#xA;&#xA;additionalPointInfo.red =0&#xA;additionalPointInfo.green=0&#xA;additionalPointInfo.blue=0&#xA;&#xA;dim bailout=110&#xA;InSet=0&#xA;dim m as Double&#xA;dim xx, yy, zz as Double&#xA;&#xA;dim n as integer&#xA;for n = 1 to zkl &#xA;&#xA;  xx = x * x&#xA;  yy = y * y&#xA;  zz = z * z&#xA;  m= xx + yy + zz&#xA;  if m &gt; bailout then&#xA;    InSet = n&#xA;    exit for&#xA;  end if&#xA;&#xA;  if(m&lt;&gt;0) then&#xA;    additionalPointInfo.red =additionalPointInfo.red +xx/m&#xA;    additionalPointInfo.green=additionalPointInfo.green+yy/m&#xA;    additionalPointInfo.blue=zz/m&#xA;  end if&#xA;&#xA;  if(m&lt;&gt;0)  then&#xA;    x=x/m+br&#xA;    y=Math.Abs(y)/m+bi&#xA;    z=Math.Abs(z)/m+bj&#xA;  else &#xA;    x+=br&#xA;    y+=bi&#xA;    z+=bj&#xA;  end if&#xA;&#xA;next&#xA;&#xA;if  inverse=true then&#xA;  if InSet= 0 then&#xA;    InSet= 1&#xA;  else&#xA;    InSet= 0&#xA;  end if&#xA;end if&#xA;&#xA;&#xA;End Function" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="10" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="0.1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="0.1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="2" />
+  <Entry Key="Renderer.ColorGreyness" Value="0.2" />
+  <Entry Key="Renderer.ColorInside" Value="1" />
+  <Entry Key="Renderer.ColorIntensity" Value="0.8" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="-0.417824487920565" />
+  <Entry Key="Scene.CenterY" Value="-1.31222028466483" />
+  <Entry Key="Scene.CenterZ" Value="0.0594666391056099" />
+  <Entry Key="Scene.Radius" Value="2.2532810423306" />
   <Entry Key="Transformation.Camera.AngleX" Value="-90" />
   <Entry Key="Transformation.Camera.AngleY" Value="50" />
   <Entry Key="Transformation.Camera.AngleZ" Value="-90" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="1" />
-  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
-  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
-  <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.Width" Value="1200" />
 </ParameterDict>

@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Border.Max.x" Value="1.81050369427322" />
-  <Entry Key="Border.Max.y" Value="-1.79179725982149" />
-  <Entry Key="Border.Max.z" Value="-1.82870884469134" />
-  <Entry Key="Border.Min.x" Value="1.77898279958286" />
-  <Entry Key="Border.Min.y" Value="-1.82331815451185" />
-  <Entry Key="Border.Min.z" Value="-1.8602297393817" />
   <Entry Key="Formula.Parameters.parameter1" Value="0.25" />
   <Entry Key="Formula.Parameters.parameter2" Value="0.001" />
   <Entry Key="Formula.Parameters.scale" Value="-1.4" />
@@ -17,13 +11,22 @@
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="170" />
   <Entry Key="Intern.Formula.Source" Value="// Mandelbox Original Formula by Tom Lowe (https://en.wikipedia.org/wiki/Mandelbox) with some simplifications.&#xA;&#xA;public override void Init() {&#xA;  base.Init();&#xA;  _parameter1=GetOrSetDouble(&quot;parameter1&quot;,0,&quot;Position of 4th Component of Julia (5Dim)&quot;);&#xA;  _parameter2=GetOrSetDouble(&quot;parameter2&quot;,0,&quot;Position of 5th Component of Julia (5Dim)&quot;);&#xA;  _scale=GetOrSetDouble(&quot;scale&quot;,1.1,&quot;Mandelbox scale factor.&quot;);&#xA;}&#xA;&#xA;double _parameter1=0;&#xA;double _parameter2=0;&#xA;double _scale=1.1;&#xA;&#xA;// Mandelbox (5Dimensional)&#xA;public override long InSet(double ar, double ai, double aj,  double br, double bi, double bj, double bk, long zkl, bool inverse) &#xA;{&#xA;&#xA; double gr=50000;&#xA; double xx, yy, zz;&#xA; long tw;&#xA; double x=0,y=0,z=0;&#xA; double r_n = 0;&#xA; double q=0,qq=0;&#xA; double bq=_parameter1; // als Ersatz für bk&#xA; double t=0,tt=0;&#xA; double bt=_parameter2; // als Ersatz für bk&#xA;&#xA; xx = x * x; yy = y * y; zz = z * z; qq=q*q;tt=t*t;&#xA; tw = 0;&#xA; double r = Math.Sqrt(xx + yy + zz);&#xA; double scale = _scale;&#xA; additionalPointInfo.red=0;&#xA; additionalPointInfo.green=0;&#xA; additionalPointInfo.blue=0;&#xA;          &#xA; for (int n = 1; n &lt; zkl; n++) &#xA; {&#xA;         &#xA;  if (x &gt; 1)           &#xA;    x = 2.0 - x;           &#xA;  else if (x &lt; -1)             &#xA;    x = -2.0 - x;&#xA;                      &#xA;  if (y &gt; 1)            &#xA;    y = 2.0 - y;        &#xA;  else if (y &lt; -1)             &#xA;    y = -2.0 - y;&#xA;                        &#xA;  if (z &gt; 1)              &#xA;    z = 2.0 - z;            &#xA;  else if (z &lt; -1)             &#xA;    z = -2.0 - z;&#xA;   &#xA;  if (q &gt; 1)              &#xA;    q = 2.0 - q;            &#xA;  else if (q &lt; -1)             &#xA;    q = -2.0 - q;             &#xA;    &#xA;  if (t &gt; 1)              &#xA;    t = 2.0 - t;          &#xA;  else if (t &lt; -1)            &#xA;    t = -2.0 - t;&#xA;                                &#xA;  xx = x * x; yy = y * y; zz = z * z; qq=q*q;tt=t*t; &#xA;  r = xx + yy + zz+qq+tt;&#xA;&#xA;  if(r!=0) &#xA;  {&#xA;    additionalPointInfo.red+=xx/r;&#xA;    additionalPointInfo.green+=yy/r;&#xA;    additionalPointInfo.blue+=zz/r;&#xA;  }&#xA;         &#xA;  if (r &gt; gr) &#xA;  {            &#xA;    tw = n; &#xA;    break;          &#xA;  }&#xA;&#xA;  double mult=1;&#xA;  if (r &lt; 1 &amp;&amp; r!=0)&#xA;    mult=1/r;&#xA;&#xA;  mult*=scale;&#xA;  x*=mult; &#xA;  y*=mult; &#xA;  z*=mult;&#xA;  q*=mult;&#xA;  t*=mult; &#xA;  x+=br; &#xA;  y+=bi;&#xA;  z+=bj;&#xA;  q+=bq;&#xA;  t+=bt;       &#xA; }&#xA;        &#xA; if (inverse) &#xA; {         &#xA;  if (tw == 0)          &#xA;  tw = 1;          &#xA;  else            &#xA;  tw = 0;        &#xA; }        &#xA; return (tw);    &#xA;}&#xA;&#xA;" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="0.7" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0.4" />
+  <Entry Key="Renderer.ColorInside" Value="1" />
+  <Entry Key="Renderer.ColorIntensity" Value="4" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="1.79474324692804" />
+  <Entry Key="Scene.CenterY" Value="-1.80755770716667" />
+  <Entry Key="Scene.CenterZ" Value="-1.84446929203652" />
+  <Entry Key="Scene.Radius" Value="0.03152089469036" />
   <Entry Key="Transformation.Camera.AngleX" Value="-51.7098798494373" />
   <Entry Key="Transformation.Camera.AngleY" Value="39.2734502073496" />
   <Entry Key="Transformation.Camera.AngleZ" Value="77.0375210000399" />
   <Entry Key="Transformation.Perspective.Cameraposition" Value="0.3" />
-  <Entry Key="Transformation.Stereo.Angle" Value="-9" />
-  <Entry Key="Transformation.Stereo.EyeDistance" Value="0.5" />
-  <Entry Key="View.Height" Value="1200" />
   <Entry Key="View.Perspective" Value="1" />
-  <Entry Key="View.Width" Value="1200" />
 </ParameterDict>
