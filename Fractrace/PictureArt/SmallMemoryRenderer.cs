@@ -15,20 +15,20 @@ namespace Fractrace.PictureArt
     public class SmallMemoryRenderer : ScienceRendererBase
     {
 
-
+        /// <summary>
+        /// In the renderer used flot based variant of pData.
+        /// </summary>
         protected FloatPictureData _pictureData = null;
 
         /// <summary>
         /// Initialisation.
         /// </summary>
-        /// <param name="pData"></param>
         public SmallMemoryRenderer(PictureData pData)
             : base(pData)
         {
-
             _pictureData = new FloatPictureData(pData.Width, pData.Height);
-
         }
+
 
         /// <summary>
         /// Initialisation with formula is needed for sharp rendering and computing original coordinates.
@@ -36,10 +36,10 @@ namespace Fractrace.PictureArt
         public override void Init(Formulas formula)
         {
             base.Init(formula);
-        // Original data has to scale such that values fits into float range.
-        Vec3 minPoint = new Vec3(0, 0, 0);
-               Vec3 maxPoint = new Vec3(0, 0, 0);
-             minPoint.X = Double.MaxValue;
+            // Original data has to scale such that values fits into float range.
+            Vec3 minPoint = new Vec3(0, 0, 0);
+            Vec3 maxPoint = new Vec3(0, 0, 0);
+            minPoint.X = Double.MaxValue;
             minPoint.Y = Double.MaxValue;
             minPoint.Z = Double.MaxValue;
             maxPoint.X = Double.MinValue;
@@ -65,7 +65,6 @@ namespace Fractrace.PictureArt
                             maxPoint.Y = coord.Y;
                         if (coord.Z > maxPoint.Z)
                             maxPoint.Z = coord.Z;
-
                     }
                 }
             }
@@ -83,12 +82,15 @@ namespace Fractrace.PictureArt
                     if (pInfo != null)
                     {
                         FloatPixelInfo floatPixelInfo = new FloatPixelInfo();
-                        floatPixelInfo.Coord.X =(float)( (pInfo.Coord.X - center.X) / radius);
+                        floatPixelInfo.Coord.X = (float)((pInfo.Coord.X - center.X) / radius);
                         floatPixelInfo.Coord.Y = (float)((pInfo.Coord.Y - center.Y) / radius);
                         floatPixelInfo.Coord.Z = (float)((pInfo.Coord.Z - center.Z) / radius);
                         floatPixelInfo.AdditionalInfo = pInfo.AdditionalInfo;
                         floatPixelInfo.IsInside = pInfo.IsInside;
                         floatPixelInfo.iterations = pInfo.iterations;
+
+                        pInfo.Normal.Normalize();
+
                         floatPixelInfo.Normal.X = (float)pInfo.Normal.X;
                         floatPixelInfo.Normal.Y = (float)pInfo.Normal.Y;
                         floatPixelInfo.Normal.Z = (float)pInfo.Normal.Z;
@@ -96,11 +98,7 @@ namespace Fractrace.PictureArt
                     }
                 }
             }
-
-
-
         }
-
 
 
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:204-->
+<!--LastNote:206-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2876,6 +2876,26 @@ Renderer.ColorInside<BR>
 <!--property:date_modified=1453421921-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="ppCC2VHeE2XAFTNtUyRwMQ"></A>Eingabefelder müssen breiter sein</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1453553317-->
+<!--property:date_modified=1453553378-->
+<!--property:hash=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
+<!--property:hash_html=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
+<DD>
+Wert wird sonst (zB. bei Radius nicht vollständig angezeigt)
+</DD>
+<DT><A name="XAtWMrGiUB3F5KnX9oibvA"></A>Float Based Renderer</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1453557957-->
+<!--property:date_modified=1453558028-->
+<!--property:hash=4ff8eddf0303c63d608f9a4a32dd27797340dc70-->
+<!--property:hash_html=3a80861278e24e56ab1ce49283c7b025b63e3743-->
+<DD>
+Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 </DL>
