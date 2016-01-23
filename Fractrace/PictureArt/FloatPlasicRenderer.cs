@@ -1,0 +1,1816 @@
+﻿
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Drawing;
+
+using Fractrace.DataTypes;
+using Fractrace.Basic;
+using Fractrace.PictureArt;
+using Fractrace.Geometry;
+
+namespace Fractrace.PictureArt
+{
+
+
+    /// <summary>
+    /// Gestaltlupe default Renderer.
+    /// </summary>
+    public class FloatPlasicRenderer : SmallMemoryRenderer
+    {
+
+
+        /// <summary>
+        /// Initialisation.
+        /// </summary>
+        /// <param name="pData"></param>
+        public FloatPlasicRenderer(PictureData pData)
+            : base(pData)
+        {
+        }
+
+
+        /// <summary>
+        /// Coordninate of the bottom, left, front point of the Boundingbox (in original Coordinates).  
+        /// </summary>
+        private FloatVec3 minPoint = new FloatVec3(0, 0, 0);
+
+
+        /// <summary>
+        /// Coordninate of the top, right, backside point of the Boundingbox (in original Coordinates).  
+        /// </summary>
+        private FloatVec3 maxPoint = new FloatVec3(0, 0, 0);
+
+
+
+        private FloatVec3[,] normalesSmooth1 = null;
+
+
+        /// <summary>
+        /// Additional informationen for the picture.
+        /// 0 no info
+        /// 1 elemtent of the cut with the screen
+        /// </summary>
+        private int[,] picInfo = null;
+
+
+        private FloatVec3[,] normalesSmooth2 = null;
+        private float[,] sharpShadow = null;
+
+        private float[,] shadowInfo11 = null;
+        private float[,] shadowInfo10 = null;
+        private float[,] shadowInfo01 = null;
+        private float[,] shadowInfo00 = null;
+        private float[,] shadowInfo11sharp = null;
+        private float[,] shadowInfo10sharp = null;
+        private float[,] shadowInfo01sharp = null;
+        private float[,] shadowInfo00sharp = null;
+        private float[,] shadowPlane = null;
+
+        private float[,] smoothDeph1 = null;
+        private float[,] smoothDeph2 = null;
+
+        private FloatVec3[,] rgbPlane = null;
+
+        private FloatVec3[,] rgbSmoothPlane1 = null;
+        private FloatVec3[,] rgbSmoothPlane2 = null;
+
+        private float minY = float.MaxValue;
+
+        private float maxY = float.MinValue;
+
+
+        // Corresponds to the number of shadows
+        private int shadowNumber = 1;
+
+
+        // Intensity of the FieldOfView
+        private int ambientIntensity = 4;
+
+
+        // Intensity of the Surface Color
+        private double colorIntensity = 0.5;
+
+
+        // if useLight==false, only the shades are computed. 
+        private bool useLight = true;
+
+
+        // Shadow height factor
+        private float shadowJustify = 1;
+
+
+        // Influence of the shininess (0 <= shininessFactor <=1)
+        private double shininessFactor = 0.7;
+
+        // Shininess ( 0... 1000)
+        private double shininess = 8;
+
+        // Normal of the light source     
+        private Vec3 lightRay = new Vec3();
+
+        // If thrue, sharp shadow rendering is activated (warning: time consuming) 
+        private bool useSharpShadow = false;
+
+
+        private double colorFactorRed = 1;
+        private double colorFactorGreen = 1;
+        private double colorFactorBlue = 1;
+
+        private double lightIntensity = 0.5;
+
+        // If ColorGreyness=1, no color is rendered
+        private double colorGreyness = 0;
+
+        /// <summary>
+        /// RGB-Componente type, i.e.:rgbType==4 Change Red and Blue component.
+        /// </summary>
+        private int rgbType = 1;
+
+        // Minimal value of FieldOfView
+        private double minFieldOfView = 0;
+
+        // Maximal value of FieldOfView
+        private double maxFieldOfView = 1;
+
+        // Red component of background color 
+        private float backColorRed = (float)0.4;
+
+        // Blue component of background color 
+        private float backColorBlue = (float)0.6;
+
+        // Green component of background color 
+        private float backColorGreen = (float)0.4;
+
+        /// <summary>
+        /// Difference between maximal and minimal y value in computing area
+        /// </summary>
+        private float areaDeph = 0;
+
+
+        private float brightness = 1;
+
+        private float contrast = 1;
+
+        bool _colorOutside = false;
+        bool _colorInside = false;
+
+        /// <summary>
+        /// Allgemeine Informationen werden erzeugt
+        /// </summary>
+        protected override void PreCalculate()
+        {
+            string parameterNode = "Renderer.";
+            shadowNumber = ParameterDict.Current.GetInt(parameterNode + "ShadowNumber");
+            ambientIntensity = ParameterDict.Current.GetInt(parameterNode + "AmbientIntensity");
+            minFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MinFieldOfView");
+            maxFieldOfView = ParameterDict.Current.GetDouble(parameterNode + "MaxFieldOfView");
+
+            brightness = (float)ParameterDict.Current.GetDouble(parameterNode + "Brightness");
+            contrast = (float)ParameterDict.Current.GetDouble(parameterNode + "Contrast");
+
+            colorIntensity = ParameterDict.Current.GetDouble(parameterNode + "ColorIntensity");
+            _colorOutside = ParameterDict.Current.GetBool("Renderer.ColorInside");
+            _colorInside = ParameterDict.Current.GetBool("Renderer.ColorOutside");
+
+            useLight = ParameterDict.Current.GetBool(parameterNode + "UseLight");
+            shadowJustify = (float)ParameterDict.Current.GetDouble(parameterNode + "ShadowJustify");
+
+            shininessFactor = ParameterDict.Current.GetDouble(parameterNode + "ShininessFactor");
+            shininess = ParameterDict.Current.GetDouble(parameterNode + "Shininess");
+            lightRay.X = ParameterDict.Current.GetDouble(parameterNode + "Light.X");
+            lightRay.Y = ParameterDict.Current.GetDouble(parameterNode + "Light.Y");
+            lightRay.Z = ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
+
+            areaDeph = (float)ParameterDict.Current.GetDouble("Scene.Radius");
+
+            // Rotate lightvec:
+            Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
+            Vec3 tempcoord2 = formula.GetTransformWithoutProjection(lightRay.X, lightRay.Y, lightRay.Z);
+            tempcoord2.X -= coord.X;
+            tempcoord2.Y -= coord.Y;
+            tempcoord2.Z -= coord.Z;
+            tempcoord2.Normalize();
+            lightRay.X = tempcoord2.X;
+            lightRay.Y = tempcoord2.Y;
+            lightRay.Z = tempcoord2.Z;
+
+            useSharpShadow = ParameterDict.Current.GetBool(parameterNode + "UseSharpShadow");
+
+            colorFactorRed = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Red");
+            colorFactorGreen = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Green");
+            colorFactorBlue = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Blue");
+
+            lightIntensity = ParameterDict.Current.GetDouble(parameterNode + "LightIntensity");
+            if (lightIntensity >= 1.0)
+                shadowNumber = 0;
+
+            colorGreyness = ParameterDict.Current.GetDouble(parameterNode + "ColorGreyness");
+            rgbType = ParameterDict.Current.GetInt(parameterNode + "ColorFactor.RgbType");
+
+            backColorRed = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Red");
+            backColorGreen = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Green");
+            backColorBlue = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Blue");
+
+            if (lightIntensity > 1)
+                lightIntensity = 1;
+            if (lightIntensity < 0)
+                lightIntensity = 0;
+
+            picInfo = new int[pData.Width, pData.Height];
+
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    picInfo[i, j] = 0;
+                }
+            }
+            if (stopRequest)
+                return;
+            CreateStatisticInfo();
+            /*
+            if (useSharpShadow)
+                CreateSharpShadow();
+                */
+            if (stopRequest)
+                return;
+            CreateSmoothNormales();
+            if (stopRequest)
+                return;
+            CreateSmoothDeph();
+            if (stopRequest)
+                return;
+            CreateShadowInfo();
+            if (stopRequest)
+                return;
+            DrawPlane();
+            if (stopRequest)
+                return;
+            if (ParameterDict.Current.GetBool(parameterNode + "Normalize"))
+                NormalizePlane();
+            if (stopRequest)
+                return;
+            if (ParameterDict.Current.GetBool(parameterNode + "UseDarken"))
+                DarkenPlane();
+            if (stopRequest)
+                return;
+            SmoothEmptyPixel();
+            if (stopRequest)
+                return;
+            SmoothPlane();
+        }
+
+
+        /// <summary>
+        /// Creates boundingbox infos.
+        /// </summary>
+        protected void CreateStatisticInfo()
+        {
+            minPoint.X = float.MaxValue;
+            minPoint.Y = float.MaxValue;
+            minPoint.Z = float.MaxValue;
+            maxPoint.X = float.MinValue;
+            maxPoint.Y = float.MinValue;
+            maxPoint.Z = float.MinValue;
+            for (int i = 0; i < _pictureData.Width; i++)
+            {
+                for (int j = 0; j < _pictureData.Height; j++)
+                {
+                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                    if (pInfo != null)
+                    {
+                        FloatVec3 coord = pInfo.Coord;
+                        if (coord.X < minPoint.X)
+                            minPoint.X = coord.X;
+                        if (coord.Y < minPoint.Y)
+                            minPoint.Y = coord.Y;
+                        if (coord.Z < minPoint.Z)
+                            minPoint.Z = coord.Z;
+                        if (coord.X > maxPoint.X)
+                            maxPoint.X = coord.X;
+                        if (coord.Y > maxPoint.Y)
+                            maxPoint.Y = coord.Y;
+                        if (coord.Z > maxPoint.Z)
+                            maxPoint.Z = coord.Z;
+
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Liefert die Farbe zum Punkt x,y
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        protected override Vec3 GetRgbAt(int x, int y)
+        {
+            FloatVec3 rgb = rgbPlane[x, y];
+            return new Vec3(rgb.X, rgb.Y, rgb.Z);
+        }
+
+
+        /// <summary>
+        /// Erzeugt das Bild im rgb-Format
+        /// </summary>
+        protected void DrawPlane()
+        {
+            rgbPlane = new FloatVec3[pData.Width, pData.Height];
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    Vec3 rgb = GetRgb(i, j);
+                    rgbPlane[i, j] = new FloatVec3((float)rgb.X, (float)rgb.Y, (float)rgb.Z);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Bildpunkte, die auf Grund fehlender Informationen nicht geladen werden konnten, werden
+        /// aus den Umgebungsinformationen gemittelt.
+        /// </summary>
+        protected void SmoothEmptyPixel()
+        {
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    PixelInfo pInfo = pData.Points[i, j];
+
+                    if (pInfo == null)
+                    { // Dieser Wert ist zu setzen
+                        // Aber nur, wenn es sich nicht um den Hintergrund handelt.
+                        FloatVec3 col = rgbPlane[i, j];
+                        col.X = backColorRed; col.Y = backColorGreen; col.Z = backColorBlue;
+                        float pixelCount = 0;
+                        for (int k = i - 1; k <= i + 1; k++)
+                        {
+                            for (int l = j - 1; l <= j + 1; l++)
+                            {
+                                if (k >= 0 && k < pData.Width && l >= 0 && l < pData.Height && k != i && l != j)
+                                {
+                                    PixelInfo pInfo2 = pData.Points[k, l];
+                                    if (pInfo2 != null)
+                                    {
+                                        pixelCount++;
+                                        FloatVec3 otherColor = rgbPlane[k, l];
+                                        col.X += otherColor.X;
+                                        col.Y += otherColor.Y;
+                                        col.Z += otherColor.Z;
+                                    }
+                                }
+                            }
+                        }
+                        //pixelCount++; // Etwas dunkler sollte es schon werden
+                        if (pixelCount > 0)
+                        {
+                            col.X /= pixelCount;
+                            col.Y /= pixelCount;
+                            col.Z /= pixelCount;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Get the color information of the bitmap at (x,y)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        protected Vec3 GetRgb(int x, int y)
+        {
+
+            FloatVec3 retVal = new FloatVec3(0, 0, 1); // blau
+            FloatPixelInfo pInfo = _pictureData.Points[x, y];
+            if (pInfo == null)
+            {
+                return new Vec3(backColorRed, backColorGreen, backColorBlue);
+            }
+
+            FloatVec3 light = new FloatVec3(0, 0, 0);
+            FloatVec3 normal = null;
+
+            normal = normalesSmooth1[x, y];
+            if (normal == null) { normal = pInfo.Normal; }
+            // Testweise original Normale verwenden
+            //  normal = pInfo.Normal;
+            // TODO: Obiges auskommentieren
+            if (normal == null)
+                return new Vec3(0, 0, 0);
+
+            // tempcoord2 enthält die umgerechnete Oberflächennormale. 
+            float tfac = 1000;
+
+            FloatVec3 coord = pInfo.Coord; //  formula.GetTransform(pInfo.Coord.X, pInfo.Coord.Y, pInfo.Coord.Z);
+            normal.Normalize();
+            /*
+            Vec3 tempcoord2 = formula.GetTransform(pInfo.Coord.X + tfac * normal.X, pInfo.Coord.Y + tfac * normal.Y, pInfo.Coord.Z + tfac * normal.Z);
+
+            tempcoord2.X -= coord.X;
+            tempcoord2.Y -= coord.Y;
+            tempcoord2.Z -= coord.Z;
+
+            // Normalize:
+            tempcoord2.Normalize();
+            
+            // debug only
+            tempcoord2 = normal;
+            */
+            FloatVec3 tempcoord2 = coord;
+
+            if (pInfo.Normal != null)
+            {
+                light = GetLightF(tempcoord2);
+                if (sharpShadow != null) { light = light.Mult(1 - sharpShadow[x, y]); }
+            }
+
+            retVal.X = light.X;
+            retVal.Y = light.Y;
+            retVal.Z = light.Z;
+
+            double d1 = maxY - minY;
+            double d2 = pData.Width + pData.Height;
+            double d3 = d1 / d2;
+
+            retVal.X = (float)(lightIntensity * retVal.X + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
+            retVal.Y = (float)(lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
+            retVal.Z = (float)(lightIntensity * retVal.Z + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
+
+            if (retVal.X < 0)
+                retVal.X = 0;
+            if (retVal.Y < 0)
+                retVal.Y = 0;
+            if (retVal.Z < 0)
+                retVal.Z = 0;
+
+            if (retVal.X > 1)
+                retVal.X = 1;
+            if (retVal.Y > 1)
+                retVal.Y = 1;
+            if (retVal.Z > 1)
+                retVal.Z = 1;
+
+            float brightLightLevel = (float)ParameterDict.Current.GetDouble("Renderer.BrightLightLevel");
+            if (brightLightLevel > 0)
+            {
+                retVal.X = (1 - brightLightLevel) * retVal.X + brightLightLevel * light.X * (1 - shadowPlane[x, y]);
+                retVal.Y = (1 - brightLightLevel) * retVal.Y + brightLightLevel * light.Y * (1 - shadowPlane[x, y]);
+                retVal.Z = (1 - brightLightLevel) * retVal.Z + brightLightLevel * light.Z * (1 - shadowPlane[x, y]);
+            }
+
+            if (retVal.X < 0)
+                retVal.X = 0;
+            if (retVal.Y < 0)
+                retVal.Y = 0;
+            if (retVal.Z < 0)
+                retVal.Z = 0;
+
+            if (retVal.X > 1)
+                retVal.X = 1;
+            if (retVal.Y > 1)
+                retVal.Y = 1;
+            if (retVal.Z > 1)
+                retVal.Z = 1;
+
+            // Add surface color
+            bool useAdditionalColorinfo = true;
+            if (colorIntensity <= 0)
+                useAdditionalColorinfo = false;
+            if (useAdditionalColorinfo && ((pInfo.IsInside && _colorInside) || (!pInfo.IsInside && _colorOutside)))
+            {
+                if (pInfo != null && pInfo.AdditionalInfo != null)
+                {
+                    // Normalise;
+                    float r1 = (float)(colorFactorRed * Math.Pow(pInfo.AdditionalInfo.red, colorIntensity));
+                    float g1 = (float)(colorFactorGreen * Math.Pow(pInfo.AdditionalInfo.green, colorIntensity));
+                    float b1 = (float)(colorFactorBlue * Math.Pow(pInfo.AdditionalInfo.blue, colorIntensity));
+                    if (r1 < 0)
+                        r1 = -r1;
+                    if (g1 < 0)
+                        g1 = -g1;
+                    if (b1 < 0)
+                        b1 = -b1;
+
+                    // Normalize:
+                    float norm = (float)(Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1) / Math.Sqrt(2.5));
+                    r1 = r1 / norm;
+                    g1 = g1 / norm;
+                    b1 = b1 / norm;
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (r1 > 1)
+                        {
+                            b1 += (r1 - 1) / (float)2.0;
+                            g1 += (r1 - 1) / (float)2.0;
+                            r1 = 1;
+                        }
+                        if (b1 > 1)
+                        {
+
+                            r1 += (b1 - 1) / (float)2.0;
+                            g1 += (b1 - 1) / (float)2.0;
+                            b1 = 1;
+
+                        }
+                        if (g1 > 1)
+                        {
+
+                            r1 += (g1 - 1) / (float)2.0;
+                            b1 += (g1 - 1) / (float)2.0;
+                            g1 = 1;
+                        }
+                    }
+
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
+
+                    if (colorGreyness > 0)
+                    {
+                        r1 = (float)(colorGreyness + (1 - colorGreyness) * r1);
+                        g1 = (float)(colorGreyness + (1 - colorGreyness) * g1);
+                        b1 = (float)(colorGreyness + (1 - colorGreyness) * b1);
+                    }
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
+
+                    if (norm != 0)
+                    {
+                        switch (rgbType)
+                        {
+                            case 1:
+                                retVal.X *= r1;
+                                retVal.Y *= g1;
+                                retVal.Z *= b1;
+                                break;
+
+                            case 2:
+                                retVal.X *= r1;
+                                retVal.Y *= b1;
+                                retVal.Z *= g1;
+                                break;
+
+                            case 3:
+                                retVal.X *= g1;
+                                retVal.Y *= r1;
+                                retVal.Z *= b1;
+                                break;
+
+                            case 4:
+                                retVal.X *= g1;
+                                retVal.Y *= b1;
+                                retVal.Z *= r1;
+                                break;
+
+                            case 5:
+                                retVal.X *= b1;
+                                retVal.Y *= r1;
+                                retVal.Z *= g1;
+                                break;
+
+                            case 6:
+                                retVal.X *= b1;
+                                retVal.Y *= g1;
+                                retVal.Z *= r1;
+                                break;
+
+                            default:
+                                retVal.X *= r1;
+                                retVal.Y *= g1;
+                                retVal.Z *= b1;
+                                break;
+
+                        }
+
+                    }
+                }
+            }
+
+            if (contrast != 1)
+            {
+                retVal.X = (float)Math.Pow(retVal.X, contrast);
+                retVal.Y = (float)Math.Pow(retVal.Y, contrast);
+                retVal.Z = (float)Math.Pow(retVal.Z, contrast);
+
+            }
+
+            if (brightness > 1)
+            {
+                retVal.X *= brightness;
+                retVal.Y *= brightness;
+                retVal.Z *= brightness;
+            }
+
+            if (retVal.X < 0)
+                retVal.X = 0;
+            if (retVal.X > 1)
+                retVal.X = 1;
+            if (retVal.Y < 0)
+                retVal.Y = 0;
+            if (retVal.Z < 0)
+                retVal.Z = 0;
+            if (retVal.Y > 1)
+                retVal.Y = 1;
+            if (retVal.Z > 1)
+                retVal.Z = 1;
+
+            if (pInfo != null && pInfo.AdditionalInfo != null)
+            {
+                pInfo.AdditionalInfo.red2 = retVal.X;
+                pInfo.AdditionalInfo.green2 = retVal.Y;
+                pInfo.AdditionalInfo.blue2 = retVal.Z;
+            }
+
+            return new Vec3(retVal.X, retVal.Y, retVal.Z);
+        }
+
+
+        /// <summary>
+        /// Liefert die Farbe der Oberfläche entsprechend der Normalen.
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <returns></returns>
+        protected virtual FloatVec3 GetLightF(FloatVec3 normal)
+        {
+
+            FloatVec3 retVal = new FloatVec3((float)backColorRed, (float)backColorGreen, (float)backColorBlue);
+            if (!useLight)
+            {
+                return new FloatVec3((float)0.5, (float)0.5, (float)0.5);
+            }
+            if (normal == null)
+                return retVal;
+
+            float weight_shini = (float)shininessFactor;
+            float weight_diffuse = 1 - weight_shini;
+
+            float norm = (float)Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
+            // Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl
+            // mit Vergleichsvektor (Beide nachträglich normiert )            
+            float angle = 0;
+            if (norm == 0)
+                return retVal;
+
+            FloatVec3 lightVec = new FloatVec3((float)lightRay.X, (float)lightRay.Y, (float)lightRay.Z);
+            lightVec.Normalize();
+            float norm2 = lightVec.Norm;
+            angle = (float)(Math.Acos((normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2)) / (Math.PI / 2.0));
+
+            angle = 1 - angle;
+            if (angle < 0)
+                angle = 0;
+            if (angle > 1)
+                angle = 1;
+            float light = (float)(weight_diffuse * angle + weight_shini * Math.Pow(angle, shininess));
+            //   double light =(Math.Pow(angle, 128));
+            //   double light = angle;
+            if (light < 0)
+                light = 0;
+            if (light > 1)
+                light = 1;
+
+            retVal.X = light;
+            retVal.Y = light;
+            retVal.Z = light;
+
+            return retVal;
+        }
+
+
+        /// <summary>
+        /// Schatteninformationen, wenn das Licht von oben rechts kommen, werden erzeugt.
+        /// Vorbereitet für weitere Lichtquellen.
+        /// </summary>
+        protected virtual void CreateShadowInfo()
+        {
+            // Noch nicht öffentliche Parameter:
+            Random rand = new Random();
+            float glow = (float)ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
+            // Drei "Schattenlichtquellen"
+            // Eine für die Dunklen Tiefen
+            // Eine für die breite Normalasicht
+            // Und eine für die mit sehr geringen Eintreffwinkel
+            // Ist bei perspektivischen Aufnahmen noch unbrauchbar.
+
+            // Shadowlight1
+            // 1 ist der Durchschnittswert.
+            float shadowlight1Val = 0.1f;
+            // Die maximale Abweichung der Auftreffwinkel.
+            float shadowlight1Range = 1;
+
+            float shadowlight1Intensity = 0.2f;
+
+            float shadowlight2Val = 0.2f;
+            // Die maximale Abweichung der Auftreffwinkel.
+            float shadowlight2Range = 2;
+            float shadowlight2Intensity = 0.6f;
+
+
+            float shadowlight3Val = 1.5f;
+            // Die maximale Abweichung der Auftreffwinkel.
+            float shadowlight3Range = 0.05f;
+            float shadowlight3Intensity = 1;
+
+
+            float sharpness = 2.5f; // 
+
+            // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
+            shadowInfo11 = new float[pData.Width, pData.Height];
+            shadowInfo01 = new float[pData.Width, pData.Height];
+            shadowInfo10 = new float[pData.Width, pData.Height];
+            shadowInfo00 = new float[pData.Width, pData.Height];
+            shadowInfo11sharp = new float[pData.Width, pData.Height];
+            shadowInfo01sharp = new float[pData.Width, pData.Height];
+            shadowInfo10sharp = new float[pData.Width, pData.Height];
+            shadowInfo00sharp = new float[pData.Width, pData.Height];
+
+            shadowPlane = new float[pData.Width, pData.Height];
+            float[,] shadowTempPlane = new float[pData.Width, pData.Height];
+            float diffy = shadowJustify * (areaDeph);
+
+            // Main Iteration:
+            float yd = 0;
+            float ydv = 0;
+            float ydh = 0;
+
+            float dShadowNumber = shadowNumber;
+
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    shadowPlane[i, j] = 0;
+                }
+            }
+
+            float currentShadowlightRange = 0;
+            float shadowVal = 0.1f;
+            int shadowTypeCount = 0;
+            float shadowlight1Level = 0.25f;
+            float shadowlight2Level = 0.5f;
+            float shadowlight3Level = 0.25f;
+            float currentIntensity = 1;
+
+            for (int shadowMode = 0; shadowMode < 3; shadowMode++)
+            {
+                //       for (int shadowMode = 1; shadowMode <=1; shadowMode++) {
+                switch (shadowMode)
+                {
+
+                    case 0:
+                        diffy = shadowJustify * shadowlight1Val * (areaDeph);
+                        shadowVal = shadowlight1Level;
+                        currentShadowlightRange = shadowlight1Range;
+                        currentIntensity = shadowlight1Intensity;
+                        break;
+
+                    case 1:
+                        diffy = shadowJustify * shadowlight2Val * (areaDeph);
+                        shadowVal = shadowlight2Level;
+                        currentShadowlightRange = shadowlight2Range;
+                        currentIntensity = shadowlight2Intensity;
+                        break;
+
+                    case 2:
+                        diffy = shadowJustify * shadowlight3Val * (areaDeph);
+                        shadowVal = shadowlight3Level;
+                        currentShadowlightRange = shadowlight3Range;
+                        currentIntensity = shadowlight3Intensity;
+                        break;
+
+                }
+
+                int usedShadowNumber = shadowNumber + 1;
+                if (shadowMode == 0 || shadowMode == 2)
+                    usedShadowNumber = (int)(0.5 * shadowNumber + 1);
+                /*
+              if (shadowMode == 3 || shadowMode == 4)
+                usedShadowNumber = (int)(0.1 * shadowNumber + 1);
+              */
+
+
+                for (int shadowIter = 1; shadowIter < usedShadowNumber + 1; shadowIter++)
+                {
+
+                    yd = diffy / ((float)(pData.Width + pData.Height));
+                    ydv = diffy / ((float)(pData.Height));
+                    ydh = diffy / ((float)(pData.Width));
+
+
+                    yd *= (1.0f + currentShadowlightRange * 2.0f * (float)shadowIter / (float)dShadowNumber);
+                    ydv *= (1.0f + currentShadowlightRange * 1.2f * (float)shadowIter / (float)dShadowNumber);
+                    ydh *= (1.0f + currentShadowlightRange * 1.2f * (float)shadowIter / (float)dShadowNumber);
+
+
+                    // Clean Plane
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            shadowTempPlane[i, j] = 0;
+                        }
+                    }
+
+
+                    // initialize shadowInfo00, ... shadowInfo11, shadowInfo00sharp, ... , shadowInfo11sharp
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            shadowInfo11[i, j] = smoothDeph1[i, j];
+                            shadowInfo10[i, j] = smoothDeph1[i, j];
+                            shadowInfo01[i, j] = smoothDeph1[i, j];
+                            shadowInfo00[i, j] = smoothDeph1[i, j];
+                            shadowInfo11sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo10sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo01sharp[i, j] = smoothDeph1[i, j];
+                            shadowInfo00sharp[i, j] = smoothDeph1[i, j];
+                        }
+                    }
+
+                    // Randomize diagonal
+                    int currentIntXval = 1;
+                    int currentIntYval = 1;
+
+
+                    shadowTypeCount++;
+                    //  if (shadowTypeCount >= 35)
+                    if (shadowTypeCount > 11)
+                        shadowTypeCount = 1;
+
+                    // Gleichmäßige Aufteilung bei 11
+
+
+                    //shadowTypeCount = 4;
+                    switch (shadowTypeCount)
+                    {
+                        case 1:
+                            currentIntXval = 1;
+                            currentIntYval = 1;
+                            break;
+
+                        case 2:
+                            currentIntXval = 1;
+                            currentIntYval = 0;
+                            break;
+
+                        case 3:
+                            currentIntXval = 0;
+                            currentIntYval = 1;
+                            break;
+
+                        case 4:
+                            currentIntXval = 2;
+                            currentIntYval = 1;
+                            break;
+
+                        case 5:
+                            currentIntXval = 1;
+                            currentIntYval = 2;
+                            break;
+
+                        case 6:
+                            currentIntXval = 3;
+                            currentIntYval = 1;
+                            break;
+
+                        case 7:
+                            currentIntXval = 1;
+                            currentIntYval = 3;
+                            break;
+
+                        case 8:
+                            currentIntXval = 4;
+                            currentIntYval = 3;
+                            break;
+
+                        case 9:
+                            currentIntXval = 3;
+                            currentIntYval = 4;
+                            break;
+
+                        case 10:
+                            currentIntXval = 1;
+                            currentIntYval = 5;
+                            break;
+
+                        case 11:
+                            currentIntXval = 5;
+                            currentIntYval = 1;
+                            break;
+
+                        case 12:
+                            currentIntXval = 2;
+                            currentIntYval = 7;
+                            break;
+
+                        case 13:
+                            currentIntXval = 7;
+                            currentIntYval = 2;
+                            break;
+
+
+                        case 14:
+                            currentIntXval = 3;
+                            currentIntYval = 5;
+                            break;
+                        case 15:
+                            currentIntXval = 5;
+                            currentIntYval = 3;
+                            break;
+                        case 16:
+                            currentIntXval = 7;
+                            currentIntYval = 3;
+                            break;
+                        case 17:
+                            currentIntXval = 3;
+                            currentIntYval = 7;
+                            break;
+                        case 18:
+                            currentIntXval = 8;
+                            currentIntYval = 3;
+                            break;
+                        case 19:
+                            currentIntXval = 3;
+                            currentIntYval = 8;
+                            break;
+                        case 20:
+                            currentIntXval = 4;
+                            currentIntYval = 5;
+                            break;
+                        case 21:
+                            currentIntXval = 5;
+                            currentIntYval = 4;
+                            break;
+                        case 22:
+                            currentIntXval = 7;
+                            currentIntYval = 4;
+                            break;
+                        case 23:
+                            currentIntXval = 4;
+                            currentIntYval = 7;
+                            break;
+                        case 24:
+                            currentIntXval = 1;
+                            currentIntYval = 1;
+                            break;
+                        case 25:
+                            currentIntXval = 5;
+                            currentIntYval = 4;
+                            break;
+                        case 26:
+                            currentIntXval = 4;
+                            currentIntYval = 5;
+                            break;
+                        case 27:
+                            currentIntXval = 0;
+                            currentIntYval = 1;
+                            break;
+                        case 28:
+                            currentIntXval = 1;
+                            currentIntYval = 0;
+                            break;
+                        case 29:
+                            currentIntXval = 1;
+                            currentIntYval = 6;
+                            break;
+                        case 30:
+                            currentIntXval = 6;
+                            currentIntYval = 1;
+                            break;
+                        case 31:
+                            currentIntXval = 3;
+                            currentIntYval = 7;
+                            break;
+                        case 32:
+                            currentIntXval = 4;
+                            currentIntYval = 7;
+                            break;
+                        case 33:
+                            currentIntXval = 3;
+                            currentIntYval = 8;
+                            break;
+                        case 34:
+                            currentIntXval = 2;
+                            currentIntYval = 7;
+                            break;
+                        case 35:
+                            currentIntXval = 6;
+                            currentIntYval = 2;
+                            break;
+                        case 36:
+                        case 37:
+                        case 38:
+                        case 39:
+                        case 40:
+                            currentIntXval = 3;
+                            currentIntYval = 7;
+                            break;
+
+                    }
+
+
+
+                    // ***********  generate shadowplane ************
+
+                    for (int i = pData.Width - currentIntXval; i >= 0; i--)
+                    {
+                        for (int j = pData.Height - currentIntYval; j >= 0; j--)
+                        {
+
+                            // *********  Fill shadowInfo11  ***********
+                            if (i < pData.Width - currentIntXval && j < pData.Height - currentIntYval)
+                            {
+                                float localShadow = shadowInfo11[i + currentIntXval, j + currentIntYval] - ydh;
+                                if (localShadow > shadowInfo11[i, j] && (rand.NextDouble() < glow))
+                                {
+                                    shadowInfo11[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo11sharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
+                                if (localShadow > shadowInfo11sharp[i, j] && (rand.NextDouble() < glow))
+                                {
+                                    shadowInfo11sharp[i, j] = localShadow;
+                                }
+                            }
+                        }
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+
+                            // *********  Fill shadowInfo01  ***********
+                            if (i < pData.Width - currentIntXval && j >= currentIntYval)
+                            {
+                                float localShadow = shadowInfo01[i + currentIntXval, j - currentIntYval] - ydh;
+                                if (localShadow > shadowInfo01[i, j] && (rand.NextDouble() < glow))
+                                {
+                                    shadowInfo01[i, j] = localShadow;
+                                }
+                                localShadow = shadowInfo01sharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
+                                if (localShadow > shadowInfo01sharp[i, j] && (rand.NextDouble() < glow))
+                                {
+                                    shadowInfo01sharp[i, j] = localShadow;
+                                }
+                            }
+                        }
+                    }
+
+
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+
+                        // *********  Fill shadowInfo10  ***********
+                        for (int j = pData.Height - currentIntXval; j >= 0; j--)
+                        {
+                            if (i >= currentIntXval && j < pData.Height - currentIntYval)
+                            {
+                                float localShadow = shadowInfo10[i - currentIntXval, j + currentIntYval] - ydv;
+                                if (localShadow > shadowInfo10[i, j] && (rand.NextDouble() < glow))
+                                    shadowInfo10[i, j] = localShadow;
+                                localShadow = shadowInfo10sharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
+                                if (localShadow > shadowInfo10sharp[i, j] && (rand.NextDouble() < glow))
+                                    shadowInfo10sharp[i, j] = localShadow;
+                            }
+                        }
+
+                        // *********  Fill shadowInfo00  ***********
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            if (i >= currentIntXval && j >= currentIntYval)
+                            {
+                                float localShadow = shadowInfo00[i - currentIntXval, j - currentIntYval] - ydh;
+                                if (localShadow > shadowInfo00[i, j] && (rand.NextDouble() < glow))
+                                    shadowInfo00[i, j] = localShadow;
+                                localShadow = shadowInfo00sharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
+                                if (localShadow > shadowInfo00sharp[i, j] && (rand.NextDouble() < glow))
+                                    shadowInfo00sharp[i, j] = localShadow;
+                            }
+                        }
+                    }
+
+
+                    // *********  Combine shadowInfo00, ..., shadowInfo11sharp  ***********
+                    // *********  create shadowTempPlane **********
+
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+
+                            float shadowMapEntry = 0;
+                            float currentShadowMapEntry = 0;
+                            float height = smoothDeph1[i, j];
+                            float shadowHeight = 0;
+                            float sharpShadowHeight = 0;
+
+                            for (int k = 0; k < 4; k++)
+                            {
+
+                                switch (k)
+                                {
+
+                                    case 0:
+                                        shadowHeight = shadowInfo00[i, j];
+                                        sharpShadowHeight = shadowInfo00sharp[i, j];
+                                        break;
+
+                                    case 1:
+                                        shadowHeight = shadowInfo01[i, j];
+                                        sharpShadowHeight = shadowInfo01sharp[i, j];
+                                        break;
+
+                                    case 2:
+                                        shadowHeight = shadowInfo10[i, j];
+                                        sharpShadowHeight = shadowInfo10sharp[i, j];
+                                        break;
+
+                                    case 3:
+                                        shadowHeight = shadowInfo11[i, j];
+                                        sharpShadowHeight = shadowInfo11sharp[i, j];
+                                        break;
+
+                                }
+
+
+                                if (height != double.MinValue)
+                                {
+                                    if (height < sharpShadowHeight) // inside the sharp shadow
+                                        currentShadowMapEntry += shadowVal;
+                                    if (height < shadowHeight) // inside the shadow
+                                        currentShadowMapEntry += shadowVal;
+
+                                    // Test:
+                                    //currentShadowMapEntry = 0;
+                                    shadowMapEntry += currentShadowMapEntry;
+                                }
+                            }
+                            // shadowMapEntry /= 1114.0;
+                            shadowMapEntry /= 16.0f;
+                            if (shadowMapEntry > 1)
+                                shadowMapEntry = 1;
+                            shadowMapEntry += shadowTempPlane[i, j];
+                            shadowMapEntry /= 2.0f;
+                            if (shadowMapEntry > 1)
+                                shadowMapEntry = 1;
+                            shadowTempPlane[i, j] = shadowMapEntry;
+                        }
+                    }
+
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            shadowPlane[i, j] += currentIntensity * shadowTempPlane[i, j] / dShadowNumber;
+                        }
+                    }
+                }
+            }
+            // Release Memory:
+            shadowInfo11 = null;
+            shadowInfo01 = null;
+            shadowInfo10 = null;
+            shadowInfo00 = null;
+            shadowInfo11sharp = null;
+            shadowInfo01sharp = null;
+            shadowInfo10sharp = null;
+            shadowInfo00sharp = null;
+
+
+            // Normalize:
+            float sMin = float.MaxValue;
+            float sMax = float.MinValue;
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    if (sMin > shadowPlane[i, j])
+                        sMin = shadowPlane[i, j];
+                    if (sMax < shadowPlane[i, j])
+                        sMax = shadowPlane[i, j];
+
+                }
+            }
+            float sDiff = sMax - sMin;
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    shadowPlane[i, j] = (shadowPlane[i, j] - sMin) / sDiff;
+                    if (float.IsNaN(shadowPlane[i, j]) || float.IsInfinity(shadowPlane[i, j]))
+                    {
+                        shadowPlane[i, j] = 0;
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Die Oberflächennormalen werden abgerundet.
+        /// </summary>
+        protected void CreateSmoothNormales()
+        {
+            normalesSmooth1 = new FloatVec3[pData.Width, pData.Height];
+            normalesSmooth2 = new FloatVec3[pData.Width, pData.Height];
+
+            // Normieren
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                    if (pInfo != null)
+                    {
+                        // pInfo.Normal.Normalize();
+                        normalesSmooth1[i, j] = pInfo.Normal;
+                        normalesSmooth1[i, j].Normalize();
+                    }
+                }
+            }
+
+            FloatVec3[,] currentSmooth = normalesSmooth1;
+            FloatVec3[,] nextSmooth = normalesSmooth2;
+            FloatVec3[,] tempSmooth;
+
+            int smoothLevel = (int)ParameterDict.Current.GetDouble("Renderer.SmoothNormalLevel");
+            for (int currentSmoothLevel = 0; currentSmoothLevel < smoothLevel; currentSmoothLevel++)
+            {
+
+                // create nextSmooth
+                for (int i = 0; i < pData.Width; i++)
+                {
+                    for (int j = 0; j < pData.Height; j++)
+                    {
+                        FloatVec3 center = null;
+                        center = currentSmooth[i, j];
+                        FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                        // Test ohne smooth-Factor
+                        // Nachbarelemente zusammenrechnen
+                        FloatVec3 neighbors = new FloatVec3();
+                        int neighborFound = 0;
+                        for (int k = -1; k <= 1; k++)
+                        {
+                            for (int l = -1; l <= 1; l++)
+                            {
+                                int posX = i + k;
+                                int posY = j + l;
+                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
+                                {
+                                    FloatVec3 currentNormal = null;
+                                    currentNormal = currentSmooth[i + k, j + l];
+                                    FloatPixelInfo pInfo2 = _pictureData.Points[i + k, j + l];
+
+                                    if (currentNormal != null)
+                                    {
+                                        float amount = 1;
+                                        if (pInfo != null && pInfo2 != null)
+                                        {
+                                            float dist = pInfo.Coord.Dist(pInfo2.Coord);
+
+                                            float dGlobal = maxPoint.Dist(minPoint);
+                                            dGlobal /= 1500;
+                                            if (dist < dGlobal)
+                                                amount = 1.0f;
+                                            else if (dist > dGlobal && dist < 5.0 * dGlobal)
+                                                amount = 1.0f - (dGlobal / dist / 5.0f);
+                                            else
+                                                amount = 0;
+                                        }
+
+                                        neighbors.Add(currentNormal.Mult(amount));
+                                        neighborFound++;
+                                    }
+                                }
+                            }
+                        }
+                        neighbors.Normalize();
+                        if (center != null)
+                        {
+                            nextSmooth[i, j] = center;
+                            if (center != null || neighborFound > 1)
+                            {
+                                FloatVec3 center2 = center;
+                                center2.Mult(200);
+                                neighbors.Add(center2.Mult(4));
+                                neighbors.Normalize();
+                                nextSmooth[i, j] = neighbors;
+                            }
+                        }
+                        else
+                        {
+                            if (neighborFound > 4)
+                            {
+                                nextSmooth[i, j] = neighbors;
+                            }
+                        }
+                    }
+                }
+
+                tempSmooth = currentSmooth;
+                currentSmooth = nextSmooth;
+                nextSmooth = tempSmooth;
+
+            }
+
+
+        }
+
+
+        /// <summary>
+        /// Lokale Tiefeninformationen werden erzeugt.
+        /// </summary>
+        protected void CreateSmoothDeph()
+        {
+            smoothDeph1 = new float[pData.Width, pData.Height];
+            smoothDeph2 = new float[pData.Width, pData.Height];
+
+            // Normieren
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                    if (pInfo != null)
+                    {
+                        smoothDeph2[i, j] = pInfo.Coord.Y;
+                        smoothDeph1[i, j] = pInfo.Coord.Y;
+                        // if (pInfo.Coord.Y != 0) { // Unterscheidung, ob Schnitt mit Begrenzung vorliegt.
+                        if (minY > pInfo.Coord.Y && pInfo.Coord.Y != 0)
+                            minY = pInfo.Coord.Y;
+                        if (maxY < pInfo.Coord.Y)
+                            maxY = pInfo.Coord.Y;
+                        //}
+                    }
+                    else
+                    {
+                        smoothDeph1[i, j] = float.MinValue;
+                        smoothDeph2[i, j] = float.MinValue;
+                    }
+                }
+            }
+
+
+
+            //    SetSmoothDeph(smoothDeph1, smoothDeph2);
+        }
+
+
+        /// <summary>
+        /// Tiefeninformationen werden weicher gemacht.
+        /// </summary>
+        /// <param name="sdeph1"></param>
+        /// <param name="sdeph2"></param>
+        protected virtual void SetSmoothDeph(double[,] sdeph1, double[,] sdeph2)
+        {
+
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    int neighborFound = 0;
+                    double smoothDeph = 0;
+                    sdeph2[i, j] = double.MinValue;
+                    //int k=0;
+                    for (int k = -1; k <= 1; k++)
+                    {
+                        //int l = -1;
+                        for (int l = -1; l <= 1; l++)
+                        {
+                            int posX = i + k;
+                            int posY = j + l;
+                            if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
+                            {
+                                double newDeph = sdeph1[posX, posY];
+
+                                // neu: es werden nur die Punkte benutzt, die echt größer sind
+                                if (newDeph != double.MinValue)
+                                {
+                                    double valToAdded = sdeph1[i, j];
+                                    if (newDeph > valToAdded)
+                                        valToAdded = newDeph;
+                                    smoothDeph += newDeph;
+                                    neighborFound++;
+
+                                }
+                            }
+                        }
+                    }
+                    if (neighborFound > 0 && sdeph1[i, j] != double.MinValue)
+                    {
+                        smoothDeph /= (double)neighborFound;
+                        sdeph2[i, j] = 1.0 * (0.8 * sdeph1[i, j] + 0.2 * smoothDeph);
+                    }
+                    else
+                    {
+                        sdeph2[i, j] = double.MinValue;
+                    }
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Used in field of view computing.
+        /// </summary>
+        double ydGlobal = 0;
+
+        /// <summary>
+        /// Compute field of view.
+        /// </summary>
+        protected void SmoothPlane()
+        {
+            double fieldOfViewStart = minFieldOfView;
+            ydGlobal = (areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
+            rgbSmoothPlane1 = new FloatVec3[pData.Width, pData.Height];
+            rgbSmoothPlane2 = new FloatVec3[pData.Width, pData.Height];
+            int intRange = 3;
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    rgbSmoothPlane2[i, j] = rgbPlane[i, j];
+                }
+            }
+            if (ambientIntensity == 0)
+            {
+                //  No field of view defined:
+                return;
+            }
+
+            // starts with rgbSmoothPlane2
+            FloatVec3[,] currentPlane = rgbSmoothPlane2;
+            FloatVec3[,] nextPlane = rgbSmoothPlane1;
+            // contain the result colors
+            FloatVec3[,] resultPlane = rgbSmoothPlane1;
+
+            double mainDeph1 = areaDeph;
+            for (int m = 0; m < ambientIntensity; m++)
+            {
+                if (stopRequest)
+                    return;
+                for (int i = 0; i < pData.Width; i++)
+                {
+                    for (int j = 0; j < pData.Height; j++)
+                    {
+                        double neighborsFound = 0;
+                        FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                        FloatVec3 nColor = new FloatVec3();
+                        float ydNormalized = (float)GetAmbientValue(smoothDeph2[i, j]);
+                        ydNormalized = (float)Math.Sqrt(ydNormalized);
+                        intRange = 1;
+                        if (intRange == 0)
+                        {
+                            nColor = currentPlane[i, j];
+                            neighborsFound = 1;
+                        }
+                        float sumColor = 0;
+
+                        //           if(pData.Points[i, j]!=null) {
+                        if (true)
+                        {
+                            for (int k = -intRange; k <= intRange; k++)
+                            {
+                                for (int l = -intRange; l <= intRange; l++)
+                                {
+                                    // Center Pixel is also allowed
+                                    // if (k != 0 || l != 0) {
+                                    int posX = i + k;
+                                    int posY = j + l;
+                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
+                                    {
+                                        FloatVec3 nColor1 = new FloatVec3();
+                                        float ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
+                                        if (true)
+                                        //   if ( (ylocalDiff > 0) ||(i==posX && j==posY))
+                                        //   if ((ylocalDiff < 0) || (i == posX && j == posY))
+                                        //   if(false)
+                                        {
+                                            //double range = (k * k + l * l) / (intRange * intRange);
+                                            int range = (k * k + l * l);
+                                            float mult = 1;
+
+                                            if (range == 0)
+                                            {
+                                                // mult = 0.6;
+                                                mult = ydNormalized * 0.3f;
+                                                //mult = 0.2;
+                                            }
+                                            if (range == 1)
+                                            {
+                                                //mult = 0.25;
+                                                mult = (1.0f - ydNormalized) * 0.4f;
+                                                //mult = 0.45;
+                                            }
+                                            if (range == 2)
+                                            {
+                                                //mult=0.15;
+                                                mult = (1.0f - ydNormalized) * 0.3f;
+                                                //mult = 0.35;
+
+                                            }
+                                            // mult += 0.00001;
+
+
+                                            FloatPixelInfo pInfo2 = _pictureData.Points[posX, posY];
+
+                                            float amount = 1;
+                                            if (pInfo != null && pInfo2 != null)
+                                            {
+                                                float dist = pInfo.Coord.Dist(pInfo2.Coord);
+
+                                                float dGlobal = maxPoint.Dist(minPoint);
+                                                dGlobal /= 1500;
+                                                if (dist < dGlobal)
+                                                    amount = 1.0f;
+                                                else
+                                                    //  else if (dist > dGlobal && dist < 10.0 * dGlobal)
+                                                    amount = 1.0f - (dGlobal / dist) / 10.0f;
+                                                // else
+                                                //     amount = 0.0;
+                                            }
+
+                                            mult *= amount;
+                                            //  mult *= 1.0/ydNormalized;
+
+
+                                            sumColor += mult;
+
+                                            FloatVec3 currentColor = currentPlane[posX, posY];
+                                            nColor1.X = currentColor.X;
+                                            nColor1.Y = currentColor.Y;
+                                            nColor1.Z = currentColor.Z;
+                                            nColor1 = nColor1.Mult(mult); // Scaling;
+
+                                            nColor.Add(nColor1);
+                                            neighborsFound++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (neighborsFound > 1)
+                        {
+                            nColor = nColor.Mult(1 / sumColor);
+                        }
+                        else
+                        {
+                            nColor = currentPlane[i, j];
+                        }
+                        nextPlane[i, j] = nColor;
+                    }
+                }
+
+                resultPlane = nextPlane;
+                nextPlane = currentPlane;
+                currentPlane = resultPlane;
+            }
+
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    rgbPlane[i, j] = resultPlane[i, j];
+                }
+            }
+
+            rgbSmoothPlane1 = null;
+            rgbSmoothPlane2 = null;
+
+            return;
+
+        }
+
+
+
+        /// <summary>
+        /// Get the value, which is used in computing the field of view.
+        /// </summary>
+        /// <param name="ypos"></param>
+        /// <returns></returns>
+        protected double GetAmbientValue(double ypos)
+        {
+            double mainDeph = maxY - minY;
+
+            if (ypos == double.MinValue)
+                ypos = minY;
+            double ydNormalized = (ypos - minY) / mainDeph;
+            double ydist = 0;
+
+            double maxDist = (maxFieldOfView - minFieldOfView);
+
+            if (ydNormalized > maxFieldOfView)
+            {
+                ydist = ydNormalized - maxFieldOfView;
+                maxDist = 1 - maxFieldOfView;
+                //ydNormalized = 0;
+                //return 0;
+            }
+            else
+            {
+                if (ydNormalized < minFieldOfView)
+                {
+                    ydist = minFieldOfView - ydNormalized;
+                    maxDist = minFieldOfView;
+                    //ydNormalized = 0;
+                    //return 0;
+                }
+                else
+                {
+                    ydist = 0; // im field of view 
+                    maxDist = 0;
+                }
+            }
+
+
+            if (maxDist != 0)
+            {
+                ydist = ydist / maxDist;
+            }
+
+
+            ydNormalized = 1.0 - ydist;
+
+            // Test only
+            if (ydNormalized > 1)
+                ydNormalized = 1;
+
+            if (ydNormalized < 0)
+                ydNormalized = 0;
+
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+            ydNormalized = Math.Sqrt(ydNormalized);
+
+            return ydNormalized;
+        }
+
+
+        /// <summary>
+        /// Die Gestalt wird nach hinten abgedunkelt.
+        /// </summary>
+        protected void DarkenPlane()
+        {
+            /* Testweise grau */
+            float mainDeph = maxY - minY;// borderMaxY - borderMinY;
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatVec3 col = rgbPlane[i, j];
+                    float yd = smoothDeph1[i, j];
+                    if (yd != double.MinValue)
+                    {
+                        //if (yd == double.MinValue)
+                        //    yd = minY;
+                        float ydNormalized = (yd - minY) / mainDeph;
+                        /*
+                        ydNormalized = Math.Sqrt(ydNormalized);
+                        ydNormalized *= 2 * ydNormalized;
+                        if (ydNormalized > 0.95) {
+                          ydNormalized = 0.95;
+                        }
+                        ydNormalized += 0.05;
+                         */
+                        float greyYd = 1.0f - ydNormalized;
+                        col.X = col.X * ydNormalized + (backColorRed * greyYd);
+                        col.Y = col.Y * ydNormalized + (backColorGreen * greyYd);
+                        //ydNormalized += 0.05;
+                        col.Z = ydNormalized * col.Z + (backColorBlue * greyYd);
+                    }
+                    else
+                    {
+                        col.X = backColorRed;
+                        col.Y = backColorGreen;
+                        col.Z = backColorBlue;
+
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Weißabgleich und Helligkeitskorrektur.
+        /// </summary>
+        protected void NormalizePlane()
+        {
+            float maxRed = 0;
+            float maxGreen = 0;
+            float maxBlue = 0;
+
+            for (int i = 1; i < pData.Width - 1; i++)
+            {
+                for (int j = 1; j < pData.Height - 1; j++)
+                {
+                    if ((picInfo[i, j] == 0) && (picInfo[i + 1, j] == 0) && (picInfo[i - 1, j] == 0) && (picInfo[i, j - 1] == 0) &&
+                        (picInfo[i, j + 1] == 0) && (picInfo[i - 1, j - 1] == 0) && (picInfo[i - 1, j + 1] == 0) && (picInfo[i + 1, j - 1] == 0) &&
+                        (picInfo[i - 1, j + 1] == 0))
+                    {
+                        FloatVec3 col = rgbPlane[i, j];
+                        if (col.X > maxRed)
+                            maxRed = col.X;
+                        if (col.Y > maxGreen)
+                            maxGreen = col.Y;
+                        if (col.Z > maxBlue)
+                            maxBlue = col.Z;
+                    }
+                }
+            }
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatVec3 col = rgbPlane[i, j];
+                    if (picInfo[i, j] == 0)
+                    {
+
+                        if (maxRed > 0)
+                            col.X /= maxRed;
+                        if (maxGreen > 0)
+                            col.Y /= maxGreen;
+                        if (maxBlue > 0)
+                            col.Z /= maxBlue;
+                    }
+                    if (col.X < 0)
+                        col.X = 0;
+                    if (col.X > 1)
+                        col.X = 1;
+                    if (col.Y < 0)
+                        col.Y = 0;
+                    if (col.Y > 1)
+                        col.Y = 1;
+                    if (col.Z < 0)
+                        col.Z = 0;
+                    if (col.Z > 1)
+                        col.Z = 1;
+
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Test, if the given point is inside the sharp shadow. 
+        /// Returns the number of intersection with the ray and the fractal, but not more than maxIntersections.
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="ray"></param>
+        /// <param name="rayLenght"></param>
+        /// <returns></returns>
+        protected int IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse, int maxIntersections, int steps)
+        {
+            //int steps = 100;
+            inverse = false;
+            double dSteps = steps;
+            double dist = 0;
+            int shadowCount = 0;
+            for (int gSteps = 0; gSteps < 6; gSteps++)
+            {
+                dist = rayLenght / dSteps;
+                Vec3 currentPoint = new Vec3(point);
+                currentPoint.Add(ray.Mult(dist));
+                for (int i = 0; i < steps; i++)
+                {
+                    currentPoint.Add(ray.Mult(dist));
+                    if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse))
+                    {
+                        shadowCount++;
+                        if (shadowCount >= maxIntersections)
+                            return maxIntersections;
+                    }
+                    else
+                    {
+                        //  return false;
+                    }
+                }
+                rayLenght /= 1.4;
+            }
+            return shadowCount;
+        }
+
+
+
+    }
+}

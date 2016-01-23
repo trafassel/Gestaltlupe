@@ -9,7 +9,7 @@ namespace Fractrace.PictureArt
 {
     public class FloatPictureData
     {
-        public PixelInfo[,] Points = null;
+        public FloatPixelInfo[,] Points = null;
 
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Fractrace.PictureArt
         {
             mWidth = width;
             mHeight = height;
-            Points = new PixelInfo[width + 1, height + 1];
+            Points = new FloatPixelInfo[width + 1, height + 1];
             for (int i = 0; i <= width; i++)
             {
                 for (int j = 0; j <= height; j++)

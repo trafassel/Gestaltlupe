@@ -23,8 +23,9 @@ namespace Fractrace.PictureArt {
         case "":
         case "PlasicRenderer":
         case "6":
-          retVal = new PlasicRenderer(pdata.Clone());
-          break;
+                    retVal = new PlasicRenderer(pdata.Clone());
+                    //retVal = new FloatPlasicRenderer(pdata.Clone());
+                    break;
 
         case "FastPreviewRenderer":
         case "8":
@@ -32,8 +33,9 @@ namespace Fractrace.PictureArt {
           break;
 
         default:
-          retVal = new PlasicRenderer(pdata.Clone());
-          break;
+                    retVal = new PlasicRenderer(pdata.Clone());
+                    //retVal = new FloatPlasicRenderer(pdata.Clone());
+                    break;
       }
 
       if (retVal != null) 

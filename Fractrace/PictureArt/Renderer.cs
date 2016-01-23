@@ -47,8 +47,7 @@ namespace Fractrace.PictureArt {
         /// <summary>
         /// Initialisation with formula is needed for sharp rendering and computing original coordinates.
         /// </summary>
-        /// <param name="formula"></param>
-        public void Init(Formulas formula) {
+        public virtual void Init(Formulas formula) {
             this.formula = formula;
         }
 

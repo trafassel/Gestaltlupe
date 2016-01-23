@@ -21,13 +21,13 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Original coordinates at given pixels
         /// </summary>
-        public Vec3 Coord = new Vec3(0, 0, 0);
+        public FloatVec3 Coord = new FloatVec3(0, 0, 0);
 
 
         /// <summary>
         /// Surface normal at given pixel.
         /// </summary>
-        public Vec3 Normal = new Vec3(0, 0, 0);
+        public FloatVec3 Normal = new FloatVec3(0, 0, 0);
 
 
         /// <summary>

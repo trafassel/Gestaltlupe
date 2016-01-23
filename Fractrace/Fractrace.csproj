@@ -218,6 +218,8 @@
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
     <Compile Include="PictureArt\FloatPictureData.cs" />
     <Compile Include="PictureArt\FloatPixelInfo.cs" />
+    <Compile Include="PictureArt\FloatPlasicRenderer.cs" />
+    <Compile Include="PictureArt\FloatVec3.cs" />
     <Compile Include="PictureArt\ScienceRendererBase.cs" />
     <Compile Include="PictureArt\SmallMemoryRenderer.cs" />
     <Compile Include="SceneGraph\FColor.cs" />

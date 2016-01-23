@@ -1154,7 +1154,7 @@ namespace Fractrace
                 formulaSettingCategories.Add("Intern.Version");
                 formulaSettingCategories.Add("Renderer.Color");
                 ParameterDict.Current.Save(sd.FileName, formulaSettingCategories);
-            }
+            } 
         }
 
 
