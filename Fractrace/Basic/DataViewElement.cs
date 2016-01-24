@@ -102,7 +102,17 @@ namespace Fractrace.Basic
                 ToolTip toolTip = new ToolTip();
                 toolTip.SetToolTip(lblName, description);
                 
-            }     
+            }
+            if ( (lblName.Text.Length <= 8 || lblName.Text== "Min Cycle") &&
+                lblName.Text!= "Contrast" &&
+                lblName.Text != "Angle" &&
+                lblName.Text != "Deph" &&
+                lblName.Text != "Deph Add" &&
+                lblName.Text != "Height" &&
+                lblName.Text != "Size" &&
+                lblName.Text != "Width" 
+                                )
+                panel1.Width = 70;
             PreInit();
         }
 

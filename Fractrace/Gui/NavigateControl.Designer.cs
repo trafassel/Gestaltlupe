@@ -407,14 +407,14 @@
             // 
             this.pnlProperties.Location = new System.Drawing.Point(252, 15);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(164, 289);
+            this.pnlProperties.Size = new System.Drawing.Size(174, 289);
             this.pnlProperties.TabIndex = 37;
             // 
             // pnlBorderProperties
             // 
             this.pnlBorderProperties.Location = new System.Drawing.Point(431, 37);
             this.pnlBorderProperties.Name = "pnlBorderProperties";
-            this.pnlBorderProperties.Size = new System.Drawing.Size(230, 261);
+            this.pnlBorderProperties.Size = new System.Drawing.Size(253, 261);
             this.pnlBorderProperties.TabIndex = 38;
             // 
             // panel3
