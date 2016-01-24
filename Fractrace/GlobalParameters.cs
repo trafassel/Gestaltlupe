@@ -92,9 +92,10 @@ namespace Fractrace
 
             // Number of iterations used in the formula, if the inside of the 3D object is rendered.
             ParameterDict.Current["Formula.Static.MinCycle"] = "0";
-            ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.Description"] = "Number of iterations used in the formula, if the inside of the 3D object is rendered.";
-            ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+            //ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.Description"] = "Number of iterations used in the formula, if the inside of the 3D object is rendered.";
+            //ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            //ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // The used formula.
             // Values from 1 to 26 corresponds to some inbuild formulas.
