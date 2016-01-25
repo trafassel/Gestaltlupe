@@ -215,6 +215,12 @@
     <Compile Include="DataTypes\XYZTupel .cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="Geometry\Navigator.cs" />
+    <Compile Include="Gui\MaterialControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\MaterialControl.Designer.cs">
+      <DependentUpon>MaterialControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
     <Compile Include="PictureArt\FloatPictureData.cs" />
     <Compile Include="PictureArt\FloatPixelInfo.cs" />
@@ -322,6 +328,9 @@
     <EmbeddedResource Include="Basic\ParameterDictControl.resx">
       <DependentUpon>ParameterDictControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\MaterialControl.resx">
+      <DependentUpon>MaterialControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\ResultImageView.resx">
       <DependentUpon>ResultImageView.cs</DependentUpon>
@@ -500,6 +509,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="images\MoveBackArrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\brightLight1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\brightLight1shininess0p8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\brightLighttLevel0p4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\dark1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\dark2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\lightInternsity0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\lightInternsity1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\ShadowJustify1p5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\ShadowJustify0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\sharp0p8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\materialImages\shininess9Shininessfactor1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

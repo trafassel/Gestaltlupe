@@ -15,34 +15,35 @@ namespace Fractrace.Scheduler
     public class PaintJob : IAsyncComputationStarter
     {
 
-        ParameterDict mParameters = null;
+        ParameterDict _parameters = null;
 
-        IAsyncComputationStarter mmaster = null;
-
+        IAsyncComputationStarter _master = null;
 
         /// <summary>
         /// Number of subrendering steps 
         /// </summary>
-        int mUpdateSteps = 0;
+        int _updateSteps = 0;
 
         /// <summary>
         /// Current iterate.
         /// </summary>
-        Iterate mIterate = null;
-
+        Iterate _iterate = null;
 
         /// <summary>
         /// Iterate in last run.
         /// </summary>
-        Iterate mLastIterate = null;
+        Iterate _lastIterate = null;
 
-        GrandScheduler scheduler = GrandScheduler.Exemplar;
+        GrandScheduler _scheduler = GrandScheduler.Exemplar;
 
-        Graphics mGraphics = null;
+        Graphics _graphics = null;
 
-        double mCurrentProgress = 0;
+        double _currentProgress = 0;
 
-        double mCurrentProgressd = 1;
+        double _currentProgressd = 1;
+
+        bool _abort = false;
+
 
         /// <summary>
         /// (master is used for progress bar).
@@ -50,12 +51,9 @@ namespace Fractrace.Scheduler
         /// <param name="master"></param>
         public PaintJob(IAsyncComputationStarter master,Graphics graphics)
         {
-            mmaster = master;
-            mGraphics = graphics;
+            _master = master;
+            _graphics = graphics;
         }
-
-
-        bool mAbort = false;
 
 
         /// <summary>
@@ -63,59 +61,48 @@ namespace Fractrace.Scheduler
         /// </summary>
         public void Abort()
         {
-            mAbort = true;
-            if (mIterate != null)
-                mIterate.Abort();
+            _abort = true;
+            if (_iterate != null)
+                _iterate.Abort();
         }
 
 
         /// <summary>
-        /// Start Computing.
+        /// Start Computing. Is called while rendering an animation. 
         /// </summary>
-        /// <param name="updateSteps"></param>
         public void Run(int updateSteps)
         {
-            mCurrentProgress = 0;
-            mmaster.Progress(mCurrentProgress);
+            _currentProgress = 0;
+            _master.Progress(_currentProgress);
             System.Diagnostics.Debug.WriteLine("PaintJob.Run " + updateSteps.ToString());
-            mParameters = ParameterDict.Current.Clone();
-            mUpdateSteps = updateSteps;
-            mCurrentProgressd = 100.0 / (double)(mUpdateSteps);
-            for (int i = 0; i < mUpdateSteps; i++)
-            {
-               
-                if (mAbort)
+            _parameters = ParameterDict.Current.Clone();
+            _updateSteps = updateSteps;
+            _currentProgressd = 100.0 / (double)(_updateSteps);
+            for (int i = 0; i < _updateSteps; i++)
+            {               
+                if (_abort)
                     return;
-                mIterate = new Iterate(mParameters, this, false);
-                if (mLastIterate != null)
+                _iterate = new Iterate(_parameters, this, false);
+                if (_lastIterate != null)
                 {
-                    mIterate.SetOldData(mLastIterate.GraphicInfo,mLastIterate.PictureData,i);
+                    _iterate.SetOldData(_lastIterate.GraphicInfo,_lastIterate.PictureData,i);
                 }
-                if (mAbort)
+                if (_abort)
                     return;
-                mIterate.StartAsync();
-                mIterate.Wait();
-                if (mAbort)
+                _iterate.StartAsync();
+                _iterate.Wait();
+                if (_abort)
                     return;
-                // TODO: View preview
-                mLastIterate = mIterate;
-                mCurrentProgress += mCurrentProgressd;
-                mmaster.Progress(mCurrentProgress);
+                _lastIterate = _iterate;
+                _currentProgress += _currentProgressd;
+                _master.Progress(_currentProgress);
             }
-            // Hint: Clone() is not neccessary.
-            Renderer renderer = new PlasicRenderer(mIterate.PictureData.Clone());
-            renderer.Init(mIterate.LastUsedFormulas);
-            renderer.Paint(mGraphics);
-            if (mAbort)
+            Renderer renderer = PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+            renderer.Paint(_graphics);
+            if (_abort)
                 return;
-            // TODO: Show in Preview, save image and data
-            System.Diagnostics.Debug.WriteLine("PaintJob.Run Ends");
-            mmaster.Progress(0);
-            // TODO: Draw progress bar
+            _master.Progress(0);
         }
-
-
-        
 
 
         /// <summary>
@@ -123,28 +110,19 @@ namespace Fractrace.Scheduler
         /// </summary>
         public void ComputationEnds()
         {
-            //scheduler.ComputationEnds();
-            // Call next iteration ...
-            // Start using Picture Art
         }
 
 
         /// <summary>
         /// Show progress. Valid values are [0, ..., 100].
         /// </summary>
-        /// <param name="progrssInPercent"></param>
         public void Progress(double progressInPercent)
         {
-           // mmaster.Progress(progressInPercent);
-
-            double progress = mCurrentProgress + progressInPercent / (double)(mUpdateSteps );
-
+            double progress = _currentProgress + progressInPercent / (double)(_updateSteps );
             System.Diagnostics.Debug.WriteLine("Progress: " + progressInPercent.ToString() + " =" + progress);
             if (progress > 100)
                 progress = 100;
-
-           mmaster.Progress(progress);
-             
+           _master.Progress(progress);
         }
 
 

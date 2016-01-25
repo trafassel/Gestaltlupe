@@ -63,6 +63,16 @@ namespace Fractrace.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _default {
+            get {
+                object obj = ResourceManager.GetObject("default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ArrowDown_32x {
             get {
                 object obj = ResourceManager.GetObject("ArrowDown_32x", resourceCulture);
@@ -103,6 +113,36 @@ namespace Fractrace.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap brightLight1 {
+            get {
+                object obj = ResourceManager.GetObject("brightLight1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap brightLight1shininess0p8 {
+            get {
+                object obj = ResourceManager.GetObject("brightLight1shininess0p8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap brightLighttLevel0p4 {
+            get {
+                object obj = ResourceManager.GetObject("brightLighttLevel0p4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CameraOrbit_32x {
             get {
                 object obj = ResourceManager.GetObject("CameraOrbit_32x", resourceCulture);
@@ -116,6 +156,26 @@ namespace Fractrace.Properties {
         internal static System.Drawing.Bitmap CameraOrbit_reverse_32x {
             get {
                 object obj = ResourceManager.GetObject("CameraOrbit_reverse_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dark1 {
+            get {
+                object obj = ResourceManager.GetObject("dark1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dark2 {
+            get {
+                object obj = ResourceManager.GetObject("dark2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +226,36 @@ namespace Fractrace.Properties {
         internal static System.Drawing.Bitmap Intellitrace_stepover {
             get {
                 object obj = ResourceManager.GetObject("Intellitrace_stepover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lightInternsity0 {
+            get {
+                object obj = ResourceManager.GetObject("lightInternsity0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lightInternsity1 {
+            get {
+                object obj = ResourceManager.GetObject("lightInternsity1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lightInternsity11 {
+            get {
+                object obj = ResourceManager.GetObject("lightInternsity11", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -336,6 +426,46 @@ namespace Fractrace.Properties {
         internal static System.Drawing.Bitmap RotateUp {
             get {
                 object obj = ResourceManager.GetObject("RotateUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShadowJustify0 {
+            get {
+                object obj = ResourceManager.GetObject("ShadowJustify0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShadowJustify1p5 {
+            get {
+                object obj = ResourceManager.GetObject("ShadowJustify1p5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sharp0p8 {
+            get {
+                object obj = ResourceManager.GetObject("sharp0p8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shininess9Shininessfactor1 {
+            get {
+                object obj = ResourceManager.GetObject("shininess9Shininessfactor1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

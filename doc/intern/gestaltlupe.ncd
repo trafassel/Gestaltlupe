@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:206-->
+<!--LastNote:209-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2911,6 +2911,12 @@ Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
 <DD>
 Hier können einige Voreinstellungen des Renderers ausgewählt werden.
 </DD>
+<DT><A name="uYUFMaOUNwddhxc1AtS5xw"></A>Min Cycle ausblenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453656665-->
+<!--property:date_modified=1453657601-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>

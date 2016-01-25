@@ -429,6 +429,18 @@ namespace Fractrace.Basic
 
 
         /// <summary>
+        /// Set double entry without raising change event.
+        /// </summary>
+        public void SetDoubleWithoutRaiseChange(string key, double value)
+        {
+            lock (_entries)
+            {
+                _entries[key] = value.ToString(Culture.NumberFormat);
+            }
+        }
+
+
+        /// <summary>
         /// Get double entry.
         /// </summary>
         public double GetDouble(string key)
