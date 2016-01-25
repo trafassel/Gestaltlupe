@@ -67,7 +67,7 @@ namespace Fractrace
             if (infos.Length > 1)
                 version = infos[1];
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
-            tabControl1.SelectedIndex = 3;
+            tabControl1.SelectedIndex = 4;
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
