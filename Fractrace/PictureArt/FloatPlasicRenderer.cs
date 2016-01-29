@@ -49,7 +49,7 @@ namespace Fractrace.PictureArt
         /// </summary>
         private int[,] _picInfo = null;
 
-
+        /*
         private float[,] _shadowInfo11 = null;
         private float[,] _shadowInfo10 = null;
         private float[,] _shadowInfo01 = null;
@@ -58,6 +58,7 @@ namespace Fractrace.PictureArt
         private float[,] _shadowInfo10sharp = null;
         private float[,] _shadowInfo01sharp = null;
         private float[,] _shadowInfo00sharp = null;
+        */
         private float[,] _shadowPlane = null;
 
         private float[,] _heightMap = null;
@@ -626,13 +627,9 @@ namespace Fractrace.PictureArt
             return retVal;
         }
 
-
-        /// <summary>
-        /// Schatteninformationen, wenn das Licht von oben rechts kommen, werden erzeugt.
-        /// Vorbereitet für weitere Lichtquellen.
-        /// </summary>
         protected virtual void CreateShadowInfo()
         {
+
             // Noch nicht öffentliche Parameter:
             Random rand = new Random();
             float glow = (float)ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
@@ -659,14 +656,13 @@ namespace Fractrace.PictureArt
             float sharpness = 2.5f; // 
 
             // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
-            _shadowInfo11 = new float[pData.Width, pData.Height];
-            _shadowInfo01 = new float[pData.Width, pData.Height];
-            _shadowInfo10 = new float[pData.Width, pData.Height];
-            _shadowInfo00 = new float[pData.Width, pData.Height];
-            _shadowInfo11sharp = new float[pData.Width, pData.Height];
-            _shadowInfo01sharp = new float[pData.Width, pData.Height];
-            _shadowInfo10sharp = new float[pData.Width, pData.Height];
-            _shadowInfo00sharp = new float[pData.Width, pData.Height];
+
+
+         float[,] shadowInfo = null;
+         float[,] shadowInfoSharp = null;
+
+            shadowInfo = new float[pData.Width, pData.Height];
+            shadowInfoSharp = new float[pData.Width, pData.Height];
 
             _shadowPlane = new float[pData.Width, pData.Height];
             float[,] shadowTempPlane = new float[pData.Width, pData.Height];
@@ -724,7 +720,7 @@ namespace Fractrace.PictureArt
 
                 int usedShadowNumber = _shadowNumber + 1;
                 if (shadowMode == 0 || shadowMode == 2)
-                    usedShadowNumber = (int)(0.5 * _shadowNumber + 1);          
+                    usedShadowNumber = (int)(0.5 * _shadowNumber + 1);
 
                 for (int shadowIter = 1; shadowIter < usedShadowNumber + 1; shadowIter++)
                 {
@@ -751,14 +747,8 @@ namespace Fractrace.PictureArt
                     {
                         for (int j = 0; j < pData.Height; j++)
                         {
-                            _shadowInfo11[i, j] = _heightMap[i, j];
-                            _shadowInfo10[i, j] = _heightMap[i, j];
-                            _shadowInfo01[i, j] = _heightMap[i, j];
-                            _shadowInfo00[i, j] = _heightMap[i, j];
-                            _shadowInfo11sharp[i, j] = _heightMap[i, j];
-                            _shadowInfo10sharp[i, j] = _heightMap[i, j];
-                            _shadowInfo01sharp[i, j] = _heightMap[i, j];
-                            _shadowInfo00sharp[i, j] = _heightMap[i, j];
+                            shadowInfo[i, j] = _heightMap[i, j];
+                            shadowInfoSharp[i, j] = _heightMap[i, j];
                         }
                     }
 
@@ -959,112 +949,121 @@ namespace Fractrace.PictureArt
                     }
 
                     // ***********  generate shadowplane ************
-                    for (int i = pData.Width - currentIntXval; i >= 0; i--)
+                    for (int k = 0; k < 4; k++)
                     {
-                        for (int j = pData.Height - currentIntYval; j >= 0; j--)
+                        // Ititialize shadowInfo and shadowInfoSharp
+                        for (int i = 0; i < pData.Width; i++)
                         {
-                            // *********  Fill shadowInfo11  ***********
-                            if (i < pData.Width - currentIntXval && j < pData.Height - currentIntYval)
+                            for (int j = 0; j < pData.Height; j++)
                             {
-                                float localShadow = _shadowInfo11[i + currentIntXval, j + currentIntYval] - ydh;
-                                if (localShadow > _shadowInfo11[i, j] && (rand.NextDouble() < glow))
+                                shadowInfo[i, j] = _heightMap[i, j];
+                                shadowInfoSharp[i, j] = _heightMap[i, j];
+                            }
+                        }
+
+                        if (k == 0)
+                        {
+                            for (int i = pData.Width - currentIntXval; i >= 0; i--)
+                            {
+                                for (int j = pData.Height - currentIntYval; j >= 0; j--)
                                 {
-                                    _shadowInfo11[i, j] = localShadow;
-                                }
-                                localShadow = _shadowInfo11sharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
-                                if (localShadow > _shadowInfo11sharp[i, j] && (rand.NextDouble() < glow))
-                                {
-                                    _shadowInfo11sharp[i, j] = localShadow;
+                                    // *********  Fill shadowInfo11  ***********
+                                    if (i < pData.Width - currentIntXval && j < pData.Height - currentIntYval)
+                                    {
+                                        float localShadow = shadowInfo[i + currentIntXval, j + currentIntYval] - ydh;
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        {
+                                            shadowInfo[i, j] = localShadow;
+                                        }
+                                        localShadow = shadowInfoSharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        {
+                                            shadowInfoSharp[i, j] = localShadow;
+                                        }
+                                    }
                                 }
                             }
                         }
-                        for (int j = 0; j < pData.Height; j++)
+
+                        if (k == 1)
                         {
-                            // *********  Fill shadowInfo01  ***********
-                            if (i < pData.Width - currentIntXval && j >= currentIntYval)
+                            for (int i = pData.Width - currentIntXval; i >= 0; i--)
                             {
-                                float localShadow = _shadowInfo01[i + currentIntXval, j - currentIntYval] - ydh;
-                                if (localShadow > _shadowInfo01[i, j] && (rand.NextDouble() < glow))
+                                for (int j = 0; j < pData.Height; j++)
                                 {
-                                    _shadowInfo01[i, j] = localShadow;
-                                }
-                                localShadow = _shadowInfo01sharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                if (localShadow > _shadowInfo01sharp[i, j] && (rand.NextDouble() < glow))
-                                {
-                                    _shadowInfo01sharp[i, j] = localShadow;
+                                    // *********  Fill shadowInfo01  ***********
+                                    if (i < pData.Width - currentIntXval && j >= currentIntYval)
+                                    {
+                                        float localShadow = shadowInfo[i + currentIntXval, j - currentIntYval] - ydh;
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        {
+                                            shadowInfo[i, j] = localShadow;
+                                        }
+                                        localShadow = shadowInfoSharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        {
+                                            shadowInfoSharp[i, j] = localShadow;
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    for (int i = 0; i < pData.Width; i++)
-                    {
-                        // *********  Fill shadowInfo10  ***********
-                        for (int j = pData.Height - currentIntXval; j >= 0; j--)
+                        if (k == 2)
                         {
-                            if (i >= currentIntXval && j < pData.Height - currentIntYval)
+                            for (int i = 0; i < pData.Width; i++)
                             {
-                                float localShadow = _shadowInfo10[i - currentIntXval, j + currentIntYval] - ydv;
-                                if (localShadow > _shadowInfo10[i, j] && (rand.NextDouble() < glow))
-                                    _shadowInfo10[i, j] = localShadow;
-                                localShadow = _shadowInfo10sharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
-                                if (localShadow > _shadowInfo10sharp[i, j] && (rand.NextDouble() < glow))
-                                    _shadowInfo10sharp[i, j] = localShadow;
-                            }
-                        }
-                        // *********  Fill shadowInfo00  ***********
-                        for (int j = 0; j < pData.Height; j++)
-                        {
-                            if (i >= currentIntXval && j >= currentIntYval)
-                            {
-                                float localShadow = _shadowInfo00[i - currentIntXval, j - currentIntYval] - ydh;
-                                if (localShadow > _shadowInfo00[i, j] && (rand.NextDouble() < glow))
-                                    _shadowInfo00[i, j] = localShadow;
-                                localShadow = _shadowInfo00sharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                if (localShadow > _shadowInfo00sharp[i, j] && (rand.NextDouble() < glow))
-                                    _shadowInfo00sharp[i, j] = localShadow;
-                            }
-                        }
-                    }
-
-                    // *********  Combine shadowInfo00, ..., shadowInfo11sharp  ***********
-                    // *********  create shadowTempPlane **********
-                    for (int i = 0; i < pData.Width; i++)
-                    {
-                        for (int j = 0; j < pData.Height; j++)
-                        {
-                            float shadowMapEntry = 0;
-                            float currentShadowMapEntry = 0;
-                            float height = _heightMap[i, j];
-                            float shadowHeight = 0;
-                            float sharpShadowHeight = 0;
-
-                            for (int k = 0; k < 4; k++)
-                            {
-                                switch (k)
+                                // *********  Fill shadowInfo10  ***********
+                                for (int j = pData.Height - currentIntXval; j >= 0; j--)
                                 {
-
-                                    case 0:
-                                        shadowHeight = _shadowInfo00[i, j];
-                                        sharpShadowHeight = _shadowInfo00sharp[i, j];
-                                        break;
-
-                                    case 1:
-                                        shadowHeight = _shadowInfo01[i, j];
-                                        sharpShadowHeight = _shadowInfo01sharp[i, j];
-                                        break;
-
-                                    case 2:
-                                        shadowHeight = _shadowInfo10[i, j];
-                                        sharpShadowHeight = _shadowInfo10sharp[i, j];
-                                        break;
-
-                                    case 3:
-                                        shadowHeight = _shadowInfo11[i, j];
-                                        sharpShadowHeight = _shadowInfo11sharp[i, j];
-                                        break;
-
+                                    if (i >= currentIntXval && j < pData.Height - currentIntYval)
+                                    {
+                                        float localShadow = shadowInfo[i - currentIntXval, j + currentIntYval] - ydv;
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                            shadowInfo[i, j] = localShadow;
+                                        localShadow = shadowInfoSharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                            shadowInfoSharp[i, j] = localShadow;
+                                    }
                                 }
+                            }
+                        }
+
+                        if (k == 3)
+                        {
+                            for (int i = 0; i < pData.Width; i++)
+                            {
+                                // *********  Fill shadowInfo00  ***********
+                                for (int j = 0; j < pData.Height; j++)
+                                {
+                                    if (i >= currentIntXval && j >= currentIntYval)
+                                    {
+                                        float localShadow = shadowInfo[i - currentIntXval, j - currentIntYval] - ydh;
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                            shadowInfo[i, j] = localShadow;
+                                        localShadow = shadowInfoSharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                            shadowInfoSharp[i, j] = localShadow;
+                                    }
+                                }
+                            }
+                        }
+
+
+                        // *********  Combine shadowInfo00, ..., shadowInfo11sharp  ***********
+                        // *********  create shadowTempPlane **********
+                        for (int i = 0; i < pData.Width; i++)
+                        {
+                            for (int j = 0; j < pData.Height; j++)
+                            {
+                                float shadowMapEntry = 0;
+                                float currentShadowMapEntry = 0;
+                                float height = _heightMap[i, j];
+                                float shadowHeight = 0;
+                                float sharpShadowHeight = 0;
+
+                                        shadowHeight = shadowInfo[i, j];
+                                        sharpShadowHeight = shadowInfoSharp[i, j];
 
                                 if (height != double.MinValue)
                                 {
@@ -1074,15 +1073,16 @@ namespace Fractrace.PictureArt
                                         currentShadowMapEntry += shadowVal;
                                     shadowMapEntry += currentShadowMapEntry;
                                 }
+
+                                shadowMapEntry /= 16.0f;
+                                if (shadowMapEntry > 1)
+                                    shadowMapEntry = 1;
+                                shadowMapEntry += shadowTempPlane[i, j];
+                                shadowMapEntry /= 2.0f;
+                                if (shadowMapEntry > 1)
+                                    shadowMapEntry = 1;
+                                shadowTempPlane[i, j] = shadowMapEntry;
                             }
-                            shadowMapEntry /= 16.0f;
-                            if (shadowMapEntry > 1)
-                                shadowMapEntry = 1;
-                            shadowMapEntry += shadowTempPlane[i, j];
-                            shadowMapEntry /= 2.0f;
-                            if (shadowMapEntry > 1)
-                                shadowMapEntry = 1;
-                            shadowTempPlane[i, j] = shadowMapEntry;
                         }
                     }
 
@@ -1096,14 +1096,8 @@ namespace Fractrace.PictureArt
                 }
             }
             // Release Memory:
-            _shadowInfo11 = null;
-            _shadowInfo01 = null;
-            _shadowInfo10 = null;
-            _shadowInfo00 = null;
-            _shadowInfo11sharp = null;
-            _shadowInfo01sharp = null;
-            _shadowInfo10sharp = null;
-            _shadowInfo00sharp = null;
+            shadowInfo = null;
+            shadowInfoSharp = null;
 
             // Normalize:
             float sMin = float.MaxValue;
@@ -1130,7 +1124,10 @@ namespace Fractrace.PictureArt
                     }
                 }
             }
+
         }
+
+
 
 
         /*
@@ -1328,7 +1325,7 @@ namespace Fractrace.PictureArt
                         float sumColor = 0;
 
                         //           if(pData.Points[i, j]!=null) {
-                        if (true)
+                        //if (true)
                         {
                             for (int k = -intRange; k <= intRange; k++)
                             {
@@ -1442,7 +1439,6 @@ namespace Fractrace.PictureArt
             return;
 
         }
-
 
 
         /// <summary>
