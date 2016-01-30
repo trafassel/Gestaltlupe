@@ -1494,5 +1494,20 @@ namespace Fractrace
 
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 3;
+        }
     }
 }

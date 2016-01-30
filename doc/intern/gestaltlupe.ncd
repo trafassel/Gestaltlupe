@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:209-->
+<!--LastNote:212-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2986,6 +2986,35 @@ Shininess Factor 0.8<BR>
 <!--property:date_modified=1453657601-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="PJifix8WAkEWZwWS16yEAQ"></A>OutOfMemory Exception bei Size 2</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454076604-->
+<!--property:date_modified=1454080077-->
+<!--property:hash=a91fe63693b94f4f1eac76409e3547616588a033-->
+<!--property:hash_html=382976905482a00cff5f4b050be5eb8567184796-->
+<DD>
+Tritt bei Fractrace.PictureArt.FloatPlasicRenderer.CreateShadowInfo()<BR>
+auf.
+</DD>
+<DT><A name="8WXRrNPj8STXtdGiRClRYA"></A>Start Stop Preview nach links</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454080080-->
+<!--property:date_modified=1454080486-->
+<!--property:hash=002befef553d7b4e973108041f00cbceae9d1999-->
+<!--property:hash_html=9fb67345a145222d91179c2d34e5cc445a0e1eeb-->
+<DD>
+panel 32<BR>
+<BR>
+Ist gemeinsam mit dem TabControl (tabControl2) in Panel4<BR>
+<BR>
+Die Vorschaubilder sind in Panel3<BR>
+<BR>
+<BR>
+panel32 muss unter das Panel, in dem Panel3 steckt (panel2)<BR>
+<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 </DL>

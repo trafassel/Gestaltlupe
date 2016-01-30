@@ -546,6 +546,15 @@
   <ItemGroup>
     <None Include="images\materialImages\shininess9Shininessfactor1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Script.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Navigate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Material.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
