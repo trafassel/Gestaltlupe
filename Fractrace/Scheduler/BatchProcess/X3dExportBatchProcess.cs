@@ -45,7 +45,6 @@ namespace Fractrace.Scheduler.BatchProcess
         double _startAngleZ = 0;
 
 
-
         public X3dExportBatchProcess()
         {
             _type = ParameterDict.Current.GetInt("Export.X3d.BatchType");
@@ -211,8 +210,8 @@ namespace Fractrace.Scheduler.BatchProcess
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45 + 270);
                 }
             }
-
         }
+
 
         protected void StepEnds()
         {

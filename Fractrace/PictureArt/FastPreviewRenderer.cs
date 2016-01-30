@@ -40,10 +40,7 @@ namespace Fractrace.PictureArt
         /// </summary>
         private Vec3 _maxPoint = new Vec3(0, 0, 0);
 
-
-
         private Vec3[,] normalesSmooth1 = null;
-
 
         /// <summary>
         /// Additional informationen for the picture.
@@ -51,7 +48,6 @@ namespace Fractrace.PictureArt
         /// 1 elemtent of the cut with the screen
         /// </summary>
         private int[,] picInfo = null;
-
 
         private Vec3[,] normalesSmooth2 = null;
         private double[,] sharpShadow = null;
@@ -78,26 +74,20 @@ namespace Fractrace.PictureArt
 
         private double maxY = double.MinValue;
 
-
         // Corresponds to the number of shadows
         private int shadowNumber = 1;
-
 
         // Intensity of the FieldOfView
         private int ambientIntensity = 4;
 
-
         // Intensity of the Surface Color
         private double colorIntensity = 0.5;
-
 
         // if useLight==false, only the shades are computed. 
         private bool useLight = true;
 
-
         // Shadow height factor
         private double shadowJustify = 1;
-
 
         // Influence of the shininess (0 <= shininessFactor <=1)
         private double shininessFactor = 0.7;
@@ -110,7 +100,6 @@ namespace Fractrace.PictureArt
 
         // If thrue, sharp shadow rendering is activated (warning: time consuming) 
         private bool useSharpShadow = false;
-
 
         private double colorFactorRed = 1;
         private double colorFactorGreen = 1;
@@ -145,7 +134,6 @@ namespace Fractrace.PictureArt
         /// Difference between maximal and minimal y value in computing area
         /// </summary>
         private double areaDeph = 0;
-
 
         private double brightness = 1;
 

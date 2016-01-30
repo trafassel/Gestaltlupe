@@ -130,7 +130,7 @@ namespace Fractrace
             double centerY = ParameterDict.Current.GetDouble("Scene.CenterY");
             double centerZ = ParameterDict.Current.GetDouble("Scene.CenterZ");
 
-            Rotation rotView = null;
+            //Rotation rotView = null;
             double centerXChange = centerX + 1;
             double centerYChange = centerY + 1;
             double centerZChange = centerZ + 1;
@@ -139,7 +139,8 @@ namespace Fractrace
             double minDoubleVal = 0.0000000000000001;
 
             // This does not work for angle combinations:
-            rotView = new Rotation();
+
+            Rotation rotView = new Rotation();
             rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                   ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             centerDiffX = rotView.TransformForNavigation(new Vec3(1, 0, 0));
@@ -153,6 +154,7 @@ namespace Fractrace
             rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                   ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             centerDiffZ = rotView.TransformForNavigation(new Vec3(0, 0, -1));
+            
 
             // Set 0-Entries
             if (centerDiffX.X > -minDoubleVal && centerDiffX.X < minDoubleVal)

@@ -170,7 +170,7 @@ namespace Fractrace.Animation
 
       
         /// <summary>
-        /// Aus dem eingegebenen Text wird die Animation erzeugt.
+        /// Create animation info from string.
         /// </summary>
         private void CreateAnimationSteps(string animationDescription)
         {
@@ -216,8 +216,6 @@ namespace Fractrace.Animation
         /// <summary>
         /// Start rendering full Animation.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
             _inAnimation = true;
@@ -262,11 +260,8 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Berechnet einen Animationsteil, bestehend aus steps Einzelschritten.
+        /// Compute part of animation.
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="steps"></param>
         private void ComputeAnimationPart(int from, int to, int steps, ParameterHistory animationHistory, int historyIndex)
         {
             lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString();
@@ -296,10 +291,8 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Animation anhalten.
+        /// Stop Animation. Creation of current image is not stopped.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnStop_Click(object sender, EventArgs e)
         {
             _animationAbort = true;
@@ -308,10 +301,8 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Die Einzelereignisse der Animation werden gezeigt.
+        /// Diplay some animation steps as preview images.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnPreview_Click(object sender, EventArgs e)
         {
             btnPreview.Enabled = false;
@@ -324,19 +315,6 @@ namespace Fractrace.Animation
         /// </summary>
         private void RenderPreview()
         {
-            /*
-            int height = 0;
-            if (int.TryParse(tbPreviewSize.Text, out height))
-            {
-                if (height > 10 && height < 256)
-                    _previewHeight = height;
-            }
-            int width = 0;
-            if (int.TryParse(tbPreviewSize.Text, out width))
-            {
-                if (width > 10 && width < 256)
-                    _previewWidth = width;
-            }*/
             _previewHeight = 100;
             _previewWidth = 100;
 
@@ -350,7 +328,7 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Ein Einzelschritt der Voransichts-Animation wurde geladen.
+        /// Rendering of one preview image is ready.
         /// </summary>
         void mPreview1_RenderingEnds()
         {
@@ -407,8 +385,6 @@ namespace Fractrace.Animation
         /// <summary>
         /// Load Animation file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
@@ -451,8 +427,6 @@ namespace Fractrace.Animation
         /// <summary>
         /// Saved animation file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
@@ -474,7 +448,7 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Is called, if some properties changed.
+        /// Is called if some properties changed.
         /// </summary>
         public void UpdateFromChangeProperty()
         {

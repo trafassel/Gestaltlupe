@@ -13,23 +13,22 @@ namespace Fractrace.Geometry
 
         public Projection(Vec3 camera, Vec3 viewPoint)
         {
-            this.camera = camera;
-            this.viewPoint = viewPoint;
+            this._camera = camera;
+            this._viewPoint = viewPoint;
             d = camera.Dist(viewPoint);
         }
 
 
         /// <summary>
-        /// Kamerapunkt des Benutzers (üblicherweise parallel vor dem Zentrum des Vierecks 
+        /// Camera position. 
         /// </summary>
-        protected Vec3 camera = null;
+        protected Vec3 _camera = null;
 
 
         /// <summary>
-        /// Der Punkt, der sich vor dem Kamerapunkt befindet und der auf das Zentrum des Bildschirmes
-        /// plaziert werden soll.
+        /// Point to view.
         /// </summary>
-        protected Vec3 viewPoint = null;
+        protected Vec3 _viewPoint = null;
 
 
         /// <summary>
@@ -41,26 +40,22 @@ namespace Fractrace.Geometry
         /// <summary>
         /// reverse transformation.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         public override Vec3 Transform(Vec3 input)
         {
-            Vec3 p1 = input.Diff(camera);
+            Vec3 p1 = input.Diff(_camera);
             double dp = p1.Norm;
             double fac = dp / d;
             Vec3 p1_p = p1.Mult(fac);
-            return (p1_p.Sum(camera));
+            return (p1_p.Sum(_camera));
         }
 
 
         /// <summary>
         /// Reversed reverse transformation.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         public Vec3 ReverseTransform(Vec3 input)
         {
-            Vec3 transformedCamera = Transform(camera);
+            Vec3 transformedCamera = Transform(_camera);
             Vec3 tempVec = input.Diff(transformedCamera);
             double l = tempVec.Norm;
             double dt = Math.Sqrt(l * d);

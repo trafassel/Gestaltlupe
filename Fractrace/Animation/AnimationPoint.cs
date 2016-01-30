@@ -21,7 +21,7 @@ namespace Fractrace.Animation
         /// <summary>
         /// Number of interpolated animation steps from this to the next AnimationPoint. 
         /// </summary>
-        protected int mSteps = 0;
+        protected int _steps = 0;
 
 
         /// <summary>
@@ -31,11 +31,11 @@ namespace Fractrace.Animation
         {
             get
             {
-                return mSteps;
+                return _steps;
             }
             set
             {
-                mSteps = value;
+                _steps = value;
             }
         }
 
@@ -43,7 +43,7 @@ namespace Fractrace.Animation
         /// <summary>
         /// Digital point in time.
         /// </summary>
-        protected int mTime = 0;
+        protected int _time = 0;
 
 
         /// <summary>
@@ -53,11 +53,11 @@ namespace Fractrace.Animation
         {
             get
             {
-                return mTime;
+                return _time;
             }
             set
             {
-                mTime = value;
+                _time = value;
             }
         }
 

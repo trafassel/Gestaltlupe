@@ -113,8 +113,6 @@ namespace Fractrace.SceneGraph
                 sbNormales.AppendLine(line);
             }
 
-
-
             int noColors = noFaces * 3;
             int noCoords = noFaces * 3;
             int noNormals = noFaces * 3;
@@ -135,8 +133,6 @@ var vertices = [
 	var colors = [
 ");
             sw.WriteLine(sbColors.ToString());
-
-         
 
             sw.WriteLine(@"
 	];

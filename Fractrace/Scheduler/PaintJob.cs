@@ -48,7 +48,6 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// (master is used for progress bar).
         /// </summary>
-        /// <param name="master"></param>
         public PaintJob(IAsyncComputationStarter master,Graphics graphics)
         {
             _master = master;

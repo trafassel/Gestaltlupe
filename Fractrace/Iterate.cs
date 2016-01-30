@@ -25,12 +25,10 @@ namespace Fractrace
 
         protected bool _abort = false;
 
-
         /// <summary>
         /// True while running iteration.
         /// </summary>
         protected bool _start = false;
-
 
         /// <summary>
         /// Globales Anhalten der Berechnung.
@@ -117,12 +115,10 @@ namespace Fractrace
         /// </summary>
         DataTypes.GraphicData _oldData = null;
 
-
         /// <summary>
         /// PictureData of previous iteration. Used for update.
         /// </summary>
         DataTypes.PictureData _oldPictureData = null;
-
 
         /// <summary>
         /// Count the number of update steps.
@@ -137,18 +133,14 @@ namespace Fractrace
         /// </summary>
         protected bool _isRightView = false;
 
-
-
         /// <summary>
         /// Liefert den Status der Berechnung (von 0-100)
         /// </summary>
         double _percent = 0;
 
-
         /// <summary>
         /// Liefert den Status der Berechnung (von 0-100)
         /// </summary>
-        /// 
         public double CurrentStatus
         {
             get
@@ -194,7 +186,6 @@ namespace Fractrace
         protected Formulas _lastUsedFormulas = null;
 
         int _maxUpdateSteps = 1;
-
 
         public Iterate()
         {
@@ -243,8 +234,6 @@ namespace Fractrace
         /// <summary>
         /// Set data of the last iteration with the same rendering parameters.
         /// </summary>
-        /// <param name="oldData"></param>
-        /// <param name="oldPictureData"></param>
         public void SetOldData(DataTypes.GraphicData oldData, DataTypes.PictureData oldPictureData, int updateCount)
         {
             _oldData = oldData;
@@ -434,26 +423,20 @@ namespace Fractrace
                 return;
             formulas.InternFormula.Init();
 
-            // Umschauen
-            /*
-            double centerX = (ParameterDict.Current.GetDouble("Border.Max.x") + ParameterDict.Current.GetDouble("Border.Min.x")) / 2.0;
-            double centerY = 0.5 * (ParameterDict.Current.GetDouble("Border.Max.y") + ParameterDict.Current.GetDouble("Border.Min.y"));
-            double centerZ = (ParameterDict.Current.GetDouble("Border.Max.z") + ParameterDict.Current.GetDouble("Border.Min.z")) / 2.0;
-            */
             double centerX = ParameterDict.Current.GetDouble("Scene.CenterX");
             double centerY = ParameterDict.Current.GetDouble("Scene.CenterY");
             double centerZ = ParameterDict.Current.GetDouble("Scene.CenterZ");
-
+            
             Rotation rotView = new Rotation();
             rotView.Init(centerX, centerY, centerZ, ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             formulas.Transforms.Add(rotView);
-            // ende Umschauen
-
-            // TODO: only use in compatibility mode.
+        
+            // TODO: only use in compatibility mode.   
             Rotation rot = new Rotation();
             rot.Init();
             formulas.Transforms.Add(rot);
+           
 
             if (_isRightView)
             {

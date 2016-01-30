@@ -42,9 +42,6 @@ namespace Fractrace.PictureArt
         /// </summary>
         private FloatVec3 _maxPoint = new FloatVec3(0, 0, 0);
 
-      //  private FloatVec3[,] _normalesSmooth1 = null;
-
-
         /// <summary>
         /// Additional informationen for the picture.
         /// 0 no info
@@ -52,8 +49,6 @@ namespace Fractrace.PictureArt
         /// </summary>
         private int[,] _picInfo = null;
 
-      //  private FloatVec3[,] _normalesSmooth2 = null;
-        //private float[,] sharpShadow = null;
 
         private float[,] _shadowInfo11 = null;
         private float[,] _shadowInfo10 = null;
@@ -99,9 +94,10 @@ namespace Fractrace.PictureArt
         // Normal of the light source     
         private FloatVec3 _lightRay = new FloatVec3();
 
-        // If thrue, sharp shadow rendering is activated (warning: time consuming) 
-       // private bool _useSharpShadow = false;
-
+        /// <summary>
+        /// Used in field of view computing.
+        /// </summary>
+        double _ydGlobal = 0;
 
         private float _colorFactorRed = 1;
         private float _colorFactorGreen = 1;
@@ -145,7 +141,7 @@ namespace Fractrace.PictureArt
         bool _colorInside = false;
 
         /// <summary>
-        /// Allgemeine Informationen werden erzeugt
+        /// Set fields from ParameterDict.Current.
         /// </summary>
         protected override void PreCalculate()
         {
@@ -274,12 +270,6 @@ namespace Fractrace.PictureArt
         }
 
 
-        /// <summary>
-        /// Liefert die Farbe zum Punkt x,y
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
         protected override Vec3 GetRgbAt(int x, int y)
         {
             FloatVec3 rgb = _rgbPlane[x, y];
@@ -288,7 +278,7 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
-        /// Erzeugt das Bild im rgb-Format
+        /// Create rgb image.
         /// </summary>
         protected void DrawPlane()
         {
@@ -358,7 +348,6 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Get the color information of the bitmap at (x,y)
         /// </summary>
-        /// <returns></returns>
         protected Vec3 GetRgb(int x, int y)
         {
 
@@ -481,7 +470,6 @@ namespace Fractrace.PictureArt
                         }
                     }
 
-
                     if (r1 > 1)
                         r1 = 1;
                     if (b1 > 1)
@@ -550,7 +538,6 @@ namespace Fractrace.PictureArt
                                 break;
 
                         }
-
                     }
                 }
             }
@@ -560,7 +547,6 @@ namespace Fractrace.PictureArt
                 retVal.X = (float)Math.Pow(retVal.X, _contrast);
                 retVal.Y = (float)Math.Pow(retVal.Y, _contrast);
                 retVal.Z = (float)Math.Pow(retVal.Z, _contrast);
-
             }
 
             if (_brightness > 1)
@@ -595,10 +581,8 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
-        /// Liefert die Farbe der Oberfläche entsprechend der Normalen.
+        /// Surface color according to _shininessFactor and _shininess.
         /// </summary>
-        /// <param name="normal"></param>
-        /// <returns></returns>
         protected virtual FloatVec3 GetLightF(FloatVec3 normal)
         {
 
@@ -1263,16 +1247,13 @@ namespace Fractrace.PictureArt
         */
 
 
-            
         /// <summary>
-        /// Lokale Tiefeninformationen werden erzeugt.
+        /// Field  _heightMap is created from _pictureData.Points.
         /// </summary>
         protected void CreateHeightMap()
         {
             _heightMap = new float[pData.Width, pData.Height];
-         //   _smoothDeph2 = new float[pData.Width, pData.Height];
 
-            // Normieren
             for (int i = 0; i < pData.Width; i++)
             {
                 for (int j = 0; j < pData.Height; j++)
@@ -1280,88 +1261,20 @@ namespace Fractrace.PictureArt
                     FloatPixelInfo pInfo = _pictureData.Points[i, j];
                     if (pInfo != null)
                     {
-           //             _smoothDeph2[i, j] = pInfo.Coord.Y;
                         _heightMap[i, j] = pInfo.Coord.Y;
-                        // if (pInfo.Coord.Y != 0) { // Unterscheidung, ob Schnitt mit Begrenzung vorliegt.
                         if (_minY > pInfo.Coord.Y && pInfo.Coord.Y != 0)
                             _minY = pInfo.Coord.Y;
                         if (_maxY < pInfo.Coord.Y)
                             _maxY = pInfo.Coord.Y;
-                        //}
                     }
                     else
                     {
                         _heightMap[i, j] = float.MinValue;
-              //          _smoothDeph2[i, j] = float.MinValue;
-                    }
-                }
-            }
-
-
-
-            //    SetSmoothDeph(smoothDeph1, smoothDeph2);
-        }
-        
-
-        /// <summary>
-        /// Tiefeninformationen werden weicher gemacht.
-        /// </summary>
-        /// <param name="sdeph1"></param>
-        /// <param name="sdeph2"></param>
-        protected virtual void SetSmoothDeph(double[,] sdeph1, double[,] sdeph2)
-        {
-
-            for (int i = 0; i < pData.Width; i++)
-            {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    int neighborFound = 0;
-                    double smoothDeph = 0;
-                    sdeph2[i, j] = double.MinValue;
-                    //int k=0;
-                    for (int k = -1; k <= 1; k++)
-                    {
-                        //int l = -1;
-                        for (int l = -1; l <= 1; l++)
-                        {
-                            int posX = i + k;
-                            int posY = j + l;
-                            if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
-                            {
-                                double newDeph = sdeph1[posX, posY];
-
-                                // neu: es werden nur die Punkte benutzt, die echt größer sind
-                                if (newDeph != double.MinValue)
-                                {
-                                    double valToAdded = sdeph1[i, j];
-                                    if (newDeph > valToAdded)
-                                        valToAdded = newDeph;
-                                    smoothDeph += newDeph;
-                                    neighborFound++;
-
-                                }
-                            }
-                        }
-                    }
-                    if (neighborFound > 0 && sdeph1[i, j] != double.MinValue)
-                    {
-                        smoothDeph /= (double)neighborFound;
-                        sdeph2[i, j] = 1.0 * (0.8 * sdeph1[i, j] + 0.2 * smoothDeph);
-                    }
-                    else
-                    {
-                        sdeph2[i, j] = double.MinValue;
                     }
                 }
             }
         }
-
-
-
-        /// <summary>
-        /// Used in field of view computing.
-        /// </summary>
-        double ydGlobal = 0;
+       
 
         /// <summary>
         /// Compute field of view.
@@ -1369,7 +1282,7 @@ namespace Fractrace.PictureArt
         protected void SmoothPlane()
         {
             double fieldOfViewStart = _minFieldOfView;
-            ydGlobal = (_areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
+            _ydGlobal = (_areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
             _rgbSmoothPlane1 = new FloatVec3[pData.Width, pData.Height];
             _rgbSmoothPlane2 = new FloatVec3[pData.Width, pData.Height];
             int intRange = 3;
@@ -1535,8 +1448,6 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Get the value, which is used in computing the field of view.
         /// </summary>
-        /// <param name="ypos"></param>
-        /// <returns></returns>
         protected double GetAmbientValue(double ypos)
         {
             double mainDeph = _maxY - _minY;
@@ -1552,8 +1463,6 @@ namespace Fractrace.PictureArt
             {
                 ydist = ydNormalized - _maxFieldOfView;
                 maxDist = 1 - _maxFieldOfView;
-                //ydNormalized = 0;
-                //return 0;
             }
             else
             {
@@ -1561,8 +1470,6 @@ namespace Fractrace.PictureArt
                 {
                     ydist = _minFieldOfView - ydNormalized;
                     maxDist = _minFieldOfView;
-                    //ydNormalized = 0;
-                    //return 0;
                 }
                 else
                 {
@@ -1571,16 +1478,13 @@ namespace Fractrace.PictureArt
                 }
             }
 
-
             if (maxDist != 0)
             {
                 ydist = ydist / maxDist;
             }
 
-
             ydNormalized = 1.0 - ydist;
 
-            // Test only
             if (ydNormalized > 1)
                 ydNormalized = 1;
 
@@ -1611,21 +1515,10 @@ namespace Fractrace.PictureArt
                     float yd = _heightMap[i, j];
                     if (yd != double.MinValue)
                     {
-                        //if (yd == double.MinValue)
-                        //    yd = minY;
                         float ydNormalized = (yd - _minY) / mainDeph;
-                        /*
-                        ydNormalized = Math.Sqrt(ydNormalized);
-                        ydNormalized *= 2 * ydNormalized;
-                        if (ydNormalized > 0.95) {
-                          ydNormalized = 0.95;
-                        }
-                        ydNormalized += 0.05;
-                         */
                         float greyYd = 1.0f - ydNormalized;
                         col.X = col.X * ydNormalized + (_backColorRed * greyYd);
                         col.Y = col.Y * ydNormalized + (_backColorGreen * greyYd);
-                        //ydNormalized += 0.05;
                         col.Z = ydNormalized * col.Z + (_backColorBlue * greyYd);
                     }
                     else
@@ -1633,7 +1526,6 @@ namespace Fractrace.PictureArt
                         col.X = _backColorRed;
                         col.Y = _backColorGreen;
                         col.Z = _backColorBlue;
-
                     }
                 }
             }
@@ -1697,50 +1589,7 @@ namespace Fractrace.PictureArt
 
                 }
             }
-
         }
-
-
-        /// <summary>
-        /// Test, if the given point is inside the sharp shadow. 
-        /// Returns the number of intersection with the ray and the fractal, but not more than maxIntersections.
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="ray"></param>
-        /// <param name="rayLenght"></param>
-        /// <returns></returns>
-        protected int IsInSharpShadow(Vec3 point, Vec3 ray, double rayLenght, bool inverse, int maxIntersections, int steps)
-        {
-            //int steps = 100;
-            inverse = false;
-            double dSteps = steps;
-            double dist = 0;
-            int shadowCount = 0;
-            for (int gSteps = 0; gSteps < 6; gSteps++)
-            {
-                dist = rayLenght / dSteps;
-                Vec3 currentPoint = new Vec3(point);
-                currentPoint.Add(ray.Mult(dist));
-                for (int i = 0; i < steps; i++)
-                {
-                    currentPoint.Add(ray.Mult(dist));
-                    if (formula.TestPoint(currentPoint.X, currentPoint.Y, currentPoint.Z, inverse))
-                    {
-                        shadowCount++;
-                        if (shadowCount >= maxIntersections)
-                            return maxIntersections;
-                    }
-                    else
-                    {
-                        //  return false;
-                    }
-                }
-                rayLenght /= 1.4;
-            }
-            return shadowCount;
-        }
-
 
 
     }

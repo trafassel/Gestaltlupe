@@ -84,11 +84,14 @@ namespace Fractrace.Basic
         /// <summary>Internal dictionary.</summary>
         protected Dictionary<string, string> _entries = new Dictionary<string, string>();
 
+        /// <summary>
+        /// If true, no outgoing update events are raised.
+        /// </summary>
+        private bool _noUpdateEvents = false;
 
         /// <summary>
         /// Gets the unique static instance of this class.
         /// </summary>
-        /// <value>The exemplar.</value>
         public static ParameterDict Current
         {
             get
@@ -108,7 +111,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Save all dictionary entries into a file.
         /// </summary>
-        /// <param name="fileName"></param>
         public void Save(string fileName)
         {
             XmlTextWriter tw = new XmlTextWriter(fileName, System.Text.Encoding.UTF8);
@@ -171,7 +173,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Load all dictionary entries from the given file.
         /// </summary>
-        /// <param name="fileName"></param>
         public void Load(string fileName)
         {
             _entries.Clear();
@@ -184,23 +185,15 @@ namespace Fractrace.Basic
 
 
         /// <summary>
-        /// If true, no outgoing update events are raised.
-        /// </summary>
-        private bool _noUpdateEvents = false;
-
-        /// <summary>
         /// Append all dictionary entries from the given file.
         /// </summary>
-        /// <param name="fileName"></param>
         public void Append(string fileName)
         {
             XmlDocument xdoc = new XmlDocument();
             if (!System.IO.File.Exists(fileName))
             {
                 return;
-                // Todo: Backwart Compatibility
             }
-
             xdoc.Load(fileName);
             foreach (XmlNode xNode in xdoc)
             {
@@ -226,7 +219,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// The text 
         /// </summary>
-        /// <param name="text">The text.</param>
         public void AppendFromText(string text)
         {
             lock (_entries)
@@ -250,7 +242,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Gets or sets the <see cref="System.String"/> with the specified name.
         /// </summary>
-        /// <value></value>
         public string this[string name]
         {
             get
@@ -267,8 +258,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get the value of the entry with given name.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         protected string GetValue(string name)
         {
             if (_entries.ContainsKey(name))
@@ -285,8 +274,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Set the value of the entry with given name. 
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
         protected void SetValue(string name, string value)
         {
             lock (_entries)
@@ -315,7 +302,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Removes the Entry with the given name.
         /// </summary>
-        /// <param name="name">The name.</param>
         public void RemoveProperty(string name)
         {
             if (_entries.ContainsKey(name))
@@ -348,8 +334,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Gets the Hash (elementName|elemenValue) of all elementes, which name starts with nodeHirarchy.
         /// </summary>
-        /// <param name="nodeHirarchy">The node hirarchy.</param>
-        /// <returns></returns>
         public string GetHash(string nodeHirarchy)
         {
             StringBuilder sb = new StringBuilder();
@@ -382,8 +366,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Gets the Hash (elementName) of all elementNames, which name starts with nodeHirarchy.
         /// </summary>
-        /// <param name="nodeHirarchy">The node hirarchy.</param>
-        /// <returns></returns>
         public string GetHashOfName(string nodeHirarchy)
         {
             StringBuilder sb = new StringBuilder();
@@ -410,8 +392,6 @@ namespace Fractrace.Basic
                 retVal.Append(temp);
             }
             return retVal.ToString();
-
-            //return Encoding.ASCII.GetString(buffer2);
         }
 
 
@@ -498,7 +478,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return View.Size * View.Height.
         /// </summary>
-        /// <returns></returns>
         public int GetHeight()
         {
             return (int)(GetDouble("View.Height") * GetDouble("View.Size"));
@@ -508,8 +487,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Set integer entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         public void SetInt(string key, int value)
         {
             lock (_entries)
@@ -523,8 +500,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get integer entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public int GetInt(string key)
         {
             int retVal = 0;
@@ -550,8 +525,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Set boolean entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         public void SetBool(string key, bool value)
         {
             lock (_entries)
@@ -568,8 +541,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get boolean entry.
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public bool GetBool(string key)
         {
             if (_entries.ContainsKey(key))
@@ -585,7 +556,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return a clone of this instance.
         /// </summary>
-        /// <returns></returns>
         public ParameterDict Clone()
         {
             ParameterDict retVal = new ParameterDict();
@@ -600,8 +570,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return Datatype of given parameter. If Datatype is unknown an empty string is returned.
         /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
         public string GetDatatype(string parameterName)
         {
             return GetValue(parameterName + ".PARAMETERINFO.Datatype");
@@ -611,8 +579,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return description of given parameter.
         /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
         public string GetDescription(string parameterName)
         {
             return GetValue(parameterName + ".PARAMETERINFO.Description");
@@ -622,7 +588,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return true, if corresponding parameter entry is for info only and should not generate any user control.
         /// </summary>
-        /// <returns></returns>
         public static bool IsAdditionalInfo(string parameterName)
         {
             if (parameterName.Contains(".PARAMETERINFO"))
@@ -630,10 +595,10 @@ namespace Fractrace.Basic
             return false;
         }
 
+
         /// <summary>
         /// Return true, if corresponding parameter entry is user setting and does not belongs to .
         /// </summary>
-        /// <returns></returns>
         public static bool IsUserSetting(string parameterName)
         {
             if (parameterName=="Intern.Filter")
@@ -663,12 +628,11 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return true, if the corresponding control should be generated.
         /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
         public static bool HasControl(string parameterName)
         {
             return !ParameterDict.Current.GetBool(parameterName + ".PARAMETERINFO.VIEW.Invisible");
         }
+
 
     }
 }

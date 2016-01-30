@@ -45,17 +45,17 @@ namespace Fractrace.SceneGraph
         public bool Valid { get { return _valid; } }
         protected bool _valid = true;
 
-
-      
-
-
         // will be set on init
-        double radius = 0;
-        double centerx = 0;
-        double centery = 0;
-        double centerz = 0;
+        double _radius = 0;
+        double _centerx = 0;
+        double _centery = 0;
+        double _centerz = 0;
 
         Mesh _mesh = null;
+
+        bool _useDistance = false;
+        double _maxDist = 0;
+        bool _needScaling = false;
 
         /// <summary>
         /// Initialise Mesh an set radius, centerx, centery and centerz.
@@ -108,11 +108,11 @@ namespace Fractrace.SceneGraph
 
                     double x, y, z;
 
-                    if (needScaling || AlwaysScale)
+                    if (_needScaling || AlwaysScale)
                     {
-                        x = (pInfo.Coord.X - centerx) / radius;
-                        y = (pInfo.Coord.Y - centery) / radius;
-                        z = (pInfo.Coord.Z - centerz) / radius;
+                        x = (pInfo.Coord.X - _centerx) / _radius;
+                        y = (pInfo.Coord.Y - _centery) / _radius;
+                        z = (pInfo.Coord.Z - _centerz) / _radius;
                     }
                     else
                     {
@@ -151,7 +151,6 @@ namespace Fractrace.SceneGraph
                 {
                     if (_pictureData.Points[i, j] != null)
                     {
-
                         PixelInfo point1 = _pictureData.Points[i, j];
                         if (point1.Coord.X > 1000 && point1.Coord.X < -1000 && point1.Coord.Y > 1000 && point1.Coord.Y < -1000 && point1.Coord.Z > 1000 && point1.Coord.Z < -1000)
                         {
@@ -164,11 +163,11 @@ namespace Fractrace.SceneGraph
                             {
                                 // triangle 1
                                 bool useTriangle = true;
-                                if (useDistance)
+                                if (_useDistance)
                                 {
                                     PixelInfo point2 = _pictureData.Points[i - 1, j];
                                     PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
-                                    if (Dist(point1, point2) > maxDist || Dist(point1, point3) > maxDist)
+                                    if (Dist(point1, point2) > _maxDist || Dist(point1, point3) > _maxDist)
                                         useTriangle = false;
                                 }
                                 if (useTriangle)
@@ -182,20 +181,18 @@ namespace Fractrace.SceneGraph
                                     _mesh._normales.Add((float)point1.Normal.Z);
 
                                 }
-
                             }
                             if (_pictureData.Points[i, j - 1] != null)
                             {
                                 // triangle 2
                                 bool useTriangle = true;
-                                if (useDistance)
+                                if (_useDistance)
                                 {
                                     PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
                                     PixelInfo point3 = _pictureData.Points[i, j - 1];
-                                    if (Dist(point1, point2) > maxDist || Dist(point1, point3) > maxDist)
+                                    if (Dist(point1, point2) > _maxDist || Dist(point1, point3) > _maxDist)
                                         useTriangle = false;
                                 }
-
                                 if (useTriangle)
                                 {
                                     _mesh._faces.Add(pointIndex[i, j]);
@@ -207,19 +204,15 @@ namespace Fractrace.SceneGraph
                                     _mesh._normales.Add((float)point1.Normal.Z);
 
                                 }
-
                             }
                         }
                     }
                 }
             }
-
-
             if (maxcol < 0.0001)
             {
                 _valid = false;
             }
-
             return _mesh;
         }
 
@@ -228,22 +221,18 @@ namespace Fractrace.SceneGraph
         {
             _iterate = iter;
             _pictureData = pictureData;
-
-            useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
-
+            _useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
             List<Coord2D> pointList = new List<Coord2D>();
             Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
-
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
-
             double minx = Double.MaxValue;
             double miny = Double.MaxValue;
             double minz = Double.MaxValue;
             double maxx = Double.MinValue;
             double maxy = Double.MinValue;
             double maxz = Double.MinValue;
-
             int currentIndex = 0;
+
             for (int i = 0; i < _pictureData.Width; i++)
             {
                 for (int j = 0; j < _pictureData.Height; j++)
@@ -251,7 +240,6 @@ namespace Fractrace.SceneGraph
                     if (_pictureData.Points[i, j] != null)
                     {
                         PixelInfo point = Transform(_pictureData.Points[i, j]);
-
                         if (minx > point.Coord.X)
                             minx = point.Coord.X;
                         if (miny > point.Coord.Y)
@@ -264,69 +252,52 @@ namespace Fractrace.SceneGraph
                             maxy = point.Coord.Y;
                         if (maxz < point.Coord.Z)
                             maxz = point.Coord.Z;
-
                         Coord2D coord = new Coord2D(i, j);
-                        //pointIndex[i, j] = currentIndex;
-                        //pointList.Add(coord);
                         currentIndex++;
-                    }
-                    else
-                    {
-                        //pointIndex[i, j] = -1;
                     }
                 }
             }
-
             if (currentIndex == 0)
             {
                 _valid = false; 
                 return;
             }
-
-
-            radius = maxz - minz + maxy - miny + maxx - minx;
-            centerx = (maxx + minx) / 2.0;
-            centery = (maxy + miny) / 2.0;
-            centerz = (maxz + minz) / 2.0;
-
-            needScaling = radius < 0.01;
-
+            _radius = maxz - minz + maxy - miny + maxx - minx;
+            _centerx = (maxx + minx) / 2.0;
+            _centery = (maxy + miny) / 2.0;
+            _centerz = (maxz + minz) / 2.0;
+            _needScaling = _radius < 0.01;
             // Rounding scale parameters to allow combine different 3d scenes at later time. 
             int noOfDigits = 1;
             double d = 1;
-            if (needScaling || AlwaysScale)
+            if (_needScaling || AlwaysScale)
             {
-                while (d > radius)
+                while (d > _radius)
                 {
                     d /= 10.0;
                     noOfDigits++;
                 }
                 noOfDigits -= 3;
-                radius = d;
+                _radius = d;
                 if (noOfDigits > 1)
                 {
-                    centerx = Math.Round(centerx, noOfDigits);
-                    centery = Math.Round(centery, noOfDigits);
-                    centerz = Math.Round(centerz, noOfDigits);
+                    _centerx = Math.Round(_centerx, noOfDigits);
+                    _centery = Math.Round(_centery, noOfDigits);
+                    _centerz = Math.Round(_centerz, noOfDigits);
                 }
             }
 
             // Maximal Distance to draw triangle.
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * radius / noOfPoints;
+            _maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * _radius / noOfPoints;
 
         }
 
-        bool useDistance = false;
-
-        double maxDist = 0;
-
-        bool needScaling = false;
 
         public Mesh CreateMesh()
         {
          
-            useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
+            _useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
 
             List<Coord2D> pointList = new List<Coord2D>();
             Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
@@ -374,36 +345,36 @@ namespace Fractrace.SceneGraph
                 }
             }
 
-            radius = maxz - minz + maxy - miny + maxx - minx;
-            centerx = (maxx + minx) / 2.0;
-            centery = (maxy + miny) / 2.0;
-            centerz = (maxz + minz) / 2.0;
+            _radius = maxz - minz + maxy - miny + maxx - minx;
+            _centerx = (maxx + minx) / 2.0;
+            _centery = (maxy + miny) / 2.0;
+            _centerz = (maxz + minz) / 2.0;
 
-            needScaling = radius < 0.01;
+            _needScaling = _radius < 0.01;
 
             // Rounding scale parameters to allow combine different 3d scenes at later time. 
             int noOfDigits = 1;
             double d = 1;
-            if (needScaling || AlwaysScale)
+            if (_needScaling || AlwaysScale)
             {
-                while (d > radius)
+                while (d > _radius)
                 {
                     d /= 10.0;
                     noOfDigits++;
                 }
                 noOfDigits -= 3;
-                radius = d;
+                _radius = d;
                 if (noOfDigits > 1)
                 {
-                    centerx = Math.Round(centerx, noOfDigits);
-                    centery = Math.Round(centery, noOfDigits);
-                    centerz = Math.Round(centerz, noOfDigits);
+                    _centerx = Math.Round(_centerx, noOfDigits);
+                    _centery = Math.Round(_centery, noOfDigits);
+                    _centerz = Math.Round(_centerz, noOfDigits);
                 }
             }
 
             // Maximal Distance to draw triangle.
             double noOfPoints = Math.Max(_pictureData.Width, _pictureData.Height);
-            maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * radius / noOfPoints;
+            _maxDist = Fractrace.Basic.ParameterDict.Current.GetDouble("Export.X3d.ClosedSurfaceDist") * _radius / noOfPoints;
 
             // to test for invalid pdata
             double maxcol = 0;
@@ -416,11 +387,11 @@ namespace Fractrace.SceneGraph
 
                     double x, y, z;
 
-                    if (needScaling || AlwaysScale)
+                    if (_needScaling || AlwaysScale)
                     {
-                        x = (pInfo.Coord.X - centerx) / radius;
-                        y = (pInfo.Coord.Y - centery) / radius;
-                        z = (pInfo.Coord.Z - centerz) / radius;
+                        x = (pInfo.Coord.X - _centerx) / _radius;
+                        y = (pInfo.Coord.Y - _centery) / _radius;
+                        z = (pInfo.Coord.Z - _centerz) / _radius;
                     }
                     else
                     {
@@ -472,11 +443,11 @@ namespace Fractrace.SceneGraph
                             {
                                 // triangle 1
                                 bool useTriangle = true;
-                                if (useDistance)
+                                if (_useDistance)
                                 {
                                     PixelInfo point2 = _pictureData.Points[i - 1, j];
                                     PixelInfo point3 = _pictureData.Points[i - 1, j - 1];
-                                    if (Dist(point1, point2) > maxDist || Dist(point1, point3) > maxDist)
+                                    if (Dist(point1, point2) > _maxDist || Dist(point1, point3) > _maxDist)
                                         useTriangle = false;
                                 }
                                 if (useTriangle)
@@ -496,11 +467,11 @@ namespace Fractrace.SceneGraph
                             {
                                 // triangle 2
                                 bool useTriangle = true;
-                                if (useDistance)
+                                if (_useDistance)
                                 {
                                     PixelInfo point2 = _pictureData.Points[i - 1, j - 1];
                                     PixelInfo point3 = _pictureData.Points[i, j - 1];
-                                    if (Dist(point1, point2) > maxDist || Dist(point1, point3) > maxDist)
+                                    if (Dist(point1, point2) > _maxDist || Dist(point1, point3) > _maxDist)
                                         useTriangle = false;
                                 }
 
@@ -521,15 +492,13 @@ namespace Fractrace.SceneGraph
                     }
                 }
             }
-
-
             if (maxcol < 0.0001)
             {
                 _valid = false;
             }
-
             return _mesh;
         }
+
 
         /// <summary>
         /// Use transformations of _iterate.LastUsedFormulas to transfrom given point.
@@ -560,14 +529,11 @@ namespace Fractrace.SceneGraph
         {
             if (point1 == null || point2 == null)
                 return -1;
-
             if (point1.Coord == null || point2.Coord == null)
                 return -1;
-
             double dx = point2.Coord.X - point1.Coord.X;
             double dy = point2.Coord.Y - point1.Coord.Y;
             double dz = point2.Coord.Z - point1.Coord.Z;
-
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
 

@@ -72,7 +72,6 @@ namespace Fractrace
                     i = maxTest;
             }
             i = i + 1;
-
             do
             {
                 _projectDir = Path.Combine(ExportDir, "Data" + i.ToString());
@@ -85,8 +84,6 @@ namespace Fractrace
         /// <summary>
         /// Get full path of next available Filename. The result has the same extension as template extension. Gestaltlupe 1.3. template: "pic.png". 
         /// </summary>
-        /// <param name="template"></param>
-        /// <returns></returns>
         public string GetFileName(string template)
         {
             string retVal = "";
@@ -108,14 +105,11 @@ namespace Fractrace
             if (!Directory.Exists(infoFilePath))
                 Directory.CreateDirectory(infoFilePath);
             Basic.ParameterDict.Current.Save(Path.Combine(infoFilePath, Path.GetFileNameWithoutExtension(retVal) + ".gestalt"));
-
             string exportDir = Path.Combine(ExportDir, "TomoTrace");
             if (!Directory.Exists(exportDir))
                 Directory.CreateDirectory(exportDir);
-
             return retVal;
         }
-
 
 
     }

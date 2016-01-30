@@ -72,7 +72,6 @@ namespace Fractrace.Geometry
         /// <summary>
         /// Multiply each component with t.
         /// </summary>
-        /// <param name="t"></param>
         public Vec3 Mult(double t)
         {
             return new Vec3(X * t, Y * t, Z * t);
@@ -135,6 +134,7 @@ namespace Fractrace.Geometry
                 Z /= d;
             }
         }
+
 
     }
 }

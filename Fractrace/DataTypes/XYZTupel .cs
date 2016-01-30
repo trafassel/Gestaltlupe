@@ -9,14 +9,12 @@ namespace Fractrace.DataTypes
         public double x = 0;
         public double y = 0;
         public double z = 0;
-    //    public double zz = 0;
         public void print() { }
 
 
         /// <summary>
         /// Return deep copy.
         /// </summary>
-        /// <returns></returns>
         public XYZTupel Clone()
         {
             XYZTupel retVal = new XYZTupel();
@@ -24,6 +22,6 @@ namespace Fractrace.DataTypes
             return retVal;
         }
 
-    }
 
+    }
 }

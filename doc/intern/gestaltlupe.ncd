@@ -2906,10 +2906,79 @@ Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1453641563-->
 <!--property:date_modified=1453641610-->
+<!--property:expanded-->
 <!--property:hash=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
 <!--property:hash_html=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
 <DD>
-Hier können einige Voreinstellungen des Renderers ausgewählt werden.
+Hier können einige Voreinstellungen des Renderers ausgewählt werden.<DL>
+<DT><A name="kxeNluC0tkNwXN1WPXEyhQ"></A>Images</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1453751096-->
+<!--property:date_modified=1453753483-->
+<!--property:hash=aace6fd48abb030e71998d4b9c0f2a838a86e73e-->
+<!--property:hash_html=d2a26b1a98728c96675fe39ec3ab6a896517f368-->
+<DD>
+shininess9Shininessfactor1:<BR>
+<BR>
+BrightLightLevel 0.94<BR>
+Brightness 6.5<BR>
+Shininess 9<BR>
+ShininessFactor 1<BR>
+<BR>
+ShadowJustify0:<BR>
+BrightLightLevel 0<BR>
+Shadow Justify 0<BR>
+<BR>
+sharp0p8:<BR>
+<BR>
+BrightLightLevel 0.8<BR>
+Brightness 63.6<BR>
+Shininess 14<BR>
+ShininessFactor 0.8<BR>
+Shadow Justify 0.2<BR>
+<BR>
+<BR>
+<BR>
+brightLighttLevel0p4:<BR>
+<BR>
+BrightLightLevel 0.4<BR>
+Brightness 1.2<BR>
+Shininess 9<BR>
+ShininessFactor 0.3<BR>
+Shadow Justify 0.8<BR>
+<BR>
+<BR>
+ShadowJustify1p5.png:<BR>
+<BR>
+BrightLightLevel 0.3<BR>
+Brightness 1.2<BR>
+Shininess 14<BR>
+ShininessFactor 0.3<BR>
+Shadow Justify 1.5<BR>
+<BR>
+<BR>
+dark1:<BR>
+<BR>
+BrightLightLevel 0<BR>
+Brightness 1<BR>
+Shadow Glow 0.961<BR>
+Shadow Justify 0.2<BR>
+<BR>
+<BR>
+<BR>
+BrightLightLevel 0.8<BR>
+Brightness 3.5<BR>
+Shadow Glow 0.971<BR>
+Shadow Justify 0.1<BR>
+Shininess 28<BR>
+Shininess Factor 0.8<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
 </DD>
 <DT><A name="uYUFMaOUNwddhxc1AtS5xw"></A>Min Cycle ausblenden</DT>
 <!--property:icon_internal=bullet_green-->

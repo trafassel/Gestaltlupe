@@ -14,7 +14,7 @@ namespace Fractrace.DataTypes
         public double i = 0;
         public double j = 0;
         public double k = 0;
-        // True, if 
+        // True, if associated point is inside. 
         public bool inside = false;
     }
 
@@ -36,9 +36,9 @@ namespace Fractrace.DataTypes
         protected int width = 1000;
         protected int height = 1000;
 
-        public int[,] Picture = null;// new int[dimx, dimy];
-        public VecInfo[,] Normals = null; // Enthält die Normalen der Geometrie in Punkt x,y
-        // PointInfo enthält die real benutzten Koordinaten (Werden später für den Zoom verwendet).
+        public int[,] Picture = null;
+        public VecInfo[,] Normals = null; 
+        // Original coordinates
         public VoxelInfo[,] PointInfo = null;
         public double[,] ColorInfo = null;
         public double[,] ColorInfoDeph = null;

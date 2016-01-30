@@ -28,28 +28,8 @@ namespace Fractrace.Geometry
 
 
         /// <summary>
-        /// Diese Objektinstanz wird mit den Werten aus den Einstellungen befüllt.
+        /// Initialisation.
         /// </summary>
-        public override void Init()
-        {
-            CenterX = ParameterDict.Current.GetDouble("Transformation.3.CenterX");
-            CenterY = ParameterDict.Current.GetDouble("Transformation.3.CenterY");
-            CenterZ = ParameterDict.Current.GetDouble("Transformation.3.CenterZ");
-            AngleX = ParameterDict.Current.GetDouble("Transformation.3.AngleX");
-            AngleY = ParameterDict.Current.GetDouble("Transformation.3.AngleY");
-            AngleZ = ParameterDict.Current.GetDouble("Transformation.3.AngleZ");
-        }
-
-
-        /// <summary>
-        /// Initialisierung
-        /// </summary>
-        /// <param name="centerX">The center X.</param>
-        /// <param name="centerY">The center Y.</param>
-        /// <param name="centerZ">The center Z.</param>
-        /// <param name="angleX">The angle X.</param>
-        /// <param name="angleY">The angle Y.</param>
-        /// <param name="angleZ">The angle Z.</param>
         public void Init(double centerX, double centerY, double centerZ, double angleX, double angleY, double angleZ)
         {
             CenterX = centerX;
@@ -98,8 +78,6 @@ namespace Fractrace.Geometry
         /// <summary>
         /// Like Transform, but with different angle combination.
         /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns></returns>
         public Vec3 TransformForNavigation(Vec3 input)
         {
 

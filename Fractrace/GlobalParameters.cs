@@ -479,8 +479,6 @@ for (int n = 1; n < _cycles; n++)
         /// <summary>
         /// Return true if ParameterDict Element with name has effect to scene.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         public static bool IsSceneProperty(string name)
         {
             return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" || name=="View.Perspective" ||

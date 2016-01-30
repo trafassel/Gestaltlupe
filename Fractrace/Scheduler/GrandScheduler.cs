@@ -22,7 +22,6 @@ namespace Fractrace.Scheduler
         }
 
 
-
         /// <summary>
         /// Used by the singleton design pattern.
         /// </summary>
@@ -83,8 +82,6 @@ namespace Fractrace.Scheduler
                 return mExemplar;
             }
         }
-
-        
 
 
         /// <summary>
@@ -152,7 +149,6 @@ namespace Fractrace.Scheduler
         public bool inComputeOneStep = false;
 
 
-
         /// <summary>
         /// Is called, if mainDisplayForm.ComputeOneStep ends.
         /// </summary>
@@ -168,15 +164,9 @@ namespace Fractrace.Scheduler
         /// Is called, if drawing of image ist ready.
         /// </summary>
         protected void PictureArtEnds()
-        {
+        {         
 
-         
-
-            // TODO: Save image
-            // TODO: Save in history
-            // TODO: Start waiting threads
         }
-
 
 
         /// <summary>
@@ -209,8 +199,5 @@ namespace Fractrace.Scheduler
         }
 
 
-    }
-
-
-   
+    }   
 }

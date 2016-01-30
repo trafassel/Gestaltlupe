@@ -21,7 +21,6 @@ namespace Fractrace
         /// which can later be copied into the formula text window to get the current
         /// formula configuration.
         /// </summary>
-        /// <returns></returns>
         public static string GenerateCompressedFormula()
         {
             //return "// sorry not implemnted";
@@ -87,10 +86,8 @@ namespace Fractrace
         /// which can later be copied into the formula text window to get the current
         /// formula configuration.
         /// </summary>
-        /// <returns></returns>
         public static string GenerateCompressedFormulaAndViewSettings()
         {
-            //return "// sorry not implemnted";
             string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
@@ -154,8 +151,6 @@ namespace Fractrace
         /// <summary>
         /// Compress the formula (remove big spaces, newlines, comments.
         /// </summary>
-        /// <param name="source">The source.</param>
-        /// <returns></returns>
         protected static string CompressFormula(string source)
         {
             string[] lines = source.Split('\n');

@@ -73,14 +73,11 @@ namespace Fractrace.SceneGraph
             return _faces[3 * i + 2];
         }
 
-
-
         /// <summary>
         /// Coordinate of minimal point in the mesh boundingbox (if computed with ComputeBoundingBox)
         /// </summary>
         private FPoint _minBBox = null;
         public FPoint MinBBox { get { return _minBBox; } }
-
 
         /// <summary>
         /// Coordinate of maximal point in the mesh boundingbox (if computed with ComputeBoundingBox)
@@ -91,14 +88,12 @@ namespace Fractrace.SceneGraph
 
         public void ComputeBoundingBox()
         {
-
             float minx = float.MaxValue;
             float miny = float.MaxValue;
             float minz = float.MaxValue;
             float maxx = float.MinValue;
             float maxy = float.MinValue;
             float maxz = float.MinValue;
-
 
             int noCoords = _coordinates.Count / 3;
             for (int i = 0; i < noCoords; i++)
@@ -124,6 +119,7 @@ namespace Fractrace.SceneGraph
             _minBBox = new FPoint(minx,miny,minz);
             _maxBBox = new FPoint(maxx, maxy, maxz);
         }
+
 
     }
 }

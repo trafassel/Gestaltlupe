@@ -21,10 +21,10 @@ namespace Fractrace.DataTypes
         {
             get
             {
-                return mWidth;
+                return _width;
             }
         }
-        private int mWidth = 0;
+        private int _width = 0;
 
 
         /// <summary>
@@ -34,17 +34,17 @@ namespace Fractrace.DataTypes
         {
             get
             {
-                return mHeight;
+                return _height;
             }
         }
 
-        private int mHeight = 0;
+        private int _height = 0;
 
 
         public PictureData(int width, int height)
         {
-            mWidth = width;
-            mHeight = height;
+            _width = width;
+            _height = height;
             Points = new PixelInfo[width + 1, height + 1];
             for (int i = 0; i <= width; i++)
             {
@@ -59,11 +59,11 @@ namespace Fractrace.DataTypes
         //! Return deep copy.
         public PictureData Clone()
         {
-            PictureData retVal = new PictureData(mWidth, mHeight);
-            retVal.Points = new PixelInfo[mWidth + 1, mHeight + 1];
-            for (int i = 0; i <= mWidth; i++)
+            PictureData retVal = new PictureData(_width, _height);
+            retVal.Points = new PixelInfo[_width + 1, _height + 1];
+            for (int i = 0; i <= _width; i++)
             {
-                for (int j = 0; j <= mHeight; j++)
+                for (int j = 0; j <= _height; j++)
                 {
                     if (Points[i, j] != null)
                     {

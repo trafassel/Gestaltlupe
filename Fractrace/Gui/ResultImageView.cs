@@ -396,9 +396,9 @@ namespace Fractrace
             {
                 _zoomX2 = e.X;
                 _zoomY2 = e.Y;
-                Pen pen = new Pen(Color.Black);
+              //  Pen pen = new Pen(Color.Black);
                 // Sorry, this Rectangle is not shown
-                _graphics.DrawRectangle(pen, _zoomX1, _zoomY1, _zoomX2 - _zoomX1, _zoomY2 - _zoomY1);
+               // _graphics.DrawRectangle(pen, _zoomX1, _zoomY1, _zoomX2 - _zoomX1, _zoomY2 - _zoomY1);
             }
         }
 

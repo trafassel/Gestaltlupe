@@ -14,6 +14,14 @@ namespace Fractrace.Geometry
     {
 
         /// <summary>
+        /// Center of the area to display.
+        /// </summary>
+        protected Vec3 _center = new Vec3();
+
+        protected Iterate _iterate = null;
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Navigator"/> class.
         /// </summary>
         public Navigator(Iterate iter)
@@ -32,13 +40,6 @@ namespace Fractrace.Geometry
         }
 
 
-        /// <summary>
-        /// Center of the area to display.
-        /// </summary>
-        protected Vec3 _center = new Vec3();
-
-
-        protected Iterate _iterate = null;
 
     }
 }

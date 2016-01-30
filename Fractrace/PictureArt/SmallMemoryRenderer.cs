@@ -31,7 +31,7 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
-        /// Initialisation with formula is needed for sharp rendering and computing original coordinates.
+        /// Initialisation with formula is needed for computing original coordinates.
         /// </summary>
         public override void Init(Formulas formula)
         {

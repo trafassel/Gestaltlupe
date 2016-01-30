@@ -57,7 +57,6 @@ namespace Fractrace.Basic
                 }
             }
 
-
             retVal.Dock = System.Windows.Forms.DockStyle.Top;
             retVal.Height = _defaultHeight;
             retVal.Init(name, value, type, description, shortenName);

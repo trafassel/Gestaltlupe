@@ -61,8 +61,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Save ParameterDict and return new time (as event count). 
         /// </summary>
-        /// <param name="dict"></param>
-        /// <returns></returns>
         public int Save()
         {
             return Save("");
@@ -72,7 +70,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Entry at position index is moved to the global ParameterDict instance.
         /// </summary>
-        /// <param name="Läd"></param>
         public void Load(int index)
         {
             if (index < 0 | index > Time)
@@ -91,7 +88,6 @@ namespace Fractrace.Basic
         /// If index is no integer and the corresponding value is a number, the values at Round(index) and Round(index)+1 
         /// are weighted and combined. 
         /// </summary>
-        /// <param name="Läd"></param>
         public void Load(double index)
         {
             foreach (KeyValuePair<string, string> entry in _history[(int)index])
@@ -180,9 +176,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get the value of entry key at time index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
         protected double GetDouble(int index, string key)
         {
             string valuesAsString = _history[index][key];
