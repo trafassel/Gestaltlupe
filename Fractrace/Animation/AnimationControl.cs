@@ -150,9 +150,8 @@ namespace Fractrace.Animation
 
 
         /// <summary>
-        /// Remov entry with given time from timeline.
+        /// Remove entry with given time from timeline.
         /// </summary>
-        /// <param name="time"></param>
         public void RemoveStep(int time)
         {
             // Remove Entry with given time from Text.

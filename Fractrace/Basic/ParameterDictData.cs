@@ -119,6 +119,15 @@ namespace Fractrace.Basic
             }
         }
 
+        /// <summary>
+        /// Test if given parameter could be smoothed in animation.
+        /// </summary>
+        private bool IsSmoothable(string name)
+        {
+            if (name.StartsWith("Transformation.Camera."))
+                return false;
+            return true;
+        }
 
         /// <summary>
         /// Entry at position index is moved to the global ParameterDict instance.
@@ -142,28 +151,40 @@ namespace Fractrace.Basic
 
                 if (isDouble)
                 {
-                    int indexAsInt = (int)index;
-                    double firstDouble = GetDouble(indexAsInt, entry.Key);
-                    double firstfirstDouble = firstDouble;
-                    if (indexAsInt > 0)
-                        firstfirstDouble = GetDouble(indexAsInt - 1, entry.Key);
-                    double lastDouble = firstDouble;
-                    if (indexAsInt < Time)
-                        lastDouble = GetDouble(indexAsInt + 1, entry.Key);
-                    double lastlastDouble = lastDouble;
-                    if (indexAsInt < Time - 1)
-                        lastlastDouble = GetDouble(indexAsInt + 2, entry.Key);
-                    double t = (index - indexAsInt);
-                    double pdiff = lastDouble - firstDouble;
-                    double p0 = firstDouble;
-                    double p1 = firstDouble + ((firstDouble - firstfirstDouble) + pdiff) / 6.0;
-                    double p2 = lastDouble - ((lastlastDouble - lastDouble) +pdiff) / 6.0;
-                    double p3 = lastDouble;
-                    double tm = 1 - t;
-                    double tm2 = tm * tm;
-                    double t2 = t * t;
-                    double val = tm2 * tm * p0 + 3.0 * tm2 * t * p1 + 3.0 * tm * t2 * p2 + t2 * t * p3;
-                    ParameterDict.Current.SetDouble(entry.Key, val);
+                    if (IsSmoothable(entry.Key))
+                    {
+                        int indexAsInt = (int)index;
+                        double firstDouble = GetDouble(indexAsInt, entry.Key);
+                        double firstfirstDouble = firstDouble;
+                        if (indexAsInt > 0)
+                            firstfirstDouble = GetDouble(indexAsInt - 1, entry.Key);
+                        double lastDouble = firstDouble;
+                        if (indexAsInt < Time)
+                            lastDouble = GetDouble(indexAsInt + 1, entry.Key);
+                        double lastlastDouble = lastDouble;
+                        if (indexAsInt < Time - 1)
+                            lastlastDouble = GetDouble(indexAsInt + 2, entry.Key);
+                        double t = (index - indexAsInt);
+                        double pdiff = lastDouble - firstDouble;
+                        double p0 = firstDouble;
+                        double p1 = firstDouble + ((firstDouble - firstfirstDouble) + pdiff) / 6.0;
+                        double p2 = lastDouble - ((lastlastDouble - lastDouble) + pdiff) / 6.0;
+                        double p3 = lastDouble;
+                        double tm = 1 - t;
+                        double tm2 = tm * tm;
+                        double t2 = t * t;
+                        double val = tm2 * tm * p0 + 3.0 * tm2 * t * p1 + 3.0 * tm * t2 * p2 + t2 * t * p3;
+                        ParameterDict.Current.SetDouble(entry.Key, val);
+                    }
+                    else
+                    {
+                        double firstDouble = GetDouble((int)index, entry.Key);
+                        double lastDouble = firstDouble;
+                        if (index < Time)
+                            lastDouble = GetDouble((int)index + 1, entry.Key);
+                        double r = (index - (int)index);
+                        ParameterDict.Current.SetDouble(entry.Key, (r * lastDouble + (1 - r) * firstDouble));
+                    }
                 }
                 else
                 { // use first entry
