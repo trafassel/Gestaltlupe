@@ -1500,7 +1500,16 @@ namespace Fractrace
 
         private void button9_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = 3;
+
+            tabControl1.SelectedIndex = 0;
+            parameterDictControl1.SelectTreeNode("Formula");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+            parameterDictControl1.SelectTreeNode("View");
+
         }
     }
 }

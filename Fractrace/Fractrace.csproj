@@ -564,6 +564,12 @@
   <ItemGroup>
     <None Include="images\Material.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Fractal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\View.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -193,6 +193,16 @@ namespace Fractrace.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Fractal {
+            get {
+                object obj = ResourceManager.GetObject("Fractal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Intellitrace_stepback {
             get {
                 object obj = ResourceManager.GetObject("Intellitrace_stepback", resourceCulture);
@@ -496,6 +506,16 @@ namespace Fractrace.Properties {
         internal static System.Drawing.Bitmap shininess9Shininessfactor1 {
             get {
                 object obj = ResourceManager.GetObject("shininess9Shininessfactor1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View {
+            get {
+                object obj = ResourceManager.GetObject("View", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

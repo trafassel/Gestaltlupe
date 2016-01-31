@@ -19,8 +19,6 @@ namespace Fractrace.Basic
             dataViewControl1.ElementChanged += DataViewControl1_ElementChanged;
         }
 
-       
-
 
         /// <summary>
         /// Nodes of this three with unique name of the entry as key.
@@ -122,10 +120,7 @@ namespace Fractrace.Basic
         /// <summary>
         /// Die Hirarchie wird in den Einträgen durch . abgetrennt. Hier wird der String 
         /// bis zum letzten . zurückgeliefert.
-        /// 
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         protected string GetCategory(string input)
         {
             int pos = input.LastIndexOf('.');
@@ -140,8 +135,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Liefert den Namen des Baumknotens der angegebenen Kategorie
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
         protected string GetName(string category)
         {
             int pos = category.LastIndexOf('.');
@@ -202,6 +195,12 @@ namespace Fractrace.Basic
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SelectNode(e.Node.Tag.ToString());
+        }
+
+
+        public void SelectTreeNode(string hirarchy)
+        {
+            _nodes[hirarchy].TreeView.SelectedNode = _nodes[hirarchy];
         }
 
 
