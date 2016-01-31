@@ -116,11 +116,8 @@ namespace Fractrace
         void ParameterValuesChanged()
         {
             preview1.Draw();
-            if (cbAutomaticSave.Checked)
-            {
-                // TODO: only add, if picture in preview1 exists
-                AddToHistory();
-            }
+            // TODO: only add, if picture in preview1 exists
+            AddToHistory();
             // Update the source code.
             if (tabControl1.SelectedTab == tpSource)
                 formulaEditor1.Init();
@@ -598,11 +595,7 @@ namespace Fractrace
         {
             mPreviewMode = false;
             mPosterMode = false;
-            // Todo: Bild nur speichern, wenn der Haken gesetzt ist
-            if (cbSaveHistory.Checked)
-            {
-                mHistory.CurrentTime = mHistory.Save();
-            }
+            mHistory.CurrentTime = mHistory.Save();
             ResultImageView.PublicForm._inPreview = false;
             ForceRedraw();
         }

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:212-->
+<!--LastNote:213-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2997,9 +2997,9 @@ Tritt bei Fractrace.PictureArt.FloatPlasicRenderer.CreateShadowInfo()<BR>
 auf.
 </DD>
 <DT><A name="8WXRrNPj8STXtdGiRClRYA"></A>Start Stop Preview nach links</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1454080080-->
-<!--property:date_modified=1454080486-->
+<!--property:date_modified=1454213655-->
 <!--property:hash=002befef553d7b4e973108041f00cbceae9d1999-->
 <!--property:hash_html=9fb67345a145222d91179c2d34e5cc445a0e1eeb-->
 <DD>
@@ -3014,6 +3014,16 @@ panel32 muss unter das Panel, in dem Panel3 steckt (panel2)<BR>
 <BR>
 <BR>
 
+</DD>
+<DT><A name="yuaaABZIyd794KTPRb7Yuw"></A>Smooth bei Animation nicht auf Rotation anwenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454213657-->
+<!--property:date_modified=1454219720-->
+<!--property:hash=58e2086ca6082c1e436eb1297570407dab05aa52-->
+<!--property:hash_html=d74c6baf44b1f0c4ebe54c95756f7c6a169f2353-->
+<DD>
+Umsetzung in ParamaeterDictData.LoadSmoothed()<BR>
+die neue Funktion: IsSmoothable(string name) abfragen.
 </DD>
 </DL>
 </DD>

@@ -221,6 +221,12 @@
     <Compile Include="Gui\MaterialControl.Designer.cs">
       <DependentUpon>MaterialControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gui\SettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\SettingsControl.Designer.cs">
+      <DependentUpon>SettingsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
     <Compile Include="PictureArt\FloatPictureData.cs" />
     <Compile Include="PictureArt\FloatPixelInfo.cs" />
@@ -351,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\RenderImage.resx">
       <DependentUpon>RenderImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\SettingsControl.resx">
+      <DependentUpon>SettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

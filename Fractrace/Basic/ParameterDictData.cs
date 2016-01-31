@@ -119,15 +119,6 @@ namespace Fractrace.Basic
             }
         }
 
-        /// <summary>
-        /// Test if given parameter could be smoothed in animation.
-        /// </summary>
-        private bool IsSmoothable(string name)
-        {
-            if (name.StartsWith("Transformation.Camera."))
-                return false;
-            return true;
-        }
 
         /// <summary>
         /// Entry at position index is moved to the global ParameterDict instance.
@@ -209,6 +200,17 @@ namespace Fractrace.Basic
                 }
             }
             return retVal;
+        }
+
+
+        /// <summary>
+        /// Test if given parameter could be smoothed in animation.
+        /// </summary>
+        private bool IsSmoothable(string name)
+        {
+            if (name.StartsWith("Transformation.Camera."))
+                return false;
+            return true;
         }
 
 
