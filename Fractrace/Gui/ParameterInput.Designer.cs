@@ -347,6 +347,7 @@ namespace Fractrace {
             this.button2.TabIndex = 3;
             this.button2.Text = "Add to Animation";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnSaveInHistory
@@ -359,6 +360,7 @@ namespace Fractrace {
             this.btnSaveInHistory.TabIndex = 0;
             this.btnSaveInHistory.Text = "Save";
             this.btnSaveInHistory.UseVisualStyleBackColor = true;
+            this.btnSaveInHistory.Visible = false;
             this.btnSaveInHistory.Click += new System.EventHandler(this.btnSaveInHistory_Click);
             // 
             // panel25

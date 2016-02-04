@@ -112,5 +112,14 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Create archive directory in exportPath and move some cache entries into it. 
+        /// </summary>
+        public void Archive(string exportPath)
+        {
+
+
+        }
+
     }
 }
