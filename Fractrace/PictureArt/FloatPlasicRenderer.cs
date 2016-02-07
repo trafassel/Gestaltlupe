@@ -49,16 +49,6 @@ namespace Fractrace.PictureArt
         /// </summary>
         private int[,] _picInfo = null;
 
-        /*
-        private float[,] _shadowInfo11 = null;
-        private float[,] _shadowInfo10 = null;
-        private float[,] _shadowInfo01 = null;
-        private float[,] _shadowInfo00 = null;
-        private float[,] _shadowInfo11sharp = null;
-        private float[,] _shadowInfo10sharp = null;
-        private float[,] _shadowInfo01sharp = null;
-        private float[,] _shadowInfo00sharp = null;
-        */
         private float[,] _shadowPlane = null;
 
         private float[,] _heightMap = null;
@@ -200,34 +190,34 @@ namespace Fractrace.PictureArt
                     _picInfo[i, j] = 0;
                 }
             }
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateStatisticInfo();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             
             //CreateSmoothNormales();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateHeightMap();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateShadowInfo();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             DrawPlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             if (ParameterDict.Current.GetBool(parameterNode + "Normalize"))
                 NormalizePlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             if (ParameterDict.Current.GetBool(parameterNode + "UseDarken"))
                 DarkenPlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             SmoothEmptyPixel();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             SmoothPlane();
         }
@@ -1305,7 +1295,7 @@ namespace Fractrace.PictureArt
             double mainDeph1 = _areaDeph;
             for (int m = 0; m < _ambientIntensity; m++)
             {
-                if (stopRequest)
+                if (_stopRequest)
                     return;
                 for (int i = 0; i < pData.Width; i++)
                 {

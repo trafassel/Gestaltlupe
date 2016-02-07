@@ -70,7 +70,7 @@ namespace Fractrace.PictureArt {
         }
 
 
-        protected bool stopRequest = false;
+        protected bool _stopRequest = false;
 
 
         /// <summary>
@@ -78,8 +78,14 @@ namespace Fractrace.PictureArt {
         /// </summary>
         public void Stop()
         {
-            stopRequest = true;
+            _stopRequest = true;
         }
+
+
+        /// <summary>
+        /// Return true if image is successfully created.
+        /// </summary>
+        public bool Valid { get { return !_stopRequest && paintHasEnded; }  }
 
 
         /// <summary>

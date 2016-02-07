@@ -41,7 +41,7 @@ namespace Fractrace.PictureArt
             _width = pData.Width;
             _height = pData.Height;
             PreCalculate();
-            if (!stopRequest)
+            if (!_stopRequest)
             {
                 for (int i = 0; i < _width; i++)
                 {

@@ -45,14 +45,10 @@ namespace Fractrace
         public static ResultImageView PublicForm = null;
 
         /// <summary>
-        /// This graphic is used to generate the bitmap. 
-        /// </summary>
-        Graphics _graphics = null;
-
-        /// <summary>
         /// Return Graphics of the computed gestalt.
         /// </summary>
         public Graphics GestaltPicture { get { return _graphics; } }
+        Graphics _graphics = null;
 
         /// <summary>
         /// With of the bitmap.
@@ -238,6 +234,7 @@ namespace Fractrace
         /// </summary>
         public void ComputeOneStep()
         {
+            ImageCreationStarts();
             if (_paras != null)
                 _paras.InComputing = true;
             this.WindowState = FormWindowState.Normal;
@@ -340,22 +337,6 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Show parameter window.
-        /// </summary>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _paras.Show();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-        }
-
-
-        /// <summary>
         /// Save mouse position for later use in zoom. 
         /// </summary>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -389,7 +370,8 @@ namespace Fractrace
                 _zoomX2 = e.X;
                 _zoomY2 = e.Y;
                 _inMouseDown = false;
-                SetZoom();
+                if (!InImageCreation)
+                   SetZoom();
             }
         }
 
@@ -501,16 +483,22 @@ namespace Fractrace
             {
                 _iterate.Abort();
             }
+            StopRunningPictureArt();
             Progress(0);
+            ImageCreationEnds();
         }
 
 
         /// <summary>
-        /// Generates the bitmap and save it.
+        /// Kill running PictureArt process.
         /// </summary>
-        private void btnRepaint_Click(object sender, EventArgs e)
+        private void StopRunningPictureArt()
         {
-            ActivatePictureArt();
+            if (_currentPicturArt != null)
+            {
+                _currentPicturArt.Stop();
+                _currentPicturArt = null;
+            }
         }
 
 
@@ -581,17 +569,33 @@ namespace Fractrace
                         _currentPicturArt.Paint(_graphics);
                         if (fastRenderingFilter != null)
                             fastRenderingFilter.Restore();
+                        if(_currentPicturArt.Valid)
+                        { 
                         _lastPicturArt = _currentPicturArt;
                         _currentPicturArt = null;
                         CallDrawImage();
+                        }
+                        else
+                        {
+                            _currentPicturArt = null;
+                        }
                     }
                     else if (!IsSubStepRendering())
                     {
+                        ImageCreationStarts();
                         _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
                         _currentPicturArt.Paint(_graphics);
-                        _lastPicturArt = _currentPicturArt;
-                        _currentPicturArt = null;
-                        CallDrawImage();
+                        if (_currentPicturArt.Valid)
+                        {
+                            _lastPicturArt = _currentPicturArt;
+                            _currentPicturArt = null;
+                            CallDrawImage();
+                        }
+                        else
+                        {
+                            _currentPicturArt = null;
+                            ImageCreationEnds();
+                        }
                     }
                 }
                 catch (System.Exception ex)
@@ -652,6 +656,8 @@ namespace Fractrace
                     }
                 }
             }
+            if (!IsSubStepRendering())
+                ImageCreationEnds();
         }
 
 
@@ -712,7 +718,18 @@ namespace Fractrace
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (_inPaint)
-                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);       
+                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);      
+            
+            if(InImageCreation)
+            {
+                Fractrace.ParameterInput.MainParameterInput.EnableStartButton(false);
+            }
+            else
+            {
+                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
+                Fractrace.ParameterInput.MainParameterInput.EnableStartButton(true);
+            }
+
             if (_progressChanged)
             {
                 _progressChanged = false;
@@ -741,6 +758,21 @@ namespace Fractrace
             return _updateCount == 1;
         }
 
+
+        private bool _inImageCreation = false;
+        private void ImageCreationStarts()
+        {
+            //if (_inImageCreation)
+            //    System.Diagnostics.Debug.WriteLine("Thread Error in ResultImageView.ImageCreationStarts(): Image creation is already running.");
+            _inImageCreation = true;
+        }
+        private void ImageCreationEnds()
+        {
+            //if (!_inImageCreation)
+            //    System.Diagnostics.Debug.WriteLine("Thread Error in ResultImageView.ImageCreationEnds(): Image creation is not running.");
+            _inImageCreation = false;
+        }
+        private bool InImageCreation { get { return _inImageCreation;  } }
 
     }
 }

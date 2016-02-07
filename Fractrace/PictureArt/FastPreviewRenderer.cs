@@ -214,35 +214,35 @@ namespace Fractrace.PictureArt
                     picInfo[i, j] = 0;
                 }
             }
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateStatisticInfo();
             //if (useSharpShadow)
             //    CreateSharpShadow();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateSmoothNormales();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateSmoothDeph();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             CreateShadowInfo();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             DrawPlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             //if (ParameterDict.Exemplar.GetBool(parameterNode + "Normalize"))
                 NormalizePlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             //if (ParameterDict.Exemplar.GetBool(parameterNode + "UseDarken"))
             //    DarkenPlane();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             SmoothEmptyPixel();
-            if (stopRequest)
+            if (_stopRequest)
                 return;
             SmoothPlane();
         }
@@ -1447,7 +1447,7 @@ namespace Fractrace.PictureArt
             double mainDeph1 = areaDeph;
             for (int m = 0; m < ambientIntensity; m++)
             {
-                if (stopRequest)
+                if (_stopRequest)
                     return;
                 for (int i = 0; i < pData.Width; i++)
                 {

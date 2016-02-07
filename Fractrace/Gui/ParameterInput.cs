@@ -238,13 +238,13 @@ namespace Fractrace
                 if (value)
                 {
                     btnStart.Enabled = false;
-                    btnCreatePoster.Enabled = false;
+                    //btnCreatePoster.Enabled = false;
                     btnStop.Enabled = true;
                 }
                 else
                 {
-                    btnStart.Enabled = true;
-                    btnCreatePoster.Enabled = true;
+                    //btnStart.Enabled = true;
+                    //btnCreatePoster.Enabled = true;
                     btnStop.Enabled = false;
                     ComputationEnds();
                 }
@@ -999,7 +999,7 @@ namespace Fractrace
         /// </summary>
         public void SetButtonsToStop()
         {
-            btnStart.Enabled = true;
+            //btnStart.Enabled = true;
             btnStop.Enabled = false;
             btnPause.Enabled = true;
             btnCreatePoster.Enabled = true;
@@ -1098,6 +1098,12 @@ namespace Fractrace
         public void EnableRepaint(bool enable)
         {
             button4.Enabled = enable;
+            Application.DoEvents();
+        }
+
+        public void EnableStartButton(bool enable)
+        {
+            btnStart.Enabled = enable;
             Application.DoEvents();
         }
 

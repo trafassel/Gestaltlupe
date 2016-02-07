@@ -16,70 +16,69 @@ namespace Fractrace.Scheduler
 
         GrandScheduler()
         {
-            mainDisplayForm = Fractrace.ResultImageView.PublicForm;
-            mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
-            history = mainParameterInput.History;
+            _mainDisplayForm = Fractrace.ResultImageView.PublicForm;
+            _mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
+            _history = _mainParameterInput.History;
         }
 
 
         /// <summary>
         /// Used by the singleton design pattern.
         /// </summary>
-        protected static GrandScheduler mExemplar = null;
+        protected static GrandScheduler _exemplar = null;
 
 
         /// <summary>
         ///  Used by the singleton design pattern.
         /// </summary>
-        protected static Object lockVar = new Object();
+        protected static Object _lockVar = new Object();
 
 
         /// <summary>
         /// Runing jobs.
         /// </summary>
-        protected List<PaintJob> jobs = new List<PaintJob>();
+        protected List<PaintJob> _jobs = new List<PaintJob>();
 
 
         /// <summary>
         /// Reference to the Form which display Rendered image.
         /// </summary>
-        Fractrace.ResultImageView mainDisplayForm = null;
+        Fractrace.ResultImageView _mainDisplayForm = null;
 
 
         /// <summary>
         /// Reference to the parameter input control.
         /// </summary>
-        Fractrace.ParameterInput mainParameterInput = null;
+        Fractrace.ParameterInput _mainParameterInput = null;
 
 
         /// <summary>
         ///  Reference to history entries, used in history control and animations.
         /// </summary>
-        ParameterHistory history = null;
+        ParameterHistory _history = null;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected long time = 0;
+        protected long _time = 0;
 
 
         /// <summary>
         /// Gets the unique static instance of this class.
         /// </summary>
-        /// <value>The exemplar.</value>
         public static GrandScheduler Exemplar
         {
             get
             {
-                lock (lockVar)
+                lock (_lockVar)
                 {
-                    if (mExemplar == null)
+                    if (_exemplar == null)
                     {
-                        mExemplar = new GrandScheduler();
+                        _exemplar = new GrandScheduler();
                     }
                 }
-                return mExemplar;
+                return _exemplar;
             }
         }
 
@@ -87,9 +86,9 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// True, if current input values are freezed.
         /// </summary>
-        protected bool historyFreezed = false;
+        protected bool _historyFreezed = false;
 
-        protected object historyFreezedObj = new object();
+        protected object _historyFreezedObj = new object();
 
 
         /// <summary>
@@ -101,7 +100,6 @@ namespace Fractrace.Scheduler
         /// <summary>
         /// Add given thread to threads. Previously closed threads are removed from threads.
         /// </summary>
-        /// <param name="thread"></param>
         public void AddThread(System.Threading.Thread thread)
         {
             lock (threads)
@@ -126,21 +124,7 @@ namespace Fractrace.Scheduler
         }
 
 
-        /// <summary>
-        /// Starts computing surface model.
-        /// </summary>
-        public void ComputeOneStep()
-        {
-            System.Diagnostics.Debug.WriteLine("GrandScheduler.ComputeOneStep");
-            lock (historyFreezedObj)
-            {
-                historyFreezed = true;
-                mainDisplayForm.ComputeOneStep();
-            }
-        }
-
-
-        public bool dontActivateRender = false;
+        public bool DontActivateRender = false;
 
 
         /// <summary>
@@ -154,8 +138,8 @@ namespace Fractrace.Scheduler
         /// </summary>
         public void ComputeOneStepEnds()
         {
-            if (!dontActivateRender)
-                mainDisplayForm.ActivatePictureArt();
+            if (!DontActivateRender)
+                _mainDisplayForm.ActivatePictureArt();
             inComputeOneStep = false;
         }
 
