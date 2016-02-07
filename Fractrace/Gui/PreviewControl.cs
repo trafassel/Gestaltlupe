@@ -50,6 +50,8 @@ namespace Fractrace
             this.btnPreview.TabIndex = 1;
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.BackgroundImageLayout = ImageLayout.Stretch;
+            this.btnPreview.FlatStyle = FlatStyle.Flat;
+            this.btnPreview.FlatAppearance.BorderSize = 0;
             Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
             btnPreview.BackgroundImage = labelImage;
             _graphics = Graphics.FromImage(labelImage);

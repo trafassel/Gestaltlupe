@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:213-->
+<!--LastNote:221-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,7 +7,7 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=ZFx8P7rlbgoGLxGrojH5kQ-->
+<!--property:UID=3MIYxYOogeYWIoDSJeQdcw-->
 <!--property:prop_modified=0-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
@@ -2649,15 +2649,15 @@ z.B. links neben dem unteren Tab.<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="6y5xxXXiWzQ9tNkW89VFAg"></A>Update Material Button</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_red-->
 <!--property:date_created=1452974980-->
-<!--property:date_modified=1452975036-->
-<!--property:hash=1ab2d8f8d5989adb8a54660cd81ecb84f073c077-->
-<!--property:hash_html=ff21145b6c761ec75cacdc73e29baa44e9cafc3e-->
+<!--property:date_modified=1454277820-->
+<!--property:hash=2609961f57dfdb04bd71d826f11fb888e16f339b-->
+<!--property:hash_html=86f3127afea73394b3b1a54d0f5668fdc86d5443-->
 <DD>
 wird manchmal nach der Bilderzeugung nicht mehr auf enabled=true gesetzt.<BR>
 <BR>
-
+Solange die Bilderzeugung läuft, sollte [start] deaktiviert sein.
 </DD>
 <DT><A name="iGQhDnmcxo2zmpW0SmA95A"></A>Batch Export für Xhtml</DT>
 <!--property:icon_internal=bullet_white-->
@@ -2877,18 +2877,18 @@ Renderer.ColorInside<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="ppCC2VHeE2XAFTNtUyRwMQ"></A>Eingabefelder müssen breiter sein</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1453553317-->
-<!--property:date_modified=1453553378-->
+<!--property:date_modified=1454277572-->
 <!--property:hash=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
 <!--property:hash_html=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
 <DD>
 Wert wird sonst (zB. bei Radius nicht vollständig angezeigt)
 </DD>
 <DT><A name="XAtWMrGiUB3F5KnX9oibvA"></A>Float Based Renderer</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1453557957-->
-<!--property:date_modified=1453558028-->
+<!--property:date_modified=1454277562-->
 <!--property:hash=4ff8eddf0303c63d608f9a4a32dd27797340dc70-->
 <!--property:hash_html=3a80861278e24e56ab1ce49283c7b025b63e3743-->
 <DD>
@@ -2903,9 +2903,9 @@ Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="p8E3nWLEW9gLMlZe3znNxA"></A>Material Reiter</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1453641563-->
-<!--property:date_modified=1453641610-->
+<!--property:date_modified=1454277552-->
 <!--property:expanded-->
 <!--property:hash=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
 <!--property:hash_html=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
@@ -3024,6 +3024,107 @@ panel32 muss unter das Panel, in dem Panel3 steckt (panel2)<BR>
 <DD>
 Umsetzung in ParamaeterDictData.LoadSmoothed()<BR>
 die neue Funktion: IsSmoothable(string name) abfragen.
+</DD>
+<DT><A name="eZcwobydidsJyB1jKV2Frw"></A>Cache leeren</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454277524-->
+<!--property:date_modified=1454277538-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="92Wq7cHse1sxYprLaPfh6g"></A>Stereo Parameter aus Navigate Tab entfernen.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454552403-->
+<!--property:date_modified=1454552429-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="T5zoaovUI1vbvfXZemRiGQ"></A>Parameter Feinabstimmung</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454709956-->
+<!--property:date_modified=1454760479-->
+<!--property:hash=0370b06743732949938f75bbe4260b8ef4ceb25a-->
+<!--property:hash_html=05e40913b7aa1cfe18dcb191955045e0c48e2e29-->
+<DD>
+Contrast +- 0.1<BR>
+Bright Light Level: zusätzlich: um 0.025 erhöhen.<BR>
+Color Greyness: 0.005<BR>
+jx,jy,jz 0.025 und 0.001<BR>
+<BR>
+
+</DD>
+<DT><A name="LLNYq5HWFG99AoAeJd22aA"></A>wenn die Seitenansicht fertig ist.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454717852-->
+<!--property:date_modified=1454783052-->
+<!--property:hash=5ad5a9dfa8989408bffc60270cc924c07452137e-->
+<!--property:hash_html=7e913f12e5752856e536c0790ea05aaed7e2600f-->
+<DD>
+Die schwarzen Punkte ensprechend ihrer Farbe im linken Vorschaubild anzeigen.<BR>
+<BR>
+Der Hintergrund bei der Seitenansicht sollte stets transparent sein.<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="N2Mznln5kCSe0DmLz1frdw"></A>Prozesse wieder direkt nacheinander ausführen.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454720842-->
+<!--property:date_modified=1454783193-->
+<!--property:hash=59a21129cac9f1433d1c67d86e75614dd389528f-->
+<!--property:hash_html=697aaaff8270aa7689adf06e7244794ae4fbf815-->
+<DD>
+Die erste Zwischenrenderung wird nach der Bereitstellung des ersten Bildes ausgeführt.<BR>
+Dann wird mit der Weiterrechnung solange gewartet, bis das Bild dargestellt ist.<BR>
+Erst dann wird weitergerechnet.<BR>
+ <BR>
+// Umstellung: Die ersten Picture-Art wird erstellt. Erst bei Abschluss des Bildes wird die endgültige PictureArt erstellt. Erst wenn das Rendern fertig ist, wird das endgültige Picture-Art verwendet.<BR>
+<BR>
+
+</DD>
+<DT><A name="MrGIwjvsIW3fQxnYkkmYHg"></A>Formula.Static.Formula</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454762060-->
+<!--property:date_modified=1454762483-->
+<!--property:hash=835e509546da119660ff78cfa103be1e8b633190-->
+<!--property:hash_html=fe2d5e5c8f019355f6df14c45d9f8a23b5a19fc4-->
+<DD>
+Durch Bool-Wert: &quot;Julia-Mode&quot; ersetzen.<BR>
+<BR>
+// Bei Formeln, die diesen Wert nicht benutzen: Diesen Wert nicht anzeigen.<BR>
+<BR>
+
+</DD>
+<DT><A name="VylDfYU0ToaOmO986Ir1HQ"></A>Klasse LifeCycle</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454785906-->
+<!--property:date_modified=1454797924-->
+<!--property:hash=ebf0830c7f7413ed81c8f95a9fc02004f62ae267-->
+<!--property:hash_html=8b46e7debce517b9d86e1c584c79037dfdfcd3e6-->
+<DD>
+Hier wird die Uhr (CurrentHistory) hochgezählt.<BR>
+<BR>
+Von hier aus werden auch die Renderprozesse gestartet.<BR>
+<BR>
+<BR>
+In diese Klasse abgearbeitete Ereignisse.<BR>
+<BR>
+<BR>
+StartRender()<BR>
+<BR>
+RenderFinished()<BR>
+<BR>
+Inter:<BR>
+StartPictureArt();<BR>
+<BR>
+Es gibt nur einen Hauptthread. 
+</DD>
+<DT><A name="AyPfE12vd2Hw6M8Pj0Rjhw"></A>Update Material</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1454805512-->
+<!--property:date_modified=1454805545-->
+<!--property:hash=884477c0c7aa4ce418126062b93414cee896b914-->
+<!--property:hash_html=884477c0c7aa4ce418126062b93414cee896b914-->
+<DD>
+wird nicht immer zurückgesetzt.
 </DD>
 </DL>
 </DD>

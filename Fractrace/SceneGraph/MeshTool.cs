@@ -312,6 +312,7 @@ namespace Fractrace.SceneGraph
             double maxz = Double.MinValue;
 
             int currentIndex = 0;
+            int pointsFound = 0;
             for (int i = 0; i < _pictureData.Width; i++)
             {
                 for (int j = 0; j < _pictureData.Height; j++)
@@ -337,12 +338,20 @@ namespace Fractrace.SceneGraph
                         pointIndex[i, j] = currentIndex;
                         pointList.Add(coord);
                         currentIndex++;
+                        pointsFound++;
                     }
                     else
                     {
                         pointIndex[i, j] = -1;
                     }
                 }
+            }
+
+
+            if (pointsFound < 100)
+            {
+                _valid = false;
+                return null;
             }
 
             _radius = maxz - minz + maxy - miny + maxx - minx;

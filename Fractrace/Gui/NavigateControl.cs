@@ -555,8 +555,6 @@ namespace Fractrace
         private void DrawPreview()
         {
             ResultImageView.PublicForm.Stop();
-            if (ParameterInput.MainParameterInput.StereoForm != null)
-                ParameterInput.MainParameterInput.StereoForm.Abort();
             _preview.Draw();
         }
 
@@ -603,18 +601,27 @@ namespace Fractrace
 
         private void UpdateMoveButtonAppearance()
         {
-            btnMoveFast.FlatStyle = FlatStyle.Flat;
-            btnMoveNormal.FlatStyle = FlatStyle.Flat;
-            btnMoveSlow.FlatStyle = FlatStyle.Flat;
-            btnMoveFine.FlatStyle = FlatStyle.Flat;
+            btnMoveFast.Font = new Font(btnMoveFast.Font.Name, btnMoveFast.Font.Size,
+                                        FontStyle.Regular, btnMoveFast.Font.Unit);
+            btnMoveNormal.Font = new Font(btnMoveNormal.Font.Name, btnMoveNormal.Font.Size,
+                                        FontStyle.Regular, btnMoveNormal.Font.Unit);
+            btnMoveSlow.Font = new Font(btnMoveSlow.Font.Name, btnMoveSlow.Font.Size,
+                                        FontStyle.Regular, btnMoveFine.Font.Unit);
+            btnMoveFine.Font = new Font(btnMoveFine.Font.Name, btnMoveFine.Font.Size,
+                                        FontStyle.Regular, btnMoveFine.Font.Unit);
+
             if (mFactor == 4)
-                btnMoveFast.FlatStyle = FlatStyle.Standard;
+                btnMoveFast.Font = new Font(btnMoveFast.Font.Name, btnMoveFast.Font.Size,
+               FontStyle.Underline, btnMoveFast.Font.Unit);
             if (mFactor == 12)
-                btnMoveNormal.FlatStyle = FlatStyle.Standard;
+                btnMoveNormal.Font = new Font(btnMoveNormal.Font.Name, btnMoveNormal.Font.Size,
+              FontStyle.Underline, btnMoveNormal.Font.Unit);
             if (mFactor == 32)
-                btnMoveSlow.FlatStyle = FlatStyle.Standard;
+                btnMoveSlow.Font = new Font(btnMoveSlow.Font.Name, btnMoveSlow.Font.Size,
+             FontStyle.Underline, btnMoveSlow.Font.Unit);
             if (mFactor == 128)
-                btnMoveFine.FlatStyle = FlatStyle.Standard;
+                btnMoveFine.Font = new Font(btnMoveFine.Font.Name, btnMoveFine.Font.Size,
+             FontStyle.Underline, btnMoveFine.Font.Unit);
         }
 
 
@@ -665,15 +672,21 @@ namespace Fractrace
 
         private void UpdateMoveAngleButtonAppearance()
         {
-            btnMoveAngleFast.FlatStyle = FlatStyle.Flat;
-            btnMoveAngleNormal.FlatStyle = FlatStyle.Flat;
-            btnMoveAngleFine.FlatStyle = FlatStyle.Flat;
+            btnMoveAngleFast.Font = new Font(btnMoveAngleFast.Font.Name, btnMoveAngleFast.Font.Size,
+                          FontStyle.Regular, btnMoveAngleFast.Font.Unit);
+            btnMoveAngleNormal.Font = new Font(btnMoveAngleNormal.Font.Name, btnMoveAngleNormal.Font.Size,
+                          FontStyle.Regular, btnMoveAngleNormal.Font.Unit);
+            btnMoveAngleFine.Font = new Font(btnMoveAngleFine.Font.Name, btnMoveAngleFine.Font.Size,
+                          FontStyle.Regular, btnMoveAngleFine.Font.Unit);
             if (mAngle == 10)
-                btnMoveAngleFast.FlatStyle = FlatStyle.Standard;
+                btnMoveAngleFast.Font = new Font(btnMoveAngleFast.Font.Name, btnMoveAngleFast.Font.Size,
+                                                 FontStyle.Underline, btnMoveAngleFast.Font.Unit);
             if (mAngle == 2)
-                btnMoveAngleNormal.FlatStyle = FlatStyle.Standard;
+                btnMoveAngleNormal.Font = new Font(btnMoveAngleNormal.Font.Name, btnMoveAngleNormal.Font.Size,
+                                                 FontStyle.Underline, btnMoveAngleNormal.Font.Unit);
             if (mAngle == 0.1)
-                btnMoveAngleFine.FlatStyle = FlatStyle.Standard;
+                btnMoveAngleFine.Font = new Font(btnMoveAngleFine.Font.Name, btnMoveAngleFine.Font.Size,
+                                                 FontStyle.Underline, btnMoveAngleFine.Font.Unit);
         }
 
 

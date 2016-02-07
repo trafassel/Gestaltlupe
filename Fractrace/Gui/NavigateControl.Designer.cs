@@ -29,6 +29,18 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnMoveFast = new System.Windows.Forms.Button();
+            this.btnMoveNormal = new System.Windows.Forms.Button();
+            this.btnMoveSlow = new System.Windows.Forms.Button();
+            this.btnMoveFine = new System.Windows.Forms.Button();
+            this.btnMoveAngleFast = new System.Windows.Forms.Button();
+            this.btnMoveAngleNormal = new System.Windows.Forms.Button();
+            this.btnMoveAngleFine = new System.Windows.Forms.Button();
+            this.pnlProperties = new System.Windows.Forms.Panel();
+            this.pnlBorderProperties = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnZoomOut = new System.Windows.Forms.Button();
             this.btnZoomIn = new System.Windows.Forms.Button();
             this.btnRotZneg = new System.Windows.Forms.Button();
@@ -43,18 +55,6 @@
             this.btnTop = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
-            this.btnMoveFast = new System.Windows.Forms.Button();
-            this.btnMoveNormal = new System.Windows.Forms.Button();
-            this.btnMoveSlow = new System.Windows.Forms.Button();
-            this.btnMoveFine = new System.Windows.Forms.Button();
-            this.btnMoveAngleFast = new System.Windows.Forms.Button();
-            this.btnMoveAngleNormal = new System.Windows.Forms.Button();
-            this.btnMoveAngleFine = new System.Windows.Forms.Button();
-            this.pnlProperties = new System.Windows.Forms.Panel();
-            this.pnlBorderProperties = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -119,6 +119,140 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 2);
             this.panel4.TabIndex = 30;
+            // 
+            // btnMoveFast
+            // 
+            this.btnMoveFast.FlatAppearance.BorderSize = 0;
+            this.btnMoveFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveFast.Location = new System.Drawing.Point(13, 151);
+            this.btnMoveFast.Name = "btnMoveFast";
+            this.btnMoveFast.Size = new System.Drawing.Size(46, 23);
+            this.btnMoveFast.TabIndex = 30;
+            this.btnMoveFast.Text = "fast";
+            this.btnMoveFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveFast.UseVisualStyleBackColor = true;
+            this.btnMoveFast.Click += new System.EventHandler(this.btnMoveFast_Click);
+            // 
+            // btnMoveNormal
+            // 
+            this.btnMoveNormal.FlatAppearance.BorderSize = 0;
+            this.btnMoveNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveNormal.Location = new System.Drawing.Point(61, 151);
+            this.btnMoveNormal.Name = "btnMoveNormal";
+            this.btnMoveNormal.Size = new System.Drawing.Size(46, 23);
+            this.btnMoveNormal.TabIndex = 31;
+            this.btnMoveNormal.Text = "normal";
+            this.btnMoveNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveNormal.UseVisualStyleBackColor = true;
+            this.btnMoveNormal.Click += new System.EventHandler(this.btnMoveNormal_Click);
+            // 
+            // btnMoveSlow
+            // 
+            this.btnMoveSlow.FlatAppearance.BorderSize = 0;
+            this.btnMoveSlow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveSlow.Location = new System.Drawing.Point(124, 151);
+            this.btnMoveSlow.Name = "btnMoveSlow";
+            this.btnMoveSlow.Size = new System.Drawing.Size(46, 23);
+            this.btnMoveSlow.TabIndex = 32;
+            this.btnMoveSlow.Text = "slow";
+            this.btnMoveSlow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveSlow.UseVisualStyleBackColor = true;
+            this.btnMoveSlow.Click += new System.EventHandler(this.btnMoveSlow_Click);
+            // 
+            // btnMoveFine
+            // 
+            this.btnMoveFine.FlatAppearance.BorderSize = 0;
+            this.btnMoveFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveFine.Location = new System.Drawing.Point(179, 151);
+            this.btnMoveFine.Name = "btnMoveFine";
+            this.btnMoveFine.Size = new System.Drawing.Size(46, 23);
+            this.btnMoveFine.TabIndex = 33;
+            this.btnMoveFine.Text = "fine";
+            this.btnMoveFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveFine.UseVisualStyleBackColor = true;
+            this.btnMoveFine.Click += new System.EventHandler(this.btnMoveFine_Click);
+            // 
+            // btnMoveAngleFast
+            // 
+            this.btnMoveAngleFast.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleFast.Location = new System.Drawing.Point(12, 285);
+            this.btnMoveAngleFast.Name = "btnMoveAngleFast";
+            this.btnMoveAngleFast.Size = new System.Drawing.Size(55, 23);
+            this.btnMoveAngleFast.TabIndex = 34;
+            this.btnMoveAngleFast.Text = "fast";
+            this.btnMoveAngleFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleFast.UseVisualStyleBackColor = true;
+            this.btnMoveAngleFast.Click += new System.EventHandler(this.btnMoveAngleFast_Click);
+            // 
+            // btnMoveAngleNormal
+            // 
+            this.btnMoveAngleNormal.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleNormal.Location = new System.Drawing.Point(90, 285);
+            this.btnMoveAngleNormal.Name = "btnMoveAngleNormal";
+            this.btnMoveAngleNormal.Size = new System.Drawing.Size(55, 23);
+            this.btnMoveAngleNormal.TabIndex = 35;
+            this.btnMoveAngleNormal.Text = "normal";
+            this.btnMoveAngleNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleNormal.UseVisualStyleBackColor = true;
+            this.btnMoveAngleNormal.Click += new System.EventHandler(this.btnMoveAngleNormal_Click);
+            // 
+            // btnMoveAngleFine
+            // 
+            this.btnMoveAngleFine.FlatAppearance.BorderSize = 0;
+            this.btnMoveAngleFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveAngleFine.Location = new System.Drawing.Point(179, 285);
+            this.btnMoveAngleFine.Name = "btnMoveAngleFine";
+            this.btnMoveAngleFine.Size = new System.Drawing.Size(55, 23);
+            this.btnMoveAngleFine.TabIndex = 36;
+            this.btnMoveAngleFine.Text = "fine";
+            this.btnMoveAngleFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveAngleFine.UseVisualStyleBackColor = true;
+            this.btnMoveAngleFine.Click += new System.EventHandler(this.btnMoveAngleFine_Click);
+            // 
+            // pnlProperties
+            // 
+            this.pnlProperties.Location = new System.Drawing.Point(252, 15);
+            this.pnlProperties.Name = "pnlProperties";
+            this.pnlProperties.Size = new System.Drawing.Size(174, 289);
+            this.pnlProperties.TabIndex = 37;
+            // 
+            // pnlBorderProperties
+            // 
+            this.pnlBorderProperties.Location = new System.Drawing.Point(431, 37);
+            this.pnlBorderProperties.Name = "pnlBorderProperties";
+            this.pnlBorderProperties.Size = new System.Drawing.Size(253, 261);
+            this.pnlBorderProperties.TabIndex = 38;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.panel8);
+            this.panel3.Location = new System.Drawing.Point(236, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2, 320);
+            this.panel3.TabIndex = 30;
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Location = new System.Drawing.Point(-52, 30);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(2, 320);
+            this.panel8.TabIndex = 31;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(432, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "Scene";
             // 
             // btnZoomOut
             // 
@@ -311,140 +445,6 @@
             this.btnLeft.TabIndex = 0;
             this.btnLeft.UseVisualStyleBackColor = true;
             this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // btnMoveFast
-            // 
-            this.btnMoveFast.FlatAppearance.BorderSize = 0;
-            this.btnMoveFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveFast.Location = new System.Drawing.Point(13, 151);
-            this.btnMoveFast.Name = "btnMoveFast";
-            this.btnMoveFast.Size = new System.Drawing.Size(46, 23);
-            this.btnMoveFast.TabIndex = 30;
-            this.btnMoveFast.Text = "fast";
-            this.btnMoveFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveFast.UseVisualStyleBackColor = true;
-            this.btnMoveFast.Click += new System.EventHandler(this.btnMoveFast_Click);
-            // 
-            // btnMoveNormal
-            // 
-            this.btnMoveNormal.FlatAppearance.BorderSize = 0;
-            this.btnMoveNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveNormal.Location = new System.Drawing.Point(61, 151);
-            this.btnMoveNormal.Name = "btnMoveNormal";
-            this.btnMoveNormal.Size = new System.Drawing.Size(46, 23);
-            this.btnMoveNormal.TabIndex = 31;
-            this.btnMoveNormal.Text = "normal";
-            this.btnMoveNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveNormal.UseVisualStyleBackColor = true;
-            this.btnMoveNormal.Click += new System.EventHandler(this.btnMoveNormal_Click);
-            // 
-            // btnMoveSlow
-            // 
-            this.btnMoveSlow.FlatAppearance.BorderSize = 0;
-            this.btnMoveSlow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveSlow.Location = new System.Drawing.Point(124, 151);
-            this.btnMoveSlow.Name = "btnMoveSlow";
-            this.btnMoveSlow.Size = new System.Drawing.Size(46, 23);
-            this.btnMoveSlow.TabIndex = 32;
-            this.btnMoveSlow.Text = "slow";
-            this.btnMoveSlow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveSlow.UseVisualStyleBackColor = true;
-            this.btnMoveSlow.Click += new System.EventHandler(this.btnMoveSlow_Click);
-            // 
-            // btnMoveFine
-            // 
-            this.btnMoveFine.FlatAppearance.BorderSize = 0;
-            this.btnMoveFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveFine.Location = new System.Drawing.Point(179, 151);
-            this.btnMoveFine.Name = "btnMoveFine";
-            this.btnMoveFine.Size = new System.Drawing.Size(46, 23);
-            this.btnMoveFine.TabIndex = 33;
-            this.btnMoveFine.Text = "fine";
-            this.btnMoveFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveFine.UseVisualStyleBackColor = true;
-            this.btnMoveFine.Click += new System.EventHandler(this.btnMoveFine_Click);
-            // 
-            // btnMoveAngleFast
-            // 
-            this.btnMoveAngleFast.FlatAppearance.BorderSize = 0;
-            this.btnMoveAngleFast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleFast.Location = new System.Drawing.Point(12, 285);
-            this.btnMoveAngleFast.Name = "btnMoveAngleFast";
-            this.btnMoveAngleFast.Size = new System.Drawing.Size(55, 23);
-            this.btnMoveAngleFast.TabIndex = 34;
-            this.btnMoveAngleFast.Text = "fast";
-            this.btnMoveAngleFast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveAngleFast.UseVisualStyleBackColor = true;
-            this.btnMoveAngleFast.Click += new System.EventHandler(this.btnMoveAngleFast_Click);
-            // 
-            // btnMoveAngleNormal
-            // 
-            this.btnMoveAngleNormal.FlatAppearance.BorderSize = 0;
-            this.btnMoveAngleNormal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleNormal.Location = new System.Drawing.Point(90, 285);
-            this.btnMoveAngleNormal.Name = "btnMoveAngleNormal";
-            this.btnMoveAngleNormal.Size = new System.Drawing.Size(55, 23);
-            this.btnMoveAngleNormal.TabIndex = 35;
-            this.btnMoveAngleNormal.Text = "normal";
-            this.btnMoveAngleNormal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveAngleNormal.UseVisualStyleBackColor = true;
-            this.btnMoveAngleNormal.Click += new System.EventHandler(this.btnMoveAngleNormal_Click);
-            // 
-            // btnMoveAngleFine
-            // 
-            this.btnMoveAngleFine.FlatAppearance.BorderSize = 0;
-            this.btnMoveAngleFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleFine.Location = new System.Drawing.Point(179, 285);
-            this.btnMoveAngleFine.Name = "btnMoveAngleFine";
-            this.btnMoveAngleFine.Size = new System.Drawing.Size(55, 23);
-            this.btnMoveAngleFine.TabIndex = 36;
-            this.btnMoveAngleFine.Text = "fine";
-            this.btnMoveAngleFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMoveAngleFine.UseVisualStyleBackColor = true;
-            this.btnMoveAngleFine.Click += new System.EventHandler(this.btnMoveAngleFine_Click);
-            // 
-            // pnlProperties
-            // 
-            this.pnlProperties.Location = new System.Drawing.Point(252, 15);
-            this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(174, 289);
-            this.pnlProperties.TabIndex = 37;
-            // 
-            // pnlBorderProperties
-            // 
-            this.pnlBorderProperties.Location = new System.Drawing.Point(431, 37);
-            this.pnlBorderProperties.Name = "pnlBorderProperties";
-            this.pnlBorderProperties.Size = new System.Drawing.Size(253, 261);
-            this.pnlBorderProperties.TabIndex = 38;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.panel8);
-            this.panel3.Location = new System.Drawing.Point(236, 2);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(2, 320);
-            this.panel3.TabIndex = 30;
-            // 
-            // panel8
-            // 
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel8.Location = new System.Drawing.Point(-52, 30);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(2, 320);
-            this.panel8.TabIndex = 31;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(432, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "Scene";
             // 
             // NavigateControl
             // 

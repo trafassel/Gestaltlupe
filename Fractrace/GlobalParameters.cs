@@ -60,7 +60,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jx"] = "0";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.Description"] = "X-component of the Julia Seed, if the formula is in julia mode. X-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusButton"] = "0.025";
             ParameterDict.Current["Formula.Static.jx.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
 
@@ -69,7 +69,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jy"] = "0";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.Description"] = "Y-component of the Julia Seed, if the formula is in julia mode. Y-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusButton"] = "0.025";
             ParameterDict.Current["Formula.Static.jy.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
             // Z-component of the Julia Seed, if the formula is in julia mode.
@@ -77,7 +77,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jz"] = "0";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.Description"] = "Z-component of the Julia Seed, if the formula is in julia mode. Z-component of the start value , if the formula is in mandelbrot mode.";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
+            ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusButton"] = "0.025";
             ParameterDict.Current["Formula.Static.jz.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.0001";
 
             // Q-component of the Julia Seed, if the formula is in julia mode.
@@ -310,7 +310,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.Description"] = " If ColorGreyness=1, no color is rendered.";
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.ColorGreyness.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.005";
 
             ParameterDict.Current["Renderer.ColorInside"] = "0";
             ParameterDict.Current["Renderer.ColorInside.PARAMETERINFO.Datatype"] = "Bool";
@@ -329,7 +329,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8";
-            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.025";
 
             // Shadow height factor
             ParameterDict.Current["Renderer.ShadowJustify"] = "1";
@@ -365,7 +365,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
 
             // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
             ParameterDict.Current["Renderer.SmoothNormalLevel"] = "8";
@@ -453,13 +453,15 @@ for (int n = 1; n < _cycles; n++)
 
             // EyeDistance in stereo mode.
             ParameterDict.Current["Transformation.Stereo.EyeDistance"] = "0.5";
-            ParameterDict.Current["Transformation.Stereo.EyeDistance.PARAMETERINFO.Description"] = "EyeDistance in stereo mode.";
+            //ParameterDict.Current["Transformation.Stereo.EyeDistance.PARAMETERINFO.Description"] = "EyeDistance in stereo mode.";
             // ParameterDict.Current["Transformation.Stereo.EyeDistance.PARAMETERINFO.VIEW.FixedButtons"] = "0.5";
+            ParameterDict.Current["Transformation.Stereo.EyeDistance.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Angle difference in stereo mode. 
             ParameterDict.Current["Transformation.Stereo.Angle"] = "-9";
-            ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.Description"] = "Angle difference in stereo mode.";
+            //ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.Description"] = "Angle difference in stereo mode.";
             // ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.FixedButtons"] = "-9";
+            ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             ParameterDict.Current["Export.X3d.ClosedSurface"] = "0";
             ParameterDict.Current["Export.X3d.ClosedSurface.PARAMETERINFO.Datatype"] = "Bool";

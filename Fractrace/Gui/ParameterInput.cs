@@ -34,6 +34,7 @@ namespace Fractrace
         /// </summary>
         protected int currentPic = 0;
 
+        Dictionary<int, Image> _historyImages = new Dictionary<int, Image>();
 
         /// <summary>
         /// get small preview control.
@@ -46,6 +47,51 @@ namespace Fractrace
             }
         }
 
+        /// <summary>
+        /// Public Acces to DataViewControl.
+        /// </summary>
+        public DataViewControl MainDataViewControl { get { return parameterDictControl1.MainDataViewControl; } }
+
+        /// <summary>
+        /// Get in historyControl used parameter history.
+        /// </summary>
+        public ParameterHistory History  {  get  {  return _history;  } }
+        ParameterHistory _history = new ParameterHistory();
+
+        /// <summary>
+        /// Zugriff auf die Bearbeitungsparameter.
+        /// </summary>
+        public FracValues Parameter { get { return _parameter; } }
+        private FracValues _parameter = new FracValues();
+
+        /// <summary>
+        /// Get Formula.Static.Cycles.
+        /// </summary>
+        public int Cycles { get { return (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles"); } }
+
+        /// <summary>
+        /// Get View.Size.
+        /// </summary>
+        public double ScreenSize { get { return ParameterDict.Current.GetDouble("View.Size"); } }
+
+        /// <summary>
+        /// GetFormula.Static.Formula.
+        /// </summary>
+        public int Formula { get { return (int)ParameterDict.Current.GetDouble("Formula.Static.Formula"); } }
+
+        public bool AutomaticSaveInAnimation { get { return cbAutomaticSaveAnimation.Checked; } }
+
+        public bool Changed = false;
+
+        /// <summary>
+        /// Damit wird vermieden, dass nach dem Export von 3D Daten stets beim Öffnen das Exportverzeichnis
+        /// als InitialDirectory verwendet wird. 
+        /// </summary>
+        protected static string oldDirectory = "";
+
+        public void DeactivatePreview() { _previewMode = false; }
+        protected bool _previewMode = false;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterInput"/> class.
@@ -56,7 +102,7 @@ namespace Fractrace
             InitializeComponent();
             ParameterDict.Current.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);
             navigateControl1.Init(preview1, preview2, this);
-            this.animationControl1.Init(mHistory);
+            this.animationControl1.Init(_history);
             preview1.PreviewButton.Click += new EventHandler(PreviewButton_Click);
             preview1.ShowProgressBar = false;
             preview2.ShowProgressBar = false;
@@ -90,11 +136,6 @@ namespace Fractrace
                 DrawSmallPreview();
         }
 
-        /// <summary>
-        /// Public Acces to DataViewControl.
-        /// </summary>
-        public DataViewControl MainDataViewControl { get { return parameterDictControl1.MainDataViewControl; } }
-
 
         private void Preview1_ProgressEvent(double progress)
         {
@@ -116,20 +157,18 @@ namespace Fractrace
         void ParameterValuesChanged()
         {
             preview1.Draw();
-            // TODO: only add, if picture in preview1 exists
             AddToHistory();
-            // Update the source code.
             if (tabControl1.SelectedTab == tpSource)
                 formulaEditor1.Init();
         }
 
 
         /// <summary>
-        /// Das berechnete Bild wird für die spätere Verwendung gespeichert.
+        /// Save current image to _historyImages.
         /// </summary>
         protected void SavePicData()
         {
-            mHistoryImages[mHistory.Time] = preview1.Image;
+            _historyImages[_history.Time] = preview1.Image;
         }
 
 
@@ -138,7 +177,7 @@ namespace Fractrace
         /// </summary>
         public void SaveHistory()
         {
-            mHistory.CurrentTime = mHistory.Save();
+            _history.CurrentTime = _history.Save();
         }
 
 
@@ -147,26 +186,8 @@ namespace Fractrace
         /// </summary>
         public void SaveHistory(string fileName)
         {
-            mHistory.CurrentTime = mHistory.Save(fileName);
+            _history.CurrentTime = _history.Save(fileName);
         }
-
-
-        /// <summary>
-        /// Get in historyControl used parameter history.
-        /// </summary>
-        public ParameterHistory History
-        {
-            get
-            {
-                return mHistory;
-            }
-        }
-
-
-        /// <summary>
-        /// Enthält die History der letzten Parameter
-        /// </summary>
-        ParameterHistory mHistory = new ParameterHistory();
 
 
         /// <summary>
@@ -194,78 +215,7 @@ namespace Fractrace
         /// </summary>
         public void Assign()
         {
-            mParameter.SetFromParameterDict();
-        }
-
-
-        /// <summary>
-        /// Zugriff auf die Bearbeitungsparameter.
-        /// </summary>
-        private FracValues mParameter = new FracValues();
-
-        public FracValues Parameter
-        {
-            get
-            {
-                return mParameter;
-            }
-        }
-
-
-        /// <summary>
-        /// Iterationstiefe
-        /// </summary>
-        public int Cycles
-        {
-            get
-            {
-                return (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles");
-            }
-        }
-
-
-        /// <summary>
-        /// Pixelgröße
-        /// </summary>
-        public int Raster
-        {
-            get
-            {
-                return (int)ParameterDict.Current.GetDouble("View.Raster");
-            }
-        }
-
-
-        /// <summary>
-        /// Faktor der Fenstergröße.
-        /// </summary>
-        public double ScreenSize
-        {
-            get
-            {
-                return ParameterDict.Current.GetDouble("View.Size");
-            }
-        }
-
-
-        /// <summary>
-        /// Index der zu berechnenden Formel.
-        /// </summary>
-        public int Formula
-        {
-            get
-            {
-                return (int)ParameterDict.Current.GetDouble("Formula.Static.Formula");
-            }
-        }
-
-
-        public bool AutomaticSaveInAnimation
-        {
-            get
-            {
-                return cbAutomaticSaveAnimation.Checked;
-            }
+            _parameter.SetFromParameterDict();
         }
 
 
@@ -275,8 +225,6 @@ namespace Fractrace
         private void ForceRedraw()
         {
             ResultImageView.PublicForm.ComputeOneStep();
-            if (Stereo)
-                DrawStereo();
         }
 
 
@@ -306,61 +254,28 @@ namespace Fractrace
 
         private void ComputationEnds()
         {
-            if (!mPreviewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
+            if (!_previewMode || ParameterDict.Current.GetBool("View.Pipeline.UpdatePreview"))
             {
                 int updateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
                 if (ResultImageView.PublicForm.CurrentUpdateStep < updateSteps)
                 {
-                    if (mPreviewMode)
+                    if (_previewMode)
                         ComputePreview();
                     else
                         ResultImageView.PublicForm.ComputeOneStep();
                     return;
                 }
             }
-            if (mPosterMode)
-            {
-                DrawNextPosterPart();
-            }
-            else
-            {
-                // Use the picture in the render frame to display in preview (for history)
-                Image image = ResultImageView.PublicForm.GetImage();
-                int imageWidth = preview1.Width;
-                int imageHeight = preview1.Height;
-                Image newImage = new Bitmap(imageWidth, imageHeight);
-                Graphics gr = Graphics.FromImage(newImage);
-                gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
-                mHistoryImages[mHistory.Time] = newImage;          
-            }
+
+            // Use the picture in the render frame to display in preview (for history)
+            Image image = ResultImageView.PublicForm.GetImage();
+            int imageWidth = preview1.Width;
+            int imageHeight = preview1.Height;
+            Image newImage = new Bitmap(imageWidth, imageHeight);
+            Graphics gr = Graphics.FromImage(newImage);
+            gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
+            _historyImages[_history.Time] = newImage;
         }
-
-
-        public void DrawStereo()
-        {
-            if (mStereoForm == null)
-            {
-                mStereoForm = new StereoForm();
-                mStereoForm.Show();
-            }
-            mStereoForm.ImageRenderer.Draw();
-        }
-
-
-        public StereoForm StereoForm
-        {
-            get
-            {
-                return mStereoForm;
-            }
-        }
-
-        private StereoForm mStereoForm = null;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool Changed = false;
 
 
         private void OK()
@@ -390,15 +305,13 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Der letzte Eintrag der History wird geladen (wenn möglich)
+        /// Load last history entry.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnBack_Click_1(object sender, EventArgs e)
         {
-            if (mHistory.Time >= 0)
+            if (_history.Time >= 0)
             {
-                mHistory.CurrentTime = 0;
+                _history.CurrentTime = 0;
                 UpdateHistoryPic();
                 LoadFromHistory();
             }
@@ -406,14 +319,12 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Der nächste Eintrag der History wird geladen (wenn möglich)
+        /// Load next history entry.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            mHistory.CurrentTime = mHistory.Time;
-            if (mHistory.CurrentTime >= 0)
+            _history.CurrentTime = _history.Time;
+            if (_history.CurrentTime >= 0)
             {
                 UpdateHistoryPic();
                 LoadFromHistory();
@@ -422,11 +333,11 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Die Parameterdaten zum Zeitpunkt mHistoryTime werden geladen und dargestellt.
+        /// Activate time _history.CurrentTime.
         /// </summary>
         private void LoadFromHistory()
         {
-            mHistory.Load(mHistory.CurrentTime);
+            _history.Load(_history.CurrentTime);
             UpdateHistoryControl();
             UpdateCurrentTab();
         }
@@ -456,39 +367,37 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Das Control zur Übersicht der historischen Daten wird neu geladen.
+        /// Redraw history control.
         /// </summary>
         protected void UpdateHistoryControl()
         {
-            lblCurrentStep.Text = mHistory.CurrentTime.ToString();
-            tbCurrentStep.Text= mHistory.CurrentTime.ToString();
-            if (mHistory.CurrentTime > 0)
+            lblCurrentStep.Text = _history.CurrentTime.ToString();
+            tbCurrentStep.Text= _history.CurrentTime.ToString();
+            if (_history.CurrentTime > 0)
             {
-                btnLastStep.Text = ((int)(mHistory.CurrentTime - 1)).ToString();
+                btnLastStep.Text = ((int)(_history.CurrentTime - 1)).ToString();
             }
             else
             {
                 btnLastStep.Text = "___";
             }
-            if (mHistory.CurrentTime < mHistory.Time)
+            if (_history.CurrentTime < _history.Time)
             {
-                btnNextStep.Text = ((int)(mHistory.CurrentTime + 1)).ToString();
+                btnNextStep.Text = ((int)(_history.CurrentTime + 1)).ToString();
             }
             else
             {
                 btnNextStep.Text = "___";
             }
 
-            btnNext.Text = mHistory.Time.ToString();
+            btnNext.Text = _history.Time.ToString();
             btnBack.Text = "0";
         }
 
 
         /// <summary>
-        /// Der Inhalt des Parameterdict wird gespeichert.
+        /// Save ParameterDict.Current as *.gestalt file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sd = new SaveFileDialog();
@@ -501,17 +410,8 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Damit wird vermieden, dass nach dem Export von 3D Daten stets beim Öffnen das Exportverzeichnis
-        /// als InitialDirectory verwendet wird. 
+        /// Load scene.
         /// </summary>
-        protected static string oldDirectory = "";
-
-
-        /// <summary>
-        /// Konfiguration öffnen.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
@@ -593,9 +493,9 @@ namespace Fractrace
         /// </summary>
         public void StartRendering()
         {
-            mPreviewMode = false;
-            mPosterMode = false;
-            mHistory.CurrentTime = mHistory.Save();
+            _previewMode = false;
+            //mPosterMode = false;
+            _history.CurrentTime = _history.Save();
             ResultImageView.PublicForm._inPreview = false;
             ForceRedraw();
         }
@@ -613,12 +513,7 @@ namespace Fractrace
         private void Stop()
         {
             Fractrace.Scheduler.GrandScheduler.Exemplar.SetBatch(null);
-            mPosterMode = false;
             ResultImageView.PublicForm.Stop();
-            if (mStereoForm != null)
-            {
-                mStereoForm.Abort();
-            }
             animationControl1.Abort();
         }
 
@@ -712,7 +607,7 @@ namespace Fractrace
         /// </summary>
         private void btnSaveInHistory_Click(object sender, EventArgs e)
         {
-            mHistory.CurrentTime = mHistory.Save();
+            _history.CurrentTime = _history.Save();
             LoadFromHistory();
         }
 
@@ -722,7 +617,7 @@ namespace Fractrace
         /// </summary>
         public void AddToHistory()
         {
-            mHistory.Save();
+            _history.Save();
             UpdateHistoryControl();
         }
 
@@ -735,18 +630,13 @@ namespace Fractrace
             btnLastStep.Enabled = true;
             try
             {
-                if (mHistory.CurrentTime > 0)
+                if (_history.CurrentTime > 0)
                 {
-                    mHistory.CurrentTime--;
+                    _history.CurrentTime--;
                     preview2.Clear();
                     if (!UpdateHistoryPic())
                     {
-                        // Not working:
-                        //Graphics gr = Graphics.FromImage(preview1.Image);
-                        //gr.DrawRectangle(new System.Drawing.Pen(Color.Gray, 4), 10, 10, 20, 20);
-                        //preview1.Refresh();
                         preview1.Clear();
-                        //preview1.Visible = false;
                     }
                     else
                     {
@@ -763,22 +653,17 @@ namespace Fractrace
         }
 
 
-        Dictionary<int, Image> mHistoryImages = new Dictionary<int, Image>();
-
-
         /// <summary>
-        /// Nächster History-Eintrag wird geladen.
+        /// Load next history entry.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnNextStep_Click(object sender, EventArgs e)
         {
             btnNextStep.Enabled = false;
             try
             {
-                if (mHistory.CurrentTime < mHistory.Time)
+                if (_history.CurrentTime < _history.Time)
                 {
-                    mHistory.CurrentTime++;
+                    _history.CurrentTime++;
                     preview2.Clear();
                     if (!UpdateHistoryPic())
                     {
@@ -804,9 +689,9 @@ namespace Fractrace
         /// </summary>
         private bool UpdateHistoryPic()
         {
-            if (mHistoryImages.ContainsKey(mHistory.CurrentTime))
+            if (_historyImages.ContainsKey(_history.CurrentTime))
             {
-                preview1.Image = mHistoryImages[mHistory.CurrentTime];
+                preview1.Image = _historyImages[_history.CurrentTime];
                 preview1.Refresh();
                 return true;
             }
@@ -821,10 +706,9 @@ namespace Fractrace
         {
             SetSmallPreviewSize();
             // Counter is set to the last time entry.
-            mHistory.CurrentTime = mHistory.Time;
+            _history.CurrentTime = _history.Time;
             UpdateHistoryControl();
             SavePicData();
-            //preview2.Draw();
             preview2.InitLabelImage();
             preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
         }
@@ -836,99 +720,9 @@ namespace Fractrace
         private void preview1_Clicked()
         {
             // Counter is set to the last time entry.
-            mHistory.CurrentTime = mHistory.Time;
+            _history.CurrentTime = _history.Time;
             UpdateHistoryControl();
             SavePicData();
-        }
-
-
-        protected int mPosterStep = 0;
-
-        protected bool mPosterMode = false;
-
-
-        public void DeactivatePreview()
-        {
-            mPreviewMode = false;
-        }
-
-        protected bool mPreviewMode = false;
-
-
-        /// <summary>
-        /// Erstellung eines Posters wurde angeklickt
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCreatePoster_Click(object sender, EventArgs e)
-        {
-            mPosterStep = 0;
-            mPosterMode = true;
-            DrawNextPosterPart();
-        }
-
-
-        /// <summary>
-        /// Erstellt das nächste Einzelbild des Posters.
-        /// </summary>
-        private void DrawNextPosterPart()
-        {
-            if (!mPosterMode)
-                return;
-            int xi = 0;
-            int yi = 0;
-            switch (mPosterStep)
-            {
-                case 0:
-                    xi = -1;
-                    yi = -1;
-                    break;
-                case 1:
-                    xi = 0;
-                    yi = -1;
-                    break;
-                case 2:
-                    xi = 1;
-                    yi = -1;
-                    break;
-                case 3:
-                    xi = -1;
-                    yi = 0;
-                    break;
-                case 4:
-                    xi = 0;
-                    yi = 0;
-                    break;
-                case 5:
-                    xi = 1;
-                    yi = 0;
-                    break;
-                case 6:
-                    xi = -1;
-                    yi = 1;
-                    break;
-                case 7:
-                    xi = 0;
-                    yi = 1;
-                    break;
-                case 8:
-                    xi = 1;
-                    yi = 1;
-                    break;
-                case 9:
-                    // Ende
-                    mPosterStep = 0;
-                    mPosterMode = false;
-                    ParameterDict.Current.SetInt("View.PosterX", 0);
-                    ParameterDict.Current.SetInt("View.PosterZ", 0);
-                    return;
-            }
-
-            ParameterDict.Current.SetInt("View.PosterX", xi);
-            ParameterDict.Current.SetInt("View.PosterZ", yi);
-            ResultImageView.PublicForm._inPreview = false;
-            ForceRedraw();
-            mPosterStep++;
         }
 
 
@@ -1017,14 +811,9 @@ namespace Fractrace
 
         public void ComputePreview()
         {
-            mPreviewMode = true;
+            _previewMode = true;
             {
-                mPosterMode = false;
-                // Todo: Bild nur speichern, wenn der Haken gesetzt ist
-                //if (cbSaveHistory.Checked)
-                {
-                    mHistory.CurrentTime = mHistory.Save();
-                }
+                _history.CurrentTime = _history.Save();
                 // Size und Raster festlegen
                 string sizeStr = ParameterDict.Current["View.Size"];
                 ParameterDict.Current["View.Size"] = "0.2";
@@ -1037,6 +826,9 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Compute preview.
+        /// </summary>
         private void btnPreview_Click(object sender, EventArgs e)
         {
             ComputePreview();
@@ -1053,9 +845,9 @@ namespace Fractrace
             preview1.Visible = true;
             try
             {
-                while (mHistory.CurrentTime > 0)
+                while (_history.CurrentTime > 0)
                 {
-                    mHistory.CurrentTime--;
+                    _history.CurrentTime--;
                     if (UpdateHistoryPic())
                         break;
                 }
@@ -1070,7 +862,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Handles the 1 event of the button1_Click control.
+        /// Activate next history entry.
         /// </summary>
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -1078,9 +870,9 @@ namespace Fractrace
             preview1.Visible = true;
             try
             {
-                while (mHistory.CurrentTime < mHistory.Time)
+                while (_history.CurrentTime < _history.Time)
                 {
-                    mHistory.CurrentTime++;
+                    _history.CurrentTime++;
                     if (UpdateHistoryPic())
                         break;
                 }
@@ -1099,7 +891,7 @@ namespace Fractrace
         /// </summary>
         private void PreviewButton_Click(object sender, EventArgs e)
         {
-            mHistory.CurrentTime = mHistory.Save();
+            _history.CurrentTime = _history.Save();
             SetSmallPreviewSize();
             preview1.btnPreview_Click(sender, e);
         }
@@ -1269,14 +1061,24 @@ namespace Fractrace
         private void tbCurrentStep_TextChanged(object sender, EventArgs e)
         {
             // TODO: Load editet entry.
+            int currentStep = 0;
+            if(int.TryParse(tbCurrentStep.Text,out currentStep))
+            {
+                if (_history.CurrentTime != currentStep)
+                {
+                    _history.CurrentTime = currentStep;
+                    UpdateHistoryPic();
+                    LoadFromHistory();
+                }
+            }
         }
 
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (mHistory.Time >= 0)
+            if (_history.Time >= 0)
             {
-                mHistory.CurrentTime = 0;
+                _history.CurrentTime = 0;
                 UpdateHistoryPic();
                 LoadFromHistory();
             }
@@ -1285,8 +1087,8 @@ namespace Fractrace
 
         private void button6_Click(object sender, EventArgs e)
         {
-            mHistory.CurrentTime = mHistory.Time;
-            if (mHistory.CurrentTime >= 0)
+            _history.CurrentTime = _history.Time;
+            if (_history.CurrentTime >= 0)
             {
                 UpdateHistoryPic();
                 LoadFromHistory();
@@ -1401,9 +1203,11 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Gernerate buttons to load some default scenes.
+        /// </summary>
         private void InitDefaultScenesPictures()
         {
-
             List<string> currentDirs = new List<string>();
             Dictionary<string, string> gestaltFiles = new Dictionary<string, string>();
             currentDirs.Add(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Scenes"));
@@ -1477,34 +1281,42 @@ namespace Fractrace
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
-            // Save Image
             SaveFileDialog sd = new SaveFileDialog();
             sd.Filter = "Image|*.png";
             if (sd.ShowDialog() == DialogResult.OK)
             {
                 ResultImageView.PublicForm.GetImage().Save(sd.FileName);
             }
-
-
         }
 
+        /// <summary>
+        /// Show navigation tab.
+        /// </summary>
         private void button7_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
         }
 
+        /// <summary>
+        /// Show material tab.
+        /// </summary>
         private void button8_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 2;
         }
 
+        /// <summary>
+        /// Show formula parameters.
+        /// </summary>
         private void button9_Click(object sender, EventArgs e)
         {
-
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("Formula");
         }
 
+        /// <summary>
+        /// Show view parameters.
+        /// </summary>
         private void button10_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 0;

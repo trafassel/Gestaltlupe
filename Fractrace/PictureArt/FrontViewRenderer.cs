@@ -37,26 +37,24 @@ namespace Fractrace.PictureArt
         /// <summary>(
         /// Erstellt das fertige Bild
         /// </summary>
-        /// <param name="grLabel"></param>
         public override void Paint(Graphics grLabel)
         {
-            width = pData.Width;
-            height = pData.Height;
+            _width = pData.Width;
+            _height = pData.Height;
             PreCalculate();
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < _width; i++)
             {
-                for (int j = 0; j < height; j++)
+                for (int j = 0; j < _height; j++)
                 {
-                    Pen p = new Pen(Color.White);
+                    Pen p = new Pen(Color.Transparent);
                     grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
                 }
             }
             // ?? Eigentlich sollte width==grLabel.VisibleClipBounds.Width gelten.
-            for (int i = 0; i < width && i < grLabel.VisibleClipBounds.Width; i++)
+            for (int i = 0; i < _width && i < grLabel.VisibleClipBounds.Width; i++)
             {
-                for (int j = 0; j < grLabel.VisibleClipBounds.Height && j < height; j++)
+                for (int j = 0; j < grLabel.VisibleClipBounds.Height && j < _height; j++)
                 {
-                    //Pen p = new Pen(GetColor(i, j)); this
                     Pen p = new Pen(Color.Black);
                     // Switch to front draw
                     PixelInfo pInfo = pData.Points[i, j];
@@ -65,8 +63,7 @@ namespace Fractrace.PictureArt
                         double y = pInfo.Coord.Y;
                         if (y != 0)
                         {
-                            //double y = pInfo.Coord.Z;
-                            double dheight = height;
+                            double dheight = _height;
                             double ypos = y - _expectedMinY;
                             ypos = ypos / (_expectedMaxY - _expectedMinY);
                             ypos = dheight - dheight * ypos;
@@ -83,8 +80,8 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override void PreCalculate()
         {
-            _expectedMinY = ParameterDict.Current.GetDouble("Scene.CenterY")- ParameterDict.Current.GetDouble("Scene.Radius"); 
-            _expectedMaxY = ParameterDict.Current.GetDouble("Scene.CenterY") + ParameterDict.Current.GetDouble("Scene.Radius");
+            _expectedMinY = ParameterDict.Current.GetDouble("Scene.CenterY")- 0.5*ParameterDict.Current.GetDouble("Scene.Radius"); 
+            _expectedMaxY = ParameterDict.Current.GetDouble("Scene.CenterY") + 0.5*ParameterDict.Current.GetDouble("Scene.Radius");
             _minY = double.MaxValue;
             _maxY = double.MinValue;
             for (int i = 0; i < pData.Width; i++)
@@ -96,7 +93,7 @@ namespace Fractrace.PictureArt
                     {
                         if (_minY > pInfo.Coord.Y && pInfo.Coord.Y != 0)
                             _minY = pInfo.Coord.Y;
-                        if (_maxY < pInfo.Coord.Y)
+                        if (_maxY < pInfo.Coord.Y && pInfo.Coord.Y != 0)
                             _maxY = pInfo.Coord.Y;
                     }
                 }

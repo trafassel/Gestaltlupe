@@ -38,14 +38,14 @@ namespace Fractrace.PictureArt
                 System.Diagnostics.Debug.WriteLine("Warning in RenderBase.Paint() formula==null");
                 return;
             }
-            width = pData.Width;
-            height = pData.Height;
+            _width = pData.Width;
+            _height = pData.Height;
             PreCalculate();
             if (!stopRequest)
             {
-                for (int i = 0; i < width; i++)
+                for (int i = 0; i < _width; i++)
                 {
-                    for (int j = 0; j < height; j++)
+                    for (int j = 0; j < _height; j++)
                     {
                         Pen p = new Pen(GetColor(i, j));
                         // Hier Exceeption: Das Objekt wird bereits an anderer Stelle verwendet

@@ -229,15 +229,6 @@ namespace Fractrace
                 pArt.Paint(_graphics);
                 Application.DoEvents();
                 this.Refresh();
-                // In instance of RenderImage is used in the big stereo
-                // and in the small preview display. Which variant is used is (clumsy) detected
-                // by the picture size.
-                if (_pictureBox.Image.Width > 400)
-                {
-                    string fileName = FileSystem.Exemplar.GetFileName("stereo_pic_right.png");
-                    this.Text = fileName;
-                    _pictureBox.Image.Save(fileName);
-                }
             }
             _inDrawing = false;
             if (_forceRedraw)

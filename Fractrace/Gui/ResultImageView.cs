@@ -113,7 +113,7 @@ namespace Fractrace
         protected double _progress = 0;
 
         /// <summary>
-        /// If true, mProgress has changed but progress is not updated.
+        /// If true, _progress has changed but progress is not updated.
         /// </summary>
         protected bool _progressChanged = false;
 
@@ -131,11 +131,6 @@ namespace Fractrace
         /// True while method Paint() runs.
         /// </summary>
         bool _inPaint = false;
-
-        /// <summary>
-        /// True, if after end of DrawPicture() a new paint request should be startet. 
-        /// </summary>
-        bool _repaintRequested = false;
 
         /// <summary>
         /// Count the number of update steps
@@ -219,8 +214,8 @@ namespace Fractrace
         /// <summary>
         /// Computes the hash of all Parameter entries which are used in 
         /// rendering, but not in picture art.
+        /// The following categories are not used:  Composite, Computation.NoOfThreads
         /// </summary>
-        /// <returns></returns>
         protected string GetParameterHashWithoutPictureArt()
         {
             StringBuilder tempHash = new StringBuilder();
@@ -230,15 +225,10 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Current.GetHash("View.Height"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Deph"));
             tempHash.Append(ParameterDict.Current.GetHash("View.DephAdd"));
-            tempHash.Append(ParameterDict.Current.GetHash("View.PosterX"));
-            tempHash.Append(ParameterDict.Current.GetHash("View.PosterZ"));
             tempHash.Append(ParameterDict.Current.GetHash("Scene"));
             tempHash.Append(ParameterDict.Current.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Current.GetHash("Formula"));
             tempHash.Append(ParameterDict.Current.GetHash("Intern.Formula"));
-            // The following categories are not used: 
-            // Composite
-            // Computation.NoOfThreads
             return tempHash.ToString();
         }
 
@@ -343,7 +333,6 @@ namespace Fractrace
         /// <summary>
         /// Get internal image data.
         /// </summary>
-        /// <returns></returns>
         public Image GetImage()
         {
             return pictureBox1.Image;
@@ -353,8 +342,6 @@ namespace Fractrace
         /// <summary>
         /// Show parameter window.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -369,36 +356,25 @@ namespace Fractrace
 
 
         /// <summary>
-        /// 
+        /// Save mouse position for later use in zoom. 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Always zoom
-            // if (_inZoom)
-            {
-                _zoomX1 = e.X;
-                _zoomY1 = e.Y;
-                _inMouseDown = true;
-            }
+            _zoomX1 = e.X;
+            _zoomY1 = e.Y;
+            _inMouseDown = true;
         }
 
 
         /// <summary>
-        /// 
+        /// Save mouse position for later use in zoom.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (_inMouseDown)
             {
                 _zoomX2 = e.X;
                 _zoomY2 = e.Y;
-              //  Pen pen = new Pen(Color.Black);
-                // Sorry, this Rectangle is not shown
-               // _graphics.DrawRectangle(pen, _zoomX1, _zoomY1, _zoomX2 - _zoomX1, _zoomY2 - _zoomY1);
             }
         }
 
@@ -406,8 +382,6 @@ namespace Fractrace
         /// <summary>
         /// Transfer of zooming parameters ends.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (_inMouseDown)
@@ -502,13 +476,10 @@ namespace Fractrace
                 _paras.Parameter.start_tupel.x = minX;
                 _paras.Parameter.start_tupel.y = minY;
                 _paras.Parameter.start_tupel.z = minZ;
-
                 _paras.Parameter.end_tupel.x = maxX;
                 _paras.Parameter.end_tupel.y = maxY;
                 _paras.Parameter.end_tupel.z = maxZ;
-
                 _paras.Parameter.TransferToParameterDict();
-
                 _paras.UpdateFromData();
                 ParameterInput.MainParameterInput.DrawSmallPreview();
             }
@@ -523,8 +494,6 @@ namespace Fractrace
         /// <summary>
         /// Stops the surface generation.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void Stop()
         {
             _currentUpdateStep = ParameterDict.Current.GetInt("View.UpdateSteps") + 1;
@@ -533,15 +502,12 @@ namespace Fractrace
                 _iterate.Abort();
             }
             Progress(0);
-            // Warning: Compution in stereo window is not stopped.
         }
 
 
         /// <summary>
         /// Generates the bitmap and save it.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnRepaint_Click(object sender, EventArgs e)
         {
             ActivatePictureArt();
@@ -603,27 +569,30 @@ namespace Fractrace
                     {
                         System.Diagnostics.Debug.WriteLine("Error in DrawPicture() currentPicturArt != null");
                     }
-                    FastRenderingFilter fastRenderingFilter = null;
-                    if (IsSubStepRendering() && !Fractrace.Animation.AnimationControl.InAnimation)
+                    if (IsFirstSubStepRendering())
                     {
-                        fastRenderingFilter = new FastRenderingFilter();
-                        fastRenderingFilter.Apply();
-                    }
-                    _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
-                    _currentPicturArt.Paint(_graphics);
-                    while (_repaintRequested)
-                    {
-                        _lastPicturArt = _currentPicturArt;
+                        FastRenderingFilter fastRenderingFilter = null;
+                        if (!Fractrace.Animation.AnimationControl.InAnimation)
+                        {
+                            fastRenderingFilter = new FastRenderingFilter();
+                            fastRenderingFilter.Apply();
+                        }
                         _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
                         _currentPicturArt.Paint(_graphics);
+                        if (fastRenderingFilter != null)
+                            fastRenderingFilter.Restore();
+                        _lastPicturArt = _currentPicturArt;
+                        _currentPicturArt = null;
+                        CallDrawImage();
                     }
-                    if (fastRenderingFilter != null)
-                        fastRenderingFilter.Restore();
-
-                    _lastPicturArt = _currentPicturArt;
-                    _currentPicturArt = null;
-                    _repaintRequested = false;
-                    CallDrawImage();
+                    else if (!IsSubStepRendering())
+                    {
+                        _currentPicturArt = PictureArtFactory.Create(_iterateForPictureArt.PictureData, _iterateForPictureArt.LastUsedFormulas);
+                        _currentPicturArt.Paint(_graphics);
+                        _lastPicturArt = _currentPicturArt;
+                        _currentPicturArt = null;
+                        CallDrawImage();
+                    }
                 }
                 catch (System.Exception ex)
                 {
@@ -722,7 +691,6 @@ namespace Fractrace
         /// <summary>
         /// Dialogabfrage vor Beendigung der Anwendung.
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnClosing(CancelEventArgs e)
         {
             if (!_forceClosing)
@@ -741,14 +709,10 @@ namespace Fractrace
         /// <summary>
         /// Try to update in background (still with some sync problems).
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (_inPaint)
-                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);
-            //  btnRepaint.Enabled = false;
-
+                Fractrace.ParameterInput.MainParameterInput.EnableRepaint(false);       
             if (_progressChanged)
             {
                 _progressChanged = false;
@@ -761,12 +725,20 @@ namespace Fractrace
         /// <summary>
         /// Return true, if bitmap creation is for substeps only.
         /// </summary>
-        /// <returns></returns>
         private bool IsSubStepRendering()
         {
             int currentStep = _updateCount;
             int lastStep = ParameterDict.Current.GetInt("View.UpdateSteps") + 1;
             return currentStep < lastStep;
+        }
+
+
+        /// <summary>
+        /// Return true, if bitmap creation is for first substep.
+        /// </summary>
+        private bool IsFirstSubStepRendering()
+        {
+            return _updateCount == 1;
         }
 
 

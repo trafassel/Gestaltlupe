@@ -103,7 +103,7 @@ namespace Fractrace.Basic
             foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
             {
                 string parameterName = entry.Key;
-                if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName))
+                if (parameterName.StartsWith(category) && ParameterDict.HasControl(parameterName) && parameterName!=category)
                 {
                     string tempName = parameterName.Substring(category.Length + 1);
                     if (!tempName.Contains("."))

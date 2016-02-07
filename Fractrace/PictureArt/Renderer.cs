@@ -23,9 +23,9 @@ namespace Fractrace.PictureArt {
 
         protected Formulas formula = null;
 
-        protected int width = 0;
+        protected int _width = 0;
         
-        protected int height = 0;
+        protected int _height = 0;
 
         /// <summary>
         /// Is set to true, if painting ends.
