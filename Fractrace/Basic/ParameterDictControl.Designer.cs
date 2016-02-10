@@ -56,14 +56,14 @@
             // treeView1
             // 
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Location = new System.Drawing.Point(0, 107);
             this.treeView1.Name = "treeView1";
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(89, 301);
+            this.treeView1.Size = new System.Drawing.Size(89, 194);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -81,18 +81,18 @@
             // 
             this.pnlEdit.AutoScroll = true;
             this.pnlEdit.Controls.Add(this.dataViewControl1);
-            this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEdit.Location = new System.Drawing.Point(5, 5);
+            this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlEdit.Location = new System.Drawing.Point(5, 107);
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
-            this.pnlEdit.Size = new System.Drawing.Size(230, 291);
+            this.pnlEdit.Size = new System.Drawing.Size(230, 189);
             this.pnlEdit.TabIndex = 1;
             // 
             // dataViewControl1
             // 
             this.dataViewControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataViewControl1.Location = new System.Drawing.Point(0, 0);
-            this.dataViewControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataViewControl1.Margin = new System.Windows.Forms.Padding(2);
             this.dataViewControl1.Name = "dataViewControl1";
             this.dataViewControl1.Size = new System.Drawing.Size(230, 0);
             this.dataViewControl1.TabIndex = 0;

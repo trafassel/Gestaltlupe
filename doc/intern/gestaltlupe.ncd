@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:221-->
+<!--LastNote:226-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -9,6 +9,14 @@
 <BODY>
 <!--property:UID=3MIYxYOogeYWIoDSJeQdcw-->
 <!--property:prop_modified=0-->
+<!--property:note_deleted=J7Ch1OD1UqwIWxpICfjvaw-->
+<!--property:note_deleted=OsVsm3bAFaEWALaOhl8qFQ-->
+<!--property:note_deleted=WJbXIdRZTrFpPWmhb8zOKw-->
+<!--property:note_deleted=fOXwl1fktKxx00QH4G7cxQ-->
+<!--property:note_deleted=gXhD42IPhnc7d71fdsUfVg-->
+<!--property:note_deleted=k1AGbKRwJeyCTwauxAVGfw-->
+<!--property:note_deleted=sFhLTD9DkYVyld9qYYgOhg-->
+<!--property:note_deleted=wmq5xIHEUxNTegB4A8vssA-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -99,423 +107,107 @@ class PictureData{<BR>
 <!--property:hash_html=-->
 <DD>
 <DL>
+<DT><A name="WLmUfa6XwXKJDEP08miLaw"></A>Verworfen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454854608-->
+<!--property:date_modified=1454855903-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="DDBt7emPY4PampZ8VgWtJA"></A>Start / Stop Buttons bei Preview</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1430467750-->
+<!--property:date_modified=1454854620-->
+<!--property:hash=da16eb0d359d2ad700e78dc9ed5bd27117df00fe-->
+<!--property:hash_html=da16eb0d359d2ad700e78dc9ed5bd27117df00fe-->
+<DD>
+Start wird bei Preview ausgegraut. Man sollte aber start stets aufrufen können.
+</DD>
+<DT><A name="R0Fdv146cZrxFLF0txHsWg"></A>Updatesteps im stereo view verwenden</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429732517-->
+<!--property:date_modified=1454854649-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="JRPehApqt65qGljxWysjQQ"></A>neues Tab</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431034087-->
+<!--property:date_modified=1454855793-->
+<!--property:hash=a78d0dedb336041f3db0d0de81ca044a64886745-->
+<!--property:hash_html=a78d0dedb336041f3db0d0de81ca044a64886745-->
+<DD>
+mit den zuletzt geänderten Parametern 
+</DD>
+<DT><A name="ZKAhWtLIhW0oaunHan8jIw"></A>Zu jedem Tab automatisiert </DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431037113-->
+<!--property:date_modified=1454855812-->
+<!--property:hash=915126d2e59e91d68374d0f95bfa1799eba434fa-->
+<!--property:hash_html=17075f0a72ebc19eb78d44fbe79d0d290806134f-->
+<DD>
+... eine Liste aus ParameterEntries anlegen. Diese wird zusammen mit den aktuellen Parametereinstellungen in Höhe jedes Eintrages eingeblendet. <BR>
+<BR>
+Also wenn z.B. von Navigate nach Data gewechselt wird, dann wird in die alte Parametersicht  (zusätzlich mit speziellen angepassten Slidern .<BR>
+<BR>
+Wenn von Parametersicht nach Navigate gewechselt wird, dann werden dort die Parameter eingeblenden, die bei der Navigation Verwendung finden. 
+</DD>
+<DT><A name="x5NnTrVfHyzVaCxAtPexnA"></A>HistoryWatcher</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431462458-->
+<!--property:date_modified=1454856103-->
+<!--property:hash=bc5a85717b2f5b540089af8dd31a6dcb2bf8c772-->
+<!--property:hash_html=14e55fa327541125a8a682586c9f215454556b8e-->
+<DD>
+Eine Klasse, die den zentralen Zeitgeber überwacht.<BR>
+<BR>
+// Singleton<BR>
+HistoryWatcher {<BR>
+    long time=-1;<BR>
+<BR>
+// Is called, if a Parameter changed.<BR>
+    updateParameter()<BR>
+{<BR>
+<BR>
+}<BR>
+}
+</DD>
+<DT><A name="HXXzaVkPN82UvNTeoWo3Jg"></A>In den ersten beiden Läufen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431465061-->
+<!--property:date_modified=1454856121-->
+<!--property:hash=85b413f9ea61c0317fe9ca0cb8d251721b8f2cf5-->
+<!--property:hash_html=26e521e64f731482b0ce402543a850a93db8b320-->
+<DD>
+der Berechung der Tiefeninformation weglassen.<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
 <DT><A name="bkRC1eb3xPHoVQZYGxp4dA"></A>erledigt</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1432975260-->
 <!--property:date_modified=1432975265-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
 <DL>
-<DT><A name="VUU72xifEZKduBft6mKYpg"></A>Threading PixelArt</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1426926891-->
-<!--property:date_modified=1426927952-->
-<!--property:hash=0284a412069d9ed15f50fe5f8211e43dd2ae2366-->
-<!--property:hash_html=2d5ac8351e9a1ae235bf9cc3466d3c49a75f5ef6-->
-<DD>
-Idee:<BR>
-Die Aufbereitung der Tiefendaten blockiert zur Zeit die Programmabarbeitung. <BR>
-Diese ist in einen gesonderten Thread auszulagern.<BR>
-<BR>
-
-</DD>
-<DT><A name="Faf8xbiaig7PuyxFnowbNA"></A>Automatisches Starten der Vorschau</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1426927957-->
-<!--property:date_modified=1426928065-->
-<!--property:hash=c861a8cf2b0b4a863debe60629e2f4f13c84d59e-->
-<!--property:hash_html=c861a8cf2b0b4a863debe60629e2f4f13c84d59e-->
-<DD>
-Wenn nichts tu tun ist, soll die Vorschau im Hintergrund aktualisiert werden. 
-</DD>
-<DT><A name="FfVNI8n0ZGX4MdSlawmshQ"></A>Weiterechnen während Vorschau</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429176102-->
-<!--property:date_modified=1429176123-->
-<!--property:hash=-->
-<!--property:hash_html=-->
+<DT><A name="xKYZtJ50YkC8JIeoM5SUnQ"></A>2015</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454854359-->
+<!--property:date_modified=1454854502-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
 <DL>
-<DT><A name="pdZaQwJc2Tf3Kd0j1350dA"></A>Teilaufgaben</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429169055-->
-<!--property:date_modified=1429169063-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DD>
-<DL>
-<DT><A name="J5wBc08xE6PZqJBRofplew"></A>Erkennen, ob Gesamtberechnung abgeschlossen ist</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429176453-->
-<!--property:date_modified=1429176475-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DT><A name="JYFHJXNboBrcLdG9XyJHpQ"></A>Eingaben filtern</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429169075-->
-<!--property:date_modified=1429169182-->
-<!--property:hash=c57ac3d59255f851a22291649d1a3c9a914d03a8-->
-<!--property:hash_html=1f8fe21e8fe8a03a9923f86baa58afb21fc38f70-->
-<DD>
-Problem: die Grafikberechnung läuft im Hintergrund und der Filter funktioniert mit einer globalen Instanz.<BR>
-<BR>
-
-</DD>
-<DT><A name="BX3z4iiVqDsMCQf2GTDFlw"></A>Schneller Renderer während Vorschau</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429024381-->
-<!--property:date_modified=1429026347-->
-<!--property:hash=fde9fb535a2798279a10af37a8a5435bf434dd46-->
-<!--property:hash_html=7ca72620eb7556405a12db00a56a6cbd3517e9c5-->
-<DD>
-In den Zwischenschritten wird eine schnell darstellbare RGB-Plane gezeichnet. Problem: wie wird erkannt, wenn die letzte Berechnung fertig ist, um das Bild in guter Qualität zu erzeugen.<BR>
-
-</DD>
-<DT><A name="xsBVleMXSrtnR5rAgN11vg"></A>Weiterechnen während Vorschau</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429179534-->
-<!--property:date_modified=1429179536-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DT><A name="gtm5VCyiE7Zptfn1JYSpNQ"></A>Exception in Dictionary update</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429182780-->
-<!--property:date_modified=1429182820-->
-<!--property:hash=beffd234848779cae1c55e78f537c5b3a22f1f56-->
-<!--property:hash_html=d2cb20c3370c758c9d26c1ed6eb780ad407a49d2-->
-<DD>
-{System.InvalidOperationException: Collection was modified; enumeration operation may not execute.<BR>
-   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)<BR>
-   at System.Collections.Generic.Dictionary`2.Enumerator.MoveNext()<BR>
-   at Fractrace.Basic.ParameterDictFilter.Apply()<BR>
-   at Fractrace.Form1.DrawPicture()}<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="PqKGUpM6HarWPvyiyLVXog"></A>Problem in DrawPicture()</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429183596-->
-<!--property:date_modified=1429183700-->
-<!--property:hash=b8904569398e0b4cb81e4170b88ae04beb3fa3d9-->
-<!--property:hash_html=42b78a3770f0e2082e859c816d03208b45158722-->
-<DD>
-Tritt auf, bei:<BR>
-inPaint == false &amp;&amp; currentPicturArt != null<BR>
-// Hier gilt auch:<BR>
-currentPicturArt.paintHaseEnded=false<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="mto97TbrxkEPlu0zSbqERg"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429176483-->
-<!--property:date_modified=1429176486-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DD>
-<DL>
-<DT><A name="hPKSQwzediDynSJpbHsBkg"></A>Aufrufreihenfolge</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429176850-->
-<!--property:date_modified=1429180690-->
-<!--property:hash=66e458eac0b8b9bbd64e9e27d166215237d73c99-->
-<!--property:hash_html=478d4fd58f497e53892df2da455e3ce51d2ed4fa-->
-<DD>
-// Start der Einzelschrittberechnung<BR>
-Form1.ComputeOneStep()<BR>
-<BR>
-// Felder, die über den Updatezustand Auskunft geben.<BR>
-<BR>
-// Aktueller Wert:<BR>
-Form1.mUpdateCount<BR>
-<BR>
-// Maximaler Wert:<BR>
-ParameterDict.Exemplar.GetDouble(&quot;View.UpdateSteps&quot;)<BR>
-<BR>
-<BR>
-// Hier wird der Bitmap erzeugt<BR>
-Form1.DrawPicture()<BR>
-<BR>
-<BR>
-<BR>
-// die Aktivierung der Berechnung des nächsten Steps erfolgt:<BR>
-Iterate.Start()<BR>
-<BR>
-<BR>
-<BR>
-// Problem:<BR>
-In Form1.DrawPicture() erfolgt die Berechnung des Bitmaps<BR>
-Erst danach, durch Aufruf von drawEnds(); wird (irgendwie) das Update angestartet.<BR>
-
-</DD>
-</DL>
-</DD>
-</DL>
-</DD>
-<DT><A name="ErC4FnOdrBu7CZyHdPhAyg"></A>Letzten Frame in Animation verwenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429176161-->
-<!--property:date_modified=1429176194-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DT><A name="TN8oxrXLW492G8eQExyxLA"></A>History wird nicht mehr gespeichert</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429195491-->
-<!--property:date_modified=1429195542-->
-<!--property:hash=ea5a23cb5ff598d4e779e9d26a0d61ceaaacb21f-->
-<!--property:hash_html=ea5a23cb5ff598d4e779e9d26a0d61ceaaacb21f-->
-<DD>
-Wahrscheinlich, weil das Speichern der Bilder abgeklemmt wurde.
-</DD>
-<DT><A name="ffMz3U6xkWkhd4uukDxn6A"></A>Fortschrittsbalken während der Animation</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429195553-->
-<!--property:date_modified=1429256893-->
-<!--property:hash=352d500fbc1935e689a0a60d6d38bd967b3b9edb-->
-<!--property:hash_html=352d500fbc1935e689a0a60d6d38bd967b3b9edb-->
-<DD>
-wird jetzt zweimal (statt einmal) gezeichnet. Aber das ist akzeptabel. Nur das Control wird nicht aktualisiert. Die Werte sind da.
-</DD>
-<DT><A name="Dl71zj9Fqx92PzMWystmAQ"></A>Test if (oldParameterHashWithoutPictureArt == tempParameterHash)</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429196550-->
-<!--property:date_modified=1429198361-->
-<!--property:hash=18de3c12ac3cdf1241c8d97fe18d225cd5a57d0d-->
-<!--property:hash_html=ea74ef17ec5e5b6a0e0334928e970eb1d4e018d6-->
-<DD>
-Funktioniert nicht in Animation<BR>
-<BR>
-&quot;f259d5112a5c3ed3f11e9af902ad7ad3<span style="color:#0000ff">4ef670f648fabce3098712b0311f50b6</span>57e5638ebf350c08a32f722a6a9e0e8992fd346424ac08b986ad529414318f9dd134c39b6359d1ab4397db9d4d97757457d1a340673ef601cea8712de922ae328f9ec924aa6cf24b0142849239e730052ac9d7606895e8a51a102db7ca7c34cb6fc786ffe207bde13e9028f93fb985d8dc88dae08375749cf9ac3ea13606348c0baa3b403136a738845942a0f9b51b79784e13b5a42223b56e5678081b10277ab483657ff2d845f0038c7056e75c8c7d&quot;<BR>
-&quot;f259d5112a5c3ed3f11e9af902ad7ad3<span style="color:#0000ff">73fb331af9a15fde50c2a73cb054f7e4</span>57e5638ebf350c08a32f722a6a9e0e8992fd346424ac08b986ad529414318f9dd134c39b6359d1ab4397db9d4d97757457d1a340673ef601cea8712de922ae328f9ec924aa6cf24b0142849239e730052ac9d7606895e8a51a102db7ca7c34cb6fc786ffe207bde13e9028f93fb985d8dc88dae08375749cf9ac3ea13606348c0baa3b403136a738845942a0f9b51b79784e13b5a42223b56e5678081b10277ab483657ff2d845f0038c7056e75c8c7d&quot;<BR>
-<BR>
-lag am zuvor aktivierten Preview.
-</DD>
-<DT><A name="ZMvtvPt0ukWKX0si7dyQSw"></A>Bei der Animation werden zuviel Zwischenschritte</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429198538-->
-<!--property:date_modified=1429198581-->
-<!--property:hash=b822138ad6f598a45187a8d87afdeb345ab4c531-->
-<!--property:hash_html=6e3d61a5d710dd0982f641f8a25330001f9f4b0e-->
-<DD>
-... berechnet. <BR>
-<BR>
-
-</DD>
-<DT><A name="ky5TS75B6S2KuABvct6VTA"></A>View.Raster ausblenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429257033-->
-<!--property:date_modified=1429282114-->
-<!--property:hash=c7dba9057137dc978cd0f0b7b5124a08c999f616-->
-<!--property:hash_html=dacbe281cd0da56be17e367e75e30430b9e38c7d-->
-<DD>
-Solle ab jetzt immer auf 2 stehen.<BR>
-<BR>
-// Muss noch im View angewendet werden:<BR>
-<BR>
-            ParameterDict.Exemplar[&quot;View.Raster&quot;] = &quot;2&quot;;<BR>
-            ParameterDict.Exemplar[&quot;View.Perspective.PARAMETERINFO.VIEW.Invisible&quot;] = &quot;1&quot;;<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="FxEuxSfVoPhExbnfXYTRbw"></A>Bool Werte auch verwenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429257069-->
-<!--property:date_modified=1429257680-->
-<!--property:hash=eeba028b5af739b597da1d6dad56b9a5c181037e-->
-<!--property:hash_html=fa090205598bfcac0a6a373a8bd93b1386b09fed-->
-<DD>
-Dazu wird ein Untereintag:<BR>
-PARAMETERINFO.Datatype=&quot;Bool&quot; <BR>
-verwendet.<BR>
-<BR>
-<BR>
-<DL>
-<DT><A name="IsmyzbDEBaWsvswZKjkETg"></A>Einzelaufgaben</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429257669-->
-<!--property:date_modified=1429277599-->
-<!--property:hash=3f3d2d8955322f325af6db2238355fa07007ebd9-->
-<!--property:hash_html=9e71fa4165cdca2b4fdfece082fa278a659f41de-->
-<DD>
-<BR>
-<BR>
-<BR>
-<BR>
-<DL>
-<DT><A name="ffVog3boaRAqnYFfwIqfOw"></A>Die Parameter anpassen.</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429277603-->
-<!--property:date_modified=1429277896-->
-<!--property:hash=3e33bbfe049704d9262568f233a1dd24f9dc7986-->
-<!--property:hash_html=f8e2497e62df9813a227a90363f251ded139e6ec-->
-<DD>
-Als Bsp: Renderer.Normalize<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="tdyKffjMyJdvmgzQvysMRQ"></A>Diese Untereinträge nicht anzeigen.</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429277580-->
-<!--property:date_modified=1429278454-->
-<!--property:hash=0fd772ac739ab9e627a532364d3797525d23b9bc-->
-<!--property:hash_html=60387a602aa9486a2adedb30d878e03407671339-->
-<DD>
-Im Aufbau von treeView1<BR>
-<BR>
-
-</DD>
-<DT><A name="PJSTGxNSDa5yYLESEMupyQ"></A>Ein DataViewBoolElement verwenden.</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429277593-->
-<!--property:date_modified=1429277594-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-</DL>
-</DD>
-</DL>
-</DD>
-<DT><A name="ffD6diZJ9LstmMcbXhLU4Q"></A>Zwischenüberschriften bei Parameters</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429465736-->
-<!--property:date_modified=1429465762-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DD>
-<DL>
-<DT><A name="Avqb1SdWo2Z7ANJrviCgiQ"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429470762-->
-<!--property:date_modified=1429470836-->
-<!--property:hash=064495fa1759c4a6459bf73c86bb3d996d1e2cb7-->
-<!--property:hash_html=5db438a035b234b6b71e90e094199cf305dedf1f-->
-<DD>
-Anpassung von: DataViewControlPage.Create();<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="x5rct5blGNdhcxn14FowfA"></A>Knoten ausblenden, deren Parameter im Hauptknoten editiert werden können</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429730296-->
-<!--property:date_modified=1429730424-->
-<!--property:hash=46071b8747f73a53d9cc952e3254cfd2c45b21cf-->
-<!--property:hash_html=351f45aa2a027c4c66a5ecd620eceb34caa8a27c-->
-<DD>
-Betrifft: Formula.Static<BR>
-Border.Min Border.Max<BR>
-Transformation.*
-</DD>
-<DT><A name="DnKxK6hTfXSn0lW2gSfEJQ"></A>Bei Animationen werden nur die schnellen Animationsparameter verwendet</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1430718664-->
-<!--property:date_modified=1430718695-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DD>
-<DL>
-<DT><A name="02PKzD2JlIfRASwbLu7DGA"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1430768777-->
-<!--property:date_modified=1430770021-->
-<!--property:hash=58cb6ce9731c6c6a8bd20dd4d3e2a59533dc3dc0-->
-<!--property:hash_html=6be9eb1350bd96ba2725f313604474637c5f5345-->
-<DD>
-Ob die Nachbearbeitung noch läuft, erkennt man an:<BR>
-  
-</DD>
-<DT><A name="vmyxi6D1GVSFleFTmXp59Q"></A>Analyse</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1430769829-->
-<!--property:date_modified=1430769975-->
-<!--property:hash=b92136328c1278e8180f645835ea699c408e4902-->
-<!--property:hash_html=9b3c60c82f3d0ed62ccf7c23852a14dce15e099c-->
-<DD>
-Das Problem ist, dass die Nachbearbeitung länger dauert als die Bildberechnung und deshalb angehalten wird. Lösung: solange die aktuelle Berechnung (des nächsten Frames) verbessern, bis die  Nachbearbeitung abgeschlossen ist.<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="O7KnIky1M8dButCRiW4cUA"></A>Automatische Animationserstellung</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1430868633-->
-<!--property:date_modified=1430868856-->
-<!--property:hash=f9fd6731ff3d89f214990aff5c84ef1edea7868e-->
-<!--property:hash_html=29be083231812813e93c7e9a9f05aa16752d14d1-->
-<DD>
-Historyeinträge werden automatisch in die Animation abgelegt. Steps ist der ebenfalls der Parameter Animation.Steps<BR>
-<BR>
-<DL>
-<DT><A name="E1smUsqQcMXoQTdmyRuqnA"></A>Umsetzung</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431166285-->
-<!--property:date_modified=1431169440-->
-<!--property:hash=e7d073b83cb4bb4f138c5ea21d4df0cc03419b20-->
-<!--property:hash_html=fb86e08b1871e57d1346c6210cb3fc059ac8a01c-->
-<DD>
-Neuer Eintrag im History Control.<BR>
-<BR>
-Beziehung zu: cbAutomaticSaveAnimation<BR>
-<BR>
-Abfrage von Parameterinput.MainParameterInput.AutomaticSaveInAnimation<BR>
-<BR>
-Ereignis: Wenn im Preview das letzte Frame gezeichnet wurde.<BR>
-<BR>
-AnimationControl.MainAnimationControl.AddCurrentHistoryEntry()<BR>
-<BR>
-<BR>
-Wie testet man, ob der letzte Schritt der Animation durchgeührt wird?<BR>
-<BR>
-
-</DD>
-<DT><A name="xTQQHxqs0pAsM02wVIDXpg"></A>Teilaufgaben</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431169363-->
-<!--property:date_modified=1431169397-->
-<!--property:hash=013da978a44a7e542c11b43fa3f29ddd87e5843d-->
-<!--property:hash_html=86a5b8bb2bc4115aac2f181f138bc6d017365a31-->
-<DD>
-History Control is zu aktualisieren.<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="f9yIhSU4Q71XqOgDay5EZw"></A>Bildanordnung in Animation preview</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1431031086-->
-<!--property:date_modified=1431031277-->
-<!--property:hash=246c5704faba200592b5c3944a2ad15cb5e46803-->
-<!--property:hash_html=d3c47fc23198af7c3522b981675ee464a5e28375-->
-<DD>
-Schnelle Lösung: Umbruch der Animationsanordnung nach einer Breite von 1000.<BR>
-<BR>
-Wenn mehr als die zur Verfügung stehenden Zwischenschritte <DL>
-<DT><A name="FYyVAeExK83voN5trn3uFQ"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431204164-->
-<!--property:date_modified=1431204191-->
-<!--property:hash=ea7b3c39cf3dafb97e0607763f842675150541be-->
-<!--property:hash_html=14a2411e1b001fa8780dea290ee5c203287d6198-->
-<DD>
-Berechnung startet in:<BR>
- RenderPreview();<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
 <DT><A name="fei39QOSDVHwAyp01Kxzxw"></A>Kommentar bei Animation </DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431031332-->
-<!--property:date_modified=1431032547-->
+<!--property:date_modified=1454854446-->
 <!--property:hash=1bb9605fda75a22c342fe55323bfa20d9c790101-->
 <!--property:hash_html=9fb179b0bff9a9bd7098b53f2edd18b203501cd7-->
 <DD>
@@ -525,7 +217,7 @@ als Kommentar
 <DT><A name="sC4xGe453KxQHvNPKA3TPw"></A>Bei nur einer Überschrift</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431032596-->
-<!--property:date_modified=1431032667-->
+<!--property:date_modified=1454854443-->
 <!--property:hash=c39e6c5b218812b10c528d12ba8c69bc4cd04e93-->
 <!--property:hash_html=c39e6c5b218812b10c528d12ba8c69bc4cd04e93-->
 <DD>
@@ -534,7 +226,7 @@ wie z.B. Formula.Static die Überschrift weglassen.
 <DT><A name="KaGcPHl56MmymuorlueT3g"></A>Bei Animationen die Previevdartellung erweitern</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431035779-->
-<!--property:date_modified=1431036007-->
+<!--property:date_modified=1454854440-->
 <!--property:hash=c547b22a6fa0b6281d46e8f4dca54e610215fe91-->
 <!--property:hash_html=229e4736ad95a50e778a6da6a2d6db58aeb0e201-->
 <DD>
@@ -546,7 +238,7 @@ Die Darstellung bleibt vertikal, nur der darunterliegende Frame wird auf die ber
 <DT><A name="zvxbNj4548a2sWxSqybYgw"></A>Overflow Error</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431273955-->
-<!--property:date_modified=1431292886-->
+<!--property:date_modified=1454854436-->
 <!--property:hash=7333fb06d36b1ebdec5e8733104d0919508f9902-->
 <!--property:hash_html=35f80fe0d544d3998834070fb965621aa7bed11c-->
 <DD>
@@ -563,7 +255,7 @@ Tritt stets am Ende des Animationsdurchlaufes auf.
 <DT><A name="VXmvODWa8VGrYxdhgaFCDQ"></A>Bezier Kurven</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431370213-->
-<!--property:date_modified=1431370265-->
+<!--property:date_modified=1454854433-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -752,74 +444,427 @@ namespace Fractrace.Animation<BR>
 </DD>
 </DL>
 </DD>
-</DL>
-</DD>
-<DT><A name="DkxyyDDUh14XS5ecLMyhUg"></A>Rendern nicht über Form1.PublicForm</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429025197-->
-<!--property:date_modified=1429025317-->
-<!--property:hash=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
-<!--property:hash_html=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
-<DD>
-Das wird z.B. während der Animation gemacht. Hier ist es evtl besser, das Zeichnen vom Formular zu trennen.
-</DD>
-<DT><A name="hcEUh9QUigjLZCYm9GHDIg"></A>weitere DataViewElemente</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1429277128-->
-<!--property:date_modified=1429730130-->
-<!--property:hash=768a39d03f7a47583ba236e9ef546ab0a864c3ff-->
-<!--property:hash_html=5ffa14c0b237b7789173120ad1e77d8a5339618f-->
-<DD>
-Auswahlbox für Formeltyp (Mandel, Julia, Spezialformeln)<BR>
-<BR>
-Int und Float, um auf Falscheingaben reagieren zu können.<BR>
-<BR>
-<BR>
-<BR>
-<DL>
-<DT><A name="JreCRwtGtK5NjnyZwWVqwA"></A>Description</DT>
+<DT><A name="f9yIhSU4Q71XqOgDay5EZw"></A>Bildanordnung in Animation preview</DT>
 <!--property:icon_internal=bullet_green-->
-<!--property:date_created=1429284647-->
-<!--property:date_modified=1429730145-->
-<!--property:hash=aa1f4315ee5cc012d6b4a070b26710027db68201-->
-<!--property:hash_html=2d12d93dad3e4487a29c9eade7c1ac6c86f9e3b6-->
+<!--property:date_created=1431031086-->
+<!--property:date_modified=1454854454-->
+<!--property:hash=246c5704faba200592b5c3944a2ad15cb5e46803-->
+<!--property:hash_html=d3c47fc23198af7c3522b981675ee464a5e28375-->
 <DD>
-Description, die bei Hover über dem Parameternamen angezeigt wird.<BR>
+Schnelle Lösung: Umbruch der Animationsanordnung nach einer Breite von 1000.<BR>
 <BR>
-Bsp:<BR>
-<BR>
-            // Set to 1 to enable sharp shadow rendering (warning: time consuming) <BR>
-            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow&quot;] = &quot;0&quot;;<BR>
-            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow.PARAMETERINFO.Datatype&quot;] = &quot;Bool&quot;;<BR>
-            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow.PARAMETERINFO.Description&quot;] = &quot; Enable sharp shadow rendering (warning: time consuming) &quot;;<BR>
-<BR>
+Wenn mehr als die zur Verfügung stehenden Zwischenschritte <DL>
+<DT><A name="FYyVAeExK83voN5trn3uFQ"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431204164-->
+<!--property:date_modified=1431204191-->
+<!--property:hash=ea7b3c39cf3dafb97e0607763f842675150541be-->
+<!--property:hash_html=14a2411e1b001fa8780dea290ee5c203287d6198-->
+<DD>
+Berechnung startet in:<BR>
+ RenderPreview();<BR>
 <BR>
 
 </DD>
 </DL>
 </DD>
+<DT><A name="Faf8xbiaig7PuyxFnowbNA"></A>Automatisches Starten der Vorschau</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1426927957-->
+<!--property:date_modified=1454854510-->
+<!--property:hash=c861a8cf2b0b4a863debe60629e2f4f13c84d59e-->
+<!--property:hash_html=c861a8cf2b0b4a863debe60629e2f4f13c84d59e-->
+<DD>
+Wenn nichts tu tun ist, soll die Vorschau im Hintergrund aktualisiert werden. <DL>
+<DT><A name="VUU72xifEZKduBft6mKYpg"></A>Threading PixelArt</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1426926891-->
+<!--property:date_modified=1454854494-->
+<!--property:hash=0284a412069d9ed15f50fe5f8211e43dd2ae2366-->
+<!--property:hash_html=2d5ac8351e9a1ae235bf9cc3466d3c49a75f5ef6-->
+<DD>
+Idee:<BR>
+Die Aufbereitung der Tiefendaten blockiert zur Zeit die Programmabarbeitung. <BR>
+Diese ist in einen gesonderten Thread auszulagern.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="FfVNI8n0ZGX4MdSlawmshQ"></A>Weiterechnen während Vorschau</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429176102-->
+<!--property:date_modified=1454854511-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="pdZaQwJc2Tf3Kd0j1350dA"></A>Teilaufgaben</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429169055-->
+<!--property:date_modified=1429169063-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="J5wBc08xE6PZqJBRofplew"></A>Erkennen, ob Gesamtberechnung abgeschlossen ist</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429176453-->
+<!--property:date_modified=1429176475-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="JYFHJXNboBrcLdG9XyJHpQ"></A>Eingaben filtern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429169075-->
+<!--property:date_modified=1429169182-->
+<!--property:hash=c57ac3d59255f851a22291649d1a3c9a914d03a8-->
+<!--property:hash_html=1f8fe21e8fe8a03a9923f86baa58afb21fc38f70-->
+<DD>
+Problem: die Grafikberechnung läuft im Hintergrund und der Filter funktioniert mit einer globalen Instanz.<BR>
+<BR>
+
+</DD>
+<DT><A name="BX3z4iiVqDsMCQf2GTDFlw"></A>Schneller Renderer während Vorschau</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429024381-->
+<!--property:date_modified=1429026347-->
+<!--property:hash=fde9fb535a2798279a10af37a8a5435bf434dd46-->
+<!--property:hash_html=7ca72620eb7556405a12db00a56a6cbd3517e9c5-->
+<DD>
+In den Zwischenschritten wird eine schnell darstellbare RGB-Plane gezeichnet. Problem: wie wird erkannt, wenn die letzte Berechnung fertig ist, um das Bild in guter Qualität zu erzeugen.<BR>
+
+</DD>
+<DT><A name="xsBVleMXSrtnR5rAgN11vg"></A>Weiterechnen während Vorschau</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429179534-->
+<!--property:date_modified=1429179536-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="gtm5VCyiE7Zptfn1JYSpNQ"></A>Exception in Dictionary update</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429182780-->
+<!--property:date_modified=1429182820-->
+<!--property:hash=beffd234848779cae1c55e78f537c5b3a22f1f56-->
+<!--property:hash_html=d2cb20c3370c758c9d26c1ed6eb780ad407a49d2-->
+<DD>
+{System.InvalidOperationException: Collection was modified; enumeration operation may not execute.<BR>
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)<BR>
+   at System.Collections.Generic.Dictionary`2.Enumerator.MoveNext()<BR>
+   at Fractrace.Basic.ParameterDictFilter.Apply()<BR>
+   at Fractrace.Form1.DrawPicture()}<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="PqKGUpM6HarWPvyiyLVXog"></A>Problem in DrawPicture()</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429183596-->
+<!--property:date_modified=1429183700-->
+<!--property:hash=b8904569398e0b4cb81e4170b88ae04beb3fa3d9-->
+<!--property:hash_html=42b78a3770f0e2082e859c816d03208b45158722-->
+<DD>
+Tritt auf, bei:<BR>
+inPaint == false &amp;&amp; currentPicturArt != null<BR>
+// Hier gilt auch:<BR>
+currentPicturArt.paintHaseEnded=false<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="mto97TbrxkEPlu0zSbqERg"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429176483-->
+<!--property:date_modified=1429176486-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="hPKSQwzediDynSJpbHsBkg"></A>Aufrufreihenfolge</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429176850-->
+<!--property:date_modified=1429180690-->
+<!--property:hash=66e458eac0b8b9bbd64e9e27d166215237d73c99-->
+<!--property:hash_html=478d4fd58f497e53892df2da455e3ce51d2ed4fa-->
+<DD>
+// Start der Einzelschrittberechnung<BR>
+Form1.ComputeOneStep()<BR>
+<BR>
+// Felder, die über den Updatezustand Auskunft geben.<BR>
+<BR>
+// Aktueller Wert:<BR>
+Form1.mUpdateCount<BR>
+<BR>
+// Maximaler Wert:<BR>
+ParameterDict.Exemplar.GetDouble(&quot;View.UpdateSteps&quot;)<BR>
+<BR>
+<BR>
+// Hier wird der Bitmap erzeugt<BR>
+Form1.DrawPicture()<BR>
+<BR>
+<BR>
+<BR>
+// die Aktivierung der Berechnung des nächsten Steps erfolgt:<BR>
+Iterate.Start()<BR>
+<BR>
+<BR>
+<BR>
+// Problem:<BR>
+In Form1.DrawPicture() erfolgt die Berechnung des Bitmaps<BR>
+Erst danach, durch Aufruf von drawEnds(); wird (irgendwie) das Update angestartet.<BR>
+
+</DD>
+</DL>
+</DD>
+</DL>
+</DD>
+<DT><A name="ErC4FnOdrBu7CZyHdPhAyg"></A>Letzten Frame in Animation verwenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429176161-->
+<!--property:date_modified=1454854512-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="TN8oxrXLW492G8eQExyxLA"></A>History wird nicht mehr gespeichert</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429195491-->
+<!--property:date_modified=1454854513-->
+<!--property:hash=ea5a23cb5ff598d4e779e9d26a0d61ceaaacb21f-->
+<!--property:hash_html=ea5a23cb5ff598d4e779e9d26a0d61ceaaacb21f-->
+<DD>
+Wahrscheinlich, weil das Speichern der Bilder abgeklemmt wurde.
+</DD>
+<DT><A name="ffMz3U6xkWkhd4uukDxn6A"></A>Fortschrittsbalken während der Animation</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429195553-->
+<!--property:date_modified=1454854514-->
+<!--property:hash=352d500fbc1935e689a0a60d6d38bd967b3b9edb-->
+<!--property:hash_html=352d500fbc1935e689a0a60d6d38bd967b3b9edb-->
+<DD>
+wird jetzt zweimal (statt einmal) gezeichnet. Aber das ist akzeptabel. Nur das Control wird nicht aktualisiert. Die Werte sind da.
+</DD>
+<DT><A name="Dl71zj9Fqx92PzMWystmAQ"></A>Test if (oldParameterHashWithoutPictureArt == tempParameterHash)</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429196550-->
+<!--property:date_modified=1454854514-->
+<!--property:hash=18de3c12ac3cdf1241c8d97fe18d225cd5a57d0d-->
+<!--property:hash_html=ea74ef17ec5e5b6a0e0334928e970eb1d4e018d6-->
+<DD>
+Funktioniert nicht in Animation<BR>
+<BR>
+&quot;f259d5112a5c3ed3f11e9af902ad7ad3<span style="color:#0000ff">4ef670f648fabce3098712b0311f50b6</span>57e5638ebf350c08a32f722a6a9e0e8992fd346424ac08b986ad529414318f9dd134c39b6359d1ab4397db9d4d97757457d1a340673ef601cea8712de922ae328f9ec924aa6cf24b0142849239e730052ac9d7606895e8a51a102db7ca7c34cb6fc786ffe207bde13e9028f93fb985d8dc88dae08375749cf9ac3ea13606348c0baa3b403136a738845942a0f9b51b79784e13b5a42223b56e5678081b10277ab483657ff2d845f0038c7056e75c8c7d&quot;<BR>
+&quot;f259d5112a5c3ed3f11e9af902ad7ad3<span style="color:#0000ff">73fb331af9a15fde50c2a73cb054f7e4</span>57e5638ebf350c08a32f722a6a9e0e8992fd346424ac08b986ad529414318f9dd134c39b6359d1ab4397db9d4d97757457d1a340673ef601cea8712de922ae328f9ec924aa6cf24b0142849239e730052ac9d7606895e8a51a102db7ca7c34cb6fc786ffe207bde13e9028f93fb985d8dc88dae08375749cf9ac3ea13606348c0baa3b403136a738845942a0f9b51b79784e13b5a42223b56e5678081b10277ab483657ff2d845f0038c7056e75c8c7d&quot;<BR>
+<BR>
+lag am zuvor aktivierten Preview.
+</DD>
+<DT><A name="ZMvtvPt0ukWKX0si7dyQSw"></A>Bei der Animation werden zuviel Zwischenschritte</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429198538-->
+<!--property:date_modified=1454854516-->
+<!--property:hash=b822138ad6f598a45187a8d87afdeb345ab4c531-->
+<!--property:hash_html=6e3d61a5d710dd0982f641f8a25330001f9f4b0e-->
+<DD>
+... berechnet. <BR>
+<BR>
+
+</DD>
+<DT><A name="ky5TS75B6S2KuABvct6VTA"></A>View.Raster ausblenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429257033-->
+<!--property:date_modified=1454854517-->
+<!--property:hash=c7dba9057137dc978cd0f0b7b5124a08c999f616-->
+<!--property:hash_html=dacbe281cd0da56be17e367e75e30430b9e38c7d-->
+<DD>
+Solle ab jetzt immer auf 2 stehen.<BR>
+<BR>
+// Muss noch im View angewendet werden:<BR>
+<BR>
+            ParameterDict.Exemplar[&quot;View.Raster&quot;] = &quot;2&quot;;<BR>
+            ParameterDict.Exemplar[&quot;View.Perspective.PARAMETERINFO.VIEW.Invisible&quot;] = &quot;1&quot;;<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="FxEuxSfVoPhExbnfXYTRbw"></A>Bool Werte auch verwenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429257069-->
+<!--property:date_modified=1454854517-->
+<!--property:hash=eeba028b5af739b597da1d6dad56b9a5c181037e-->
+<!--property:hash_html=fa090205598bfcac0a6a373a8bd93b1386b09fed-->
+<DD>
+Dazu wird ein Untereintag:<BR>
+PARAMETERINFO.Datatype=&quot;Bool&quot; <BR>
+verwendet.<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="IsmyzbDEBaWsvswZKjkETg"></A>Einzelaufgaben</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429257669-->
+<!--property:date_modified=1429277599-->
+<!--property:hash=3f3d2d8955322f325af6db2238355fa07007ebd9-->
+<!--property:hash_html=9e71fa4165cdca2b4fdfece082fa278a659f41de-->
+<DD>
+<BR>
+<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="ffVog3boaRAqnYFfwIqfOw"></A>Die Parameter anpassen.</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429277603-->
+<!--property:date_modified=1429277896-->
+<!--property:hash=3e33bbfe049704d9262568f233a1dd24f9dc7986-->
+<!--property:hash_html=f8e2497e62df9813a227a90363f251ded139e6ec-->
+<DD>
+Als Bsp: Renderer.Normalize<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="tdyKffjMyJdvmgzQvysMRQ"></A>Diese Untereinträge nicht anzeigen.</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429277580-->
+<!--property:date_modified=1429278454-->
+<!--property:hash=0fd772ac739ab9e627a532364d3797525d23b9bc-->
+<!--property:hash_html=60387a602aa9486a2adedb30d878e03407671339-->
+<DD>
+Im Aufbau von treeView1<BR>
+<BR>
+
+</DD>
+<DT><A name="PJSTGxNSDa5yYLESEMupyQ"></A>Ein DataViewBoolElement verwenden.</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429277593-->
+<!--property:date_modified=1429277594-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+</DL>
+</DD>
+</DL>
+</DD>
+<DT><A name="ffD6diZJ9LstmMcbXhLU4Q"></A>Zwischenüberschriften bei Parameters</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429465736-->
+<!--property:date_modified=1454854518-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="Avqb1SdWo2Z7ANJrviCgiQ"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429470762-->
+<!--property:date_modified=1429470836-->
+<!--property:hash=064495fa1759c4a6459bf73c86bb3d996d1e2cb7-->
+<!--property:hash_html=5db438a035b234b6b71e90e094199cf305dedf1f-->
+<DD>
+Anpassung von: DataViewControlPage.Create();<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="x5rct5blGNdhcxn14FowfA"></A>Knoten ausblenden, deren Parameter im Hauptknoten editiert werden können</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429730296-->
+<!--property:date_modified=1454854519-->
+<!--property:hash=46071b8747f73a53d9cc952e3254cfd2c45b21cf-->
+<!--property:hash_html=351f45aa2a027c4c66a5ecd620eceb34caa8a27c-->
+<DD>
+Betrifft: Formula.Static<BR>
+Border.Min Border.Max<BR>
+Transformation.*
+</DD>
+<DT><A name="DnKxK6hTfXSn0lW2gSfEJQ"></A>Bei Animationen werden nur die schnellen Animationsparameter verwendet</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1430718664-->
+<!--property:date_modified=1454854519-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="02PKzD2JlIfRASwbLu7DGA"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1430768777-->
+<!--property:date_modified=1430770021-->
+<!--property:hash=58cb6ce9731c6c6a8bd20dd4d3e2a59533dc3dc0-->
+<!--property:hash_html=6be9eb1350bd96ba2725f313604474637c5f5345-->
+<DD>
+Ob die Nachbearbeitung noch läuft, erkennt man an:<BR>
+  
+</DD>
+<DT><A name="vmyxi6D1GVSFleFTmXp59Q"></A>Analyse</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1430769829-->
+<!--property:date_modified=1430769975-->
+<!--property:hash=b92136328c1278e8180f645835ea699c408e4902-->
+<!--property:hash_html=9b3c60c82f3d0ed62ccf7c23852a14dce15e099c-->
+<DD>
+Das Problem ist, dass die Nachbearbeitung länger dauert als die Bildberechnung und deshalb angehalten wird. Lösung: solange die aktuelle Berechnung (des nächsten Frames) verbessern, bis die  Nachbearbeitung abgeschlossen ist.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="O7KnIky1M8dButCRiW4cUA"></A>Automatische Animationserstellung</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1430868633-->
+<!--property:date_modified=1454854520-->
+<!--property:hash=f9fd6731ff3d89f214990aff5c84ef1edea7868e-->
+<!--property:hash_html=29be083231812813e93c7e9a9f05aa16752d14d1-->
+<DD>
+Historyeinträge werden automatisch in die Animation abgelegt. Steps ist der ebenfalls der Parameter Animation.Steps<BR>
+<BR>
+<DL>
+<DT><A name="E1smUsqQcMXoQTdmyRuqnA"></A>Umsetzung</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431166285-->
+<!--property:date_modified=1431169440-->
+<!--property:hash=e7d073b83cb4bb4f138c5ea21d4df0cc03419b20-->
+<!--property:hash_html=fb86e08b1871e57d1346c6210cb3fc059ac8a01c-->
+<DD>
+Neuer Eintrag im History Control.<BR>
+<BR>
+Beziehung zu: cbAutomaticSaveAnimation<BR>
+<BR>
+Abfrage von Parameterinput.MainParameterInput.AutomaticSaveInAnimation<BR>
+<BR>
+Ereignis: Wenn im Preview das letzte Frame gezeichnet wurde.<BR>
+<BR>
+AnimationControl.MainAnimationControl.AddCurrentHistoryEntry()<BR>
+<BR>
+<BR>
+Wie testet man, ob der letzte Schritt der Animation durchgeührt wird?<BR>
+<BR>
+
+</DD>
+<DT><A name="xTQQHxqs0pAsM02wVIDXpg"></A>Teilaufgaben</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431169363-->
+<!--property:date_modified=1431169397-->
+<!--property:hash=013da978a44a7e542c11b43fa3f29ddd87e5843d-->
+<!--property:hash_html=86a5b8bb2bc4115aac2f181f138bc6d017365a31-->
+<DD>
+History Control is zu aktualisieren.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+</DL>
+</DD>
 <DT><A name="qquMgkl741gsxW5XCWCG8A"></A>Rotation der Winkel überprüfen</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429321904-->
-<!--property:date_modified=1429322051-->
+<!--property:date_modified=1454854553-->
 <!--property:hash=3ca728c0aa3a12ab1a06019fa3896eb502b92b70-->
 <!--property:hash_html=3ca728c0aa3a12ab1a06019fa3896eb502b92b70-->
 <DD>
 Es sieht so aus, als ob x, und y in der Standard-Mandelbulb Formel vertauscht sind. Eventuell wird auch der Aspect Ratio falsch dargestellt. Siehe: C:\Users\Per\Documents\git\Gestaltlupe\settings\tests\wrongAspectRatio.xml
 </DD>
-<DT><A name="cx5xDqM36nk098JCQBVTPQ"></A>UpdateSteps werden bei Verwendung der Animation verringert</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429322998-->
-<!--property:date_modified=1429323043-->
-<!--property:hash=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
-<!--property:hash_html=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
-<DD>
-... und nicht zurückgesetzt. 
-</DD>
 <DT><A name="UhBl04QmA75jcDx1ifj03g"></A>Small Preview sollte Vorrang haben</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465199-->
-<!--property:date_modified=1453415281-->
+<!--property:date_modified=1454854559-->
 <!--property:hash=8731e7fd614d064c347c5847471393d90baf5908-->
 <!--property:hash_html=1a41011aeab897e1d2615aea66e7fdc8ae9b39d7-->
 <DD>
@@ -829,7 +874,7 @@ Bisher werden beide Renderings gleichzeitig gestartet.<BR>
 <DT><A name="2Gcfj9rmC8jxfgowZF7Jqw"></A>Preview aktualisieren bei Änderung in Render</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465601-->
-<!--property:date_modified=1453415293-->
+<!--property:date_modified=1454854566-->
 <!--property:hash=9576fc3244a01d238250d07f277d0a11f7944913-->
 <!--property:hash_html=16fe046bfdb777174cffa9d79585b7d937ff54e8-->
 <DD>
@@ -838,16 +883,37 @@ Ein Möglichkeit dazu in der GUI schaffen, um das zu aktivieren.<BR>
 (Haken bei Parameters, Haken in der GUI unten).<BR>
 
 </DD>
-<DT><A name="R0Fdv146cZrxFLF0txHsWg"></A>Updatesteps im stereo view verwenden</DT>
+<DT><A name="YBWfyZy8PZ3Wb9ZGea4Tkg"></A>Sehr dunkle Bereiche zufällig aufhellen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1430467960-->
+<!--property:date_modified=1454854575-->
+<!--property:hash=945f1fa562e97727d9dea77c6bcc66451444382f-->
+<!--property:hash_html=945f1fa562e97727d9dea77c6bcc66451444382f-->
+<DD>
+bei der Berechnung der Schatten.
+</DD>
+<DT><A name="DkxyyDDUh14XS5ecLMyhUg"></A>Rendern nicht über Form1.PublicForm</DT>
 <!--property:icon_internal=bullet_black-->
-<!--property:date_created=1429732517-->
-<!--property:date_modified=1429732536-->
-<!--property:hash=-->
-<!--property:hash_html=-->
+<!--property:date_created=1429025197-->
+<!--property:date_modified=1454854631-->
+<!--property:hash=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
+<!--property:hash_html=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
+<DD>
+Das wird z.B. während der Animation gemacht. Hier ist es evtl besser, das Zeichnen vom Formular zu trennen.
+</DD>
+<DT><A name="cx5xDqM36nk098JCQBVTPQ"></A>UpdateSteps werden bei Verwendung der Animation verringert</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1429322998-->
+<!--property:date_modified=1454854645-->
+<!--property:hash=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
+<!--property:hash_html=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
+<DD>
+... und nicht zurückgesetzt. 
+</DD>
 <DT><A name="OyTgqmPe2eUWNEuA2MlMAg"></A>Update alter Parameter</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1430338814-->
-<!--property:date_modified=1431414310-->
+<!--property:date_modified=1454854660-->
 <!--property:hash=b9bb040b3d220a8910768bac9525b19f061e7137-->
 <!--property:hash_html=400695c308887bf8dbc5e1daa0e6aa7be2f51f4c-->
 <DD>
@@ -890,66 +956,16 @@ Die Animationseinstellungen können zurückgesetzt werden.<BR>
 </DD>
 </DL>
 </DD>
-<DT><A name="DDBt7emPY4PampZ8VgWtJA"></A>Start / Stop Buttons bei Preview</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1430467750-->
-<!--property:date_modified=1430467803-->
-<!--property:hash=6e79e5bac50ad5feae9a32d68966925fc34750c2-->
-<!--property:hash_html=de9b224635228af1c8d96f4a69c7d631a28f9f02-->
-<DD>
-Start wird bei Preview ausgegraut. Man sollte aber start stets aufrufen können.<BR>
-
-</DD>
-<DT><A name="YBWfyZy8PZ3Wb9ZGea4Tkg"></A>Sehr dunkle Bereiche zufällig aufhellen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1430467960-->
-<!--property:date_modified=1430468003-->
-<!--property:hash=945f1fa562e97727d9dea77c6bcc66451444382f-->
-<!--property:hash_html=945f1fa562e97727d9dea77c6bcc66451444382f-->
-<DD>
-bei der Berechnung der Schatten.
-</DD>
 <DT><A name="KM56JkcLLTVvWLItl3qkYA"></A>Bug: Parameter passen nicht mehr zu den gespeicherten Bildern</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1430599611-->
-<!--property:date_modified=1430599636-->
+<!--property:date_modified=1454854669-->
 <!--property:hash=-->
 <!--property:hash_html=-->
-<DT><A name="uKLYAA4yq7Wu9xMnrVpoSg"></A>Kein Preview erlauben, wenn</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1430861762-->
-<!--property:date_modified=1430931341-->
-<!--property:hash=08c00202e70f879eb395319098d0e771d145efe9-->
-<!--property:hash_html=08c00202e70f879eb395319098d0e771d145efe9-->
-<DD>
-... gerade ein bild mit hoher Auflösung und denselben Formel-Parametern angezeigt wird.
-</DD>
-<DT><A name="JRPehApqt65qGljxWysjQQ"></A>neues Tab</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431034087-->
-<!--property:date_modified=1431034157-->
-<!--property:hash=a78d0dedb336041f3db0d0de81ca044a64886745-->
-<!--property:hash_html=a78d0dedb336041f3db0d0de81ca044a64886745-->
-<DD>
-mit den zuletzt geänderten Parametern 
-</DD>
-<DT><A name="ZKAhWtLIhW0oaunHan8jIw"></A>Zu jedem Tab automatisiert </DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431037113-->
-<!--property:date_modified=1431037758-->
-<!--property:hash=915126d2e59e91d68374d0f95bfa1799eba434fa-->
-<!--property:hash_html=17075f0a72ebc19eb78d44fbe79d0d290806134f-->
-<DD>
-... eine Liste aus ParameterEntries anlegen. Diese wird zusammen mit den aktuellen Parametereinstellungen in Höhe jedes Eintrages eingeblendet. <BR>
-<BR>
-Also wenn z.B. von Navigate nach Data gewechselt wird, dann wird in die alte Parametersicht  (zusätzlich mit speziellen angepassten Slidern .<BR>
-<BR>
-Wenn von Parametersicht nach Navigate gewechselt wird, dann werden dort die Parameter eingeblenden, die bei der Navigation Verwendung finden. 
-</DD>
 <DT><A name="yxaDqxFYiLNpeDNqR3steQ"></A>Bug: Reagierte in einem Fall nicht auf Stop</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431038641-->
-<!--property:date_modified=1431040809-->
+<!--property:date_modified=1454855820-->
 <!--property:hash=a6f78f3efcffca975460961a37bc10933c907ffa-->
 <!--property:hash_html=a6f78f3efcffca975460961a37bc10933c907ffa-->
 <DD>
@@ -958,32 +974,13 @@ z.B. wenn zu schnell Parameterwiderholung angeklickt wird.
 <DT><A name="AVjFGdxyOTnFtPqqjkrYag"></A>Center, Radius statt bounds verwenden</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431164430-->
-<!--property:date_modified=1431164450-->
+<!--property:date_modified=1454855830-->
 <!--property:hash=-->
 <!--property:hash_html=-->
-<DT><A name="TuUxp77yp5Oz2HBGsHnr3w"></A>Bei Beendigung leere Verzeichnisse löschen </DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431166665-->
-<!--property:date_modified=1431166687-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DT><A name="JPFMGmgi6hPYxwhy4e4Avw"></A>Aktuellen Kamerapunkt bei PictureArt verwenden</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431168236-->
-<!--property:date_modified=1431168389-->
-<!--property:hash=303efb3c3474e6dd3fd87c2fab4350c973a51935-->
-<!--property:hash_html=20dd170453e5ffae1b10a8f43afe1cac86ebaf65-->
-<DD>
-z.b.:<BR>
-bei Berechnung des Abstandes bei der Unschärfe<BR>
-bei der Berechnung des specular Anteils<BR>
-<BR>
-
-</DD>
 <DT><A name="ZPDl4UFxZDvwNi0MHLZtyg"></A>Size 0.5, Update steps 1</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431205414-->
-<!--property:date_modified=1431205521-->
+<!--property:date_modified=1454855901-->
 <!--property:hash=7d815ce4848760b6d75e1aa8cb026db084e915c5-->
 <!--property:hash_html=7d815ce4848760b6d75e1aa8cb026db084e915c5-->
 <DD>
@@ -992,81 +989,16 @@ bei der Berechnung des specular Anteils<BR>
 <DT><A name="fTDpo0T58AHVVoF8y5AynA"></A>Aspect Ratio in Preview</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431205548-->
-<!--property:date_modified=1431205641-->
+<!--property:date_modified=1454855928-->
 <!--property:hash=e38081403478b094a0828085e9bf5dc8f8c87a1a-->
 <!--property:hash_html=e38081403478b094a0828085e9bf5dc8f8c87a1a-->
 <DD>
 Die Höhe des linken Controls automatisch setzen, wenn preview gestartet wird. (Die Breite ist vorgegeben).
 </DD>
-<DT><A name="yvmCwMPFCZxRd4xQS20PPw"></A>Bei der Animationsvorschau die Änderung der Parameter</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431213534-->
-<!--property:date_modified=1431213612-->
-<!--property:hash=539cd7c3b64889bcdbff7846bcbe9148ec33237f-->
-<!--property:hash_html=539cd7c3b64889bcdbff7846bcbe9148ec33237f-->
-<DD>
-im zeitlichen Verlauf anzeigen. Dazu braucht es 
-</DD>
-<DT><A name="YUXubDTja6vQy4HPRb3m8Q"></A>PictureArt.Glow</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1431214661-->
-<!--property:date_modified=1431216724-->
-<!--property:hash=0b120acda991e225152aee0992d5b612278edd3a-->
-<!--property:hash_html=535b7ee0584d35c87b8652e2a114aee84b89d32d-->
-<DD>
-der gibt an, wie durchlässig die Wände sind.<BR>
-<BR>
-
-</DD>
-<DT><A name="BPK6atnyt6xIVaITWijoGw"></A>Warnung, wenn man zum Ende </DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431217626-->
-<!--property:date_modified=1431217682-->
-<!--property:hash=d1e4f4822e0ccd3a516cc4b2c1a65b802fb1f5e4-->
-<!--property:hash_html=45db54fbe3a399571d2e89a3c64260d5a8bf2f89-->
-<DD>
-der Double Auflösung gekommen ist. <BR>
-<BR>
-
-</DD>
-<DT><A name="5fynzQ9hk4B9v00Wof90lA"></A>Als Rotationsmittelpunkt</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431217793-->
-<!--property:date_modified=1431217902-->
-<!--property:hash=02445c8f6e953b55757e1d81c8f7e3c88b1170d4-->
-<!--property:hash_html=ac8e9df04251a0023926ab471963612a2ab9c088-->
-<DD>
-den Mittelpunkt entsprechend des berechneten Höhenprofiles anzeigen.<BR>
-<BR>
-
-</DD>
-<DT><A name="RBDHyw2a8xeh4nIWS9A0KQ"></A>Back und Forward button neben manchen Parametern</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1431226904-->
-<!--property:date_modified=1432478028-->
-<!--property:hash=0cc3acb496f5cb440ffd60218f86e0a10c431f1c-->
-<!--property:hash_html=ec490821f00eb095d0e2ec01f730088a6fde8c69-->
-<DD>
-In jedem Schritt:<BR>
-Die Schrittweite = Mittel der allten Schrittweite und per Hand eingegebene Änderung.<BR>
-<BR>
-<DL>
-<DT><A name="lpaD7QvInlIzB5L1nn6g2A"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431293213-->
-<!--property:date_modified=1431293287-->
-<!--property:hash=7ac35b3a6a3d2092dc635dcad4dc9118dc836e11-->
-<!--property:hash_html=10f448fd882ce90bd9087a40d08ee5883465ab0c-->
-<DD>
-// Testparameter:<BR>
-<span style="color:#2b91af">ParameterDict</span>.Exemplar[<span style="color:#a31515">&quot;Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON&quot;</span>] = <span style="color:#a31515">&quot;forward,backward,&quot;</span>;
-</DD>
-</DL>
-</DD>
 <DT><A name="tyjYy8DeHwtsBUpkDzcjlw"></A>Während der Animatuinsarbarbeitung kommen neue Animationseinträge hinzu.</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431230603-->
-<!--property:date_modified=1431380206-->
+<!--property:date_modified=1454856048-->
 <!--property:hash=8c314f54c560d5c59bfea244e0c214ab8710445a-->
 <!--property:hash_html=875031ba926e31b4e2aa1ad82cbca1a31ee82d55-->
 <DD>
@@ -1091,42 +1023,199 @@ Die Schrittweite = Mittel der allten Schrittweite und per Hand eingegebene Ände
 </DD>
 </DL>
 </DD>
-<DT><A name="x5NnTrVfHyzVaCxAtPexnA"></A>HistoryWatcher</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431462458-->
-<!--property:date_modified=1431462701-->
-<!--property:hash=bc5a85717b2f5b540089af8dd31a6dcb2bf8c772-->
-<!--property:hash_html=14e55fa327541125a8a682586c9f215454556b8e-->
+<DT><A name="L19poOuc29wRJCTAVBA2eg"></A>beim Beenden des Rendern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1433102300-->
+<!--property:date_modified=1454856074-->
+<!--property:expanded-->
+<!--property:hash=2cc1a475cf9172003c3999ff1735de9dd508a8e9-->
+<!--property:hash_html=19d41448e4de3de4a67e1653a801283337ddb858-->
 <DD>
-Eine Klasse, die den zentralen Zeitgeber überwacht.<BR>
+steht manchmal 0.2 bei size. Hier wird der Preview nicht korrekt zurückgesetzt.<BR>
 <BR>
-// Singleton<BR>
-HistoryWatcher {<BR>
-    long time=-1;<BR>
+Prinzipiell sollte die Beendigung eines Rendervorganges keine Parameteränderung auslösen.<BR>
 <BR>
-// Is called, if a Parameter changed.<BR>
-    updateParameter()<BR>
-{<BR>
+Ursache ist:<BR>
 <BR>
-}<BR>
-}
+Form1: ln 698<BR>
+<BR>
+     if (fastRenderingFilter != null)<BR>
+                        fastRenderingFilter.Restore();<BR>
+<BR>
+Hier wird auch &quot;View.Size&quot; auf 0.2 gesetzt.<BR>
+<BR>
+// Hier bei Restore nur die geänderten Parameter setzen.<BR>
+<BR>
+<BR>
+<BR>
+In ParameterInput.ComputePreview()<BR>
+<BR>
+ ParameterDict.Exemplar[&quot;View.Size&quot;] = &quot;0.2&quot;;<BR>
+// Ab hier gilt: &quot;View.Size&quot;=0.2<BR>
+....<BR>
+ForceRedraw();<BR>
+....<BR>
+ParameterDict.Exemplar[&quot;View.Size&quot;] = sizeStr;<BR>
+<BR>
+<DL>
+<DT><A name="MlRoqGnsXe4rPFg8stXXoA"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434286342-->
+<!--property:date_modified=1434286344-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+</DL>
 </DD>
-<DT><A name="HXXzaVkPN82UvNTeoWo3Jg"></A>In den ersten beiden Läufen</DT>
+<DT><A name="xteyEwozZ7Ch8fGT0aQLDg"></A>Größenveränderung im Preview.</DT>
 <!--property:icon_internal=bullet_black-->
-<!--property:date_created=1431465061-->
-<!--property:date_modified=1431465131-->
-<!--property:hash=85b413f9ea61c0317fe9ca0cb8d251721b8f2cf5-->
-<!--property:hash_html=26e521e64f731482b0ce402543a850a93db8b320-->
+<!--property:date_created=1434658050-->
+<!--property:date_modified=1454856145-->
+<!--property:hash=180f0753d3ea2c841ff2d10164aae50994746167-->
+<!--property:hash_html=5ec721c88e9068da1e838d679afdfca20ba7e691-->
 <DD>
-der Berechung der Tiefeninformation weglassen.<BR>
+... Verbieten(funktioniert nicht). <BR>
+<BR>
+<DL>
+<DT><A name="Y3wWgeoNuO4olouMOApXJg"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434658366-->
+<!--property:date_modified=1434792195-->
+<!--property:hash=e3b6d32691e41620cd7fa248c9f79b5e328e892a-->
+<!--property:hash_html=7e240c53381c91141db931be4de849343850df78-->
+<DD>
+// Struktur bei der Anzeige.<BR>
+this.splitContainer1.Panel1.Controls.Add(this.preview1);<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="Y8YtzuIFirc5F0giZGxxAg"></A>Fortschrittsbalken beim Small Preview</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1434303082-->
+<!--property:date_modified=1454856196-->
+<!--property:hash=bbe6c6c5144ae6e432810374809fccf6c03af8e1-->
+<!--property:hash_html=7687b39c5e33936519c78b041ba41d83d5bc4b33-->
+<DD>
+wird nur bis zum 1. drittel gezeichnet.<BR>
+<BR>
+(Wahrscheinlich anhängig von updatePreview Wert).<BR>
+<BR>
+<DL>
+<DT><A name="0vLOlXhsCOwEcXpvyVCq2A"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434303204-->
+<!--property:date_modified=1434303366-->
+<!--property:hash=12c6cd4271bc6226d8fd2069b4a4404c6a3ce227-->
+<!--property:hash_html=f702541bc6e45d6d528b29e454184c1f52264db0-->
+<DD>
+Die Fortschrittsanzeige wird in:<BR>
+<BR>
+Iterate.IsAvailable() gezeichnet.<BR>
+<BR>
+Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das small preview handelt.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="MV4eExjC1TozkUTGto3ezw"></A>Kleinigkeiten</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1432477239-->
+<!--property:date_modified=1454856318-->
+<!--property:hash=1b0c87434b8f5454235bf23fdd90cf6a43e1b625-->
+<!--property:hash_html=e5cdf988b5dc26d4ca7c904ab99f2a9c9c8226bf-->
+<DD>
+Überprüfen: <BR>
+Passt das Bild zu den Parametern bei der Animation.<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="biapQNHvyypcea14rJTd0g"></A>Umbenennungen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1433008085-->
+<!--property:date_modified=1433008114-->
+<!--property:hash=eb9ef320b8c5153d65d4165a0974800bb0f4f656-->
+<!--property:hash_html=b40f180dd267c8c25b66421c197895de3185aaff-->
+<DD>
+Save Animation Step -&gt; Add to Animation<BR>
+Save Animation Step automatically -&gt; Automatically Add to Animation
+</DD>
+<DT><A name="GGhDyfLIob5OnguuWT3gKg"></A>Bei Änderung eines Render-Parameters den Preview (unten) mitändern</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1433008189-->
+<!--property:date_modified=1454856357-->
+<!--property:hash=d90ec92b7c207a5a5634309dfc6c76690e538a8d-->
+<!--property:hash_html=d90ec92b7c207a5a5634309dfc6c76690e538a8d-->
+<DD>
+danach PictureArt im größeren Preview starten.<DL>
+<DT><A name="ShP7OHLCyRs2dwi9c8ZobQ"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1433008200-->
+<!--property:date_modified=1433139157-->
+<!--property:hash=f78b79e20f57c84aba5cbf8be51f8c6a9c0524f2-->
+<!--property:hash_html=bed56d4a807ee8bc2d91a7bc950d63bf9f671e3e-->
+<DD>
+Picture Art im Preview auslösen:<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="fNnUDn9oSagoSIbJud4G9g"></A>Kompatibilität mit alten Daten</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1433008336-->
+<!--property:date_modified=1433008914-->
+<!--property:hash=11e53568d5b4242bef6238ef2e8d15083a3e4ec5-->
+<!--property:hash_html=8930baea910b780133a4da18e5eedfbc0d867e58-->
+<DD>
+Navigationsunterparameter anzeigen:<BR>
+<BR>
+// Beispieldatensatz:<BR>
+C:\Users\Per\Documents\git\Gestaltlupe\bin\Scenes\Rendering\GestaltlupeVersion2\Beehive.xml<BR>
+<BR>
+// Hier<BR>
+NeedSubNodes(string category) <BR>
+<BR>
+// Problem: die Steuerelemente werden nur einmal erstellt und dann aktualisiert.<BR>
+// Wenn es noch alte Elemente gibt, werden sie nicht dargestellt.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1434576602-->
+<!--property:date_modified=1454856379-->
+<!--property:hash=649123520437f43fbf8d6a37c679892185fa61e2-->
+<!--property:hash_html=b10380c0b76c12c0c9ee317e86c594fcc30e412f-->
+<DD>
+gibt es manchmal eine Exception.<BR>
+<BR>
+Ursache:<BR>
+<BR>
+// in Form1 (Ln 739):<BR>
+public void Progress(double progressInPercent)<BR>
+<BR>
+Wird aufgerufen, obwohl das Programm bereite beendet wurde.<BR>
+<BR>
+Lösung, beim Schließen, flag inClosing=true setzen und vor<BR>
+ this.Invoke(new ProgressDelegate(OnProgress));<BR>
+testen.<BR>
 <BR>
 <BR>
 
 </DD>
 <DT><A name="8u9EDcaxUSDR4lkDsFYZKQ"></A>GrandScheduler</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431497263-->
-<!--property:date_modified=1432982120-->
+<!--property:date_modified=1454856409-->
 <!--property:hash=852a15b46248537f146df0ff2178858866c58843-->
 <!--property:hash_html=b202012730eef3eb5bafd27f2c7cd274d6947d7e-->
 <DD>
@@ -1314,6 +1403,143 @@ namespace Fractrace.Scheduler<BR>
 </DD>
 </DL>
 </DD>
+</DL>
+</DD>
+<DT><A name="hcEUh9QUigjLZCYm9GHDIg"></A>weitere DataViewElemente</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1429277128-->
+<!--property:date_modified=1429730130-->
+<!--property:hash=768a39d03f7a47583ba236e9ef546ab0a864c3ff-->
+<!--property:hash_html=5ffa14c0b237b7789173120ad1e77d8a5339618f-->
+<DD>
+Auswahlbox für Formeltyp (Mandel, Julia, Spezialformeln)<BR>
+<BR>
+Int und Float, um auf Falscheingaben reagieren zu können.<BR>
+<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="JreCRwtGtK5NjnyZwWVqwA"></A>Description</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1429284647-->
+<!--property:date_modified=1429730145-->
+<!--property:hash=aa1f4315ee5cc012d6b4a070b26710027db68201-->
+<!--property:hash_html=2d12d93dad3e4487a29c9eade7c1ac6c86f9e3b6-->
+<DD>
+Description, die bei Hover über dem Parameternamen angezeigt wird.<BR>
+<BR>
+Bsp:<BR>
+<BR>
+            // Set to 1 to enable sharp shadow rendering (warning: time consuming) <BR>
+            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow&quot;] = &quot;0&quot;;<BR>
+            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow.PARAMETERINFO.Datatype&quot;] = &quot;Bool&quot;;<BR>
+            ParameterDict.Exemplar[&quot;Renderer.UseSharpShadow.PARAMETERINFO.Description&quot;] = &quot; Enable sharp shadow rendering (warning: time consuming) &quot;;<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="AK7lSeh3OfQfpe7Q6798GA"></A>PARAMETERINFO.Description aus Bulk entfernen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434739083-->
+<!--property:date_modified=1454856430-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="uKLYAA4yq7Wu9xMnrVpoSg"></A>Kein Preview erlauben, wenn</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1430861762-->
+<!--property:date_modified=1430931341-->
+<!--property:hash=08c00202e70f879eb395319098d0e771d145efe9-->
+<!--property:hash_html=08c00202e70f879eb395319098d0e771d145efe9-->
+<DD>
+... gerade ein bild mit hoher Auflösung und denselben Formel-Parametern angezeigt wird.
+</DD>
+<DT><A name="TuUxp77yp5Oz2HBGsHnr3w"></A>Bei Beendigung leere Verzeichnisse löschen </DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431166665-->
+<!--property:date_modified=1431166687-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="JPFMGmgi6hPYxwhy4e4Avw"></A>Aktuellen Kamerapunkt bei PictureArt verwenden</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431168236-->
+<!--property:date_modified=1431168389-->
+<!--property:hash=303efb3c3474e6dd3fd87c2fab4350c973a51935-->
+<!--property:hash_html=20dd170453e5ffae1b10a8f43afe1cac86ebaf65-->
+<DD>
+z.b.:<BR>
+bei Berechnung des Abstandes bei der Unschärfe<BR>
+bei der Berechnung des specular Anteils<BR>
+<BR>
+
+</DD>
+<DT><A name="yvmCwMPFCZxRd4xQS20PPw"></A>Bei der Animationsvorschau die Änderung der Parameter</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431213534-->
+<!--property:date_modified=1431213612-->
+<!--property:hash=539cd7c3b64889bcdbff7846bcbe9148ec33237f-->
+<!--property:hash_html=539cd7c3b64889bcdbff7846bcbe9148ec33237f-->
+<DD>
+im zeitlichen Verlauf anzeigen. Dazu braucht es 
+</DD>
+<DT><A name="YUXubDTja6vQy4HPRb3m8Q"></A>PictureArt.Glow</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1431214661-->
+<!--property:date_modified=1431216724-->
+<!--property:hash=0b120acda991e225152aee0992d5b612278edd3a-->
+<!--property:hash_html=535b7ee0584d35c87b8652e2a114aee84b89d32d-->
+<DD>
+der gibt an, wie durchlässig die Wände sind.<BR>
+<BR>
+
+</DD>
+<DT><A name="BPK6atnyt6xIVaITWijoGw"></A>Warnung, wenn man zum Ende </DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431217626-->
+<!--property:date_modified=1431217682-->
+<!--property:hash=d1e4f4822e0ccd3a516cc4b2c1a65b802fb1f5e4-->
+<!--property:hash_html=45db54fbe3a399571d2e89a3c64260d5a8bf2f89-->
+<DD>
+der Double Auflösung gekommen ist. <BR>
+<BR>
+
+</DD>
+<DT><A name="5fynzQ9hk4B9v00Wof90lA"></A>Als Rotationsmittelpunkt</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431217793-->
+<!--property:date_modified=1431217902-->
+<!--property:expanded-->
+<!--property:hash=02445c8f6e953b55757e1d81c8f7e3c88b1170d4-->
+<!--property:hash_html=ac8e9df04251a0023926ab471963612a2ab9c088-->
+<DD>
+den Mittelpunkt entsprechend des berechneten Höhenprofiles anzeigen.<BR>
+<BR>
+
+</DD>
+<DT><A name="RBDHyw2a8xeh4nIWS9A0KQ"></A>Back und Forward button neben manchen Parametern</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1431226904-->
+<!--property:date_modified=1432478028-->
+<!--property:hash=0cc3acb496f5cb440ffd60218f86e0a10c431f1c-->
+<!--property:hash_html=ec490821f00eb095d0e2ec01f730088a6fde8c69-->
+<DD>
+In jedem Schritt:<BR>
+Die Schrittweite = Mittel der allten Schrittweite und per Hand eingegebene Änderung.<BR>
+<BR>
+<DL>
+<DT><A name="lpaD7QvInlIzB5L1nn6g2A"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1431293213-->
+<!--property:date_modified=1431293287-->
+<!--property:hash=7ac35b3a6a3d2092dc635dcad4dc9118dc836e11-->
+<!--property:hash_html=10f448fd882ce90bd9087a40d08ee5883465ab0c-->
+<DD>
+// Testparameter:<BR>
+<span style="color:#2b91af">ParameterDict</span>.Exemplar[<span style="color:#a31515">&quot;Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON&quot;</span>] = <span style="color:#a31515">&quot;forward,backward,&quot;</span>;
+</DD>
+</DL>
+</DD>
 <DT><A name="0NiCUfQ6nbJRzN2WFG0KEg"></A>intern.AnimationScript</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431783240-->
@@ -1326,117 +1552,6 @@ namespace Fractrace.Scheduler<BR>
 Umgesetzt als Dateiladen / speichern in der Animation<BR>
 <BR>
 
-</DD>
-<DT><A name="MV4eExjC1TozkUTGto3ezw"></A>Kleinigkeiten</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1432477239-->
-<!--property:date_modified=1433139137-->
-<!--property:hash=1b0c87434b8f5454235bf23fdd90cf6a43e1b625-->
-<!--property:hash_html=e5cdf988b5dc26d4ca7c904ab99f2a9c9c8226bf-->
-<DD>
-Überprüfen: <BR>
-Passt das Bild zu den Parametern bei der Animation.<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<DL>
-<DT><A name="biapQNHvyypcea14rJTd0g"></A>Umbenennungen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1433008085-->
-<!--property:date_modified=1433008114-->
-<!--property:hash=eb9ef320b8c5153d65d4165a0974800bb0f4f656-->
-<!--property:hash_html=b40f180dd267c8c25b66421c197895de3185aaff-->
-<DD>
-Save Animation Step -&gt; Add to Animation<BR>
-Save Animation Step automatically -&gt; Automatically Add to Animation
-</DD>
-<DT><A name="GGhDyfLIob5OnguuWT3gKg"></A>Bei Änderung eines Render-Parameters den Preview (unten) mitändern</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1433008189-->
-<!--property:date_modified=1433139191-->
-<!--property:hash=d90ec92b7c207a5a5634309dfc6c76690e538a8d-->
-<!--property:hash_html=d90ec92b7c207a5a5634309dfc6c76690e538a8d-->
-<DD>
-danach PictureArt im größeren Preview starten.<DL>
-<DT><A name="ShP7OHLCyRs2dwi9c8ZobQ"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1433008200-->
-<!--property:date_modified=1433139157-->
-<!--property:hash=f78b79e20f57c84aba5cbf8be51f8c6a9c0524f2-->
-<!--property:hash_html=bed56d4a807ee8bc2d91a7bc950d63bf9f671e3e-->
-<DD>
-Picture Art im Preview auslösen:<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="fNnUDn9oSagoSIbJud4G9g"></A>Kompatibilität mit alten Daten</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1433008336-->
-<!--property:date_modified=1433008914-->
-<!--property:hash=11e53568d5b4242bef6238ef2e8d15083a3e4ec5-->
-<!--property:hash_html=8930baea910b780133a4da18e5eedfbc0d867e58-->
-<DD>
-Navigationsunterparameter anzeigen:<BR>
-<BR>
-// Beispieldatensatz:<BR>
-C:\Users\Per\Documents\git\Gestaltlupe\bin\Scenes\Rendering\GestaltlupeVersion2\Beehive.xml<BR>
-<BR>
-// Hier<BR>
-NeedSubNodes(string category) <BR>
-<BR>
-// Problem: die Steuerelemente werden nur einmal erstellt und dann aktualisiert.<BR>
-// Wenn es noch alte Elemente gibt, werden sie nicht dargestellt.<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="L19poOuc29wRJCTAVBA2eg"></A>beim Beenden des Rendern</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1433102300-->
-<!--property:date_modified=1434288240-->
-<!--property:hash=2cc1a475cf9172003c3999ff1735de9dd508a8e9-->
-<!--property:hash_html=19d41448e4de3de4a67e1653a801283337ddb858-->
-<DD>
-steht manchmal 0.2 bei size. Hier wird der Preview nicht korrekt zurückgesetzt.<BR>
-<BR>
-Prinzipiell sollte die Beendigung eines Rendervorganges keine Parameteränderung auslösen.<BR>
-<BR>
-Ursache ist:<BR>
-<BR>
-Form1: ln 698<BR>
-<BR>
-     if (fastRenderingFilter != null)<BR>
-                        fastRenderingFilter.Restore();<BR>
-<BR>
-Hier wird auch &quot;View.Size&quot; auf 0.2 gesetzt.<BR>
-<BR>
-// Hier bei Restore nur die geänderten Parameter setzen.<BR>
-<BR>
-<BR>
-<BR>
-In ParameterInput.ComputePreview()<BR>
-<BR>
- ParameterDict.Exemplar[&quot;View.Size&quot;] = &quot;0.2&quot;;<BR>
-// Ab hier gilt: &quot;View.Size&quot;=0.2<BR>
-....<BR>
-ForceRedraw();<BR>
-....<BR>
-ParameterDict.Exemplar[&quot;View.Size&quot;] = sizeStr;<BR>
-<BR>
-<DL>
-<DT><A name="MlRoqGnsXe4rPFg8stXXoA"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434286342-->
-<!--property:date_modified=1434286344-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-</DL>
 </DD>
 <DT><A name="T7r70tdwvnYQ6sMSuiMksg"></A>Formeledit beim Drücken auf Small Preview</DT>
 <!--property:icon_internal=bullet_green-->
@@ -1470,35 +1585,6 @@ Gibt man bei View.Size 0. ein kommt es zur Exception &quot;Unzulässiger Wert&qu
 View.DephAdd sollt unabhängig von View.Size sein.<BR>
 <BR>
 
-</DD>
-<DT><A name="Y8YtzuIFirc5F0giZGxxAg"></A>Fortschrittsbalken beim Small Preview</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1434303082-->
-<!--property:date_modified=1434303186-->
-<!--property:hash=bbe6c6c5144ae6e432810374809fccf6c03af8e1-->
-<!--property:hash_html=7687b39c5e33936519c78b041ba41d83d5bc4b33-->
-<DD>
-wird nur bis zum 1. drittel gezeichnet.<BR>
-<BR>
-(Wahrscheinlich anhängig von updatePreview Wert).<BR>
-<BR>
-<DL>
-<DT><A name="0vLOlXhsCOwEcXpvyVCq2A"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434303204-->
-<!--property:date_modified=1434303366-->
-<!--property:hash=12c6cd4271bc6226d8fd2069b4a4404c6a3ce227-->
-<!--property:hash_html=f702541bc6e45d6d528b29e454184c1f52264db0-->
-<DD>
-Die Fortschrittsanzeige wird in:<BR>
-<BR>
-Iterate.IsAvailable() gezeichnet.<BR>
-<BR>
-Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das small preview handelt.<BR>
-<BR>
-
-</DD>
-</DL>
 </DD>
 <DT><A name="KGQy7vAH7BONLxQq3zwZAg"></A>Wenn sich die Formel geändert hat</DT>
 <!--property:icon_internal=bullet_green-->
@@ -1542,29 +1628,6 @@ Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
 <!--property:date_modified=1434582443-->
 <!--property:hash=-->
 <!--property:hash_html=-->
-<DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1434576602-->
-<!--property:date_modified=1434576820-->
-<!--property:hash=649123520437f43fbf8d6a37c679892185fa61e2-->
-<!--property:hash_html=b10380c0b76c12c0c9ee317e86c594fcc30e412f-->
-<DD>
-gibt es manchmal eine Exception.<BR>
-<BR>
-Ursache:<BR>
-<BR>
-// in Form1 (Ln 739):<BR>
-public void Progress(double progressInPercent)<BR>
-<BR>
-Wird aufgerufen, obwohl das Programm bereite beendet wurde.<BR>
-<BR>
-Lösung, beim Schließen, flag inClosing=true setzen und vor<BR>
- this.Invoke(new ProgressDelegate(OnProgress));<BR>
-testen.<BR>
-<BR>
-<BR>
-
-</DD>
 <DT><A name="vIchVIJeMcNK6bx8orczTQ"></A>Falsche gespeicherte Parameterer bei Animationen</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434583657-->
@@ -1575,43 +1638,12 @@ testen.<BR>
 bei Animationen sind die Parameter zu den gespeicherten Bildern um genau 1 versetzt. Man muss also immer das um 1 ältere Bild laden.<BR>
 
 </DD>
-<DT><A name="xteyEwozZ7Ch8fGT0aQLDg"></A>Größenveränderung im Preview.</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434658050-->
-<!--property:date_modified=1434658146-->
-<!--property:hash=180f0753d3ea2c841ff2d10164aae50994746167-->
-<!--property:hash_html=5ec721c88e9068da1e838d679afdfca20ba7e691-->
-<DD>
-... Verbieten(funktioniert nicht). <BR>
-<BR>
-<DL>
-<DT><A name="Y3wWgeoNuO4olouMOApXJg"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434658366-->
-<!--property:date_modified=1434792195-->
-<!--property:hash=e3b6d32691e41620cd7fa248c9f79b5e328e892a-->
-<!--property:hash_html=7e240c53381c91141db931be4de849343850df78-->
-<DD>
-// Struktur bei der Anzeige.<BR>
-this.splitContainer1.Panel1.Controls.Add(this.preview1);<BR>
-<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="AK7lSeh3OfQfpe7Q6798GA"></A>PARAMETERINFO.Description aus Bulk entfernen</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434739083-->
-<!--property:date_modified=1434739095-->
-<!--property:hash=-->
-<!--property:hash_html=-->
 <DT><A name="RQpI3PdSsfSQQhR6rjvh8w"></A>Farbe bei Phong Shading</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434762671-->
-<!--property:date_modified=1434763249-->
-<!--property:hash=3089d5f28e68ccb716d94aedaf987017298972d7-->
-<!--property:hash_html=50a0ee58fa94d05e848397706eabc204c90a99a3-->
+<!--property:date_modified=1454857425-->
+<!--property:hash=c8172a77b6073a356a5c472b6044ada98dcf9350-->
+<!--property:hash_html=02f02a78d2a673f23aff83ea6235f1cf2872943d-->
 <DD>
 Beispiel siehe redSphere.<BR>
 <BR>
@@ -1620,8 +1652,20 @@ Wenn die Oberfläche rot ist, ist die Farbe bei dem von Shinines betroffenen Geb
 Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben zu vereinigen.<BR>
 <BR>
 <BR>
+Lösung: Den shininess Lichtanteil extra berechnen.<BR>
 <BR>
+class Light<BR>
+{<BR>
+Light(pData) {}<BR>
 <BR>
+public virtual float[] LightAt(int x,int y) {}<BR>
+}<BR>
+<BR>
+class ShininessLight: Light<BR>
+{<BR>
+public override float[] LightAt(int x,int y) {}<BR>
+<BR>
+}<BR>
 
 </DD>
 <DT><A name="4fnGcHKKgNLLnqfEBzWm3w"></A>Kein Start der Berechnung</DT>
@@ -3118,13 +3162,49 @@ StartPictureArt();<BR>
 Es gibt nur einen Hauptthread. 
 </DD>
 <DT><A name="AyPfE12vd2Hw6M8Pj0Rjhw"></A>Update Material</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1454805512-->
-<!--property:date_modified=1454805545-->
+<!--property:date_modified=1454854335-->
 <!--property:hash=884477c0c7aa4ce418126062b93414cee896b914-->
 <!--property:hash_html=884477c0c7aa4ce418126062b93414cee896b914-->
 <DD>
 wird nicht immer zurückgesetzt.
+</DD>
+<DT><A name="8juITFPD6h2SPhfg10Pm7g"></A>Zoomen verhindern während die Berechnung läuft.</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454847491-->
+<!--property:date_modified=1454854324-->
+<!--property:hash=89c6a1b880325f70935c93abd38bdc6a4de09d45-->
+<!--property:hash_html=cf6f2e1b02d86467c8ca401cf660e4fd82046ed9-->
+<DD>
+Ein damit auftgretendes Problem:<BR>
+Die aktuellen Parameterwerte werden verändert. Das kann zu Problemen beim weiteren Update führen.<BR>
+<BR>
+Wie erkennt man, ob die Berechnung noch läuft?<BR>
+
+</DD>
+<DT><A name="7b8PdEmsYSO1TgihiblYvQ"></A>In Paramete Navigation in default Scene</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454854920-->
+<!--property:date_modified=1454855005-->
+<!--property:hash=ebfb34225ae03ff5586413a4b6115b37846b510b-->
+<!--property:hash_html=7fbd2c2c713fe250edc89dad58f594e3c7e4f319-->
+<DD>
+Hier fehlt Perspective.Cameraposition<BR>
+<BR>
+
+</DD>
+<DT><A name="5Wye4gTcyDEJJ6xKbAL4tw"></A>Warn-MessageBox, wenn mehr als 1000 szenen im Cache sind</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1454971275-->
+<!--property:date_modified=1454981357-->
+<!--property:hash=ceeba3d10a636a39e0709bad6e469fe5929fa837-->
+<!--property:hash_html=2dda937a8a3538bd2e4ec1adcd7f242af559e8c2-->
+<DD>
+Config Variable: CacheSizeWarning=1000;<BR>
+<BR>
+<BR>
+Gestaltlupe save all generated szenes in the directory :Gestaltlupe. Now there are about 1000 szenes in this directory. 
 </DD>
 </DL>
 </DD>

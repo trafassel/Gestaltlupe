@@ -1089,11 +1089,11 @@ namespace Fractrace {
             // 
             // navigateControl1
             // 
-            this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navigateControl1.Location = new System.Drawing.Point(0, 0);
+            this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.navigateControl1.Location = new System.Drawing.Point(0, 2);
             this.navigateControl1.Margin = new System.Windows.Forms.Padding(2);
             this.navigateControl1.Name = "navigateControl1";
-            this.navigateControl1.Size = new System.Drawing.Size(676, 333);
+            this.navigateControl1.Size = new System.Drawing.Size(676, 331);
             this.navigateControl1.TabIndex = 0;
             // 
             // tpMaterial
@@ -1108,10 +1108,10 @@ namespace Fractrace {
             // 
             // materialControl1
             // 
-            this.materialControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialControl1.Location = new System.Drawing.Point(0, 0);
+            this.materialControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.materialControl1.Location = new System.Drawing.Point(0, 125);
             this.materialControl1.Name = "materialControl1";
-            this.materialControl1.Size = new System.Drawing.Size(676, 333);
+            this.materialControl1.Size = new System.Drawing.Size(676, 208);
             this.materialControl1.TabIndex = 0;
             // 
             // tpSource

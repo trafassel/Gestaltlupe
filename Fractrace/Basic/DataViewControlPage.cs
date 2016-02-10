@@ -139,6 +139,7 @@ namespace Fractrace.Basic
             for (int i = oldElements.Count - 1; i >= 0; i--)
             {
                 DataViewElement dElement = oldElements[i];
+               // dElement.Dock = DockStyle.Bottom;
                 Controls.Add(dElement);
             }
             this.ResumeLayout(true);
