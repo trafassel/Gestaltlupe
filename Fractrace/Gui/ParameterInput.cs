@@ -237,6 +237,7 @@ namespace Fractrace
             {
                 if (value)
                 {
+                    btnPreview.Enabled = false;
                     btnStart.Enabled = false;
                     //btnCreatePoster.Enabled = false;
                     btnStop.Enabled = true;
@@ -1103,6 +1104,7 @@ namespace Fractrace
 
         public void EnableStartButton(bool enable)
         {
+            btnPreview.Enabled = enable;
             btnStart.Enabled = enable;
             Application.DoEvents();
         }

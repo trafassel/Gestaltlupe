@@ -180,11 +180,9 @@ namespace Fractrace.Basic
                     return;
                 _inUpdateFromData = true;
             }
-            this.dataViewControl1.Select(_choosenHirarchy);
-            if (dataViewControl1.Height > 350)
-                pnlEdit.Dock = DockStyle.Fill;
-            else
-                pnlEdit.Dock = DockStyle.Bottom;
+            this.dataViewControl1.Select(_choosenHirarchy);         
+            pnlEdit.Dock = DockStyle.Fill;
+        
             lock (_updateFromDataMutex)
             {
                 _inUpdateFromData = false;

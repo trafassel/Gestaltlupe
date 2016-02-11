@@ -56,10 +56,10 @@
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 339);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(550, 11);
+            this.panel1.Size = new System.Drawing.Size(550, 350);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -87,7 +87,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(270, 339);
+            this.panel2.Size = new System.Drawing.Size(270, 350);
             this.panel2.TabIndex = 1;
             // 
             // button20
@@ -299,7 +299,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(270, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(280, 339);
+            this.panel3.Size = new System.Drawing.Size(280, 350);
             this.panel3.TabIndex = 2;
             // 
             // MaterialControl

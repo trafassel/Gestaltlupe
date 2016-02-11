@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:226-->
+<!--LastNote:229-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,16 +7,8 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=3MIYxYOogeYWIoDSJeQdcw-->
+<!--property:UID=G2r5DlUHZAleFJCYu9sb6w-->
 <!--property:prop_modified=0-->
-<!--property:note_deleted=J7Ch1OD1UqwIWxpICfjvaw-->
-<!--property:note_deleted=OsVsm3bAFaEWALaOhl8qFQ-->
-<!--property:note_deleted=WJbXIdRZTrFpPWmhb8zOKw-->
-<!--property:note_deleted=fOXwl1fktKxx00QH4G7cxQ-->
-<!--property:note_deleted=gXhD42IPhnc7d71fdsUfVg-->
-<!--property:note_deleted=k1AGbKRwJeyCTwauxAVGfw-->
-<!--property:note_deleted=sFhLTD9DkYVyld9qYYgOhg-->
-<!--property:note_deleted=wmq5xIHEUxNTegB4A8vssA-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -3205,6 +3197,111 @@ Config Variable: CacheSizeWarning=1000;<BR>
 <BR>
 <BR>
 Gestaltlupe save all generated szenes in the directory :Gestaltlupe. Now there are about 1000 szenes in this directory. 
+</DD>
+<DT><A name="bytyyC8HM6CTq0BQr5wqLQ"></A>InputBuffer beim Updaten der PictureArt</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455057550-->
+<!--property:date_modified=1455057665-->
+<!--property:hash=192d9077559718fe1509629cddf7f483f8b52277-->
+<!--property:hash_html=d70b99a2616fdddd627c36e39c7efe2ab45d77e3-->
+<DD>
+List&lt;int&gt; HistoryToUpdate;<BR>
+
+</DD>
+<DT><A name="F32Mu4pr1ulLcJexIzn0lg"></A>SmootNormalFactor</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1455057667-->
+<!--property:date_modified=1455059467-->
+<!--property:hash=a7480662e1f8ea234193c9241bff8578f01f2cdf-->
+<!--property:hash_html=64169db762fb7f3177b77fde13d478d4aef5b874-->
+<DD>
+nicht anzeigen.<BR>
+<BR>
+Auch nicht:<BR>
+Use Darken<BR>
+Use Light<BR>
+<BR>
+<BR>
+Im Material Tab verwendet:<BR>
+<BR>
+Hier gibt es Untertabs:<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+Anbient intensity
+</DD>
+<DT><A name="TFePbyJEv0HZvDhy8v6Zqg"></A>Makros in der Formel</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455058119-->
+<!--property:date_modified=1455069707-->
+<!--property:hash=bf1aedd0bfeeeb8071057ac429c08f4a71552dc8-->
+<!--property:hash_html=e8d0141a9a5e4d732ca1de8f070d86e635560926-->
+<DD>
+@init<BR>
+<BR>
+xxxx<BR>
+<BR>
+wird zu:<BR>
+public override void Init() <BR>
+{<BR>
+<BR>
+mit abschließender Klammer zu Beginn der nächsten Funktion oder am Ende.<BR>
+<BR>
+<BR>
+@definition<BR>
+<BR>
+wird zu:<BR>
+<BR>
+<BR>
+public override bool GetBool(double x, double y, double z)<BR>
+{<BR>
+<BR>
+<BR>
+mit abschließender Klammer.
+</DD>
+<DT><A name="4KdeMAt2qXUsTd8hC3BIvA"></A>High quality Preview.</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1455058382-->
+<!--property:date_modified=1455058679-->
+<!--property:hash=ce03376124fcb83ae8744a8e391c8bb73110915a-->
+<!--property:hash_html=7602bffb1a52c53cc0b776e3dd18103c578e96cb-->
+<DD>
+hier wird jedes Element nochmnal, aber diesmal in höherer Quality gerendert.<BR>
+<BR>
+Button zum Abbrechen dieses Renderns: stop preview.<BR>
+<BR>
+
+</DD>
+<DT><A name="E9zjkKjbs6xUBsgdkm68AA"></A>Einige Tabs unten anordnen.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455058795-->
+<!--property:date_modified=1455059167-->
+<!--property:hash=a448eb5a5eb94516f17a8ecd75ee9cfaabafe6ab-->
+<!--property:hash_html=37cc24b5fc7a7690806c8bfc2ed0a9094be0e717-->
+<DD>
+Das betrifft alle tabs, die ohne zu scrollen in die Startansicht passen. Data, Navigate, Material, File,<BR>
+Animation, info, Documentation<BR>
+
+</DD>
+<DT><A name="t44b7TplCoTX4FW7YZjoWQ"></A>Senkrechte Buttonleiste am unteren rechten Rand. </DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455061116-->
+<!--property:date_modified=1455061267-->
+<!--property:hash=9f2089f60e84667319949c02eec81e2b0c71181a-->
+<!--property:hash_html=9f2089f60e84667319949c02eec81e2b0c71181a-->
+<DD>
+Für Zugriff auch weitere Elemente: Formel 
+</DD>
+<DT><A name="7kWVTHfvTUOqklsDvYEgWQ"></A>Wenn Cache aufgeräumt wird: </DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455062036-->
+<!--property:date_modified=1455069387-->
+<!--property:hash=572f1d0ae825837195f66f3faf18367572131395-->
+<!--property:hash_html=626cf556fb8958d28b8d2947b835321a76700dd8-->
+<DD>
+Werden nur die leeren Verzeichnisse und eventuell zugehörigen *.gestaltlupe Dateien gelöscht.<BR>
+
 </DD>
 </DL>
 </DD>
