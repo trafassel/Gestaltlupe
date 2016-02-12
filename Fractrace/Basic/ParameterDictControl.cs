@@ -181,7 +181,7 @@ namespace Fractrace.Basic
                 _inUpdateFromData = true;
             }
             this.dataViewControl1.Select(_choosenHirarchy);         
-            pnlEdit.Dock = DockStyle.Fill;
+            //pnlEdit.Dock = DockStyle.Fill;
         
             lock (_updateFromDataMutex)
             {

@@ -92,7 +92,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(201, 267);
+            this.button20.Location = new System.Drawing.Point(201, 345);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(60, 60);
             this.button20.TabIndex = 19;
@@ -101,7 +101,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(201, 201);
+            this.button19.Location = new System.Drawing.Point(201, 279);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(60, 60);
             this.button19.TabIndex = 18;
@@ -112,7 +112,9 @@
             // 
             this.button18.BackgroundImage = global::Fractrace.Properties.Resources.shininess9Shininessfactor1;
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button18.Location = new System.Drawing.Point(201, 135);
+            this.button18.FlatAppearance.BorderSize = 0;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Location = new System.Drawing.Point(123, 183);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 17;
@@ -123,7 +125,9 @@
             // 
             this.button17.BackgroundImage = global::Fractrace.Properties.Resources.lightInternsity1;
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button17.Location = new System.Drawing.Point(201, 69);
+            this.button17.FlatAppearance.BorderSize = 0;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Location = new System.Drawing.Point(63, 183);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(60, 60);
             this.button17.TabIndex = 16;
@@ -134,7 +138,9 @@
             // 
             this.button16.BackgroundImage = global::Fractrace.Properties.Resources.dark1;
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button16.Location = new System.Drawing.Point(201, 3);
+            this.button16.FlatAppearance.BorderSize = 0;
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button16.Location = new System.Drawing.Point(3, 183);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(60, 60);
             this.button16.TabIndex = 15;
@@ -143,7 +149,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(135, 267);
+            this.button15.Location = new System.Drawing.Point(135, 345);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(60, 60);
             this.button15.TabIndex = 14;
@@ -152,7 +158,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(69, 267);
+            this.button14.Location = new System.Drawing.Point(69, 345);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(60, 60);
             this.button14.TabIndex = 13;
@@ -161,7 +167,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(3, 267);
+            this.button13.Location = new System.Drawing.Point(3, 345);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(60, 60);
             this.button13.TabIndex = 12;
@@ -170,7 +176,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(135, 201);
+            this.button12.Location = new System.Drawing.Point(135, 279);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(60, 60);
             this.button12.TabIndex = 11;
@@ -179,7 +185,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(69, 201);
+            this.button11.Location = new System.Drawing.Point(69, 279);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(60, 60);
             this.button11.TabIndex = 10;
@@ -188,7 +194,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(3, 201);
+            this.button10.Location = new System.Drawing.Point(3, 279);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(60, 60);
             this.button10.TabIndex = 9;
@@ -199,7 +205,9 @@
             // 
             this.button9.BackgroundImage = global::Fractrace.Properties.Resources.sharp0p8;
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button9.Location = new System.Drawing.Point(135, 135);
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Location = new System.Drawing.Point(123, 123);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(60, 60);
             this.button9.TabIndex = 8;
@@ -210,7 +218,9 @@
             // 
             this.button8.BackgroundImage = global::Fractrace.Properties.Resources.ShadowJustify1p5;
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button8.Location = new System.Drawing.Point(69, 135);
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(63, 123);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(60, 60);
             this.button8.TabIndex = 7;
@@ -221,7 +231,9 @@
             // 
             this.button7.BackgroundImage = global::Fractrace.Properties.Resources.ShadowJustify0;
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button7.Location = new System.Drawing.Point(3, 135);
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(3, 123);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(60, 60);
             this.button7.TabIndex = 6;
@@ -232,7 +244,9 @@
             // 
             this.button6.BackgroundImage = global::Fractrace.Properties.Resources.lightInternsity0;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button6.Location = new System.Drawing.Point(135, 69);
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(123, 63);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(60, 60);
             this.button6.TabIndex = 5;
@@ -243,7 +257,9 @@
             // 
             this.button5.BackgroundImage = global::Fractrace.Properties.Resources._default;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.Location = new System.Drawing.Point(69, 69);
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(63, 63);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(60, 60);
             this.button5.TabIndex = 4;
@@ -254,7 +270,9 @@
             // 
             this.button4.BackgroundImage = global::Fractrace.Properties.Resources.dark2;
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point(3, 69);
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(3, 63);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(60, 60);
             this.button4.TabIndex = 3;
@@ -265,7 +283,9 @@
             // 
             this.button3.BackgroundImage = global::Fractrace.Properties.Resources.brightLighttLevel0p4;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point(135, 3);
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(123, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(60, 60);
             this.button3.TabIndex = 2;
@@ -276,7 +296,9 @@
             // 
             this.button2.BackgroundImage = global::Fractrace.Properties.Resources.brightLight1shininess0p8;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point(69, 3);
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(63, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 60);
             this.button2.TabIndex = 1;
@@ -287,6 +309,8 @@
             // 
             this.button1.BackgroundImage = global::Fractrace.Properties.Resources.brightLight1;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 60);

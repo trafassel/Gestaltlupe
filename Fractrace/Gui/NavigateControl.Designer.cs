@@ -202,7 +202,7 @@
             // 
             this.btnMoveAngleFine.FlatAppearance.BorderSize = 0;
             this.btnMoveAngleFine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoveAngleFine.Location = new System.Drawing.Point(179, 260);
+            this.btnMoveAngleFine.Location = new System.Drawing.Point(172, 260);
             this.btnMoveAngleFine.Name = "btnMoveAngleFine";
             this.btnMoveAngleFine.Size = new System.Drawing.Size(55, 23);
             this.btnMoveAngleFine.TabIndex = 36;
@@ -213,7 +213,7 @@
             // 
             // pnlProperties
             // 
-            this.pnlProperties.Location = new System.Drawing.Point(252, 3);
+            this.pnlProperties.Location = new System.Drawing.Point(246, 3);
             this.pnlProperties.Name = "pnlProperties";
             this.pnlProperties.Size = new System.Drawing.Size(174, 301);
             this.pnlProperties.TabIndex = 37;
@@ -229,7 +229,7 @@
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.panel8);
-            this.panel3.Location = new System.Drawing.Point(236, 2);
+            this.panel3.Location = new System.Drawing.Point(227, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(2, 320);
@@ -341,7 +341,7 @@
             this.btnRotY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRotY.FlatAppearance.BorderSize = 0;
             this.btnRotY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRotY.Location = new System.Drawing.Point(187, 190);
+            this.btnRotY.Location = new System.Drawing.Point(175, 191);
             this.btnRotY.Margin = new System.Windows.Forms.Padding(2);
             this.btnRotY.Name = "btnRotY";
             this.btnRotY.Size = new System.Drawing.Size(32, 32);

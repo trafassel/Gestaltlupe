@@ -72,6 +72,7 @@ namespace Fractrace {
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlSettings1 = new System.Windows.Forms.Panel();
+            this.settingsControl1 = new Fractrace.Gui.SettingsControl();
             this.cbAutomaticSaveAnimation = new System.Windows.Forms.CheckBox();
             this.tpSpecial = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -84,6 +85,8 @@ namespace Fractrace {
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.preview2 = new Fractrace.PreviewControl();
+            this.preview1 = new Fractrace.PreviewControl();
             this.panel32 = new System.Windows.Forms.Panel();
             this.panel34 = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
@@ -97,9 +100,13 @@ namespace Fractrace {
             this.panel11 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Data = new System.Windows.Forms.TabPage();
+            this.parameterDictControl1 = new Fractrace.Basic.ParameterDictControl();
             this.tpNavigate = new System.Windows.Forms.TabPage();
+            this.navigateControl1 = new Fractrace.NavigateControl();
             this.tpMaterial = new System.Windows.Forms.TabPage();
+            this.materialControl1 = new Fractrace.Gui.MaterialControl();
             this.tpSource = new System.Windows.Forms.TabPage();
+            this.formulaEditor1 = new Fractrace.FormulaEditor();
             this.tpFile = new System.Windows.Forms.TabPage();
             this.panel30 = new System.Windows.Forms.Panel();
             this.panel24 = new System.Windows.Forms.Panel();
@@ -114,6 +121,7 @@ namespace Fractrace {
             this.panel33 = new System.Windows.Forms.Panel();
             this.btnLoadLast = new System.Windows.Forms.Button();
             this.tpAnimationTop = new System.Windows.Forms.TabPage();
+            this.animationControl1 = new Fractrace.Animation.AnimationControl();
             this.tpInfo = new System.Windows.Forms.TabPage();
             this.panel29 = new System.Windows.Forms.Panel();
             this.tbInfoOutput = new System.Windows.Forms.TextBox();
@@ -122,14 +130,6 @@ namespace Fractrace {
             this.btBulk = new System.Windows.Forms.Button();
             this.tpDoc = new System.Windows.Forms.TabPage();
             this.btnShowDocumentation = new System.Windows.Forms.Button();
-            this.parameterDictControl1 = new Fractrace.Basic.ParameterDictControl();
-            this.navigateControl1 = new Fractrace.NavigateControl();
-            this.materialControl1 = new Fractrace.Gui.MaterialControl();
-            this.formulaEditor1 = new Fractrace.FormulaEditor();
-            this.animationControl1 = new Fractrace.Animation.AnimationControl();
-            this.settingsControl1 = new Fractrace.Gui.SettingsControl();
-            this.preview2 = new Fractrace.PreviewControl();
-            this.preview1 = new Fractrace.PreviewControl();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -210,10 +210,10 @@ namespace Fractrace {
             // 
             this.panel4.Controls.Add(this.tabControl2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(351, 0);
+            this.panel4.Location = new System.Drawing.Point(341, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(333, 115);
+            this.panel4.Size = new System.Drawing.Size(343, 115);
             this.panel4.TabIndex = 1;
             // 
             // tabControl2
@@ -226,7 +226,7 @@ namespace Fractrace {
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(333, 115);
+            this.tabControl2.Size = new System.Drawing.Size(343, 115);
             this.tabControl2.TabIndex = 2;
             // 
             // tpRender
@@ -237,7 +237,7 @@ namespace Fractrace {
             this.tpRender.Location = new System.Drawing.Point(4, 22);
             this.tpRender.Name = "tpRender";
             this.tpRender.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRender.Size = new System.Drawing.Size(325, 89);
+            this.tpRender.Size = new System.Drawing.Size(335, 89);
             this.tpRender.TabIndex = 0;
             this.tpRender.Text = "Render";
             this.tpRender.UseVisualStyleBackColor = true;
@@ -247,7 +247,7 @@ namespace Fractrace {
             this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel22.Location = new System.Drawing.Point(118, 3);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(204, 83);
+            this.panel22.Size = new System.Drawing.Size(214, 83);
             this.panel22.TabIndex = 1;
             // 
             // panel21
@@ -255,7 +255,7 @@ namespace Fractrace {
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(118, 3);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(204, 83);
+            this.panel21.Size = new System.Drawing.Size(214, 83);
             this.panel21.TabIndex = 0;
             // 
             // panel12
@@ -321,7 +321,7 @@ namespace Fractrace {
             this.tpAnimation.Location = new System.Drawing.Point(4, 22);
             this.tpAnimation.Name = "tpAnimation";
             this.tpAnimation.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAnimation.Size = new System.Drawing.Size(325, 89);
+            this.tpAnimation.Size = new System.Drawing.Size(335, 89);
             this.tpAnimation.TabIndex = 1;
             this.tpAnimation.Text = "History";
             this.tpAnimation.UseVisualStyleBackColor = true;
@@ -335,13 +335,13 @@ namespace Fractrace {
             this.panel10.Margin = new System.Windows.Forms.Padding(2);
             this.panel10.Name = "panel10";
             this.panel10.Padding = new System.Windows.Forms.Padding(5);
-            this.panel10.Size = new System.Drawing.Size(319, 37);
+            this.panel10.Size = new System.Drawing.Size(329, 37);
             this.panel10.TabIndex = 2;
             // 
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.Location = new System.Drawing.Point(121, 5);
+            this.button2.Location = new System.Drawing.Point(131, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 27);
             this.button2.TabIndex = 3;
@@ -353,7 +353,7 @@ namespace Fractrace {
             // btnSaveInHistory
             // 
             this.btnSaveInHistory.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSaveInHistory.Location = new System.Drawing.Point(239, 5);
+            this.btnSaveInHistory.Location = new System.Drawing.Point(249, 5);
             this.btnSaveInHistory.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveInHistory.Name = "btnSaveInHistory";
             this.btnSaveInHistory.Size = new System.Drawing.Size(75, 27);
@@ -370,7 +370,7 @@ namespace Fractrace {
             this.panel25.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel25.Location = new System.Drawing.Point(3, 28);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(319, 26);
+            this.panel25.Size = new System.Drawing.Size(329, 26);
             this.panel25.TabIndex = 1;
             // 
             // panel14
@@ -380,7 +380,7 @@ namespace Fractrace {
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(0, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(319, 26);
+            this.panel14.Size = new System.Drawing.Size(329, 26);
             this.panel14.TabIndex = 2;
             // 
             // panel16
@@ -390,7 +390,7 @@ namespace Fractrace {
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(52, 0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(267, 26);
+            this.panel16.Size = new System.Drawing.Size(277, 26);
             this.panel16.TabIndex = 1;
             // 
             // panel18
@@ -399,7 +399,7 @@ namespace Fractrace {
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel18.Location = new System.Drawing.Point(170, 0);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(97, 26);
+            this.panel18.Size = new System.Drawing.Size(107, 26);
             this.panel18.TabIndex = 1;
             // 
             // button6
@@ -407,7 +407,7 @@ namespace Fractrace {
             this.button6.Dock = System.Windows.Forms.DockStyle.Right;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(22, 0);
+            this.button6.Location = new System.Drawing.Point(32, 0);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 26);
             this.button6.TabIndex = 0;
@@ -542,7 +542,7 @@ namespace Fractrace {
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel23.Location = new System.Drawing.Point(3, 3);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(319, 25);
+            this.panel23.Size = new System.Drawing.Size(329, 25);
             this.panel23.TabIndex = 0;
             this.panel23.Visible = false;
             // 
@@ -555,7 +555,7 @@ namespace Fractrace {
             this.panel5.Location = new System.Drawing.Point(36, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(236, 25);
+            this.panel5.Size = new System.Drawing.Size(246, 25);
             this.panel5.TabIndex = 3;
             // 
             // panel8
@@ -622,7 +622,7 @@ namespace Fractrace {
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(221, 0);
+            this.panel7.Location = new System.Drawing.Point(231, 0);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(15, 25);
@@ -649,7 +649,7 @@ namespace Fractrace {
             // btnNext
             // 
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNext.Location = new System.Drawing.Point(272, 0);
+            this.btnNext.Location = new System.Drawing.Point(282, 0);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(47, 25);
             this.btnNext.TabIndex = 1;
@@ -675,7 +675,7 @@ namespace Fractrace {
             this.tpSettings.Controls.Add(this.splitContainer2);
             this.tpSettings.Location = new System.Drawing.Point(4, 22);
             this.tpSettings.Name = "tpSettings";
-            this.tpSettings.Size = new System.Drawing.Size(325, 89);
+            this.tpSettings.Size = new System.Drawing.Size(335, 89);
             this.tpSettings.TabIndex = 2;
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
@@ -689,8 +689,8 @@ namespace Fractrace {
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.pnlSettings1);
-            this.splitContainer2.Size = new System.Drawing.Size(325, 89);
-            this.splitContainer2.SplitterDistance = 274;
+            this.splitContainer2.Size = new System.Drawing.Size(335, 89);
+            this.splitContainer2.SplitterDistance = 281;
             this.splitContainer2.TabIndex = 0;
             // 
             // pnlSettings1
@@ -701,8 +701,16 @@ namespace Fractrace {
             this.pnlSettings1.Location = new System.Drawing.Point(0, 0);
             this.pnlSettings1.Name = "pnlSettings1";
             this.pnlSettings1.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlSettings1.Size = new System.Drawing.Size(274, 89);
+            this.pnlSettings1.Size = new System.Drawing.Size(281, 89);
             this.pnlSettings1.TabIndex = 0;
+            // 
+            // settingsControl1
+            // 
+            this.settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settingsControl1.Location = new System.Drawing.Point(5, 22);
+            this.settingsControl1.Name = "settingsControl1";
+            this.settingsControl1.Size = new System.Drawing.Size(271, 62);
+            this.settingsControl1.TabIndex = 3;
             // 
             // cbAutomaticSaveAnimation
             // 
@@ -710,7 +718,7 @@ namespace Fractrace {
             this.cbAutomaticSaveAnimation.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbAutomaticSaveAnimation.Location = new System.Drawing.Point(5, 5);
             this.cbAutomaticSaveAnimation.Name = "cbAutomaticSaveAnimation";
-            this.cbAutomaticSaveAnimation.Size = new System.Drawing.Size(264, 17);
+            this.cbAutomaticSaveAnimation.Size = new System.Drawing.Size(271, 17);
             this.cbAutomaticSaveAnimation.TabIndex = 2;
             this.cbAutomaticSaveAnimation.Text = "Automatically Add Preview To Animation";
             this.cbAutomaticSaveAnimation.UseVisualStyleBackColor = true;
@@ -720,7 +728,7 @@ namespace Fractrace {
             this.tpSpecial.Controls.Add(this.splitContainer3);
             this.tpSpecial.Location = new System.Drawing.Point(4, 22);
             this.tpSpecial.Name = "tpSpecial";
-            this.tpSpecial.Size = new System.Drawing.Size(325, 89);
+            this.tpSpecial.Size = new System.Drawing.Size(335, 89);
             this.tpSpecial.TabIndex = 3;
             this.tpSpecial.Text = "Export";
             this.tpSpecial.UseVisualStyleBackColor = true;
@@ -738,8 +746,8 @@ namespace Fractrace {
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.panel31);
-            this.splitContainer3.Size = new System.Drawing.Size(325, 89);
-            this.splitContainer3.SplitterDistance = 144;
+            this.splitContainer3.Size = new System.Drawing.Size(335, 89);
+            this.splitContainer3.SplitterDistance = 147;
             this.splitContainer3.TabIndex = 0;
             // 
             // pnlSpecial1
@@ -752,7 +760,7 @@ namespace Fractrace {
             this.pnlSpecial1.Location = new System.Drawing.Point(0, 0);
             this.pnlSpecial1.Name = "pnlSpecial1";
             this.pnlSpecial1.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlSpecial1.Size = new System.Drawing.Size(144, 89);
+            this.pnlSpecial1.Size = new System.Drawing.Size(147, 89);
             this.pnlSpecial1.TabIndex = 0;
             // 
             // btnBatchExport
@@ -762,7 +770,7 @@ namespace Fractrace {
             this.btnBatchExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBatchExport.Location = new System.Drawing.Point(5, 67);
             this.btnBatchExport.Name = "btnBatchExport";
-            this.btnBatchExport.Size = new System.Drawing.Size(134, 23);
+            this.btnBatchExport.Size = new System.Drawing.Size(137, 23);
             this.btnBatchExport.TabIndex = 4;
             this.btnBatchExport.Text = "Batch Export";
             this.btnBatchExport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -776,7 +784,7 @@ namespace Fractrace {
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Location = new System.Drawing.Point(5, 44);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(134, 23);
+            this.btnExport.Size = new System.Drawing.Size(137, 23);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Export";
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -789,7 +797,7 @@ namespace Fractrace {
             this.btnCreatePoster.Location = new System.Drawing.Point(5, 22);
             this.btnCreatePoster.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreatePoster.Name = "btnCreatePoster";
-            this.btnCreatePoster.Size = new System.Drawing.Size(134, 22);
+            this.btnCreatePoster.Size = new System.Drawing.Size(137, 22);
             this.btnCreatePoster.TabIndex = 1;
             this.btnCreatePoster.Text = "Create Poster";
             this.btnCreatePoster.UseVisualStyleBackColor = true;
@@ -801,7 +809,7 @@ namespace Fractrace {
             this.cbStereo.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbStereo.Location = new System.Drawing.Point(5, 5);
             this.cbStereo.Name = "cbStereo";
-            this.cbStereo.Size = new System.Drawing.Size(134, 17);
+            this.cbStereo.Size = new System.Drawing.Size(137, 17);
             this.cbStereo.TabIndex = 2;
             this.cbStereo.Text = "Stereo";
             this.cbStereo.UseVisualStyleBackColor = true;
@@ -814,7 +822,7 @@ namespace Fractrace {
             this.panel31.Location = new System.Drawing.Point(0, 67);
             this.panel31.Name = "panel31";
             this.panel31.Padding = new System.Windows.Forms.Padding(3);
-            this.panel31.Size = new System.Drawing.Size(177, 22);
+            this.panel31.Size = new System.Drawing.Size(184, 22);
             this.panel31.TabIndex = 0;
             // 
             // label1
@@ -830,7 +838,7 @@ namespace Fractrace {
             // 
             this.panel3.Controls.Add(this.splitContainer1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(128, 0);
+            this.panel3.Location = new System.Drawing.Point(118, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(223, 115);
@@ -855,6 +863,33 @@ namespace Fractrace {
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
+            // preview2
+            // 
+            this.preview2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.preview2.Image = ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
+            this.preview2.IsRightView = false;
+            this.preview2.Location = new System.Drawing.Point(145, 0);
+            this.preview2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.preview2.Name = "preview2";
+            this.preview2.RenderOnClick = true;
+            this.preview2.ShowProgressBar = true;
+            this.preview2.Size = new System.Drawing.Size(78, 66);
+            this.preview2.TabIndex = 2;
+            // 
+            // preview1
+            // 
+            this.preview1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
+            this.preview1.IsRightView = false;
+            this.preview1.Location = new System.Drawing.Point(0, 0);
+            this.preview1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.preview1.Name = "preview1";
+            this.preview1.RenderOnClick = true;
+            this.preview1.ShowProgressBar = true;
+            this.preview1.Size = new System.Drawing.Size(88, 66);
+            this.preview1.TabIndex = 1;
+            this.preview1.RenderingEnds += new Fractrace.PictureRenderingIsReady(this.preview1_RenderingEnds);
+            // 
             // panel32
             // 
             this.panel32.Controls.Add(this.panel34);
@@ -865,7 +900,7 @@ namespace Fractrace {
             this.panel32.Location = new System.Drawing.Point(0, 0);
             this.panel32.Name = "panel32";
             this.panel32.Padding = new System.Windows.Forms.Padding(5);
-            this.panel32.Size = new System.Drawing.Size(128, 115);
+            this.panel32.Size = new System.Drawing.Size(118, 115);
             this.panel32.TabIndex = 3;
             // 
             // panel34
@@ -878,7 +913,7 @@ namespace Fractrace {
             this.panel34.Location = new System.Drawing.Point(5, 5);
             this.panel34.Name = "panel34";
             this.panel34.Padding = new System.Windows.Forms.Padding(3);
-            this.panel34.Size = new System.Drawing.Size(118, 31);
+            this.panel34.Size = new System.Drawing.Size(108, 31);
             this.panel34.TabIndex = 3;
             // 
             // button10
@@ -888,9 +923,9 @@ namespace Fractrace {
             this.button10.Dock = System.Windows.Forms.DockStyle.Left;
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(82, 3);
+            this.button10.Location = new System.Drawing.Point(78, 3);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(28, 25);
+            this.button10.Size = new System.Drawing.Size(25, 25);
             this.button10.TabIndex = 3;
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
@@ -902,9 +937,9 @@ namespace Fractrace {
             this.button9.Dock = System.Windows.Forms.DockStyle.Left;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(54, 3);
+            this.button9.Location = new System.Drawing.Point(53, 3);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(28, 25);
+            this.button9.Size = new System.Drawing.Size(25, 25);
             this.button9.TabIndex = 2;
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
@@ -916,9 +951,9 @@ namespace Fractrace {
             this.button8.Dock = System.Windows.Forms.DockStyle.Left;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(26, 3);
+            this.button8.Location = new System.Drawing.Point(28, 3);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(28, 25);
+            this.button8.Size = new System.Drawing.Size(25, 25);
             this.button8.TabIndex = 1;
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
@@ -933,7 +968,7 @@ namespace Fractrace {
             this.button7.Location = new System.Drawing.Point(3, 3);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(2);
-            this.button7.Size = new System.Drawing.Size(23, 25);
+            this.button7.Size = new System.Drawing.Size(25, 25);
             this.button7.TabIndex = 0;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -945,7 +980,7 @@ namespace Fractrace {
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Location = new System.Drawing.Point(5, 36);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(118, 25);
+            this.btnStart.Size = new System.Drawing.Size(108, 25);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.btnStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -960,7 +995,7 @@ namespace Fractrace {
             this.btnStop.Location = new System.Drawing.Point(5, 61);
             this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(118, 24);
+            this.btnStop.Size = new System.Drawing.Size(108, 24);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
             this.btnStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -974,7 +1009,7 @@ namespace Fractrace {
             this.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreview.Location = new System.Drawing.Point(5, 85);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(118, 25);
+            this.btnPreview.Size = new System.Drawing.Size(108, 25);
             this.btnPreview.TabIndex = 2;
             this.btnPreview.Text = "Preview";
             this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -999,12 +1034,12 @@ namespace Fractrace {
             this.panel11.Location = new System.Drawing.Point(0, 115);
             this.panel11.Margin = new System.Windows.Forms.Padding(2);
             this.panel11.Name = "panel11";
+            this.panel11.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.panel11.Size = new System.Drawing.Size(684, 359);
             this.panel11.TabIndex = 3;
             // 
             // tabControl1
             // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tabControl1.Controls.Add(this.Data);
             this.tabControl1.Controls.Add(this.tpNavigate);
             this.tabControl1.Controls.Add(this.tpMaterial);
@@ -1015,63 +1050,101 @@ namespace Fractrace {
             this.tabControl1.Controls.Add(this.tpDoc);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 5);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(10, 6);
+            this.tabControl1.RightToLeftLayout = true;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(684, 359);
+            this.tabControl1.Size = new System.Drawing.Size(684, 354);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // Data
             // 
             this.Data.Controls.Add(this.parameterDictControl1);
-            this.Data.Location = new System.Drawing.Point(4, 4);
+            this.Data.Location = new System.Drawing.Point(4, 28);
             this.Data.Name = "Data";
-            this.Data.Size = new System.Drawing.Size(676, 333);
+            this.Data.Size = new System.Drawing.Size(676, 322);
             this.Data.TabIndex = 8;
             this.Data.Text = "Data";
             this.Data.UseVisualStyleBackColor = true;
             // 
+            // parameterDictControl1
+            // 
+            this.parameterDictControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.parameterDictControl1.Location = new System.Drawing.Point(0, 0);
+            this.parameterDictControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.parameterDictControl1.Name = "parameterDictControl1";
+            this.parameterDictControl1.Padding = new System.Windows.Forms.Padding(5);
+            this.parameterDictControl1.Size = new System.Drawing.Size(676, 322);
+            this.parameterDictControl1.TabIndex = 0;
+            // 
             // tpNavigate
             // 
             this.tpNavigate.Controls.Add(this.navigateControl1);
-            this.tpNavigate.Location = new System.Drawing.Point(4, 4);
+            this.tpNavigate.Location = new System.Drawing.Point(4, 28);
             this.tpNavigate.Margin = new System.Windows.Forms.Padding(2);
             this.tpNavigate.Name = "tpNavigate";
-            this.tpNavigate.Size = new System.Drawing.Size(676, 333);
+            this.tpNavigate.Size = new System.Drawing.Size(677, 327);
             this.tpNavigate.TabIndex = 9;
             this.tpNavigate.Text = "Navigate";
             this.tpNavigate.UseVisualStyleBackColor = true;
             // 
+            // navigateControl1
+            // 
+            this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navigateControl1.Location = new System.Drawing.Point(0, 0);
+            this.navigateControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.navigateControl1.Name = "navigateControl1";
+            this.navigateControl1.Size = new System.Drawing.Size(677, 327);
+            this.navigateControl1.TabIndex = 0;
+            // 
             // tpMaterial
             // 
             this.tpMaterial.Controls.Add(this.materialControl1);
-            this.tpMaterial.Location = new System.Drawing.Point(4, 4);
+            this.tpMaterial.Location = new System.Drawing.Point(4, 28);
             this.tpMaterial.Name = "tpMaterial";
-            this.tpMaterial.Size = new System.Drawing.Size(676, 333);
+            this.tpMaterial.Size = new System.Drawing.Size(677, 327);
             this.tpMaterial.TabIndex = 14;
             this.tpMaterial.Text = "Material";
             this.tpMaterial.UseVisualStyleBackColor = true;
             // 
+            // materialControl1
+            // 
+            this.materialControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialControl1.Location = new System.Drawing.Point(0, 0);
+            this.materialControl1.Name = "materialControl1";
+            this.materialControl1.Size = new System.Drawing.Size(677, 327);
+            this.materialControl1.TabIndex = 0;
+            // 
             // tpSource
             // 
             this.tpSource.Controls.Add(this.formulaEditor1);
-            this.tpSource.Location = new System.Drawing.Point(4, 4);
+            this.tpSource.Location = new System.Drawing.Point(4, 28);
             this.tpSource.Margin = new System.Windows.Forms.Padding(2);
             this.tpSource.Name = "tpSource";
-            this.tpSource.Size = new System.Drawing.Size(676, 333);
+            this.tpSource.Size = new System.Drawing.Size(677, 327);
             this.tpSource.TabIndex = 10;
             this.tpSource.Text = "Formula";
             this.tpSource.UseVisualStyleBackColor = true;
+            // 
+            // formulaEditor1
+            // 
+            this.formulaEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formulaEditor1.Location = new System.Drawing.Point(0, 0);
+            this.formulaEditor1.Margin = new System.Windows.Forms.Padding(2);
+            this.formulaEditor1.Name = "formulaEditor1";
+            this.formulaEditor1.Size = new System.Drawing.Size(677, 327);
+            this.formulaEditor1.TabIndex = 0;
             // 
             // tpFile
             // 
             this.tpFile.Controls.Add(this.panel30);
             this.tpFile.Controls.Add(this.panel24);
             this.tpFile.Controls.Add(this.panel13);
-            this.tpFile.Location = new System.Drawing.Point(4, 4);
+            this.tpFile.Location = new System.Drawing.Point(4, 28);
             this.tpFile.Name = "tpFile";
-            this.tpFile.Size = new System.Drawing.Size(676, 333);
+            this.tpFile.Size = new System.Drawing.Size(677, 327);
             this.tpFile.TabIndex = 6;
             this.tpFile.Text = "File";
             this.tpFile.UseVisualStyleBackColor = true;
@@ -1079,9 +1152,9 @@ namespace Fractrace {
             // panel30
             // 
             this.panel30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel30.Location = new System.Drawing.Point(124, 0);
+            this.panel30.Location = new System.Drawing.Point(114, 0);
             this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(552, 233);
+            this.panel30.Size = new System.Drawing.Size(563, 227);
             this.panel30.TabIndex = 8;
             // 
             // panel24
@@ -1097,7 +1170,7 @@ namespace Fractrace {
             this.panel24.Location = new System.Drawing.Point(0, 0);
             this.panel24.Name = "panel24";
             this.panel24.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.panel24.Size = new System.Drawing.Size(124, 233);
+            this.panel24.Size = new System.Drawing.Size(114, 227);
             this.panel24.TabIndex = 7;
             // 
             // btnSaveImage
@@ -1108,7 +1181,7 @@ namespace Fractrace {
             this.btnSaveImage.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnSaveImage.Location = new System.Drawing.Point(0, 152);
             this.btnSaveImage.Name = "btnSaveImage";
-            this.btnSaveImage.Size = new System.Drawing.Size(119, 23);
+            this.btnSaveImage.Size = new System.Drawing.Size(109, 23);
             this.btnSaveImage.TabIndex = 7;
             this.btnSaveImage.Text = "Save Image";
             this.btnSaveImage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1123,7 +1196,7 @@ namespace Fractrace {
             this.btnSaveFormula.Location = new System.Drawing.Point(0, 128);
             this.btnSaveFormula.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveFormula.Name = "btnSaveFormula";
-            this.btnSaveFormula.Size = new System.Drawing.Size(119, 24);
+            this.btnSaveFormula.Size = new System.Drawing.Size(109, 24);
             this.btnSaveFormula.TabIndex = 3;
             this.btnSaveFormula.Text = "Save Formula";
             this.btnSaveFormula.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1137,7 +1210,7 @@ namespace Fractrace {
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Location = new System.Drawing.Point(0, 103);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(119, 25);
+            this.btnSave.Size = new System.Drawing.Size(109, 25);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1152,7 +1225,7 @@ namespace Fractrace {
             this.button3.Location = new System.Drawing.Point(0, 79);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(119, 24);
+            this.button3.Size = new System.Drawing.Size(109, 24);
             this.button3.TabIndex = 5;
             this.button3.Text = "Append Formula";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1167,7 +1240,7 @@ namespace Fractrace {
             this.btnAppend.Location = new System.Drawing.Point(0, 55);
             this.btnAppend.Margin = new System.Windows.Forms.Padding(2);
             this.btnAppend.Name = "btnAppend";
-            this.btnAppend.Size = new System.Drawing.Size(119, 24);
+            this.btnAppend.Size = new System.Drawing.Size(109, 24);
             this.btnAppend.TabIndex = 4;
             this.btnAppend.Text = "Append";
             this.btnAppend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1181,7 +1254,7 @@ namespace Fractrace {
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoad.Location = new System.Drawing.Point(0, 30);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(119, 25);
+            this.btnLoad.Size = new System.Drawing.Size(109, 25);
             this.btnLoad.TabIndex = 1;
             this.btnLoad.Text = "Load";
             this.btnLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1195,7 +1268,7 @@ namespace Fractrace {
             this.btnLoadExamples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadExamples.Location = new System.Drawing.Point(0, 5);
             this.btnLoadExamples.Name = "btnLoadExamples";
-            this.btnLoadExamples.Size = new System.Drawing.Size(119, 25);
+            this.btnLoadExamples.Size = new System.Drawing.Size(109, 25);
             this.btnLoadExamples.TabIndex = 6;
             this.btnLoadExamples.Text = "Load Examples";
             this.btnLoadExamples.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1207,18 +1280,18 @@ namespace Fractrace {
             this.panel13.Controls.Add(this.panel33);
             this.panel13.Controls.Add(this.btnLoadLast);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel13.Location = new System.Drawing.Point(0, 233);
+            this.panel13.Location = new System.Drawing.Point(0, 227);
             this.panel13.Name = "panel13";
             this.panel13.Padding = new System.Windows.Forms.Padding(5);
-            this.panel13.Size = new System.Drawing.Size(676, 100);
+            this.panel13.Size = new System.Drawing.Size(677, 100);
             this.panel13.TabIndex = 2;
             // 
             // panel33
             // 
             this.panel33.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel33.Location = new System.Drawing.Point(124, 5);
+            this.panel33.Location = new System.Drawing.Point(114, 5);
             this.panel33.Name = "panel33";
-            this.panel33.Size = new System.Drawing.Size(547, 90);
+            this.panel33.Size = new System.Drawing.Size(558, 90);
             this.panel33.TabIndex = 1;
             // 
             // btnLoadLast
@@ -1229,7 +1302,7 @@ namespace Fractrace {
             this.btnLoadLast.Location = new System.Drawing.Point(5, 5);
             this.btnLoadLast.Name = "btnLoadLast";
             this.btnLoadLast.Padding = new System.Windows.Forms.Padding(5);
-            this.btnLoadLast.Size = new System.Drawing.Size(119, 90);
+            this.btnLoadLast.Size = new System.Drawing.Size(109, 90);
             this.btnLoadLast.TabIndex = 0;
             this.btnLoadLast.Text = "Continue";
             this.btnLoadLast.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1239,21 +1312,30 @@ namespace Fractrace {
             // tpAnimationTop
             // 
             this.tpAnimationTop.Controls.Add(this.animationControl1);
-            this.tpAnimationTop.Location = new System.Drawing.Point(4, 4);
+            this.tpAnimationTop.Location = new System.Drawing.Point(4, 28);
             this.tpAnimationTop.Margin = new System.Windows.Forms.Padding(2);
             this.tpAnimationTop.Name = "tpAnimationTop";
-            this.tpAnimationTop.Size = new System.Drawing.Size(676, 333);
+            this.tpAnimationTop.Size = new System.Drawing.Size(677, 327);
             this.tpAnimationTop.TabIndex = 11;
             this.tpAnimationTop.Text = "Animation";
             this.tpAnimationTop.UseVisualStyleBackColor = true;
+            // 
+            // animationControl1
+            // 
+            this.animationControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.animationControl1.Location = new System.Drawing.Point(0, 0);
+            this.animationControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.animationControl1.Name = "animationControl1";
+            this.animationControl1.Size = new System.Drawing.Size(677, 327);
+            this.animationControl1.TabIndex = 0;
             // 
             // tpInfo
             // 
             this.tpInfo.Controls.Add(this.panel29);
             this.tpInfo.Controls.Add(this.panel28);
-            this.tpInfo.Location = new System.Drawing.Point(4, 4);
+            this.tpInfo.Location = new System.Drawing.Point(4, 28);
             this.tpInfo.Name = "tpInfo";
-            this.tpInfo.Size = new System.Drawing.Size(676, 333);
+            this.tpInfo.Size = new System.Drawing.Size(677, 327);
             this.tpInfo.TabIndex = 12;
             this.tpInfo.Text = "Info";
             this.tpInfo.UseVisualStyleBackColor = true;
@@ -1264,7 +1346,7 @@ namespace Fractrace {
             this.panel29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel29.Location = new System.Drawing.Point(135, 0);
             this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(541, 333);
+            this.panel29.Size = new System.Drawing.Size(542, 327);
             this.panel29.TabIndex = 2;
             // 
             // tbInfoOutput
@@ -1274,7 +1356,7 @@ namespace Fractrace {
             this.tbInfoOutput.Multiline = true;
             this.tbInfoOutput.Name = "tbInfoOutput";
             this.tbInfoOutput.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tbInfoOutput.Size = new System.Drawing.Size(541, 333);
+            this.tbInfoOutput.Size = new System.Drawing.Size(542, 327);
             this.tbInfoOutput.TabIndex = 0;
             // 
             // panel28
@@ -1285,7 +1367,7 @@ namespace Fractrace {
             this.panel28.Location = new System.Drawing.Point(0, 0);
             this.panel28.Name = "panel28";
             this.panel28.Padding = new System.Windows.Forms.Padding(5);
-            this.panel28.Size = new System.Drawing.Size(135, 333);
+            this.panel28.Size = new System.Drawing.Size(135, 327);
             this.panel28.TabIndex = 1;
             // 
             // btnCreateCompleteBulk
@@ -1319,10 +1401,10 @@ namespace Fractrace {
             // tpDoc
             // 
             this.tpDoc.Controls.Add(this.btnShowDocumentation);
-            this.tpDoc.Location = new System.Drawing.Point(4, 4);
+            this.tpDoc.Location = new System.Drawing.Point(4, 28);
             this.tpDoc.Margin = new System.Windows.Forms.Padding(2);
             this.tpDoc.Name = "tpDoc";
-            this.tpDoc.Size = new System.Drawing.Size(676, 333);
+            this.tpDoc.Size = new System.Drawing.Size(677, 327);
             this.tpDoc.TabIndex = 13;
             this.tpDoc.Text = "Documentation";
             this.tpDoc.UseVisualStyleBackColor = true;
@@ -1337,86 +1419,6 @@ namespace Fractrace {
             this.btnShowDocumentation.Text = "Show Documentation";
             this.btnShowDocumentation.UseVisualStyleBackColor = true;
             this.btnShowDocumentation.Click += new System.EventHandler(this.btnShowDocumentation_Click);
-            // 
-            // parameterDictControl1
-            // 
-            this.parameterDictControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.parameterDictControl1.Location = new System.Drawing.Point(0, 0);
-            this.parameterDictControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.parameterDictControl1.Name = "parameterDictControl1";
-            this.parameterDictControl1.Padding = new System.Windows.Forms.Padding(5);
-            this.parameterDictControl1.Size = new System.Drawing.Size(676, 333);
-            this.parameterDictControl1.TabIndex = 0;
-            // 
-            // navigateControl1
-            // 
-            this.navigateControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navigateControl1.Location = new System.Drawing.Point(0, 0);
-            this.navigateControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.navigateControl1.Name = "navigateControl1";
-            this.navigateControl1.Size = new System.Drawing.Size(676, 333);
-            this.navigateControl1.TabIndex = 0;
-            // 
-            // materialControl1
-            // 
-            this.materialControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialControl1.Location = new System.Drawing.Point(0, 0);
-            this.materialControl1.Name = "materialControl1";
-            this.materialControl1.Size = new System.Drawing.Size(676, 333);
-            this.materialControl1.TabIndex = 0;
-            // 
-            // formulaEditor1
-            // 
-            this.formulaEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formulaEditor1.Location = new System.Drawing.Point(0, 0);
-            this.formulaEditor1.Margin = new System.Windows.Forms.Padding(2);
-            this.formulaEditor1.Name = "formulaEditor1";
-            this.formulaEditor1.Size = new System.Drawing.Size(676, 333);
-            this.formulaEditor1.TabIndex = 0;
-            // 
-            // animationControl1
-            // 
-            this.animationControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.animationControl1.Location = new System.Drawing.Point(0, 0);
-            this.animationControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.animationControl1.Name = "animationControl1";
-            this.animationControl1.Size = new System.Drawing.Size(676, 333);
-            this.animationControl1.TabIndex = 0;
-            // 
-            // settingsControl1
-            // 
-            this.settingsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsControl1.Location = new System.Drawing.Point(5, 22);
-            this.settingsControl1.Name = "settingsControl1";
-            this.settingsControl1.Size = new System.Drawing.Size(264, 62);
-            this.settingsControl1.TabIndex = 3;
-            // 
-            // preview2
-            // 
-            this.preview2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.preview2.Image = ((System.Drawing.Image)(resources.GetObject("preview2.Image")));
-            this.preview2.IsRightView = false;
-            this.preview2.Location = new System.Drawing.Point(145, 0);
-            this.preview2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.preview2.Name = "preview2";
-            this.preview2.RenderOnClick = true;
-            this.preview2.ShowProgressBar = true;
-            this.preview2.Size = new System.Drawing.Size(78, 66);
-            this.preview2.TabIndex = 2;
-            // 
-            // preview1
-            // 
-            this.preview1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.preview1.Image = ((System.Drawing.Image)(resources.GetObject("preview1.Image")));
-            this.preview1.IsRightView = false;
-            this.preview1.Location = new System.Drawing.Point(0, 0);
-            this.preview1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.preview1.Name = "preview1";
-            this.preview1.RenderOnClick = true;
-            this.preview1.ShowProgressBar = true;
-            this.preview1.Size = new System.Drawing.Size(88, 66);
-            this.preview1.TabIndex = 1;
-            this.preview1.RenderingEnds += new Fractrace.PictureRenderingIsReady(this.preview1_RenderingEnds);
             // 
             // ParameterInput
             // 
