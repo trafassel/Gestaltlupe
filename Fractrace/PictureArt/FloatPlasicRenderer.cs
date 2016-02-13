@@ -58,6 +58,9 @@ namespace Fractrace.PictureArt
         private FloatVec3[,] _rgbSmoothPlane1 = null;
         private FloatVec3[,] _rgbSmoothPlane2 = null;
 
+        // true for all background pixel.
+        private bool[,] _isBackground = null;
+
         private float _minY = float.MaxValue;
         private float _maxY = float.MinValue;
 
@@ -130,6 +133,7 @@ namespace Fractrace.PictureArt
 
         bool _colorOutside = false;
         bool _colorInside = false;
+        bool _transparentBackground = false;
 
         /// <summary>
         /// Set fields from ParameterDict.Current.
@@ -154,7 +158,8 @@ namespace Fractrace.PictureArt
             _lightRay.Y = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.Y");
             _lightRay.Z = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
             _areaDeph = (float)ParameterDict.Current.GetDouble("Scene.Radius");
-       
+            _transparentBackground = ParameterDict.Current.GetBool("Renderer.BackColor.Transparent");
+
             Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
             Vec3 tempcoord2 = formula.GetTransformWithoutProjection(_lightRay.X, _lightRay.Y, _lightRay.Z);
             tempcoord2.X -= coord.X;
@@ -195,7 +200,12 @@ namespace Fractrace.PictureArt
             CreateStatisticInfo();
             if (_stopRequest)
                 return;
-            
+
+            _isBackground = new bool[pData.Width, pData.Height];
+            for (int i = 0; i < pData.Width; i++)
+                for (int j = 0; j < pData.Height; j++)
+                    _isBackground[i, j] = pData.Points[i, j] == null;
+
             //CreateSmoothNormales();
             if (_stopRequest)
                 return;
@@ -267,6 +277,20 @@ namespace Fractrace.PictureArt
             return new Vec3(rgb.X, rgb.Y, rgb.Z);
         }
 
+        /// <summary>
+        /// Return rgb value at (x,y)
+        /// </summary>
+        protected override Color GetColor(int x, int y)
+        {
+            Color col = base.GetColor(x, y);
+            if(_transparentBackground)
+            {
+                if(_isBackground[x,y])
+                   col = Color.FromArgb(0, col);
+            }
+            return col;
+        }
+
 
         /// <summary>
         /// Create rgb image.
@@ -298,7 +322,10 @@ namespace Fractrace.PictureArt
                     PixelInfo pInfo = pData.Points[i, j];
 
                     if (pInfo == null)
-                    { // Dieser Wert ist zu setzen
+                    { 
+                        
+                        
+                        // Dieser Wert ist zu setzen
                         // Aber nur, wenn es sich nicht um den Hintergrund handelt.
                         FloatVec3 col = _rgbPlane[i, j];
                         col.X = _backColorRed;

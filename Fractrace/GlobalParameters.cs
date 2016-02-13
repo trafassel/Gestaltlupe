@@ -253,7 +253,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Pipeline.UpdatePreview.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Default animation steps while adding the frame in the animation control. 
-            ParameterDict.Current["Animation.Steps"] = "30";
+            ParameterDict.Current["Animation.Steps"] = "1";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.Description"] = "Default animation steps while adding the frame in the animation control.";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.FixedButtons"] = "1 15 30";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.PlusButton"] = "1";
@@ -433,6 +433,12 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.Description"] = "Green component of background color (0, ...,1).";
             ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Renderer.BackColor.Green.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
+            // transparent background 
+            ParameterDict.Current["Renderer.BackColor.Transparent"] = "0";
+            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Description"] = "Transparent Background.";
+            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Datatype"] = "Bool";
+
 
             // Blue component of background color 
             ParameterDict.Current["Renderer.BackColor.Blue"] = "0";

@@ -31,8 +31,6 @@ namespace Fractrace.PictureArt
         /// <param name="grLabel"></param>
         public override void Paint(Graphics grLabel)
         {
-            System.Diagnostics.Debug.WriteLine("RendererBase.Paint()");
-
             if (formula == null)
             {
                 System.Diagnostics.Debug.WriteLine("Warning in RenderBase.Paint() formula==null");
@@ -41,6 +39,7 @@ namespace Fractrace.PictureArt
             _width = pData.Width;
             _height = pData.Height;
             PreCalculate();
+            grLabel.Clear(Color.FromArgb(0, 0, 0, 0));
             if (!_stopRequest)
             {
                 for (int i = 0; i < _width; i++)
@@ -70,9 +69,6 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Return rgb value at (x,y)
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
         protected virtual Color GetColor(int x, int y)
         {
             Vec3 col = GetRgbAt(x, y);

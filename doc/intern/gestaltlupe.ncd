@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:229-->
+<!--LastNote:236-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3302,6 +3302,34 @@ Für Zugriff auch weitere Elemente: Formel
 <DD>
 Werden nur die leeren Verzeichnisse und eventuell zugehörigen *.gestaltlupe Dateien gelöscht.<BR>
 
+</DD>
+<DT><A name="JwhsTlw2MPrWQG00M7cRRw"></A>Oberen und unteren Bereich vertauschen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455135001-->
+<!--property:date_modified=1455149055-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="i0m0aLOcNDWvu8Nch07aYg"></A>View.Perspectice</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455223332-->
+<!--property:date_modified=1455223414-->
+<!--property:hash=db904806fe682459bb37a4e2041de4a0e953870d-->
+<!--property:hash_html=a9b27cab61b095678d1ec9887d045fe869f18da3-->
+<DD>
+Gehört zu Transformation<BR>
+<BR>
+(Transformation ist Camera)<BR>
+<BR>
+
+</DD>
+<DT><A name="xrxdEO6vrQMVet6xrBApog"></A>Transparenter Hintergrund</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455334005-->
+<!--property:date_modified=1455334301-->
+<!--property:hash=83b0a714748ab249d142d5f3d5abaeb12843c940-->
+<!--property:hash_html=83b0a714748ab249d142d5f3d5abaeb12843c940-->
+<DD>
+als Möglichkeit unter Render-Einstellungen
 </DD>
 </DL>
 </DD>
