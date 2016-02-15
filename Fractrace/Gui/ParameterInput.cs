@@ -363,6 +363,9 @@ namespace Fractrace
                 case "Data":
                     parameterDictControl1.UpdateFromData();
                     break;
+                case "tpMaterial":
+                    materialControl1.UpdateFromChangeProperty();
+                    break;
             }
         }
 

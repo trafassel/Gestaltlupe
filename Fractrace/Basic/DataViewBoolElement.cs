@@ -20,12 +20,11 @@ namespace Fractrace.Basic
         /// <summary>
         /// Value changed by user.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void cbValue_CheckedChanged(object sender, EventArgs e)
         {
             ParameterDict.Current.SetBool(_name, this._cbValue.Checked);
             CallElementChanged(_name, this._cbValue.Checked.ToString());
+            _oldValue = this._cbValue.Checked.ToString();
         }
 
 

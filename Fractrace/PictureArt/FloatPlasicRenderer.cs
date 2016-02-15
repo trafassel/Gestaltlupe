@@ -323,8 +323,7 @@ namespace Fractrace.PictureArt
 
                     if (pInfo == null)
                     { 
-                        
-                        
+                                         
                         // Dieser Wert ist zu setzen
                         // Aber nur, wenn es sich nicht um den Hintergrund handelt.
                         FloatVec3 col = _rgbPlane[i, j];
@@ -351,11 +350,12 @@ namespace Fractrace.PictureArt
                             }
                         }
                         //pixelCount++; // Etwas dunkler sollte es schon werden
-                        if (pixelCount > 0)
+                        if (pixelCount > 2)
                         {
                             col.X /= pixelCount;
                             col.Y /= pixelCount;
                             col.Z /= pixelCount;
+                            _isBackground[i, j] = false;
                         }
                     }
                 }

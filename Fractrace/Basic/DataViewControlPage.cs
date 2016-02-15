@@ -66,10 +66,38 @@ namespace Fractrace.Basic
         public int ComputedHeight { get { return _computedHeight; } }
         protected int _computedHeight = 1200;
 
+
+        /// <summary>
+        /// Control ist filled with all entries which corresponds to given names.
+        /// </summary>
+        public void Create(string[] entryNames)
+        {
+            this.Dock = DockStyle.Fill;
+            // Contain the edit entries before adding to the control
+            List<DataViewElement> oldElements = new List<DataViewElement>();
+
+            this.SuspendLayout();
+            foreach(string parameterName in entryNames)
+            {
+                DataViewElement dElement = DataViewElementFactory.Create(parameterName, ParameterDict.Current.SortedEntries[parameterName], ParameterDict.Current.GetDatatype(parameterName),
+                               ParameterDict.Current.GetDescription(parameterName), true);
+                dElement.ElementChanged += new ElementChangedDelegate(_parent.dElement_ElementChanged);
+                oldElements.Add(dElement);
+                dElement.TabIndex = oldElements.Count;
+                _computedHeight += DataViewElementFactory.DefaultHeight;
+            }
+            for (int i = oldElements.Count - 1; i >= 0; i--)
+            {
+                DataViewElement dElement = oldElements[i];
+                Controls.Add(dElement);
+            }
+            this.ResumeLayout(true);
+        }
+
+
         /// <summary>
         /// Control ist filled with all entries which corresponds to the given category.
         /// </summary>
-        /// <param name="category">The category.</param>
         public void Create(string category)
         {
             this.Dock = DockStyle.Fill;

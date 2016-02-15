@@ -30,8 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
@@ -51,7 +49,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlRenderer = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,13 +59,11 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(550, 350);
+            this.panel1.Size = new System.Drawing.Size(550, 485);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button20);
-            this.panel2.Controls.Add(this.button19);
             this.panel2.Controls.Add(this.button18);
             this.panel2.Controls.Add(this.button17);
             this.panel2.Controls.Add(this.button16);
@@ -87,26 +85,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(270, 350);
+            this.panel2.Size = new System.Drawing.Size(197, 485);
             this.panel2.TabIndex = 1;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(201, 345);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(60, 60);
-            this.button20.TabIndex = 19;
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Visible = false;
-            // 
-            // button19
-            // 
-            this.button19.Location = new System.Drawing.Point(201, 279);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(60, 60);
-            this.button19.TabIndex = 18;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Visible = false;
             // 
             // button18
             // 
@@ -320,11 +300,21 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.pnlRenderer);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(270, 0);
+            this.panel3.Location = new System.Drawing.Point(197, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(280, 350);
+            this.panel3.Size = new System.Drawing.Size(353, 485);
             this.panel3.TabIndex = 2;
+            // 
+            // pnlRenderer
+            // 
+            this.pnlRenderer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRenderer.Location = new System.Drawing.Point(0, 0);
+            this.pnlRenderer.Name = "pnlRenderer";
+            this.pnlRenderer.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
+            this.pnlRenderer.Size = new System.Drawing.Size(353, 327);
+            this.pnlRenderer.TabIndex = 0;
             // 
             // MaterialControl
             // 
@@ -334,8 +324,9 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "MaterialControl";
-            this.Size = new System.Drawing.Size(550, 350);
+            this.Size = new System.Drawing.Size(550, 485);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -344,8 +335,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button16;
@@ -365,5 +354,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlRenderer;
     }
 }
