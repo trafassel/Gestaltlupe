@@ -258,7 +258,7 @@ namespace Fractrace
             StartAsync(fracValues, (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles"),
                 ParameterDict.Current.GetDouble("View.Size"),
                 ParameterDict.Current.GetInt("Formula.Static.Formula"),
-                ParameterDict.Current.GetBool("View.Perspective"));
+                    !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
         }
 
 
@@ -502,11 +502,11 @@ namespace Fractrace
             // Projektion initialisieren und der Berechnung zuordnen:
             // TODO: Projektion über Einstellungen abwählbar machen           
             double cameraDeph = act_val.end_tupel.y - act_val.start_tupel.y;
-            cameraDeph *= ParameterDict.Current.GetDouble("Transformation.Perspective.Cameraposition");
+            cameraDeph *= ParameterDict.Current.GetDouble("Transformation.Camera.Position");
             Vec3 camera = new Vec3(xcenter, act_val.end_tupel.y + cameraDeph, zcenter);
             Vec3 viewPoint = new Vec3(xcenter, act_val.end_tupel.y, zcenter);
             Projection proj = new Projection(camera, viewPoint);
-            if (ParameterDict.Current.GetBool("View.Perspective"))
+            if (!ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"))
                 formulas.Projection = proj;
 
             // Bei der Postererstellung werden die Parameter der räumlichen Projektion auf das mittlere Bild 

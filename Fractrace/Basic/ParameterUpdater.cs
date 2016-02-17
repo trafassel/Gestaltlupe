@@ -16,7 +16,17 @@ namespace Fractrace.Basic
         public static void Update()
         {
 
-            if (ParameterDict.Current.Exists("Border.Min.y"))
+
+            if (ParameterDict.Current.Exists("Transformation.Perspective.Cameraposition")) // Version 4
+            {
+                ParameterDict.Current.SetDouble("Transformation.Camera.Position", ParameterDict.Current.GetDouble("Transformation.Perspective.Cameraposition"));
+                ParameterDict.Current.RemoveProperty("Transformation.Perspective.Cameraposition");
+                ParameterDict.Current.SetBool("Transformation.Camera.IsometricProjection", !ParameterDict.Current.GetBool("View.Perspective"));
+                ParameterDict.Current.RemoveProperty("View.Perspective");
+
+            }
+
+                if (ParameterDict.Current.Exists("Border.Min.y"))
             {
                 ParameterDict.Current.SetDouble("Scene.CenterX",
                    (ParameterDict.Current.GetDouble("Border.Min.x") + ParameterDict.Current.GetDouble("Border.Max.x")) / 2.0);

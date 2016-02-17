@@ -31,7 +31,7 @@ namespace Fractrace
             //formulaSettingCategories.Add("View.Width");
             //formulaSettingCategories.Add("View.Height");
             //formulaSettingCategories.Add("Border");
-            formulaSettingCategories.Add("View.Perspective");
+            //formulaSettingCategories.Add("View.Perspective");
             //formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("Transformation.Camera");
             formulaSettingCategories.Add("Transformation.Perspectice");
@@ -95,7 +95,7 @@ namespace Fractrace
             //formulaSettingCategories.Add("View.Width");
             //formulaSettingCategories.Add("View.Height");
             formulaSettingCategories.Add("Scene");
-            formulaSettingCategories.Add("View.Perspective");
+            //formulaSettingCategories.Add("View.Perspective");
             formulaSettingCategories.Add("Transformation.Camera");
             formulaSettingCategories.Add("Transformation.Perspectice");
             formulaSettingCategories.Add("Formula");

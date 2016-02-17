@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:236-->
+<!--LastNote:239-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3323,13 +3323,54 @@ Gehört zu Transformation<BR>
 
 </DD>
 <DT><A name="xrxdEO6vrQMVet6xrBApog"></A>Transparenter Hintergrund</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1455334005-->
-<!--property:date_modified=1455334301-->
+<!--property:date_modified=1455366376-->
 <!--property:hash=83b0a714748ab249d142d5f3d5abaeb12843c940-->
 <!--property:hash_html=83b0a714748ab249d142d5f3d5abaeb12843c940-->
 <DD>
 als Möglichkeit unter Render-Einstellungen
+</DD>
+<DT><A name="kSiyqLO8yZsGjxgFCDDsuw"></A>Behandlung von nicht aufgelösten Pixeln</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455366378-->
+<!--property:date_modified=1455366532-->
+<!--property:hash=29630046da33943613896f578555f829e2aa4eee-->
+<!--property:hash_html=5d7850417dc2f474940b286b9bcd6d4e1e11c933-->
+<DD>
+Frage: Wie kann man sie identifizieren?<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+In der Seitenansicht werden sie 
+</DD>
+<DT><A name="JSIM87MbD9ItQI8Y0PMGyw"></A>Material Tab</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455569057-->
+<!--property:date_modified=1455569063-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="ls6c4gKJJGd4x8GjhhIrLQ"></A>info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455569065-->
+<!--property:date_modified=1455569338-->
+<!--property:hash=b0a56f03c777e6cde8c5b55965b2b99ba3d7774c-->
+<!--property:hash_html=87de438f81769607ea1a5bbf9ad85cef1f0bd7e6-->
+<DD>
+Beispielcode:<BR>
+<BR>
+ _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);<BR>
+                _propertyControl.Dock = DockStyle.Fill;<BR>
+                _propertyControl.Create(&quot;Transformation&quot;);<BR>
+                pnlProperties.Controls.Add(_propertyControl);<BR>
+<BR>
+
+</DD>
+</DL>
 </DD>
 </DL>
 </DD>

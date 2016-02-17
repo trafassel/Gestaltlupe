@@ -128,7 +128,7 @@ namespace Fractrace
                     ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
                     ParameterDict.Current.GetInt("Formula.Static.Formula"),
-                    ParameterDict.Current.GetBool("View.Perspective"));
+                    !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
         }
 
 

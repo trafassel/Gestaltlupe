@@ -216,7 +216,6 @@ namespace Fractrace
         {
             StringBuilder tempHash = new StringBuilder();
             tempHash.Append(ParameterDict.Current.GetHash("View.Size"));
-            tempHash.Append(ParameterDict.Current.GetHash("View.Perspective"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Width"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Height"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Deph"));
@@ -266,7 +265,7 @@ namespace Fractrace
                         _iterate._oneStepProgress = false;
                     if (_updateCount > ParameterDict.Current.GetDouble("View.UpdateSteps") + 1)
                         _iterate._oneStepProgress = true;
-                    _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
+                    _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
                 }
                 else
                 {
@@ -287,7 +286,7 @@ namespace Fractrace
                         _updateCount = 1;
                         _iterate = new Iterate(_width, _height, this, false);
                         _iterate._oneStepProgress = false;
-                        _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, ParameterDict.Current.GetBool("View.Perspective"));
+                        _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
                     }
                 }
             }

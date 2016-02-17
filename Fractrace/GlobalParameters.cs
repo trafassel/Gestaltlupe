@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "4";
+            ParameterDict.Current["Intern.Version"] = "5";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -51,8 +51,10 @@ namespace Fractrace
 
             // Distance to the virtual screen. Small values gives a more 3D effect. Large values
             // gives the scene a parallel projection view.
-            ParameterDict.Current["Transformation.Perspective.Cameraposition"] = "1";
-            ParameterDict.Current["Transformation.Perspective.Cameraposition.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
+            //ParameterDict.Current["Transformation.Perspective.Cameraposition"] = "1";
+            //ParameterDict.Current["Transformation.Perspective.Cameraposition.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
+            ParameterDict.Current["Transformation.Camera.Position"] = "1";
+            ParameterDict.Current["Transformation.Camera.Position.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
 
 
             // X-component of the Julia Seed, if the formula is in julia mode.
@@ -197,9 +199,12 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.5 1 2";
 
             // Switch between 3D view and parallel view.
-            ParameterDict.Current["View.Perspective"] = "1";
-            ParameterDict.Current["View.Perspective.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["View.Perspective.PARAMETERINFO.Description"] = "Switch between 3D view and parallel view.";
+            //ParameterDict.Current["View.Perspective"] = "1";
+            //ParameterDict.Current["View.Perspective.PARAMETERINFO.Datatype"] = "Bool";
+            //ParameterDict.Current["View.Perspective.PARAMETERINFO.Description"] = "Switch between 3D view and parallel view.";
+            ParameterDict.Current["Transformation.Camera.IsometricProjection"] = "1";
+            ParameterDict.Current["Transformation.Camera.IsometricProjection.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Transformation.Camera.IsometricProjection.PARAMETERINFO.Description"] = "Switch between 3D view and parallel view.";
 
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Current["View.Width"] = "1200";
@@ -489,8 +494,8 @@ for (int n = 1; n < _cycles; n++)
         /// </summary>
         public static bool IsSceneProperty(string name)
         {
-            return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" || name=="View.Perspective" ||
-                name.StartsWith("Transformation.Camera.") || name.StartsWith("Transformation.Perspective.") || name.StartsWith("Formula.") || name== "View.DephAdd");
+            return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" ||
+                name.StartsWith("Transformation.Camera.") || name.StartsWith("Formula.") || name== "View.DephAdd");
         }
 
 

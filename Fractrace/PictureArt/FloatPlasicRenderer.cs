@@ -350,7 +350,7 @@ namespace Fractrace.PictureArt
                             }
                         }
                         //pixelCount++; // Etwas dunkler sollte es schon werden
-                        if (pixelCount > 2)
+                        if (pixelCount > 1)
                         {
                             col.X /= pixelCount;
                             col.Y /= pixelCount;

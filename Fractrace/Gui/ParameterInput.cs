@@ -935,7 +935,6 @@ namespace Fractrace
             {
                 List<string> formulaSettingCategories = new List<string>();
                 formulaSettingCategories.Add("Scene");
-                formulaSettingCategories.Add("View.Perspective");
                 formulaSettingCategories.Add("Transformation.Camera");
                 formulaSettingCategories.Add("Transformation.Perspective");
                 formulaSettingCategories.Add("Formula");
