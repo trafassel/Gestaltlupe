@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:239-->
+<!--LastNote:241-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3346,9 +3346,9 @@ Frage: Wie kann man sie identifizieren?<BR>
 In der Seitenansicht werden sie 
 </DD>
 <DT><A name="JSIM87MbD9ItQI8Y0PMGyw"></A>Material Tab</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1455569057-->
-<!--property:date_modified=1455569063-->
+<!--property:date_modified=1455738578-->
 <!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
@@ -3371,6 +3371,31 @@ Beispielcode:<BR>
 
 </DD>
 </DL>
+</DD>
+<DT><A name="yYsu33mXMYhhxx0VoFdmAw"></A>View Parameter</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455739179-->
+<!--property:date_modified=1455743255-->
+<!--property:hash=f9dac5fe10791ad283733115ab1149eef3045986-->
+<!--property:hash_html=2e126f03ceb77f860421ee8de55ca35ce8e2806a-->
+<DD>
+Transformation.Perspective.Cameraposition =&gt; Transformation.Camera.Position<BR>
+<BR>
+View.Perspective =&gt; Transformation.Camera.IsometricProjection 
+</DD>
+<DT><A name="9O10bntxmYZ3MM8dxzgTVQ"></A>Exportdateien gleich öffnen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455836324-->
+<!--property:date_modified=1455841489-->
+<!--property:hash=8ca0303132c1830427584329dcfb3dba1c7b709a-->
+<!--property:hash_html=86e2f1823ac719caa3955030c550bb46941ccd5c-->
+<DD>
+Dialog erstellen<BR>
+Haken [] Show in Browser <BR>
+(In Settings merken)<BR>
+Falls angehakt, im Browser öffnen<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

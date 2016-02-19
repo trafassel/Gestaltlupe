@@ -34,5 +34,17 @@ namespace Fractrace.Properties {
                 this["DeleteCacheAutomatically"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowExportInBrowser {
+            get {
+                return ((bool)(this["ShowExportInBrowser"]));
+            }
+            set {
+                this["ShowExportInBrowser"] = value;
+            }
+        }
     }
 }

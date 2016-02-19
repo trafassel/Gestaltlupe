@@ -1050,7 +1050,13 @@ namespace Fractrace
                         Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
                     exporter.Export(sd.FileName);
                     }
-                    MessageBox.Show(sd.FileName+" exported.");
+                    Fractrace.Gui.ExportResultDialog exportResultDialog = new Gui.ExportResultDialog(sd.FileName);
+                    exportResultDialog.ShowDialog();
+
+                    if(exportResultDialog.OpenInBrowser)
+                    {
+                        System.Diagnostics.Process.Start(sd.FileName);
+                    }
                 }
             }
             catch (Exception ex)
