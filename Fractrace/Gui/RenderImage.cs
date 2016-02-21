@@ -133,7 +133,7 @@ namespace Fractrace
             _iterate.StartAsync(_parameter,
                     ParameterDict.Current.GetInt("Formula.Static.Cycles"),
                     1,
-                    ParameterDict.Current.GetInt("Formula.Static.Formula"),
+                    ParameterDict.Current.GetBool("Formula.Static.Julia"),
                     !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
         }
 

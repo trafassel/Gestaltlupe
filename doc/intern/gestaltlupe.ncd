@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:241-->
+<!--LastNote:226-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3187,13 +3187,16 @@ Hier fehlt Perspective.Cameraposition<BR>
 
 </DD>
 <DT><A name="5Wye4gTcyDEJJ6xKbAL4tw"></A>Warn-MessageBox, wenn mehr als 1000 szenen im Cache sind</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_red-->
 <!--property:date_created=1454971275-->
-<!--property:date_modified=1454981357-->
-<!--property:hash=ceeba3d10a636a39e0709bad6e469fe5929fa837-->
-<!--property:hash_html=2dda937a8a3538bd2e4ec1adcd7f242af559e8c2-->
+<!--property:date_modified=1456047654-->
+<!--property:hash=8fea9a79ce5a921d013aec5dcfe62f87bf82f8a6-->
+<!--property:hash_html=2258f7d8ac86078dc05f31b0a2d485995497f14d-->
 <DD>
 Config Variable: CacheSizeWarning=1000;<BR>
+Wenn Warnung angezeigt wurde, diesen Wert auf 20000 setzen. Danach auf 0 (keine Warnung).<BR>
+<BR>
+<BR>
 <BR>
 <BR>
 Gestaltlupe save all generated szenes in the directory :Gestaltlupe. Now there are about 1000 szenes in this directory. 

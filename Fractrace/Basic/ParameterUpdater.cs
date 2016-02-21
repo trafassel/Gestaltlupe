@@ -16,6 +16,10 @@ namespace Fractrace.Basic
         public static void Update()
         {
 
+            if (ParameterDict.Current.Exists("Formula.Static.Formula")) // Version 5
+            {
+                ParameterDict.Current.SetBool("Formula.Static.Julia", ParameterDict.Current.GetInt("Formula.Static.Formula") == -2);
+            }
 
             if (ParameterDict.Current.Exists("Transformation.Perspective.Cameraposition")) // Version 4
             {
@@ -23,10 +27,10 @@ namespace Fractrace.Basic
                 ParameterDict.Current.RemoveProperty("Transformation.Perspective.Cameraposition");
                 ParameterDict.Current.SetBool("Transformation.Camera.IsometricProjection", !ParameterDict.Current.GetBool("View.Perspective"));
                 ParameterDict.Current.RemoveProperty("View.Perspective");
-
             }
 
-                if (ParameterDict.Current.Exists("Border.Min.y"))
+            // Version < 4:
+            if (ParameterDict.Current.Exists("Border.Min.y")) 
             {
                 ParameterDict.Current.SetDouble("Scene.CenterX",
                    (ParameterDict.Current.GetDouble("Border.Min.x") + ParameterDict.Current.GetDouble("Border.Max.x")) / 2.0);
@@ -64,7 +68,7 @@ namespace Fractrace.Basic
                 ParameterDict.Current.RemoveProperty("Transformation.AngleZ");
             }
 
-            if (ParameterDict.Current["Transformation.3.AngleX"] != string.Empty )
+            if (ParameterDict.Current["Transformation.3.AngleX"] != string.Empty)
             {
                 ParameterDict.Current.RemoveProperty("Transformation.3.AngleX");
                 ParameterDict.Current.RemoveProperty("Transformation.3.AngleY");

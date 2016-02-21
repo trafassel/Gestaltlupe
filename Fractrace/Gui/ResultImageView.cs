@@ -265,7 +265,7 @@ namespace Fractrace
                         _iterate._oneStepProgress = false;
                     if (_updateCount > ParameterDict.Current.GetDouble("View.UpdateSteps") + 1)
                         _iterate._oneStepProgress = true;
-                    _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
+                    _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula==-2, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
                 }
                 else
                 {
@@ -286,7 +286,7 @@ namespace Fractrace
                         _updateCount = 1;
                         _iterate = new Iterate(_width, _height, this, false);
                         _iterate._oneStepProgress = false;
-                        _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
+                        _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula==-2, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
                     }
                 }
             }

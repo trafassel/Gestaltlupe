@@ -77,7 +77,9 @@ namespace Fractrace
         /// <summary>
         /// GetFormula.Static.Formula.
         /// </summary>
-        public int Formula { get { return (int)ParameterDict.Current.GetDouble("Formula.Static.Formula"); } }
+        public int Formula { get {
+                return ParameterDict.Current.GetBool("Formula.Static.Julia") ? -2 : -1;
+            } }
 
         public bool AutomaticSaveInAnimation { get { return cbAutomaticSaveAnimation.Checked; } }
 

@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "5";
+            ParameterDict.Current["Intern.Version"] = "6";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -99,13 +99,11 @@ namespace Fractrace
             //ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
             ParameterDict.Current["Formula.Static.MinCycle.PARAMETERINFO.VIEW.Invisible"] = "1";
 
-            // The used formula.
-            // Values from 1 to 26 corresponds to some inbuild formulas.
-            // Formula.Static.Formula=-1: Use "Intern.Formula.Source" in mandelbrot mode.
-            // Formula.Static.Formula=-2: Use "Intern.Formula.Source" in julia mode.
-            ParameterDict.Current["Formula.Static.Formula"] = "-1";
-            ParameterDict.Current["Formula.Static.Formula.PARAMETERINFO.Description"] = "-1: mandelbrot mode. -2: julia mode (Values from 1 to 26 corresponds to some inbuild formulas.)";
-            ParameterDict.Current["Formula.Static.Formula.PARAMETERINFO.VIEW.FixedButtons"] = "-1 -2";
+            // Julia Mode.
+            ParameterDict.Current["Formula.Static.Julia"] = "0";
+            ParameterDict.Current["Formula.Static.Julia.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Formula.Static.Julia.PARAMETERINFO.Description"] = "Activate Julia Mode.";
+
 
             // Source code of the formula, if Formula.Static.Formula < 0.
             ParameterDict.Current["Intern.Formula.Source"] = @"

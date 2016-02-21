@@ -257,7 +257,7 @@ namespace Fractrace
             fracValues.SetFromParameterDict();
             StartAsync(fracValues, (int)ParameterDict.Current.GetDouble("Formula.Static.Cycles"),
                 ParameterDict.Current.GetDouble("View.Size"),
-                ParameterDict.Current.GetInt("Formula.Static.Formula"),
+                ParameterDict.Current.GetBool("Formula.Static.Julia"),
                     !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
         }
 
@@ -278,21 +278,24 @@ namespace Fractrace
         /// <summary>
         /// Split computing in threads.
         /// </summary>
-        public void StartAsync(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
+        // public void StartAsync(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
+        public void StartAsync(FracValues act_val, int zyklen, double screensize, bool _isJulia, bool perspective)
         {
             _start = true;
             System.Diagnostics.Debug.WriteLine("Iter start");
             _actVal = act_val;
             _cycles = zyklen;
             _screensize = screensize;
-            _formula = formula;
+            _formula = -1;
+            if (_isJulia)
+                _formula = -2;
             _perspective = perspective;
             _availableY = 0;
 
             int noOfThreads = ParameterDict.Current.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
             {
-                Generate(act_val, zyklen, screensize, formula, perspective);
+                Generate(act_val, zyklen, screensize, _formula, perspective);
                 _starter.ComputationEnds();
                 return;
             }

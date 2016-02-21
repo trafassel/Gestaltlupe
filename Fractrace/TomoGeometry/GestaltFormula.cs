@@ -23,7 +23,7 @@ namespace Fractrace.TomoGeometry
             _jy = ParameterDict.Current.GetDouble("Formula.Static.jy");
             _jz = ParameterDict.Current.GetDouble("Formula.Static.jz");
             _cycles = ParameterDict.Current.GetInt("Formula.Static.Cycles");
-            if (ParameterDict.Current.GetInt("Formula.Static.Formula") == -2)
+            if (ParameterDict.Current.GetBool("Formula.Static.Julia"))
                 _isJulia = true;
         }
 
