@@ -183,6 +183,16 @@ namespace Fractrace.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Data806pic10050c32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Data806pic10050c32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DecreaseMipMap {
             get {
                 object obj = ResourceManager.GetObject("DecreaseMipMap", resourceCulture);
