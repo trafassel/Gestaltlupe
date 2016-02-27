@@ -23,20 +23,12 @@ namespace Fractrace
         /// </summary>
         public static string GenerateCompressedFormula()
         {
-            //return "// sorry not implemnted";
             string formula = ParameterDict.Current["Intern.Formula.Source"];
-
             List<string> formulaSettingCategories = new List<string>();
             formulaSettingCategories.Add("Scene");
-            //formulaSettingCategories.Add("View.Width");
-            //formulaSettingCategories.Add("View.Height");
-            //formulaSettingCategories.Add("Border");
-            //formulaSettingCategories.Add("View.Perspective");
-            //formulaSettingCategories.Add("Border");
             formulaSettingCategories.Add("Transformation.Camera");
             formulaSettingCategories.Add("Transformation.Perspectice");
             formulaSettingCategories.Add("Formula");
-
             // To make the new settings unique
 
             ParameterDict.Current["intern.Formula.TempUpdateVal"] = "vv";
@@ -45,7 +37,6 @@ namespace Fractrace
             string insertSettingsStringHere = "base.Init();";
             if (formula.Contains(insertSettingsStringHere))
             {
-
                 StringBuilder settingsString = new StringBuilder();
                 settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
                 settingsString.Append("SetParameterBulk(\"");
@@ -66,14 +57,12 @@ namespace Fractrace
                           settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
                     }
                 }
-
                 // fix this formula to testHash
                 settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
                 settingsString.Append("\");");
                 settingsString.Append("}");
                 formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
             }
-
             StringBuilder retVal = new StringBuilder();
             retVal.Append(CompressFormula(formula));
             return retVal.ToString();
@@ -91,11 +80,7 @@ namespace Fractrace
             string formula = ParameterDict.Current["Intern.Formula.Source"];
 
             List<string> formulaSettingCategories = new List<string>();
-            //formulaSettingCategories.Add("Border");
-            //formulaSettingCategories.Add("View.Width");
-            //formulaSettingCategories.Add("View.Height");
             formulaSettingCategories.Add("Scene");
-            //formulaSettingCategories.Add("View.Perspective");
             formulaSettingCategories.Add("Transformation.Camera");
             formulaSettingCategories.Add("Transformation.Perspectice");
             formulaSettingCategories.Add("Formula");
@@ -103,17 +88,14 @@ namespace Fractrace
             formulaSettingCategories.Add("Renderer.BackColor");
             formulaSettingCategories.Add("Renderer.ColorFactor");
             formulaSettingCategories.Add("Renderer.Light");
-            //formulaSettingCategories.Add("Intern.Formula");
 
             // To make the new settings unique
-
             ParameterDict.Current["intern.Formula.TempUpdateVal"] = "vv";
             string testHash = ParameterDict.Current.GetHash("");
 
             string insertSettingsStringHere = "base.Init();";
             if (formula.Contains(insertSettingsStringHere))
             {
-
                 StringBuilder settingsString = new StringBuilder();
                 settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
                 settingsString.Append("SetParameterBulk(\"");
@@ -134,14 +116,12 @@ namespace Fractrace
                             settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
                     }
                 }
-
                 // fix this formula to testHash
                 settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
                 settingsString.Append("\");");
                 settingsString.Append("}");
                 formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
             }
-
             StringBuilder retVal = new StringBuilder();
             retVal.Append(CompressFormula(formula));
             return retVal.ToString();
@@ -167,7 +147,6 @@ namespace Fractrace
                 if (lineToAdd != "")
                     sourceBlock.Append(lineToAdd);
             }
-
             source = sourceBlock.ToString();
             source = source.Replace("\n", " ");
             source = source.Replace("\t", " ");
@@ -177,7 +156,6 @@ namespace Fractrace
             source = source.Replace("  ", " ");
             source = source.Replace("  ", " ");
             source = source.Replace("  ", " ");
-
             return source;
         }
 

@@ -1313,6 +1313,7 @@ namespace Fractrace
         private void button7_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
+            tabControl2.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -1321,6 +1322,7 @@ namespace Fractrace
         private void button8_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 2;
+            tabControl2.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -1330,6 +1332,7 @@ namespace Fractrace
         {
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("Formula");
+            tabControl2.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -1339,7 +1342,59 @@ namespace Fractrace
         {
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("View");
+            tabControl2.SelectedIndex = 0;
+        }
 
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ;
+
+
+           // TabPage tabPage = (TabPage)sender;
+            switch(tabControl2.SelectedTab.Name)
+            {
+
+                case "topTbFiles":
+                    tabControl1.SelectedIndex = 4;
+                    break;
+
+                case "topTbFormula":
+                    tabControl1.SelectedIndex = 3;
+                    break;
+
+                case "tpAnimation":
+                    tabControl1.SelectedIndex = 5;
+                    break;
+
+                case "tpRender":
+                    //tabControl1.SelectedIndex = 0;
+                    //parameterDictControl1.SelectTreeNode("Renderer");
+                    break;
+
+                case "tpSettings":
+                    tabControl1.SelectedIndex = 0;
+                    break;
+
+                case "tpSpecial":
+                    tabControl1.SelectedIndex = 0;
+                    parameterDictControl1.SelectTreeNode("Export");
+                    break;
+
+            }
+
+
+
+
+        }
+
+        private void btnDocumentation_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 7;
+        }
+
+        private void btnExtras_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 6;
         }
     }
 }
