@@ -471,7 +471,7 @@ namespace Fractrace
                 minCycle = zyklen;
 
             // Offset für den Maximalzyklus für die klassische 2D-Darstellung 
-            int cycleAdd = 128;
+            //int cycleAdd = 128;
 
             wix = act_val.arc.x;
             wiy = act_val.arc.y;
@@ -658,7 +658,7 @@ namespace Fractrace
                                                 miny = yschl;
                                             minYDetected = true;
                                             // Iteration ist nicht abgebrochen, also weiterrechnen:
-                                            int oldPictureInfo = (_gData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
+                                            //int oldPictureInfo = (_gData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
                                             // die Farbberechnung wiederholt wird.
                                            
                                             _gData.Picture[xx, yy] = 1; // Punkt als gesetzt markieren
@@ -668,14 +668,16 @@ namespace Fractrace
                                             vInfo.j = y;
                                             vInfo.k = z;
 
+                                            /*
                                             cycleAdd = 1024;
                                             if (minCycle >= 0)
                                             {
                                                 cycleAdd = minCycle - zyklen;
                                             }
+                                            */
                                             if (isYborder)
                                             { 
-                                                if (formulas.Rechne(x, y, z, 0, zyklen + cycleAdd,
+                                                if (formulas.Rechne(x, y, z, 0, zyklen,
                                                  wix, wiy, wiz,
                                                  jx, jy, jz, jzz, formula, false)==0)
                                                     (_gData.Picture)[xx, yy] = 2; // Mark point as not set.
@@ -693,7 +695,7 @@ namespace Fractrace
                                                         }
                                                         else
                                                         {
-                                                            formulas.FixPoint(minCycle, x, y, z, 0,
+                                                           formulas.FixPoint(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);

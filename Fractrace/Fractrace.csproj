@@ -585,6 +585,9 @@
   <ItemGroup>
     <None Include="images\Animation.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Data833pic10146a32x32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:242-->
+<!--LastNote:246-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -2617,9 +2617,9 @@ fügt während der Animation Einträge hinzu.
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="4wywTUi5afLmKSbJiFWPpg"></A>Animationsparameter im Animationcontrol verwenden</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452875151-->
-<!--property:date_modified=1452876424-->
+<!--property:date_modified=1456666508-->
 <!--property:hash=7cfc2d79c2bc93a74a21b1db9deaf4b5abbf4bb1-->
 <!--property:hash_html=9e777c9ec1e4e93332a778d22565a65c033b07d1-->
 <DD>
@@ -2679,15 +2679,15 @@ z.B. links neben dem unteren Tab.<BR>
 
 </DD>
 <DT><A name="xpUQk59Add8X2F32G5ajvQ"></A>Size und Export werden nicht mitgespeichert</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452963992-->
-<!--property:date_modified=1452964026-->
+<!--property:date_modified=1456666496-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="6y5xxXXiWzQ9tNkW89VFAg"></A>Update Material Button</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452974980-->
-<!--property:date_modified=1454277820-->
+<!--property:date_modified=1456666487-->
 <!--property:hash=2609961f57dfdb04bd71d826f11fb888e16f339b-->
 <!--property:hash_html=86f3127afea73394b3b1a54d0f5668fdc86d5443-->
 <DD>
@@ -3401,9 +3401,53 @@ Falls angehakt, im Browser öffnen<BR>
 
 </DD>
 <DT><A name="8AjPa638fH54axiKvE73jg"></A>Julia</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1456052072-->
-<!--property:date_modified=1456052077-->
+<!--property:date_modified=1456660649-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="sRUyahsdyEfYxm1E71Z8xQ"></A>CompressedBulb funktioniert nur bei init</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1456660650-->
+<!--property:date_modified=1456666467-->
+<!--property:hash=658f9cfaadcc3b90d4cc76ad0b2e34cff14c5975-->
+<!--property:hash_html=5d5cfd44fa11268b577f36a2e216866c8921e571-->
+<DD>
+Damit die Parameter gesetzt werden, muss init() existieren.<BR>
+<BR>
+
+</DD>
+<DT><A name="TXe2lXz4exEpC9KXtKxGnw"></A>In der Seitenansicht nur die korrekten Pixel anzeigen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1456666728-->
+<!--property:date_modified=1456666927-->
+<!--property:hash=d7152626ad99d774697a92286f7657c378679f5c-->
+<!--property:hash_html=06b33aab068970e25f28793af72ab20f9788fca7-->
+<DD>
+Pixel, die in iterate() im nächsten Schritt aktualisiert werden sollen, werden als etwas über der Gestalt befindliche Punkte angezeigt. <BR>
+<BR>
+Zur Erkennung muss eventuell auf gData von iterate zugegriffen werden.<BR>
+<BR>
+<BR>
+Info:<BR>
+<BR>
+
+</DD>
+<DT><A name="z91t3xIPa7E4dyF26EJSZA"></A>Format Button</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1456667268-->
+<!--property:date_modified=1456670942-->
+<!--property:hash=c3f76916fdee0dece9bc9c0c01123d0aa1d3e6ea-->
+<!--property:hash_html=20dcbb06116eaba74eac52e83f9470500a015611-->
+<DD>
+... um die Formel zu formatieren.<BR>
+<BR>
+
+</DD>
+<DT><A name="lkz0iYt2zhUD0shkG2XvBQ"></A>Zweimaliges BulkString setzen vermeiden</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1456670945-->
+<!--property:date_modified=1456671077-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

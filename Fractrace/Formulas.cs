@@ -2475,7 +2475,7 @@ namespace Fractrace
                     }
                     else
                     {
-                        tief[0] = 20;
+                        tief[0] = 0;
                     }
 
 
@@ -2499,6 +2499,7 @@ namespace Fractrace
                             pInfo = new PixelInfo();
                             pData.Points[pixelX, pixelY] = pInfo;
                             pInfo.Coord.X = xpos[0];
+             
                             pInfo.Coord.Y = ypos[0] + tief[0] * yd;
                             pInfo.Coord.Z = zpos[0];
                         }
