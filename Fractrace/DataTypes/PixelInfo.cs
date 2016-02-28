@@ -34,12 +34,6 @@ namespace Fractrace.DataTypes
 
 
         /// <summary>
-        /// Iteration cout . Used for colorize cut.
-        /// </summary>
-        public double iterations = -1;
-
-
-        /// <summary>
         /// True, if the corresponding pixel is part of the inside view
         /// </summary>
         public bool IsInside = false;
@@ -53,7 +47,6 @@ namespace Fractrace.DataTypes
             retVal.Normal.X = Normal.X;
             retVal.Normal.Y = Normal.Y;
             retVal.Normal.Z = Normal.Z;
-            retVal.iterations = iterations;
             retVal.IsInside = IsInside;
             if (AdditionalInfo != null)
                 retVal.AdditionalInfo = AdditionalInfo.Clone();

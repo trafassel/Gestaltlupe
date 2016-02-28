@@ -216,6 +216,62 @@ namespace Fractrace.Basic
         }
 
 
+        string Category(string entryname)
+        {
+            int lastPPos = entryname.LastIndexOf('.');
+            if (lastPPos == -1 )
+                return entryname;
+            return entryname.Substring(0,lastPPos);
+        }
+
+        string ParameterName(string entryname)
+        {
+            int lastPPos = entryname.LastIndexOf('.');
+            if (lastPPos == -1)
+                return entryname;
+            return entryname.Substring(lastPPos+1);
+        }
+
+        public string CreateBulk(string[] parameters,string[] parametersToExclude)
+        {
+            
+            Dictionary<string, bool> parameterFilter = new Dictionary<string, bool>();
+            foreach(string str in parametersToExclude)
+            {
+                parameterFilter[str] = true;
+            }
+            
+            StringBuilder bulkString = new StringBuilder();
+
+            string oldCategory = "";
+            foreach (KeyValuePair<string, string> entry in SortedEntries)
+            {
+                if (!IsAdditionalInfo(entry.Key) &&!parameterFilter.ContainsKey(entry.Key))
+                {
+                    bool useEntry = false;
+                    foreach (string str in parameters)
+                    {
+                        if (entry.Key.StartsWith(str))
+                        {
+                            useEntry = true;
+                            break;
+                        }
+                    }
+                    if (useEntry)
+                    {
+                        string category = Category(entry.Key);
+                        if (oldCategory != category)
+                            bulkString.Append(category + ": ");
+                        string parameterName = ParameterName(entry.Key);
+                        bulkString.Append(parameterName + "=" + entry.Value + " ");
+                        oldCategory = category;
+                    }
+                }
+            }
+            return bulkString.ToString();
+        }
+
+
         /// <summary>
         /// The text 
         /// </summary>
@@ -223,17 +279,38 @@ namespace Fractrace.Basic
         {
             lock (_entries)
             {
-                XmlDocument xdoc = new XmlDocument();
-                XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
-                xnode.InnerXml = text;
-                foreach (XmlNode entryNode in xnode)
+                if(text.StartsWith("<"))
                 {
-                    if (entryNode.Name == "Entry")
+                    XmlDocument xdoc = new XmlDocument();
+                    XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
+                    xnode.InnerXml = text;
+                    foreach (XmlNode entryNode in xnode)
                     {
-                        string key = entryNode.Attributes.GetNamedItem("Key").Value;
-                        string value = entryNode.Attributes.GetNamedItem("Value").Value;
-                        _entries[key] = value;
+                        if (entryNode.Name == "Entry")
+                        {
+                            string key = entryNode.Attributes.GetNamedItem("Key").Value;
+                            string value = entryNode.Attributes.GetNamedItem("Value").Value;
+                            _entries[key] = value;
+                        }
                     }
+                }
+                else
+                {
+                    string currentCategory = "";
+                    string[] entries = text.Split(' ');
+                    foreach(string entry in entries)
+                    {
+                        if (entry.EndsWith(":"))
+                            currentCategory = entry.Substring(0,entry.Length-1);
+                        else
+                        {
+                            string[] split = entry.Split('=');
+                            string entryName = currentCategory+"."+split[0];
+                            string value = split[1];
+                            _entries[entryName] = value;
+                        }
+                    }
+
                 }
             }
         }

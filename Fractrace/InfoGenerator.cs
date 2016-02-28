@@ -35,34 +35,61 @@ namespace Fractrace
             string testHash = ParameterDict.Current.GetHash("");
 
             string insertSettingsStringHere = "base.Init();";
-            if (formula.Contains(insertSettingsStringHere))
+            if (!formula.Contains(insertSettingsStringHere))
             {
-                StringBuilder settingsString = new StringBuilder();
-                settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
-                settingsString.Append("SetParameterBulk(\"");
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
+                formula = @"
+public override void Init() 
+{
+  base.Init();
+}
+" + formula;
+            }
+
+            StringBuilder settingsString = new StringBuilder();
+            settingsString.AppendLine("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
+            settingsString.Append("SetParameterBulk(\"");
+            string[] parameters = new string[]
+            {
+                "Formula",
+                "Scene",
+                "Transformation.Camera"
+            };
+            string[] parametersToExclude = new string[]
+            {
+                "Formula.Static.Formula",
+                "Formula.Static.jzz",
+                "Formula.Static.MinCycle"
+            };
+
+            string parameterBulk = ParameterDict.Current.CreateBulk(parameters,parametersToExclude);
+            settingsString.Append(parameterBulk);
+            settingsString.Append("intern.Formula: TempUpdateVal=" + testHash);
+
+            /*
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
+            {
+                bool isInCategorie = false;
+                foreach (string testCategorie in formulaSettingCategories)
                 {
-                    bool isInCategorie = false;
-                    foreach (string testCategorie in formulaSettingCategories)
+                    if (entry.Key.StartsWith(testCategorie))
                     {
-                        if (entry.Key.StartsWith(testCategorie))
-                        {
-                            isInCategorie = true;
-                            break;
-                        }
-                    }
-                    if (isInCategorie)
-                    {
-                        if(!ParameterDict.IsAdditionalInfo(entry.Key))
-                          settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                        isInCategorie = true;
+                        break;
                     }
                 }
-                // fix this formula to testHash
-                settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
-                settingsString.Append("\");");
-                settingsString.Append("}");
-                formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
+                if (isInCategorie)
+                {
+                    if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                        settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                }
             }
+            // fix this formula to testHash
+            settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
+            */
+            settingsString.AppendLine("\");");
+            settingsString.AppendLine("}");
+            formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
+
             StringBuilder retVal = new StringBuilder();
             retVal.Append(CompressFormula(formula));
             return retVal.ToString();
@@ -94,34 +121,41 @@ namespace Fractrace
             string testHash = ParameterDict.Current.GetHash("");
 
             string insertSettingsStringHere = "base.Init();";
-            if (formula.Contains(insertSettingsStringHere))
+            if (!formula.Contains(insertSettingsStringHere))
             {
-                StringBuilder settingsString = new StringBuilder();
-                settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
-                settingsString.Append("SetParameterBulk(\"");
-                foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
+                formula = @"
+public override void Init() 
+{
+  base.Init();
+}
+" + formula;
+            }
+            StringBuilder settingsString = new StringBuilder();
+            settingsString.Append("if(GetString(\"intern.Formula.TempUpdateVal\")!=\"" + testHash + "\"){");
+            settingsString.Append("SetParameterBulk(\"");
+            foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
+            {
+                bool isInCategorie = false;
+                foreach (string testCategorie in formulaSettingCategories)
                 {
-                    bool isInCategorie = false;
-                    foreach (string testCategorie in formulaSettingCategories)
+                    if (entry.Key.StartsWith(testCategorie))
                     {
-                        if (entry.Key.StartsWith(testCategorie))
-                        {
-                            isInCategorie = true;
-                            break;
-                        }
-                    }
-                    if (isInCategorie)
-                    {
-                        if (!ParameterDict.IsAdditionalInfo(entry.Key))
-                            settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                        isInCategorie = true;
+                        break;
                     }
                 }
-                // fix this formula to testHash
-                settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
-                settingsString.Append("\");");
-                settingsString.Append("}");
-                formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
+                if (isInCategorie)
+                {
+                    if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                        settingsString.Append("<Entry Key='" + entry.Key + "' Value='" + entry.Value + "' />");
+                }
             }
+            // fix this formula to testHash
+            settingsString.Append("<Entry Key='intern.Formula.TempUpdateVal' Value='" + testHash + "' />");
+            settingsString.Append("\");");
+            settingsString.Append("}");
+            formula = formula.Replace(insertSettingsStringHere, insertSettingsStringHere + settingsString.ToString());
+
             StringBuilder retVal = new StringBuilder();
             retVal.Append(CompressFormula(formula));
             return retVal.ToString();
@@ -156,6 +190,18 @@ namespace Fractrace
             source = source.Replace("  ", " ");
             source = source.Replace("  ", " ");
             source = source.Replace("  ", " ");
+            source = source.Replace(") ", ")");
+            source = source.Replace("( ", "(");
+            source = source.Replace("; ", ";");
+            source = source.Replace("{ ", "{");
+            source = source.Replace("} ", "}");
+            source = source.Replace(", ", ",");
+            source = source.Replace("= ", "=");
+            source = source.Replace(" =", "=");
+            source = source.Replace(" +", "+");
+            source = source.Replace("+ ", "+");
+            source = source.Replace(" -", "-");
+            source = source.Replace("- ", "-");
             return source;
         }
 

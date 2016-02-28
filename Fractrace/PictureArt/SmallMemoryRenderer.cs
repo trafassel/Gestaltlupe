@@ -87,7 +87,6 @@ namespace Fractrace.PictureArt
                         floatPixelInfo.Coord.Z = (float)((pInfo.Coord.Z - center.Z) / radius);
                         floatPixelInfo.AdditionalInfo = pInfo.AdditionalInfo;
                         floatPixelInfo.IsInside = pInfo.IsInside;
-                        floatPixelInfo.iterations = pInfo.iterations;
 
                         pInfo.Normal.Normalize();
 

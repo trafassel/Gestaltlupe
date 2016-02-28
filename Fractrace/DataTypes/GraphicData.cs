@@ -28,7 +28,7 @@ namespace Fractrace.DataTypes
 
 
     /// <summary>
-    /// Information of computed surface.
+    /// Information of computed surface. This class is used in iterate to access informations of the last rendering for each pixel. 
     /// </summary>
     public class GraphicData
     {

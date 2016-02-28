@@ -406,7 +406,6 @@ namespace Fractrace
         {
             Random rand = new Random();
             _maxUpdateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");
-            double[] col = null;
             double xd, yd, zd;
             double x, y, z;
             double dephAdd = ParameterDict.Current.GetInt("View.DephAdd") * screensize;
@@ -448,7 +447,6 @@ namespace Fractrace
                 formulas.Transforms.Add(stereoTransform);
             }
 
-            col = formulas.col;
             _maxxIter = _width;
             _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
             if(IsSmallPreview())
@@ -458,7 +456,6 @@ namespace Fractrace
             int MINX_ITER = 0;
             int MINY_ITER = 0;
             int MINZ_ITER = 0;
-            double fa1;
             int xschl = 0, yschl = 0, zschl = 0, xx = 0, yy = 0;
             double wix = 0, wiy = 0, wiz = 0;
             double jx = 0, jy = 0, jz = 0, jzz = 0;
@@ -635,8 +632,6 @@ namespace Fractrace
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
                                             return;
 
-                                        fa1 = 0;
-
                                         int usedCycles = 0;
                                         bool inverse = false;
                                         if (_gData == null)
@@ -679,39 +674,26 @@ namespace Fractrace
                                                 cycleAdd = minCycle - zyklen;
                                             }
                                             if (isYborder)
-                                            { // es liegt Schnitt mit Begrenzung vor
-
-                                                fa1 = formulas.Rechne(x, y, z, 0, zyklen + cycleAdd,
+                                            { 
+                                                if (formulas.Rechne(x, y, z, 0, zyklen + cycleAdd,
                                                  wix, wiy, wiz,
-                                                 jx, jy, jz, jzz, formula, false);
-
-                                                if (fa1 == 0)
-                                                {
-                                                    fa1 = -1;
-                                                    (_gData.Picture)[xx, yy] = 2; // Punkt nicht als gesetzt markieren
-                                                }
-                                                else
-                                                    fa1 = 255 * fa1 / (zyklen + cycleAdd);
-
-                                                // debug only: alle Farbwerte auf 1 setzen
-                                                col[0] = col[1] = col[2] = col[3] = 255;
+                                                 jx, jy, jz, jzz, formula, false)==0)
+                                                    (_gData.Picture)[xx, yy] = 2; // Mark point as not set.
                                             }
                                             else
-                                            {// innerer Punkt
-
+                                            {// inner Point
                                                 if (inverse)
-                                                {
-                                                    
+                                                {                                                    
                                                         if (IsSmallPreview())
                                                         {
-                                                            fa1 = formulas.RayCastAt(minCycle, x, y, z, 0,
+                                                            formulas.RayCastAt(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
                                                         else
                                                         {
-                                                            fa1 = formulas.FixPoint(minCycle, x, y, z, 0,
+                                                            formulas.FixPoint(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
@@ -721,18 +703,18 @@ namespace Fractrace
                                                 {
                                                         if (IsSmallPreview())
                                                         {
-                                                            fa1 = formulas.RayCastAt(zyklen, x, y, z, 0,
+                                                            formulas.RayCastAt(zyklen, x, y, z, 0,
                                    xd, yd, zd, 0,
                                    wix, wiy, wiz,
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
                                                         else
                                                         {
-                                                            fa1 = formulas.FixPoint(zyklen, x, y, z, 0,
+                                                            formulas.FixPoint(zyklen, x, y, z, 0,
                                      xd, yd, zd, 0,
                                      wix, wiy, wiz,
                                      jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                                                            fa1 = (col[0] + col[1] + col[2] + col[3]) / 4.0;
+                                                          
                                                         } 
                                                 }
                                             }
