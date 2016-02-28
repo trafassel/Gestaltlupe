@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Fractrace.Basic;
+using System.IO;
 
 namespace Fractrace {
     public partial class FormulaEditor : UserControl {
@@ -111,8 +112,6 @@ namespace Fractrace {
         /// <summary>
         /// Is called, each time, the text has changed. Set "Intern.Formula.Source to source text.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tbSource_TextChanged(object sender, EventArgs e) {
             ParameterDict.Current["Intern.Formula.Source"] = tbSource.Text;
         }
@@ -126,5 +125,75 @@ namespace Fractrace {
         private void btnShrink_Click(object sender, EventArgs e) {
             panel1.Visible = false;
         }
+
+
+        /// <summary>
+        /// Format 
+        /// </summary>
+        public void Format()
+        {
+            string inputText = tbSource.Text;
+            inputText=inputText.Replace("{", System.Environment.NewLine + "{" + System.Environment.NewLine);
+            inputText = inputText.Replace("}", System.Environment.NewLine + "}" + System.Environment.NewLine);
+            inputText = inputText.Replace(";", ";" + System.Environment.NewLine);
+            inputText = inputText.Replace(System.Environment.NewLine+";", ";");
+
+            StringBuilder formatedSource = new StringBuilder();
+            using (StringReader sr = new StringReader(inputText))
+            {
+                int indent = 0;
+                string line;
+                // dont use newline while in for(int i=0;i...)
+                bool inFor = false;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    line = line.Trim();
+                    if(line.StartsWith("public "))
+                    {
+                        formatedSource.AppendLine("");
+                        formatedSource.AppendLine("");
+                    }
+                    if (inFor && line.Contains(")"))
+                        inFor = false;
+
+                    if (line.StartsWith("for"))
+                        inFor = true;
+                    if (line.Contains("}"))
+                        indent--;
+                    if (line != "")
+                    {
+                        if (inFor)
+                        {
+                            if (line.Contains("for"))
+                                formatedSource.Append(Indent(indent));
+                            formatedSource.Append(line);
+                        }
+                        else
+                        {
+                            formatedSource.AppendLine(Indent(indent) + line);
+                        }
+                    }
+                    if (line.Contains("{"))
+                        indent++;
+                }
+            }
+
+
+            // TODO: Leerzeilen entfernen
+            //       Einrücken
+
+            tbSource.Text = formatedSource.ToString();
+
+        }
+
+        string Indent(int indent)
+        {
+            StringBuilder retVal = new StringBuilder();
+            for (int i = 0; i < indent; i++)
+                retVal.Append("  ");
+            return retVal.ToString();
+        }
+
+
     }
 }

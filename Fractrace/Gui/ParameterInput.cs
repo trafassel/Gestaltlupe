@@ -1363,7 +1363,7 @@ namespace Fractrace
                     break;
 
                 case "tpAnimation":
-                    tabControl1.SelectedIndex = 5;
+                    //tabControl1.SelectedIndex = 5;
                     break;
 
                 case "tpRender":
@@ -1395,6 +1395,16 @@ namespace Fractrace
         private void btnExtras_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 6;
+        }
+
+        private void btnFormat_Click(object sender, EventArgs e)
+        {
+            this.formulaEditor1.Format();
+        }
+
+        private void btnAnimation_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 5;
         }
     }
 }
