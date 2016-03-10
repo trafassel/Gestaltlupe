@@ -965,7 +965,7 @@ namespace Fractrace
         /// </summary>
         private void btnShowDocumentation_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Help.ShowHelp(this, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Gestaltlupe.chm"));
+            System.Diagnostics.Process.Start(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "html/index.html"));
         }
 
 
@@ -1025,7 +1025,7 @@ namespace Fractrace
             {
                 Application.DoEvents();
                 SaveFileDialog sd = new SaveFileDialog();
-                sd.Filter = "VRML|*.wrl|Web|*.xhtml|*.*|*.*";
+                sd.Filter = "Web|*.xhtml|VRML|*.wrl|*.*|*.*";
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
                     if (ResultImageView.PublicForm.LastPicturArt == null)

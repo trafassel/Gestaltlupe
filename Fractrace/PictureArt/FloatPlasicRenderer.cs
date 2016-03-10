@@ -226,7 +226,7 @@ namespace Fractrace.PictureArt
                 DarkenPlane();
             if (_stopRequest)
                 return;
-            SmoothEmptyPixel();
+            //SmoothEmptyPixel();
             if (_stopRequest)
                 return;
             SmoothPlane();
