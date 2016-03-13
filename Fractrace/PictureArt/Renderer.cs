@@ -16,7 +16,7 @@ namespace Fractrace.PictureArt {
         public delegate void PaintEndsDelegate();
 
 
-        public event PaintEndsDelegate PaintEnds;
+        //public event PaintEndsDelegate PaintEnds;
 
         public PictureData PictureData { get { return pData; } }
         protected PictureData pData = null;
@@ -39,8 +39,8 @@ namespace Fractrace.PictureArt {
         protected void CallPaintEnds()
         {
             paintHasEnded = true;
-            if (PaintEnds != null)
-                PaintEnds();
+            //if (PaintEnds != null)
+            //    PaintEnds();
         }
 
 
@@ -55,7 +55,6 @@ namespace Fractrace.PictureArt {
         /// <summary>
         /// Initialisation
         /// </summary>
-        /// <param name="pData"></param>
         public Renderer(PictureData pData) {
             this.pData = pData;
         }
@@ -63,9 +62,8 @@ namespace Fractrace.PictureArt {
 
 
          /// <summary>
-        /// Erstellt das fertige Bild
+        /// Paint generated rgb values to bitmap.
         /// </summary>
-        /// <param name="grLabel"></param>
         public virtual void Paint(Graphics grLabel) {
         }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:246-->
+<!--LastNote:248-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,7 +7,7 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=xufDEraXIxxEEzR7kOAFgA-->
+<!--property:UID=CZzSEtxo34Ngs4dAX2lxOw-->
 <!--property:prop_modified=0-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
@@ -3448,6 +3448,23 @@ Info:<BR>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1456670945-->
 <!--property:date_modified=1456671077-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="5zlvQ8S2DKWsx3tuF5xJHA"></A>Nach dem Laden einer Referenzscene</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1457265128-->
+<!--property:date_modified=1457265419-->
+<!--property:hash=945872d28d45cb5d4dbbd64f3baa21bedb631c58-->
+<!--property:hash_html=a6354656209258dca7d86dbdf8898e4f120f955c-->
+<DD>
+... wird der Tab umgeschatet, aber der Tab oben rechts bleibt bei Files.<BR>
+<BR>
+
+</DD>
+<DT><A name="He30fkF6bOm0FNX7A268xQ"></A>ShadowJustify hat keine Auswirkung</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1457780285-->
+<!--property:date_modified=1457788608-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

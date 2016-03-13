@@ -129,6 +129,11 @@ namespace Fractrace
         bool _inPaint = false;
 
         /// <summary>
+        /// True, if there is need for PictureArt update after current picture art process ends.
+        /// </summary>
+        bool _needRepaintPictureArt = false;
+
+        /// <summary>
         /// Count the number of update steps
         /// </summary>
         int _updateCount = 0;
@@ -193,7 +198,6 @@ namespace Fractrace
         /// <summary>
         /// Load bitmap from the given file and displays it.
         /// </summary>
-        /// <param name="fileName"></param>
         public void ShowPictureFromFile(string fileName)
         {
             if (System.IO.File.Exists(fileName))
@@ -510,10 +514,17 @@ namespace Fractrace
             {
                 if (_iterate != null && !_iterate.InAbort)
                 {
+                    if(_inPaint)
+                    {
+                        _needRepaintPictureArt = true;
+                    }
+                    else
+                    { 
                     System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
                     System.Threading.Thread thread = new System.Threading.Thread(tStart);
                     Scheduler.GrandScheduler.Exemplar.AddThread(thread);
                     thread.Start();
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -603,7 +614,14 @@ namespace Fractrace
                 }
                 _inPaint = false;
             }
+            if (_needRepaintPictureArt)
+            {
+                _needRepaintPictureArt = false;
+                DrawPicture();
+            }
         }
+
+       
 
 
         /// <summary>
@@ -638,13 +656,14 @@ namespace Fractrace
             }
 
             Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
-            /*
-            // On Mono: the Image ist not shown. Quickfix is to reload the saved image.
+            
+            // On Mono: the image ist not shown. Quickfix is to reload the saved image.
             if (!Environment.OSVersion.ToString().ToLower().Contains("microsoft"))
             {
-                ShowPictureFromFile(fileName);
+                pictureBox1.Image = new Bitmap(pictureBox1.Image);
+                _graphics = Graphics.FromImage(pictureBox1.Image);
             }
-            */
+            
             if (ResultImageView.PublicForm.LastPicturArt != null)
             {
                 if (_progress == 100) // TODO: Better test of last rendering process
@@ -663,7 +682,6 @@ namespace Fractrace
         /// <summary>
         /// Set computation progress in percent.
         /// </summary>
-        /// <param name="progressInPercent"></param>
         public void Progress(double progressInPercent)
         {
             if (progressInPercent >= 0 && progressInPercent <= 100)
@@ -694,7 +712,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Dialogabfrage vor Beendigung der Anwendung.
+        /// Dialog on closing this application.
         /// </summary>
         protected override void OnClosing(CancelEventArgs e)
         {
