@@ -116,6 +116,7 @@ namespace Fractrace
                 version = infos[1];
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 4;
+            tabControl2.SelectedIndex = 4;
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
@@ -788,6 +789,7 @@ namespace Fractrace
                 }
             }
             tabControl1.SelectedIndex = 1;
+            tabControl2.SelectedIndex = 0;
         }
 
 
@@ -1233,7 +1235,7 @@ namespace Fractrace
             int currentXpos = 0;
             int currentYpos = 6;
             int bordersize = 6;
-            int maxXpos = 480;
+            int maxXpos = 530;
             int maxYpos = 160;
 
             Random rand = new Random();

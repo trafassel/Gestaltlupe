@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:248-->
+<!--LastNote:247-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3453,11 +3453,24 @@ Info:<BR>
 <DT><A name="5zlvQ8S2DKWsx3tuF5xJHA"></A>Nach dem Laden einer Referenzscene</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1457265128-->
-<!--property:date_modified=1457265419-->
-<!--property:hash=945872d28d45cb5d4dbbd64f3baa21bedb631c58-->
-<!--property:hash_html=a6354656209258dca7d86dbdf8898e4f120f955c-->
+<!--property:date_modified=1457883550-->
+<!--property:hash=b39fe6c5ad3ba703e1510c05e050af3034ca66d4-->
+<!--property:hash_html=1f16b5d236a4af118cddfd21922a924da6fb2cb4-->
 <DD>
 ... wird der Tab umgeschatet, aber der Tab oben rechts bleibt bei Files.<BR>
+<BR>
+Die Datei-laden Einträge müssen nach oben.<BR>
+<BR>
+info:<BR>
+btnLoadExamples<BR>
+btnLoad<BR>
+btnAppend<BR>
+nach: panel37<BR>
+<BR>
+btnSave<BR>
+btnSaveFormula<BR>
+btnSaveImage<BR>
+nach: panel38<BR>
 <BR>
 
 </DD>
