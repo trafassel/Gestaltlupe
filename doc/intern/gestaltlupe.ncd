@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:247-->
+<!--LastNote:256-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3478,6 +3478,90 @@ nach: panel38<BR>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1457780285-->
 <!--property:date_modified=1457788608-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="6qAI8eqmg3yZOtiTlDpycQ"></A>PictureArt anpassen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1463483725-->
+<!--property:date_modified=1463500423-->
+<!--property:hash=225b4241cbdd794424236e7c0fd049c7fd34915e-->
+<!--property:hash_html=f907153c79f8f96159ff50fd9228bb859ff0e2df-->
+<DD>
+In einzelne Module aufsplitten<BR>
+<BR>
+Abhängigkeiten definieren (Vorteil beim Update)<BR>
+<BR>
+
+</DD>
+<DT><A name="XpU1DzoihYg2wFJbxnoNoQ"></A>X3D Export</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1463500425-->
+<!--property:date_modified=1463500530-->
+<!--property:hash=4620bbe940c46a691b597174fd779a4805deff07-->
+<!--property:hash_html=0b3fd03a0f60d5f5a2fc2949d7320a0ddd898d44-->
+<DD>
+Der X3D Export ist breits Besdtandteil des WebGl Exportes. Ein reiner X3D Export hat aber Vorteile bei der Weiterverarbeitung (da XML-Dateien leicht geparst werden können).<BR>
+<BR>
+
+</DD>
+<DT><A name="5YWgau1xWZrWPuXjIChX5g"></A>Bei Wechsel auf Settings</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1466254824-->
+<!--property:date_modified=1466871205-->
+<!--property:hash=e0e87651e537dce1c2fef50c6ac48c99767a24e4-->
+<!--property:hash_html=3f923c905b6387f774a945d1f1eaed67eb174ae9-->
+<DD>
+in die zum ausgewähltem Tab gehörenden Einstellungen wechseln.<BR>
+<BR>
+
+</DD>
+<DT><A name="yaWeRIQtkS0hCYosLfeLlg"></A>Formel als Parameter</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1466255498-->
+<!--property:date_modified=1466871008-->
+<!--property:hash=43ae18175a8815009a3e4c2040d32eedc92e9899-->
+<!--property:hash_html=8c6302651347d336e124eac96be764d3f8739fb0-->
+<DD>
+sollte b-ei den Settings nach dem Laden einer Szern-e n-it beim Update erkannt werden.<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="4IFyVwx9gYpnwEWaDRLdyA"></A>Verfeinerung der Vorschau</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1466257334-->
+<!--property:date_modified=1466257546-->
+<!--property:hash=62d39a7430afeaac139289da68b64b9ec0ffe8f4-->
+<!--property:hash_html=5c96204442dd8e2d4c68933c322c45362ee35cd0-->
+<DD>
+als async Methode.<BR>
+<BR>
+
+</DD>
+<DT><A name="l1K4UyyuEAJLWOFV8Jbokw"></A>Kontextanzeige bei Toolbuttons</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1466258255-->
+<!--property:date_modified=1466871026-->
+<!--property:hash=8e87b17ed7dff138f0533bb53d0dd3c9a6686858-->
+<!--property:hash_html=8e87b17ed7dff138f0533bb53d0dd3c9a6686858-->
+<DD>
+und bei Tabüberschriften.
+</DD>
+<DT><A name="wflxzU9t141w6HcygWuxpw"></A>Bei Beendigung </DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1466937823-->
+<!--property:date_modified=1466937908-->
+<!--property:hash=8c011c569f733304c4f3ffdf0e1c1068da5d5aa3-->
+<!--property:hash_html=37bd2f58fbbf310a10ed7d054ce03455c8ffdbae-->
+<DD>
+müssen auch die laufenden Renderprozesse geschlosen werden.<BR>
+<BR>
+Getestet bei Beendigung während der Animationserstellung. 
+</DD>
+<DT><A name="BI01t3S78OyTxrV35xZyFA"></A>Shadow Glow bei Größenänderung anpasen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1473796721-->
+<!--property:date_modified=1473840653-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

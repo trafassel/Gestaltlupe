@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -621,8 +619,6 @@ namespace Fractrace
             }
         }
 
-       
-
 
         /// <summary>
         /// Call drawImage in Windows.Forms thread.
@@ -779,14 +775,10 @@ namespace Fractrace
         private bool _inImageCreation = false;
         private void ImageCreationStarts()
         {
-            //if (_inImageCreation)
-            //    System.Diagnostics.Debug.WriteLine("Thread Error in ResultImageView.ImageCreationStarts(): Image creation is already running.");
             _inImageCreation = true;
         }
         private void ImageCreationEnds()
         {
-            //if (!_inImageCreation)
-            //    System.Diagnostics.Debug.WriteLine("Thread Error in ResultImageView.ImageCreationEnds(): Image creation is not running.");
             _inImageCreation = false;
         }
         private bool InImageCreation { get { return _inImageCreation;  } }

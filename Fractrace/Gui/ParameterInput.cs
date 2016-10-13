@@ -763,13 +763,11 @@ namespace Fractrace
 
         /// <summary>
         /// Handles the Click event of the btnLoadLast control.
-        /// Das letzte Projekt wird geladen.
+        /// Load last saved project.
         /// </summary>
         private void btnLoadLast_Click(object sender, EventArgs e)
         {
-            string exportDir = FileSystem.Exemplar.ExportDir;
-            exportDir = System.IO.Path.Combine(exportDir, "data");
-            exportDir = System.IO.Path.Combine(exportDir, "parameters");
+            string exportDir = System.IO.Path.Combine(FileSystem.Exemplar.ExportDir, "data","parameters");
             if (System.IO.Directory.Exists(exportDir))
             {
                 DateTime maxDateTime = DateTime.MinValue;
@@ -794,9 +792,8 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Projektdatei wird geladen und (falls ein Bild existiert) angezeigt.
+        /// Load project file.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
         private void LoadConfiguration(string fileName)
         {
             ParameterDict.Current.Load(fileName);
@@ -822,13 +819,13 @@ namespace Fractrace
             _previewMode = true;
             {
                 _history.CurrentTime = _history.Save();
-                // Size und Raster festlegen
+                // Fix Size parameter.
                 string sizeStr = ParameterDict.Current["View.Size"];
                 ParameterDict.Current["View.Size"] = "0.2";
                 ResultImageView.PublicForm._inPreview = true;
                 ForceRedraw();
                 ResultImageView.PublicForm._inPreview = false;
-                // Size und Raster auf die Ursprungswerte setzen
+                // Restore Size parameter.
                 ParameterDict.Current["View.Size"] = sizeStr;
             }
         }
@@ -1006,7 +1003,6 @@ namespace Fractrace
         /// </summary>
         public void SetButtonsToStop()
         {
-            //btnStart.Enabled = true;
             btnStop.Enabled = false;
             btnPause.Enabled = true;
             btnCreatePoster.Enabled = true;
@@ -1073,7 +1069,7 @@ namespace Fractrace
 
         private void tbCurrentStep_TextChanged(object sender, EventArgs e)
         {
-            // TODO: Load editet entry.
+            // TODO: Load edited entry.
             int currentStep = 0;
             if(int.TryParse(tbCurrentStep.Text,out currentStep))
             {
@@ -1087,6 +1083,9 @@ namespace Fractrace
         }
 
 
+        /// <summary>
+        /// Set history to first history entry.
+        /// </summary>
         private void button5_Click(object sender, EventArgs e)
         {
             if (_history.Time >= 0)
