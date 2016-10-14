@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:256-->
+<!--LastNote:257-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -94,7 +94,6 @@ class PictureData{<BR>
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -103,7 +102,6 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454854608-->
 <!--property:date_modified=1454855903-->
-<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -183,7 +181,6 @@ der Berechung der Tiefeninformation weglassen.<BR>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1432975260-->
 <!--property:date_modified=1432975265-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -1019,7 +1016,6 @@ Die Höhe des linken Controls automatisch setzen, wenn preview gestartet wird. (
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1433102300-->
 <!--property:date_modified=1454856074-->
-<!--property:expanded-->
 <!--property:hash=2cc1a475cf9172003c3999ff1735de9dd508a8e9-->
 <!--property:hash_html=19d41448e4de3de4a67e1653a801283337ddb858-->
 <DD>
@@ -1501,7 +1497,6 @@ der Double Auflösung gekommen ist. <BR>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431217793-->
 <!--property:date_modified=1431217902-->
-<!--property:expanded-->
 <!--property:hash=02445c8f6e953b55757e1d81c8f7e3c88b1170d4-->
 <!--property:hash_html=ac8e9df04251a0023926ab471963612a2ab9c088-->
 <DD>
@@ -1664,7 +1659,6 @@ public override float[] LightAt(int x,int y) {}<BR>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434789087-->
 <!--property:date_modified=1434789121-->
-<!--property:expanded-->
 <!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <DD>
@@ -1705,7 +1699,6 @@ Tritt auf, wenn das Programm während einer Animation beendet wird.<BR>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1435339481-->
 <!--property:date_modified=1435654145-->
-<!--property:expanded-->
 <!--property:hash=f53ed17303ee6882d7fb7157e4d2867fe2483a6d-->
 <!--property:hash_html=525f7f064ee5c3fd67a9c95cc8bad17e4cacc2ea-->
 <DD>
@@ -2092,7 +2085,6 @@ Gestalt von mehrere Seiten (oben, links, unten...) einzeln aufnehmen und in eine
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1452418676-->
 <!--property:date_modified=1452496558-->
-<!--property:expanded-->
 <!--property:hash=215d96e62596208380ca85ab708b7bda2e77c05a-->
 <!--property:hash_html=48a41db53b72dd0a74fbd1d44b713519b1fa3498-->
 <DD>
@@ -2259,7 +2251,6 @@ field SFBool normalPerVertex TRUE field SFBool solid TRUE  <BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452713732-->
 <!--property:date_modified=1452713736-->
-<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -2942,7 +2933,6 @@ Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1453641563-->
 <!--property:date_modified=1454277552-->
-<!--property:expanded-->
 <!--property:hash=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
 <!--property:hash_html=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
 <DD>
@@ -3352,7 +3342,6 @@ In der Seitenansicht werden sie
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1455569057-->
 <!--property:date_modified=1455738578-->
-<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -3568,6 +3557,12 @@ Getestet bei Beendigung während der Animationserstellung.
 </DD>
 </DL>
 </DD>
+<DT><A name="wQ9qbcB7ZBYrktEtWHkzRw"></A>Gestaltlupe HTML-GUI</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1476388132-->
+<!--property:date_modified=1476388160-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </BODY>
 </HTML>
