@@ -90,6 +90,8 @@ namespace Fractrace
         int _mouseYBottomView = 0;
         bool _mouseDown = false;
         bool _mouseDownBottomView = false;
+        bool _mouseDownRight = false;
+        bool _mouseDownRightBottomView = false;
 
         System.Windows.Forms.Timer timer1 = null;
         public ParameterInput()
@@ -149,18 +151,25 @@ namespace Fractrace
         private void PreviewButton_MouseLeave1(object sender, EventArgs e)
         {
             _mouseDownBottomView = false;
+            _mouseDownRightBottomView = false;
         }
 
         private void PreviewButton_MouseUp1(object sender, MouseEventArgs e)
         {
+            if (_mouseDownRightBottomView)
+                UpdateNavigateControl();
             _mouseDownBottomView = false;
+            _mouseDownRightBottomView = false;
         }
 
         private void PreviewButton_MouseDown1(object sender, MouseEventArgs e)
         {
             _mouseXBottomView = e.X;
             _mouseYBottomView = e.Y;
-            _mouseDownBottomView = true;
+            if (e.Button == MouseButtons.Left)
+                _mouseDownBottomView = true;
+            if (e.Button == MouseButtons.Right)
+                _mouseDownRightBottomView = true;
         }
 
         private void PreviewButton_MouseMove1(object sender, MouseEventArgs e)
@@ -181,6 +190,18 @@ namespace Fractrace
                 */
                 System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
             }
+
+            if(_mouseDownRightBottomView)
+            {
+                navigateControl1.RotateSceneBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
+                _mouseXBottomView = e.X;
+                _mouseYBottomView = e.Y;
+                lock (_viewNeedsUpdateMutex)
+                {
+                    _viewNeedsUpdate = true;
+            }
+            }
+
         }
 
         private bool _viewNeedsUpdate = false;
@@ -190,34 +211,61 @@ namespace Fractrace
 
         private void PreviewButton_MouseLeave(object sender, EventArgs e)
         {
+            if (_mouseDownRight)
+                UpdateNavigateControl();
             _mouseDown = false;
+            _mouseDownRight = false;
         }
 
         private void PreviewButton_MouseUp(object sender, MouseEventArgs e)
         {
+            if (_mouseDownRight)
+                UpdateNavigateControl();
             _mouseDown = false;
+            _mouseDownRight = false;
         }
-        
-
 
 
         private void PreviewButton_MouseDown(object sender, MouseEventArgs e)
         {
             _mouseX = e.X;
             _mouseY = e.Y;
-            _mouseDown = true;
+            if (e.Button == MouseButtons.Left)
+            {
+                _mouseDown = true;
+                _mouseDownRight = false;
+
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                _mouseDown = false;
+                _mouseDownRight = true;
+            }
         }
 
-      
+
 
         private void PreviewButton_MouseMove(object sender, MouseEventArgs e)
         {
-            if(_mouseDown)
+            if (_mouseDown)
             {
                 navigateControl1.MoveScene(e.X - _mouseX, e.Y - _mouseY);
                 _mouseX = e.X;
                 _mouseY = e.Y;
+
             }
+            if (_mouseDownRight)
+            {
+                navigateControl1.RotateScene(e.X - _mouseX, e.Y - _mouseY);
+                _mouseX = e.X;
+                _mouseY = e.Y;
+                lock (_viewNeedsUpdateMutex)
+                {
+
+                    _viewNeedsUpdate = true;
+            }
+            }
+
         }
 
         private void Preview1_MouseWheel(object sender, MouseEventArgs e)
@@ -1515,6 +1563,11 @@ namespace Fractrace
         private void timer1_Tick(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("timer1_Tick");
+            
+        }
+
+        private void UpdateNavigateControl()
+        {
             bool mustUpdate = false;
             lock (_viewNeedsUpdateMutex)
             {
@@ -1524,8 +1577,8 @@ namespace Fractrace
                     _viewNeedsUpdate = false;
                 }
             }
-            if(mustUpdate)
-               navigateControl1.DrawPreview();
+            if (mustUpdate)
+                navigateControl1.DrawPreview();
         }
     }
 }

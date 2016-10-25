@@ -630,7 +630,7 @@ namespace Fractrace
         private void btnMoveNormal_Click(object sender, EventArgs e)
         {
             mFactor = 12;
-            mZoomFactor = 1.1;
+            mZoomFactor = 1.03;
             UpdateMoveButtonAppearance();
         }
 
@@ -638,7 +638,7 @@ namespace Fractrace
         private void btnMoveSlow_Click(object sender, EventArgs e)
         {
             mFactor = 32;
-            mZoomFactor = 1.05;
+            mZoomFactor = 1.01;
             UpdateMoveButtonAppearance();
         }
 
@@ -646,7 +646,7 @@ namespace Fractrace
         private void btnMoveFine_Click(object sender, EventArgs e)
         {
             mFactor = 128;
-            mZoomFactor = 1.01;
+            mZoomFactor = 1.005;
             UpdateMoveButtonAppearance();
         }
 
@@ -697,6 +697,30 @@ namespace Fractrace
             btnZoomIn_Click(null, null);
         }
 
+
+
+        public void RotateSceneBottomView(int x, int y)
+        {
+            if (x != 0 || y != 0)
+            {
+                //                RotateX((double)y / -1.0 / 180.0);
+                RotateY((double)y / -1.0 / 180.0);
+                RotateZ((double)x / 1.0 / 180.0);
+            }
+        }
+
+
+        /// <summary>
+        /// Rotate scene. Center is scene center. Input is from bootom view mouse move event or fron view mouse move event.
+        /// </summary>
+        public void RotateScene(int x, int y)
+        {
+            if (x != 0 || y != 0)
+            {
+                RotateX((double)y / -1.0 / 180.0);
+                RotateZ((double)x / 1.0 / 180.0);
+            }
+        }
 
         /// <summary>
         /// Slide scene. Input is from bootom view mouse move event.
