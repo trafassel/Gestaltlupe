@@ -143,7 +143,8 @@ namespace Fractrace
             set
             {
                 btnPreview.BackgroundImage = value;
-                _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+                if(btnPreview.BackgroundImage!=null)
+                   _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             }
         }
 

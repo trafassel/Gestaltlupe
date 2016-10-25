@@ -238,7 +238,10 @@ namespace Fractrace.Scheduler.BatchProcess
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY);
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ);
 
-            System.Windows.Forms.MessageBox.Show("File " + ExportFile + " created.");
+            Fractrace.Gui.ExportResultDialog exportResultDialog = new Gui.ExportResultDialog(ExportFile);
+            exportResultDialog.ShowDialog();
+            if (exportResultDialog.OpenInBrowser)
+                System.Diagnostics.Process.Start(ExportFile);
         }
 
 

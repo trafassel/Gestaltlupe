@@ -20,6 +20,7 @@ namespace Fractrace {
 
         #region Windows Form Designer generated code
 
+        System.Windows.Forms.Panel _userdefinedPanel1 = new System.Windows.Forms.Panel();
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -275,7 +276,8 @@ namespace Fractrace {
             // 
             // panel35
             // 
-            this.panel35.Controls.Add(this.btnAnimation);
+            //    this.panel35.Controls.Add(this.btnAnimation);
+            this.panel12.Controls.Add(this.btnAnimation);
             this.panel35.Controls.Add(this.btnExtras);
             this.panel35.Controls.Add(this.btnDocumentation);
             this.panel35.Dock = System.Windows.Forms.DockStyle.Left;
@@ -338,8 +340,11 @@ namespace Fractrace {
             // panel12
             // 
             this.panel12.Controls.Add(this.btnAddToAnimation);
+
             this.panel12.Controls.Add(this.button4);
+#if DEBUG
             this.panel12.Controls.Add(this.btnPause);
+#endif
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(3, 3);
             this.panel12.Name = "panel12";
@@ -356,7 +361,7 @@ namespace Fractrace {
             this.btnAddToAnimation.Name = "btnAddToAnimation";
             this.btnAddToAnimation.Size = new System.Drawing.Size(105, 22);
             this.btnAddToAnimation.TabIndex = 4;
-            this.btnAddToAnimation.Text = "Add To Animation";
+            this.btnAddToAnimation.Text = "     +";
             this.btnAddToAnimation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddToAnimation.UseVisualStyleBackColor = true;
             this.btnAddToAnimation.Click += new System.EventHandler(this.btnAddToAnimation_Click);
@@ -373,7 +378,8 @@ namespace Fractrace {
             this.button4.Text = "Update Material";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Visible = false;
+            // this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnPause
             // 
@@ -1126,9 +1132,11 @@ namespace Fractrace {
             // panel32
             // 
             this.panel32.Controls.Add(this.panel34);
+           // this.panel32.Controls.Add(this.btnPause);
             this.panel32.Controls.Add(this.btnStop);
             this.panel32.Controls.Add(this.btnPreview);
             this.panel32.Controls.Add(this.btnStart);
+           
             this.panel32.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel32.Location = new System.Drawing.Point(0, 0);
             this.panel32.Name = "panel32";
@@ -1645,7 +1653,7 @@ namespace Fractrace {
 
         }
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;

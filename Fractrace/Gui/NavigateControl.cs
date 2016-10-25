@@ -694,6 +694,11 @@ namespace Fractrace
 
         public void ZoomIn()
         {
+            /*
+            double radius = ParameterDict.Current.GetDouble("Scene.Radius");
+            ParameterDict.Current.SetDouble("Scene.Radius", radius / mZoomFactor);
+            */
+
             btnZoomIn_Click(null, null);
         }
 
@@ -703,8 +708,8 @@ namespace Fractrace
         {
             if (x != 0 || y != 0)
             {
-                //                RotateX((double)y / -1.0 / 180.0);
-                RotateY((double)y / -1.0 / 180.0);
+                              RotateX((double)y / -1.0 / 180.0);
+           //     RotateY((double)y / -1.0 / 180.0);
                 RotateZ((double)x / 1.0 / 180.0);
             }
         }
@@ -717,8 +722,8 @@ namespace Fractrace
         {
             if (x != 0 || y != 0)
             {
-                RotateX((double)y / -1.0 / 180.0);
-                RotateZ((double)x / 1.0 / 180.0);
+                RotateX(-2.0*(double)y / 180.0);
+                RotateZ(2.0*(double)x / 180.0);
             }
         }
 

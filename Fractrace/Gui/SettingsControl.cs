@@ -23,6 +23,7 @@ namespace Fractrace.Gui
         {
             InitializeComponent();
             cbDeleteCacheAutomatically.Checked = Settings.Default.DeleteCacheAutomatically;
+            cbDeleteCacheAutomatically.Visible = false;
         }
 
         private void cbDeleteCacheAutomatically_CheckedChanged(object sender, EventArgs e)

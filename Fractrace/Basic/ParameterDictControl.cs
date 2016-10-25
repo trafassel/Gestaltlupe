@@ -49,6 +49,10 @@ namespace Fractrace.Basic
         /// </summary>
         public event ElementChangedDelegate ElementChanged;
 
+        public void ShowTree(bool active=true)
+        {
+            panel3.Visible = active;
+        }
 
         /// <summary>
         /// Build hierarchy from ParameterDict entries. 

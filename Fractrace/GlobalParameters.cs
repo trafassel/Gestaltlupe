@@ -200,7 +200,7 @@ for (int n = 1; n < _cycles; n++)
             //ParameterDict.Current["View.Perspective"] = "1";
             //ParameterDict.Current["View.Perspective.PARAMETERINFO.Datatype"] = "Bool";
             //ParameterDict.Current["View.Perspective.PARAMETERINFO.Description"] = "Switch between 3D view and parallel view.";
-            ParameterDict.Current["Transformation.Camera.IsometricProjection"] = "1";
+            ParameterDict.Current["Transformation.Camera.IsometricProjection"] = "0";
             ParameterDict.Current["Transformation.Camera.IsometricProjection.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Transformation.Camera.IsometricProjection.PARAMETERINFO.Description"] = "Switch between 3D view and parallel view.";
 
@@ -477,7 +477,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "4";
             ParameterDict.Current["Export.X3d.ClosedSurfaceDist.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 1 1.2 2 4 8";
 
-            ParameterDict.Current["Export.X3d.BatchType"] = "3";
+            ParameterDict.Current["Export.X3d.BatchType"] = "2";
             ParameterDict.Current["Export.X3d.BatchType.PARAMETERINFO.Description"] = "2: front, back 3:front,back,top... 4:front,top-front,...";
             ParameterDict.Current["Export.X3d.BatchType.PARAMETERINFO.VIEW.FixedButtons"] = "2 3 4";
 

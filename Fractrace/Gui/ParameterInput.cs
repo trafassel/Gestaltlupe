@@ -136,6 +136,11 @@ namespace Fractrace
             this.timer1.Enabled = true;
             this.timer1.Tick += Timer1_Tick;
 
+            this.tabControl1.Multiline = true;
+            this.tabControl2.Multiline = true;
+
+            this.cbAutomaticSaveAnimation.Visible = false;
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -513,6 +518,7 @@ namespace Fractrace
                     this.animationControl1.UpdateFromChangeProperty();
                     break;
                 case "Data":
+                    parameterDictControl1.ShowTree();
                     parameterDictControl1.UpdateFromData();
                     break;
                 case "tpMaterial":
@@ -1318,6 +1324,7 @@ namespace Fractrace
         private void btnAddToAnimation_Click(object sender, EventArgs e)
         {
             this.animationControl1.AddToAnimation();
+            this.btnAnimation_Click(null, null);
         }
 
 
@@ -1486,6 +1493,8 @@ namespace Fractrace
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("Formula");
             tabControl2.SelectedIndex = 0;
+            parameterDictControl1.ShowTree(false);
+
         }
 
         /// <summary>
@@ -1496,6 +1505,7 @@ namespace Fractrace
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("View");
             tabControl2.SelectedIndex = 0;
+            parameterDictControl1.ShowTree(false);
         }
 
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
@@ -1526,11 +1536,13 @@ namespace Fractrace
 
                 case "tpSettings":
                     tabControl1.SelectedIndex = 0;
+                    parameterDictControl1.ShowTree(true);
                     break;
 
                 case "tpSpecial":
                     tabControl1.SelectedIndex = 0;
                     parameterDictControl1.SelectTreeNode("Export");
+                    parameterDictControl1.ShowTree(false);
                     break;
 
             }
@@ -1579,6 +1591,11 @@ namespace Fractrace
             }
             if (mustUpdate)
                 navigateControl1.DrawPreview();
+        }
+
+        private void btnDocumentation_Click_1(object sender, EventArgs e)
+        {
+            btnDocumentation_Click(sender, e);
         }
     }
 }

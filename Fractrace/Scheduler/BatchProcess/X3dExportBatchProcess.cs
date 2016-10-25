@@ -228,23 +228,27 @@ namespace Fractrace.Scheduler.BatchProcess
         /// </summary>
         protected void BatchEnds()
         {
-            try { 
-            // combine created files
-            FileStream resultFile = File.Open(ExportFile, FileMode.Create);
-            foreach (string file in _createdFiles)
+            try
             {
-                FileStream fileStream = File.Open(file, FileMode.Open);
-                byte[] fileContent = new byte[fileStream.Length];
-                fileStream.Read(fileContent, 0, (int)fileStream.Length);
-                resultFile.Write(fileContent, 0, (int)fileStream.Length);
-                fileStream.Close();
-            }
-            resultFile.Close();
-            foreach (string file in _createdFiles)
-            {
-                System.IO.File.Delete(file);
-            }
-            System.Windows.Forms.MessageBox.Show("File " + ExportFile + " created.");
+                // combine created files
+                FileStream resultFile = File.Open(ExportFile, FileMode.Create);
+                foreach (string file in _createdFiles)
+                {
+                    FileStream fileStream = File.Open(file, FileMode.Open);
+                    byte[] fileContent = new byte[fileStream.Length];
+                    fileStream.Read(fileContent, 0, (int)fileStream.Length);
+                    resultFile.Write(fileContent, 0, (int)fileStream.Length);
+                    fileStream.Close();
+                }
+                resultFile.Close();
+                foreach (string file in _createdFiles)
+                {
+                    System.IO.File.Delete(file);
+                }
+                Fractrace.Gui.ExportResultDialog exportResultDialog = new Gui.ExportResultDialog(ExportFile);
+                exportResultDialog.ShowDialog();
+                if (exportResultDialog.OpenInBrowser)
+                    System.Diagnostics.Process.Start(ExportFile);
             }
             catch (System.Exception ex)
             {

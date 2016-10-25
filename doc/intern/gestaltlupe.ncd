@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:267-->
+<!--LastNote:270-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3557,13 +3557,28 @@ Getestet bei Beendigung während der Animationserstellung.
 <DT><A name="5KNqvrS2ZUI9Ofy0BxbvTA"></A>Settingsstruktur ausblenden</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1477336034-->
-<!--property:date_modified=1477337078-->
-<!--property:hash=502b2659483d08f1bfe1b196d22de65eaecd423b-->
-<!--property:hash_html=2ff8938b144494152d35dc232dc9ac8ccc6dd955-->
+<!--property:date_modified=1477404356-->
+<!--property:expanded-->
+<!--property:hash=961f7531fa39b6d9fb06ec54d318ce8a719b492f-->
+<!--property:hash_html=416f1379a0e08187ae81a44edeea80399978328d-->
 <DD>
 Bei Formula und View.<BR>
 <BR>
-
+// Baum ausblenden<BR>
+ParameterDictControl.treeview1<BR>
+<BR>
+<DL>
+<DT><A name="ZltSeP5afur56pJ8RUdiRA"></A>Info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477404474-->
+<!--property:date_modified=1477404656-->
+<!--property:hash=ecc5db716717199531d7ac4e2ffb569ca4ccb30a-->
+<!--property:hash_html=7389f4b0359337d40fea4ed4c5ce01e3ec729465-->
+<DD>
+Wird aufgerufen bei:<BR>
+  
+</DD>
+</DL>
 </DD>
 <DT><A name="CXkwuAXKucwYFr4G6Gi0ng"></A>Nach dem Batch Export 3D Browser starten</DT>
 <!--property:icon_internal=bullet_white-->
@@ -3637,13 +3652,12 @@ Besser; bei jeder dritten Navigationsänderung.<BR>
 <DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1477344109-->
-<!--property:date_modified=1477382611-->
-<!--property:hash=10f0b297e1be548902c40472fbdc9678c5a4a93c-->
-<!--property:hash_html=5dfaf25601261d7fc6e142543aa1d8ecf975bf9a-->
+<!--property:date_modified=1477399365-->
+<!--property:hash=38837dee261ee6845cf84c6023ea38ed491a1b0d-->
+<!--property:hash_html=9e359b7d87b93d83be320cc2ee03c9cf94240ba4-->
 <DD>
 private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)<BR>
        <BR>
-<BR>
 <A href="https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx">https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx</A><BR>
 <BR>
 <BR>
@@ -3653,9 +3667,31 @@ private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArg
 
 </DD>
 <DT><A name="YbuEIhI0vyC95P9SVC6zUw"></A>Rotation bei rechter Maustaste</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1477382512-->
-<!--property:date_modified=1477382603-->
+<!--property:date_modified=1477403982-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="CMgL7Ucf9mxq3MpvmAc36A"></A>Schnelle Vorschau beim Verschieben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477406472-->
+<!--property:date_modified=1477406756-->
+<!--property:hash=bb13c4268448fb4e4267f81b939de75a15597f9f-->
+<!--property:hash_html=61e63f92c6e3c64f5c192ffdaad0d1bc02f4f24b-->
+<DD>
+<BR>
+<BR>
+Dazu wird ein zweites Image verwendet. <BR>
+<BR>
+offsetX und offsetY geben die Verschiebung an.<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="DPyptS4czBvLml4YdR5ZeQ"></A>defaultwert für Batch Type: 2</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477413221-->
+<!--property:date_modified=1477413239-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
