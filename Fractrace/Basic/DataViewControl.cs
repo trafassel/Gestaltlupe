@@ -20,7 +20,6 @@ namespace Fractrace.Basic
             InitializeComponent();
         }
 
-
         /// <summary>
         /// Some created pages for fast display on node selection. Key is the category.
         /// </summary>
@@ -30,14 +29,13 @@ namespace Fractrace.Basic
         /// <summary>
         /// Current choosen category (of selected node).
         /// </summary>
-        protected string _oldCategory = "";
+        protected string _oldNodeHash = "";
 
 
         /// <summary>
         /// A new category (as node in the tree view is selected). This control 
         /// has to display all corresponding entries.
         /// </summary>
-        /// <param name="category">The category.</param>
         public void Select(string category)
         {
             if (category == "")
@@ -65,14 +63,14 @@ namespace Fractrace.Basic
                 newPage.Create(category);
                 _pages[category] = newPage;
             }
-            if (_oldCategory != newPage.NodeHash)
+            if (_oldNodeHash != newPage.NodeHash)
             {
                 pnlMain.Controls.Clear();
                 pnlMain.Controls.Add(newPage);
                 this.Height = newPage.ComputedHeight;
             }
             this.ResumeLayout(true);
-            _oldCategory = newPage.NodeHash;
+            _oldNodeHash = newPage.NodeHash;
         }
 
 

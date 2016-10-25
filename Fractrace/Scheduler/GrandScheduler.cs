@@ -22,15 +22,7 @@ namespace Fractrace.Scheduler
         }
 
 
-        /// <summary>
-        /// Used by the singleton design pattern.
-        /// </summary>
         protected static GrandScheduler _exemplar = null;
-
-
-        /// <summary>
-        ///  Used by the singleton design pattern.
-        /// </summary>
         protected static Object _lockVar = new Object();
 
 
@@ -56,12 +48,6 @@ namespace Fractrace.Scheduler
         ///  Reference to history entries, used in history control and animations.
         /// </summary>
         ParameterHistory _history = null;
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected long _time = 0;
 
 
         /// <summary>

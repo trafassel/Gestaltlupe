@@ -31,7 +31,7 @@ namespace Fractrace
             UpdateMoveButtonAppearance();
             UpdateMoveAngleButtonAppearance();
 
-            // test is for designer only
+            // This prevents the designer to read this block.
             if (ParameterInput.MainParameterInput != null && ParameterInput.MainParameterInput.MainDataViewControl != null)
             {
                 _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
@@ -689,6 +689,145 @@ namespace Fractrace
                                                  FontStyle.Underline, btnMoveAngleFine.Font.Unit);
         }
 
+
+        public void ZoomIn()
+        {
+            btnZoomIn_Click(null, null);
+        }
+
+
+        /// <summary>
+        /// Slide scene. Input is from bootom view mouse move event.
+        /// </summary>
+        public void MoveSceneFromBottomView(int x, int y)
+        {
+            if (x != 0 || y != 0)
+            {
+                System.Diagnostics.Debug.WriteLine("MoveScene: " + x.ToString() + " " + y.ToString());
+
+                {
+                    UpdateCenterDiff();
+                    Vec3 trans = SolveEqusyst(new Vec3(((double)x) / -10, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
+                    if (trans.X != 0)
+                        SlideX(trans.X / mFactor);
+                    if (trans.Y != 0)
+                        SlideY(trans.Y / mFactor);
+                    if (trans.Z != 0)
+                        SlideZ(trans.Z / mFactor);
+                }
+
+
+                /*
+                {
+                    UpdateCenterDiff();
+                    Vec3 trans = SolveEqusyst(new Vec3(0, 0, ((double)y) / -10), centerDiffX, centerDiffY, centerDiffZ);
+                    if (trans.X != 0)
+                        SlideX(trans.X / mFactor);
+                    if (trans.Y != 0)
+                        SlideY(trans.Y / mFactor);
+                    if (trans.Z != 0)
+                        SlideZ(trans.Z / mFactor);
+                }
+                */
+
+
+            }
+
+        }
+
+
+        public void MoveScene(int x,int y)
+        {
+            if(x!=0 || y !=0)
+            {
+                System.Diagnostics.Debug.WriteLine("MoveScene: " + x.ToString() + " " + y.ToString());
+
+                {
+                    UpdateCenterDiff();
+                    Vec3 trans = SolveEqusyst(new Vec3(((double)x) / -10, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
+                    if (trans.X != 0)
+                        SlideX(trans.X / mFactor);
+                    if (trans.Y != 0)
+                        SlideY(trans.Y / mFactor);
+                    if (trans.Z != 0)
+                        SlideZ(trans.Z / mFactor);
+                }
+
+               
+                {
+                    UpdateCenterDiff();
+                    Vec3 trans = SolveEqusyst(new Vec3(0, 0, ((double)y) / -10), centerDiffX, centerDiffY, centerDiffZ);
+                    if (trans.X != 0)
+                        SlideX(trans.X / mFactor);
+                    if (trans.Y != 0)
+                        SlideY(trans.Y / mFactor);
+                    if (trans.Z != 0)
+                        SlideZ(trans.Z / mFactor);
+                }
+               
+
+              //  DrawAndWriteInHistory();
+            }
+        }
+        /*
+        public void Zoom(double factor)
+        {
+            ParameterDict.Current.SetDouble("Scene.Radius", ParameterDict.Current.GetDouble("Scene.Radius") * factor);
+            // if (mZoomFactor>1.1)
+            {
+                //                btnBackwards_Click(null, null);
+
+                if (mFactor == 0)
+                    return;
+                if (factor >= 1)
+                {
+                    UpdateCenterDiff();
+                    Vec3 trans = SolveEqusyst(new Vec3(0, -0.3, 0), centerDiffX, centerDiffY, centerDiffZ);
+                    if (trans.X != 0)
+                        SlideX(trans.X / mFactor);
+                    if (trans.Y != 0)
+                        SlideY(trans.Y / mFactor);
+                    if (trans.Z != 0)
+                        SlideZ(trans.Z / mFactor);
+                    DrawAndWriteInHistory();
+
+                }
+
+                //     btnBackwards_Click(null, null);
+                //     btnBackwards_Click(null, null);
+            }
+            DrawAndWriteInHistory();
+        }
+        */
+
+
+        public void ZoomOut()
+        {
+            btnZoomOut_Click(null, null);
+        }
+
+        public void MoveLeftRightUpOrDown(int diffx, int diffy)
+        {
+
+            Vec3 trans = SolveEqusyst(new Vec3(-1, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
+            if (trans.X != 0)
+                SlideX(trans.X / mFactor);
+            if (trans.Y != 0)
+                SlideY(trans.Y / mFactor);
+            if (trans.Z != 0)
+                SlideZ(trans.Z / mFactor);
+
+            /*
+            if (diffx < -2)
+                navigateControl1.MoveLeft();
+            if (diffx > 2)
+                navigateControl1.MoveLeft();
+            if (diffy < -2)
+                navigateControl1.MoveUp();
+            if (diffy > 2)
+                navigateControl1.MoveDown();
+                */
+        }
 
     }
 }

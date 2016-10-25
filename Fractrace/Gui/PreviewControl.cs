@@ -57,7 +57,6 @@ namespace Fractrace
             _graphics = Graphics.FromImage(labelImage);
         }
 
-
         /// <summary>
         /// Clear the image.
         /// </summary>

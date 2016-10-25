@@ -58,9 +58,6 @@ namespace Fractrace
         public ParameterHistory History  {  get  {  return _history;  } }
         ParameterHistory _history = new ParameterHistory();
 
-        /// <summary>
-        /// Zugriff auf die Bearbeitungsparameter.
-        /// </summary>
         public FracValues Parameter { get { return _parameter; } }
         private FracValues _parameter = new FracValues();
 
@@ -75,29 +72,25 @@ namespace Fractrace
         public double ScreenSize { get { return ParameterDict.Current.GetDouble("View.Size"); } }
 
         /// <summary>
-        /// GetFormula.Static.Formula.
+        /// GetFormula.Static.Julia.
         /// </summary>
         public int Formula { get {
                 return ParameterDict.Current.GetBool("Formula.Static.Julia") ? -2 : -1;
             } }
 
         public bool AutomaticSaveInAnimation { get { return cbAutomaticSaveAnimation.Checked; } }
-
         public bool Changed = false;
-
-        /// <summary>
-        /// Damit wird vermieden, dass nach dem Export von 3D Daten stets beim Öffnen das Exportverzeichnis
-        /// als InitialDirectory verwendet wird. 
-        /// </summary>
         protected static string oldDirectory = "";
-
         public void DeactivatePreview() { _previewMode = false; }
         protected bool _previewMode = false;
 
+        int _mouseX = 0;
+        int _mouseY = 0;
+        int _mouseXBottomView = 0;
+        int _mouseYBottomView = 0;
+        bool _mouseDown = false;
+        bool _mouseDownBottomView = false;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterInput"/> class.
-        /// </summary>
         public ParameterInput()
         {
             MainParameterInput = this;
@@ -124,8 +117,92 @@ namespace Fractrace
             InitDefaultScenesPictures();
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(600, 200);
+            preview1.MouseWheel += Preview1_MouseWheel;
+            preview1.PreviewButton.MouseMove += PreviewButton_MouseMove;
+            preview1.PreviewButton.MouseDown += PreviewButton_MouseDown;
+            preview1.PreviewButton.MouseUp += PreviewButton_MouseUp;
+            preview1.PreviewButton.MouseLeave += PreviewButton_MouseLeave;
+
+            preview2.PreviewButton.MouseMove += PreviewButton_MouseMove1;
+            preview2.PreviewButton.MouseDown += PreviewButton_MouseDown1;
+            preview2.PreviewButton.MouseUp += PreviewButton_MouseUp1;
+            preview2.PreviewButton.MouseLeave += PreviewButton_MouseLeave1;
+            preview2.PreviewButton.Click += PreviewButton_Click1;
+            //   this.MouseMove += ParameterInput_MouseMove;
+
         }
 
+        private void PreviewButton_Click1(object sender, EventArgs e)
+        {
+            PreviewButton_Click(null, null);
+        }
+
+        private void PreviewButton_MouseLeave1(object sender, EventArgs e)
+        {
+            _mouseDownBottomView = false;
+        }
+
+        private void PreviewButton_MouseUp1(object sender, MouseEventArgs e)
+        {
+            _mouseDownBottomView = false;
+        }
+
+        private void PreviewButton_MouseDown1(object sender, MouseEventArgs e)
+        {
+            _mouseXBottomView = e.X;
+            _mouseYBottomView = e.Y;
+            _mouseDownBottomView = true;
+        }
+
+        private void PreviewButton_MouseMove1(object sender, MouseEventArgs e)
+        {
+            if (_mouseDownBottomView)
+            {
+                navigateControl1.MoveSceneFromBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
+                _mouseXBottomView = e.X;
+                _mouseYBottomView = e.Y;
+            }
+        }
+
+        private void PreviewButton_MouseLeave(object sender, EventArgs e)
+        {
+            _mouseDown = false;
+        }
+
+        private void PreviewButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            _mouseDown = false;
+        }
+        
+
+
+
+        private void PreviewButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            _mouseX = e.X;
+            _mouseY = e.Y;
+            _mouseDown = true;
+        }
+
+      
+
+        private void PreviewButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(_mouseDown)
+            {
+                navigateControl1.MoveScene(e.X - _mouseX, e.Y - _mouseY);
+                _mouseX = e.X;
+                _mouseY = e.Y;
+            }
+        }
+
+        private void Preview1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+                navigateControl1.ZoomIn();
+            else
+                navigateControl1.ZoomOut();
+        }
 
         private void ParameterDictControl1_ElementChanged(string name, string value)
         {

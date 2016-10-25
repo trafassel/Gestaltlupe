@@ -19,6 +19,18 @@ namespace Fractrace.Basic
             dataViewControl1.ElementChanged += DataViewControl1_ElementChanged;
         }
 
+        public bool ShowCategory
+        {
+            get
+            {
+                return _showCategory;
+            }
+            set
+            {
+                _showCategory = value;
+            }
+        }
+        bool _showCategory = true;
 
         /// <summary>
         /// Nodes of this three with unique name of the entry as key.
@@ -65,7 +77,6 @@ namespace Fractrace.Basic
                                 {
                                     _nodes[parentCat] = new TreeNode(parentCat);
                                     _nodes[parentCat].Tag = parentCat;
-                                    // TODO: eigentlich müsste hier rekursiv die Hirarchie aufgebaut werden
                                     string testParentParent = GetCategory(parentCat);
                                     if (testParentParent != "." && _nodes.ContainsKey(parentCat))
                                     {
@@ -96,8 +107,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return true, if node corresponding to given category need subnodes to edit subentries.
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
         protected bool NeedSubNodes(string category)
         {
             foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
@@ -117,31 +126,23 @@ namespace Fractrace.Basic
         }
 
 
-        /// <summary>
-        /// Die Hirarchie wird in den Einträgen durch . abgetrennt. Hier wird der String 
-        /// bis zum letzten . zurückgeliefert.
-        /// </summary>
-        protected string GetCategory(string input)
+        protected string GetCategory(string fullPath)
         {
-            int pos = input.LastIndexOf('.');
+            int pos = fullPath.LastIndexOf('.');
             if (pos != -1)
-            {
-                return input.Substring(0, pos);
-            }
+                return fullPath.Substring(0, pos);
             return ".";
         }
 
 
         /// <summary>
-        /// Liefert den Namen des Baumknotens der angegebenen Kategorie
+        /// Get text of corresponding tree node.
         /// </summary>
         protected string GetName(string category)
         {
             int pos = category.LastIndexOf('.');
             if (pos != -1)
-            {
                 return category.Substring(pos + 1);
-            }
             return category;
         }
 
@@ -149,7 +150,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Return true, if corresponding parameter entry has an user control in ParameterDictControl.
         /// </summary>
-        /// <returns></returns>
         bool HasEntryControl(string parameterName)
         {
             if (parameterName.StartsWith("Intern."))
@@ -180,13 +180,9 @@ namespace Fractrace.Basic
                     return;
                 _inUpdateFromData = true;
             }
-            this.dataViewControl1.Select(_choosenHirarchy);         
-            //pnlEdit.Dock = DockStyle.Fill;
-        
+            this.dataViewControl1.Select(_choosenHirarchy);     
             lock (_updateFromDataMutex)
-            {
                 _inUpdateFromData = false;
-            }
         }
 
 
@@ -209,7 +205,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Ein Knoten mit einer bestimmten Hirarchie wurde ausgewählt.
         /// </summary>
-        /// <param name="hirarchy"></param>
         public void SelectNode(string hirarchy)
         {
             _choosenHirarchy = hirarchy;

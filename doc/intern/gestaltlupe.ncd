@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:257-->
+<!--LastNote:266-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -94,6 +94,7 @@ class PictureData{<BR>
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -3553,6 +3554,104 @@ Getestet bei Beendigung während der Animationserstellung.
 <!--property:date_modified=1473840653-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="5KNqvrS2ZUI9Ofy0BxbvTA"></A>Settingsstruktur ausblenden</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1477336034-->
+<!--property:date_modified=1477337078-->
+<!--property:hash=502b2659483d08f1bfe1b196d22de65eaecd423b-->
+<!--property:hash_html=2ff8938b144494152d35dc232dc9ac8ccc6dd955-->
+<DD>
+Bei Formula und View.<BR>
+<BR>
+
+</DD>
+<DT><A name="CXkwuAXKucwYFr4G6Gi0ng"></A>Nach dem Batch Export 3D Browser starten</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477337017-->
+<!--property:date_modified=1477337061-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="QymmBHYDzwNTY7y5KH5LJg"></A>X3d und XHTML in einer Datei.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477337589-->
+<!--property:date_modified=1477337665-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="BGyEsw1PJP01Kisxp2llkg"></A>In der Navigation eine Kopie des Preview Controls verwenden.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477337915-->
+<!--property:date_modified=1477338421-->
+<!--property:hash=71def9fb44c9607ce3efd60d3b8bf81fb2e1d56c-->
+<!--property:hash_html=4bd6748719aa1f985e7fa91aea0d3e3c32978df5-->
+<DD>
+Das würde dann auch die Zuordnung der Richtungen einfacher machen. <BR>
+Später kann man dann auf eine Änderung auch bei einem Verschiebung im Bild reagiert werden.<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="9G6NBQ7aXSOjm1sIrbKp7A"></A>Parameter und Static</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477340090-->
+<!--property:date_modified=1477340221-->
+<!--property:hash=cb7c853cdb50cd7da9108c1cc9e782d6524359c6-->
+<!--property:hash_html=a23fa245b2e81965f54f3358c5569d6a0c1cfca3-->
+<DD>
+bei Formel weglassen.<BR>
+<BR>
+
+</DD>
+<DT><A name="MspYtvIJp1Zv9QBPJFy4bQ"></A>VRML Menu im Export.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477341101-->
+<!--property:date_modified=1477341136-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="JKoqI9WY4kgwCAQIqVW71Q"></A>X3d-Export</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477341143-->
+<!--property:date_modified=1477341151-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="kwcEeHDrOUxcwFJduSaBTA"></A>Nach Änderung der Navigation</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477342315-->
+<!--property:date_modified=1477342671-->
+<!--property:hash=2704e839338afd174ea1724dec506559f0cea2ca-->
+<!--property:hash_html=4ecbf6a1739c8992751c35ac0050f662c646344f-->
+<DD>
+in den Haupttag &quot;...&quot; wechseln.<BR>
+Besser; bei jeder dritten Navigationsänderung.<BR>
+<BR>
+
+</DD>
+<DT><A name="xCAWijY9dWdHfWTsrtUjng"></A>Den Formula Tab unter Formula einordnen.</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477343091-->
+<!--property:date_modified=1477343144-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477344109-->
+<!--property:date_modified=1477344354-->
+<!--property:hash=10f0b297e1be548902c40472fbdc9678c5a4a93c-->
+<!--property:hash_html=5dfaf25601261d7fc6e142543aa1d8ecf975bf9a-->
+<DD>
+private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)<BR>
+       <BR>
+<BR>
+<A href="https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx">https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx</A><BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 </DL>

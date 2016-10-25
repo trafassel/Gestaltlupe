@@ -268,7 +268,6 @@ namespace Fractrace.Scheduler.BatchProcess
         /// <summary>
         /// Return true, if after generation a new process should be startet.
         /// </summary>
-        /// <returns></returns>
         public override bool OnPictureCreated(Iterate iter, PictureData pictureData)
         {
             _iter = iter;
