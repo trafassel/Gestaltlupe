@@ -91,6 +91,7 @@ namespace Fractrace
         bool _mouseDown = false;
         bool _mouseDownBottomView = false;
 
+        System.Windows.Forms.Timer timer1 = null;
         public ParameterInput()
         {
             MainParameterInput = this;
@@ -128,8 +129,16 @@ namespace Fractrace
             preview2.PreviewButton.MouseUp += PreviewButton_MouseUp1;
             preview2.PreviewButton.MouseLeave += PreviewButton_MouseLeave1;
             preview2.PreviewButton.Click += PreviewButton_Click1;
-            //   this.MouseMove += ParameterInput_MouseMove;
 
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1.Enabled = true;
+            this.timer1.Tick += Timer1_Tick;
+
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            timer1_Tick(null, null);
         }
 
         private void PreviewButton_Click1(object sender, EventArgs e)
@@ -158,11 +167,26 @@ namespace Fractrace
         {
             if (_mouseDownBottomView)
             {
+                System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 " + e.X.ToString() + " " + e.Y.ToString());
                 navigateControl1.MoveSceneFromBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
                 _mouseXBottomView = e.X;
                 _mouseYBottomView = e.Y;
+
+                // activate the following for experimental update on mousemove feature.
+                /* 
+                lock (_viewNeedsUpdateMutex)
+                {
+                    _viewNeedsUpdate = true;
+                }
+                */
+                System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
             }
         }
+
+        private bool _viewNeedsUpdate = false;
+        object _viewNeedsUpdateMutex = new object();
+
+
 
         private void PreviewButton_MouseLeave(object sender, EventArgs e)
         {
@@ -670,6 +694,9 @@ namespace Fractrace
         /// </summary>
         private void SetSmallPreviewSize()
         {
+
+            if (preview1 == null || preview2 == null)
+                return;
 
             double winput = ParameterDict.Current.GetDouble("View.Width");
             double hinput = ParameterDict.Current.GetDouble("View.Height");
@@ -1483,6 +1510,22 @@ namespace Fractrace
         private void btnAnimation_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 5;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("timer1_Tick");
+            bool mustUpdate = false;
+            lock (_viewNeedsUpdateMutex)
+            {
+                if (_viewNeedsUpdate)
+                {
+                    mustUpdate = true;
+                    _viewNeedsUpdate = false;
+                }
+            }
+            if(mustUpdate)
+               navigateControl1.DrawPreview();
         }
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:266-->
+<!--LastNote:267-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3635,9 +3635,9 @@ Besser; bei jeder dritten Navigationsänderung.<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1477344109-->
-<!--property:date_modified=1477344354-->
+<!--property:date_modified=1477382611-->
 <!--property:hash=10f0b297e1be548902c40472fbdc9678c5a4a93c-->
 <!--property:hash_html=5dfaf25601261d7fc6e142543aa1d8ecf975bf9a-->
 <DD>
@@ -3652,6 +3652,12 @@ private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArg
 <BR>
 
 </DD>
+<DT><A name="YbuEIhI0vyC95P9SVC6zUw"></A>Rotation bei rechter Maustaste</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1477382512-->
+<!--property:date_modified=1477382603-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>

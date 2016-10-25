@@ -417,7 +417,7 @@ namespace Fractrace
         /// <summary>
         /// Factor used in move.
         /// </summary>
-        protected double mFactor = 4;
+        protected double mFactor = 12;
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -552,10 +552,12 @@ namespace Fractrace
         }
 
 
-        private void DrawPreview()
+        public void DrawPreview()
         {
+            System.Diagnostics.Debug.WriteLine("DrawPreview");
             ResultImageView.PublicForm.Stop();
             _preview.Draw();
+            System.Diagnostics.Debug.WriteLine("DrawPreview Ends");
         }
 
 
@@ -717,10 +719,10 @@ namespace Fractrace
                 }
 
 
-                /*
+                
                 {
                     UpdateCenterDiff();
-                    Vec3 trans = SolveEqusyst(new Vec3(0, 0, ((double)y) / -10), centerDiffX, centerDiffY, centerDiffZ);
+                    Vec3 trans = SolveEqusyst(new Vec3(0, ((double)y) / -10, 0), centerDiffX, centerDiffY, centerDiffZ);
                     if (trans.X != 0)
                         SlideX(trans.X / mFactor);
                     if (trans.Y != 0)
@@ -728,7 +730,7 @@ namespace Fractrace
                     if (trans.Z != 0)
                         SlideZ(trans.Z / mFactor);
                 }
-                */
+                
 
 
             }
