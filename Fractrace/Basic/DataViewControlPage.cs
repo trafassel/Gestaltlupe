@@ -112,6 +112,14 @@ namespace Fractrace.Basic
             this.SuspendLayout();
             _computedHeight = 0;
             bool elementAdded = false;
+
+            {
+                DataViewElement helement = DataViewElementFactory.Create(category.Replace("."," "), "", "Headline", "", false);
+                oldElements.Add(helement);
+                _computedHeight += DataViewElementFactory.DefaultHeight;
+            }
+
+
             foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
             {
                 string parameterName = entry.Key;
@@ -139,6 +147,9 @@ namespace Fractrace.Basic
             string oldCategory = "";
             if (!elementAdded)
             {
+                // Header:
+               
+
                 foreach (KeyValuePair<string, string> entry in ParameterDict.Current.SortedEntries)
                 {
                     string parameterName = entry.Key;
@@ -150,8 +161,12 @@ namespace Fractrace.Basic
                             currentCategory = paraSplit[paraSplit.Length - 2];
                             if (currentCategory != oldCategory)
                             {
-                                DataViewElement helement = DataViewElementFactory.Create(currentCategory, "", "Headline", "", false);
+                                /*
+                                //DataViewElement helement = DataViewElementFactory.Create(currentCategory, "", "Headline", "", false);
+                                DataViewElement helement = DataViewElementFactory.Create("", "", "Headline", "", false);
                                 oldElements.Add(helement);
+                                */
+                                
                                 oldCategory = currentCategory;
                                 _computedHeight += DataViewElementFactory.DefaultHeight;
                             }
@@ -190,7 +205,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Subentries are updated. Returns true, if at least one entry is added or removed.
         /// </summary>
-        /// <param name="category">The category.</param>
         public bool IterateElements()
         {
             string newNodeHash = ParameterDict.Current.GetHashOfName(_category);

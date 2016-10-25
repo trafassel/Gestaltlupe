@@ -220,7 +220,7 @@
             // 
             // pnlBorderProperties
             // 
-            this.pnlBorderProperties.Location = new System.Drawing.Point(431, 33);
+            this.pnlBorderProperties.Location = new System.Drawing.Point(431, 3);
             this.pnlBorderProperties.Name = "pnlBorderProperties";
             this.pnlBorderProperties.Size = new System.Drawing.Size(253, 265);
             this.pnlBorderProperties.TabIndex = 38;
@@ -253,6 +253,7 @@
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 39;
             this.label1.Text = "Scene";
+            this.label1.Visible = false;
             // 
             // btnZoomOut
             // 

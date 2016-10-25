@@ -114,6 +114,9 @@ namespace Fractrace.Basic
             this.pnlButtons.Controls.Add(button);
         }
 
+
+
+
         private void PlusButton_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;

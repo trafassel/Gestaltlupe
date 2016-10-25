@@ -19,18 +19,6 @@ namespace Fractrace.Basic
             dataViewControl1.ElementChanged += DataViewControl1_ElementChanged;
         }
 
-        public bool ShowCategory
-        {
-            get
-            {
-                return _showCategory;
-            }
-            set
-            {
-                _showCategory = value;
-            }
-        }
-        bool _showCategory = true;
 
         /// <summary>
         /// Nodes of this three with unique name of the entry as key.

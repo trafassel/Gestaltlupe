@@ -22,13 +22,13 @@ namespace Fractrace
             ParameterDict.Current["Scene.CenterX"] = "0";
             ParameterDict.Current["Scene.CenterX.PARAMETERINFO.Description"] = "X Coordinate of Scene Center";
 
-            ParameterDict.Current["Scene.CenterY"] = "0";
+            ParameterDict.Current["Scene.CenterY"] = "0.66";
             ParameterDict.Current["Scene.CenterY.PARAMETERINFO.Description"] = "Y Coordinate of Scene Center";
 
             ParameterDict.Current["Scene.CenterZ"] = "0";
             ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.Description"] = "Z Coordinate of Scene Center";
 
-            ParameterDict.Current["Scene.Radius"] = "2.16";
+            ParameterDict.Current["Scene.Radius"] = "1.8";
             ParameterDict.Current["Scene.Radius.PARAMETERINFO.Description"] = "Size of Scene";
 
             // Rotation angle (in degree) for axis x (rotation center is center of the given bounds).

@@ -87,9 +87,9 @@
 
     }
 
-    #endregion
+        #endregion
 
-    private System.Windows.Forms.Panel panel1;
+        protected System.Windows.Forms.Panel panel1;
     protected System.Windows.Forms.Panel pnlEdit;
     protected System.Windows.Forms.Panel pnlButtons;
     protected System.Windows.Forms.Label lblName;
