@@ -35,26 +35,34 @@ namespace Fractrace.Basic
             {
                 DataViewStringElement stringElement = new DataViewStringElement();
                 retVal = stringElement;
-                if (ParameterDict.Current[name +".PARAMETERINFO.VIEW.FixedButtons"]!="")
-                {
-                    string buttonValues = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.FixedButtons"];
-                    foreach(string buttonText in buttonValues.Split(' '))
-                    {
-                        stringElement.AddFixedValueButton(buttonText.Trim());
-                    }
-                }
+                //                stringElement.AddFillRightButton();
+                bool hasButtons = false;
                 if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusButton"] != "")
                 {
                     string buttonValue = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusButton"];
                     stringElement.AddPlusButton(buttonValue.Trim());
                     stringElement.AddMinusButton(buttonValue.Trim());
+                    hasButtons = true;
                 }
                 if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusPlusButton"] != "")
                 {
                     string buttonValue = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusPlusButton"];
                     stringElement.AddPlusPlusButton(buttonValue.Trim());
                     stringElement.AddMinusMinusButton(buttonValue.Trim());
+                    hasButtons = true;
                 }
+                if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.FixedButtons"] != "")
+                {
+                    string buttonValues = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.FixedButtons"];
+                    foreach (string buttonText in buttonValues.Split(' '))
+                    {
+                        stringElement.AddFixedValueButton(buttonText.Trim());
+                        hasButtons = true;
+                    }
+                }
+                if (hasButtons)
+                   stringElement.AddFillRightButton();
+
             }
 
             retVal.Dock = System.Windows.Forms.DockStyle.Top;

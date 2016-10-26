@@ -61,32 +61,43 @@ namespace Fractrace.Basic
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = text;
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //button.Text = "o";
+
+//            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+
+
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
-            button.Dock = System.Windows.Forms.DockStyle.Right;
+                button.Dock = System.Windows.Forms.DockStyle.Right;
+            //button.Dock = System.Windows.Forms.DockStyle.Left;
             if (text.Length < 3 || (text.Length==3 && text.Contains(".")))
             {
                 button.Width = 30;
-                this.pnlButtons.Width += 32;
+                this.pnlButtons.Width += 30;
             }
             else
             {
                 button.Width = 60;
-                this.pnlButtons.Width += 64;
+              //  if (this.pnlButtons.Width == 0)
+              //      _additionalButtonsWidth -= 30;
+                this.pnlButtons.Width += 60;
             }
 
+            _additionalButtonsWidth += button.Width;
+            _additionalButtonsWidth += tmpBtnSize;
             button.Click += Button_Click;
             this.pnlButtons.Controls.Add(button);    
         }
 
+        int tmpBtnSize = 0;
 
         public void AddPlusButton(string value)
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "+";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
@@ -94,7 +105,9 @@ namespace Fractrace.Basic
             button.Tag = value;
             button.Click += PlusButton_Click;
             button.Width = 30;
-            this.pnlButtons.Width += 32;
+            _additionalButtonsWidth += button.Width;
+            _additionalButtonsWidth += tmpBtnSize;
+            this.pnlButtons.Width += 30;
             this.pnlButtons.Controls.Add(button);
         }
 
@@ -102,7 +115,7 @@ namespace Fractrace.Basic
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "++";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
@@ -110,15 +123,48 @@ namespace Fractrace.Basic
             button.Tag = value;
             button.Click += PlusButton_Click;
             button.Width = 30;
-            this.pnlButtons.Width += 32;
+            _additionalButtonsWidth += button.Width;
+            _additionalButtonsWidth += tmpBtnSize;
+            this.pnlButtons.Width += 30;
             this.pnlButtons.Controls.Add(button);
         }
 
+        System.Windows.Forms.Button fillRightButton = null;
 
+        int _additionalButtonsWidth = 0;
+        public void AddFillRightButton()
+        {
+           // this.pnlButtons.Width = 200;
+           // _additionalButtonsWidth = this.pnlButtons.Width;
+            fillRightButton = new System.Windows.Forms.Button();
+            fillRightButton.Text = "";
+            fillRightButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            fillRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            fillRightButton.ForeColor = System.Drawing.Color.DarkGray;
+            fillRightButton.FlatAppearance.BorderSize = 0;
+            fillRightButton.Dock = System.Windows.Forms.DockStyle.Right;
+            fillRightButton.Width = 130;
+            this.pnlButtons.Width += 130;
+            this.pnlButtons.Controls.Add(fillRightButton);
+         //   UpdateFillRightSize();
+        }
 
+        void UpdateFillRightSize()
+        {
+            if(fillRightButton!=null)
+            {
+                int oldWidth = fillRightButton.Width;
+                int newWidth= this.Width - 420- _additionalButtonsWidth+100;
+                if (newWidth < 0)
+                    newWidth = 0;
+                fillRightButton.Width = newWidth;
+                this.pnlButtons.Width += fillRightButton.Width-oldWidth;
+            }
+        }
 
         private void PlusButton_Click(object sender, EventArgs e)
         {
+
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
             double currentValue = Double.Parse(this._tbValue.Text, ParameterDict.Culture);
             double valueToAdd= Double.Parse(button.Tag.ToString(), ParameterDict.Culture);
@@ -131,7 +177,7 @@ namespace Fractrace.Basic
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "-";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
@@ -139,12 +185,15 @@ namespace Fractrace.Basic
             button.Tag = value;
             button.Click += MinusButton_Click;
             button.Width = 30;
-            this.pnlButtons.Width += 32;
+            _additionalButtonsWidth += button.Width;
+            _additionalButtonsWidth += tmpBtnSize;
+            this.pnlButtons.Width += 30;
             this.pnlButtons.Controls.Add(button);
         }
 
         public void AddMinusMinusButton(string value)
         {
+           
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "--";
             button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -155,7 +204,9 @@ namespace Fractrace.Basic
             button.Tag = value;
             button.Click += MinusButton_Click;
             button.Width = 30;
-            this.pnlButtons.Width += 32;
+            _additionalButtonsWidth += button.Width;
+            _additionalButtonsWidth += tmpBtnSize;
+            this.pnlButtons.Width += 30;
             this.pnlButtons.Controls.Add(button);
         }
 
@@ -174,5 +225,11 @@ namespace Fractrace.Basic
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
             this._tbValue.Text = button.Text;
           }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            UpdateFillRightSize();
+        }
     }
 }

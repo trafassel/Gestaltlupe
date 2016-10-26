@@ -1082,7 +1082,7 @@ namespace Fractrace.PictureArt
                                         shadowHeight = shadowInfo[i, j];
                                         sharpShadowHeight = shadowInfoSharp[i, j];
 
-                                if (height != double.MinValue)
+                                if (height != float.MinValue)
                                 {
                                     if (height < sharpShadowHeight) // inside the sharp shadow
                                         currentShadowMapEntry += shadowVal;
@@ -1526,10 +1526,11 @@ namespace Fractrace.PictureArt
                 {
                     FloatVec3 col = _rgbPlane[i, j];
                     float yd = _heightMap[i, j];
-                    if (yd != double.MinValue)
+                    if (yd != float.MinValue)
                     {
                         float ydNormalized = (yd - _minY) / mainDeph;
                         float greyYd = 1.0f - ydNormalized;
+                        greyYd = greyYd * greyYd;
                         col.X = col.X * ydNormalized + (_backColorRed * greyYd);
                         col.Y = col.Y * ydNormalized + (_backColorGreen * greyYd);
                         col.Z = ydNormalized * col.Z + (_backColorBlue * greyYd);

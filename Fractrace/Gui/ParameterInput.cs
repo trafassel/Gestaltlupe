@@ -185,14 +185,7 @@ namespace Fractrace
                 navigateControl1.MoveSceneFromBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
                 _mouseXBottomView = e.X;
                 _mouseYBottomView = e.Y;
-
-                // activate the following for experimental update on mousemove feature.
-                /* 
-                lock (_viewNeedsUpdateMutex)
-                {
-                    _viewNeedsUpdate = true;
-                }
-                */
+                navigateControl1.UpdateFromChangeProperty();
                 System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
             }
 
@@ -201,6 +194,7 @@ namespace Fractrace
                 navigateControl1.RotateSceneBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
                 _mouseXBottomView = e.X;
                 _mouseYBottomView = e.Y;
+                navigateControl1.UpdateFromChangeProperty();
                 lock (_viewNeedsUpdateMutex)
                 {
                     _viewNeedsUpdate = true;
@@ -255,6 +249,7 @@ namespace Fractrace
             if (_mouseDown)
             {
                 navigateControl1.MoveScene(e.X - _mouseX, e.Y - _mouseY);
+                navigateControl1.UpdateFromChangeProperty();
                 _mouseX = e.X;
                 _mouseY = e.Y;
 
@@ -268,6 +263,7 @@ namespace Fractrace
                 {
 
                     _viewNeedsUpdate = true;
+                    navigateControl1.UpdateFromChangeProperty();
             }
             }
 
@@ -1574,7 +1570,7 @@ namespace Fractrace
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("timer1_Tick");
+            //System.Diagnostics.Debug.WriteLine("timer1_Tick");
             
         }
 

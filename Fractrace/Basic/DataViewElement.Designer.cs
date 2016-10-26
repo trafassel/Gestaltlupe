@@ -40,6 +40,18 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.panel1.Size = new System.Drawing.Size(127, 79);
             this.panel1.TabIndex = 0;
+
+            this.panel1FillRight = new System.Windows.Forms.Panel();
+            //this.panel1FillRight.Controls.Add(this.lblName);
+            this.panel1FillRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1FillRight.Location = new System.Drawing.Point(0, 0);
+            this.panel1FillRight.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1FillRight.Name = "panel1";
+            this.panel1FillRight.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.panel1FillRight.Size = new System.Drawing.Size(127, 79);
+            this.panel1FillRight.TabIndex = 0;
+            this.panel1FillRight.SuspendLayout();
+            
             // 
             // lblName
             // 
@@ -54,7 +66,7 @@
             // 
             // pnlEdit
             // 
-            this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEdit.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlEdit.Location = new System.Drawing.Point(127, 0);
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
@@ -76,8 +88,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlButtons);
+           // this.Controls.Add(this.panel1FillRight);
+            
             this.Controls.Add(this.pnlEdit);
             this.Controls.Add(this.panel1);
+
+            this.pnlEdit.Width = 100;
+
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataViewElement";
             this.Size = new System.Drawing.Size(260, 79);
@@ -87,6 +104,7 @@
 
     }
 
+        protected System.Windows.Forms.Panel panel1FillRight;
         #endregion
 
         protected System.Windows.Forms.Panel panel1;
