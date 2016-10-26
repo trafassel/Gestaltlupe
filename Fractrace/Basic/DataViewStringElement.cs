@@ -154,7 +154,7 @@ namespace Fractrace.Basic
             if(fillRightButton!=null)
             {
                 int oldWidth = fillRightButton.Width;
-                int newWidth= this.Width - 420- _additionalButtonsWidth+100;
+                int newWidth= this.Width - 420- _additionalButtonsWidth+200;
                 if (newWidth < 0)
                     newWidth = 0;
                 fillRightButton.Width = newWidth;

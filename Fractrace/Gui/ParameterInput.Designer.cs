@@ -37,6 +37,7 @@ namespace Fractrace {
             this.panel35 = new System.Windows.Forms.Panel();
             this.btnAnimation = new System.Windows.Forms.Button();
             this.btnExtras = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.btnDocumentation = new System.Windows.Forms.Button();
             this.panel21 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
@@ -239,7 +240,7 @@ namespace Fractrace {
             // 
             this.tabControl2.Controls.Add(this.tpRender);
             this.tabControl2.Controls.Add(this.tpAnimation);
-            this.tabControl2.Controls.Add(this.tpSettings);
+          //  this.tabControl2.Controls.Add(this.tpSettings);
             this.tabControl2.Controls.Add(this.tpSpecial);
             this.tabControl2.Controls.Add(this.topTbFiles);
             this.tabControl2.Controls.Add(this.topTbFormula);
@@ -280,11 +281,12 @@ namespace Fractrace {
             this.panel12.Controls.Add(this.btnAnimation);
             this.panel35.Controls.Add(this.btnExtras);
             this.panel35.Controls.Add(this.btnDocumentation);
+            this.panel35.Controls.Add(this.btnSettings);
             this.panel35.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel35.Location = new System.Drawing.Point(0, 0);
             this.panel35.Name = "panel35";
             this.panel35.Padding = new System.Windows.Forms.Padding(5);
-            this.panel35.Size = new System.Drawing.Size(124, 77);
+            this.panel35.Size = new System.Drawing.Size(164, 77);
             this.panel35.TabIndex = 0;
             // 
             // btnAnimation
@@ -296,7 +298,7 @@ namespace Fractrace {
             this.btnAnimation.Name = "btnAnimation";
             this.btnAnimation.Size = new System.Drawing.Size(114, 23);
             this.btnAnimation.TabIndex = 2;
-            this.btnAnimation.Text = "Animation";
+            this.btnAnimation.Text = "Show Animation Tab";
             this.btnAnimation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAnimation.UseVisualStyleBackColor = true;
             this.btnAnimation.Click += new System.EventHandler(this.btnAnimation_Click);
@@ -310,10 +312,25 @@ namespace Fractrace {
             this.btnExtras.Name = "btnExtras";
             this.btnExtras.Size = new System.Drawing.Size(114, 23);
             this.btnExtras.TabIndex = 1;
-            this.btnExtras.Text = "Extras";
+            this.btnExtras.Text = "Show Extras Tab";
             this.btnExtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExtras.UseVisualStyleBackColor = true;
             this.btnExtras.Click += new System.EventHandler(this.btnExtras_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Location = new System.Drawing.Point(5, 27);
+            this.btnSettings.Name = "btnExtras";
+            this.btnSettings.Size = new System.Drawing.Size(114, 23);
+            this.btnSettings.TabIndex = 1;
+            this.btnSettings.Text = "Show Settings Tab";
+            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += BtnSettings_Click;
+            //this.btnSettings.Click += new System.EventHandler(this.btnExtras_Click);
             // 
             // btnDocumentation
             // 
@@ -324,7 +341,7 @@ namespace Fractrace {
             this.btnDocumentation.Name = "btnDocumentation";
             this.btnDocumentation.Size = new System.Drawing.Size(114, 22);
             this.btnDocumentation.TabIndex = 0;
-            this.btnDocumentation.Text = "Documentation";
+            this.btnDocumentation.Text = "Show Documentation Tab";
             this.btnDocumentation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDocumentation.UseVisualStyleBackColor = true;
             this.btnDocumentation.Click += new System.EventHandler(this.btnDocumentation_Click);
@@ -349,7 +366,7 @@ namespace Fractrace {
             this.panel12.Location = new System.Drawing.Point(3, 3);
             this.panel12.Name = "panel12";
             this.panel12.Padding = new System.Windows.Forms.Padding(5);
-            this.panel12.Size = new System.Drawing.Size(115, 77);
+            this.panel12.Size = new System.Drawing.Size(135, 77);
             this.panel12.TabIndex = 2;
             // 
             // btnAddToAnimation
@@ -361,7 +378,7 @@ namespace Fractrace {
             this.btnAddToAnimation.Name = "btnAddToAnimation";
             this.btnAddToAnimation.Size = new System.Drawing.Size(105, 22);
             this.btnAddToAnimation.TabIndex = 4;
-            this.btnAddToAnimation.Text = "     +";
+            this.btnAddToAnimation.Text = "Add to Animation";
             this.btnAddToAnimation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddToAnimation.UseVisualStyleBackColor = true;
             this.btnAddToAnimation.Click += new System.EventHandler(this.btnAddToAnimation_Click);
@@ -1653,7 +1670,9 @@ namespace Fractrace {
 
         }
 
-#endregion
+      
+
+        #endregion
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -1763,6 +1782,7 @@ namespace Fractrace {
         private System.Windows.Forms.TabPage topTbFormula;
         private System.Windows.Forms.Panel panel35;
         private System.Windows.Forms.Button btnExtras;
+        private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnDocumentation;
         private System.Windows.Forms.Panel panel36;
         private System.Windows.Forms.Button btnFormat;

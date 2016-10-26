@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:270-->
+<!--LastNote:271-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3644,9 +3644,9 @@ Besser; bei jeder dritten Navigationsänderung.<BR>
 
 </DD>
 <DT><A name="xCAWijY9dWdHfWTsrtUjng"></A>Den Formula Tab unter Formula einordnen.</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_purple-->
 <!--property:date_created=1477343091-->
-<!--property:date_modified=1477343144-->
+<!--property:date_modified=1477421079-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
@@ -3692,6 +3692,12 @@ offsetX und offsetY geben die Verschiebung an.<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477413221-->
 <!--property:date_modified=1477413239-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="FDt2pTpfO2dh67PuRrXQ1Q"></A>Parameter Steps wird im AnimationTab nicht angezeigt</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477445862-->
+<!--property:date_modified=1477445884-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

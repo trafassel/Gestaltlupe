@@ -19,6 +19,7 @@ namespace Fractrace.Basic
             if (ParameterDict.Current.Exists("Formula.Static.Formula")) // Version 5
             {
                 ParameterDict.Current.SetBool("Formula.Static.Julia", ParameterDict.Current.GetInt("Formula.Static.Formula") == -2);
+                ParameterDict.Current.RemoveProperty("Formula.Static.Formula");
             }
 
             if (ParameterDict.Current.Exists("Transformation.Perspective.Cameraposition")) // Version 4

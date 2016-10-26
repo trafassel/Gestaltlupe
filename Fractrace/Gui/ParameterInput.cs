@@ -112,7 +112,7 @@ namespace Fractrace
                 version = infos[1];
             this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 4;
-            tabControl2.SelectedIndex = 4;
+            tabControl2.SelectedIndex = 0;
             SetSmallPreviewSize();
             parameterDictControl1.SelectNode("View");
             parameterDictControl1.ElementChanged += ParameterDictControl1_ElementChanged;
@@ -175,6 +175,12 @@ namespace Fractrace
                 _mouseDownBottomView = true;
             if (e.Button == MouseButtons.Right)
                 _mouseDownRightBottomView = true;
+        }
+
+        private void BtnSettings_Click(object sender, System.EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+            parameterDictControl1.ShowTree(true);
         }
 
         private void PreviewButton_MouseMove1(object sender, MouseEventArgs e)
@@ -1320,7 +1326,7 @@ namespace Fractrace
         private void btnAddToAnimation_Click(object sender, EventArgs e)
         {
             this.animationControl1.AddToAnimation();
-            this.btnAnimation_Click(null, null);
+           // this.btnAnimation_Click(null, null);
         }
 
 
