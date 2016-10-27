@@ -282,7 +282,6 @@
             this.tbSize.Size = new System.Drawing.Size(98, 20);
             this.tbSize.TabIndex = 1;
             this.tbSize.Text = "1";
-            this.tbSize.TextChanged += new System.EventHandler(this.tbSize_TextChanged);
             // 
             // label1
             // 

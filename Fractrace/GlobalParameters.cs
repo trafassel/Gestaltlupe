@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "6";
+            ParameterDict.Current["Intern.Version"] = "7";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -194,7 +194,8 @@ for (int n = 1; n < _cycles; n++)
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Current["View.Size"] = "1";
             ParameterDict.Current["View.Size.PARAMETERINFO.Description"] = "View.Size*View.Width == width of the rendered bitmap";
-            ParameterDict.Current["View.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.5 1 2";
+            ParameterDict.Current["View.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
+            ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Switch between 3D view and parallel view.
             //ParameterDict.Current["View.Perspective"] = "1";
@@ -260,6 +261,19 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.Description"] = "Default animation steps while adding the frame in the animation control.";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.FixedButtons"] = "1 15 30";
             ParameterDict.Current["Animation.Steps.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
+            // If set, animation is smooth.
+            ParameterDict.Current["Animation.Smooth"] = "0";
+            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.Description"] = "If set, animation is smooth.";
+            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.VIEW.FixedButtons"] = "1 15 30";
+            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
+            // Used istead View.Size while creating animation. 
+            ParameterDict.Current["Animation.Size"] = "1";
+            ParameterDict.Current["Animation.Size.PARAMETERINFO.Description"] = "Used istead View.Size while creating animation. ";
+            ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
+            ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Color and light correction.
             ParameterDict.Current["Renderer.Normalize"] = "0";

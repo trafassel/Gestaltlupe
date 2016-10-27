@@ -33,7 +33,15 @@ namespace Fractrace.Animation
                 _propertyControl.Dock = DockStyle.Fill;
                 _propertyControl.Create("Animation");
                 panel3.Controls.Add(_propertyControl);
+                this.cbSmooth.Visible = false;
+                this.tbSize.Visible = false;
+                this.label1.Visible = false;
+                this.tbAnimationDescription.ScrollBars = ScrollBars.None;
+                this.tbAnimationDescription.BorderStyle = BorderStyle.None;
+//                this.tbAnimationDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
             }
+
         }
 
 
@@ -212,11 +220,15 @@ namespace Fractrace.Animation
         }
 
 
+        bool _animationSmooth = ParameterDict.Current.GetBool("Animation.Smooth");
+
         /// <summary>
         /// Start rendering full Animation.
         /// </summary>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            _pictureSize = ParameterDict.Current.GetDouble("Animation.Size");
+            _animationSmooth = ParameterDict.Current.GetBool("Animation.Smooth");
             _inAnimation = true;
             ParameterInput.MainParameterInput.SetButtonsToStart();
             CreateAnimationSteps(tbAnimationDescription.Text);
@@ -269,7 +281,7 @@ namespace Fractrace.Animation
                 lblAnimationProgress.Text = "compute: " + from.ToString() + " " + to.ToString() + " Step " + i.ToString() + " (from " + steps.ToString() + ")";
                 double r = 1.0 / steps * (double)i;
                 Application.DoEvents();
-                if (cbSmooth.Checked)
+                if (_animationSmooth)
                     animationHistory.LoadSmoothed(r + historyIndex);
                 else
                     animationHistory.Load(r + historyIndex);
@@ -368,18 +380,6 @@ namespace Fractrace.Animation
             mPreview1.RenderingEnds += new PictureRenderingIsReady(mPreview1_RenderingEnds);
             mPreview1.Draw();
         }
-
-
-        private void tbSize_TextChanged(object sender, EventArgs e)
-        {
-            if (double.TryParse(tbSize.Text, System.Globalization.NumberStyles.Number, ParameterDict.Culture.NumberFormat, out _pictureSize))
-            {
-                tbSize.ForeColor = Color.Black;
-            }
-            else
-                tbSize.ForeColor = Color.Red;
-        }
-
 
         /// <summary>
         /// Load Animation file.
