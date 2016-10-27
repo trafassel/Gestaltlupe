@@ -114,7 +114,7 @@ namespace Fractrace.Basic
         public void AddPlusPlusButton(string value)
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-            button.Text = "++";
+            button.Text = "+";
             button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
@@ -195,7 +195,7 @@ namespace Fractrace.Basic
         {
            
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-            button.Text = "--";
+            button.Text = "-";
             button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;

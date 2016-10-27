@@ -331,7 +331,7 @@ for (int n = 1; n < _cycles; n++)
             // Light Level: light in bright areas
             ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
-            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8";
+            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8 1";
             ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.025";
 
             // Shadow height factor
@@ -344,9 +344,9 @@ for (int n = 1; n < _cycles; n++)
             // Shininess factor (0 ... 1)
             ParameterDict.Current["Renderer.ShininessFactor"] = "0.5";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.Description"] = "Shininess factor (0 ... 1).";
-            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.8";
+            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.3 0.8 1";
             ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
 
             // Shininess ( 0... 1000)
@@ -354,21 +354,21 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.Description"] = "Shininess ( 0... 1000).";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.FixedButtons"] = "9 14 28";
             ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
-            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
+            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.1";
 
             // Brightness (1 ...)
             ParameterDict.Current["Renderer.Brightness"] = "1.05";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
-            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "1";
+            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.1";
 
             // Contrast (0 ... 1 ...)
             ParameterDict.Current["Renderer.Contrast"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
             ParameterDict.Current["Renderer.SmoothNormalLevel"] = "8";
@@ -381,19 +381,19 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Light.X.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             ParameterDict.Current["Renderer.Light.Y"] = "1";
             ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Light.Y.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             ParameterDict.Current["Renderer.Light.Z"] = "0.15";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.Description"] = "Normal of the light source.";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
             //ParameterDict.Current["Renderer.UseSharpShadow"] = "0";
@@ -404,19 +404,19 @@ for (int n = 1; n < _cycles; n++)
             // To justify the color components 
             ParameterDict.Current["Renderer.ColorFactor.Red"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.Description"] = "To justify the color components.";
-            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.1 0.5 1 2 10 100";
             ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
+            ParameterDict.Current["Renderer.ColorFactor.Red.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             ParameterDict.Current["Renderer.ColorFactor.Green"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.Description"] = "To justify the color components.";
-            ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.FixedButtons"] = "0  0.1 0.5 1 2 10 100";
             ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
             ParameterDict.Current["Renderer.ColorFactor.Green.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
 
             ParameterDict.Current["Renderer.ColorFactor.Blue"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.Description"] = "To justify the color components.";
-            ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.FixedButtons"] = "0  0.1 0.5 1 2 10 100";
             ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
             ParameterDict.Current["Renderer.ColorFactor.Blue.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.001";
 
