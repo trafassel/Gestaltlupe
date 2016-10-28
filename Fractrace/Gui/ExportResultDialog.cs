@@ -11,13 +11,17 @@ using System.Windows.Forms;
 
 namespace Fractrace.Gui
 {
+
+    
     public partial class ExportResultDialog : Form
     {
+        static bool _openInBrowser = false;
+
         public ExportResultDialog(string fileName)
         {
             InitializeComponent();
             lblExportText.Text = "Export to " + fileName;
-            cbOpenInBrowser.Checked = Settings.Default.ShowExportInBrowser;
+            cbOpenInBrowser.Checked = _openInBrowser;
         }
 
 
@@ -30,8 +34,7 @@ namespace Fractrace.Gui
 
         private void cbOpenInBrowser_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ShowExportInBrowser = cbOpenInBrowser.Checked;
-            Settings.Default.Save();
+            _openInBrowser = cbOpenInBrowser.Checked;
         }
     }
 }

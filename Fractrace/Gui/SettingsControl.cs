@@ -22,14 +22,12 @@ namespace Fractrace.Gui
         public SettingsControl()
         {
             InitializeComponent();
-            cbDeleteCacheAutomatically.Checked = Settings.Default.DeleteCacheAutomatically;
-            cbDeleteCacheAutomatically.Visible = false;
+            
         }
 
         private void cbDeleteCacheAutomatically_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.DeleteCacheAutomatically = cbDeleteCacheAutomatically.Checked;
-            Settings.Default.Save();
+           
         }
 
 
