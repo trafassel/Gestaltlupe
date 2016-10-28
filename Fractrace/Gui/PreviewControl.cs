@@ -306,6 +306,36 @@ namespace Fractrace
             this.ResumeLayout(false);
         }
 
+        System.Drawing.Bitmap _baseBitmap = null;
+
+        /// <summary>
+        /// Internal reference bitmap is set (as copy of current bitmap).
+        /// </summary>
+        public void InitBaseImage()
+        {
+            System.Diagnostics.Debug.WriteLine("InitBaseImage ");
+            _baseBitmap = (System.Drawing.Bitmap)btnPreview.BackgroundImage.Clone();
+        }
+
+        public void MoveBitmap(int x, int y)
+
+        {
+            System.Diagnostics.Debug.WriteLine("MoveBitmap " + x.ToString() + " " + y.ToString());
+            if (_baseBitmap == null)
+            {
+                return;
+            }
+            Graphics graphics = Graphics.FromImage(_baseBitmap);
+            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+            _graphics.Clear(Color.Black);
+            _graphics.DrawImage(_baseBitmap, x, y);
+            Application.DoEvents();
+            this.Update();
+            this.Refresh();
+            btnPreview.Refresh();
+            btnPreview.Focus();
+        }
+
 
     }
 }

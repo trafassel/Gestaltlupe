@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:270-->
+<!--LastNote:272-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3700,6 +3700,17 @@ offsetX und offsetY geben die Verschiebung an.<BR>
 <!--property:date_modified=1477446440-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="juxwiNlFEYnnhKDlbzuiYw"></A>Reiter Animation</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1477555639-->
+<!--property:date_modified=1477555931-->
+<!--property:hash=12bf4e6337d77376f13406edaeefea45e8d591f2-->
+<!--property:hash_html=08a13301661c98170c20103c8a30293fedc2f46f-->
+<DD>
+Neue Parameter:<BR>
+<BR>
+Animation
+</DD>
 </DL>
 </DD>
 </DL>
