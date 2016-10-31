@@ -166,6 +166,7 @@ namespace Fractrace
         {
             if (_iterate == null || !_iterate.InAbort)
                 this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            InitBaseImage();
         }
 
 
@@ -313,10 +314,14 @@ namespace Fractrace
         /// </summary>
         public void InitBaseImage()
         {
-            System.Diagnostics.Debug.WriteLine("InitBaseImage ");
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("InitBaseImage ");
             _baseBitmap = (System.Drawing.Bitmap)btnPreview.BackgroundImage.Clone();
+            _baseBitmap.Save(@"C:\Users\perwi_000\Desktop\temp\t2.png");
+            }catch (Exception ex)
+            { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
         }
-
         public void MoveBitmap(int x, int y)
 
         {
@@ -327,8 +332,9 @@ namespace Fractrace
             }
             Graphics graphics = Graphics.FromImage(_baseBitmap);
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
-            _graphics.Clear(Color.Black);
+            _graphics.Clear(Color.White);
             _graphics.DrawImage(_baseBitmap, x, y);
+            _baseBitmap.Save(@"C:\Users\perwi_000\Desktop\temp\t1.png");
             Application.DoEvents();
             this.Update();
             this.Refresh();

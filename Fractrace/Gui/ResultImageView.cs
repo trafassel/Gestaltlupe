@@ -740,6 +740,7 @@ namespace Fractrace
             else
             {
                 Fractrace.ParameterInput.MainParameterInput.EnableRepaint(true);
+                if(this.LastPicturArt!=null)
                 Fractrace.ParameterInput.MainParameterInput.EnableStartButton(true);
             }
 

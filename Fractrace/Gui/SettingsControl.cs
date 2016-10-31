@@ -15,7 +15,8 @@ namespace Fractrace.Gui
 
     /// <summary>
     /// User input for:
-    /// Settings.Default.DeleteCacheAutomatically
+    /// Settings.Default.DeleteCacheAutomatically.
+    /// Not used since version 3.3.
     /// </summary>
     public partial class SettingsControl : UserControl
     {

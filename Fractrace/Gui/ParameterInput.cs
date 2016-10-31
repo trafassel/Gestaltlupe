@@ -172,7 +172,13 @@ namespace Fractrace
             _mouseXBottomView = e.X;
             _mouseYBottomView = e.Y;
             if (e.Button == MouseButtons.Left)
+            {
                 _mouseDownBottomView = true;
+                _mouseXStartBottomView = e.X;
+                _mouseYStartBottomView = e.Y;
+                preview2.InitBaseImage();
+               
+            }
             if (e.Button == MouseButtons.Right)
                 _mouseDownRightBottomView = true;
         }
@@ -188,14 +194,21 @@ namespace Fractrace
             if (_mouseDownBottomView)
             {
                 System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 " + e.X.ToString() + " " + e.Y.ToString());
-                navigateControl1.MoveSceneFromBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
+                navigateControl1.MoveSceneFromBottomView((e.X - _mouseXBottomView)*1, (e.Y - _mouseYBottomView)*4);
+            //    preview2.MoveBitmap((e.X - _mouseXBottomView) / 2, (e.Y - _mouseYBottomView) / 2);
                 _mouseXBottomView = e.X;
                 _mouseYBottomView = e.Y;
                 navigateControl1.UpdateFromChangeProperty();
                 System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
+                preview2.MoveBitmap((e.X - _mouseXStartBottomView) / 2, (e.Y - _mouseYStartBottomView) / 2);
+   //             preview2.MoveBitmap((e.X - _mouseXBottomView) / 2, (e.Y - _mouseYBottomView) / 2);
+                //   _mouseXStartBottomView = e.X;
+                //   _mouseYStartBottomView = e.Y;
+
+                //                preview2.MoveBitmap(0,0);
             }
 
-            if(_mouseDownRightBottomView)
+            if (_mouseDownRightBottomView)
             {
                 navigateControl1.RotateSceneBottomView(e.X - _mouseXBottomView, e.Y - _mouseYBottomView);
                 _mouseXBottomView = e.X;
@@ -241,9 +254,7 @@ namespace Fractrace
                 _mouseDownRight = false;
                 _mouseXStart = _mouseX;
                 _mouseYStart = _mouseY;
-
                 preview1.InitBaseImage();
-
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -254,6 +265,8 @@ namespace Fractrace
 
         int _mouseXStart = 0;
         int _mouseYStart = 0;
+        int _mouseXStartBottomView = 0;
+        int _mouseYStartBottomView = 0;
 
         private void PreviewButton_MouseMove(object sender, MouseEventArgs e)
         {
@@ -263,7 +276,7 @@ namespace Fractrace
                 navigateControl1.UpdateFromChangeProperty();
                 _mouseX = e.X;
                 _mouseY = e.Y;
-                preview1.MoveBitmap((e.X - _mouseXStart) / 2, (e.Y - _mouseYStart) / 2);
+               preview1.MoveBitmap((e.X - _mouseXStart) / 2, (e.Y - _mouseYStart) / 2);
 
             }
             if (_mouseDownRight)
@@ -1582,11 +1595,12 @@ namespace Fractrace
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            var cursor = new Cursor(Cursor.Current.Handle);
-            if (preview1.ClientRectangle.Contains(Cursor.Position))
-                preview1.PreviewButton.Focus();
-            //System.Diagnostics.Debug.WriteLine("timer1_Tick");
-
+            if (Cursor.Current != null)
+            {
+                var cursor = new Cursor(Cursor.Current.Handle);
+                if (preview1.ClientRectangle.Contains(Cursor.Position))
+                    preview1.PreviewButton.Focus();
+            }
         }
 
         private void UpdateNavigateControl()

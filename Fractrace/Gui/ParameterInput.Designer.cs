@@ -1270,6 +1270,7 @@ namespace Fractrace {
             this.btnStart.Size = new System.Drawing.Size(108, 25);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
+            this.btnStart.Enabled = false;
             this.btnStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
