@@ -7,27 +7,17 @@ interpreted this as formula description of an arbitrary object in the 3D space. 
 if and only if p is inside the object. 
 
 
-Installation
---------------
-Gestaltlupe is available at GitHub at:
-
+Gestaltlupe is available at GitHub at 
 http://github.com/trafassel/Gestaltlupe 
    
-The corresponding Version 1.0.2, which is documented here, can be found at:
-
+The full documentation can be found at
 http://github.com/trafassel/Gestaltlupe/blob/master/bin/Gestaltlupe_1_0_2.exe 
-
-On this page you have to click “raw” to get the binary.  But the recommended way to work with 
-Gestaltlupe is to download the full archive file (the big “Download” button at 
-http://github.com/trafassel/Gestaltlupe ). The archive contains the binaries and sample projects 
-with the corresponding formulas.
 
 
 Windows
 ------------
 
-Gestaltlupe is developed and tested with WindowsXP and Windows7. It is a native .NET 2.0 application. 
-Double click on Gestaltlupe_1_0_2.exe , choose Tab “file”, load an sample project and press the 
+Double click on Gestaltlupe.exe , choose Tab “file”, load an sample project and press the 
 button “preview” to get after a short time a small picture of the given 3D object, or press "start" 
 to render a bitmap in full resolution. 
 
@@ -37,14 +27,13 @@ Linux:
 
 To run Gestaltlupe  on a Linux system, you have to install the mono package 
 (http://www.mono-project.com/Main_Page ). It is tested on a Ubuntu Hardy Heron 8.04.3 LTS. 
-It runs without problems, but looks more ugly than the windows version (Yes, that is possible).
 
 On Ubuntu 14.04 it is nececcary to install the packets `mono-mcs` and `libmono-system-windows-forms4.0-cil`.
+
 
 Mac OSX:
 -------------
 
 It is tested on a Mac OSX 10.6. with Mono 2.8 . It can produce some nice pictures, but working is a 
-pain, because some windows forms are not redrawn properly (Gestaltlupe is compatible to the 
-Windows.Forms library 2.0).
+pain, because some windows forms are not redrawn properly.
 
