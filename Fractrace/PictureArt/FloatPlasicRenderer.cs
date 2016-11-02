@@ -135,6 +135,8 @@ namespace Fractrace.PictureArt
         bool _colorInside = false;
         bool _transparentBackground = false;
 
+        float _glow = 1;
+
         /// <summary>
         /// Set fields from ParameterDict.Current.
         /// </summary>
@@ -159,6 +161,12 @@ namespace Fractrace.PictureArt
             _lightRay.Z = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
             _areaDeph = (float)ParameterDict.Current.GetDouble("Scene.Radius");
             _transparentBackground = ParameterDict.Current.GetBool("Renderer.BackColor.Transparent");
+            _glow = (float)ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
+
+            // scale glow to get simmilaier results for different image sizes
+            {
+                _glow = 1 - (1000 / pData.Width * (1 - _glow));
+                     }
 
             Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
             Vec3 tempcoord2 = formula.GetTransformWithoutProjection(_lightRay.X, _lightRay.Y, _lightRay.Z);
@@ -644,12 +652,13 @@ namespace Fractrace.PictureArt
             return retVal;
         }
 
+
+
         protected virtual void CreateShadowInfo()
         {
 
             // Noch nicht öffentliche Parameter:
             Random rand = new Random();
-            float glow = (float)ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
             // Drei "Schattenlichtquellen"
             // Eine für die Dunklen Tiefen
             // Eine für die breite Normalasicht
@@ -988,12 +997,12 @@ namespace Fractrace.PictureArt
                                     if (i < pData.Width - currentIntXval && j < pData.Height - currentIntYval)
                                     {
                                         float localShadow = shadowInfo[i + currentIntXval, j + currentIntYval] - ydh;
-                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                         {
                                             shadowInfo[i, j] = localShadow;
                                         }
                                         localShadow = shadowInfoSharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
-                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                         {
                                             shadowInfoSharp[i, j] = localShadow;
                                         }
@@ -1012,12 +1021,12 @@ namespace Fractrace.PictureArt
                                     if (i < pData.Width - currentIntXval && j >= currentIntYval)
                                     {
                                         float localShadow = shadowInfo[i + currentIntXval, j - currentIntYval] - ydh;
-                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                         {
                                             shadowInfo[i, j] = localShadow;
                                         }
                                         localShadow = shadowInfoSharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                         {
                                             shadowInfoSharp[i, j] = localShadow;
                                         }
@@ -1036,10 +1045,10 @@ namespace Fractrace.PictureArt
                                     if (i >= currentIntXval && j < pData.Height - currentIntYval)
                                     {
                                         float localShadow = shadowInfo[i - currentIntXval, j + currentIntYval] - ydv;
-                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfo[i, j] = localShadow;
                                         localShadow = shadowInfoSharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
-                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfoSharp[i, j] = localShadow;
                                     }
                                 }
@@ -1056,10 +1065,10 @@ namespace Fractrace.PictureArt
                                     if (i >= currentIntXval && j >= currentIntYval)
                                     {
                                         float localShadow = shadowInfo[i - currentIntXval, j - currentIntYval] - ydh;
-                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfo[i, j] = localShadow;
                                         localShadow = shadowInfoSharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
-                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < glow))
+                                        if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfoSharp[i, j] = localShadow;
                                     }
                                 }

@@ -273,7 +273,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Size"] = "1";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.Description"] = "Used istead View.Size while creating animation. ";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
-            ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "1";
+            ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Color and light correction.
             ParameterDict.Current["Renderer.Normalize"] = "0";

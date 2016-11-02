@@ -359,9 +359,7 @@ namespace Fractrace {
             this.panel12.Controls.Add(this.btnAddToAnimation);
 
             this.panel12.Controls.Add(this.button4);
-#if DEBUG
             this.panel12.Controls.Add(this.btnPause);
-#endif
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(3, 3);
             this.panel12.Name = "panel12";

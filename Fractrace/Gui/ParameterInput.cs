@@ -1539,7 +1539,7 @@ namespace Fractrace
             {
 
                 case "topTbFiles":
-                    tabControl1.SelectedIndex = 4;
+                     tabControl1.SelectedIndex = 4;
                     break;
 
                 case "topTbFormula":

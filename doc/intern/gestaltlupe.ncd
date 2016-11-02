@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:272-->
+<!--LastNote:7-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -90,6 +90,116 @@ class PictureData{<BR>
 <!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
+<DD>
+<DL>
+<DT><A name="bh49BUtz1kPJ9e9boaMbVA"></A>Codeschnipsel</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477955534-->
+<!--property:date_modified=1477955656-->
+<!--property:expanded-->
+<!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
+<!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
+<DD>
+<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="3mBcNJzlMK0IblLCPx7zQg"></A>Variable hinzufügen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477954858-->
+<!--property:date_modified=1477958002-->
+<!--property:hash=393ef8c70bfcca7f9205a33ba46b8c7fc086ab40-->
+<!--property:hash_html=99b82b2302c28c9102834d480f4649cf99c12831-->
+<DD>
+ _scale=GetOrSetDouble(&quot;scale&quot;,1.1,&quot;Mandelbox scale factor.&quot;);<BR>
+<BR>
+Fractrace.Basic.ParameterDict.Current[&quot;Formula.Parameters.BulbVariant.PARAMETERINFO.Datatype&quot;] = &quot;Bool&quot;;<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="30PTAxiSoQVF6y53CAJGCg"></A>Bool Variable Hinzufügen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478069149-->
+<!--property:date_modified=1478069184-->
+<!--property:hash=d8226a7657e1b4fcc32e169e065a8678bc5fa3fc-->
+<!--property:hash_html=a1b84c3c86535ea50bc86e9d5c51482bc050ec48-->
+<DD>
+  if(!Fractrace.Basic.ParameterDict.Current.Exists(&quot;Formula.Parameters.SinusVariant&quot;))<BR>
+  {<BR>
+    Fractrace.Basic.ParameterDict.Current[&quot;Formula.Parameters.SinusVariant&quot;] = &quot;0&quot;;<BR>
+  }<BR>
+  _sinusVariant=Fractrace.Basic.ParameterDict.Current.GetBool  (&quot;Formula.Parameters.SinusVariant&quot;);<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="3SfSrijfHICeZHYKotxUDQ"></A> Alte Formel: Breite begrenzen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477955645-->
+<!--property:date_modified=1477956343-->
+<!--property:hash=51035c93eeed88303cdf0484728896b8a5f3dc73-->
+<!--property:hash_html=cfd374de2574264dd3a78569d4448c53fd8c1d78-->
+<DD>
+//<BR>
+<BR>
+double bd=0.000002;<BR>
+if(bj&gt;bd || bj&lt;-bd)<BR>
+{<BR>
+if(bj&gt;bd) returnValue=1;            <BR>
+if(bj&lt;-bd) returnValue=1;  <BR>
+<BR>
+if (inverse) <BR>
+{                <BR>
+if (returnValue == 0)                    <BR>
+  returnValue = 1;              <BR>
+else                    <BR>
+  returnValue = 0;          <BR>
+}<BR>
+return returnValue;<BR>
+}
+</DD>
+<DT><A name="V6acUY9L3F9y5LARfM9SKA"></A>ifs</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478033183-->
+<!--property:date_modified=1478033454-->
+<!--property:hash=2f1f23102b5e8a795081b98adc987afc26e06deb-->
+<!--property:hash_html=b9bf7f539da6d6cda543cb4a16ec6a2345c17cf7-->
+<DD>
+bool Bailout()<BR>
+{<BR>
+// box<BR>
+  if(x*x&gt;0.01)<BR>
+    return false;<BR>
+  if(y*y&gt;0.01)<BR>
+    return false;<BR>
+  if(z*z&gt;0.01)<BR>
+    return false;<BR>
+  return true;<BR>
+<BR>
+// sphere<BR>
+  if(x*x+y*y+z*z&gt;0.4)<BR>
+  return false;<BR>
+  return true;<BR>
+}<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="0Ly0LkO2YIycnJYasJQ4IQ"></A>HTML Dokumentation</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477962265-->
+<!--property:date_modified=1477962502-->
+<!--property:hash=6857933094de2890781ef09b54fb9064082a5585-->
+<!--property:hash_html=6857933094de2890781ef09b54fb9064082a5585-->
+<DD>
+TXU1CgksNW2RsHxd95lMJw.html  enthält den Link auf den Installer.
+</DD>
+</DL>
+</DD>
 <DT><A name="xEzoXp1xYVgIyKX4JEol0Q"></A>Tickets</DT>
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
@@ -3701,9 +3811,9 @@ offsetX und offsetY geben die Verschiebung an.<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="juxwiNlFEYnnhKDlbzuiYw"></A>Reiter Animation</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1477555639-->
-<!--property:date_modified=1477555931-->
+<!--property:date_modified=1477945377-->
 <!--property:hash=12bf4e6337d77376f13406edaeefea45e8d591f2-->
 <!--property:hash_html=08a13301661c98170c20103c8a30293fedc2f46f-->
 <DD>
