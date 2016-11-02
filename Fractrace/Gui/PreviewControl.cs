@@ -318,7 +318,6 @@ namespace Fractrace
             {
                 System.Diagnostics.Debug.WriteLine("InitBaseImage ");
             _baseBitmap = (System.Drawing.Bitmap)btnPreview.BackgroundImage.Clone();
-            _baseBitmap.Save(@"C:\Users\perwi_000\Desktop\temp\t2.png");
             }catch (Exception ex)
             { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
         }
@@ -333,7 +332,6 @@ namespace Fractrace
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             _graphics.Clear(Color.White);
             _graphics.DrawImage(_baseBitmap, x, y);
-            _baseBitmap.Save(@"C:\Users\perwi_000\Desktop\temp\t1.png");
             Application.DoEvents();
             this.Update();
             this.Refresh();

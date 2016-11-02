@@ -1591,7 +1591,7 @@ namespace Fractrace
         {
             if (Cursor.Current != null)
             {
-                if (preview1.ClientRectangle.Contains(Cursor.Position))
+                if (preview1.ClientRectangle.Contains(preview1.PointToClient(Cursor.Position)))
                     preview1.PreviewButton.Focus();
             }
         }
