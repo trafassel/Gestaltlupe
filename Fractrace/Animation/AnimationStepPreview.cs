@@ -72,7 +72,6 @@ namespace Fractrace.Animation
             double width = this.Width;
             double dsteps = width / ((double)_steps);
             double pos = (currentStep+1) * dsteps;
-            int ipos = (int)pos;
             for (int i = 0; i < pos; ++i)
             {
                 _graphicsUsedInSteps.DrawLine(p, i, 3, i, 6);

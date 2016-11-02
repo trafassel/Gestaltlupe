@@ -380,7 +380,6 @@ namespace Fractrace
                     _availableY = y + 1;
                     if (_maxUpdateSteps > 0 && !_oneStepProgress && !IsSmallPreview() )
                     {
-                        double f = ((double)_updateCount) / ((double)_maxUpdateSteps + 1);
                         double maxUpInvers = 1.0 / ((double)_maxUpdateSteps + 2);
                         if(!_abort)
                         _starter.Progress(100.0 * (
@@ -495,7 +494,6 @@ namespace Fractrace
             }
 
             double xcenter = (act_val.start_tupel.x + act_val.end_tupel.x) / 2.0;
-            double ycenter = (act_val.start_tupel.y + act_val.end_tupel.y) / 2.0;
             double zcenter = (act_val.start_tupel.z + act_val.end_tupel.z) / 2.0;
             bool isYborder = true;
 
@@ -535,7 +533,6 @@ namespace Fractrace
                     System.Windows.Forms.Application.DoEvents();
                     z = act_val.end_tupel.z - (double)zd * (_maxzIter - zschl);
 
-                    bool minYDetected = false;
                     for (xschl = (int)(MINX_ITER); xschl <= _maxxIter; xschl += 1)
                     {
                         if (_abort)
@@ -544,7 +541,6 @@ namespace Fractrace
                         }
 
                         x = act_val.start_tupel.x + (double)xd * xschl;
-                        double miny = 0;
                         isYborder = true;
 
                         xx = xschl;
@@ -654,9 +650,6 @@ namespace Fractrace
 
                                         if (usedCycles == 0)
                                         {
-                                            if (!minYDetected)
-                                                miny = yschl;
-                                            minYDetected = true;
                                             // Iteration ist nicht abgebrochen, also weiterrechnen:
                                             //int oldPictureInfo = (_gData.Picture)[xx, yy]; // pictureInfo wird eventuell zurückgesetzt, wenn 
                                             // die Farbberechnung wiederholt wird.

@@ -330,7 +330,6 @@ namespace Fractrace
             {
                 return;
             }
-            Graphics graphics = Graphics.FromImage(_baseBitmap);
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             _graphics.Clear(Color.White);
             _graphics.DrawImage(_baseBitmap, x, y);

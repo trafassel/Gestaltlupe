@@ -61,10 +61,6 @@ namespace Fractrace
         /// </summary>
         PreviewControl _preview = null;
 
-        /// <summary>
-        /// The "right eye"-view of the control.
-        /// </summary>
-        PreviewControl _previewStereo = null;
 
         /// <summary>
         /// Parent control.
@@ -94,7 +90,6 @@ namespace Fractrace
         public void Init(PreviewControl preview, PreviewControl preview2, ParameterInput parent)
         {
             _preview = preview;
-            _previewStereo = preview2;
             _parent = parent;
         }
 
@@ -125,15 +120,6 @@ namespace Fractrace
         /// </summary>
         public void UpdateCenterDiff()
         {
-
-            double centerX = ParameterDict.Current.GetDouble("Scene.CenterX");
-            double centerY = ParameterDict.Current.GetDouble("Scene.CenterY");
-            double centerZ = ParameterDict.Current.GetDouble("Scene.CenterZ");
-
-            //Rotation rotView = null;
-            double centerXChange = centerX + 1;
-            double centerYChange = centerY + 1;
-            double centerZChange = centerZ + 1;
 
             // For Zerotest
             double minDoubleVal = 0.0000000000000001;

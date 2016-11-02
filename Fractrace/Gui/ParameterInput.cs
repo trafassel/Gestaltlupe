@@ -650,14 +650,11 @@ namespace Fractrace
             string tempFileName = fileName.Substring(4); // Data ist vier Zeichen lang.
 
             int dataPos = tempFileName.IndexOf("pic");
-            int picPos = dataPos + 3;
 
             if (dataPos < 0)
                 return;
 
             string gesDataString = tempFileName.Substring(0, dataPos);
-            string gesPicString = tempFileName.Substring(picPos);
-
             string picDir = System.IO.Path.Combine(Fractrace.FileSystem.Exemplar.ExportDir, "Data" + gesDataString);
             string picFile = System.IO.Path.Combine(picDir, fileName + ".png");
 
@@ -1390,8 +1387,6 @@ namespace Fractrace
                             Size size = new Size(pictureBox.Width, 100);
                             pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
                             pictureBox.Tag = fileName;
-                            Graphics graphics = Graphics.FromImage(pictureBox.Image);
-                            
                             this.Refresh();
                             this.WindowState = FormWindowState.Normal;
                         }
@@ -1456,7 +1451,6 @@ namespace Fractrace
                 Size size = new Size(pictureBox.Width, 100);
                 pictureBox.Image = (Image)(new Bitmap(image, size)); // TODO: Consider aspect ratio
                 pictureBox.Tag = gestaltFile;
-                Graphics graphics = Graphics.FromImage(pictureBox.Image);
                 pictureBox.Click += PictureBox_Click;
 
                 currentXpos += pictureBox.Width + bordersize;
@@ -1597,7 +1591,6 @@ namespace Fractrace
         {
             if (Cursor.Current != null)
             {
-                var cursor = new Cursor(Cursor.Current.Handle);
                 if (preview1.ClientRectangle.Contains(Cursor.Position))
                     preview1.PreviewButton.Focus();
             }

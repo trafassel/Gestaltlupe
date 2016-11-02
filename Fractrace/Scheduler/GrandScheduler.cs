@@ -17,8 +17,6 @@ namespace Fractrace.Scheduler
         GrandScheduler()
         {
             _mainDisplayForm = Fractrace.ResultImageView.PublicForm;
-            _mainParameterInput = Fractrace.ParameterInput.MainParameterInput;
-            _history = _mainParameterInput.History;
         }
 
 
@@ -36,19 +34,6 @@ namespace Fractrace.Scheduler
         /// Reference to the Form which display Rendered image.
         /// </summary>
         Fractrace.ResultImageView _mainDisplayForm = null;
-
-
-        /// <summary>
-        /// Reference to the parameter input control.
-        /// </summary>
-        Fractrace.ParameterInput _mainParameterInput = null;
-
-
-        /// <summary>
-        ///  Reference to history entries, used in history control and animations.
-        /// </summary>
-        ParameterHistory _history = null;
-
 
         /// <summary>
         /// Gets the unique static instance of this class.

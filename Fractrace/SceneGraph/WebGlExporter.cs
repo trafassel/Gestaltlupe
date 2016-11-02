@@ -55,8 +55,6 @@ namespace Fractrace.SceneGraph
                 radius = radiusz;
             float scale = size / radius;
 
-            StringBuilder normalString = new StringBuilder();
-            StringBuilder normalIndex = new StringBuilder();
 
             StreamWriter sw = new System.IO.StreamWriter(fileName, false, Encoding.GetEncoding("iso-8859-1"));
             

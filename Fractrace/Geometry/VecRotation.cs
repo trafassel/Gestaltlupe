@@ -199,11 +199,7 @@ namespace Fractrace.Geometry
             else
                 attitude = Math.Asin(2 * w * Y - 2 * X * Z);
 
-            double test2 = 2 * w * Z + 2 * X * Y;
-            double test3 = w * w + X * X - Y * Y - Z * Z;
             heading = Math.Atan2(2 * w * Z + 2 * X * Y, w * w + X * X - Y * Y - Z * Z);
-            test2 = 2 * w * X + 2 * Y * Z;
-            test3 = w * w - X * X - Y * Y + Z * Z;
 
             bank = Math.Atan2(2 * w * X + 2 * Y * Z, w * w - X * X - Y * Y + Z * Z);
             toAxisAngle();

@@ -52,14 +52,8 @@ namespace Fractrace.SceneGraph
 
         public override void Export(string fileName)
         {
-          
-
-            float size = 100;
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.
             _mesh.ComputeBoundingBox();
-            float centerx = (_mesh.MaxBBox.X + _mesh.MinBBox.X) / 2.0f;
-            float centery = (_mesh.MaxBBox.Y + _mesh.MinBBox.Y) / 2.0f;
-            float centerz = (_mesh.MaxBBox.Z + _mesh.MinBBox.Z) / 2.0f;
             float radiusx = _mesh.MaxBBox.X - _mesh.MinBBox.X;
             float radiusy = _mesh.MaxBBox.Y - _mesh.MinBBox.Y;
             float radiusz = _mesh.MaxBBox.Z - _mesh.MinBBox.Z;
@@ -68,7 +62,6 @@ namespace Fractrace.SceneGraph
                 radius = radiusy;
             if (radiusz > radius)
                 radius = radiusz;
-            float scale = size / radius;
 
             StringBuilder normalString = new StringBuilder();
             StringBuilder normalIndex = new StringBuilder();

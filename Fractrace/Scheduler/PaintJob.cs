@@ -34,7 +34,6 @@ namespace Fractrace.Scheduler
         /// </summary>
         Iterate _lastIterate = null;
 
-        GrandScheduler _scheduler = GrandScheduler.Exemplar;
 
         Graphics _graphics = null;
 

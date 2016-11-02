@@ -98,9 +98,6 @@ namespace Fractrace.PictureArt
         // Normal of the light source     
         private Vec3 lightRay = new Vec3();
 
-        // If thrue, sharp shadow rendering is activated (warning: time consuming) 
-        private bool useSharpShadow = false;
-
         private double colorFactorRed = 1;
         private double colorFactorGreen = 1;
         private double colorFactorBlue = 1;
@@ -182,8 +179,6 @@ namespace Fractrace.PictureArt
             lightRay.X = tempcoord2.X;
             lightRay.Y = tempcoord2.Y;
             lightRay.Z = tempcoord2.Z;
-
-            useSharpShadow = ParameterDict.Current.GetBool(parameterNode + "UseSharpShadow");
 
             colorFactorRed = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Red");
             colorFactorGreen = ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Green");
@@ -418,9 +413,6 @@ namespace Fractrace.PictureArt
             retVal.Y = light.Y;
             retVal.Z = light.Z;
 
-            double d1 = maxY - minY;
-            double d2 = pData.Width + pData.Height;
-            double d3 = d1 / d2;
 
             retVal.X = (lightIntensity * retVal.X + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
             retVal.Y = (lightIntensity * retVal.Y + (1 - lightIntensity) * (1 - shadowPlane[x, y]));
@@ -1409,19 +1401,12 @@ namespace Fractrace.PictureArt
         }
 
 
-
-        /// <summary>
-        /// Used in field of view computing.
-        /// </summary>
-        double ydGlobal = 0;
-
+       
         /// <summary>
         /// Compute field of view.
         /// </summary>
         protected void SmoothPlane()
         {
-            double fieldOfViewStart = minFieldOfView;
-            ydGlobal = (areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
             rgbSmoothPlane1 = new Vec3[pData.Width, pData.Height];
             rgbSmoothPlane2 = new Vec3[pData.Width, pData.Height];
             int intRange = 3;
@@ -1444,7 +1429,6 @@ namespace Fractrace.PictureArt
             // contain the result colors
             Vec3[,] resultPlane = rgbSmoothPlane1;
 
-            double mainDeph1 = areaDeph;
             for (int m = 0; m < ambientIntensity; m++)
             {
                 if (_stopRequest)
@@ -1480,7 +1464,6 @@ namespace Fractrace.PictureArt
                                     if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
                                     {
                                         Vec3 nColor1 = new Vec3();
-                                        double ylocalDiff = smoothDeph1[i, j] - smoothDeph1[posX, posY];
                                         if (true)
                                         //   if ( (ylocalDiff > 0) ||(i==posX && j==posY))
                                         //   if ((ylocalDiff < 0) || (i == posX && j == posY))

@@ -20,7 +20,6 @@ namespace Fractrace {
 
         #region Windows Form Designer generated code
 
-        System.Windows.Forms.Panel _userdefinedPanel1 = new System.Windows.Forms.Panel();
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -265,6 +264,7 @@ namespace Fractrace {
             this.tpRender.TabIndex = 0;
             this.tpRender.Text = "...";
             this.tpRender.UseVisualStyleBackColor = true;
+            //this.tpRender.BackColor = Color.White;
             // 
             // panel22
             // 
@@ -1317,6 +1317,7 @@ namespace Fractrace {
             this.Data.Size = new System.Drawing.Size(676, 350);
             this.Data.TabIndex = 8;
             this.Data.UseVisualStyleBackColor = true;
+            this.Data.BackColor = Color.White;
             // 
             // parameterDictControl1
             // 
@@ -1337,6 +1338,7 @@ namespace Fractrace {
             this.tpNavigate.Size = new System.Drawing.Size(676, 350);
             this.tpNavigate.TabIndex = 9;
             this.tpNavigate.UseVisualStyleBackColor = true;
+            this.tpNavigate.BackColor = Color.White;
             // 
             // navigateControl1
             // 
@@ -1355,6 +1357,7 @@ namespace Fractrace {
             this.tpMaterial.Size = new System.Drawing.Size(676, 350);
             this.tpMaterial.TabIndex = 14;
             this.tpMaterial.UseVisualStyleBackColor = true;
+            this.tpMaterial.BackColor = Color.White;
             // 
             // materialControl1
             // 
@@ -1473,6 +1476,7 @@ namespace Fractrace {
             this.tpAnimationTop.Size = new System.Drawing.Size(676, 350);
             this.tpAnimationTop.TabIndex = 11;
             this.tpAnimationTop.UseVisualStyleBackColor = true;
+            this.tpAnimationTop.BackColor = Color.White;
             // 
             // animationControl1
             // 
@@ -1492,6 +1496,7 @@ namespace Fractrace {
             this.tpInfo.Size = new System.Drawing.Size(676, 350);
             this.tpInfo.TabIndex = 12;
             this.tpInfo.UseVisualStyleBackColor = true;
+            this.tpInfo.BackColor = Color.White;
             // 
             // panel29
             // 
@@ -1560,6 +1565,7 @@ namespace Fractrace {
             this.tpDoc.Size = new System.Drawing.Size(676, 350);
             this.tpDoc.TabIndex = 13;
             this.tpDoc.UseVisualStyleBackColor = true;
+            this.tpDoc.BackColor = Color.White;
             // 
             // btnShowDocumentation
             // 

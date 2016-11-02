@@ -73,7 +73,6 @@ namespace Fractrace.SceneGraph
             // TODO: Update _mesh data 
 
             List<Coord2D> pointList = new List<Coord2D>();
-            Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
 
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
 
@@ -84,7 +83,6 @@ namespace Fractrace.SceneGraph
                 {
                     if (_pictureData.Points[i, j] != null)
                     {
-                        PixelInfo point = Transform(_pictureData.Points[i, j]);
                         Coord2D coord = new Coord2D(i, j);
                         pointIndex[i, j] = currentIndex;
                         pointList.Add(coord);
@@ -222,9 +220,6 @@ namespace Fractrace.SceneGraph
             _iterate = iter;
             _pictureData = pictureData;
             _useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
-            List<Coord2D> pointList = new List<Coord2D>();
-            Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
-            int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
             double minx = Double.MaxValue;
             double miny = Double.MaxValue;
             double minz = Double.MaxValue;
@@ -252,7 +247,6 @@ namespace Fractrace.SceneGraph
                             maxy = point.Coord.Y;
                         if (maxz < point.Coord.Z)
                             maxz = point.Coord.Z;
-                        Coord2D coord = new Coord2D(i, j);
                         currentIndex++;
                     }
                 }
@@ -300,7 +294,6 @@ namespace Fractrace.SceneGraph
             _useDistance = !Fractrace.Basic.ParameterDict.Current.GetBool("Export.X3d.ClosedSurface");
 
             List<Coord2D> pointList = new List<Coord2D>();
-            Dictionary<KeyValuePair<int, int>, int> indexList = new Dictionary<KeyValuePair<int, int>, int>();
 
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
 

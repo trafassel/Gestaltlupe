@@ -88,11 +88,6 @@ namespace Fractrace.PictureArt
         // Normal of the light source     
         private FloatVec3 _lightRay = new FloatVec3();
 
-        /// <summary>
-        /// Used in field of view computing.
-        /// </summary>
-        double _ydGlobal = 0;
-
         private float _colorFactorRed = 1;
         private float _colorFactorGreen = 1;
         private float _colorFactorBlue = 1;
@@ -402,9 +397,6 @@ namespace Fractrace.PictureArt
             retVal.Y = light.Y;
             retVal.Z = light.Z;
 
-            double d1 = _maxY - _minY;
-            double d2 = pData.Width + pData.Height;
-            double d3 = d1 / d2;
 
             retVal.X = (float)(_lightIntensity * retVal.X + (1 - _lightIntensity) * (1 - _shadowPlane[x, y]));
             retVal.Y = (float)(_lightIntensity * retVal.Y + (1 - _lightIntensity) * (1 - _shadowPlane[x, y]));
@@ -1304,8 +1296,6 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected void SmoothPlane()
         {
-            double fieldOfViewStart = _minFieldOfView;
-            _ydGlobal = (_areaDeph) / ((double)(Math.Max(pData.Width, pData.Height)));
             _rgbSmoothPlane1 = new FloatVec3[pData.Width, pData.Height];
             _rgbSmoothPlane2 = new FloatVec3[pData.Width, pData.Height];
             int intRange = 3;
@@ -1328,7 +1318,6 @@ namespace Fractrace.PictureArt
             // contain the result colors
             FloatVec3[,] resultPlane = _rgbSmoothPlane1;
 
-            double mainDeph1 = _areaDeph;
             for (int m = 0; m < _ambientIntensity; m++)
             {
                 if (_stopRequest)
@@ -1364,7 +1353,6 @@ namespace Fractrace.PictureArt
                                     if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
                                     {
                                         FloatVec3 nColor1 = new FloatVec3();
-                                        float ylocalDiff = _heightMap[i, j] - _heightMap[posX, posY];
                                         if (true)
                                         //   if ( (ylocalDiff > 0) ||(i==posX && j==posY))
                                         //   if ((ylocalDiff < 0) || (i == posX && j == posY))

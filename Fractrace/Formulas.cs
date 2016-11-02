@@ -340,13 +340,6 @@ namespace Fractrace
             x = 1; // Um den Startwinkel eindeutig zu definieren.
             for (n = 1; n < zkl; n++)
             {
-                double r_xy = Math.Sqrt(xx + yy);
-                /*
-                vecRot.x = x;
-                vecRot.y = y;
-                vecRot.z = z;
-                vecRot.angle = x;
-                 * */
 
                 double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
                 double phi = Math.Atan2(y, x);
@@ -2360,7 +2353,6 @@ namespace Fractrace
 
             double distance = 0.09;
 
-            double xDistance = distance * 6.0;
             double zDistance = distance * 6.0;
 
             // Eventuell während der Berechnung entstehende Zusatzinfos für alle 4 Punkte.

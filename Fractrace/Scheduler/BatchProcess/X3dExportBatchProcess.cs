@@ -35,9 +35,6 @@ namespace Fractrace.Scheduler.BatchProcess
 
         public override string Description() {  return "X3d Export"; }
 
-        Iterate _iter = null;
-
-        PictureData _pictureData = null;
 
         // saved ParameterDict parameters
         double _startAngleX = 0;
@@ -274,8 +271,6 @@ namespace Fractrace.Scheduler.BatchProcess
         /// </summary>
         public override bool OnPictureCreated(Iterate iter, PictureData pictureData)
         {
-            _iter = iter;
-            _pictureData = pictureData;
             StepEnds();
 
             bool retVal = _currentStep < _steps;

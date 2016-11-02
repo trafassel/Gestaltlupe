@@ -35,9 +35,7 @@ namespace Fractrace.TomoGeometry {
 
         x = 1; // Um den Startwinkel eindeutig zu definieren.
         for (n = 1; n < zkl; n++) {
-          double r_xy = Math.Sqrt(xx + yy);
 
-          double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
           double phi = Math.Atan2(y, x);
 
           vecRot.X = 0;
@@ -92,8 +90,6 @@ namespace Fractrace.TomoGeometry {
         double r = Math.Sqrt(xx + yy + zz);
         Fractrace.Geometry.VecRotation vecRot = new Fractrace.Geometry.VecRotation();
         for (n = 1; n < zkl; n++) {
-          double r_xy = Math.Sqrt(xx + yy);
-          double theta = Math.Atan2(Math.Sqrt(xx + yy), z);
           double phi = Math.Atan2(y, x);
           // Erste Rotation
 
