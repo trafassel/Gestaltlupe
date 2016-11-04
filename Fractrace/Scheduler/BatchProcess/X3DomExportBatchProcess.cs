@@ -57,7 +57,7 @@ namespace Fractrace.Scheduler.BatchProcess
             }
             if (_type == 4)
             {
-                _steps = 14;
+                _steps = 18;
             }
             PrepareStep();
         }
@@ -202,6 +202,30 @@ namespace Fractrace.Scheduler.BatchProcess
                 if (_currentStep == 14)
                 {
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 270 - 45);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45 + 270);
+                }
+                if (_currentStep == 15)
+                {
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 90 - 45);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45);
+                }
+                if (_currentStep == 16)
+                {
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 90 - 45);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45 + 90);
+                }
+                if (_currentStep == 17)
+                {
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 90 - 45);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45 + 180);
+                }
+                if (_currentStep == 18)
+                {
+                    ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX + 90 - 45);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY + 0);
                     ParameterDict.Current.SetDouble("Transformation.Camera.AngleZ", _startAngleZ + 45 + 270);
                 }
