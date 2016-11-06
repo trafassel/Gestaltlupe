@@ -160,7 +160,7 @@ namespace Fractrace.PictureArt
 
             // scale glow to get simmilaier results for different image sizes
             {
-                _glow = 1 - (1000 / pData.Width * (1 - _glow));
+                _glow = 1 - (  300.0F/ (float)pData.Width  * (1.0F - _glow));
                      }
 
             Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);

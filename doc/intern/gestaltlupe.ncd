@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:7-->
+<!--LastNote:282-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -192,11 +192,14 @@ bool Bailout()<BR>
 <DT><A name="0Ly0LkO2YIycnJYasJQ4IQ"></A>HTML Dokumentation</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477962265-->
-<!--property:date_modified=1477962502-->
-<!--property:hash=6857933094de2890781ef09b54fb9064082a5585-->
-<!--property:hash_html=6857933094de2890781ef09b54fb9064082a5585-->
+<!--property:date_modified=1478222089-->
+<!--property:hash=6e1e03c9db4d920d3f033bc2828c94b5842fd5f9-->
+<!--property:hash_html=2d59e2661a86603e71d527122f8827ad7551bded-->
 <DD>
-TXU1CgksNW2RsHxd95lMJw.html  enthält den Link auf den Installer.
+TXU1CgksNW2RsHxd95lMJw.html  enthält den Link auf den Installer.<BR>
+<BR>
+<BR>
+http://www.gestaltlupe.com/x3dom/
 </DD>
 </DL>
 </DD>
@@ -3821,6 +3824,30 @@ Neue Parameter:<BR>
 <BR>
 Animation
 </DD>
+<DT><A name="IAF0MVVLaVeOkTjyhuD59A"></A>Formula Insert from Clipboard</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1478352653-->
+<!--property:date_modified=1478352807-->
+<!--property:hash=6e8e3f2101f11c44261548a2da762bb3e8287e28-->
+<!--property:hash_html=62095b3bdfd9c13c2c64b002812c31ca2a9c3b31-->
+<DD>
+Button [Insert from Clipboard]<BR>
+  * incl. automatisches Ausführen<BR>
+  * löschen der Parametersetzung nach dem ersten ausführen.<BR>
+<BR>
+
+</DD>
+<DT><A name="JMb6n8VYm11xpmfkexFNDw"></A>More Examples</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478352811-->
+<!--property:date_modified=1478352939-->
+<!--property:hash=b73581c32d89e855fc82098270fe9eea9c40b91f-->
+<!--property:hash_html=944a4a25cbe65b0c3585ecda37724226c8ec3cef-->
+<DD>
+mit Verweis auf die Internetseite.<BR>
+<BR>
+ 
+</DD>
 </DL>
 </DD>
 </DL>
@@ -3831,6 +3858,124 @@ Animation
 <!--property:date_modified=1476388160-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="KmJVcikis8T1xwFn06jArA"></A>Windows 10 App</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478354823-->
+<!--property:date_modified=1478392898-->
+<!--property:expanded-->
+<!--property:hash=8368febfffd22692629f215fe23076e75b2d40cf-->
+<!--property:hash_html=62b58a6159a6934c29608579090d331b17262bf7-->
+<DD>
+<A href="https://developer.microsoft.com/de-de/dashboard/overview">https://developer.microsoft.com/de-de/dashboard/overview</A><BR>
+<BR>
+<A href="https://developer.microsoft.com/de-de/dashboard/apps/9NBLGGH44078">https://developer.microsoft.com/de-de/dashboard/apps/9NBLGGH44078</A><BR>
+<BR>
+<BR>
+// Verwendung von:  Desktop App Converter<BR>
+<A href="https://msdn.microsoft.com/de-de/windows/uwp/porting/desktop-to-uwp-run-desktop-app-converter">https://msdn.microsoft.com/de-de/windows/uwp/porting/desktop-to-uwp-run-desktop-app-converter</A><BR>
+<BR>
+// Aufruf von:<BR>
+<span style="color:#8b6914"> DesktopAppConverter.exe -Installer E:\Public\setup.exe -Destination e:\gestalt -PackageName &quot;Gestaltlupe&quot; -Publisher &quot;CN=&lt;trafassel&gt;&quot; -Version 3.3.4.0 -MakeAppx</span><BR>
+<BR>
+<span style="color:#a52a2a">C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_x64__8wekyb3d8bbwe\DesktopAppConverter.ps1 : DesktopAppConverter : error 'E_FEATURE_NOT_ENABLED': Required<BR>
+Windows Feature 'Containers' is not enabled. Please refer to converter setup instructions at <A href="https://aka.ms/converterdocs">https://aka.ms/converterdocs</A><BR>
+In Zeile:1 Zeichen:1<BR>
++ &amp;'C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_ ...<BR>
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException<BR>
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DesktopAppConverter.ps1<BR>
+<BR>
+Output Paths:<BR>
+<BR>
+Name                           Value<BR>
+----                           -----<BR>
+CertPath<BR>
+PackageFilesPath<BR>
+PackagePath<BR>
+LogFilesPath                   C:\DesktopAppConverter\f30237da-8d2c-4ddb-8f14-104d76960f21\logs</span><BR>
+<BR>
+// enable containers<BR>
+// <A href="http://stackoverflow.com/questions/36590514/how-to-enable-the-windows-10-containers-feature">http://stackoverflow.com/questions/36590514/how-to-enable-the-windows-10-containers-feature</A><BR>
+<span style="color:#8b6914">Enable-WindowsOptionalFeature -Online -FeatureName containers -All</span><BR>
+<BR>
+<BR>
+<span style="color:#a52a2a">C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_x64__8wekyb3d8bbwe\DesktopAppConverter.ps1 : DesktopAppConverter : error 'E_UNSUPPORTED_SDK_VERSION':<BR>
+Windows SDK Version '10.0.10586.212' does not meet the minimum requirement of '10.0.14388.0'. You can acquire the required SDK from<BR>
+<A href="http://go.microsoft.com/fwlink/?LinkId=821375">http://go.microsoft.com/fwlink/?LinkId=821375</A><BR>
+In Zeile:1 Zeichen:1<BR>
++ &amp;'C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_ ...<BR>
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException<BR>
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DesktopAppConverter.ps1<BR>
+<BR>
+Output Paths:<BR>
+<BR>
+Name                           Value<BR>
+----                           -----<BR>
+CertPath<BR>
+PackageFilesPath<BR>
+PackagePath<BR>
+LogFilesPath                   C:\DesktopAppConverter\802a4b9b-7cdf-41a5-a816-637eb2b5cf94\logs</span><BR>
+<BR>
+// Install SDK von:<BR>
+<A href="https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk">https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk</A><BR>
+<BR>
+<span style="color:#8b6914">DesktopAppConverter.exe -Installer E:\Public\Gestaltlupe\setup.exe -Destination e:\gestalt -PackageName &quot;Gestaltlupe&quot; -Publisher &quot;CN=trafassel&quot; -Version 3.4.0.0 -MakeAppx</span><BR>
+<BR>
+<span style="color:#a52a2a">C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_x64__8wekyb3d8bbwe\DesktopAppConverter.ps1 : DesktopAppConverter : error 'E_MANIFEST_SET_PROPERTY_FAILED':<BR>
+Property 'Package.Identity.Publisher' in AppxManifest.xml could not be set to the value 'CN=&lt;trafassel&gt;' given for parameter -'Publisher'. Please visit:<BR>
+'<A href="https://aka.ms/idpub">https://aka.ms/idpub</A>' for more info on the Data type requirements for the property.<BR>
+In Zeile:1 Zeichen:1<BR>
++ &amp;'C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_ ...<BR>
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException<BR>
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,DesktopAppConverter.ps1<BR>
+<BR>
+Output Paths:<BR>
+<BR>
+Name                           Value<BR>
+----                           -----<BR>
+CertPath<BR>
+PackageFilesPath<BR>
+PackagePath<BR>
+LogFilesPath                   C:\DesktopAppConverter\81174dcb-211d-4489-a1e8-1e6143de024a\logs</span><BR>
+<BR>
+<BR>
+<BR>
+<BR>
+CMD PS C:\&gt; Set-ExecutionPolicy bypass<BR>
+CMD PS C:\&gt; DesktopAppConverter.exe -Setup -BaseImage .\BaseImage-1XXXX.wim -Verbose<BR>
+<BR>
+<BR>
+// Initialisierung:<BR>
+DesktopAppConverter.exe -Setup -BaseImage C:\Users\perwi_000\Downloads\BaseImage-14959.wim<BR>
+<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="2oJhBUnW43ZLf7NjsqIhyw"></A>bugs</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478357455-->
+<!--property:date_modified=1478357496-->
+<!--property:hash=f6ad3acc0662a134dbc61bf4d77e60dc68401b24-->
+<!--property:hash_html=75e5ab5f9ab6a0fb2143fa568c177d2ee830fb7f-->
+<DD>
+// Install Dockers:<BR>
+Install-Module -Name DockerMsftProvider -Repository PSGallery -Force<BR>
+Install-Package -Name docker -ProviderName DockerMsftProvider<BR>
+<BR>
+<span style="color:#a52a2a">Install-Package : Es wurden keine Paketanbieter (DockerMsftProvider) gefunden.<BR>
+In Zeile:1 Zeichen:1<BR>
++ Install-Package -Name docker -ProviderName DockerMsftProvider<BR>
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+    + CategoryInfo          : InvalidArgument: (Microsoft.Power....InstallPackage:InstallPackage) [Install-Package], E<BR>
+   xception<BR>
+    + FullyQualifiedErrorId : UnknownProviders,Microsoft.PowerShell.PackageManagement.Cmdlets.InstallPackage</span><BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
 </DL>
 </BODY>
 </HTML>

@@ -72,10 +72,20 @@ namespace Fractrace.Basic
             button.FlatAppearance.BorderSize = 0;
                 button.Dock = System.Windows.Forms.DockStyle.Right;
             //button.Dock = System.Windows.Forms.DockStyle.Left;
-            if (text.Length < 3 || (text.Length==3 && text.Contains(".")))
+            if (text.Length < 3 || (text.Length == 3 && text.Contains(".")))
             {
                 button.Width = 30;
                 this.pnlButtons.Width += 30;
+            }
+            else if (text.Length < 4)
+            {
+                button.Width = 35;
+                this.pnlButtons.Width += 35;
+            }
+            else if (text.Length < 5)
+            {
+                button.Width = 40;
+                this.pnlButtons.Width += 40;
             }
             else
             {
@@ -196,7 +206,7 @@ namespace Fractrace.Basic
            
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "-";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
