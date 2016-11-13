@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Static.Cycles" Value="5" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Riemann sphere flower by msltoe&#xA;// http://www.fractalforums.com/new-theories-and-research/revisiting-the-riemann-sphere-(again)/&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x;&#xA;    double yy=y*y;&#xA;    double zz=z*z;&#xA;    double r=Math.Sqrt(xx+yy+zz);&#xA;    if(r&gt;5) return false;&#xA;&#xA;    x=x/r;&#xA;    y=y/r;&#xA;    z=z/r;&#xA;    double x1 = x/(1.0 - z);&#xA;    double y1 = y/(1.0 - z);&#xA;    double z1 = (r - 1)*(1.0 + x1*x1 + y1*y1);&#xA;    x1 = x1 - Math.Floor(x1 + 0.5);&#xA;    y1 = y1 - Math.Floor(y1 + 0.5);&#xA;    x=3*x1;&#xA;    y=3*y1;&#xA;    z=1*z1;&#xA;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Scene.CenterX" Value="-0.237596812354921" />
+  <Entry Key="Scene.CenterY" Value="0.767816137676075" />
+  <Entry Key="Scene.CenterZ" Value="0.318937659035185" />
+  <Entry Key="Scene.Radius" Value="2.592" />
+  <Entry Key="Transformation.Camera.AngleX" Value="41.6654176343049" />
+  <Entry Key="Transformation.Camera.AngleY" Value="-1.5693398052827" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="12.3506787868806" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

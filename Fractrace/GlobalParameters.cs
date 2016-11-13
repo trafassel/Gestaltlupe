@@ -491,7 +491,7 @@ for (int n = 1; n < _cycles; n++)
             // ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.FixedButtons"] = "-9";
             ParameterDict.Current["Transformation.Stereo.Angle.PARAMETERINFO.VIEW.Invisible"] = "1";
 
-            ParameterDict.Current["Export.X3d.ClosedSurface"] = "0";
+            ParameterDict.Current["Export.X3d.ClosedSurface"] = "1";
             ParameterDict.Current["Export.X3d.ClosedSurface.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Export.X3d.ClosedSurfaceDist"] = "4";
             ParameterDict.Current["Export.X3d.ClosedSurfaceDist.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 1 1.2 2 4 8";

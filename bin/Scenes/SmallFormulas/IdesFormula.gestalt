@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Static.Cycles" Value="12" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Ides Formula&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x;&#xA;    double yy=y*y;&#xA;    double zz=z*z;&#xA;    double r=xx+yy+zz;&#xA;    if(r&gt;5) return false;&#xA;    x=2*x*y*z;&#xA;    y=yy-0.5*(xx+zz);&#xA;    z=zz-0.5*(xx+yy);&#xA;    if(r&gt;0)&#xA;    {&#xA;      additionalPointInfo.red+=xx/r;&#xA;      additionalPointInfo.green+=yy/r;&#xA;      additionalPointInfo.blue+=zz/r;&#xA;    }&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Renderer.ColorOutside" Value="1" />
+  <Entry Key="Scene.CenterX" Value="-0.795603960693615" />
+  <Entry Key="Scene.CenterY" Value="-0.145669703398805" />
+  <Entry Key="Scene.CenterZ" Value="0" />
+  <Entry Key="Scene.Radius" Value="3.18241584277446" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="90" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

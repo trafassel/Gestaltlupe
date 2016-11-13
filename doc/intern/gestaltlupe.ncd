@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:282-->
+<!--LastNote:281-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3662,15 +3662,15 @@ müssen auch die laufenden Renderprozesse geschlosen werden.<BR>
 Getestet bei Beendigung während der Animationserstellung. 
 </DD>
 <DT><A name="BI01t3S78OyTxrV35xZyFA"></A>Shadow Glow bei Größenänderung anpasen</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1473796721-->
-<!--property:date_modified=1473840653-->
+<!--property:date_modified=1479031199-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="5KNqvrS2ZUI9Ofy0BxbvTA"></A>Settingsstruktur ausblenden</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1477336034-->
-<!--property:date_modified=1477404356-->
+<!--property:date_modified=1479031192-->
 <!--property:expanded-->
 <!--property:hash=961f7531fa39b6d9fb06ec54d318ce8a719b492f-->
 <!--property:hash_html=416f1379a0e08187ae81a44edeea80399978328d-->
@@ -3848,6 +3848,12 @@ mit Verweis auf die Internetseite.<BR>
 <BR>
  
 </DD>
+<DT><A name="n5a0CMje5XxxZ9DfsFOgEw"></A>Korrekte Positionierung bei Verschiebung</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479031260-->
+<!--property:date_modified=1479031908-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>
@@ -3861,10 +3867,10 @@ mit Verweis auf die Internetseite.<BR>
 <DT><A name="KmJVcikis8T1xwFn06jArA"></A>Windows 10 App</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1478354823-->
-<!--property:date_modified=1478392898-->
+<!--property:date_modified=1478544192-->
 <!--property:expanded-->
-<!--property:hash=8368febfffd22692629f215fe23076e75b2d40cf-->
-<!--property:hash_html=62b58a6159a6934c29608579090d331b17262bf7-->
+<!--property:hash=d77af824640db549ebb1ef3f26307fa6a2bf86d0-->
+<!--property:hash_html=64e299cabdc99d2ce1db21a39ae8b58a098c4097-->
 <DD>
 <A href="https://developer.microsoft.com/de-de/dashboard/overview">https://developer.microsoft.com/de-de/dashboard/overview</A><BR>
 <BR>
@@ -3952,6 +3958,23 @@ DesktopAppConverter.exe -Setup -BaseImage C:\Users\perwi_000\Downloads\BaseImage
 <BR>
 <BR>
 <BR>
+<span style="color:#8b6914">DesktopAppConverter.exe -Installer E:\Public\Gestaltlupe\setup.exe -Destination e:\gestalt -PackageName &quot;Gestaltlupe&quot; -Publisher &quot;CN=trafassel&quot; -Version 3.4.0.0 -MakeAppx</span><BR>
+<BR>
+<span style="color:#a52a2a">C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_x64__8wekyb3<BR>
+d8bbwe\DesktopAppConverter.ps1 : DesktopAppConverter : error<BR>
+'E_STARTING_ISOLATED_ENV_FAILED': Failed to start the isolated environment.<BR>
+See inner exception for more details.<BR>
+In Zeile:1 Zeichen:1<BR>
++ &amp;'C:\Program Files\WindowsApps\Microsoft.DesktopAppConverter_1.0.1.0_ ...<BR>
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorExcep<BR>
+   tion<BR>
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorExceptio<BR>
+   n,DesktopAppConverter.ps1</span><BR>
+<BR>
+<BR>
+<BR>
+<BR>
 <DL>
 <DT><A name="2oJhBUnW43ZLf7NjsqIhyw"></A>bugs</DT>
 <!--property:icon_internal=bullet_white-->
@@ -3972,6 +3995,27 @@ In Zeile:1 Zeichen:1<BR>
    xception<BR>
     + FullyQualifiedErrorId : UnknownProviders,Microsoft.PowerShell.PackageManagement.Cmdlets.InstallPackage</span><BR>
 <BR>
+
+</DD>
+<DT><A name="VOZw3NRxM4AwvVraKZPgRw"></A>Manually</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1478544643-->
+<!--property:date_modified=1478559574-->
+<!--property:hash=69dfa2a9ac73e901f3f8fff76fa4e573eef3ba93-->
+<!--property:hash_html=bba5604b5d493a2ab49fc8756b8eb6b90810d05f-->
+<DD>
+<A href="https://msdn.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-manual-conversion">https://msdn.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-manual-conversion</A><BR>
+<BR>
+Erstellt:<BR>
+<BR>
+G:\wip\Public\appxmanifest.xml<BR>
+G:\wip\Public\mappings.txt<BR>
+<BR>
+Aufruf: <BR>
+&quot;C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makeappx.exe&quot;<BR>
+<BR>
+<BR>
+&quot;C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makeappx.exe&quot; pack /f G:\wip\Public\mappings.txt /p G:\wip\Public\Gestaltlupe340.appx<BR>
 
 </DD>
 </DL>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Static.Cycles" Value="55" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0.18" />
+  <Entry Key="Formula.Static.jy" Value="-0.13" />
+  <Entry Key="Formula.Static.jz" Value="-0.26" />
+  <Entry Key="Intern.Formula.Source" Value="// Kali Set http://www.fractalforums.com/new-theories-and-research/very-simple-formula-for-fractal-patterns/&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double r=x*x+y*y+z*z;&#xA;    if(r&gt;5) return false;&#xA;&#xA;    if(r&gt;0)&#xA;    {&#xA;      x=x/r;&#xA;      y=Math.Abs(y)/r;&#xA;      z=Math.Abs(z)/r;&#xA;    }&#xA;&#xA;    x+=_jx;&#xA;    y+=_jy;&#xA;    z+=_jz;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="7" />
+  <Entry Key="Scene.CenterX" Value="-0.59183573683547" />
+  <Entry Key="Scene.CenterY" Value="-0.69893712220134" />
+  <Entry Key="Scene.CenterZ" Value="0.0334946853503649" />
+  <Entry Key="Scene.Radius" Value="0.262997501470242" />
+  <Entry Key="Transformation.Camera.AngleX" Value="96.2184762535011" />
+  <Entry Key="Transformation.Camera.AngleY" Value="-53.9564544000261" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="-75.0506555392853" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

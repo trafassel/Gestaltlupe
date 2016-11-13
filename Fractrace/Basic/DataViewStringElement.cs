@@ -61,17 +61,11 @@ namespace Fractrace.Basic
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = text;
-            //button.Text = "o";
-
-//            button.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
-
             button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button.ForeColor = System.Drawing.Color.DarkGray;
             button.FlatAppearance.BorderSize = 0;
-                button.Dock = System.Windows.Forms.DockStyle.Right;
-            //button.Dock = System.Windows.Forms.DockStyle.Left;
+            button.Dock = System.Windows.Forms.DockStyle.Right;
             if (text.Length < 3 || (text.Length == 3 && text.Contains(".")))
             {
                 button.Width = 30;
@@ -90,11 +84,8 @@ namespace Fractrace.Basic
             else
             {
                 button.Width = 60;
-              //  if (this.pnlButtons.Width == 0)
-              //      _additionalButtonsWidth -= 30;
                 this.pnlButtons.Width += 60;
             }
-
             _additionalButtonsWidth += button.Width;
             _additionalButtonsWidth += tmpBtnSize;
             button.Click += Button_Click;
@@ -144,8 +135,6 @@ namespace Fractrace.Basic
         int _additionalButtonsWidth = 0;
         public void AddFillRightButton()
         {
-           // this.pnlButtons.Width = 200;
-           // _additionalButtonsWidth = this.pnlButtons.Width;
             fillRightButton = new System.Windows.Forms.Button();
             fillRightButton.Text = "";
             fillRightButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -156,7 +145,6 @@ namespace Fractrace.Basic
             fillRightButton.Width = 130;
             this.pnlButtons.Width += 130;
             this.pnlButtons.Controls.Add(fillRightButton);
-         //   UpdateFillRightSize();
         }
 
         void UpdateFillRightSize()
