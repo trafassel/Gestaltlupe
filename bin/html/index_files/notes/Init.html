@@ -1,0 +1,14 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD><meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+<TITLE>Formula &gt; Methods and Datatypes &gt; Init</TITLE></HEAD>
+<BODY>
+The method Init() is called at the start of the rendering process. This function is a good place to perform some time consuming computations, which dos not need to called for each testing point. Furthermore, the reading of global parameters should be performed here, because the user is able to change some global parameters while the rendering process is running.<BR>
+<BR>
+<span style="color:#8b6914">public override void Init() {<BR>
+  base.Init();<BR>
+}</span><BR>
+
+</BODY>
+</HTML>

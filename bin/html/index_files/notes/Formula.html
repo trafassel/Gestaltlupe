@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD><meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+<TITLE>Formula</TITLE></HEAD>
+<BODY>
+The formula sorce code can be edited by pressing the <i>Formula</i> tab on the upper right.<BR>
+<BR>
+<img alt="" title="Image.png" src="img/Image_QxqFBgvbfcNEk9e1XhS7Ig_0004.png"><BR>
+<BR>
+<BR>
+Because everything in Gestaltlupe is based on Microsoft .NET framework, all predefined mathematical methods has to start with <i>Math</i>.<BR>
+<BR>
+<BR>
+<span style="color:#8b6914">
+
+public override bool GetBool(double x, double y, double z)<br/>
+{<br/>
+ &nbsp; if (x*x + y*y + z*z <1) return true;<br/>
+ &nbsp; if (Math.Abs(x) + Math.Abs(y) + Math.Abs(z) < 1.4) return true;<br/>
+ &nbsp; return false;<br/>
+}<br/>
+
+</span><BR>
+<BR>
+<img alt="" title="Image.png" src="img/Image_QxqFBgvbfcNEk9e1XhS7Ig_0005.png"><BR>
+<BR>
+<BR>
+<BR>
+Surface colours can be defined in the field <i>additionalPointInfo</i>. The rgb-values of the surface color corresponds to (<i>additionalPointInfo.red, additionalPointInfo.green, additionalPointInfo.blue</i>). <BR>
+<BR>
+<span style="color:#8b6914">public override bool GetBool(double x, double y, double z)<BR>
+{<BR>
+  if(x*x+y*y+z*z&lt;1)<BR>
+  {<BR>
+    additionalPointInfo.red=1;<BR>
+    additionalPointInfo.green=1;<BR>
+    return true;<BR>
+  }<BR>
+  if(Math.Abs(x)+Math.Abs(y)+Math.Abs(z)&lt;1.4)<BR>
+  {<BR>
+    additionalPointInfo.blue=0.6;<BR>
+    return true;<BR>
+  }<BR>
+  return false;<BR>
+}</span><BR>
+<BR>
+<img alt="" title="Image.png" src="img/Image_QxqFBgvbfcNEk9e1XhS7Ig_0006.png"><BR>
+<BR>
+Of course to see the colors, the parameter <i>Color Outside</i> has to be set in Material tab.<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</BODY>
+</HTML>

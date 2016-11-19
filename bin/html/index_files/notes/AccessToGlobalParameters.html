@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD><meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+<TITLE>Formula &gt; Methods and Datatypes &gt; Access to Global Parameters</TITLE></HEAD>
+<BODY>
+The user can set the value of all global parameters,<BR>
+<BR>
+<span style="color:#8b6914">public void Set(string id, int value); <BR>
+public void Set(string id, double value);<BR>
+public void Set(string id, bool value);</span><BR>
+<BR>
+read the value of all global parameters<BR>
+<BR>
+<span style="color:#8b6914">public double GetDouble(string id);<BR>
+</span><BR>
+or define new global parameters.<BR>
+<BR>
+<span style="color:#8b6914">public void AddValue(string id, double value);<BR>
+public double GetOrSetDouble(string name,double defaultValue,string description);<BR>
+</span><BR>
+A bulk of parameters at the same time can be set with the method SetParameterBulk(string xmlDescription). The XML description is the same, as the settings in the project file.<BR>
+<BR>
+<span style="color:#8b6914">SetParameterBulk(&quot;&quot;);</span><BR>
+<BR>
+<BR>
+
+</BODY>
+</HTML>

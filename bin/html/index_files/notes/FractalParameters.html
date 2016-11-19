@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD><meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+<TITLE>Formula &gt; Methods and Datatypes &gt; Fractal Parameters</TITLE></HEAD>
+<BODY>
+The julia seed parameters are available by the member valiables <i>_jx</i>,<i>_jy</i> and <i>_jz</i>. The member <i>_isJulia</i> corresponds to the formula <i>Julia</i> parameter. The following code is used to define the mandelbrot and julia formula in the same source code.<BR>
+<BR>
+<span style="color:#8b6914">public override bool GetBool(double x, double y, double z)<BR>
+{<BR>
+double br, bi, bj;<BR>
+double ar, ai, aj;<BR>
+if (_isJulia)<BR>
+{<BR>
+  br = _jx; bi = _jy; bj = _jz;<BR>
+  ar = x; ai = y; aj = z;<BR>
+}<BR>
+else<BR>
+{<BR>
+  br = x; bi = y; bj = z;<BR>
+  ar = _jx; ai = _jy; aj = _jz;<BR>
+}<BR>
+...</span><BR>
+<BR>
+<BR>
+
+</BODY>
+</HTML>
