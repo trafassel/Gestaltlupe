@@ -69,6 +69,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDouble("Renderer.BrightLightLevel", 1);
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.Brightness", 1.65);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -80,6 +81,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDouble("Renderer.BrightLightLevel", 1);
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.Brightness", 3);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -89,6 +91,7 @@ namespace Fractrace.Gui
             SetDefault();
             ParameterDict.Current.SetDouble("Renderer.BrightLightLevel", 0.4);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -101,6 +104,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.ShadowGlow", 0.961);
             ParameterDict.Current.SetDouble("Renderer.ShadowJustify", 0.2);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -115,6 +119,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.Shininess", 28);
             ParameterDict.Current.SetDouble("Renderer.ShininessFactor", 0.8);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -124,6 +129,7 @@ namespace Fractrace.Gui
             SetDefault();
             ParameterDict.Current.SetDouble("Renderer.LightIntensity", 0);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -134,6 +140,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.BrightLightLevel", 0);
             ParameterDict.Current.SetDouble("Renderer.LightIntensity", 0);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -143,6 +150,7 @@ namespace Fractrace.Gui
             SetDefault();
             ParameterDict.Current.SetDouble("Renderer.LightIntensity", 1);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -152,6 +160,7 @@ namespace Fractrace.Gui
             SetDefault();
             ParameterDict.Current.SetDouble("Renderer.ShadowJustify", 0);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -165,6 +174,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.ShininessFactor", 0.3);
             ParameterDict.Current.SetDouble("Renderer.ShadowJustify", 1.5);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -178,6 +188,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.ShininessFactor", 0.8);
             ParameterDict.Current.SetDouble("Renderer.ShadowJustify", 0.2);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 
@@ -190,6 +201,7 @@ namespace Fractrace.Gui
             ParameterDict.Current.SetDoubleWithoutRaiseChange("Renderer.Shininess", 9);
             ParameterDict.Current.SetDouble("Renderer.ShininessFactor", 1);
             ResultImageView.PublicForm.ActivatePictureArt();
+            ParameterInput.MainParameterInput.UpdatePictureArtInSmallPreview();
             UpdateFromChangeProperty();
         }
 

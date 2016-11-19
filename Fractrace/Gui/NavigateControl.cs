@@ -61,7 +61,6 @@ namespace Fractrace
         /// </summary>
         PreviewControl _preview = null;
 
-
         /// <summary>
         /// Parent control.
         /// </summary>
@@ -86,7 +85,6 @@ namespace Fractrace
         /// <summary>
         /// Initialisation.
         /// </summary>
-        /// <param name="preview"></param>
         public void Init(PreviewControl preview, PreviewControl preview2, ParameterInput parent)
         {
             _preview = preview;
@@ -124,8 +122,6 @@ namespace Fractrace
             // For Zerotest
             double minDoubleVal = 0.0000000000000001;
 
-            // This does not work for angle combinations:
-
             Rotation rotView = new Rotation();
             rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                   ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
@@ -139,8 +135,7 @@ namespace Fractrace
             rotView = new Rotation();
             rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                   ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
-            centerDiffZ = rotView.TransformForNavigation(new Vec3(0, 0, -1));
-            
+            centerDiffZ = rotView.TransformForNavigation(new Vec3(0, 0, -1));            
 
             // Set 0-Entries
             if (centerDiffX.X > -minDoubleVal && centerDiffX.X < minDoubleVal)
@@ -540,10 +535,9 @@ namespace Fractrace
 
         public void DrawPreview()
         {
-            System.Diagnostics.Debug.WriteLine("DrawPreview");
             ResultImageView.PublicForm.Stop();
+            _preview.Abort();
             _preview.Draw();
-            System.Diagnostics.Debug.WriteLine("DrawPreview Ends");
         }
 
 
@@ -769,7 +763,6 @@ namespace Fractrace
                     if (trans.Z != 0)
                         SlideZ(trans.Z / mFactor);
                 }
-
                
                 {
                     UpdateCenterDiff();
@@ -780,42 +773,10 @@ namespace Fractrace
                         SlideY(trans.Y / mFactor);
                     if (trans.Z != 0)
                         SlideZ(trans.Z / mFactor);
-                }
-               
-
-              //  DrawAndWriteInHistory();
+                }               
             }
         }
-        /*
-        public void Zoom(double factor)
-        {
-            ParameterDict.Current.SetDouble("Scene.Radius", ParameterDict.Current.GetDouble("Scene.Radius") * factor);
-            // if (mZoomFactor>1.1)
-            {
-                //                btnBackwards_Click(null, null);
-
-                if (mFactor == 0)
-                    return;
-                if (factor >= 1)
-                {
-                    UpdateCenterDiff();
-                    Vec3 trans = SolveEqusyst(new Vec3(0, -0.3, 0), centerDiffX, centerDiffY, centerDiffZ);
-                    if (trans.X != 0)
-                        SlideX(trans.X / mFactor);
-                    if (trans.Y != 0)
-                        SlideY(trans.Y / mFactor);
-                    if (trans.Z != 0)
-                        SlideZ(trans.Z / mFactor);
-                    DrawAndWriteInHistory();
-
-                }
-
-                //     btnBackwards_Click(null, null);
-                //     btnBackwards_Click(null, null);
-            }
-            DrawAndWriteInHistory();
-        }
-        */
+    
 
 
         public void ZoomOut()
@@ -823,6 +784,8 @@ namespace Fractrace
             btnZoomOut_Click(null, null);
         }
 
+
+        /*
         public void MoveLeftRightUpOrDown(int diffx, int diffy)
         {
 
@@ -834,17 +797,7 @@ namespace Fractrace
             if (trans.Z != 0)
                 SlideZ(trans.Z / mFactor);
 
-            /*
-            if (diffx < -2)
-                navigateControl1.MoveLeft();
-            if (diffx > 2)
-                navigateControl1.MoveLeft();
-            if (diffy < -2)
-                navigateControl1.MoveUp();
-            if (diffy > 2)
-                navigateControl1.MoveDown();
-                */
-        }
+        }*/
 
     }
 }

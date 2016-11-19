@@ -5,8 +5,16 @@
   <Entry Key="Formula.Static.jx" Value="0" />
   <Entry Key="Formula.Static.jy" Value="0" />
   <Entry Key="Formula.Static.jz" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="// Mandelbrot on real numbers&#xA;// http://www.fractalforums.com/mandelbrot-and-julia-set/mandelbrot-on-real-numbers-t5375/msg26926/#msg26926&#xA;&#xA;&#xA;public override bool GetBool(double a,double b,double c)&#xA;{&#xA;  double x=0;&#xA;  double y=0;&#xA;  double z=0;&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    if(x+y-z&gt;5) return false;&#xA;    x=x*(1-x)+a;&#xA;    y=y*(1-y)+b;&#xA;    z=z*(1-z)+c;&#xA;    if(x&gt;y) additionalPointInfo.red+=1;&#xA;    if(y&gt;z) additionalPointInfo.green+=1;&#xA;    if(z&gt;x) additionalPointInfo.blue+=1;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Mandelbrot on real numbers http://www.fractalforums.com/mandelbrot-and-julia-set/mandelbrot-on-real-numbers-t5375/msg26926/#msg26926&#xA;public override bool GetBool(double a,double b,double c)&#xA;{&#xA;  double x = 0;&#xA;  double y = 0;&#xA;  double z = 0;&#xA;  for (int n = 1; n &lt; _cycles; n++)&#xA;  {&#xA;    if (x+y-z&gt;5) return false;&#xA;    x = x*(1-x) + a;&#xA;    y = y*(1-y) + b;&#xA;    z = z*(1-z) + c;&#xA;    if (x&gt;y) additionalPointInfo.red+=1;&#xA;    if (y&gt;z) additionalPointInfo.green+=1;&#xA;    if (z&gt;x) additionalPointInfo.blue+=1;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="4" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
   <Entry Key="Renderer.ColorOutside" Value="1" />
   <Entry Key="Scene.CenterX" Value="2.31740888221669" />
   <Entry Key="Scene.CenterY" Value="2.51271255060026" />

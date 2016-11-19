@@ -17,6 +17,14 @@ namespace Fractrace
     public class PreviewControl : RenderImage
     {
 
+        public PreviewControl(int updateSteps)
+        {
+            _updateSteps = updateSteps;
+        }
+
+        // number of additional steps to increase render quality.
+        int _updateSteps = 0;
+
         public Button PreviewButton { get { return this.btnPreview; } }
         protected System.Windows.Forms.Button btnPreview;
 
@@ -75,13 +83,14 @@ namespace Fractrace
         /// <summary>
         /// Redraw, forced by the user  (in this application on mouse click).
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void btnPreview_Click(object sender, EventArgs e)
         {
-            _smallPreviewCurrentDrawStep = 1;
-            if (_renderOnClick)
-                StartDrawing();
+            lock (_smallPreviewCurrentDrawStepMutex)
+            {
+                _smallPreviewCurrentDrawStep = 1;
+            }
+                if (_renderOnClick)
+                    StartDrawing();
         }
 
 
@@ -103,31 +112,59 @@ namespace Fractrace
         {
             ResultImageView.PublicForm.Stop();
             _forceRedraw = false;
-            btnPreview.Enabled = false;
-            _inDrawing = true;
+            btnPreview.Enabled = false;        
             if (btnPreview.Width < 1 && btnPreview.Height < 1)
             {
                 ResultImageView.PublicForm.CurrentUpdateStep = 0;
                 return;
             }
+            lock (_inDrawingMutex)
+                _inDrawing = true;
+            System.Diagnostics.Debug.WriteLine("_inDrawing = true (1)");
             if (_iterate != null)
-                _iterate.Abort();
+            {
+                if(_iterate.Running)
+                  _iterate.Abort();
+            }
 
-            if (_smallPreviewCurrentDrawStep == 1)
+            lock (_smallPreviewCurrentDrawStepMutex)
             {
-                _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+                lock (_smallPreviewCurrentDrawStepMutex)
+                {
+                    if (_smallPreviewCurrentDrawStep == 0 || _smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2 || _smallPreviewCurrentDrawStep == 4)
+                    {
+                        _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+                         _smallPreviewCurrentDrawStep = 2;
+                    }
+
+                    else if (_smallPreviewCurrentDrawStep == 3)
+                    {
+                        _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+                        _iterate.SetOldData(null, null, 2);
+                        _smallPreviewCurrentDrawStep = 4;
+                    }
+                    else
+                    {
+                        if(_iterate!=null)
+                        if(_iterate.Running)
+                          _iterate.Abort();
+                        _iterate = null;
+                        lock(_inDrawingMutex)
+                          _inDrawing = false;
+                        _smallPreviewCurrentDrawStep = 1;
+                    }
+                }
             }
-            else
+            if (_iterate != null)
             {
-                _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+                _iterate._oneStepProgress = false;
+                AssignParameters();
+                _iterate.StartAsync(_parameter,
+                        ParameterDict.Current.GetInt("Formula.Static.Cycles"),
+                        1,
+                        ParameterDict.Current.GetBool("Formula.Static.Julia"),
+                        !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
             }
-            _iterate._oneStepProgress = false;
-            AssignParameters();
-            _iterate.StartAsync(_parameter,
-                    ParameterDict.Current.GetInt("Formula.Static.Cycles"),
-                    1,
-                    ParameterDict.Current.GetBool("Formula.Static.Julia"),
-                    !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
         }
 
 
@@ -166,6 +203,12 @@ namespace Fractrace
         {
             if (_iterate == null || !_iterate.InAbort)
                 this.Invoke(new OneStepEndsDelegate(OneStepEnds));
+            else
+            {
+                lock (_inDrawingMutex)
+                    _inDrawing = false;
+            }
+            System.Diagnostics.Debug.WriteLine("_inDrawing = false (2)");
             InitBaseImage();
         }
 
@@ -188,8 +231,36 @@ namespace Fractrace
                         {
                             if (IsSmallPreview())
                             {
-                                pArt = new PictureArt.FastPreviewRenderer(_iterate.PictureData);
-                                pArt.Init(_iterate.LastUsedFormulas);
+                                lock (_smallPreviewCurrentDrawStepMutex)
+                                {
+                                   
+                                    if (_smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2)
+                                    {
+                                        if (_iterate.Height < 60)
+                                        {
+                                            pArt = new PictureArt.FastPreviewRenderer(_iterate.PictureData);
+                                            pArt.Init(_iterate.LastUsedFormulas);
+                                        }
+                                        else
+                                        {
+                                            pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                                        }
+                                        
+                                    }
+
+                                    else if (_smallPreviewCurrentDrawStep == 4 || _smallPreviewCurrentDrawStep == 3)
+                                    {
+                                        pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                                        _smallPreviewCurrentDrawStep = 5;
+                                    }
+                                    else
+                                    {
+                                        if (_smallPreviewCurrentDrawStep == 5)
+                                            _smallPreviewCurrentDrawStep = 1;
+                                        pArt = null;
+                                    }
+                                }
+                                   
                             }
                             else
                             {
@@ -208,25 +279,47 @@ namespace Fractrace
                        
                         if (IsSmallPreview())
                         {
-                            _smallPreviewCurrentDrawStep++;
-                            if (_smallPreviewCurrentDrawStep == 2 && _fixedRenderer == -1)
+                            lock (_smallPreviewCurrentDrawStepMutex)
                             {
-                                if (RenderingEnds != null)
-                                    RenderingEnds();
+                                // _smallPreviewCurrentDrawStep++;
 
-                                // Uncomment following line for more accurate small preview rendering in next iteration. 
-                                //StartDrawing();
-                            }
-                            else
-                            {
-                                if (_fixedRenderer == -1)
+                                if (_smallPreviewCurrentDrawStep == 5)
+{
+                                    _smallPreviewCurrentDrawStep = 1;
+
+                                }
+                                else if ( (_smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2) && _fixedRenderer == -1)
+
+                                //                  if (_smallPreviewCurrentDrawStep == 2 && _fixedRenderer == -1)
                                 {
                                     if (RenderingEnds != null)
                                         RenderingEnds();
+
+                                    // Uncomment following line for more accurate small preview rendering in next iteration. 
+                                    if (_smallPreviewCurrentDrawStep == 2 && _updateSteps>0)
+                                    {
+                                        if (!_iterate.Running)
+                                        {
+                                            _smallPreviewCurrentDrawStep = 3;
+                                            lock (_inDrawingMutex)
+                                                _inDrawing = false;
+                                            System.Diagnostics.Debug.WriteLine("_inDrawing = false (3)");
+
+                                            StartDrawing();
+                                        }
+                                    }
                                 }
+                                else
+                                {
+                                    if (_fixedRenderer == -1)
+                                    {
+                                        if (RenderingEnds != null)
+                                            RenderingEnds();
+                                    }
+                                }
+                               // if (_smallPreviewCurrentDrawStep > 1)
+                               //     _smallPreviewCurrentDrawStep = 0;
                             }
-                            if (_smallPreviewCurrentDrawStep > 1)
-                                _smallPreviewCurrentDrawStep = 0;
                         }
                         else
                         {
@@ -241,7 +334,9 @@ namespace Fractrace
                 }
             }
             btnPreview.Enabled = true;
-            _inDrawing = false;
+            lock (_inDrawingMutex)
+                _inDrawing = false;
+            System.Diagnostics.Debug.WriteLine("_inDrawing = false (4)");
             if (ParameterDict.Current.GetBool("View.Pipeline.Preview") && this == ParameterInput.MainParameterInput.MainPreviewControl)
             {
                 ParameterInput.MainParameterInput.ComputePreview();
@@ -316,11 +411,13 @@ namespace Fractrace
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("InitBaseImage ");
-            _baseBitmap = (System.Drawing.Bitmap)btnPreview.BackgroundImage.Clone();
-            }catch (Exception ex)
+                _baseBitmap = (System.Drawing.Bitmap)btnPreview.BackgroundImage.Clone();
+            }
+            catch (Exception ex)
             { System.Diagnostics.Debug.WriteLine(ex.ToString()); }
         }
+
+
         public void MoveBitmap(int x, int y)
 
         {

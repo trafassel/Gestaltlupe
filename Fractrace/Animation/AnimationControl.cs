@@ -341,6 +341,7 @@ namespace Fractrace.Animation
         /// <summary>
         /// Rendering of one preview image is ready.
         /// </summary>
+
         void mPreview1_RenderingEnds()
         {
             if (_currentPreviewStep >= _animationSteps.Steps.Count)
@@ -358,7 +359,7 @@ namespace Fractrace.Animation
             _dataPerTime.Load(ap.Time);
             animationHistory.Save();
 
-            PreviewControl mPreview1 = new Fractrace.PreviewControl();
+            PreviewControl mPreview1 = new Fractrace.PreviewControl(0);
             mPreview1.Width = _previewWidth ;
             mPreview1.Height = _previewHeight;
             mPreview1.Location = new System.Drawing.Point(_previewWidth * _currentPreviewStep, 0);
@@ -380,6 +381,7 @@ namespace Fractrace.Animation
             mPreview1.RenderingEnds += new PictureRenderingIsReady(mPreview1_RenderingEnds);
             mPreview1.Draw();
         }
+        
 
         /// <summary>
         /// Load Animation file.

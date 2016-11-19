@@ -274,6 +274,13 @@ namespace Fractrace
             }
         }
 
+        public bool Running
+        {
+            get
+            {
+                return _start && (!_abort);
+            }
+        }
 
         /// <summary>
         /// Split computing in threads.
@@ -448,7 +455,7 @@ namespace Fractrace
 
             _maxxIter = _width;
             _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
-            if(IsSmallPreview())
+            if(IsSmallPreview() && _updateCount == 0)
                 _maxyIter = _maxxIter;    
             _maxzIter = _height;
               
@@ -679,7 +686,7 @@ namespace Fractrace
                                             {// inner Point
                                                 if (inverse)
                                                 {                                                    
-                                                        if (IsSmallPreview())
+                                                        if (IsSmallPreview() && _updateCount == 0)
                                                         {
                                                             formulas.RayCastAt(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
@@ -696,7 +703,8 @@ namespace Fractrace
                                                 }
                                                 else
                                                 {
-                                                        if (IsSmallPreview())
+                                                    
+                                                        if (IsSmallPreview() && _updateCount==0)
                                                         {
                                                             formulas.RayCastAt(zyklen, x, y, z, 0,
                                    xd, yd, zd, 0,
@@ -704,6 +712,7 @@ namespace Fractrace
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
                                                         else
+                                                        
                                                         {
                                                             formulas.FixPoint(zyklen, x, y, z, 0,
                                      xd, yd, zd, 0,

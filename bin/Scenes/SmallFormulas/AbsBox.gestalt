@@ -7,8 +7,16 @@
   <Entry Key="Formula.Static.jz" Value="0.04" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="// Simple Mandelbox Julia&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for(int n=1;n&lt;_cycles;  n++)&#xA;  {&#xA;    if(x&lt;-1)x=-2-x;&#xA;    if(y&lt;-1)y=-2-y;&#xA;    if(z&lt;-1)z=-2-z;&#xA;    double r=x*x+y*y+z*z;&#xA;    if(r&gt;3000)&#xA;    {&#xA;      return true;&#xA;    }&#xA;    if(r&lt;1)&#xA;    {&#xA;      x/=r;&#xA;      y/=r;&#xA;      z/=r;&#xA;    }&#xA;    x+=_jx;&#xA;    y+=_jy;&#xA;    z+=_jz;&#xA;  }&#xA;  return false;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="// Simple Absbox Julia&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for(int n=1; n&lt;_cycles; n++)&#xA;  {&#xA;    if (x&lt;-1) x = -2 -x;&#xA;    if (y&lt;-1) y = -2 -y;&#xA;    if (z&lt;-1) z = -2 -z;&#xA;    double r = x*x + y*y + z*z;&#xA;    if (r&gt;3000) return true;&#xA;    if (r&lt;1)&#xA;    {&#xA;      x/=r;&#xA;      y/=r;&#xA;      z/=r;&#xA;    }&#xA;    x+=_jx;&#xA;    y+=_jy;&#xA;    z+=_jz;&#xA;  }&#xA;  return false;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="7" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
   <Entry Key="Scene.CenterX" Value="-1.7357799042272" />
   <Entry Key="Scene.CenterY" Value="0.078283814156992" />
   <Entry Key="Scene.CenterZ" Value="-1.61960012329993" />

@@ -27,6 +27,7 @@ namespace Fractrace
         /// </summary>
         public Iterate Iterate  {  get   {  return _iterate; }  }
         protected Iterate _iterate = null;
+        protected object _iterateMutex = new object();
 
         int _maxx = 0;
 
@@ -47,6 +48,7 @@ namespace Fractrace
         /// Gibt an, ob zur Zeit gezeichnet wird.
         /// </summary>
         protected bool _inDrawing = false;
+        protected object _inDrawingMutex = new object();
 
         /// <summary>
         /// True, wenn von außen das Neuzeichnen aktiviert wurde.
@@ -56,9 +58,14 @@ namespace Fractrace
 
         /// <summary>
         /// smallPreviewCurrentDrawStep == 0 : iter(width/2,height/2) , FastPreviewRenderer
-        /// smallPreviewCurrentDrawStep == 1 : FastPreviewRenderer  
+        /// smallPreviewCurrentDrawStep == 1 : (iter running)
+        /// smallPreviewCurrentDrawStep == 2 : FastPreviewRenderer
+        /// smallPreviewCurrentDrawStep == 3 : FastPreviewRenderer complete
         /// </summary>
         protected int _smallPreviewCurrentDrawStep = 0;
+
+        protected object _smallPreviewCurrentDrawStepMutex = new object();
+        public int SmallPreviewCurrentDrawStep { get { return _smallPreviewCurrentDrawStep;  } }
 
         /// <summary>
         /// if fixedRenderer != -1 renderer to use for creating the bitmap.
@@ -69,6 +76,10 @@ namespace Fractrace
         /// Fortschritt der Berechnung in Prozent.
         /// </summary>
         protected double _progress = 0;
+        public double GetProgress()
+            {
+                return _progress;
+            }
 
         protected delegate void ProgressDelegate();
 
@@ -89,14 +100,16 @@ namespace Fractrace
         }
 
 
-        /// <summary>
-        /// Berechnung wird abgebrochen:
-        /// </summary>
+        // Kill all running renderíng and picture art processing.
         public void Abort()
         {
-            if (_iterate != null)
+            lock (_iterateMutex)
             {
-                _iterate.Abort();
+                if (_iterate != null)
+                {
+                    if (_iterate.Running)
+                        _iterate.Abort();
+                }
             }
         }
 
@@ -126,7 +139,9 @@ namespace Fractrace
         protected virtual void StartDrawing()
         {
             _forceRedraw = false;
-            _inDrawing = true;
+            lock (_inDrawingMutex)
+                _inDrawing = true;
+            System.Diagnostics.Debug.WriteLine("_inDrawing = true (6)");
             SetPictureBoxSize();
             _iterate = new Iterate(_maxx, _maxy, this, IsRightView);
             AssignParameters();
@@ -152,7 +167,9 @@ namespace Fractrace
         /// </summary>
         public virtual void Draw()
         {
-            _smallPreviewCurrentDrawStep = 1;
+            System.Diagnostics.Debug.WriteLine("Draw() _inDrawing=" + _inDrawing.ToString());
+            lock (_smallPreviewCurrentDrawStepMutex)
+                _smallPreviewCurrentDrawStep = 0;
             _fixedRenderer = -1;
             if (!_inDrawing)
                 StartDrawing();
@@ -167,12 +184,25 @@ namespace Fractrace
             }
         }
 
+        public void ActivatePictureArt()
+        {
+            try
+            {
+                if (_iterate != null && !_iterate.InAbort)
+                {                    
+                    OneStepEnds();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
+
 
         /// <summary>
         /// Paint image with fixed renderer and reuse an iterate object after computation. 
         /// </summary>
-        /// <param name="otherIterate"></param>
-        /// <param name="renderer"></param>
         public virtual void Redraw(Iterate otherIterate, int renderer)
         {
             _fixedRenderer = renderer;
@@ -230,7 +260,9 @@ namespace Fractrace
                 Application.DoEvents();
                 this.Refresh();
             }
-            _inDrawing = false;
+            lock (_inDrawingMutex)
+                _inDrawing = false;
+            System.Diagnostics.Debug.WriteLine("_inDrawing = false (7)");
             if (_forceRedraw)
                 StartDrawing();
         }

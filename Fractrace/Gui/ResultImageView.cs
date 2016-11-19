@@ -482,7 +482,8 @@ namespace Fractrace
             _currentUpdateStep = ParameterDict.Current.GetInt("View.UpdateSteps") + 1;
             if (_iterate != null)
             {
-                _iterate.Abort();
+                if(_iterate.Running)
+                  _iterate.Abort();
             }
             StopRunningPictureArt();
             Progress(0);
@@ -750,7 +751,6 @@ namespace Fractrace
                 progressBar1.Value = (int)_progress;
             }
         }
-
 
 
         /// <summary>

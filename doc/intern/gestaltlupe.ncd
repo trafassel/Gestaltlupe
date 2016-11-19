@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:281-->
+<!--LastNote:282-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3854,6 +3854,15 @@ mit Verweis auf die Internetseite.<BR>
 <!--property:date_modified=1479031908-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="X7FfZQvwgkV2Ocyvi4G4BQ"></A>Update Dateiversion</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479105999-->
+<!--property:date_modified=1479106081-->
+<!--property:hash=c7b3ae45d8642940090b4b04f2c750c663327de3-->
+<!--property:hash_html=c7b3ae45d8642940090b4b04f2c750c663327de3-->
+<DD>
+Wenn eine ältere Datei eingelesen, konvertiert und gespeichert wird, steht dort noch die Ursprungs-Dateiversion.
+</DD>
 </DL>
 </DD>
 </DL>

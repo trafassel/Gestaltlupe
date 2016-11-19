@@ -34,10 +34,11 @@ namespace Fractrace
         /// </summary>
         protected int currentPic = 0;
 
+        // small images of created images in this session. 
         Dictionary<int, Image> _historyImages = new Dictionary<int, Image>();
 
         /// <summary>
-        /// get small preview control.
+        /// get small preview control (bottom view).
         /// </summary>
         public Fractrace.PreviewControl MainPreviewControl
         {
@@ -78,10 +79,11 @@ namespace Fractrace
                 return ParameterDict.Current.GetBool("Formula.Static.Julia") ? -2 : -1;
             } }
 
+        // if true, all preview renderings are automatically added to animation. 
         public bool AutomaticSaveInAnimation { get { return cbAutomaticSaveAnimation.Checked; } }
-        public bool Changed = false;
+        // Last used scene directory. Used in file open dialog.
         protected static string oldDirectory = "";
-        public void DeactivatePreview() { _previewMode = false; }
+        // if false a full size image is created.
         protected bool _previewMode = false;
 
         int _mouseX = 0;
@@ -110,7 +112,19 @@ namespace Fractrace
             string version = "";
             if (infos.Length > 1)
                 version = infos[1];
-            this.Text = "Gestaltlupe" + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
+            if (version.Contains("=") && version.Contains("."))
+            {
+                version = version.Substring(version.IndexOf("=") + 1);
+                string[] versionNumbers = version.Split('.');
+                if(versionNumbers.Length>2)
+                {
+                    version = versionNumbers[0] + "." + versionNumbers[1];
+                    if (versionNumbers[2] != "0")
+                        version += "." + versionNumbers[2];
+                }
+
+            }
+            this.Text = "Gestaltlupe " + version + "    [" + System.IO.Path.GetFileName(FileSystem.Exemplar.ProjectDir) + "]";
             tabControl1.SelectedIndex = 4;
             tabControl2.SelectedIndex = 0;
             SetSmallPreviewSize();
@@ -173,6 +187,7 @@ namespace Fractrace
             _mouseYBottomView = e.Y;
             if (e.Button == MouseButtons.Left)
             {
+                preview1.Abort();
                 _mouseDownBottomView = true;
                 _mouseXStartBottomView = e.X;
                 _mouseYStartBottomView = e.Y;
@@ -180,7 +195,10 @@ namespace Fractrace
                
             }
             if (e.Button == MouseButtons.Right)
+            {
+                preview1.Abort();
                 _mouseDownRightBottomView = true;
+            }
         }
 
         private void BtnSettings_Click(object sender, System.EventArgs e)
@@ -250,6 +268,7 @@ namespace Fractrace
             _mouseY = e.Y;
             if (e.Button == MouseButtons.Left)
             {
+                preview1.Abort();
                 _mouseDown = true;
                 _mouseDownRight = false;
                 _mouseXStart = _mouseX;
@@ -258,6 +277,7 @@ namespace Fractrace
             }
             if (e.Button == MouseButtons.Right)
             {
+                preview1.Abort();
                 _mouseDown = false;
                 _mouseDownRight = true;
             }
@@ -296,17 +316,25 @@ namespace Fractrace
 
         private void Preview1_MouseWheel(object sender, MouseEventArgs e)
         {
+            preview1.Abort();
             if (e.Delta > 0)
                 navigateControl1.ZoomIn();
             else
                 navigateControl1.ZoomOut();
         }
 
+        public void UpdatePictureArtInSmallPreview()
+        {
+            preview1.ActivatePictureArt();
+        }
+
         private void ParameterDictControl1_ElementChanged(string name, string value)
         {
             if(GlobalParameters.IsMaterialProperty(name))
             {
+                //DrawSmallPreview();
                 ResultImageView.PublicForm.ActivatePictureArt();
+                preview1.ActivatePictureArt();
                 return;
             }
 
@@ -323,9 +351,23 @@ namespace Fractrace
 
         private void UpdateFrontView()
         {
-            preview2.InitLabelImage();
-            preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
-
+            if ( preview1.SmallPreviewCurrentDrawStep == 2 || preview1.SmallPreviewCurrentDrawStep == 1)
+            {                
+                if (preview1.GetProgress() >= 100 || preview1.Iterate.Height<60)
+                {
+                    preview2.InitLabelImage();
+                    preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
+                }
+                
+            }
+            else
+            {
+                if (preview1.SmallPreviewCurrentDrawStep == 4 && preview1.GetProgress()>=100)
+                {
+                    preview2.InitLabelImage();
+                    preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
+                }
+            }
         }
 
 
@@ -334,6 +376,7 @@ namespace Fractrace
         /// </summary>
         void ParameterValuesChanged()
         {
+            preview1.Abort();
             preview1.Draw();
             AddToHistory();
             if (tabControl1.SelectedTab == tpSource)
@@ -369,10 +412,8 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Eine globale Variable hat sich geändert.
+        /// A global variable has changed.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
         void Exemplar_EventChanged(object source, ParameterDictChangedEventArgs e)
         {
             UpdateFromData();
@@ -380,7 +421,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// 
+        /// A global variable has changed.
         /// </summary>
         public void UpdateFromData()
         {
@@ -398,7 +439,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Neuzeichnen über das übergeordentete Control.
+        /// Redraw result image.
         /// </summary>
         private void ForceRedraw()
         {
@@ -417,13 +458,10 @@ namespace Fractrace
                 {
                     btnPreview.Enabled = false;
                     btnStart.Enabled = false;
-                    //btnCreatePoster.Enabled = false;
                     btnStop.Enabled = true;
                 }
                 else
                 {
-                    //btnStart.Enabled = true;
-                    //btnCreatePoster.Enabled = true;
                     btnStop.Enabled = false;
                     ComputationEnds();
                 }
@@ -454,32 +492,6 @@ namespace Fractrace
             Graphics gr = Graphics.FromImage(newImage);
             gr.DrawImage(image, new Rectangle(0, 0, imageWidth, imageHeight));
             _historyImages[_history.Time] = newImage;
-        }
-
-
-        private void OK()
-        {
-            Changed = true;
-            ResultImageView.PublicForm._inPreview = false;
-            ForceRedraw();
-        }
-
-
-        private void tbVar1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void tbAngle_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void tbVar2_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
 
@@ -673,8 +685,8 @@ namespace Fractrace
         /// </summary>
         public void StartRendering()
         {
+            preview1.Abort();
             _previewMode = false;
-            //mPosterMode = false;
             _history.CurrentTime = _history.Save();
             ResultImageView.PublicForm._inPreview = false;
             ForceRedraw();
@@ -766,7 +778,6 @@ namespace Fractrace
         /// </summary>
         private void SetSmallPreviewSize()
         {
-
             if (preview1 == null || preview2 == null)
                 return;
 
@@ -932,6 +943,7 @@ namespace Fractrace
         /// </summary>
         public void DrawSmallPreview()
         {
+            preview1.Abort();
             preview1.Draw();
             AddToHistory();
         }
@@ -994,6 +1006,7 @@ namespace Fractrace
         {
             _previewMode = true;
             {
+                preview1.Abort();
                 _history.CurrentTime = _history.Save();
                 // Fix Size parameter.
                 string sizeStr = ParameterDict.Current["View.Size"];
@@ -1272,7 +1285,9 @@ namespace Fractrace
             }
         }
 
-
+        /// <summary>
+        /// Set history to history entry with max time.
+        /// </summary>
         private void button6_Click(object sender, EventArgs e)
         {
             _history.CurrentTime = _history.Time;
@@ -1316,7 +1331,6 @@ namespace Fractrace
             sd.Filter = "*.wrl|*.wrl|Web|*.xhtml";
             if (sd.ShowDialog() == DialogResult.OK)
             {
-
                 if (sd.FileName.ToLower().EndsWith(".xhtml"))
                 {
                     Fractrace.Scheduler.BatchProcess.X3DomExportBatchProcess x3DomExportBatchProcess = new Scheduler.BatchProcess.X3DomExportBatchProcess();
@@ -1342,7 +1356,6 @@ namespace Fractrace
         private void btnAddToAnimation_Click(object sender, EventArgs e)
         {
             this.animationControl1.AddToAnimation();
-           // this.btnAnimation_Click(null, null);
         }
 
 
@@ -1525,10 +1538,6 @@ namespace Fractrace
 
         private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ;
-
-
-           // TabPage tabPage = (TabPage)sender;
             switch(tabControl2.SelectedTab.Name)
             {
 
@@ -1561,10 +1570,6 @@ namespace Fractrace
                     break;
 
             }
-
-
-
-
         }
 
         private void btnDocumentation_Click(object sender, EventArgs e)

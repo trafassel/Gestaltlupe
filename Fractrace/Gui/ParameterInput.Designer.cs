@@ -103,8 +103,8 @@ namespace Fractrace {
             this.btnFormat = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.preview2 = new Fractrace.PreviewControl();
-            this.preview1 = new Fractrace.PreviewControl();
+            this.preview2 = new Fractrace.PreviewControl(1);
+            this.preview1 = new Fractrace.PreviewControl(1);
             this.panel32 = new System.Windows.Forms.Panel();
             this.panel34 = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();

@@ -5,8 +5,17 @@
   <Entry Key="Formula.Static.jx" Value="0.305" />
   <Entry Key="Formula.Static.jy" Value="0.425" />
   <Entry Key="Formula.Static.jz" Value="0.1" />
-  <Entry Key="Intern.Formula.Source" Value="// Quaternion Julia without 4th compontent.&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  if(z&gt;0) return false;&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x;&#xA;    double yy=y*y;&#xA;    double zz=z*z;&#xA;    double r=xx+yy+zz;&#xA;    if(r&gt;5) return false;&#xA;    y = 2.0 * x * y + _jy;&#xA;    z = 2.0 * x * z + _jz;&#xA;    x = xx - yy - zz + _jx;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Quaternion Julia without 4th component.&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  if (z&gt;0) return false;&#xA;  for (int n = 1; n &lt; _cycles; n++)&#xA;  {&#xA;    double xx = x*x;&#xA;    double yy = y*y;&#xA;    double zz = z*z;&#xA;    double r = xx + yy + zz;&#xA;    if (r&gt;5) return false;&#xA;    y = 2*x*y + _jy;&#xA;    z = 2*x*z + _jz;&#xA;    x = xx - yy - zz + _jx;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="7" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
   <Entry Key="Scene.CenterX" Value="0.446456252623132" />
   <Entry Key="Scene.CenterY" Value="0.111364860043813" />
   <Entry Key="Scene.CenterZ" Value="-0.0166769221501216" />
