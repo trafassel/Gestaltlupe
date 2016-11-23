@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:282-->
+<!--LastNote:287-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -107,14 +107,19 @@ class PictureData{<BR>
 <DT><A name="3mBcNJzlMK0IblLCPx7zQg"></A>Variable hinzufügen</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477954858-->
-<!--property:date_modified=1477958002-->
-<!--property:hash=393ef8c70bfcca7f9205a33ba46b8c7fc086ab40-->
-<!--property:hash_html=99b82b2302c28c9102834d480f4649cf99c12831-->
+<!--property:date_modified=1479557085-->
+<!--property:hash=1c87734cb1eaf7240a1d50d11c507e464f7da4e0-->
+<!--property:hash_html=41995368c64b5569e423f901b1259259cc2aeb80-->
 <DD>
  _scale=GetOrSetDouble(&quot;scale&quot;,1.1,&quot;Mandelbox scale factor.&quot;);<BR>
 <BR>
 Fractrace.Basic.ParameterDict.Current[&quot;Formula.Parameters.BulbVariant.PARAMETERINFO.Datatype&quot;] = &quot;Bool&quot;;<BR>
 <BR>
+<BR>
+// Variablendefinitionen kommen hier hin:<BR>
+public override void Init() {<BR>
+base.Init();<BR>
+}<BR>
 <BR>
 
 </DD>
@@ -185,6 +190,40 @@ bool Bailout()<BR>
 <BR>
 <BR>
 <BR>
+
+</DD>
+<DT><A name="lRaa2znk1xuUgoFKRaghyw"></A>Julia/Mandelbrot</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479555206-->
+<!--property:date_modified=1479555315-->
+<!--property:hash=d119bdd70e027ccf5f196c8bff98650032572937-->
+<!--property:hash_html=58fa7259569e753a1da38f25eae0ca452984d520-->
+<DD>
+double jx, jy, jz;<BR>
+if (_isJulia)<BR>
+{<BR>
+jx = _jx; jy = _jy; jz = _jz;<BR>
+}<BR>
+else<BR>
+{<BR>
+jx = x; jy = y; jz = z;<BR>
+x = _jx; y = _jy; z = _jz;<BR>
+}<BR>
+
+</DD>
+<DT><A name="9YX1frRAnJhv5xkrk52Pqw"></A>Farben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479558377-->
+<!--property:date_modified=1479558438-->
+<!--property:hash=8cec99d272af66f317763a160ff91a6ac8c05bf0-->
+<!--property:hash_html=f748044963af7896a2cf733c633ac8d7f06abf06-->
+<DD>
+if (n &gt; _cycles / 3 &amp;&amp; n &lt; _cycles / 1.2 &amp;&amp; r&gt;0)<BR>
+  {<BR>
+    additionalPointInfo.red += xx / r;<BR>
+    additionalPointInfo.green += yy / r;<BR>
+    additionalPointInfo.blue += zz / r;<BR>
+  }<BR>
 
 </DD>
 </DL>
@@ -3862,6 +3901,88 @@ mit Verweis auf die Internetseite.<BR>
 <!--property:hash_html=c7b3ae45d8642940090b4b04f2c750c663327de3-->
 <DD>
 Wenn eine ältere Datei eingelesen, konvertiert und gespeichert wird, steht dort noch die Ursprungs-Dateiversion.
+</DD>
+<DT><A name="M3lmDMLxFekXjwxBagNFKg"></A>Small Preview stilles Update</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479475081-->
+<!--property:date_modified=1479483078-->
+<!--property:expanded-->
+<!--property:hash=482ace2c48d15770aaf86d3ef5512ce335fdcaca-->
+<!--property:hash_html=069e382029fe17303325f0ef4947ce80e8607b7c-->
+<DD>
+Update im Hintergrund (ohne Fortschrittsanzeigt)<BR>
+<BR>
+Alt:<BR>
+ // Uncomment following line for more accurate small preview rendering in next iteration. <BR>
+                                StartDrawing();<BR>
+<BR>
+in PreviewControl.OnStepEnds<BR>
+<DL>
+<DT><A name="ly2paYytQKfO1i3Lu6G7rg"></A>nicht genutzter Code</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479484575-->
+<!--property:date_modified=1479484599-->
+<!--property:hash=33ccc2fd34a48ab574cbd1a4d4a6ec5ce1eaf219-->
+<!--property:hash_html=1fb2aad1462b101a476bd02aa44f6089e27f1184-->
+<DD>
+<BR>
+        // 0 no preview of current scene <BR>
+        // 1 compute first (low quality) rendering<BR>
+        // 2 first (low quality) rendering is ready<BR>
+        // 3 second (good quality) rendering<BR>
+        // 4 second (good quality) rendering is ready<BR>
+        int previewRenderingCount = 0;<BR>
+        object previewRenderingCountMutex = new object();<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="1ExFRzEmJbD9JDgzB9Xevg"></A>Das Objekt wird bereits an anderer Stelle verwendet</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1479851572-->
+<!--property:date_modified=1479851692-->
+<!--property:hash=76ddb451346e92b756b22a9a19419042efd13ed2-->
+<!--property:hash_html=1accbe881dcbd71a7cdccd1039e50a73d488f6ea-->
+<DD>
+Bei Small Preview Image<BR>
+<BR>
+Informationen über das Aufrufen von JIT-Debuggen<BR>
+anstelle dieses Dialogfelds finden Sie am Ende dieser Meldung.<BR>
+<BR>
+************** Ausnahmetext **************<BR>
+System.InvalidOperationException: Das Objekt wird bereits an anderer Stelle verwendet.<BR>
+   bei System.Drawing.Image.get_Width()<BR>
+   bei System.Windows.Forms.ControlPaint.DrawBackgroundImage(Graphics g, Image backgroundImage, Color backColor, ImageLayout backgroundImageLayout, Rectangle bounds, Rectangle clipRect, Point scrollOffset, RightToLeft rightToLeft)<BR>
+   bei System.Windows.Forms.Control.PaintBackground(PaintEventArgs e, Rectangle rectangle, Color backColor, Point scrollOffset)<BR>
+   bei System.Windows.Forms.ButtonInternal.ButtonFlatAdapter.PaintBackground(PaintEventArgs e, Rectangle r, Color backColor)<BR>
+   bei System.Windows.Forms.ButtonInternal.ButtonFlatAdapter.PaintUp(PaintEventArgs e, CheckState state)<BR>
+   bei System.Windows.Forms.ButtonBase.OnPaint(PaintEventArgs pevent)<BR>
+   bei System.Windows.Forms.Control.PaintWithErrorHandling(PaintEventArgs e, Int16 layer)<BR>
+   bei System.Windows.Forms.Control.WmPaint(Message&amp; m)<BR>
+   bei System.Windows.Forms.Control.WndProc(Message&amp; m)<BR>
+   bei System.Windows.Forms.ButtonBase.WndProc(Message&amp; m)<BR>
+   bei System.Windows.Forms.Button.WndProc(Message&amp; m)<BR>
+   bei System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)<BR>
+<BR>
+<BR>
+************** Geladene Assemblys **************<BR>
+mscorlib<BR>
+    Assembly-Version: 4.0.0.0.<BR>
+    Win32-Version: 4.6.1586.0 built by: NETFXREL2.<BR>
+    CodeBase: <A href="file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll">file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll</A>.<BR>
+----------------------------------------<BR>
+Fractrace<BR>
+    Assembly-Version: 3.4.0.41341.<BR>
+    Win32-Version: 3.4.0.0.<BR>
+    CodeBase: <A href="file:///C:/Users/perwi_000/Desktop/src/git/Gestaltlupe/bin/Gestaltlupe.exe">file:///C:/Users/perwi_000/Desktop/src/git/Gestaltlupe/bin/Gestaltlupe.exe</A>.<BR>
+----------------------------------------<BR>
+System.Windows.Forms<BR>
+    Assembly-Version: 4.0.0.0.<BR>
+    Win32-Version: 4.6.1586.0 built by: NETFXREL2.<BR>
+    CodeBase: <A href="file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll">file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll</A>.<BR>
+----------------------------------------
 </DD>
 </DL>
 </DD>

@@ -428,7 +428,10 @@ namespace Fractrace
             }
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             _graphics.Clear(Color.White);
-            _graphics.DrawImage(_baseBitmap, x, y);
+            if(btnPreview.BackgroundImage.Width<100)
+               _graphics.DrawImage(_baseBitmap, x/2, y/2);
+            else
+                _graphics.DrawImage(_baseBitmap, x, y);
             Application.DoEvents();
             this.Update();
             this.Refresh();
