@@ -85,6 +85,8 @@ namespace Fractrace
         /// The Hash of the Parameters of the last rendering (but without picture art settings).
         /// </summary>
         protected string _oldParameterHashWithoutPictureArt = "";
+        // formula and view parameters of last completed rendered image.
+        string _currentParameterHashWithoutPictureArt = "";
 
         /// <summary>
         /// The Hash of the Parameters of the last rendering (but without picture art settings and navigation).
@@ -503,6 +505,20 @@ namespace Fractrace
             }
         }
 
+        /*
+         * string tempParameterHash = GetParameterHashWithoutPictureArt();
+                _paras.Assign();
+                if (_oldParameterHashWithoutPictureArt == tempParameterHash)
+         */
+
+
+        public void ComputeOneStepEnds()
+        {
+            _currentParameterHashWithoutPictureArt = GetParameterHashWithoutPictureArt();
+            ActivatePictureArt();
+        }
+
+
 
         /// <summary>
         /// The surface data is analysed. The generation of the corresponding bitmap starts here .
@@ -513,16 +529,19 @@ namespace Fractrace
             {
                 if (_iterate != null && !_iterate.InAbort)
                 {
-                    if(_inPaint)
+                    if (_inPaint)
                     {
                         _needRepaintPictureArt = true;
                     }
                     else
-                    { 
-                    System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
-                    System.Threading.Thread thread = new System.Threading.Thread(tStart);
-                    Scheduler.GrandScheduler.Exemplar.AddThread(thread);
-                    thread.Start();
+                    {
+                        if (_currentParameterHashWithoutPictureArt == GetParameterHashWithoutPictureArt())
+                        {                        
+                            System.Threading.ThreadStart tStart = new System.Threading.ThreadStart(DrawPicture);
+                            System.Threading.Thread thread = new System.Threading.Thread(tStart);
+                            Scheduler.GrandScheduler.Exemplar.AddThread(thread);
+                            thread.Start();
+                        }
                     }
                 }
             }

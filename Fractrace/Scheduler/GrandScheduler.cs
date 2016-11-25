@@ -110,7 +110,7 @@ namespace Fractrace.Scheduler
         public void ComputeOneStepEnds()
         {
             if (!DontActivateRender)
-                _mainDisplayForm.ActivatePictureArt();
+                _mainDisplayForm.ComputeOneStepEnds();
             inComputeOneStep = false;
         }
 

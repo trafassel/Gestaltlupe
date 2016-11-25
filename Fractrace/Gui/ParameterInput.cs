@@ -286,7 +286,7 @@ namespace Fractrace
         {
             if (_mouseDown)
             {
-                navigateControl1.MoveScene( (e.X - _mouseX), (e.Y - _mouseY) );
+                navigateControl1.MoveScene((e.X - _mouseX), (e.Y - _mouseY));
                 navigateControl1.UpdateFromChangeProperty();
                 _mouseX = e.X;
                 _mouseY = e.Y;
@@ -299,12 +299,10 @@ namespace Fractrace
                 _mouseY = e.Y;
                 lock (_viewNeedsUpdateMutex)
                 {
-
                     _viewNeedsUpdate = true;
                     navigateControl1.UpdateFromChangeProperty();
+                }
             }
-            }
-
         }
 
         private void Preview1_MouseWheel(object sender, MouseEventArgs e)
@@ -327,9 +325,8 @@ namespace Fractrace
         {
             if(GlobalParameters.IsMaterialProperty(name))
             {
-                //DrawSmallPreview();
-                ResultImageView.PublicForm.ActivatePictureArt();
                 preview1.ActivatePictureArt();
+                ResultImageView.PublicForm.ActivatePictureArt();
                 return;
             }
 
