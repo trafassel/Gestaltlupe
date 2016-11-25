@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:287-->
+<!--LastNote:289-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -3983,6 +3983,25 @@ System.Windows.Forms<BR>
     Win32-Version: 4.6.1586.0 built by: NETFXREL2.<BR>
     CodeBase: <A href="file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll">file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll</A>.<BR>
 ----------------------------------------
+</DD>
+<DT><A name="nvHlp7IGtfP7nomdj4elWA"></A>Material Update im Preview nur, wenn</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1480017498-->
+<!--property:date_modified=1480017552-->
+<!--property:expanded-->
+<!--property:hash=ba7267097f8678fdc918ea634387972828558f9c-->
+<!--property:hash_html=d01bed5230bee218a5734b2aae5e8fb1da88875c-->
+<DD>
+... die zuletzt berechneten Daten noch aktuell sind.<BR>
+<BR>
+<DL>
+<DT><A name="52al8GXoyfQH8nTv5nklag"></A>Info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480017557-->
+<!--property:date_modified=1480017560-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+</DL>
 </DD>
 </DL>
 </DD>

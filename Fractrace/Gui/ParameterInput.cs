@@ -310,10 +310,7 @@ namespace Fractrace
         private void Preview1_MouseWheel(object sender, MouseEventArgs e)
         {
             preview1.Abort();
-            if (e.Delta > 0)
-                navigateControl1.ZoomIn();
-            else
-                navigateControl1.ZoomOut();
+            navigateControl1.Zoom(e.Delta/120);
         }
 
         public void UpdatePictureArtInSmallPreview()
@@ -341,12 +338,13 @@ namespace Fractrace
             this.Invoke(new VoidDelegate(UpdateFrontView));
         }
 
+        System.Random _rand = new Random();
 
         private void UpdateFrontView()
         {
             if ( preview1.SmallPreviewCurrentDrawStep == 2 || preview1.SmallPreviewCurrentDrawStep == 1)
             {                
-                if (preview1.GetProgress() >= 100 || preview1.Iterate.Height<60)
+                if (preview1.GetProgress() >= 100 || ( (preview1.Iterate.Height<60) && (_rand.NextDouble()>0.85)   )  )
                 {
                     preview2.InitLabelImage();
                     preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view

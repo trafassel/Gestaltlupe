@@ -25,7 +25,14 @@ namespace Fractrace
         // number of additional steps to increase render quality.
         int _updateSteps = 0;
 
-        public Button PreviewButton { get { return this.btnPreview; } }
+        public Button PreviewButton
+        {
+            get
+            {
+                lock (_smallPreviewCurrentDrawStepMutex)
+                { return this.btnPreview; }
+            }
+        }
         protected System.Windows.Forms.Button btnPreview;
 
         public event PictureRenderingIsReady RenderingEnds;
@@ -112,7 +119,7 @@ namespace Fractrace
         {
             ResultImageView.PublicForm.Stop();
             _forceRedraw = false;
-            btnPreview.Enabled = false;        
+               
             if (btnPreview.Width < 1 && btnPreview.Height < 1)
             {
                 ResultImageView.PublicForm.CurrentUpdateStep = 0;
@@ -129,31 +136,30 @@ namespace Fractrace
 
             lock (_smallPreviewCurrentDrawStepMutex)
             {
-                lock (_smallPreviewCurrentDrawStepMutex)
+                btnPreview.Enabled = false;
+                if (_smallPreviewCurrentDrawStep == 0 || _smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2 || _smallPreviewCurrentDrawStep == 4)
                 {
-                    if (_smallPreviewCurrentDrawStep == 0 || _smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2 || _smallPreviewCurrentDrawStep == 4)
-                    {
-                        _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
-                         _smallPreviewCurrentDrawStep = 2;
-                    }
-
-                    else if (_smallPreviewCurrentDrawStep == 3)
-                    {
-                        _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
-                        _iterate.SetOldData(null, null, 2);
-                        _smallPreviewCurrentDrawStep = 4;
-                    }
-                    else
-                    {
-                        if(_iterate!=null)
-                        if(_iterate.Running)
-                          _iterate.Abort();
-                        _iterate = null;
-                        lock(_inDrawingMutex)
-                          _inDrawing = false;
-                        _smallPreviewCurrentDrawStep = 1;
-                    }
+                    _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+                    _smallPreviewCurrentDrawStep = 2;
                 }
+
+                else if (_smallPreviewCurrentDrawStep == 3)
+                {
+                    _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+                    _iterate.SetOldData(null, null, 2);
+                    _smallPreviewCurrentDrawStep = 4;
+                }
+                else
+                {
+                    if (_iterate != null)
+                        if (_iterate.Running)
+                            _iterate.Abort();
+                    _iterate = null;
+                    lock (_inDrawingMutex)
+                        _inDrawing = false;
+                    _smallPreviewCurrentDrawStep = 1;
+                }
+
             }
             if (_iterate != null)
             {
