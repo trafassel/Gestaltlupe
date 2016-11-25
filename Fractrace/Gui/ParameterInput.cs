@@ -310,7 +310,12 @@ namespace Fractrace
         private void Preview1_MouseWheel(object sender, MouseEventArgs e)
         {
             preview1.Abort();
-            navigateControl1.Zoom(e.Delta/120);
+            double zoom = e.Delta / 120;
+            if (zoom > 2)
+                zoom = 2;
+            if (zoom < -2)
+                zoom = -2;
+            navigateControl1.Zoom(zoom);
         }
 
         public void UpdatePictureArtInSmallPreview()
@@ -1505,15 +1510,21 @@ namespace Fractrace
         }
 
         /// <summary>
-        /// Show formula parameters.
+        /// Formula button.
         /// </summary>
         private void button9_Click(object sender, EventArgs e)
         {
+            // Show Formula source if this button is pressed two times: 
+            if(tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0)
+            {
+                tabControl2.SelectedIndex = 4;
+                return;
+            }
+            // Show formula parameters:
             tabControl1.SelectedIndex = 0;
             parameterDictControl1.SelectTreeNode("Formula");
             tabControl2.SelectedIndex = 0;
             parameterDictControl1.ShowTree(false);
-
         }
 
         /// <summary>

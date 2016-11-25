@@ -686,10 +686,10 @@ namespace Fractrace
         public void Zoom(double factor)
         {
             double radius = ParameterDict.Current.GetDouble("Scene.Radius");
-            if(factor>0)
-              ParameterDict.Current.SetDouble("Scene.Radius", radius / (factor*1.01) );
+            if (factor > 0)
+                ParameterDict.Current.SetDouble("Scene.Radius", radius / (factor*1.03) );
             else
-              ParameterDict.Current.SetDouble("Scene.Radius", -radius * factor*1.01 );
+              ParameterDict.Current.SetDouble("Scene.Radius", -radius * factor*1.03 );
             DrawAndWriteInHistory();
         }
 
