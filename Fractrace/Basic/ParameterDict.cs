@@ -400,7 +400,11 @@ namespace Fractrace.Basic
                 {
                     foreach (KeyValuePair<string, string> entry in _entries)
                     {
-                        retVal[entry.Key] = entry.Value;
+                        try
+                        {
+                            retVal[entry.Key] = entry.Value;
+                        }
+                        catch { }
                     }
                 }
                 return retVal;

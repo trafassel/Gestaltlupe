@@ -136,7 +136,15 @@ namespace Fractrace
 
             lock (_smallPreviewCurrentDrawStepMutex)
             {
+                try { 
                 btnPreview.Enabled = false;
+                } catch(InvalidOperationException ex)
+                {
+                    lock (_inDrawingMutex)
+                        _inDrawing = false;
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    return;
+                }
                 if (_smallPreviewCurrentDrawStep == 0 || _smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2 || _smallPreviewCurrentDrawStep == 4)
                 {
                     _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);

@@ -1515,6 +1515,7 @@ namespace Fractrace
             if(tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0)
             {
                 tabControl2.SelectedIndex = 4;
+                this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Script;
                 return;
             }
             // Show formula parameters:
@@ -1522,6 +1523,7 @@ namespace Fractrace
             parameterDictControl1.SelectTreeNode("Formula");
             tabControl2.SelectedIndex = 0;
             parameterDictControl1.ShowTree(false);
+            this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
         }
 
         /// <summary>
