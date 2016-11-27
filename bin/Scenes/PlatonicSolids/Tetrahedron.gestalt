@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Static.Cycles" Value="8" />
+  <Entry Key="Formula.Static.Julia" Value="0" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="// Tetrahedron&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  Vec3 v=new Vec3(x,y,z);&#xA;  // Face 1:&#xA;  if(v.X&lt;-1) return false;&#xA;&#xA;  double alpha=Math.PI+Math.Acos(1.0/3.0);&#xA;  double angle=0;&#xA;  for(int i=0;i&lt;3;  i++)&#xA;  {&#xA;    VecRotation r=new VecRotation(1,0,0,angle);&#xA;    Vec3 p= r.getTransform(v);&#xA;    r=new VecRotation(0,0,1,alpha);&#xA;    p= r.getTransform(p);&#xA;&#xA;    // Face 2-4:&#xA;    if(p.X&lt;-1) return false;&#xA;&#xA;    angle+=Math.PI/180.0*120;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="7" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="1" />
+  <Entry Key="Scene.CenterX" Value="-0.308560293226615" />
+  <Entry Key="Scene.CenterY" Value="1.40057779670105" />
+  <Entry Key="Scene.CenterZ" Value="-2.58562124760176" />
+  <Entry Key="Scene.Radius" Value="11.6508598617104" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="0" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="1" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

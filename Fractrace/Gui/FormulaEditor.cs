@@ -37,7 +37,7 @@ namespace Fractrace {
         public static void AddError(string errorText,int line,int column) {
             if (FormulaEditor.mStaticInstance != null) {
                 FormulaEditor.mStaticInstance.ViewError(errorText);
-                FormulaEditor.mStaticInstance.SelectLine(line-9);
+                FormulaEditor.mStaticInstance.SelectLine(line-12);
             }
         }
 

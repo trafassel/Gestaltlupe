@@ -133,8 +133,11 @@ End Class
           
             string tomoSource = @"
 using System;
+using Fractrace;
 using Fractrace.TomoGeometry;
-public class CSTomoFormula : "+ GuessFormulaClass(code) + @" {
+using Fractrace.Geometry;
+
+public class CSTomoFormula : " + GuessFormulaClass(code) + @" {
 public CSTomoFormula() {
 
     }

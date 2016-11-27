@@ -18,6 +18,13 @@ namespace Fractrace.Geometry
             Angle = 0;
         }
 
+        public VecRotation(double x,double y,double z,double angle)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+            Angle = angle;
+        }
 
         /// <summary>Winkel in Bogenmaß</summary>	
         public double Angle = 0;

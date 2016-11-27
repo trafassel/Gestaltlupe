@@ -3943,6 +3943,7 @@ in PreviewControl.OnStepEnds<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1479851572-->
 <!--property:date_modified=1479851692-->
+<!--property:expanded-->
 <!--property:hash=76ddb451346e92b756b22a9a19419042efd13ed2-->
 <!--property:hash_html=1accbe881dcbd71a7cdccd1039e50a73d488f6ea-->
 <DD>
@@ -3982,7 +3983,31 @@ System.Windows.Forms<BR>
     Assembly-Version: 4.0.0.0.<BR>
     Win32-Version: 4.6.1586.0 built by: NETFXREL2.<BR>
     CodeBase: <A href="file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll">file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll</A>.<BR>
-----------------------------------------
+----------------------------------------<DL>
+<DT><A name="WWsHTqpkefLg4ixm3d3t0Q"></A>Lösung</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480018910-->
+<!--property:date_modified=1480019290-->
+<!--property:hash=d2aa1ea984d3aa6b597a2de761e77a69e04ee269-->
+<!--property:hash_html=bde54986f5c84dff2ed306ae159d18bce8b4d1b9-->
+<DD>
+In:<BR>
+  private void ParameterDictControl1_ElementChanged(string name, string value)<BR>
+        <BR>
+<BR>
+  if (GlobalParameters.IsSceneProperty(name))<BR>
+                DrawSmallPreview();<BR>
+<BR>
+<BR>
+DrawSmallPreview(); nur im gui thread aufrufen.<BR>
+<BR>
+// Das Problem:<BR>
+Der Prozess läuft im GUI Thread, er wurde durch:<BR>
+tbValue_TextChanged ausgelöst.<BR>
+<BR>
+
+</DD>
+</DL>
 </DD>
 <DT><A name="nvHlp7IGtfP7nomdj4elWA"></A>Material Update im Preview nur, wenn</DT>
 <!--property:icon_internal=bullet_red-->
@@ -4002,6 +4027,19 @@ System.Windows.Forms<BR>
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
+</DD>
+<DT><A name="txc3s1qDObILRUSKDlrIMw"></A>Wechsel zwischen Formelansicht und Formelparametern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1480020757-->
+<!--property:date_modified=1480098118-->
+<!--property:hash=ea41caf832834ff82ea0624de934650005da50a0-->
+<!--property:hash_html=2151da2746e19212655c87dcd2be70fc67134e18-->
+<DD>
+bei einem weiteren Click auf das Gestaltlupe Symbol.<BR>
+<BR>
+info:<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>
