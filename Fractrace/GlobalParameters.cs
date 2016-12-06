@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "7";
+            ParameterDict.Current["Intern.Version"] = "8";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -443,6 +443,12 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorFactor.RgbType"] = "1";
             ParameterDict.Current["Renderer.ColorFactor.RgbType.PARAMETERINFO.Description"] = "accepted integer values: 1, ..., 6  (all values>1 :switch rgb components)";
             ParameterDict.Current["Renderer.ColorFactor.RgbType.PARAMETERINFO.VIEW.FixedButtons"] = "1 2 3 4 5 6";
+
+            ParameterDict.Current["Renderer.ColorFactor.Threshold"] = "0";
+            ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.Description"] = "If all color components are lower than this threshold, the result color is white.";
+            ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.VIEW.FixedButtons"] = "0  1 1.2 1.4 1.6 3";
+            ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.VIEW.PlusPlusButton"] = "0.01";
 
             // Red component of background color 
             ParameterDict.Current["Renderer.BackColor.Red"] = "0";

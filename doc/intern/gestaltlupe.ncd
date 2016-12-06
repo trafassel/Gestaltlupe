@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:289-->
+<!--LastNote:295-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -9,6 +9,7 @@
 <BODY>
 <!--property:UID=CZzSEtxo34Ngs4dAX2lxOw-->
 <!--property:prop_modified=0-->
+<!--property:note_deleted=IPw1y1qGhP0jPPKxYvY5bg-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -4010,9 +4011,9 @@ tbValue_TextChanged ausgelöst.<BR>
 </DL>
 </DD>
 <DT><A name="nvHlp7IGtfP7nomdj4elWA"></A>Material Update im Preview nur, wenn</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1480017498-->
-<!--property:date_modified=1480017552-->
+<!--property:date_modified=1480576052-->
 <!--property:expanded-->
 <!--property:hash=ba7267097f8678fdc918ea634387972828558f9c-->
 <!--property:hash_html=d01bed5230bee218a5734b2aae5e8fb1da88875c-->
@@ -4038,6 +4039,68 @@ tbValue_TextChanged ausgelöst.<BR>
 bei einem weiteren Click auf das Gestaltlupe Symbol.<BR>
 <BR>
 info:<BR>
+<BR>
+
+</DD>
+<DT><A name="vXanyMecox4uDRSyq4GsRA"></A>Schlüsselwort public in formula</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1480576058-->
+<!--property:date_modified=1480594670-->
+<!--property:expanded-->
+<!--property:hash=8956ff4384672507a8619ace00a9cd0ec4ec408f-->
+<!--property:hash_html=f919a8ce5bb1bed2b42af45f940962e93cfce227-->
+<DD>
+Zu den entsprechenden Variablen werden dann Parametereinträge erstellt.<BR>
+<BR>
+<DL>
+<DT><A name="e9SBYlaWvCtrVN3yI1OeYA"></A>Teilaufgaben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480594676-->
+<!--property:date_modified=1480601270-->
+<!--property:expanded-->
+<!--property:hash=5b142a78ab5185134a1bf4f2a14177daf3063eb5-->
+<!--property:hash_html=2a1bde3c1172fefc0ed110ba8fc1a146b36d10d2-->
+<DD>
+(1) Eigener Preprozessor mit Schlüsseltworten @Initialize() @GetBool(x,y,z) @parameter<BR>
+<BR>
+(2) Korrekte Zuordnung der Fehler beruhend auf dem davon erzeugten Code.<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="wVbX5Hs20JxjCLmx0RgcpQ"></A>Preprozrssor</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480601305-->
+<!--property:date_modified=1480617439-->
+<!--property:hash=351d121c6aba842eac76aca3fa5e9bc77fb2df2e-->
+<!--property:hash_html=074b66d996912b56bcaa9d710bc4ff41a50529d1-->
+<DD>
+ @Initialize() <BR>
+<BR>
+@GetBool(x,y,z) <BR>
+<BR>
+@parameter
+</DD>
+<DT><A name="osdxisjFT0kdxyXIMGCLvA"></A>kein Preprozessor</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480889150-->
+<!--property:date_modified=1480889440-->
+<!--property:hash=0acacd43c7a75d503f151457f478911db115df55-->
+<!--property:hash_html=0acacd43c7a75d503f151457f478911db115df55-->
+<DD>
+statt dessen einfach die public Felder übernehmen. 
+</DD>
+</DL>
+</DD>
+</DL>
+</DD>
+<DT><A name="GJ34G8WIqBMBWiOVcEjtDQ"></A>Textfelder sind zu klein</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1480617211-->
+<!--property:date_modified=1480617247-->
+<!--property:hash=eb80b16e5c1c427976c9e7689b17032a1c75861e-->
+<!--property:hash_html=de2dcaa7476b4ff73c75e0a077d304b318da2701-->
+<DD>
+... für double Einträge.<BR>
 <BR>
 
 </DD>

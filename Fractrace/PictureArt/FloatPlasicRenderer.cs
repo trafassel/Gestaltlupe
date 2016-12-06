@@ -132,6 +132,9 @@ namespace Fractrace.PictureArt
 
         float _glow = 1;
 
+        // Renderer.ColorFactor.Threshold
+        double _colorThreshold = ParameterDict.Current.GetDouble("Renderer.ColorFactor.Threshold");
+
         /// <summary>
         /// Set fields from ParameterDict.Current.
         /// </summary>
@@ -459,9 +462,31 @@ namespace Fractrace.PictureArt
 
                     // Normalize:
                     float norm = (float)(Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1) / Math.Sqrt(2.5));
-                    r1 = r1 / norm;
-                    g1 = g1 / norm;
-                    b1 = b1 / norm;
+                    if (norm > 0)
+                    {
+                        r1 = r1 / norm;
+                        g1 = g1 / norm;
+                        b1 = b1 / norm;
+
+                        if (_colorThreshold > 0)
+                        {
+                            double thresholdIndicator = Math.Max(Math.Abs(r1 - b1), Math.Max(Math.Abs(r1 - g1), Math.Abs(g1 - b1)));
+                            float lowerThresholdFactor = (float)0.7;
+                            if (thresholdIndicator < _colorThreshold * lowerThresholdFactor)
+                            {
+                                r1 = (float)1;
+                                g1 = (float)1;
+                                b1 = (float)1;
+                            }
+                            else if (thresholdIndicator < _colorThreshold)
+                            {
+                                r1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + r1;
+                                g1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + g1;
+                                b1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + b1;
+                            }
+                        }
+
+                    }
 
                     for (int i = 0; i < 5; i++)
                     {
