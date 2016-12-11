@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:295-->
+<!--LastNote:298-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4103,6 +4103,24 @@ statt dessen einfach die public Felder übernehmen.
 ... für double Einträge.<BR>
 <BR>
 
+</DD>
+<DT><A name="ne1vyy0LUxTBK3gkPyjoUA"></A>Shadow Number entfernen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1481453335-->
+<!--property:date_modified=1481453614-->
+<!--property:hash=71f795281e87dfc0a832a076c6960a8a84c449df-->
+<!--property:hash_html=71f795281e87dfc0a832a076c6960a8a84c449df-->
+<DD>
+Zwischenrechnungen werden 
+</DD>
+<DT><A name="mWDUy5vmSo59LnDQ2y4o8g"></A>Beim Druck auf Settings </DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1481455317-->
+<!--property:date_modified=1481455414-->
+<!--property:hash=768751f9a21ae9a3e0298c82e9abf8a22ecd6e4b-->
+<!--property:hash_html=768751f9a21ae9a3e0298c82e9abf8a22ecd6e4b-->
+<DD>
+sollen die zuletzten vom Nutzer eingestellten Settings ausgewählt werden.
 </DD>
 </DL>
 </DD>

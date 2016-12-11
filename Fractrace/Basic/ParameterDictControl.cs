@@ -25,6 +25,11 @@ namespace Fractrace.Basic
         /// </summary>
         protected Dictionary<string, TreeNode> _nodes = new Dictionary<string, TreeNode>();
 
+        public string ChoosenHirarchy {
+            get {
+                return _choosenHirarchy;
+            }
+        }
         /// <summary>
         /// Id of currently selected hirarchy.
         /// </summary>

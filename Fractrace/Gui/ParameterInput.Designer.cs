@@ -1188,7 +1188,7 @@ namespace Fractrace {
             // 
             // button9
             // 
-            this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
+            //this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button9.Dock = System.Windows.Forms.DockStyle.Left;
             this.button9.FlatAppearance.BorderSize = 0;

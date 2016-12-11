@@ -155,6 +155,14 @@ namespace Fractrace
 
             this.cbAutomaticSaveAnimation.Visible = false;
 
+            this.button9.ImageList = new ImageList();
+            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Data833pic10146a32x32);
+            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Script);
+            this.button9.ImageIndex = 0;
+
+            // Image Layout
+            //    this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -1511,19 +1519,48 @@ namespace Fractrace
         /// </summary>
         private void button9_Click(object sender, EventArgs e)
         {
-            // Show Formula source if this button is pressed two times: 
-            if(tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0)
+            //tabControl1.SelectedIndex  2 : Material
+            // tabControl1.SelectedIndex  1 : Navigation
+            // tabControl1.SelectedIndex  0 : View
+            // 
+            // Show Formula source if this button is pressed two times:
+          //  this.parameterDictControl1.ChoosenHirarchy
+           // this.settingsControl1.sel
+            if ( (tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0 && this.button9.ImageIndex==0) )
             {
                 tabControl2.SelectedIndex = 4;
-                this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Script;
+                //this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Script;
+                /*
+                this.button9.ImageList = new ImageList();
+                this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Data833pic10146a32x32);
+                this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Script);
+                */
+                this.button9.ImageIndex = 1;
+
                 return;
             }
+
+            if(this.button9.ImageIndex == 1 && 
+                ( (tabControl1.SelectedIndex != 3 || tabControl2.SelectedIndex!=4)
+                /*
+                &&
+                (tabControl1.SelectedIndex != 2 || tabControl2.SelectedIndex != 0                
+                )
+                */
+                ))
+            {
+                tabControl2.SelectedIndex = 4;
+                return;
+            }
+
             // Show formula parameters:
             tabControl1.SelectedIndex = 0;
+            this.button9.ImageIndex = 1;
             parameterDictControl1.SelectTreeNode("Formula");
             tabControl2.SelectedIndex = 0;
             parameterDictControl1.ShowTree(false);
-            this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
+            this.button9.ImageIndex = 0;
+ //           this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
         }
 
         /// <summary>
