@@ -445,6 +445,7 @@ namespace Fractrace.PictureArt
             bool useAdditionalColorinfo = true;
             if (_colorIntensity <= 0)
                 useAdditionalColorinfo = false;
+
             if (useAdditionalColorinfo && ((pInfo.IsInside && _colorInside) || (!pInfo.IsInside && _colorOutside)))
             {
                 if (pInfo != null && pInfo.AdditionalInfo != null)

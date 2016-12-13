@@ -1524,29 +1524,15 @@ namespace Fractrace
             // tabControl1.SelectedIndex  0 : View
             // 
             // Show Formula source if this button is pressed two times:
-          //  this.parameterDictControl1.ChoosenHirarchy
-           // this.settingsControl1.sel
-            if ( (tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0 && this.button9.ImageIndex==0) )
+            if ( (tabControl1.SelectedIndex == 0 && tabControl2.SelectedIndex == 0 && this.button9.ImageIndex==0 && this.parameterDictControl1.ChoosenHirarchy=="Formula" ) )
             {
                 tabControl2.SelectedIndex = 4;
-                //this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Script;
-                /*
-                this.button9.ImageList = new ImageList();
-                this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Data833pic10146a32x32);
-                this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Script);
-                */
                 this.button9.ImageIndex = 1;
-
                 return;
             }
 
             if(this.button9.ImageIndex == 1 && 
                 ( (tabControl1.SelectedIndex != 3 || tabControl2.SelectedIndex!=4)
-                /*
-                &&
-                (tabControl1.SelectedIndex != 2 || tabControl2.SelectedIndex != 0                
-                )
-                */
                 ))
             {
                 tabControl2.SelectedIndex = 4;
@@ -1560,7 +1546,6 @@ namespace Fractrace
             tabControl2.SelectedIndex = 0;
             parameterDictControl1.ShowTree(false);
             this.button9.ImageIndex = 0;
- //           this.button9.BackgroundImage = global::Fractrace.Properties.Resources.Data833pic10146a32x32;
         }
 
         /// <summary>

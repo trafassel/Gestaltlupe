@@ -37,7 +37,7 @@ namespace Fractrace {
         public static void AddError(string errorText,int line,int column) {
             if (FormulaEditor.mStaticInstance != null) {
                 FormulaEditor.mStaticInstance.ViewError(errorText);
-                FormulaEditor.mStaticInstance.SelectLine(line-12);
+                FormulaEditor.mStaticInstance.SelectLine(line-10);
             }
         }
 
@@ -148,11 +148,6 @@ namespace Fractrace {
                 while ((line = sr.ReadLine()) != null)
                 {
                     line = line.Trim();
-                    if(line.StartsWith("public "))
-                    {
-                        formatedSource.AppendLine("");
-                        formatedSource.AppendLine("");
-                    }
                     if (inFor && line.Contains(")"))
                         inFor = false;
 
@@ -177,13 +172,7 @@ namespace Fractrace {
                         indent++;
                 }
             }
-
-
-            // TODO: Leerzeilen entfernen
-            //       Einrücken
-
             tbSource.Text = formatedSource.ToString();
-
         }
 
         string Indent(int indent)
