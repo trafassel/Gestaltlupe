@@ -279,7 +279,10 @@ namespace Fractrace.Basic
         {
             lock (_entries)
             {
-                if(text.StartsWith("<"))
+                text = text.Replace(System.Environment.NewLine, " ");
+                text = text.Replace("\n", " ");
+
+                if (text.StartsWith("<"))
                 {
                     XmlDocument xdoc = new XmlDocument();
                     XmlNode xnode = xdoc.CreateNode(XmlNodeType.Element, "MainNode", "");
@@ -297,7 +300,7 @@ namespace Fractrace.Basic
                 else
                 {
                     string currentCategory = "";
-                    string[] entries = text.Split(' ');
+                    string[] entries = text.Split(new char[] { ' ' },StringSplitOptions.RemoveEmptyEntries);
                     foreach(string entry in entries)
                     {
                         if (entry.EndsWith(":"))

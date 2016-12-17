@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:298-->
+<!--LastNote:301-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -10,6 +10,7 @@
 <!--property:UID=CZzSEtxo34Ngs4dAX2lxOw-->
 <!--property:prop_modified=0-->
 <!--property:note_deleted=IPw1y1qGhP0jPPKxYvY5bg-->
+<!--property:note_deleted=juxwiNlFEYnnhKDlbzuiYw-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -256,6 +257,7 @@ http://www.gestaltlupe.com/x3dom/
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454854608-->
 <!--property:date_modified=1454855903-->
+<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -329,12 +331,42 @@ der Berechung der Tiefeninformation weglassen.<BR>
 <BR>
 
 </DD>
+<DT><A name="TFePbyJEv0HZvDhy8v6Zqg"></A>Makros in der Formel</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455058119-->
+<!--property:date_modified=1481983311-->
+<!--property:hash=bf1aedd0bfeeeb8071057ac429c08f4a71552dc8-->
+<!--property:hash_html=e8d0141a9a5e4d732ca1de8f070d86e635560926-->
+<DD>
+@init<BR>
+<BR>
+xxxx<BR>
+<BR>
+wird zu:<BR>
+public override void Init() <BR>
+{<BR>
+<BR>
+mit abschließender Klammer zu Beginn der nächsten Funktion oder am Ende.<BR>
+<BR>
+<BR>
+@definition<BR>
+<BR>
+wird zu:<BR>
+<BR>
+<BR>
+public override bool GetBool(double x, double y, double z)<BR>
+{<BR>
+<BR>
+<BR>
+mit abschließender Klammer.
+</DD>
 </DL>
 </DD>
 <DT><A name="bkRC1eb3xPHoVQZYGxp4dA"></A>erledigt</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1432975260-->
 <!--property:date_modified=1432975265-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -995,10 +1027,18 @@ History Control is zu aktualisieren.<BR>
 </DD>
 </DL>
 </DD>
+<DT><A name="cLDHU9uLnz4nVqySBBNzQA"></A>2016</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1481980555-->
+<!--property:date_modified=1481980558-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
 <DT><A name="qquMgkl741gsxW5XCWCG8A"></A>Rotation der Winkel überprüfen</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429321904-->
-<!--property:date_modified=1454854553-->
+<!--property:date_modified=1481980560-->
 <!--property:hash=3ca728c0aa3a12ab1a06019fa3896eb502b92b70-->
 <!--property:hash_html=3ca728c0aa3a12ab1a06019fa3896eb502b92b70-->
 <DD>
@@ -1007,7 +1047,7 @@ Es sieht so aus, als ob x, und y in der Standard-Mandelbulb Formel vertauscht si
 <DT><A name="UhBl04QmA75jcDx1ifj03g"></A>Small Preview sollte Vorrang haben</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465199-->
-<!--property:date_modified=1454854559-->
+<!--property:date_modified=1481980561-->
 <!--property:hash=8731e7fd614d064c347c5847471393d90baf5908-->
 <!--property:hash_html=1a41011aeab897e1d2615aea66e7fdc8ae9b39d7-->
 <DD>
@@ -1017,7 +1057,7 @@ Bisher werden beide Renderings gleichzeitig gestartet.<BR>
 <DT><A name="2Gcfj9rmC8jxfgowZF7Jqw"></A>Preview aktualisieren bei Änderung in Render</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1429465601-->
-<!--property:date_modified=1454854566-->
+<!--property:date_modified=1481980562-->
 <!--property:hash=9576fc3244a01d238250d07f277d0a11f7944913-->
 <!--property:hash_html=16fe046bfdb777174cffa9d79585b7d937ff54e8-->
 <DD>
@@ -1029,7 +1069,7 @@ Ein Möglichkeit dazu in der GUI schaffen, um das zu aktivieren.<BR>
 <DT><A name="YBWfyZy8PZ3Wb9ZGea4Tkg"></A>Sehr dunkle Bereiche zufällig aufhellen</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1430467960-->
-<!--property:date_modified=1454854575-->
+<!--property:date_modified=1481980562-->
 <!--property:hash=945f1fa562e97727d9dea77c6bcc66451444382f-->
 <!--property:hash_html=945f1fa562e97727d9dea77c6bcc66451444382f-->
 <DD>
@@ -1038,7 +1078,7 @@ bei der Berechnung der Schatten.
 <DT><A name="DkxyyDDUh14XS5ecLMyhUg"></A>Rendern nicht über Form1.PublicForm</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1429025197-->
-<!--property:date_modified=1454854631-->
+<!--property:date_modified=1481980563-->
 <!--property:hash=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
 <!--property:hash_html=db382cbe5f59cb171a1aad9f2d62ed0e4d30b686-->
 <DD>
@@ -1047,7 +1087,7 @@ Das wird z.B. während der Animation gemacht. Hier ist es evtl besser, das Zeich
 <DT><A name="cx5xDqM36nk098JCQBVTPQ"></A>UpdateSteps werden bei Verwendung der Animation verringert</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1429322998-->
-<!--property:date_modified=1454854645-->
+<!--property:date_modified=1481980563-->
 <!--property:hash=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
 <!--property:hash_html=2b28dbd9a5432a29cbde8aaa80389158cbc5913d-->
 <DD>
@@ -1056,7 +1096,7 @@ Das wird z.B. während der Animation gemacht. Hier ist es evtl besser, das Zeich
 <DT><A name="OyTgqmPe2eUWNEuA2MlMAg"></A>Update alter Parameter</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1430338814-->
-<!--property:date_modified=1454854660-->
+<!--property:date_modified=1481980564-->
 <!--property:hash=b9bb040b3d220a8910768bac9525b19f061e7137-->
 <!--property:hash_html=400695c308887bf8dbc5e1daa0e6aa7be2f51f4c-->
 <DD>
@@ -1102,13 +1142,13 @@ Die Animationseinstellungen können zurückgesetzt werden.<BR>
 <DT><A name="KM56JkcLLTVvWLItl3qkYA"></A>Bug: Parameter passen nicht mehr zu den gespeicherten Bildern</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1430599611-->
-<!--property:date_modified=1454854669-->
+<!--property:date_modified=1481980565-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DT><A name="yxaDqxFYiLNpeDNqR3steQ"></A>Bug: Reagierte in einem Fall nicht auf Stop</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431038641-->
-<!--property:date_modified=1454855820-->
+<!--property:date_modified=1481980565-->
 <!--property:hash=a6f78f3efcffca975460961a37bc10933c907ffa-->
 <!--property:hash_html=a6f78f3efcffca975460961a37bc10933c907ffa-->
 <DD>
@@ -1117,13 +1157,13 @@ z.B. wenn zu schnell Parameterwiderholung angeklickt wird.
 <DT><A name="AVjFGdxyOTnFtPqqjkrYag"></A>Center, Radius statt bounds verwenden</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431164430-->
-<!--property:date_modified=1454855830-->
+<!--property:date_modified=1481980566-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DT><A name="ZPDl4UFxZDvwNi0MHLZtyg"></A>Size 0.5, Update steps 1</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431205414-->
-<!--property:date_modified=1454855901-->
+<!--property:date_modified=1481980566-->
 <!--property:hash=7d815ce4848760b6d75e1aa8cb026db084e915c5-->
 <!--property:hash_html=7d815ce4848760b6d75e1aa8cb026db084e915c5-->
 <DD>
@@ -1132,7 +1172,7 @@ z.B. wenn zu schnell Parameterwiderholung angeklickt wird.
 <DT><A name="fTDpo0T58AHVVoF8y5AynA"></A>Aspect Ratio in Preview</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431205548-->
-<!--property:date_modified=1454855928-->
+<!--property:date_modified=1481980567-->
 <!--property:hash=e38081403478b094a0828085e9bf5dc8f8c87a1a-->
 <!--property:hash_html=e38081403478b094a0828085e9bf5dc8f8c87a1a-->
 <DD>
@@ -1141,7 +1181,7 @@ Die Höhe des linken Controls automatisch setzen, wenn preview gestartet wird. (
 <DT><A name="tyjYy8DeHwtsBUpkDzcjlw"></A>Während der Animatuinsarbarbeitung kommen neue Animationseinträge hinzu.</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431230603-->
-<!--property:date_modified=1454856048-->
+<!--property:date_modified=1481980567-->
 <!--property:hash=8c314f54c560d5c59bfea244e0c214ab8710445a-->
 <!--property:hash_html=875031ba926e31b4e2aa1ad82cbca1a31ee82d55-->
 <DD>
@@ -1169,7 +1209,7 @@ Die Höhe des linken Controls automatisch setzen, wenn preview gestartet wird. (
 <DT><A name="L19poOuc29wRJCTAVBA2eg"></A>beim Beenden des Rendern</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1433102300-->
-<!--property:date_modified=1454856074-->
+<!--property:date_modified=1481980568-->
 <!--property:hash=2cc1a475cf9172003c3999ff1735de9dd508a8e9-->
 <!--property:hash_html=19d41448e4de3de4a67e1653a801283337ddb858-->
 <DD>
@@ -1211,7 +1251,7 @@ ParameterDict.Exemplar[&quot;View.Size&quot;] = sizeStr;<BR>
 <DT><A name="xteyEwozZ7Ch8fGT0aQLDg"></A>Größenveränderung im Preview.</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434658050-->
-<!--property:date_modified=1454856145-->
+<!--property:date_modified=1481980568-->
 <!--property:hash=180f0753d3ea2c841ff2d10164aae50994746167-->
 <!--property:hash_html=5ec721c88e9068da1e838d679afdfca20ba7e691-->
 <DD>
@@ -1236,7 +1276,7 @@ this.splitContainer1.Panel1.Controls.Add(this.preview1);<BR>
 <DT><A name="Y8YtzuIFirc5F0giZGxxAg"></A>Fortschrittsbalken beim Small Preview</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434303082-->
-<!--property:date_modified=1454856196-->
+<!--property:date_modified=1481980569-->
 <!--property:hash=bbe6c6c5144ae6e432810374809fccf6c03af8e1-->
 <!--property:hash_html=7687b39c5e33936519c78b041ba41d83d5bc4b33-->
 <DD>
@@ -1265,7 +1305,7 @@ Hier könnte anhängig von der Größe vorher getestet werden, ob es sich um das
 <DT><A name="MV4eExjC1TozkUTGto3ezw"></A>Kleinigkeiten</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1432477239-->
-<!--property:date_modified=1454856318-->
+<!--property:date_modified=1481980570-->
 <!--property:hash=1b0c87434b8f5454235bf23fdd90cf6a43e1b625-->
 <!--property:hash_html=e5cdf988b5dc26d4ca7c904ab99f2a9c9c8226bf-->
 <DD>
@@ -1334,7 +1374,7 @@ NeedSubNodes(string category) <BR>
 <DT><A name="Ef5bL2NDbZy14b3qB8g5aw"></A>Beim Beenden des Programmes</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1434576602-->
-<!--property:date_modified=1454856379-->
+<!--property:date_modified=1481980570-->
 <!--property:hash=649123520437f43fbf8d6a37c679892185fa61e2-->
 <!--property:hash_html=b10380c0b76c12c0c9ee317e86c594fcc30e412f-->
 <DD>
@@ -1357,7 +1397,7 @@ testen.<BR>
 <DT><A name="8u9EDcaxUSDR4lkDsFYZKQ"></A>GrandScheduler</DT>
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1431497263-->
-<!--property:date_modified=1454856409-->
+<!--property:date_modified=1481980571-->
 <!--property:hash=852a15b46248537f146df0ff2178858866c58843-->
 <!--property:hash_html=b202012730eef3eb5bafd27f2c7cd274d6947d7e-->
 <DD>
@@ -1545,6 +1585,1021 @@ namespace Fractrace.Scheduler<BR>
 </DD>
 </DL>
 </DD>
+<DT><A name="AK7lSeh3OfQfpe7Q6798GA"></A>PARAMETERINFO.Description aus Bulk entfernen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434739083-->
+<!--property:date_modified=1481980571-->
+<!--property:hash=-->
+<!--property:hash_html=-->
+<DT><A name="uKLYAA4yq7Wu9xMnrVpoSg"></A>Kein Preview erlauben, wenn</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1430861762-->
+<!--property:date_modified=1481980572-->
+<!--property:hash=08c00202e70f879eb395319098d0e771d145efe9-->
+<!--property:hash_html=08c00202e70f879eb395319098d0e771d145efe9-->
+<DD>
+... gerade ein bild mit hoher Auflösung und denselben Formel-Parametern angezeigt wird.
+</DD>
+<DT><A name="YUXubDTja6vQy4HPRb3m8Q"></A>PictureArt.Glow</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1431214661-->
+<!--property:date_modified=1481980572-->
+<!--property:hash=0b120acda991e225152aee0992d5b612278edd3a-->
+<!--property:hash_html=535b7ee0584d35c87b8652e2a114aee84b89d32d-->
+<DD>
+der gibt an, wie durchlässig die Wände sind.<BR>
+<BR>
+
+</DD>
+<DT><A name="0NiCUfQ6nbJRzN2WFG0KEg"></A>intern.AnimationScript</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1431783240-->
+<!--property:date_modified=1481980573-->
+<!--property:hash=63c0df007258168c84f91eda1278092495e475fd-->
+<!--property:hash_html=d02de0268b28c87cf3bc6c55bcfb8089017e80a9-->
+<DD>
+... als Parameter. Wenn das Projekt geladen ist, werden für jeden Animationsschritt die in den Kommentaren enthaltenen Dateien geladen und time ausgetauscht. <BR>
+<BR>
+Umgesetzt als Dateiladen / speichern in der Animation<BR>
+<BR>
+
+</DD>
+<DT><A name="T7r70tdwvnYQ6sMSuiMksg"></A>Formeledit beim Drücken auf Small Preview</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1434041176-->
+<!--property:date_modified=1481980573-->
+<!--property:hash=471d45b523ae6c47dfbe5b11e1a3d7314456aeb0-->
+<!--property:hash_html=d080c62d3bc83e38796adff389b6170515a2c28c-->
+<DD>
+Hier wird die Formel aktualisert und die aktuelle Cursorposition verschwindet. <BR>
+<BR>
+
+</DD>
+<DT><A name="Mxi2qlXT17xtRyQSwyB9RQ"></A>Unzulässiger Zustand bei Exception</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1434041239-->
+<!--property:date_modified=1481980579-->
+<!--property:hash=4ca6c37127464b1a06c80dee66d713c5f6ecc835-->
+<!--property:hash_html=722c7a6f9846b1b289d5feaf56fa65373606a4b8-->
+<DD>
+Gibt man bei View.Size 0. ein kommt es zur Exception &quot;Unzulässiger Wert&quot;. Danach lässt sich der Button-Zustand nicht mehr auf den korrekten Zustand setzen.<BR>
+<BR>
+(Bei Druck auf preview passiert nichts).
+</DD>
+<DT><A name="KGQy7vAH7BONLxQq3zwZAg"></A>Wenn sich die Formel geändert hat</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1434491535-->
+<!--property:date_modified=1481980580-->
+<!--property:hash=333eb01598460894cd0d6cd1fb96badf9fd5769d-->
+<!--property:hash_html=eaee9e8b8b31ad18e644ea49cd68e7ef2606d32d-->
+<DD>
+... die Aktualisierung im Preview beenden.<BR>
+<BR>
+Aktuell werden während des Editierens Fehler im Code-Control angezeigt.<BR>
+<BR>
+Prinzipiell soll die  Aktualisierung im Preview stets gestoppt werden, wenn sich ein Parameter geändert hat, der nicht zur PictureArt gehört.<BR>
+<BR>
+<DL>
+<DT><A name="YePDXf7xNZcOVyx65TlJNg"></A>info</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1434573324-->
+<!--property:date_modified=1434581940-->
+<!--property:hash=83e1ce422c391b39d5d40446136baaa8b896ed50-->
+<!--property:hash_html=2359e7fa0370d8615d597283c3f2d0bc9305b596-->
+<DD>
+In Form1. <BR>
+<BR>
+public void ComputeOneStep()<BR>
+        {<BR>
+<BR>
+wird korrekt erkannt, dass sich die Parameter geändert haben.<BR>
+Es wird aber ein neues Rendering angestoßen.<BR>
+<BR>
+Ein neues Rendering sollte aber nur bei der ersten Stufe ausgelöst werden. <BR>
+Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="vXanyMecox4uDRSyq4GsRA"></A>Schlüsselwort public in formula</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1480576058-->
+<!--property:date_modified=1481980847-->
+<!--property:hash=8956ff4384672507a8619ace00a9cd0ec4ec408f-->
+<!--property:hash_html=f919a8ce5bb1bed2b42af45f940962e93cfce227-->
+<DD>
+Zu den entsprechenden Variablen werden dann Parametereinträge erstellt.<BR>
+<BR>
+<DL>
+<DT><A name="e9SBYlaWvCtrVN3yI1OeYA"></A>Teilaufgaben</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480594676-->
+<!--property:date_modified=1480601270-->
+<!--property:hash=5b142a78ab5185134a1bf4f2a14177daf3063eb5-->
+<!--property:hash_html=2a1bde3c1172fefc0ed110ba8fc1a146b36d10d2-->
+<DD>
+(1) Eigener Preprozessor mit Schlüsseltworten @Initialize() @GetBool(x,y,z) @parameter<BR>
+<BR>
+(2) Korrekte Zuordnung der Fehler beruhend auf dem davon erzeugten Code.<BR>
+<BR>
+<BR>
+<DL>
+<DT><A name="wVbX5Hs20JxjCLmx0RgcpQ"></A>Preprozrssor</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480601305-->
+<!--property:date_modified=1480617439-->
+<!--property:hash=351d121c6aba842eac76aca3fa5e9bc77fb2df2e-->
+<!--property:hash_html=074b66d996912b56bcaa9d710bc4ff41a50529d1-->
+<DD>
+ @Initialize() <BR>
+<BR>
+@GetBool(x,y,z) <BR>
+<BR>
+@parameter
+</DD>
+<DT><A name="osdxisjFT0kdxyXIMGCLvA"></A>kein Preprozessor</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480889150-->
+<!--property:date_modified=1480889440-->
+<!--property:hash=0acacd43c7a75d503f151457f478911db115df55-->
+<!--property:hash_html=0acacd43c7a75d503f151457f478911db115df55-->
+<DD>
+statt dessen einfach die public Felder übernehmen. 
+</DD>
+</DL>
+</DD>
+</DL>
+</DD>
+<DT><A name="psNo87wJ8R9nWlT2R7zPeA"></A>Fortschrittsbutton bei SmallPreview.</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450604382-->
+<!--property:date_modified=1481980845-->
+<!--property:hash=ec08930596c7c7b4c295ed19c2d98faddd25d5f0-->
+<!--property:hash_html=ec08930596c7c7b4c295ed19c2d98faddd25d5f0-->
+<DD>
+ersetzen durch eine Aktualisierung des Seitenbildes.<DL>
+<DT><A name="txLl6iN6lmUBiRykkpv62A"></A>info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1450636328-->
+<!--property:date_modified=1450636332-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+</DL>
+</DD>
+<DT><A name="5KNqvrS2ZUI9Ofy0BxbvTA"></A>Settingsstruktur ausblenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1477336034-->
+<!--property:date_modified=1481980840-->
+<!--property:hash=961f7531fa39b6d9fb06ec54d318ce8a719b492f-->
+<!--property:hash_html=416f1379a0e08187ae81a44edeea80399978328d-->
+<DD>
+Bei Formula und View.<BR>
+<BR>
+// Baum ausblenden<BR>
+ParameterDictControl.treeview1<BR>
+<BR>
+<DL>
+<DT><A name="ZltSeP5afur56pJ8RUdiRA"></A>Info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1477404474-->
+<!--property:date_modified=1477404656-->
+<!--property:hash=ecc5db716717199531d7ac4e2ffb569ca4ccb30a-->
+<!--property:hash_html=7389f4b0359337d40fea4ed4c5ce01e3ec729465-->
+<DD>
+Wird aufgerufen bei:<BR>
+  
+</DD>
+</DL>
+</DD>
+<DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1477344109-->
+<!--property:date_modified=1481980840-->
+<!--property:hash=38837dee261ee6845cf84c6023ea38ed491a1b0d-->
+<!--property:hash_html=9e359b7d87b93d83be320cc2ee03c9cf94240ba4-->
+<DD>
+private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)<BR>
+       <BR>
+<A href="https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx">https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx</A><BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="YbuEIhI0vyC95P9SVC6zUw"></A>Rotation bei rechter Maustaste</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1477382512-->
+<!--property:date_modified=1481980839-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="DPyptS4czBvLml4YdR5ZeQ"></A>defaultwert für Batch Type: 2</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1477413221-->
+<!--property:date_modified=1481980837-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="FDt2pTpfO2dh67PuRrXQ1Q"></A>Parameter Steps wird im AnimationTab nicht angezeigt</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1477445862-->
+<!--property:date_modified=1481980837-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="BI01t3S78OyTxrV35xZyFA"></A>Shadow Glow bei Größenänderung anpasen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1473796721-->
+<!--property:date_modified=1481980836-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="z91t3xIPa7E4dyF26EJSZA"></A>Format Button</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1456667268-->
+<!--property:date_modified=1481980835-->
+<!--property:hash=c3f76916fdee0dece9bc9c0c01123d0aa1d3e6ea-->
+<!--property:hash_html=20dcbb06116eaba74eac52e83f9470500a015611-->
+<DD>
+... um die Formel zu formatieren.<BR>
+<BR>
+
+</DD>
+<DT><A name="JwhsTlw2MPrWQG00M7cRRw"></A>Oberen und unteren Bereich vertauschen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455135001-->
+<!--property:date_modified=1481980835-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="xrxdEO6vrQMVet6xrBApog"></A>Transparenter Hintergrund</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455334005-->
+<!--property:date_modified=1481980834-->
+<!--property:hash=83b0a714748ab249d142d5f3d5abaeb12843c940-->
+<!--property:hash_html=83b0a714748ab249d142d5f3d5abaeb12843c940-->
+<DD>
+als Möglichkeit unter Render-Einstellungen
+</DD>
+<DT><A name="JSIM87MbD9ItQI8Y0PMGyw"></A>Material Tab</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455569057-->
+<!--property:date_modified=1481980833-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="ls6c4gKJJGd4x8GjhhIrLQ"></A>info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1455569065-->
+<!--property:date_modified=1455569338-->
+<!--property:hash=b0a56f03c777e6cde8c5b55965b2b99ba3d7774c-->
+<!--property:hash_html=87de438f81769607ea1a5bbf9ad85cef1f0bd7e6-->
+<DD>
+Beispielcode:<BR>
+<BR>
+ _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);<BR>
+                _propertyControl.Dock = DockStyle.Fill;<BR>
+                _propertyControl.Create(&quot;Transformation&quot;);<BR>
+                pnlProperties.Controls.Add(_propertyControl);<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="yYsu33mXMYhhxx0VoFdmAw"></A>View Parameter</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455739179-->
+<!--property:date_modified=1481980832-->
+<!--property:hash=f9dac5fe10791ad283733115ab1149eef3045986-->
+<!--property:hash_html=2e126f03ceb77f860421ee8de55ca35ce8e2806a-->
+<DD>
+Transformation.Perspective.Cameraposition =&gt; Transformation.Camera.Position<BR>
+<BR>
+View.Perspective =&gt; Transformation.Camera.IsometricProjection 
+</DD>
+<DT><A name="9O10bntxmYZ3MM8dxzgTVQ"></A>Exportdateien gleich öffnen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1455836324-->
+<!--property:date_modified=1481980831-->
+<!--property:hash=8ca0303132c1830427584329dcfb3dba1c7b709a-->
+<!--property:hash_html=86e2f1823ac719caa3955030c550bb46941ccd5c-->
+<DD>
+Dialog erstellen<BR>
+Haken [] Show in Browser <BR>
+(In Settings merken)<BR>
+Falls angehakt, im Browser öffnen<BR>
+<BR>
+
+</DD>
+<DT><A name="8AjPa638fH54axiKvE73jg"></A>Julia</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1456052072-->
+<!--property:date_modified=1481980831-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="sRUyahsdyEfYxm1E71Z8xQ"></A>CompressedBulb funktioniert nur bei init</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1456660650-->
+<!--property:date_modified=1481980830-->
+<!--property:hash=658f9cfaadcc3b90d4cc76ad0b2e34cff14c5975-->
+<!--property:hash_html=5d5cfd44fa11268b577f36a2e216866c8921e571-->
+<DD>
+Damit die Parameter gesetzt werden, muss init() existieren.<BR>
+<BR>
+
+</DD>
+<DT><A name="AyPfE12vd2Hw6M8Pj0Rjhw"></A>Update Material</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454805512-->
+<!--property:date_modified=1481980829-->
+<!--property:hash=884477c0c7aa4ce418126062b93414cee896b914-->
+<!--property:hash_html=884477c0c7aa4ce418126062b93414cee896b914-->
+<DD>
+wird nicht immer zurückgesetzt.
+</DD>
+<DT><A name="8juITFPD6h2SPhfg10Pm7g"></A>Zoomen verhindern während die Berechnung läuft.</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454847491-->
+<!--property:date_modified=1481980829-->
+<!--property:hash=89c6a1b880325f70935c93abd38bdc6a4de09d45-->
+<!--property:hash_html=cf6f2e1b02d86467c8ca401cf660e4fd82046ed9-->
+<DD>
+Ein damit auftgretendes Problem:<BR>
+Die aktuellen Parameterwerte werden verändert. Das kann zu Problemen beim weiteren Update führen.<BR>
+<BR>
+Wie erkennt man, ob die Berechnung noch läuft?<BR>
+
+</DD>
+<DT><A name="iDZrbIJv7i8y8qKN9Jf5ZQ"></A>Save Formula Fehlt</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453160038-->
+<!--property:date_modified=1481980828-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="yNmgl3Nye7nx9WMyEoN6sA"></A>Ansicht von Data wird nicht immer aktualisiert</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453415319-->
+<!--property:date_modified=1481980827-->
+<!--property:hash=f0433f58065e5f2dec2c807dc610ca4f27ef961c-->
+<!--property:hash_html=a7dca86b3e161666b7b12978e028179a09569cd2-->
+<DD>
+das betrifft z.B. &quot;View&quot; nach Laden einer Formel.
+</DD>
+<DT><A name="vInuH6ddYaYPY4VO79Sb6w"></A>Beim Speichern der Formel auch Farbinfos mitspeichern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453419168-->
+<!--property:date_modified=1481980827-->
+<!--property:hash=823f1e11244a663b1636064c965b4246ca1c0d94-->
+<!--property:hash_html=8359aba5659fd6dd313a18ec567e48dde80e7e89-->
+<DD>
+&quot;Renderer.ColorIntensity&quot;<BR>
+&quot;Renderer.ColorGreyness&quot;<BR>
+Renderer.ColorInside<BR>
+&quot;Renderer.ColorOutside&quot;<BR>
+&quot;Renderer.ColorFactor.Red&quot;<BR>
+&quot;Renderer.ColorFactor.Green&quot;<BR>
+&quot;Renderer.ColorFactor.Blue&quot;<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="ppCC2VHeE2XAFTNtUyRwMQ"></A>Eingabefelder müssen breiter sein</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453553317-->
+<!--property:date_modified=1481980826-->
+<!--property:hash=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
+<!--property:hash_html=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
+<DD>
+Wert wird sonst (zB. bei Radius nicht vollständig angezeigt)
+</DD>
+<DT><A name="XAtWMrGiUB3F5KnX9oibvA"></A>Float Based Renderer</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453557957-->
+<!--property:date_modified=1481980825-->
+<!--property:hash=4ff8eddf0303c63d608f9a4a32dd27797340dc70-->
+<!--property:hash_html=3a80861278e24e56ab1ce49283c7b025b63e3743-->
+<DD>
+Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
+<BR>
+
+</DD>
+<DT><A name="p8E3nWLEW9gLMlZe3znNxA"></A>Material Reiter</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453641563-->
+<!--property:date_modified=1481980822-->
+<!--property:hash=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
+<!--property:hash_html=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
+<DD>
+Hier können einige Voreinstellungen des Renderers ausgewählt werden.<DL>
+<DT><A name="kxeNluC0tkNwXN1WPXEyhQ"></A>Images</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1453751096-->
+<!--property:date_modified=1453753483-->
+<!--property:hash=aace6fd48abb030e71998d4b9c0f2a838a86e73e-->
+<!--property:hash_html=d2a26b1a98728c96675fe39ec3ab6a896517f368-->
+<DD>
+shininess9Shininessfactor1:<BR>
+<BR>
+BrightLightLevel 0.94<BR>
+Brightness 6.5<BR>
+Shininess 9<BR>
+ShininessFactor 1<BR>
+<BR>
+ShadowJustify0:<BR>
+BrightLightLevel 0<BR>
+Shadow Justify 0<BR>
+<BR>
+sharp0p8:<BR>
+<BR>
+BrightLightLevel 0.8<BR>
+Brightness 63.6<BR>
+Shininess 14<BR>
+ShininessFactor 0.8<BR>
+Shadow Justify 0.2<BR>
+<BR>
+<BR>
+<BR>
+brightLighttLevel0p4:<BR>
+<BR>
+BrightLightLevel 0.4<BR>
+Brightness 1.2<BR>
+Shininess 9<BR>
+ShininessFactor 0.3<BR>
+Shadow Justify 0.8<BR>
+<BR>
+<BR>
+ShadowJustify1p5.png:<BR>
+<BR>
+BrightLightLevel 0.3<BR>
+Brightness 1.2<BR>
+Shininess 14<BR>
+ShininessFactor 0.3<BR>
+Shadow Justify 1.5<BR>
+<BR>
+<BR>
+dark1:<BR>
+<BR>
+BrightLightLevel 0<BR>
+Brightness 1<BR>
+Shadow Glow 0.961<BR>
+Shadow Justify 0.2<BR>
+<BR>
+<BR>
+<BR>
+BrightLightLevel 0.8<BR>
+Brightness 3.5<BR>
+Shadow Glow 0.971<BR>
+Shadow Justify 0.1<BR>
+Shininess 28<BR>
+Shininess Factor 0.8<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="uYUFMaOUNwddhxc1AtS5xw"></A>Min Cycle ausblenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453656665-->
+<!--property:date_modified=1481980821-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="PJifix8WAkEWZwWS16yEAQ"></A>OutOfMemory Exception bei Size 2</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454076604-->
+<!--property:date_modified=1481980819-->
+<!--property:hash=a91fe63693b94f4f1eac76409e3547616588a033-->
+<!--property:hash_html=382976905482a00cff5f4b050be5eb8567184796-->
+<DD>
+Tritt bei Fractrace.PictureArt.FloatPlasicRenderer.CreateShadowInfo()<BR>
+auf.
+</DD>
+<DT><A name="8WXRrNPj8STXtdGiRClRYA"></A>Start Stop Preview nach links</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454080080-->
+<!--property:date_modified=1481980818-->
+<!--property:hash=002befef553d7b4e973108041f00cbceae9d1999-->
+<!--property:hash_html=9fb67345a145222d91179c2d34e5cc445a0e1eeb-->
+<DD>
+panel 32<BR>
+<BR>
+Ist gemeinsam mit dem TabControl (tabControl2) in Panel4<BR>
+<BR>
+Die Vorschaubilder sind in Panel3<BR>
+<BR>
+<BR>
+panel32 muss unter das Panel, in dem Panel3 steckt (panel2)<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="yuaaABZIyd794KTPRb7Yuw"></A>Smooth bei Animation nicht auf Rotation anwenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454213657-->
+<!--property:date_modified=1481980817-->
+<!--property:hash=58e2086ca6082c1e436eb1297570407dab05aa52-->
+<!--property:hash_html=d74c6baf44b1f0c4ebe54c95756f7c6a169f2353-->
+<DD>
+Umsetzung in ParamaeterDictData.LoadSmoothed()<BR>
+die neue Funktion: IsSmoothable(string name) abfragen.
+</DD>
+<DT><A name="T5zoaovUI1vbvfXZemRiGQ"></A>Parameter Feinabstimmung</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1454709956-->
+<!--property:date_modified=1481980817-->
+<!--property:hash=0370b06743732949938f75bbe4260b8ef4ceb25a-->
+<!--property:hash_html=05e40913b7aa1cfe18dcb191955045e0c48e2e29-->
+<DD>
+Contrast +- 0.1<BR>
+Bright Light Level: zusätzlich: um 0.025 erhöhen.<BR>
+Color Greyness: 0.005<BR>
+jx,jy,jz 0.025 und 0.001<BR>
+<BR>
+
+</DD>
+<DT><A name="LHWwHZZJa7qnewlzFGwxWg"></A>Normalen mit exportieren</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452803088-->
+<!--property:date_modified=1481980816-->
+<!--property:hash=f5d6f7a1939d503a45be7d76a0bda157d16a82d2-->
+<!--property:hash_html=94a9efade33eea57f044c9002289959e4729a606-->
+<DD>
+// <BR>
+normal Normal { . . . }<BR>
+<BR>
+Normal { <BR>
+  exposedField MFVec3f vector  []   # (-INF,INF)<BR>
+}<BR>
+<BR>
+<BR>
+// Bei der erstllung der faces setzen    <BR>
+normalIndex [ . . . ]<BR>
+    normalPerVertex FALSE<BR>
+<BR>
+<BR>
+<BR>
+also<BR>
+normal Normal { vector [ <BR>
+   0.3 0.5 0.5 -1<BR>
+  0.67 0.99 0.34 -1<BR>
+---<BR>
+] }<BR>
+<BR>
+<BR>
+normalIndex [ 1 2 3 ]<BR>
+<BR>
+    normalPerVertex FALSE<BR>
+<BR>
+
+</DD>
+<DT><A name="yvypBG5qljkuFaaUCNetyw"></A>Center,Radius</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452846538-->
+<!--property:date_modified=1481980815-->
+<!--property:hash=de92089b74100f872a701c49425b80430da848b4-->
+<!--property:hash_html=b93950c50b6439f87fbd1a19623c1166e827bd97-->
+<DD>
+... statt Min.X ... verwenden.<BR>
+<BR>
+Navigater.SetAspectRatio()<BR>
+<BR>
+double screenWidth = ParameterDict.Current.GetDouble(&quot;View.Width&quot;);<BR>
+            double screenHeight = ParameterDict.Current.GetDouble(&quot;View.Height&quot;);<BR>
+            double maxScreenSize = Math.Max(screenWidth, screenHeight);<BR>
+<BR>
+            // diffx/diffz should be equal to screenWidth/screenHeight;<BR>
+            diffx = maxDiff * screenWidth / maxScreenSize;<BR>
+            diffz = maxDiff * screenHeight / maxScreenSize;<BR>
+            diffy = Math.Max(diffx, diffz);<BR>
+<BR>
+            diffx /= 2.0; diffy /= 2.0; diffz /= 2.0;<BR>
+<BR>
+            xmin = centerX - diffx; xmax = centerX + diffx;<BR>
+            ymin = centerY - diffy; ymax = centerY + diffy;<BR>
+            zmin = centerZ - diffz; zmax = centerZ + diffz;<BR>
+<BR>
+<BR>
+<BR>
+    double centerX = ParameterDict.Current.GetDouble(&quot;Scene.CenterX&quot;);<BR>
+            double centerY = ParameterDict.Current.GetDouble(&quot;Scene.CenterY&quot;);<BR>
+            double centerZ = ParameterDict.Current.GetDouble(&quot;Scene.CenterZ&quot;);<BR>
+            double radius= ParameterDict.Current.GetDouble(&quot;Scene.Radius&quot;);<BR>
+<BR>
+// Aktuell: je größer der Zoom, desto flacher die Darstellung<BR>
+<BR>
+<BR>
+  start_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Min.x&quot;);<BR>
+            start_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Min.y&quot;);<BR>
+            start_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Min.z&quot;);<BR>
+            end_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Max.x&quot;);<BR>
+            end_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Max.y&quot;);<BR>
+            end_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Max.z&quot;);<BR>
+<BR>
+
+</DD>
+<DT><A name="SxO7nDqsNvVuk9vD8h67kA"></A>Automatic Add To Animation ...</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452873056-->
+<!--property:date_modified=1481980814-->
+<!--property:hash=937d7bb07dc1d2df84af95f298355459f744a0f6-->
+<!--property:hash_html=937d7bb07dc1d2df84af95f298355459f744a0f6-->
+<DD>
+fügt während der Animation Einträge hinzu.
+</DD>
+<DT><A name="4wywTUi5afLmKSbJiFWPpg"></A>Animationsparameter im Animationcontrol verwenden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452875151-->
+<!--property:date_modified=1481980814-->
+<!--property:hash=7cfc2d79c2bc93a74a21b1db9deaf4b5abbf4bb1-->
+<!--property:hash_html=9e777c9ec1e4e93332a778d22565a65c033b07d1-->
+<DD>
+Wie bei der NaviagationControl<BR>
+NaviagationControl.UpdateFromChangeProperty<BR>
+<BR>
+info:<BR>
+<BR>
+in panel3:<BR>
+<BR>
+
+</DD>
+<DT><A name="ufK313xzCLf2GeQUuESGww"></A>Im NavigationControl</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452875418-->
+<!--property:date_modified=1481980813-->
+<!--property:hash=8587ec581c3aa91d0793283709e4891b35d65e0b-->
+<!--property:hash_html=e776ea29ce3678faa877a421954230253f09505f-->
+<DD>
+Reaktion auf Änderung an Scene Parameter<BR>
+<BR>
+
+</DD>
+<DT><A name="xpUQk59Add8X2F32G5ajvQ"></A>Size und Export werden nicht mitgespeichert</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452963992-->
+<!--property:date_modified=1481980813-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="6y5xxXXiWzQ9tNkW89VFAg"></A>Update Material Button</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452974980-->
+<!--property:date_modified=1481980812-->
+<!--property:hash=2609961f57dfdb04bd71d826f11fb888e16f339b-->
+<!--property:hash_html=86f3127afea73394b3b1a54d0f5668fdc86d5443-->
+<DD>
+wird manchmal nach der Bilderzeugung nicht mehr auf enabled=true gesetzt.<BR>
+<BR>
+Solange die Bilderzeugung läuft, sollte [start] deaktiviert sein.
+</DD>
+<DT><A name="isE8y7CnjxBbb1p5jyH6sw"></A>Start Stop Preview Button links</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453050680-->
+<!--property:date_modified=1481980811-->
+<!--property:hash=5d0618ca781918182146593a4f0e395a0b00bd48-->
+<!--property:hash_html=9a5bc63a441bbc87696f0d5e386d546762e5eb42-->
+<DD>
+btnStart<BR>
+btnStop<BR>
+btnPreview<BR>
+<BR>
+tabControl2<BR>
+<BR>
+<BR>
+in:<BR>
+panel32<BR>
+<BR>
+<BR>
+<BR>
+panel4<BR>
+<BR>
+<BR>
+button4<BR>
+btnUpdateMaterial<BR>
+in<BR>
+panel12
+</DD>
+<DT><A name="DQQWsSanFNJhytcoQs2yAw"></A>Nach Start von Render</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1453051453-->
+<!--property:date_modified=1481980811-->
+<!--property:hash=e3853c8c76a4d3e420ca6869023ee2a4861e1858-->
+<!--property:hash_html=1666dd77d5dc3468b3f9f6499f9ebff464b0c7d4-->
+<DD>
+... werden immer die View-Parameter angezeigt.<BR>
+<BR>
+
+</DD>
+<DT><A name="j4OvK1ApwDJHA27cL2UCWA"></A>Zoom sollte immer aktiviert sein.</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450802965-->
+<!--property:date_modified=1481980810-->
+<!--property:hash=e4150be986dd95687a10e62d1aa64645fecc34f6-->
+<!--property:hash_html=e4150be986dd95687a10e62d1aa64645fecc34f6-->
+<DD>
+Damit entfallen dann auch alle unteren Button.
+</DD>
+<DT><A name="kvjfXmZXfjVYcbwCKjrRxw"></A>Installer: Name Gestaltlupe</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450809216-->
+<!--property:date_modified=1481980809-->
+<!--property:hash=c552a22e08d3cf4b1d371254ae1b0a258ee13fd0-->
+<!--property:hash_html=c552a22e08d3cf4b1d371254ae1b0a258ee13fd0-->
+<DD>
+Bisher steht hier Fractrace
+</DD>
+<DT><A name="uQyKpPwDPYJPNwRxpUSsvw"></A>Einträge in Tab Navigate aktualisieren</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450817515-->
+<!--property:date_modified=1481980809-->
+<!--property:hash=15a51c7b6e231288b231eff9f727c35822ebcdce-->
+<!--property:hash_html=15a51c7b6e231288b231eff9f727c35822ebcdce-->
+<DD>
+... und im Data Tab nach Dateiladen.
+</DD>
+<DT><A name="xnMmiMSxGePHC3sCR4I8BA"></A>Buttons in Form1 entfernen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450817629-->
+<!--property:date_modified=1481980808-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="4cwgYs7dxCNzaotKFXf1Vg"></A>Mit Node View starten</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450820063-->
+<!--property:date_modified=1481980807-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="lVAf9AsD3BzwwwrydOuUKw"></A>In Create Bulk</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450821231-->
+<!--property:date_modified=1481980807-->
+<!--property:hash=353e49bcb6c38cebc2dd3a24db7e25bb33719fae-->
+<!--property:hash_html=f78f58f2505320c6562f95d1ba13e2d9b5ad4949-->
+<DD>
+die .PARAMETERINFO. Einträge weglassen.<BR>
+
+</DD>
+<DT><A name="fecwxGvDSNVoMyVTrzpyrg"></A>Laufenden Prozess anhalten</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450824549-->
+<!--property:date_modified=1481980806-->
+<!--property:hash=76ef348180b56bc7e30e491aefcd65bc99ea87d9-->
+<!--property:hash_html=58e860191f69e8a1292b5ddf0ae19a25f71291e2-->
+<DD>
+... wenn SmallPreview aktualisiert wird.<BR>
+<BR>
+
+</DD>
+<DT><A name="Gwdtvd4jqfrzOJGOK5fErA"></A>Preview Berechung anhalten, wenn small preview aktualisiert wird</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452340490-->
+<!--property:date_modified=1481980805-->
+<!--property:hash=18d47c30ade2382b2bed45a37e4a0880851311c7-->
+<!--property:hash_html=32d0f0edb038c3b9073ccdba183a8a5100976364-->
+<DD>
+ResultImageView.Stop();<BR>
+<BR>
+
+</DD>
+<DT><A name="VgS3MT4IDaH67HyNyFCDSQ"></A>++ Buttons</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452361889-->
+<!--property:date_modified=1481980805-->
+<!--property:hash=44f1bc6d1e7b09e370e238889fe402e2820e2061-->
+<!--property:hash_html=3bd4f37fb3769547408aee7fdababf350705640e-->
+<DD>
+für noch feinere Schritte<BR>
+
+</DD>
+<DT><A name="sz62rILeU51cQNjMS88E9A"></A>Formelaufruf vereinfachen</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452376118-->
+<!--property:date_modified=1481980804-->
+<!--property:hash=84ada732b82ae1ca0ba2f2dbd56f7d334ee40346-->
+<!--property:hash_html=4cf89038ac545901564708976fd9357a105196a2-->
+<DD>
+Statt: TomoFormula<BR>
+<BR>
+GestaltFormula verwenden
+</DD>
+<DT><A name="5g4eKxaExDBDZb8Ceoqnzw"></A>Bugbehebung X3D Export</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452418676-->
+<!--property:date_modified=1481980799-->
+<!--property:hash=215d96e62596208380ca85ab708b7bda2e77c05a-->
+<!--property:hash_html=48a41db53b72dd0a74fbd1d44b713519b1fa3498-->
+<DD>
+&quot;Streifen&quot; in einem Bereich des Exportes beheben.<BR>
+<BR>
+Egal, in welchem Format, es gibt immer links einen etwa 15% breiten streifen mit falschen Farben.<BR>
+<BR>
+// nicht umgesetzt:<BR>
+// Lücken beheben:<BR>
+wenn  _pictureData.Points[i, j]==null:<BR>
+_pictureData.Points[i, j] als Mittelwert aus den Umgebungsknoten bestimmen.<BR>
+<DL>
+<DT><A name="xkgKxkdRh6TANcJF1rEYJQ"></A>temp</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1452442644-->
+<!--property:date_modified=1452443476-->
+<!--property:hash=d40840ef4dc4f25793d23113061294799b6122c0-->
+<!--property:hash_html=8df87b36f953700c71ae53850ba1a656aa395587-->
+<DD>
+In Auflösung: 241,241 <BR>
+<BR>
+Bei 7276 werden korrekte Koordinaten angezeigt.<BR>
+<BR>
+<BR>
+Daten:<BR>
+[30,128]: (-0.22355555555555609, -0.18522697176049355, -0.019753086419753152)<BR>
+[30,129]: (-0.22355555555555609, -0.18580929236234539, -0.02222222222222231)<BR>
+[30,130]: (-0.22355555555555609, -0.18655248742686359, -0.024691358024691412)<BR>
+[30,131]: (-0.22355555555555609, -0.18713524722345651, -0.02716049382716057)<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="ePIg3HtyIujuxmCmXHDiYg"></A>Scene in X3d Export skalieren</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452451312-->
+<!--property:date_modified=1481980798-->
+<!--property:hash=87b44b4dcb664c9655e84a4f4cdba41e08c67cc3-->
+<!--property:hash_html=62ee6462e615b52d6a49a3699091f1dab21e1f91-->
+<DD>
+<BR>
+wenn der Bereich nicht mehr in float-bereich passt. <BR>
+<BR>
+Nachteil: Teilbereiche lassen sich nicht mehr zusammensetzen.<BR>
+<BR>
+Lösung: Den Skalierungs-, und Bewegungsparameter aus &quot;gerundeten&quot; Elementen ermitteln.<BR>
+<BR>
+also <BR>
+radius, centerx, centery, centerz sollten sich bei Bildern in ähnlichen Regionen nicht unterscheiden.<BR>
+<BR>
+
+</DD>
+<DT><A name="UwtyknoxTHUrbX0gKqFbvA"></A>Andere default-Einstellungen für Renderer</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452493598-->
+<!--property:date_modified=1481980797-->
+<!--property:hash=2fa42b5be5833eada973965a029d071e1189942c-->
+<!--property:hash_html=23cd195b2e2354077621ce1b108e80220d3e38fd-->
+<DD>
+Cameraposition 1<BR>
+<BR>
+MinFieldOfView 0.3<BR>
+BrightLightLevel 0.5<BR>
+ShadowNumber 22<BR>
+Shininess 28<BR>
+Shininess factor 0.5<BR>
+<BR>
+<BR>
+Brightness 1.5<BR>
+Normalize 0<BR>
+<BR>
+// Im renderer für small preview Brightness auf 1 setzen<BR>
+<BR>
+<BR>
+
+</DD>
+<DT><A name="8A99XOGlLX4GgiSIf2xTog"></A>Computation.NoOfThreads nicht mit speichern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452547369-->
+<!--property:date_modified=1481980796-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="3zyxtY9UbDttxzqX5rflxA"></A>try catch bei Export</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1452621061-->
+<!--property:date_modified=1481980796-->
+<!--property:hash=879bf3e038872b0633598a46126386e9c1f0e11c-->
+<!--property:hash_html=1fa84cfa33bc3b94bdc94013e9b5ec5b6493a3a0-->
+<DD>
+... um z.B. enabled bei Button bei zu voller Festplatte zurückzusetzen.<BR>
+<BR>
+ <BR>
+<BR>
+
+</DD>
+<DT><A name="HUJs4Jek3DkUxW1LnYAUcA"></A>Grobauflösung beim Preview</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450604602-->
+<!--property:date_modified=1481980795-->
+<!--property:hash=a85e5a472cda691ab74cb41c7f615dab69a6a3d0-->
+<!--property:hash_html=a85e5a472cda691ab74cb41c7f615dab69a6a3d0-->
+<DD>
+Nur die Grobauflösung reicht völlig. Die automatische Verfeinerung kann später über user Settings eingestellt werden.<DL>
+<DT><A name="CCMfCBzA2qyyg9x3Rn2TGw"></A>info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1450607184-->
+<!--property:date_modified=1450607188-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+</DL>
+</DD>
+<DT><A name="NEb4ihJzGWmc2ayvBRJR7g"></A>Start mit aktivierten File Tab</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450667793-->
+<!--property:date_modified=1481980794-->
+<!--property:hash=01a7342e7db6072863c082607d24a2ddc036bc77-->
+<!--property:hash_html=295613bfd63dea3c73de7b5c384ff9f3768eb2c0-->
+<DD>
+Auf der rechten Seite werden die unter start/ liegenden Vorgabeprojekte und das letzte Projekt (jeweils als Thumbnails angezeigt).<BR>
+<BR>
+Nach Laden eines Projektes wird auf den Reiter Navigate umgestellt.<BR>
+<BR>
+// Änderung: Es wird mit Navigate Tab gestartet
+</DD>
+<DT><A name="Dp35JFYdkfqs8Iw0Cmp2EA"></A>View.Pipeline</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450705204-->
+<!--property:date_modified=1481980793-->
+<!--property:hash=c4f91b3fa02684b670b226991a887b053684f242-->
+<!--property:hash_html=d57f4dc9df27ebb76c9fe94b97e95eeff1abc5ba-->
+<DD>
+Ausblenden und stets<BR>
+Preview=false<BR>
+und UpdatePreview = true setzen.
+</DD>
+<DT><A name="bX3QG37oxpwtYZltiFMFIQ"></A>Programmicon</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1450792923-->
+<!--property:date_modified=1481980792-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="txc3s1qDObILRUSKDlrIMw"></A>Wechsel zwischen Formelansicht und Formelparametern</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1480020757-->
+<!--property:date_modified=1481980792-->
+<!--property:hash=ea41caf832834ff82ea0624de934650005da50a0-->
+<!--property:hash_html=2151da2746e19212655c87dcd2be70fc67134e18-->
+<DD>
+bei einem weiteren Click auf das Gestaltlupe Symbol.<BR>
+<BR>
+info:<BR>
+<BR>
+
+</DD>
+<DT><A name="nvHlp7IGtfP7nomdj4elWA"></A>Material Update im Preview nur, wenn</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1480017498-->
+<!--property:date_modified=1481980790-->
+<!--property:hash=ba7267097f8678fdc918ea634387972828558f9c-->
+<!--property:hash_html=d01bed5230bee218a5734b2aae5e8fb1da88875c-->
+<DD>
+... die zuletzt berechneten Daten noch aktuell sind.<BR>
+<BR>
+<DL>
+<DT><A name="52al8GXoyfQH8nTv5nklag"></A>Info</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1480017557-->
+<!--property:date_modified=1480017560-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+</DL>
+</DD>
+</DL>
+</DD>
+<DT><A name="vR17fQqmdBvN9xLsxzT0cg"></A>Vorschaubilder bei Animation</DT>
+<!--property:date_created=1450601358-->
+<!--property:date_modified=1481983181-->
+<!--property:expanded-->
+<!--property:hash=7b126a236689d8239dfd189aa019018f527f506c-->
+<!--property:hash_html=7b126a236689d8239dfd189aa019018f527f506c-->
+<DD>
+das rendering eines Vorschaubildes hat in der Grobauflösung andere Historydaten als beim zweiten Durchlauf.<DL>
+<DT><A name="RQpI3PdSsfSQQhR6rjvh8w"></A>Farbe bei Phong Shading</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1434762671-->
+<!--property:date_modified=1481980882-->
+<!--property:hash=c8172a77b6073a356a5c472b6044ada98dcf9350-->
+<!--property:hash_html=02f02a78d2a673f23aff83ea6235f1cf2872943d-->
+<DD>
+Beispiel siehe redSphere.<BR>
+<BR>
+Wenn die Oberfläche rot ist, ist die Farbe bei dem von Shinines betroffenen Gebieten weiss.<BR>
+<BR>
+Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben zu vereinigen.<BR>
+<BR>
+<BR>
+Lösung: Den shininess Lichtanteil extra berechnen.<BR>
+<BR>
+class Light<BR>
+{<BR>
+Light(pData) {}<BR>
+<BR>
+public virtual float[] LightAt(int x,int y) {}<BR>
+}<BR>
+<BR>
+class ShininessLight: Light<BR>
+{<BR>
+public override float[] LightAt(int x,int y) {}<BR>
+<BR>
+}<BR>
+
+</DD>
+</DL>
+</DD>
 </DL>
 </DD>
 <DT><A name="hcEUh9QUigjLZCYm9GHDIg"></A>weitere DataViewElemente</DT>
@@ -1582,21 +2637,6 @@ Bsp:<BR>
 </DD>
 </DL>
 </DD>
-<DT><A name="AK7lSeh3OfQfpe7Q6798GA"></A>PARAMETERINFO.Description aus Bulk entfernen</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434739083-->
-<!--property:date_modified=1454856430-->
-<!--property:hash=-->
-<!--property:hash_html=-->
-<DT><A name="uKLYAA4yq7Wu9xMnrVpoSg"></A>Kein Preview erlauben, wenn</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1430861762-->
-<!--property:date_modified=1430931341-->
-<!--property:hash=08c00202e70f879eb395319098d0e771d145efe9-->
-<!--property:hash_html=08c00202e70f879eb395319098d0e771d145efe9-->
-<DD>
-... gerade ein bild mit hoher Auflösung und denselben Formel-Parametern angezeigt wird.
-</DD>
 <DT><A name="TuUxp77yp5Oz2HBGsHnr3w"></A>Bei Beendigung leere Verzeichnisse löschen </DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431166665-->
@@ -1625,17 +2665,6 @@ bei der Berechnung des specular Anteils<BR>
 <DD>
 im zeitlichen Verlauf anzeigen. Dazu braucht es 
 </DD>
-<DT><A name="YUXubDTja6vQy4HPRb3m8Q"></A>PictureArt.Glow</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1431214661-->
-<!--property:date_modified=1431216724-->
-<!--property:hash=0b120acda991e225152aee0992d5b612278edd3a-->
-<!--property:hash_html=535b7ee0584d35c87b8652e2a114aee84b89d32d-->
-<DD>
-der gibt an, wie durchlässig die Wände sind.<BR>
-<BR>
-
-</DD>
 <DT><A name="BPK6atnyt6xIVaITWijoGw"></A>Warnung, wenn man zum Ende </DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431217626-->
@@ -1651,6 +2680,7 @@ der Double Auflösung gekommen ist. <BR>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431217793-->
 <!--property:date_modified=1431217902-->
+<!--property:expanded-->
 <!--property:hash=02445c8f6e953b55757e1d81c8f7e3c88b1170d4-->
 <!--property:hash_html=ac8e9df04251a0023926ab471963612a2ab9c088-->
 <DD>
@@ -1681,41 +2711,6 @@ Die Schrittweite = Mittel der allten Schrittweite und per Hand eingegebene Ände
 </DD>
 </DL>
 </DD>
-<DT><A name="0NiCUfQ6nbJRzN2WFG0KEg"></A>intern.AnimationScript</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1431783240-->
-<!--property:date_modified=1432982113-->
-<!--property:hash=63c0df007258168c84f91eda1278092495e475fd-->
-<!--property:hash_html=d02de0268b28c87cf3bc6c55bcfb8089017e80a9-->
-<DD>
-... als Parameter. Wenn das Projekt geladen ist, werden für jeden Animationsschritt die in den Kommentaren enthaltenen Dateien geladen und time ausgetauscht. <BR>
-<BR>
-Umgesetzt als Dateiladen / speichern in der Animation<BR>
-<BR>
-
-</DD>
-<DT><A name="T7r70tdwvnYQ6sMSuiMksg"></A>Formeledit beim Drücken auf Small Preview</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1434041176-->
-<!--property:date_modified=1434286830-->
-<!--property:hash=471d45b523ae6c47dfbe5b11e1a3d7314456aeb0-->
-<!--property:hash_html=d080c62d3bc83e38796adff389b6170515a2c28c-->
-<DD>
-Hier wird die Formel aktualisert und die aktuelle Cursorposition verschwindet. <BR>
-<BR>
-
-</DD>
-<DT><A name="Mxi2qlXT17xtRyQSwyB9RQ"></A>Unzulässiger Zustand bei Exception</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1434041239-->
-<!--property:date_modified=1434041363-->
-<!--property:hash=4ca6c37127464b1a06c80dee66d713c5f6ecc835-->
-<!--property:hash_html=722c7a6f9846b1b289d5feaf56fa65373606a4b8-->
-<DD>
-Gibt man bei View.Size 0. ein kommt es zur Exception &quot;Unzulässiger Wert&quot;. Danach lässt sich der Button-Zustand nicht mehr auf den korrekten Zustand setzen.<BR>
-<BR>
-(Bei Druck auf preview passiert nichts).
-</DD>
 <DT><A name="fmypFNEzMnZOjUcSRJ8pQw"></A>View.DephAdd abhängig von View.Size</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434059400-->
@@ -1726,42 +2721,6 @@ Gibt man bei View.Size 0. ein kommt es zur Exception &quot;Unzulässiger Wert&qu
 View.DephAdd sollt unabhängig von View.Size sein.<BR>
 <BR>
 
-</DD>
-<DT><A name="KGQy7vAH7BONLxQq3zwZAg"></A>Wenn sich die Formel geändert hat</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1434491535-->
-<!--property:date_modified=1434573229-->
-<!--property:hash=333eb01598460894cd0d6cd1fb96badf9fd5769d-->
-<!--property:hash_html=eaee9e8b8b31ad18e644ea49cd68e7ef2606d32d-->
-<DD>
-... die Aktualisierung im Preview beenden.<BR>
-<BR>
-Aktuell werden während des Editierens Fehler im Code-Control angezeigt.<BR>
-<BR>
-Prinzipiell soll die  Aktualisierung im Preview stets gestoppt werden, wenn sich ein Parameter geändert hat, der nicht zur PictureArt gehört.<BR>
-<BR>
-<DL>
-<DT><A name="YePDXf7xNZcOVyx65TlJNg"></A>info</DT>
-<!--property:icon_internal=bullet_black-->
-<!--property:date_created=1434573324-->
-<!--property:date_modified=1434581940-->
-<!--property:hash=83e1ce422c391b39d5d40446136baaa8b896ed50-->
-<!--property:hash_html=2359e7fa0370d8615d597283c3f2d0bc9305b596-->
-<DD>
-In Form1. <BR>
-<BR>
-public void ComputeOneStep()<BR>
-        {<BR>
-<BR>
-wird korrekt erkannt, dass sich die Parameter geändert haben.<BR>
-Es wird aber ein neues Rendering angestoßen.<BR>
-<BR>
-Ein neues Rendering sollte aber nur bei der ersten Stufe ausgelöst werden. <BR>
-Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
-<BR>
-
-</DD>
-</DL>
 </DD>
 <DT><A name="Y9AqT4IMGrHuGd2J6KC4Vw"></A>Bei Fehlern in der Formel wird trotzdem die Pipeline weiterverfolgt</DT>
 <!--property:icon_internal=bullet_black-->
@@ -1779,40 +2738,11 @@ Bei anderen Parametern soll die Berdchnung gestoppt werden.<BR>
 bei Animationen sind die Parameter zu den gespeicherten Bildern um genau 1 versetzt. Man muss also immer das um 1 ältere Bild laden.<BR>
 
 </DD>
-<DT><A name="RQpI3PdSsfSQQhR6rjvh8w"></A>Farbe bei Phong Shading</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1434762671-->
-<!--property:date_modified=1454857425-->
-<!--property:hash=c8172a77b6073a356a5c472b6044ada98dcf9350-->
-<!--property:hash_html=02f02a78d2a673f23aff83ea6235f1cf2872943d-->
-<DD>
-Beispiel siehe redSphere.<BR>
-<BR>
-Wenn die Oberfläche rot ist, ist die Farbe bei dem von Shinines betroffenen Gebieten weiss.<BR>
-<BR>
-Problem: Die Farbe ist auch in GetLight zu berechnen und dann mit den Restfarben zu vereinigen.<BR>
-<BR>
-<BR>
-Lösung: Den shininess Lichtanteil extra berechnen.<BR>
-<BR>
-class Light<BR>
-{<BR>
-Light(pData) {}<BR>
-<BR>
-public virtual float[] LightAt(int x,int y) {}<BR>
-}<BR>
-<BR>
-class ShininessLight: Light<BR>
-{<BR>
-public override float[] LightAt(int x,int y) {}<BR>
-<BR>
-}<BR>
-
-</DD>
 <DT><A name="4fnGcHKKgNLLnqfEBzWm3w"></A>Kein Start der Berechnung</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434789087-->
 <!--property:date_modified=1434789121-->
+<!--property:expanded-->
 <!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <DD>
@@ -1905,14 +2835,6 @@ Verwendung bei Animation.<BR>
 <BR>
 
 </DD>
-<DT><A name="vR17fQqmdBvN9xLsxzT0cg"></A>Vorschaubilder bei Animation</DT>
-<!--property:date_created=1450601358-->
-<!--property:date_modified=1450602145-->
-<!--property:hash=7b126a236689d8239dfd189aa019018f527f506c-->
-<!--property:hash_html=7b126a236689d8239dfd189aa019018f527f506c-->
-<DD>
-das rendering eines Vorschaubildes hat in der Grobauflösung andere Historydaten als beim zweiten Durchlauf.
-</DD>
 <DT><A name="1fYxUVHp09exddV1jcshug"></A>Bildauswahl in der History</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1450603856-->
@@ -1931,68 +2853,6 @@ das rendering eines Vorschaubildes hat in der Grobauflösung andere Historydaten
 <DD>
 Großes Vorschaubild, darum werden  die Buttons gruppiert. (Darstellung nur mit Icon). 
 </DD>
-<DT><A name="psNo87wJ8R9nWlT2R7zPeA"></A>Fortschrittsbutton bei SmallPreview.</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450604382-->
-<!--property:date_modified=1450638711-->
-<!--property:hash=ec08930596c7c7b4c295ed19c2d98faddd25d5f0-->
-<!--property:hash_html=ec08930596c7c7b4c295ed19c2d98faddd25d5f0-->
-<DD>
-ersetzen durch eine Aktualisierung des Seitenbildes.<DL>
-<DT><A name="txLl6iN6lmUBiRykkpv62A"></A>info</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1450636328-->
-<!--property:date_modified=1450636332-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-</DL>
-</DD>
-<DT><A name="HUJs4Jek3DkUxW1LnYAUcA"></A>Grobauflösung beim Preview</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450604602-->
-<!--property:date_modified=1450636311-->
-<!--property:hash=a85e5a472cda691ab74cb41c7f615dab69a6a3d0-->
-<!--property:hash_html=a85e5a472cda691ab74cb41c7f615dab69a6a3d0-->
-<DD>
-Nur die Grobauflösung reicht völlig. Die automatische Verfeinerung kann später über user Settings eingestellt werden.<DL>
-<DT><A name="CCMfCBzA2qyyg9x3Rn2TGw"></A>info</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1450607184-->
-<!--property:date_modified=1450607188-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-</DL>
-</DD>
-<DT><A name="NEb4ihJzGWmc2ayvBRJR7g"></A>Start mit aktivierten File Tab</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450667793-->
-<!--property:date_modified=1452760006-->
-<!--property:hash=01a7342e7db6072863c082607d24a2ddc036bc77-->
-<!--property:hash_html=295613bfd63dea3c73de7b5c384ff9f3768eb2c0-->
-<DD>
-Auf der rechten Seite werden die unter start/ liegenden Vorgabeprojekte und das letzte Projekt (jeweils als Thumbnails angezeigt).<BR>
-<BR>
-Nach Laden eines Projektes wird auf den Reiter Navigate umgestellt.<BR>
-<BR>
-// Änderung: Es wird mit Navigate Tab gestartet
-</DD>
-<DT><A name="Dp35JFYdkfqs8Iw0Cmp2EA"></A>View.Pipeline</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450705204-->
-<!--property:date_modified=1452759957-->
-<!--property:hash=c4f91b3fa02684b670b226991a887b053684f242-->
-<!--property:hash_html=d57f4dc9df27ebb76c9fe94b97e95eeff1abc5ba-->
-<DD>
-Ausblenden und stets<BR>
-Preview=false<BR>
-und UpdatePreview = true setzen.
-</DD>
-<DT><A name="bX3QG37oxpwtYZltiFMFIQ"></A>Programmicon</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450792923-->
-<!--property:date_modified=1452759966-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="9cGCN5usuqkaxcjpe57rSA"></A>Windows Installer</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1450792944-->
@@ -2017,15 +2877,6 @@ Transformation und Border ausblenden.<BR>
 <!--property:hash_html=18bb2ae50360838d11c1b1b06c2d6eaf2d28c137-->
 <DD>
 ... vorher testen, ob das zuletzt geschriebene Bild dieselben Parameter hatte. Falls ja, das vorhergerige (Nach erfogreicher Speicherung des aktuellen) laden.
-</DD>
-<DT><A name="j4OvK1ApwDJHA27cL2UCWA"></A>Zoom sollte immer aktiviert sein.</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450802965-->
-<!--property:date_modified=1452759941-->
-<!--property:hash=e4150be986dd95687a10e62d1aa64645fecc34f6-->
-<!--property:hash_html=e4150be986dd95687a10e62d1aa64645fecc34f6-->
-<DD>
-Damit entfallen dann auch alle unteren Button.
 </DD>
 <DT><A name="yxwLt7NFMmZz2OBtWxhjvg"></A>Allgemeines Update</DT>
 <!--property:icon_internal=bullet_white-->
@@ -2065,57 +2916,6 @@ C4: Dreiecke sehr guter Qualität (Werden nie aus dieser Aufnahme gelöscht).<BR
 <DD>
 Den Button wieder aktivieren.
 </DD>
-<DT><A name="kvjfXmZXfjVYcbwCKjrRxw"></A>Installer: Name Gestaltlupe</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450809216-->
-<!--property:date_modified=1450817560-->
-<!--property:hash=c552a22e08d3cf4b1d371254ae1b0a258ee13fd0-->
-<!--property:hash_html=c552a22e08d3cf4b1d371254ae1b0a258ee13fd0-->
-<DD>
-Bisher steht hier Fractrace
-</DD>
-<DT><A name="uQyKpPwDPYJPNwRxpUSsvw"></A>Einträge in Tab Navigate aktualisieren</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450817515-->
-<!--property:date_modified=1452760020-->
-<!--property:hash=15a51c7b6e231288b231eff9f727c35822ebcdce-->
-<!--property:hash_html=15a51c7b6e231288b231eff9f727c35822ebcdce-->
-<DD>
-... und im Data Tab nach Dateiladen.
-</DD>
-<DT><A name="xnMmiMSxGePHC3sCR4I8BA"></A>Buttons in Form1 entfernen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450817629-->
-<!--property:date_modified=1450820013-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="4cwgYs7dxCNzaotKFXf1Vg"></A>Mit Node View starten</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450820063-->
-<!--property:date_modified=1450821080-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="lVAf9AsD3BzwwwrydOuUKw"></A>In Create Bulk</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450821231-->
-<!--property:date_modified=1450821878-->
-<!--property:hash=353e49bcb6c38cebc2dd3a24db7e25bb33719fae-->
-<!--property:hash_html=f78f58f2505320c6562f95d1ba13e2d9b5ad4949-->
-<DD>
-die .PARAMETERINFO. Einträge weglassen.<BR>
-
-</DD>
-<DT><A name="fecwxGvDSNVoMyVTrzpyrg"></A>Laufenden Prozess anhalten</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1450824549-->
-<!--property:date_modified=1450829603-->
-<!--property:hash=76ef348180b56bc7e30e491aefcd65bc99ea87d9-->
-<!--property:hash_html=58e860191f69e8a1292b5ddf0ae19a25f71291e2-->
-<DD>
-... wenn SmallPreview aktualisiert wird.<BR>
-<BR>
-
-</DD>
 <DT><A name="SJUhA5HNxbprTP4LDtSp4Q"></A>Bei extremen Größen</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1450829606-->
@@ -2145,17 +2945,6 @@ parameter1=GetDouble(&quot;Formula.Common.Parameter1&quot;);<BR>
 <BR>
 
 </DD>
-<DT><A name="Gwdtvd4jqfrzOJGOK5fErA"></A>Preview Berechung anhalten, wenn small preview aktualisiert wird</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452340490-->
-<!--property:date_modified=1452872590-->
-<!--property:hash=18d47c30ade2382b2bed45a37e4a0880851311c7-->
-<!--property:hash_html=32d0f0edb038c3b9073ccdba183a8a5100976364-->
-<DD>
-ResultImageView.Stop();<BR>
-<BR>
-
-</DD>
 <DT><A name="i7TtMBRggqSP4sU2JUyd8g"></A>Fall, dass bei Rotation NaN entsteht beheben</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452341278-->
@@ -2181,16 +2970,6 @@ UseSharpShadow ausblenden und beim laden auf false setzen.<BR>
 <BR>
 
 </DD>
-<DT><A name="VgS3MT4IDaH67HyNyFCDSQ"></A>++ Buttons</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452361889-->
-<!--property:date_modified=1452373685-->
-<!--property:hash=44f1bc6d1e7b09e370e238889fe402e2820e2061-->
-<!--property:hash_html=3bd4f37fb3769547408aee7fdababf350705640e-->
-<DD>
-für noch feinere Schritte<BR>
-
-</DD>
 <DT><A name="3AIc30idGyFXJMdmQai1aw"></A>Preview Size ausblenden</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452363326-->
@@ -2213,17 +2992,6 @@ Statt:<BR>
 <BR>
 Leerzeichen nach ; in Formel entfernen. 
 </DD>
-<DT><A name="sz62rILeU51cQNjMS88E9A"></A>Formelaufruf vereinfachen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452376118-->
-<!--property:date_modified=1452416627-->
-<!--property:hash=84ada732b82ae1ca0ba2f2dbd56f7d334ee40346-->
-<!--property:hash_html=4cf89038ac545901564708976fd9357a105196a2-->
-<DD>
-Statt: TomoFormula<BR>
-<BR>
-GestaltFormula verwenden
-</DD>
 <DT><A name="fVL2t9ZJRL1pW7h1O2CVbg"></A>mehrere Ansichten in X3D Export</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452416630-->
@@ -2234,44 +3002,6 @@ GestaltFormula verwenden
 Gestalt von mehrere Seiten (oben, links, unten...) einzeln aufnehmen und in eine X3D-Datei exportieren.<BR>
 <BR>
 
-</DD>
-<DT><A name="5g4eKxaExDBDZb8Ceoqnzw"></A>Bugbehebung X3D Export</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452418676-->
-<!--property:date_modified=1452496558-->
-<!--property:hash=215d96e62596208380ca85ab708b7bda2e77c05a-->
-<!--property:hash_html=48a41db53b72dd0a74fbd1d44b713519b1fa3498-->
-<DD>
-&quot;Streifen&quot; in einem Bereich des Exportes beheben.<BR>
-<BR>
-Egal, in welchem Format, es gibt immer links einen etwa 15% breiten streifen mit falschen Farben.<BR>
-<BR>
-// nicht umgesetzt:<BR>
-// Lücken beheben:<BR>
-wenn  _pictureData.Points[i, j]==null:<BR>
-_pictureData.Points[i, j] als Mittelwert aus den Umgebungsknoten bestimmen.<BR>
-<DL>
-<DT><A name="xkgKxkdRh6TANcJF1rEYJQ"></A>temp</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1452442644-->
-<!--property:date_modified=1452443476-->
-<!--property:hash=d40840ef4dc4f25793d23113061294799b6122c0-->
-<!--property:hash_html=8df87b36f953700c71ae53850ba1a656aa395587-->
-<DD>
-In Auflösung: 241,241 <BR>
-<BR>
-Bei 7276 werden korrekte Koordinaten angezeigt.<BR>
-<BR>
-<BR>
-Daten:<BR>
-[30,128]: (-0.22355555555555609, -0.18522697176049355, -0.019753086419753152)<BR>
-[30,129]: (-0.22355555555555609, -0.18580929236234539, -0.02222222222222231)<BR>
-[30,130]: (-0.22355555555555609, -0.18655248742686359, -0.024691358024691412)<BR>
-[30,131]: (-0.22355555555555609, -0.18713524722345651, -0.02716049382716057)<BR>
-<BR>
-
-</DD>
-</DL>
 </DD>
 <DT><A name="vG8TJzLunz8yeHbVt4WEIg"></A>Create Poster funktioniert nicht mehr</DT>
 <!--property:icon_internal=bullet_white-->
@@ -2284,55 +3014,6 @@ Daten:<BR>
 <BR>
 
 </DD>
-<DT><A name="ePIg3HtyIujuxmCmXHDiYg"></A>Scene in X3d Export skalieren</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452451312-->
-<!--property:date_modified=1452496570-->
-<!--property:hash=87b44b4dcb664c9655e84a4f4cdba41e08c67cc3-->
-<!--property:hash_html=62ee6462e615b52d6a49a3699091f1dab21e1f91-->
-<DD>
-<BR>
-wenn der Bereich nicht mehr in float-bereich passt. <BR>
-<BR>
-Nachteil: Teilbereiche lassen sich nicht mehr zusammensetzen.<BR>
-<BR>
-Lösung: Den Skalierungs-, und Bewegungsparameter aus &quot;gerundeten&quot; Elementen ermitteln.<BR>
-<BR>
-also <BR>
-radius, centerx, centery, centerz sollten sich bei Bildern in ähnlichen Regionen nicht unterscheiden.<BR>
-<BR>
-
-</DD>
-<DT><A name="UwtyknoxTHUrbX0gKqFbvA"></A>Andere default-Einstellungen für Renderer</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452493598-->
-<!--property:date_modified=1452641634-->
-<!--property:hash=2fa42b5be5833eada973965a029d071e1189942c-->
-<!--property:hash_html=23cd195b2e2354077621ce1b108e80220d3e38fd-->
-<DD>
-Cameraposition 1<BR>
-<BR>
-MinFieldOfView 0.3<BR>
-BrightLightLevel 0.5<BR>
-ShadowNumber 22<BR>
-Shininess 28<BR>
-Shininess factor 0.5<BR>
-<BR>
-<BR>
-Brightness 1.5<BR>
-Normalize 0<BR>
-<BR>
-// Im renderer für small preview Brightness auf 1 setzen<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="8A99XOGlLX4GgiSIf2xTog"></A>Computation.NoOfThreads nicht mit speichern</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452547369-->
-<!--property:date_modified=1452554998-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="zCVSwtfvDZ5QvRqdLAFZSQ"></A>Batch Prozesse</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452549826-->
@@ -2385,19 +3066,6 @@ field SFBool normalPerVertex TRUE field SFBool solid TRUE  <BR>
 <!--property:hash_html=06b8de53e822723e5cb43e576c5af6b587096dfa-->
 <DD>
 ... wenn Berechnung abgeschlossen ist.<BR>
-<BR>
-
-</DD>
-<DT><A name="3zyxtY9UbDttxzqX5rflxA"></A>try catch bei Export</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452621061-->
-<!--property:date_modified=1452641644-->
-<!--property:hash=879bf3e038872b0633598a46126386e9c1f0e11c-->
-<!--property:hash_html=1fa84cfa33bc3b94bdc94013e9b5ec5b6493a3a0-->
-<DD>
-... um z.B. enabled bei Button bei zu voller Festplatte zurückzusetzen.<BR>
-<BR>
- <BR>
 <BR>
 
 </DD>
@@ -2647,86 +3315,6 @@ wahrscheinlich passt last picture nicht???<BR>
 <BR>
 
 </DD>
-<DT><A name="LHWwHZZJa7qnewlzFGwxWg"></A>Normalen mit exportieren</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452803088-->
-<!--property:date_modified=1452845545-->
-<!--property:hash=f5d6f7a1939d503a45be7d76a0bda157d16a82d2-->
-<!--property:hash_html=94a9efade33eea57f044c9002289959e4729a606-->
-<DD>
-// <BR>
-normal Normal { . . . }<BR>
-<BR>
-Normal { <BR>
-  exposedField MFVec3f vector  []   # (-INF,INF)<BR>
-}<BR>
-<BR>
-<BR>
-// Bei der erstllung der faces setzen    <BR>
-normalIndex [ . . . ]<BR>
-    normalPerVertex FALSE<BR>
-<BR>
-<BR>
-<BR>
-also<BR>
-normal Normal { vector [ <BR>
-   0.3 0.5 0.5 -1<BR>
-  0.67 0.99 0.34 -1<BR>
----<BR>
-] }<BR>
-<BR>
-<BR>
-normalIndex [ 1 2 3 ]<BR>
-<BR>
-    normalPerVertex FALSE<BR>
-<BR>
-
-</DD>
-<DT><A name="yvypBG5qljkuFaaUCNetyw"></A>Center,Radius</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452846538-->
-<!--property:date_modified=1453047500-->
-<!--property:hash=de92089b74100f872a701c49425b80430da848b4-->
-<!--property:hash_html=b93950c50b6439f87fbd1a19623c1166e827bd97-->
-<DD>
-... statt Min.X ... verwenden.<BR>
-<BR>
-Navigater.SetAspectRatio()<BR>
-<BR>
-double screenWidth = ParameterDict.Current.GetDouble(&quot;View.Width&quot;);<BR>
-            double screenHeight = ParameterDict.Current.GetDouble(&quot;View.Height&quot;);<BR>
-            double maxScreenSize = Math.Max(screenWidth, screenHeight);<BR>
-<BR>
-            // diffx/diffz should be equal to screenWidth/screenHeight;<BR>
-            diffx = maxDiff * screenWidth / maxScreenSize;<BR>
-            diffz = maxDiff * screenHeight / maxScreenSize;<BR>
-            diffy = Math.Max(diffx, diffz);<BR>
-<BR>
-            diffx /= 2.0; diffy /= 2.0; diffz /= 2.0;<BR>
-<BR>
-            xmin = centerX - diffx; xmax = centerX + diffx;<BR>
-            ymin = centerY - diffy; ymax = centerY + diffy;<BR>
-            zmin = centerZ - diffz; zmax = centerZ + diffz;<BR>
-<BR>
-<BR>
-<BR>
-    double centerX = ParameterDict.Current.GetDouble(&quot;Scene.CenterX&quot;);<BR>
-            double centerY = ParameterDict.Current.GetDouble(&quot;Scene.CenterY&quot;);<BR>
-            double centerZ = ParameterDict.Current.GetDouble(&quot;Scene.CenterZ&quot;);<BR>
-            double radius= ParameterDict.Current.GetDouble(&quot;Scene.Radius&quot;);<BR>
-<BR>
-// Aktuell: je größer der Zoom, desto flacher die Darstellung<BR>
-<BR>
-<BR>
-  start_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Min.x&quot;);<BR>
-            start_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Min.y&quot;);<BR>
-            start_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Min.z&quot;);<BR>
-            end_tupel.x = ParameterDict.Current.GetDouble(&quot;Border.Max.x&quot;);<BR>
-            end_tupel.y = ParameterDict.Current.GetDouble(&quot;Border.Max.y&quot;);<BR>
-            end_tupel.z = ParameterDict.Current.GetDouble(&quot;Border.Max.z&quot;);<BR>
-<BR>
-
-</DD>
 <DT><A name="JxDPY8Cyxqn76Nux96y8fg"></A>Stereo und Poster als Batch Prozess umsetzen</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452847677-->
@@ -2746,48 +3334,12 @@ eventuell lastiterate verwenden???<BR>
 <BR>
 
 </DD>
-<DT><A name="SxO7nDqsNvVuk9vD8h67kA"></A>Automatic Add To Animation ...</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452873056-->
-<!--property:date_modified=1452875032-->
-<!--property:hash=937d7bb07dc1d2df84af95f298355459f744a0f6-->
-<!--property:hash_html=937d7bb07dc1d2df84af95f298355459f744a0f6-->
-<DD>
-fügt während der Animation Einträge hinzu.
-</DD>
 <DT><A name="DUXYqxyVnHk3FRThOiBuoA"></A>Stop sollte auch laufende Animation beenden</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452873166-->
 <!--property:date_modified=1452873182-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="4wywTUi5afLmKSbJiFWPpg"></A>Animationsparameter im Animationcontrol verwenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452875151-->
-<!--property:date_modified=1456666508-->
-<!--property:hash=7cfc2d79c2bc93a74a21b1db9deaf4b5abbf4bb1-->
-<!--property:hash_html=9e777c9ec1e4e93332a778d22565a65c033b07d1-->
-<DD>
-Wie bei der NaviagationControl<BR>
-NaviagationControl.UpdateFromChangeProperty<BR>
-<BR>
-info:<BR>
-<BR>
-in panel3:<BR>
-<BR>
-
-</DD>
-<DT><A name="ufK313xzCLf2GeQUuESGww"></A>Im NavigationControl</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452875418-->
-<!--property:date_modified=1452876169-->
-<!--property:hash=8587ec581c3aa91d0793283709e4891b35d65e0b-->
-<!--property:hash_html=e776ea29ce3678faa877a421954230253f09505f-->
-<DD>
-Reaktion auf Änderung an Scene Parameter<BR>
-<BR>
-
-</DD>
 <DT><A name="EtCa2ifIglxuimFaCnQcdQ"></A>3D Export ist gespiegelt</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1452945507-->
@@ -2822,23 +3374,6 @@ Es wird zweiseitig gespeichert, die Rückseite bekommt statt der Farbe nur die N
 z.B. links neben dem unteren Tab.<BR>
 <BR>
 
-</DD>
-<DT><A name="xpUQk59Add8X2F32G5ajvQ"></A>Size und Export werden nicht mitgespeichert</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452963992-->
-<!--property:date_modified=1456666496-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="6y5xxXXiWzQ9tNkW89VFAg"></A>Update Material Button</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1452974980-->
-<!--property:date_modified=1456666487-->
-<!--property:hash=2609961f57dfdb04bd71d826f11fb888e16f339b-->
-<!--property:hash_html=86f3127afea73394b3b1a54d0f5668fdc86d5443-->
-<DD>
-wird manchmal nach der Bilderzeugung nicht mehr auf enabled=true gesetzt.<BR>
-<BR>
-Solange die Bilderzeugung läuft, sollte [start] deaktiviert sein.
 </DD>
 <DT><A name="iGQhDnmcxo2zmpW0SmA95A"></A>Batch Export für Xhtml</DT>
 <!--property:icon_internal=bullet_white-->
@@ -2888,44 +3423,6 @@ Wenn die Anzahl &gt; 1000, die ältesten 80% (incl. der Bilder) löschen.<BR>
 // Die Verzeichnisse bleiben beim Löschen bestehen, um nicht in Namenskonflikte zu kommen. (Evtl. gibt es dafür eine bessere Lösung: das zuerst mit Data beginnende Verzeichnis suchen und die dort verwendete Zahl als Startzahl verwenden.)<BR>
 <BR>
 // Speichen (Bild) unter implementieren.
-</DD>
-<DT><A name="isE8y7CnjxBbb1p5jyH6sw"></A>Start Stop Preview Button links</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453050680-->
-<!--property:date_modified=1453066093-->
-<!--property:hash=5d0618ca781918182146593a4f0e395a0b00bd48-->
-<!--property:hash_html=9a5bc63a441bbc87696f0d5e386d546762e5eb42-->
-<DD>
-btnStart<BR>
-btnStop<BR>
-btnPreview<BR>
-<BR>
-tabControl2<BR>
-<BR>
-<BR>
-in:<BR>
-panel32<BR>
-<BR>
-<BR>
-<BR>
-panel4<BR>
-<BR>
-<BR>
-button4<BR>
-btnUpdateMaterial<BR>
-in<BR>
-panel12
-</DD>
-<DT><A name="DQQWsSanFNJhytcoQs2yAw"></A>Nach Start von Render</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453051453-->
-<!--property:date_modified=1453066083-->
-<!--property:hash=e3853c8c76a4d3e420ca6869023ee2a4861e1858-->
-<!--property:hash_html=1666dd77d5dc3468b3f9f6499f9ebff464b0c7d4-->
-<DD>
-... werden immer die View-Parameter angezeigt.<BR>
-<BR>
-
 </DD>
 <DT><A name="0znGkqZ90etHQaRO7ZtPyg"></A>Color update in Formel</DT>
 <!--property:icon_internal=bullet_white-->
@@ -3018,193 +3515,18 @@ sName Buchstabenweise durchgehen und if(s==s.ToLower()) verwenden<BR>
 <DD>
 ... hängt enabling des Start Buttons hinterher.
 </DD>
-<DT><A name="iDZrbIJv7i8y8qKN9Jf5ZQ"></A>Save Formula Fehlt</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453160038-->
-<!--property:date_modified=1453415246-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="yNmgl3Nye7nx9WMyEoN6sA"></A>Ansicht von Data wird nicht immer aktualisiert</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453415319-->
-<!--property:date_modified=1453417622-->
-<!--property:hash=f0433f58065e5f2dec2c807dc610ca4f27ef961c-->
-<!--property:hash_html=a7dca86b3e161666b7b12978e028179a09569cd2-->
-<DD>
-das betrifft z.B. &quot;View&quot; nach Laden einer Formel.
-</DD>
-<DT><A name="vInuH6ddYaYPY4VO79Sb6w"></A>Beim Speichern der Formel auch Farbinfos mitspeichern</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453419168-->
-<!--property:date_modified=1453419920-->
-<!--property:hash=823f1e11244a663b1636064c965b4246ca1c0d94-->
-<!--property:hash_html=8359aba5659fd6dd313a18ec567e48dde80e7e89-->
-<DD>
-&quot;Renderer.ColorIntensity&quot;<BR>
-&quot;Renderer.ColorGreyness&quot;<BR>
-Renderer.ColorInside<BR>
-&quot;Renderer.ColorOutside&quot;<BR>
-&quot;Renderer.ColorFactor.Red&quot;<BR>
-&quot;Renderer.ColorFactor.Green&quot;<BR>
-&quot;Renderer.ColorFactor.Blue&quot;<BR>
-<BR>
-<BR>
-
-</DD>
 <DT><A name="x5f0enyRr1Ly31aLnFDxYA"></A>Parameter bk in 2p3dJulia</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1453421894-->
 <!--property:date_modified=1453421921-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="ppCC2VHeE2XAFTNtUyRwMQ"></A>Eingabefelder müssen breiter sein</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453553317-->
-<!--property:date_modified=1454277572-->
-<!--property:hash=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
-<!--property:hash_html=ae18e76d2862efdaf9bb5d56f26e7f478c7d0ce3-->
-<DD>
-Wert wird sonst (zB. bei Radius nicht vollständig angezeigt)
-</DD>
-<DT><A name="XAtWMrGiUB3F5KnX9oibvA"></A>Float Based Renderer</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453557957-->
-<!--property:date_modified=1454277562-->
-<!--property:hash=4ff8eddf0303c63d608f9a4a32dd27797340dc70-->
-<!--property:hash_html=3a80861278e24e56ab1ce49283c7b025b63e3743-->
-<DD>
-Shadow Justify entspricht etwa 0.1 *shadowJustify ???<BR>
-<BR>
-
-</DD>
 <DT><A name="Xgqgey7plt4e7FOwdaQjHw"></A>Programm beendet sich nicht immer</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1453640117-->
 <!--property:date_modified=1453640133-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="p8E3nWLEW9gLMlZe3znNxA"></A>Material Reiter</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453641563-->
-<!--property:date_modified=1454277552-->
-<!--property:hash=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
-<!--property:hash_html=1e7a7b3cd945f6bb3d389d5c5ef30f19170358c5-->
-<DD>
-Hier können einige Voreinstellungen des Renderers ausgewählt werden.<DL>
-<DT><A name="kxeNluC0tkNwXN1WPXEyhQ"></A>Images</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1453751096-->
-<!--property:date_modified=1453753483-->
-<!--property:hash=aace6fd48abb030e71998d4b9c0f2a838a86e73e-->
-<!--property:hash_html=d2a26b1a98728c96675fe39ec3ab6a896517f368-->
-<DD>
-shininess9Shininessfactor1:<BR>
-<BR>
-BrightLightLevel 0.94<BR>
-Brightness 6.5<BR>
-Shininess 9<BR>
-ShininessFactor 1<BR>
-<BR>
-ShadowJustify0:<BR>
-BrightLightLevel 0<BR>
-Shadow Justify 0<BR>
-<BR>
-sharp0p8:<BR>
-<BR>
-BrightLightLevel 0.8<BR>
-Brightness 63.6<BR>
-Shininess 14<BR>
-ShininessFactor 0.8<BR>
-Shadow Justify 0.2<BR>
-<BR>
-<BR>
-<BR>
-brightLighttLevel0p4:<BR>
-<BR>
-BrightLightLevel 0.4<BR>
-Brightness 1.2<BR>
-Shininess 9<BR>
-ShininessFactor 0.3<BR>
-Shadow Justify 0.8<BR>
-<BR>
-<BR>
-ShadowJustify1p5.png:<BR>
-<BR>
-BrightLightLevel 0.3<BR>
-Brightness 1.2<BR>
-Shininess 14<BR>
-ShininessFactor 0.3<BR>
-Shadow Justify 1.5<BR>
-<BR>
-<BR>
-dark1:<BR>
-<BR>
-BrightLightLevel 0<BR>
-Brightness 1<BR>
-Shadow Glow 0.961<BR>
-Shadow Justify 0.2<BR>
-<BR>
-<BR>
-<BR>
-BrightLightLevel 0.8<BR>
-Brightness 3.5<BR>
-Shadow Glow 0.971<BR>
-Shadow Justify 0.1<BR>
-Shininess 28<BR>
-Shininess Factor 0.8<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="uYUFMaOUNwddhxc1AtS5xw"></A>Min Cycle ausblenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1453656665-->
-<!--property:date_modified=1453657601-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="PJifix8WAkEWZwWS16yEAQ"></A>OutOfMemory Exception bei Size 2</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454076604-->
-<!--property:date_modified=1454080077-->
-<!--property:hash=a91fe63693b94f4f1eac76409e3547616588a033-->
-<!--property:hash_html=382976905482a00cff5f4b050be5eb8567184796-->
-<DD>
-Tritt bei Fractrace.PictureArt.FloatPlasicRenderer.CreateShadowInfo()<BR>
-auf.
-</DD>
-<DT><A name="8WXRrNPj8STXtdGiRClRYA"></A>Start Stop Preview nach links</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454080080-->
-<!--property:date_modified=1454213655-->
-<!--property:hash=002befef553d7b4e973108041f00cbceae9d1999-->
-<!--property:hash_html=9fb67345a145222d91179c2d34e5cc445a0e1eeb-->
-<DD>
-panel 32<BR>
-<BR>
-Ist gemeinsam mit dem TabControl (tabControl2) in Panel4<BR>
-<BR>
-Die Vorschaubilder sind in Panel3<BR>
-<BR>
-<BR>
-panel32 muss unter das Panel, in dem Panel3 steckt (panel2)<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="yuaaABZIyd794KTPRb7Yuw"></A>Smooth bei Animation nicht auf Rotation anwenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454213657-->
-<!--property:date_modified=1454219720-->
-<!--property:hash=58e2086ca6082c1e436eb1297570407dab05aa52-->
-<!--property:hash_html=d74c6baf44b1f0c4ebe54c95756f7c6a169f2353-->
-<DD>
-Umsetzung in ParamaeterDictData.LoadSmoothed()<BR>
-die neue Funktion: IsSmoothable(string name) abfragen.
-</DD>
 <DT><A name="eZcwobydidsJyB1jKV2Frw"></A>Cache leeren</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454277524-->
@@ -3217,20 +3539,6 @@ die neue Funktion: IsSmoothable(string name) abfragen.
 <!--property:date_modified=1454552429-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="T5zoaovUI1vbvfXZemRiGQ"></A>Parameter Feinabstimmung</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454709956-->
-<!--property:date_modified=1454760479-->
-<!--property:hash=0370b06743732949938f75bbe4260b8ef4ceb25a-->
-<!--property:hash_html=05e40913b7aa1cfe18dcb191955045e0c48e2e29-->
-<DD>
-Contrast +- 0.1<BR>
-Bright Light Level: zusätzlich: um 0.025 erhöhen.<BR>
-Color Greyness: 0.005<BR>
-jx,jy,jz 0.025 und 0.001<BR>
-<BR>
-
-</DD>
 <DT><A name="LLNYq5HWFG99AoAeJd22aA"></A>wenn die Seitenansicht fertig ist.</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454717852-->
@@ -3297,28 +3605,6 @@ StartPictureArt();<BR>
 <BR>
 Es gibt nur einen Hauptthread. 
 </DD>
-<DT><A name="AyPfE12vd2Hw6M8Pj0Rjhw"></A>Update Material</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454805512-->
-<!--property:date_modified=1454854335-->
-<!--property:hash=884477c0c7aa4ce418126062b93414cee896b914-->
-<!--property:hash_html=884477c0c7aa4ce418126062b93414cee896b914-->
-<DD>
-wird nicht immer zurückgesetzt.
-</DD>
-<DT><A name="8juITFPD6h2SPhfg10Pm7g"></A>Zoomen verhindern während die Berechnung läuft.</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1454847491-->
-<!--property:date_modified=1454854324-->
-<!--property:hash=89c6a1b880325f70935c93abd38bdc6a4de09d45-->
-<!--property:hash_html=cf6f2e1b02d86467c8ca401cf660e4fd82046ed9-->
-<DD>
-Ein damit auftgretendes Problem:<BR>
-Die aktuellen Parameterwerte werden verändert. Das kann zu Problemen beim weiteren Update führen.<BR>
-<BR>
-Wie erkennt man, ob die Berechnung noch läuft?<BR>
-
-</DD>
 <DT><A name="7b8PdEmsYSO1TgihiblYvQ"></A>In Paramete Navigation in default Scene</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454854920-->
@@ -3378,35 +3664,6 @@ Hier gibt es Untertabs:<BR>
 <BR>
 Anbient intensity
 </DD>
-<DT><A name="TFePbyJEv0HZvDhy8v6Zqg"></A>Makros in der Formel</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1455058119-->
-<!--property:date_modified=1455069707-->
-<!--property:hash=bf1aedd0bfeeeb8071057ac429c08f4a71552dc8-->
-<!--property:hash_html=e8d0141a9a5e4d732ca1de8f070d86e635560926-->
-<DD>
-@init<BR>
-<BR>
-xxxx<BR>
-<BR>
-wird zu:<BR>
-public override void Init() <BR>
-{<BR>
-<BR>
-mit abschließender Klammer zu Beginn der nächsten Funktion oder am Ende.<BR>
-<BR>
-<BR>
-@definition<BR>
-<BR>
-wird zu:<BR>
-<BR>
-<BR>
-public override bool GetBool(double x, double y, double z)<BR>
-{<BR>
-<BR>
-<BR>
-mit abschließender Klammer.
-</DD>
 <DT><A name="4KdeMAt2qXUsTd8hC3BIvA"></A>High quality Preview.</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1455058382-->
@@ -3450,12 +3707,6 @@ Für Zugriff auch weitere Elemente: Formel
 Werden nur die leeren Verzeichnisse und eventuell zugehörigen *.gestaltlupe Dateien gelöscht.<BR>
 
 </DD>
-<DT><A name="JwhsTlw2MPrWQG00M7cRRw"></A>Oberen und unteren Bereich vertauschen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1455135001-->
-<!--property:date_modified=1455149055-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="i0m0aLOcNDWvu8Nch07aYg"></A>View.Perspectice</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1455223332-->
@@ -3468,15 +3719,6 @@ Gehört zu Transformation<BR>
 (Transformation ist Camera)<BR>
 <BR>
 
-</DD>
-<DT><A name="xrxdEO6vrQMVet6xrBApog"></A>Transparenter Hintergrund</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1455334005-->
-<!--property:date_modified=1455366376-->
-<!--property:hash=83b0a714748ab249d142d5f3d5abaeb12843c940-->
-<!--property:hash_html=83b0a714748ab249d142d5f3d5abaeb12843c940-->
-<DD>
-als Möglichkeit unter Render-Einstellungen
 </DD>
 <DT><A name="kSiyqLO8yZsGjxgFCDDsuw"></A>Behandlung von nicht aufgelösten Pixeln</DT>
 <!--property:icon_internal=bullet_white-->
@@ -3492,74 +3734,6 @@ Frage: Wie kann man sie identifizieren?<BR>
 <BR>
 In der Seitenansicht werden sie 
 </DD>
-<DT><A name="JSIM87MbD9ItQI8Y0PMGyw"></A>Material Tab</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1455569057-->
-<!--property:date_modified=1455738578-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DD>
-<DL>
-<DT><A name="ls6c4gKJJGd4x8GjhhIrLQ"></A>info</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1455569065-->
-<!--property:date_modified=1455569338-->
-<!--property:hash=b0a56f03c777e6cde8c5b55965b2b99ba3d7774c-->
-<!--property:hash_html=87de438f81769607ea1a5bbf9ad85cef1f0bd7e6-->
-<DD>
-Beispielcode:<BR>
-<BR>
- _propertyControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);<BR>
-                _propertyControl.Dock = DockStyle.Fill;<BR>
-                _propertyControl.Create(&quot;Transformation&quot;);<BR>
-                pnlProperties.Controls.Add(_propertyControl);<BR>
-<BR>
-
-</DD>
-</DL>
-</DD>
-<DT><A name="yYsu33mXMYhhxx0VoFdmAw"></A>View Parameter</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1455739179-->
-<!--property:date_modified=1455743255-->
-<!--property:hash=f9dac5fe10791ad283733115ab1149eef3045986-->
-<!--property:hash_html=2e126f03ceb77f860421ee8de55ca35ce8e2806a-->
-<DD>
-Transformation.Perspective.Cameraposition =&gt; Transformation.Camera.Position<BR>
-<BR>
-View.Perspective =&gt; Transformation.Camera.IsometricProjection 
-</DD>
-<DT><A name="9O10bntxmYZ3MM8dxzgTVQ"></A>Exportdateien gleich öffnen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1455836324-->
-<!--property:date_modified=1455841489-->
-<!--property:hash=8ca0303132c1830427584329dcfb3dba1c7b709a-->
-<!--property:hash_html=86e2f1823ac719caa3955030c550bb46941ccd5c-->
-<DD>
-Dialog erstellen<BR>
-Haken [] Show in Browser <BR>
-(In Settings merken)<BR>
-Falls angehakt, im Browser öffnen<BR>
-<BR>
-
-</DD>
-<DT><A name="8AjPa638fH54axiKvE73jg"></A>Julia</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1456052072-->
-<!--property:date_modified=1456660649-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="sRUyahsdyEfYxm1E71Z8xQ"></A>CompressedBulb funktioniert nur bei init</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1456660650-->
-<!--property:date_modified=1456666467-->
-<!--property:hash=658f9cfaadcc3b90d4cc76ad0b2e34cff14c5975-->
-<!--property:hash_html=5d5cfd44fa11268b577f36a2e216866c8921e571-->
-<DD>
-Damit die Parameter gesetzt werden, muss init() existieren.<BR>
-<BR>
-
-</DD>
 <DT><A name="TXe2lXz4exEpC9KXtKxGnw"></A>In der Seitenansicht nur die korrekten Pixel anzeigen</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1456666728-->
@@ -3573,17 +3747,6 @@ Zur Erkennung muss eventuell auf gData von iterate zugegriffen werden.<BR>
 <BR>
 <BR>
 Info:<BR>
-<BR>
-
-</DD>
-<DT><A name="z91t3xIPa7E4dyF26EJSZA"></A>Format Button</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1456667268-->
-<!--property:date_modified=1456670942-->
-<!--property:hash=c3f76916fdee0dece9bc9c0c01123d0aa1d3e6ea-->
-<!--property:hash_html=20dcbb06116eaba74eac52e83f9470500a015611-->
-<DD>
-... um die Formel zu formatieren.<BR>
 <BR>
 
 </DD>
@@ -3617,12 +3780,6 @@ nach: panel38<BR>
 <BR>
 
 </DD>
-<DT><A name="He30fkF6bOm0FNX7A268xQ"></A>ShadowJustify hat keine Auswirkung</DT>
-<!--property:icon_internal=bullet_red-->
-<!--property:date_created=1457780285-->
-<!--property:date_modified=1457788608-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="6qAI8eqmg3yZOtiTlDpycQ"></A>PictureArt anpassen</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1463483725-->
@@ -3701,38 +3858,6 @@ müssen auch die laufenden Renderprozesse geschlosen werden.<BR>
 <BR>
 Getestet bei Beendigung während der Animationserstellung. 
 </DD>
-<DT><A name="BI01t3S78OyTxrV35xZyFA"></A>Shadow Glow bei Größenänderung anpasen</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1473796721-->
-<!--property:date_modified=1479031199-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="5KNqvrS2ZUI9Ofy0BxbvTA"></A>Settingsstruktur ausblenden</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477336034-->
-<!--property:date_modified=1479031192-->
-<!--property:expanded-->
-<!--property:hash=961f7531fa39b6d9fb06ec54d318ce8a719b492f-->
-<!--property:hash_html=416f1379a0e08187ae81a44edeea80399978328d-->
-<DD>
-Bei Formula und View.<BR>
-<BR>
-// Baum ausblenden<BR>
-ParameterDictControl.treeview1<BR>
-<BR>
-<DL>
-<DT><A name="ZltSeP5afur56pJ8RUdiRA"></A>Info</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1477404474-->
-<!--property:date_modified=1477404656-->
-<!--property:hash=ecc5db716717199531d7ac4e2ffb569ca4ccb30a-->
-<!--property:hash_html=7389f4b0359337d40fea4ed4c5ce01e3ec729465-->
-<DD>
-Wird aufgerufen bei:<BR>
-  
-</DD>
-</DL>
-</DD>
 <DT><A name="CXkwuAXKucwYFr4G6Gi0ng"></A>Nach dem Batch Export 3D Browser starten</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477337017-->
@@ -3802,29 +3927,6 @@ Besser; bei jeder dritten Navigationsänderung.<BR>
 <!--property:date_modified=1477421079-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="QJgwaeLvkUDwDn05YCiCwg"></A>MouseWheel in Preview Control</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477344109-->
-<!--property:date_modified=1477399365-->
-<!--property:hash=38837dee261ee6845cf84c6023ea38ed491a1b0d-->
-<!--property:hash_html=9e359b7d87b93d83be320cc2ee03c9cf94240ba4-->
-<DD>
-private void panel1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)<BR>
-       <BR>
-<A href="https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx">https://msdn.microsoft.com/de-de/library/system.windows.forms.control.mousewheel(v=vs.110).aspx</A><BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-
-</DD>
-<DT><A name="YbuEIhI0vyC95P9SVC6zUw"></A>Rotation bei rechter Maustaste</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477382512-->
-<!--property:date_modified=1477403982-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="CMgL7Ucf9mxq3MpvmAc36A"></A>Schnelle Vorschau beim Verschieben</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477406472-->
@@ -3840,29 +3942,6 @@ offsetX und offsetY geben die Verschiebung an.<BR>
 <BR>
 <BR>
 
-</DD>
-<DT><A name="DPyptS4czBvLml4YdR5ZeQ"></A>defaultwert für Batch Type: 2</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477413221-->
-<!--property:date_modified=1477446947-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="FDt2pTpfO2dh67PuRrXQ1Q"></A>Parameter Steps wird im AnimationTab nicht angezeigt</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477445862-->
-<!--property:date_modified=1477446440-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<DT><A name="juxwiNlFEYnnhKDlbzuiYw"></A>Reiter Animation</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1477555639-->
-<!--property:date_modified=1477945377-->
-<!--property:hash=12bf4e6337d77376f13406edaeefea45e8d591f2-->
-<!--property:hash_html=08a13301661c98170c20103c8a30293fedc2f46f-->
-<DD>
-Neue Parameter:<BR>
-<BR>
-Animation
 </DD>
 <DT><A name="IAF0MVVLaVeOkTjyhuD59A"></A>Formula Insert from Clipboard</DT>
 <!--property:icon_internal=bullet_red-->
@@ -4010,89 +4089,6 @@ tbValue_TextChanged ausgelöst.<BR>
 </DD>
 </DL>
 </DD>
-<DT><A name="nvHlp7IGtfP7nomdj4elWA"></A>Material Update im Preview nur, wenn</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1480017498-->
-<!--property:date_modified=1480576052-->
-<!--property:expanded-->
-<!--property:hash=ba7267097f8678fdc918ea634387972828558f9c-->
-<!--property:hash_html=d01bed5230bee218a5734b2aae5e8fb1da88875c-->
-<DD>
-... die zuletzt berechneten Daten noch aktuell sind.<BR>
-<BR>
-<DL>
-<DT><A name="52al8GXoyfQH8nTv5nklag"></A>Info</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1480017557-->
-<!--property:date_modified=1480017560-->
-<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
-</DL>
-</DD>
-<DT><A name="txc3s1qDObILRUSKDlrIMw"></A>Wechsel zwischen Formelansicht und Formelparametern</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1480020757-->
-<!--property:date_modified=1480098118-->
-<!--property:hash=ea41caf832834ff82ea0624de934650005da50a0-->
-<!--property:hash_html=2151da2746e19212655c87dcd2be70fc67134e18-->
-<DD>
-bei einem weiteren Click auf das Gestaltlupe Symbol.<BR>
-<BR>
-info:<BR>
-<BR>
-
-</DD>
-<DT><A name="vXanyMecox4uDRSyq4GsRA"></A>Schlüsselwort public in formula</DT>
-<!--property:icon_internal=bullet_green-->
-<!--property:date_created=1480576058-->
-<!--property:date_modified=1481675602-->
-<!--property:expanded-->
-<!--property:hash=8956ff4384672507a8619ace00a9cd0ec4ec408f-->
-<!--property:hash_html=f919a8ce5bb1bed2b42af45f940962e93cfce227-->
-<DD>
-Zu den entsprechenden Variablen werden dann Parametereinträge erstellt.<BR>
-<BR>
-<DL>
-<DT><A name="e9SBYlaWvCtrVN3yI1OeYA"></A>Teilaufgaben</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1480594676-->
-<!--property:date_modified=1480601270-->
-<!--property:expanded-->
-<!--property:hash=5b142a78ab5185134a1bf4f2a14177daf3063eb5-->
-<!--property:hash_html=2a1bde3c1172fefc0ed110ba8fc1a146b36d10d2-->
-<DD>
-(1) Eigener Preprozessor mit Schlüsseltworten @Initialize() @GetBool(x,y,z) @parameter<BR>
-<BR>
-(2) Korrekte Zuordnung der Fehler beruhend auf dem davon erzeugten Code.<BR>
-<BR>
-<BR>
-<DL>
-<DT><A name="wVbX5Hs20JxjCLmx0RgcpQ"></A>Preprozrssor</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1480601305-->
-<!--property:date_modified=1480617439-->
-<!--property:hash=351d121c6aba842eac76aca3fa5e9bc77fb2df2e-->
-<!--property:hash_html=074b66d996912b56bcaa9d710bc4ff41a50529d1-->
-<DD>
- @Initialize() <BR>
-<BR>
-@GetBool(x,y,z) <BR>
-<BR>
-@parameter
-</DD>
-<DT><A name="osdxisjFT0kdxyXIMGCLvA"></A>kein Preprozessor</DT>
-<!--property:icon_internal=bullet_white-->
-<!--property:date_created=1480889150-->
-<!--property:date_modified=1480889440-->
-<!--property:hash=0acacd43c7a75d503f151457f478911db115df55-->
-<!--property:hash_html=0acacd43c7a75d503f151457f478911db115df55-->
-<DD>
-statt dessen einfach die public Felder übernehmen. 
-</DD>
-</DL>
-</DD>
-</DL>
-</DD>
 <DT><A name="GJ34G8WIqBMBWiOVcEjtDQ"></A>Textfelder sind zu klein</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1480617211-->
@@ -4121,6 +4117,39 @@ Zwischenrechnungen werden
 <!--property:hash_html=768751f9a21ae9a3e0298c82e9abf8a22ecd6e4b-->
 <DD>
 sollen die zuletzten vom Nutzer eingestellten Settings ausgewählt werden.
+</DD>
+<DT><A name="gNAwtBe33mu0cXxpomR2fg"></A>Ungenutzte Formelparameter entfernen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1481979793-->
+<!--property:date_modified=1481979820-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="He30fkF6bOm0FNX7A268xQ"></A>ShadowJustify hat keine Auswirkung</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1457780285-->
+<!--property:date_modified=1481979953-->
+<!--property:hash=4a96c4d755e63ca14ab91c61b8efd11832618e33-->
+<!--property:hash_html=455e192a319a874fb49b94296b14d16b84855737-->
+<DD>
+Doch, aber das hängt von der Szene ab. Wahrscheinlich ist es derselbe Effekt, der unplausible Eingaben ein Export|Closed Surface Dist fordert.<BR>
+
+</DD>
+<DT><A name="tpCJFJyGIqmkow5ZJbaSHw"></A>Nicht verwendete Formelparameter löschen</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1481983374-->
+<!--property:date_modified=1481983395-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="FBkT6vHC4qJqVwg38h6TEg"></A>Formel im Hintergrund bei Textänderung aktualisieren</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1481983417-->
+<!--property:date_modified=1481983499-->
+<!--property:hash=f745bfb17eec61974e5b1a1a38f79707a8c18c55-->
+<!--property:hash_html=9fb7e9a86a750193eef785ac98529e40850866f6-->
+<DD>
+Fehler sollten nicht angezeigt werden, aber das Small Preview sollte aktualisert werden.<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

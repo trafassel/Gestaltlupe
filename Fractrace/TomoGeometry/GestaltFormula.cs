@@ -37,6 +37,49 @@ namespace Fractrace.TomoGeometry
         }
 
 
+        protected double Red
+        {
+            get
+            {
+                return additionalPointInfo.red;
+            }
+            set
+            {
+                additionalPointInfo.red = value;
+            }
+        }
+        protected double Green
+        {
+            get
+            {
+                return additionalPointInfo.green;
+            }
+            set
+            {
+                additionalPointInfo.green = value;
+            }
+        }
+        protected double Blue
+        {
+            get
+            {
+                return additionalPointInfo.blue;
+            }
+            set
+            {
+                additionalPointInfo.blue = value;
+            }
+        }
+        protected void Rotate(double angle, ref double x, ref double y)
+        {
+            double re = Math.Cos(angle);
+            double im = Math.Sin(angle);
+            double a = re * x - im * y;
+            y = re * y + im * x;
+            x = a;
+        }
+
+
     }
 
 }

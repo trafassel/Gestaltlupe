@@ -455,11 +455,23 @@ namespace Fractrace.PictureArt
                 if (pInfo != null && pInfo.AdditionalInfo != null)
                 {
                     if (pInfo.AdditionalInfo.red < 0)
+                    {
+                        pInfo.AdditionalInfo.green -= pInfo.AdditionalInfo.red;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.red;
                         pInfo.AdditionalInfo.red = 0;
+                    }
                     if (pInfo.AdditionalInfo.green < 0)
+                    {
+                        pInfo.AdditionalInfo.red -= pInfo.AdditionalInfo.green;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.green;
                         pInfo.AdditionalInfo.green = 0;
+                    }
                     if (pInfo.AdditionalInfo.blue < 0)
+                    {
+                        pInfo.AdditionalInfo.red -= pInfo.AdditionalInfo.blue;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.blue;
                         pInfo.AdditionalInfo.blue = 0;
+                    }
 
 
                     // Normalise;
