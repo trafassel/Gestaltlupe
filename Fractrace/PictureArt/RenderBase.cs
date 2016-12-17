@@ -87,13 +87,13 @@ namespace Fractrace.PictureArt
 
             try
             {
-                if (double.IsNaN(col.X))
+                if (double.IsNaN(col.X)|| double.IsNaN(col.Y)|| double.IsNaN(col.Z))
                     return Color.Red;
                 return Color.FromArgb((int)(255.0 * col.X), (int)(255.0 * col.Y), (int)(255.0 * col.Z));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+               // Console.WriteLine(ex.ToString());
             }
             return Color.Black;
         }

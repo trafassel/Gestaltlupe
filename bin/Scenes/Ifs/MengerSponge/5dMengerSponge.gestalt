@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters._angleWV" Value="0" />
+  <Entry Key="Formula.Parameters._angleX" Value="0" />
+  <Entry Key="Formula.Parameters._angleY" Value="0" />
+  <Entry Key="Formula.Parameters._angleZ" Value="0" />
+  <Entry Key="Formula.Parameters.boxSize" Value="3" />
+  <Entry Key="Formula.Parameters.holeSize" Value="1" />
+  <Entry Key="Formula.Parameters.jv" Value="0" />
+  <Entry Key="Formula.Parameters.jw" Value="0" />
+  <Entry Key="Formula.Parameters.v" Value="1" />
+  <Entry Key="Formula.Parameters.w" Value="1" />
+  <Entry Key="Formula.Static.Cycles" Value="8" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="public double boxSize=3;&#xA;public double holeSize=1;&#xA;public double _angleX;&#xA;public double _angleY;&#xA;public double _angleZ;&#xA;public double _angleWV;&#xA;public double v;&#xA;public double w;&#xA;public double jv;&#xA;public double jw;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  double angleX=Math.PI/180.0*_angleX;&#xA;  double angleY=Math.PI/180.0*_angleY;&#xA;  double angleZ=Math.PI/180.0*_angleZ;&#xA;  double angleWV=Math.PI/180.0*_angleWV;&#xA;  x*=boxSize;&#xA;  y*=boxSize;&#xA;  z*=boxSize;&#xA;  if(x&gt;boxSize)return false;&#xA;  if(y&gt;boxSize)return false;&#xA;  if(z&gt;boxSize)return false;&#xA;  if(x&lt;-boxSize)return false;&#xA;  if(y&lt;-boxSize)return false;&#xA;  if(z&lt;-boxSize)return false;&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xa=Math.Abs(x);&#xA;    double ya=Math.Abs(y);&#xA;    double za=Math.Abs(z);&#xA;    double va=Math.Abs(v);&#xA;    double wa=Math.Abs(w);&#xA;    int holeCount=0;&#xA;    if(xa&lt;holeSize) holeCount++;&#xA;    if(ya&lt;holeSize) holeCount++;&#xA;    if(za&lt;holeSize) holeCount++;&#xA;    if(va&lt;holeSize) holeCount++;&#xA;    if(wa&lt;holeSize) holeCount++;&#xA;    if(holeCount==2) return false;&#xA;    if(x&gt; holeSize) x-=2*holeSize;&#xA;    if(x&lt;-holeSize) x+=2*holeSize;&#xA;    if(y&gt; holeSize) y-=2*holeSize;&#xA;    if(y&lt;-holeSize) y+=2*holeSize;&#xA;    if(z&gt; holeSize) z-=2*holeSize;&#xA;    if(z&lt;-holeSize) z+=2*holeSize;&#xA;    if(v&gt; holeSize) v-=2*holeSize;&#xA;    if(v&lt;-holeSize) v+=2*holeSize;&#xA;    if(w&gt; holeSize) w-=2*holeSize;&#xA;    if(w&lt;-holeSize) w+=2*holeSize;&#xA;    x*=boxSize;&#xA;    y*=boxSize;&#xA;    z*=boxSize;&#xA;    v*=boxSize;&#xA;    w*=boxSize;&#xA;    if(_angleX!=0)Rotate(_angleX,ref y,ref z);&#xA;    if(_angleY!=0)Rotate(_angleY,ref x,ref z);&#xA;    if(_angleZ!=0)Rotate(_angleZ,ref x,ref y);&#xA;  //  if(_angleWV!=0)Rotate(_angleWV,ref w,ref v);&#xA;    x+=jx;&#xA;    y+=jy;&#xA;    z+=jz;&#xA;    v+=jv;&#xA;    w+=jw;&#xA;  }&#xA;  return true;&#xA;}&#xA;void Rotate(double angle,ref double x,ref double y)&#xA;{&#xA;  double re=Math.Cos(angle );&#xA;  double im=Math.Sin(angle );&#xA;  double a=re * x-im * y;&#xA;  y=re * y+im * x;&#xA;  x=a;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="8" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="-0.42091049498283" />
+  <Entry Key="Scene.CenterY" Value="0.624904219872387" />
+  <Entry Key="Scene.CenterZ" Value="0.152286376463638" />
+  <Entry Key="Scene.Radius" Value="2.39162676631084" />
+  <Entry Key="Transformation.Camera.AngleX" Value="17.4839023981776" />
+  <Entry Key="Transformation.Camera.AngleY" Value="5.18340632886874" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="33.8586344195824" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

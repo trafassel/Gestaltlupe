@@ -448,7 +448,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\StereoForm.resx">
@@ -657,6 +656,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data833pic10146.ico" />
+    <None Include="images\Data833pic10146s24x24.png" />
+    <None Include="images\Script24x24.png" />
+    <None Include="Resources\Script24x24.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

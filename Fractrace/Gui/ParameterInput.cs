@@ -156,13 +156,10 @@ namespace Fractrace
             this.cbAutomaticSaveAnimation.Visible = false;
 
             this.button9.ImageList = new ImageList();
-            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Data833pic10146a32x32);
-            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Script);
+            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Data833pic10146s24x24);
+            this.button9.ImageList.Images.Add(global::Fractrace.Properties.Resources.Script24x241);
+            this.button9.ImageList.ImageSize = new Size(24, 24);
             this.button9.ImageIndex = 0;
-
-            // Image Layout
-            //    this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-
         }
 
         private void Timer1_Tick(object sender, EventArgs e)

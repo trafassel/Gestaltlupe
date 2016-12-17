@@ -213,6 +213,16 @@ namespace Fractrace.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Data833pic10146s24x24 {
+            get {
+                object obj = ResourceManager.GetObject("Data833pic10146s24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DecreaseMipMap {
             get {
                 object obj = ResourceManager.GetObject("DecreaseMipMap", resourceCulture);
@@ -496,6 +506,16 @@ namespace Fractrace.Properties {
         internal static System.Drawing.Bitmap Script {
             get {
                 object obj = ResourceManager.GetObject("Script", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Script24x241 {
+            get {
+                object obj = ResourceManager.GetObject("Script24x241", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

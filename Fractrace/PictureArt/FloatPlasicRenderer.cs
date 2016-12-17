@@ -309,6 +309,10 @@ namespace Fractrace.PictureArt
                 for (int j = 0; j < pData.Height; j++)
                 {
                     Vec3 rgb = GetRgb(i, j);
+                    if(double.IsNaN(rgb.X)|| double.IsNaN(rgb.Y)|| double.IsNaN(rgb.Z))
+                    {
+
+                    }
                     _rgbPlane[i, j] = new FloatVec3((float)rgb.X, (float)rgb.Y, (float)rgb.Z);
                 }
             }
@@ -445,11 +449,19 @@ namespace Fractrace.PictureArt
             bool useAdditionalColorinfo = true;
             if (_colorIntensity <= 0)
                 useAdditionalColorinfo = false;
-
+            
             if (useAdditionalColorinfo && ((pInfo.IsInside && _colorInside) || (!pInfo.IsInside && _colorOutside)))
             {
                 if (pInfo != null && pInfo.AdditionalInfo != null)
                 {
+                    if (pInfo.AdditionalInfo.red < 0)
+                        pInfo.AdditionalInfo.red = 0;
+                    if (pInfo.AdditionalInfo.green < 0)
+                        pInfo.AdditionalInfo.green = 0;
+                    if (pInfo.AdditionalInfo.blue < 0)
+                        pInfo.AdditionalInfo.blue = 0;
+
+
                     // Normalise;
                     float r1 = (float)(_colorFactorRed * Math.Pow(pInfo.AdditionalInfo.red, _colorIntensity));
                     float g1 = (float)(_colorFactorGreen * Math.Pow(pInfo.AdditionalInfo.green, _colorIntensity));
