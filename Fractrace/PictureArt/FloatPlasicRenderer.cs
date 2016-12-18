@@ -454,6 +454,13 @@ namespace Fractrace.PictureArt
             {
                 if (pInfo != null && pInfo.AdditionalInfo != null)
                 {
+                    if (double.IsNaN(pInfo.AdditionalInfo.red))
+                        pInfo.AdditionalInfo.red = 0;
+                    if (double.IsNaN(pInfo.AdditionalInfo.green))
+                        pInfo.AdditionalInfo.green = 0;
+                    if (double.IsNaN(pInfo.AdditionalInfo.blue))
+                        pInfo.AdditionalInfo.blue = 0;
+
                     if (pInfo.AdditionalInfo.red < 0)
                     {
                         pInfo.AdditionalInfo.green -= pInfo.AdditionalInfo.red;

@@ -98,6 +98,7 @@ namespace Fractrace
         System.Windows.Forms.Timer timer1 = null;
         public ParameterInput()
         {
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             MainParameterInput = this;
             InitializeComponent();
             ParameterDict.Current.EventChanged += new ParameterDictChanged(Exemplar_EventChanged);

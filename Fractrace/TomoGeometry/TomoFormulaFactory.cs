@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fractrace.Basic;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -212,6 +213,7 @@ public CSTomoFormula() {
             try
             {
                 results = provider.CompileAssemblyFromSource(parameters, tomoSource);
+                RemoveUnusedParameters(tomoSource);
             }
             catch (Exception ex)
             {
@@ -232,6 +234,71 @@ public CSTomoFormula() {
                     }
                 }
             }
+        }
+
+        static object lockRemoveUnusedParameters = new object();
+
+        void RemoveUnusedParameters(string tomoSource)
+        {
+            lock (lockRemoveUnusedParameters)
+            {
+                try
+                {
+                    if (tomoSource.Contains("SetParameterBulk"))
+                        return;
+                    Dictionary<string, bool> usedParameters = UsedParameters(tomoSource);
+                    List<string> entriesToDelete = new List<string>();
+                    foreach (KeyValuePair<string, string> entry in ParameterDict.Current.Entries)
+                    {
+                        if (entry.Key.StartsWith("Formula.Parameters."))
+                        {
+                            if (!ParameterDict.IsAdditionalInfo(entry.Key))
+                            {
+                                string parameterName = entry.Key.Substring("Formula.Parameters.".Length);
+                                if (!usedParameters.ContainsKey(parameterName))
+                                {
+                                    entriesToDelete.Add(parameterName);
+                                }
+                            }
+                        }
+                    }
+                    foreach (string entryToDelete in entriesToDelete)
+                    {
+                        ParameterDict.Current.RemoveProperty("Formula.Parameters." + entryToDelete);
+                    }
+                } catch(System.InvalidOperationException)
+                {
+                    // throwed if enumeration is not possible because ParameterDict.Current.Entries has changed in other thread.
+                }
+            }
+        }
+
+        Dictionary<string,bool> UsedParameters(string code)
+        {
+            Dictionary<string, bool> usedParameters = new Dictionary<string, bool>();
+            if (code.Trim() == "")
+                return usedParameters;
+
+            int i = 0;
+            while(i!=-1)
+            {
+                i = code.IndexOf("GetOrSet", i);
+                if(i!=-1)
+                {
+                    i = code.IndexOf("\"", i)+1;
+                    int nameStart = i;
+                    i = code.IndexOf("\"", i);
+                    int nameEnd = i;
+                    if(nameStart!=-1 && nameEnd!=-1)
+                    {
+                        string parameterName = code.Substring(nameStart, nameEnd - nameStart);
+                        if(parameterName.StartsWith("Formula.Parameters."))
+                            parameterName = parameterName.Substring("Formula.Parameters.".Length);
+                        usedParameters[parameterName] = true;
+                    }
+                }
+            }
+            return usedParameters;
         }
 
 
