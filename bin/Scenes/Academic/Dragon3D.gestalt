@@ -1,28 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
+  <Entry Key="Formula.Parameters.cutAtZ" Value="1" />
   <Entry Key="Formula.Static.Cycles" Value="66" />
   <Entry Key="Formula.Static.Julia" Value="1" />
   <Entry Key="Formula.Static.jx" Value="3" />
   <Entry Key="Formula.Static.jy" Value="0.125" />
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="&#xA;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  if(z&gt;0)return false;&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x;&#xA;    double yy=y*y;&#xA;    double zz=z*z;&#xA;    double r=xx+yy+zz;&#xA;    if(r&gt;5) return false;&#xA;&#xA;    // -- -- --  Formula -- -- -- --&#xA;&#xA;&#xA;    double oc = x - xx + yy + zz;&#xA;    double od = 2*(-x * y)+y;&#xA;    double odz = 2*(-x * z)+z;&#xA;    x = jx * oc - jy * od;&#xA;    y = jy * oc + jx * od;&#xA;    z = jz * oc + jx * odz;&#xA;&#xA;&#xA;&#xA;    // -- -- -- -- -- -- -- -- -- --&#xA;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="public bool cutAtZ;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  if(cutAtZ&amp;&amp;z&gt;0)return false;&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x;&#xA;    double yy=y*y;&#xA;    double zz=z*z;&#xA;    double r=xx+yy+zz;&#xA;    if(r&gt;5) return false;&#xA;    if(r&gt;0.00001)&#xA;    {&#xA;      Red+=xx/r;&#xA;      Green+=yy/r;&#xA;      Blue+=zz/r;&#xA;    }&#xA;    // -- -- --  Formula -- -- -- --&#xA;    double oc = x - xx + yy + zz;&#xA;    double od = 2*(-x * y)+y;&#xA;    double odz = 2*(-x * z)+z;&#xA;    x = jx * oc - jy * od;&#xA;    y = jy * oc + jx * od;&#xA;    z = jz * oc + jx * odz;&#xA;    // -- -- -- -- -- -- -- -- -- --&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="4" />
-  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="100" />
   <Entry Key="Renderer.ColorFactor.Green" Value="1" />
-  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="0.1" />
   <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
   <Entry Key="Renderer.ColorGreyness" Value="0" />
   <Entry Key="Renderer.ColorInside" Value="0" />
   <Entry Key="Renderer.ColorIntensity" Value="1" />
-  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Renderer.ColorOutside" Value="1" />
   <Entry Key="Scene.CenterX" Value="0.414570507163051" />
   <Entry Key="Scene.CenterY" Value="0.117766933224832" />
   <Entry Key="Scene.CenterZ" Value="-0.115860241217001" />
   <Entry Key="Scene.Radius" Value="0.694444444444444" />
-  <Entry Key="Transformation.Camera.AngleX" Value="25.916457877656" />
-  <Entry Key="Transformation.Camera.AngleY" Value="-1.59067966745087" />
-  <Entry Key="Transformation.Camera.AngleZ" Value="31.804353914618" />
+  <Entry Key="Transformation.Camera.AngleX" Value="34.5231325853232" />
+  <Entry Key="Transformation.Camera.AngleY" Value="3.86482723500239" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="32.2702548139552" />
   <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
   <Entry Key="Transformation.Camera.Position" Value="1" />
 </ParameterDict>

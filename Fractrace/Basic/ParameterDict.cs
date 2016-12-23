@@ -401,14 +401,18 @@ namespace Fractrace.Basic
                 SortedDictionary<string, string> retVal = new SortedDictionary<string, string>();
                 lock (_entries)
                 {
-                    foreach (KeyValuePair<string, string> entry in _entries)
+                    try
                     {
-                        try
+                        foreach (KeyValuePair<string, string> entry in _entries)
                         {
-                            retVal[entry.Key] = entry.Value;
+                            try
+                            {
+                                retVal[entry.Key] = entry.Value;
+                            }
+                            catch { }
                         }
-                        catch { }
                     }
+                    catch { } // this could cause problems later (enumeration has changed).
                 }
                 return retVal;
             }
