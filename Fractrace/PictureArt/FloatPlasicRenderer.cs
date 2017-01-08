@@ -25,8 +25,8 @@ namespace Fractrace.PictureArt
         /// Initialisation.
         /// </summary>
         /// <param name="pData"></param>
-        public FloatPlasicRenderer(PictureData pData)
-            : base(pData)
+        public FloatPlasicRenderer(PictureData pData, ParameterDict parameters)
+            : base(pData, parameters)
         {
         }
 
@@ -133,33 +133,34 @@ namespace Fractrace.PictureArt
         float _glow = 1;
 
         // Renderer.ColorFactor.Threshold
-        double _colorThreshold = ParameterDict.Current.GetDouble("Renderer.ColorFactor.Threshold");
+        double _colorThreshold = 0;
 
         /// <summary>
-        /// Set fields from ParameterDict.Current.
+        /// Set fields from _parameters.
         /// </summary>
         protected override void PreCalculate()
         {
             string parameterNode = "Renderer.";
-            _shadowNumber = ParameterDict.Current.GetInt(parameterNode + "ShadowNumber");
-            _ambientIntensity = ParameterDict.Current.GetInt(parameterNode + "AmbientIntensity");
-            _minFieldOfView = (float)ParameterDict.Current.GetDouble(parameterNode + "MinFieldOfView");
-            _maxFieldOfView = (float)ParameterDict.Current.GetDouble(parameterNode + "MaxFieldOfView");
-            _brightness = (float)ParameterDict.Current.GetDouble(parameterNode + "Brightness");
-            _contrast = (float)ParameterDict.Current.GetDouble(parameterNode + "Contrast");
-            _colorIntensity = ParameterDict.Current.GetDouble(parameterNode + "ColorIntensity");
-            _colorOutside = ParameterDict.Current.GetBool("Renderer.ColorInside");
-            _colorInside = ParameterDict.Current.GetBool("Renderer.ColorOutside");
-            _useLight = ParameterDict.Current.GetBool(parameterNode + "UseLight");
-            _shadowJustify = 0.1f*(float)ParameterDict.Current.GetDouble(parameterNode + "ShadowJustify");
-            _shininessFactor = (float)ParameterDict.Current.GetDouble(parameterNode + "ShininessFactor");
-            _shininess = (float)ParameterDict.Current.GetDouble(parameterNode + "Shininess");
-            _lightRay.X = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.X");
-            _lightRay.Y = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.Y");
-            _lightRay.Z = (float)ParameterDict.Current.GetDouble(parameterNode + "Light.Z");
-            _areaDeph = (float)ParameterDict.Current.GetDouble("Scene.Radius");
-            _transparentBackground = ParameterDict.Current.GetBool("Renderer.BackColor.Transparent");
-            _glow = (float)ParameterDict.Current.GetDouble("Renderer.ShadowGlow");
+            _colorThreshold = _parameters.GetDouble("Renderer.ColorFactor.Threshold");
+            _shadowNumber = _parameters.GetInt(parameterNode + "ShadowNumber");
+            _ambientIntensity = _parameters.GetInt(parameterNode + "AmbientIntensity");
+            _minFieldOfView = (float)_parameters.GetDouble(parameterNode + "MinFieldOfView");
+            _maxFieldOfView = (float)_parameters.GetDouble(parameterNode + "MaxFieldOfView");
+            _brightness = (float)_parameters.GetDouble(parameterNode + "Brightness");
+            _contrast = (float)_parameters.GetDouble(parameterNode + "Contrast");
+            _colorIntensity = _parameters.GetDouble(parameterNode + "ColorIntensity");
+            _colorOutside = _parameters.GetBool("Renderer.ColorInside");
+            _colorInside = _parameters.GetBool("Renderer.ColorOutside");
+            _useLight = _parameters.GetBool(parameterNode + "UseLight");
+            _shadowJustify = 0.1f*(float)_parameters.GetDouble(parameterNode + "ShadowJustify");
+            _shininessFactor = (float)_parameters.GetDouble(parameterNode + "ShininessFactor");
+            _shininess = (float)_parameters.GetDouble(parameterNode + "Shininess");
+            _lightRay.X = (float)_parameters.GetDouble(parameterNode + "Light.X");
+            _lightRay.Y = (float)_parameters.GetDouble(parameterNode + "Light.Y");
+            _lightRay.Z = (float)_parameters.GetDouble(parameterNode + "Light.Z");
+            _areaDeph = (float)_parameters.GetDouble("Scene.Radius");
+            _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
+            _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
 
             // scale glow to get simmilaier results for different image sizes
             {
@@ -176,18 +177,18 @@ namespace Fractrace.PictureArt
             _lightRay.Y = (float)tempcoord2.Y;
             _lightRay.Z = (float)tempcoord2.Z;
                  
-            _colorFactorRed = (float)ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Red");
-            _colorFactorGreen = (float)ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Green");
-            _colorFactorBlue = (float)ParameterDict.Current.GetDouble(parameterNode + "ColorFactor.Blue");
-            _lightIntensity = (float)ParameterDict.Current.GetDouble(parameterNode + "LightIntensity");
+            _colorFactorRed = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Red");
+            _colorFactorGreen = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Green");
+            _colorFactorBlue = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Blue");
+            _lightIntensity = (float)_parameters.GetDouble(parameterNode + "LightIntensity");
             if (_lightIntensity >= 1.0)
                 _shadowNumber = 0;
 
-            _colorGreyness = (float)ParameterDict.Current.GetDouble(parameterNode + "ColorGreyness");
-            _rgbType = ParameterDict.Current.GetInt(parameterNode + "ColorFactor.RgbType");
-            _backColorRed = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Red");
-            _backColorGreen = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Green");
-            _backColorBlue = (float)ParameterDict.Current.GetDouble("Renderer.BackColor.Blue");
+            _colorGreyness = (float)_parameters.GetDouble(parameterNode + "ColorGreyness");
+            _rgbType = _parameters.GetInt(parameterNode + "ColorFactor.RgbType");
+            _backColorRed = (float)_parameters.GetDouble("Renderer.BackColor.Red");
+            _backColorGreen = (float)_parameters.GetDouble("Renderer.BackColor.Green");
+            _backColorBlue = (float)_parameters.GetDouble("Renderer.BackColor.Blue");
             if (_lightIntensity > 1)
                 _lightIntensity = 1;
             if (_lightIntensity < 0)
@@ -224,11 +225,11 @@ namespace Fractrace.PictureArt
             DrawPlane();
             if (_stopRequest)
                 return;
-            if (ParameterDict.Current.GetBool(parameterNode + "Normalize"))
+            if (_parameters.GetBool(parameterNode + "Normalize"))
                 NormalizePlane();
             if (_stopRequest)
                 return;
-            if (ParameterDict.Current.GetBool(parameterNode + "UseDarken"))
+            if (_parameters.GetBool(parameterNode + "UseDarken"))
                 DarkenPlane();
             if (_stopRequest)
                 return;
@@ -423,7 +424,7 @@ namespace Fractrace.PictureArt
             if (retVal.Z > 1)
                 retVal.Z = 1;
 
-            float brightLightLevel = (float)ParameterDict.Current.GetDouble("Renderer.BrightLightLevel");
+            float brightLightLevel = (float)_parameters.GetDouble("Renderer.BrightLightLevel");
             if (brightLightLevel > 0)
             {
                 retVal.X = (1 - brightLightLevel) * retVal.X + brightLightLevel * light.X * (1 - _shadowPlane[x, y]);
@@ -1236,7 +1237,7 @@ namespace Fractrace.PictureArt
             float dGlobal = maxDist;
             dGlobal /= 1500;
 
-            int smoothLevel = (int)ParameterDict.Current.GetDouble("Renderer.SmoothNormalLevel");
+            int smoothLevel = (int)_parameters.GetDouble("Renderer.SmoothNormalLevel");
             for (int currentSmoothLevel = 0; currentSmoothLevel < smoothLevel; currentSmoothLevel++)
             {
 

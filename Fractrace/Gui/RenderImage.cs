@@ -253,7 +253,7 @@ namespace Fractrace
             {
                 Fractrace.PictureArt.Renderer pArt;
                 if (_fixedRenderer == -1)
-                    pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                    pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
                 else
                     pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
                 pArt.Paint(_graphics);

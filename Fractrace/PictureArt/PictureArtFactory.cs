@@ -15,7 +15,7 @@ namespace Fractrace.PictureArt {
     /// Hier können eigene Renderer zugeschaltet werden:
     /// </summary>
     /// <returns></returns>
-    public static Renderer Create(PictureData pdata,Formulas formula) {
+    public static Renderer Create(PictureData pdata,Formulas formula, ParameterDict dict) {
         Renderer retVal = null;
 
       switch (ParameterDict.Current["Composite.Renderer"]) {
@@ -24,7 +24,7 @@ namespace Fractrace.PictureArt {
         case "PlasicRenderer":
         case "6":
                     //retVal = new PlasicRenderer(pdata.Clone());
-                    retVal = new FloatPlasicRenderer(pdata.Clone());
+                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
 
         case "FastPreviewRenderer":
@@ -34,7 +34,7 @@ namespace Fractrace.PictureArt {
 
         default:
                     //retVal = new PlasicRenderer(pdata.Clone());
-                    retVal = new FloatPlasicRenderer(pdata.Clone());
+                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
       }
 

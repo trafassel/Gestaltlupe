@@ -257,14 +257,14 @@ namespace Fractrace
                                         }
                                         else
                                         {
-                                            pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                                            pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
                                         }
                                         
                                     }
 
                                     else if (_smallPreviewCurrentDrawStep == 4 || _smallPreviewCurrentDrawStep == 3)
                                     {
-                                        pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                                        pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
                                         _smallPreviewCurrentDrawStep = 5;
                                     }
                                     else
@@ -278,7 +278,7 @@ namespace Fractrace
                             }
                             else
                             {
-                                pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+                                pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
                             }
                             btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
                             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);

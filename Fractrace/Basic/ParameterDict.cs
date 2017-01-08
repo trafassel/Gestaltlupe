@@ -107,6 +107,18 @@ namespace Fractrace.Basic
             }
         }
 
+        ParameterDict(Dictionary<string, string> entries)
+         {
+            foreach(KeyValuePair<string,string> entry in entries)
+            {
+                _entries[entry.Key] = entry.Value;
+            }            
+        }
+
+        public ParameterDict Clone(Dictionary<string, string> entries)
+        {
+            return new ParameterDict(entries);
+        }
 
         /// <summary>
         /// Save all dictionary entries into a file.

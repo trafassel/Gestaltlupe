@@ -9,11 +9,14 @@ namespace Fractrace.Basic
     public class ParameterDictFilter
     {
 
+        protected ParameterDict _dict = null;
         public ParameterDictFilter()
         {
+            _dict = ParameterDict.Current.Clone();
         }
 
 
+        /*
         /// <summary>
         /// Saved dict which will be activated after using this filter.
         /// </summary>
@@ -52,17 +55,19 @@ namespace Fractrace.Basic
                     _changedParameters[entry.Key] = true;
             }
         }
+        */
 
 
         /// <summary>
         /// Apply filter to current values.
         /// </summary>
-        protected virtual void Filter()
+        public virtual ParameterDict Apply()
         {
-
+            return _dict;
         }
 
 
+        /*
         /// <summary>
         /// All saved values are restored.
         /// </summary>
@@ -75,6 +80,7 @@ namespace Fractrace.Basic
             }
             ParameterDict.Current.SetValue("Intern.Filter", "", false);
         }
+        */
 
 
     }

@@ -95,7 +95,7 @@ namespace Fractrace.Scheduler
                 _currentProgress += _currentProgressd;
                 _master.Progress(_currentProgress);
             }
-            Renderer renderer = PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas);
+            Renderer renderer = PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
             renderer.Paint(_graphics);
             if (_abort)
                 return;

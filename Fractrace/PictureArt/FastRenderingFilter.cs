@@ -12,12 +12,13 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Apply filter to current values.
         /// </summary>
-        protected override void Filter()
+        public override ParameterDict Apply()
         {
-            ParameterDict.Current.SetValue("Renderer.ShadowNumber","11",false);
-            ParameterDict.Current.SetValue("Renderer.AmbientIntensity","0",false);
-            ParameterDict.Current.SetValue("Renderer.SmoothNormalLevel","3",false);
-            ParameterDict.Current.SetValue("Intern.Filter", "FastRenderingFilter", false);
+            _dict.SetValue("Renderer.ShadowNumber","11",false);
+            _dict.SetValue("Renderer.AmbientIntensity","0",false);
+            _dict.SetValue("Renderer.SmoothNormalLevel","3",false);
+            _dict.SetValue("Intern.Filter", "FastRenderingFilter", false);
+            return _dict;
         }
 
 

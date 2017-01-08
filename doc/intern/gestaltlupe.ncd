@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:301-->
+<!--LastNote:302-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4150,6 +4150,15 @@ Doch, aber das hängt von der Szene ab. Wahrscheinlich ist es derselbe Effekt, d
 Fehler sollten nicht angezeigt werden, aber das Small Preview sollte aktualisert werden.<BR>
 <BR>
 
+</DD>
+<DT><A name="EygWxgKFXy4Tk38Kc6s8lg"></A>Globale Parameter nicht beim schnellen Rendern des Zwischenergebnisses aktualisieren</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1483384998-->
+<!--property:date_modified=1483385292-->
+<!--property:hash=68c677a2a999401454c6c8b1d4ef6caebaf9b9ee-->
+<!--property:hash_html=68c677a2a999401454c6c8b1d4ef6caebaf9b9ee-->
+<DD>
+also entweder erhält das PictureArt-Objekt eine eigene Parameter-Referenz oder einen Flag (Preview)
 </DD>
 </DL>
 </DD>

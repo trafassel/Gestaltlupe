@@ -1,4 +1,5 @@
-﻿using Fractrace.DataTypes;
+﻿using Fractrace.Basic;
+using Fractrace.DataTypes;
 using Fractrace.Geometry;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,15 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected FloatPictureData _pictureData = null;
 
+        protected ParameterDict _parameters = null;
         /// <summary>
         /// Initialisation.
         /// </summary>
-        public SmallMemoryRenderer(PictureData pData)
+        public SmallMemoryRenderer(PictureData pData, ParameterDict parameters)
             : base(pData)
         {
             _pictureData = new FloatPictureData(pData.Width, pData.Height);
+            _parameters = parameters;
         }
 
 
