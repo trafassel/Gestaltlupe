@@ -13,7 +13,7 @@ namespace Fractrace.PictureArt
 
         public FloatPixelInfo()
         {
-
+           
         }
 
         public AdditionalPointInfo AdditionalInfo = null;

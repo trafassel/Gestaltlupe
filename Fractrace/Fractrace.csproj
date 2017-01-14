@@ -309,6 +309,7 @@
     <Compile Include="Gui\SettingsControl.Designer.cs">
       <DependentUpon>SettingsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PictureArt\EnvironmentShadowRenderComponent.cs" />
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />
     <Compile Include="PictureArt\FloatPictureData.cs" />
     <Compile Include="PictureArt\FloatPixelInfo.cs" />

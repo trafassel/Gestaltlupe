@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:302-->
+<!--LastNote:309-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -16,7 +16,6 @@
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434281063-->
 <!--property:date_modified=1434281068-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -25,7 +24,6 @@
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281074-->
 <!--property:date_modified=1434281082-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -34,7 +32,6 @@
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1435657416-->
 <!--property:date_modified=1435657418-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -89,7 +86,6 @@ class PictureData{<BR>
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281104-->
 <!--property:date_modified=1434281108-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -98,7 +94,6 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477955534-->
 <!--property:date_modified=1477955656-->
-<!--property:expanded-->
 <!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
 <!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
 <DD>
@@ -248,7 +243,6 @@ http://www.gestaltlupe.com/x3dom/
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -257,7 +251,6 @@ http://www.gestaltlupe.com/x3dom/
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1454854608-->
 <!--property:date_modified=1454855903-->
-<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -366,7 +359,6 @@ mit abschließender Klammer.
 <!--property:icon_internal=bullet_green-->
 <!--property:date_created=1432975260-->
 <!--property:date_modified=1432975265-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -2563,7 +2555,6 @@ info:<BR>
 <DT><A name="vR17fQqmdBvN9xLsxzT0cg"></A>Vorschaubilder bei Animation</DT>
 <!--property:date_created=1450601358-->
 <!--property:date_modified=1481983181-->
-<!--property:expanded-->
 <!--property:hash=7b126a236689d8239dfd189aa019018f527f506c-->
 <!--property:hash_html=7b126a236689d8239dfd189aa019018f527f506c-->
 <DD>
@@ -2680,7 +2671,6 @@ der Double Auflösung gekommen ist. <BR>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1431217793-->
 <!--property:date_modified=1431217902-->
-<!--property:expanded-->
 <!--property:hash=02445c8f6e953b55757e1d81c8f7e3c88b1170d4-->
 <!--property:hash_html=ac8e9df04251a0023926ab471963612a2ab9c088-->
 <DD>
@@ -2742,7 +2732,6 @@ bei Animationen sind die Parameter zu den gespeicherten Bildern um genau 1 verse
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1434789087-->
 <!--property:date_modified=1434789121-->
-<!--property:expanded-->
 <!--property:hash=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <!--property:hash_html=72507339f404e568bdda19ab0709807efe5ec8b3-->
 <DD>
@@ -3986,7 +3975,6 @@ Wenn eine ältere Datei eingelesen, konvertiert und gespeichert wird, steht dort
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1479475081-->
 <!--property:date_modified=1479483078-->
-<!--property:expanded-->
 <!--property:hash=482ace2c48d15770aaf86d3ef5512ce335fdcaca-->
 <!--property:hash_html=069e382029fe17303325f0ef4947ce80e8607b7c-->
 <DD>
@@ -4023,7 +4011,6 @@ in PreviewControl.OnStepEnds<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1479851572-->
 <!--property:date_modified=1479851692-->
-<!--property:expanded-->
 <!--property:hash=76ddb451346e92b756b22a9a19419042efd13ed2-->
 <!--property:hash_html=1accbe881dcbd71a7cdccd1039e50a73d488f6ea-->
 <DD>
@@ -4152,13 +4139,33 @@ Fehler sollten nicht angezeigt werden, aber das Small Preview sollte aktualisert
 
 </DD>
 <DT><A name="EygWxgKFXy4Tk38Kc6s8lg"></A>Globale Parameter nicht beim schnellen Rendern des Zwischenergebnisses aktualisieren</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1483384998-->
-<!--property:date_modified=1483385292-->
+<!--property:date_modified=1484002072-->
 <!--property:hash=68c677a2a999401454c6c8b1d4ef6caebaf9b9ee-->
 <!--property:hash_html=68c677a2a999401454c6c8b1d4ef6caebaf9b9ee-->
 <DD>
 also entweder erhält das PictureArt-Objekt eine eigene Parameter-Referenz oder einen Flag (Preview)
+</DD>
+<DT><A name="93GxjbcvZwpHIORhFt1Sgg"></A>Picture Art aufteilen</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1484238104-->
+<!--property:date_modified=1484238464-->
+<!--property:hash=b548f20ab0ea57c786ad96889a1aab59cd23e39f-->
+<!--property:hash_html=be756711a128052c6798f66e93d9176b2ff022ec-->
+<DD>
+.. in Picture Art Data ()<BR>
+uns PictureArt Components<BR>
+<BR>
+Wenn sich nur PictureArt Paramter geändert haben, wird dann ein Update aufgerufen.<BR>
+<BR>
+<BR>
+<BR>
+oder:..<BR>
+neu PictureArtShader <BR>
+Erstellt das farbige Bild aus den PictureArt Componenten.<BR>
+<BR>
+Überlagert das Schattenbild mit den dem Licht 
 </DD>
 </DL>
 </DD>
@@ -4323,6 +4330,78 @@ Aufruf: <BR>
 <BR>
 &quot;C:\Program Files (x86)\Windows Kits\8.0\bin\x64\makeappx.exe&quot; pack /f G:\wip\Public\mappings.txt /p G:\wip\Public\Gestaltlupe340.appx<BR>
 
+</DD>
+</DL>
+</DD>
+<DT><A name="rWOln9ru8xXL9Zwx2ZZrow"></A>Formulas</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1484239718-->
+<!--property:date_modified=1484239724-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="yqlIBgHaX5SsYRbUxGfhsA"></A>Kleinian</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1484239729-->
+<!--property:date_modified=1484241150-->
+<!--property:hash=0c313f4965d08c545b3dffc99e0b20bd472b5401-->
+<!--property:hash_html=32822e3f4831e13162760989dd505eeb78358560-->
+<DD>
+based on:<BR>
+<BR>
+<A href="http://www.josleys.com/articles/Kleinian%20escape-time_2.pdf">http://www.josleys.com/articles/Kleinian%20escape-time_2.pdf</A><BR>
+<BR>
+double R=x*x+y*y;<BR>
+<BR>
+// Transform 1:<BR>
+x=-b+x/R;<BR>
+y=a-y/R;<BR>
+<BR>
+<BR>
+// Transform 2:<BR>
+double R=(x+b)*(x+b)+(y-a)*(y-a);<BR>
+x=(x+b)/R;<BR>
+y=(y-a)/R;<BR>
+<BR>
+<BR>
+// Iteration:<BR>
+<BR>
+// bring into box:<BR>
+if(x&gt;1-y*b/a) x=x%2-2*x;<BR>
+if(x&lt;-1-y*b/a) x=x%2+2;<BR>
+<BR>
+double dividingLine=a/2+Math.Sign(b)*(2*a-1.95)*Math.Sign(x+b/2)*(1-  Math.Pow( Math.E, -(7.2-(1.95-a)*12*Math.Abs(x+b/2)) ) )/4;<BR>
+<BR>
+if(y&lt;dividingLine)<BR>
+{<BR>
+// Transform 1:<BR>
+double R=x*x+y*y;<BR>
+x=-b+x/R;<BR>
+y=a-y/R;<BR>
+<BR>
+if(y&lt;0 || y&gt;a)<BR>
+  return false;<BR>
+<BR>
+}<BR>
+<BR>
+// bring into box:<BR>
+if(x&gt;1-y*b/a) x=x%2-2*x;<BR>
+if(x&lt;-1-y*b/a) x=x%2+2;<BR>
+<BR>
+if(y&gt;dividingLine)<BR>
+{<BR>
+<BR>
+// Transform 2:<BR>
+double R=(x+b)*(x+b)+(y-a)*(y-a);<BR>
+x=(x+b)/R;<BR>
+y=(y-a)/R;<BR>
+<BR>
+if(y&lt;0 || y&gt;a)<BR>
+  return false;<BR>
+<BR>
+}
 </DD>
 </DL>
 </DD>
