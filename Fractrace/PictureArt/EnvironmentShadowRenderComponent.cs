@@ -14,7 +14,6 @@ namespace Fractrace.PictureArt
             pData = floatPictureData;
             _heightMap = heightMap;
             _shadowJustify = 0.1f * (float)parameters.GetDouble("Renderer.ShadowJustify");
-          //  _areaDeph = parameters.GetDouble("Scene.Radius");
             _shadowNumber = parameters.GetInt("Renderer.ShadowNumber");
             _glow = (float)parameters.GetDouble("Renderer.ShadowGlow");
 
@@ -26,11 +25,6 @@ namespace Fractrace.PictureArt
 
         // Shadow height factor
         private float _shadowJustify = 1;
-
-        /// <summary>
-        /// Previously: difference between maximal and minimal y value in computing area
-        /// </summary>
-        private float _areaDeph = 1;
 
         // Corresponds to the number of shadows
         private int _shadowNumber = 1;
@@ -77,7 +71,7 @@ namespace Fractrace.PictureArt
 
             _shadowPlane = new float[pData.Width, pData.Height];
             float[,] shadowTempPlane = new float[pData.Width, pData.Height];
-            float diffy = _shadowJustify * (_areaDeph);
+            float diffy = _shadowJustify ;
 
             // Main Iteration:
             float yd = 0;
@@ -107,21 +101,21 @@ namespace Fractrace.PictureArt
                 {
 
                     case 0:
-                        diffy = _shadowJustify * shadowlight1Val * (_areaDeph);
+                        diffy = _shadowJustify * shadowlight1Val ;
                         shadowVal = shadowlight1Level;
                         currentShadowlightRange = shadowlight1Range;
                         currentIntensity = shadowlight1Intensity;
                         break;
 
                     case 1:
-                        diffy = _shadowJustify * shadowlight2Val * (_areaDeph);
+                        diffy = _shadowJustify * shadowlight2Val ;
                         shadowVal = shadowlight2Level;
                         currentShadowlightRange = shadowlight2Range;
                         currentIntensity = shadowlight2Intensity;
                         break;
 
                     case 2:
-                        diffy = _shadowJustify * shadowlight3Val * (_areaDeph);
+                        diffy = _shadowJustify * shadowlight3Val ;
                         shadowVal = shadowlight3Level;
                         currentShadowlightRange = shadowlight3Range;
                         currentIntensity = shadowlight3Intensity;
