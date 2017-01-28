@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:309-->
+<!--LastNote:305-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -7,15 +7,14 @@
 <meta name="format_version" content="4.0.8">
 </HEAD>
 <BODY>
-<!--property:UID=CZzSEtxo34Ngs4dAX2lxOw-->
+<!--property:UID=3Vk0CcyOg6GcpCq6tOxESw-->
 <!--property:prop_modified=0-->
-<!--property:note_deleted=IPw1y1qGhP0jPPKxYvY5bg-->
-<!--property:note_deleted=juxwiNlFEYnnhKDlbzuiYw-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
 <!--property:date_created=1434281063-->
 <!--property:date_modified=1434281068-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -243,6 +242,7 @@ http://www.gestaltlupe.com/x3dom/
 <!--property:icon_internal=wrench-->
 <!--property:date_created=1426926874-->
 <!--property:date_modified=1426926879-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -4148,9 +4148,9 @@ Fehler sollten nicht angezeigt werden, aber das Small Preview sollte aktualisert
 also entweder erhält das PictureArt-Objekt eine eigene Parameter-Referenz oder einen Flag (Preview)
 </DD>
 <DT><A name="93GxjbcvZwpHIORhFt1Sgg"></A>Picture Art aufteilen</DT>
-<!--property:icon_internal=bullet_white-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1484238104-->
-<!--property:date_modified=1484238464-->
+<!--property:date_modified=1484997807-->
 <!--property:hash=b548f20ab0ea57c786ad96889a1aab59cd23e39f-->
 <!--property:hash_html=be756711a128052c6798f66e93d9176b2ff022ec-->
 <DD>
@@ -4166,6 +4166,31 @@ neu PictureArtShader <BR>
 Erstellt das farbige Bild aus den PictureArt Componenten.<BR>
 <BR>
 Überlagert das Schattenbild mit den dem Licht 
+</DD>
+<DT><A name="bodxCaIf76t5O81MDIYzAQ"></A>In Formula|Format</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1484241288-->
+<!--property:date_modified=1484241524-->
+<!--property:hash=c202b5daa67d02a269aab896831d37a1ffafa622-->
+<!--property:hash_html=27999e44d4e3f2340a73237126fd871f3aa41074-->
+<DD>
+... die Farbe des Textes auf Schwarz und den Zeichensatz auf den default Zeichensatz setzen.<BR>
+<BR>
+
+</DD>
+<DT><A name="cBbStWYKJhwnskuk3X7OBw"></A>zwei Ebenen in Renderer</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1484997813-->
+<!--property:date_modified=1484998021-->
+<!--property:hash=6abc08350cd9a26db665f403718238c34b523da9-->
+<!--property:hash_html=36f227ebac95ec05f2d457e510887b19c4f0f1ad-->
+<DD>
+Bisher werden Lücken mit keinem Punkt versehen.<BR>
+<BR>
+Zukünftig werden hier zwei Punkte verwendet. Der obere wird dann als Staub (also transparent) dargestellt.<BR>
+<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>
@@ -4345,13 +4370,13 @@ Aufruf: <BR>
 <DT><A name="yqlIBgHaX5SsYRbUxGfhsA"></A>Kleinian</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1484239729-->
-<!--property:date_modified=1484241150-->
-<!--property:hash=0c313f4965d08c545b3dffc99e0b20bd472b5401-->
-<!--property:hash_html=32822e3f4831e13162760989dd505eeb78358560-->
+<!--property:date_modified=1484244884-->
+<!--property:hash=9385fbddecb2de1ad8026b89b383c5dbf0a6aaa4-->
+<!--property:hash_html=7720502e4cccea989e137994f8fa091a2805cea6-->
 <DD>
 based on:<BR>
 <BR>
-<A href="http://www.josleys.com/articles/Kleinian%20escape-time_2.pdf">http://www.josleys.com/articles/Kleinian%20escape-time_2.pdf</A><BR>
+<A href="http://www.josleys.com/articles/Kleinian escape-time_2.pdf">http://www.josleys.com/articles/Kleinian%20escape-time_2.pdf</A><BR>
 <BR>
 double R=x*x+y*y;<BR>
 <BR>
@@ -4401,7 +4426,20 @@ y=(y-a)/R;<BR>
 if(y&lt;0 || y&gt;a)<BR>
   return false;<BR>
 <BR>
-}
+}<BR>
+<BR>
+<BR>
+// Erste Testimplementation:<BR>
+ public override void Init(){base.Init();if(GetString(&quot;intern.Formula.TempUpdateVal&quot;)!=&quot;7bd13811cf163d7486175f7333f99d2e&quot;){SetParameterBulk(&quot;Formula.Parameters: a=0.5 b=2.05 bailout=0.2 Formula.Static: Cycles=33 Julia=1 jx=0 jy=0 jz=0 Scene: CenterX=2.02787509836283 CenterY=0.303434536322575 CenterZ=-0.0957092389164516 Radius=2.96087234934467 Transformation.Camera: AngleX=-81.9033877125449 AngleY=-37.1673206589976 AngleZ=166.491656392557 IsometricProjection=1 Position=1 intern.Formula: TempUpdateVal=7bd13811cf163d7486175f7333f99d2e&quot;);}}public double a=0.1;public double b=1.95;public double bailout=0.3;public override bool GetBool(double x,double y,double z){if(z&gt;1)return false;if(z&lt;-1)return true;for (int i=0;i &lt; _cycles;i++){if(x&gt;1-y*b/a)x=x%2-2*x;if(x&lt;-1-y*b/a)x=x%2+2;double dividingLine=a/2+Math.Sign(b)*(2*a-1.95)*Math.Sign(x+b/2)*(1-Math.Pow(Math.E,-(7.2-(1.95-a)*12*Math.Abs(x+b/2))))/4;if(y&lt;dividingLine){double R=x*x+y*y;x=-b+x/R;y=a-y/R;if(y&lt;0 || y&gt;a)return false;}if(x&gt;1-y*b/a)x=x%2-2*x;if(x&lt;-1-y*b/a)x=x%2+2;if(y&gt;dividingLine){double R=(x+b)*(x+b)+(y-a)*(y-a);x=(x+b)/R;y=(y-a)/R;if(y&lt;0 || y&gt;a)return false;}}return true;}<BR>
+<BR>
+<BR>
+// Version 2<BR>
+ public override void Init(){base.Init();if(GetString(&quot;intern.Formula.TempUpdateVal&quot;)!=&quot;4202a6807a49e8206235d386c767519f&quot;){SetParameterBulk(&quot;Formula.Parameters: a=1.9 b=0.01 bailout=0.2 Formula.Static: Cycles=50 Julia=1 jx=0 jy=0 jz=0 Scene: CenterX=0.427501825179056 CenterY=0.802199579181394 CenterZ=0.992028064099294 Radius=1.25388550699138 Transformation.Camera: AngleX=90 AngleY=0 AngleZ=0 IsometricProjection=1 Position=1 intern.Formula: TempUpdateVal=4202a6807a49e8206235d386c767519f&quot;);}}public double a=0.1;public double b=1.95;public double bailout=0.3;public override bool GetBool(double x,double y,double z){if (y&lt;0 || y&gt;a)return false;if(z&gt;1)return false;if(z&lt;-1)return false;for (int i=0;i &lt; _cycles;i++){if(x&gt;1-y*b/a)x=x%2-2*x;else if(x&lt;-1-y*b/a)x=x%2+2;double dividingLine=a/2+Math.Sign(b)*(2*a-1.95)*Math.Sign(x+b/2)*(1-Math.Pow(Math.E,-(7.2-(1.95-a)*12*Math.Abs(x+b/2))))/4;bool needTransform2=false;if(y&lt;dividingLine){double R=x*x+y*y;if(R&gt;0){x=-b+x/R;y=a-y/R;if(y&lt;0 || y&gt;a)return false;}}elseneedTransform2=true;if(x&gt;1-y*b/a)x=x%2-2*x;else if(x&lt;-1-y*b/a)x=x%2+2;if(y&gt;dividingLine || needTransform2){double R=(x+b)*(x+b)+(y-a)*(y-a);if(R&gt;0){x=(x+b)/R;y=(y-a)/R;if(y&lt;0 || y&gt;a)return false;}}if(y&lt;0 || y&gt;a)return false;}return true;}<BR>
+<BR>
+// Zwischenversion 3 (funktioniert noch weniger)<BR>
+ public override void Init(){base.Init();if(GetString(&quot;intern.Formula.TempUpdateVal&quot;)!=&quot;95082ee8ecdb128cfa441f714c7782b6&quot;){SetParameterBulk(&quot;Formula.Parameters: a=1.9 b=0.01 Formula.Static: Cycles=50 Julia=1 jx=0 jy=0 jz=0 Scene: CenterX=-2.89387950012721 CenterY=0.926523809712258 CenterZ=0.992028064099294 Radius=7.99163023001155 Transformation.Camera: AngleX=90 AngleY=0 AngleZ=0 IsometricProjection=1 Position=1 intern.Formula: TempUpdateVal=95082ee8ecdb128cfa441f714c7782b6&quot;);}}public double a=0.1;public double b=1.95;public override bool GetBool(double x,double y,double z){if (y&lt;0 || y&gt;a)return false;if(z&gt;1)return false;if(z&lt;-1)return false;for (int i=0;i &lt; _cycles;i++){if(x&gt;1-y*b/a)x=x%2-2*x;else if(x&lt;-1-y*b/a)x=x%2+2;double dividingLine=a/2+Math.Sign(b)*(2*a-1.95)*Math.Sign(x+b/2)*(1-Math.Pow(Math.E,-(7.2-(1.95-a)*12*Math.Abs(x+b/2))))/4;bool needTransform2=false;if(y&lt;dividingLine){double R=x*x+y*y;if(R&gt;0){x=-b+x/R;y=a-y/R;if(y&lt;0 || y&gt;a)return false;}}else needTransform2=true;if(x&gt;1-y*b/a)x=x%2-2*x;else if(x&lt;-1-y*b/a)x=x%2+2;dividingLine=a/2+Math.Sign(b)*(2*a-1.95)*Math.Sign(x+b/2)*(1-Math.Pow(Math.E,-(7.2-(1.95-a)*12*Math.Abs(x+b/2))))/4;if(y&gt;dividingLine || needTransform2){double R=(x+b)*(x+b)+(y-a)*(y-a);if(R&gt;0){x=(x+b)/R;y=(y-a)/R;if(y&lt;0 || y&gt;a)return false;}}if(y&lt;0 || y&gt;a)return false;}return true;}<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

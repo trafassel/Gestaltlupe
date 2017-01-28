@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Formula.Parameters.box" Value="1" />
+  <Entry Key="Formula.Parameters.box" Value="True" />
   <Entry Key="Formula.Parameters.scale" Value="1.5" />
-  <Entry Key="Formula.Parameters.size" Value="0.061" />
-  <Entry Key="Formula.Parameters.xd" Value="1.2" />
+  <Entry Key="Formula.Parameters.size" Value="0.1" />
+  <Entry Key="Formula.Parameters.xd" Value="1" />
   <Entry Key="Formula.Parameters.yd" Value="1" />
-  <Entry Key="Formula.Parameters.zd" Value="1.2" />
+  <Entry Key="Formula.Parameters.zd" Value="1" />
   <Entry Key="Formula.Static.Cycles" Value="6" />
   <Entry Key="Formula.Static.Julia" Value="1" />
   <Entry Key="Formula.Static.jx" Value="0" />
@@ -13,12 +13,13 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="double x=0;&#xA;double y=0;&#xA;double z=0;&#xA;double _xd = 1;&#xA;double _yd = 1;&#xA;double _zd = 0;&#xA;double _scale=1.5;&#xA;double _size=0.1;&#xA;bool _box=true;&#xA;&#xA;public override void Init()&#xA;{&#xA;  base.Init();&#xA;  _xd=GetOrSetDouble(&quot;xd&quot;,1);&#xA;  _yd=GetOrSetDouble(&quot;yd&quot;,1);&#xA;  _zd=GetOrSetDouble(&quot;zd&quot;,0);&#xA;  _size=GetOrSetDouble(&quot;size&quot;,0.1);&#xA;  _scale=GetOrSetDouble(&quot;scale&quot;,1.5);&#xA;&#xA;  if(!Fractrace.Basic.ParameterDict.Current.Exists(&quot;Formula.Parameters.box&quot;))&#xA;  {&#xA;    Fractrace.Basic.ParameterDict.Current[&quot;Formula.Parameters.box&quot;] = &quot;1&quot;;&#xA;  }&#xA;  _box=Fractrace.Basic.ParameterDict.Current.GetBool  (&quot;Formula.Parameters.box&quot;);&#xA;   Fractrace.Basic.ParameterDict.Current[&quot;Formula.Parameters.box.PARAMETERINFO.Datatype&quot;] = &quot;Bool&quot;;&#xA;}&#xA;&#xA;&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  this.x=x;&#xA;  this.y=y;&#xA;  this.z=z;&#xA;  return GetBool(_cycles);&#xA;}&#xA;&#xA;&#xA;public bool GetBool(int cycles)&#xA;{&#xA;  // Julia Parameters&#xA;  x+=_jx;&#xA;  y+=_jy;&#xA;  z+=_jz;&#xA;  if(Bailout()) return true;&#xA;  if(cycles&lt;=0)return false;&#xA;  Scale(_scale);&#xA;&#xA;  double x1=x;&#xA;  double y1=y;&#xA;  double z1=z;&#xA;&#xA;  {&#xA;    Move(0,_yd,0);&#xA;    if(GetBool(cycles-1)) return true;&#xA;&#xA;    x=x1;&#xA;    y=y1;&#xA;    z=z1;&#xA;    Move(_xd,0,0);&#xA;    if(GetBool(cycles-1)) return true;&#xA;&#xA;    x=x1;&#xA;    y=y1;&#xA;    z=z1;&#xA;    Move(0,0,_zd);&#xA;    if(GetBool(cycles-1)) return true;&#xA;  }&#xA;&#xA;  x=x1;&#xA;  y=y1;&#xA;  z=z1;&#xA;  return false;&#xA;}&#xA;&#xA;bool Bailout()&#xA;{&#xA;if(_box)&#xA;  return BailoutBox();&#xA;return BailoutSphere();&#xA;}&#xA;&#xA;bool BailoutBox()&#xA;{&#xA;  // box&#xA;  if(x*x&gt;_size)&#xA;  return false;&#xA;  if(y*y&gt;_size)&#xA;  return false;&#xA;  if(z*z&gt;_size)&#xA;  return false;&#xA;  return true;&#xA;}&#xA;bool BailoutSphere()&#xA;{&#xA;  // sphere&#xA;  if(x*x+y*y+z*z&gt;_size)&#xA;  return false;&#xA;  return true;&#xA;}&#xA;void Move(double xd,double yd,double zd)&#xA;{&#xA;  x+=xd;&#xA;  y+=yd;&#xA;  z+=zd;&#xA;}&#xA;void Scale(double scale)&#xA;{&#xA;  x*=scale;&#xA;  y*=scale;&#xA;  z*=scale;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="double x=0;&#xA;double y=0;&#xA;double z=0;&#xA;public double xd = 1;&#xA;public double yd = 1;&#xA;public double zd = 1;&#xA;public double scale=1.5;&#xA;public double size=0.1;&#xA;public bool box=true;&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  this.x=x;&#xA;  this.y=y;&#xA;  this.z=z;&#xA;  return GetBool(_cycles);&#xA;}&#xA;bool GetBool(int cycles)&#xA;{&#xA;  // Julia Parameters&#xA;  x+=_jx;&#xA;  y+=_jy;&#xA;  z+=_jz;&#xA;  if(Bailout()) return true;&#xA;  if(cycles&lt;=0)return false;&#xA;  Scale(scale);&#xA;  double x1=x;&#xA;  double y1=y;&#xA;  double z1=z;&#xA;  {&#xA;    Move(0,yd,0);&#xA;    if(GetBool(cycles-1)) return true;&#xA;    x=x1;&#xA;    y=y1;&#xA;    z=z1;&#xA;    Move(xd,0,0);&#xA;    if(GetBool(cycles-1)) return true;&#xA;    x=x1;&#xA;    y=y1;&#xA;    z=z1;&#xA;    Move(0,0,zd);&#xA;    if(GetBool(cycles-1)) return true;&#xA;  }&#xA;  x=x1;&#xA;  y=y1;&#xA;  z=z1;&#xA;  return false;&#xA;}&#xA;bool Bailout()&#xA;{&#xA;  if(box)&#xA;  return BailoutBox();&#xA;  return BailoutSphere();&#xA;}&#xA;bool BailoutBox()&#xA;{&#xA;  if(x*x&gt;size) return false;&#xA;  if(y*y&gt;size) return false;&#xA;  if(z*z&gt;size) return false;&#xA;  return true;&#xA;}&#xA;bool BailoutSphere()&#xA;{&#xA;  if(x*x+y*y+z*z&gt;size) return false;&#xA;  return true;&#xA;}&#xA;void Move(double xd,double yd,double zd)&#xA;{&#xA;  x+=xd;&#xA;  y+=yd;&#xA;  z+=zd;&#xA;}&#xA;void Scale(double scale)&#xA;{&#xA;  x*=scale;&#xA;  y*=scale;&#xA;  z*=scale;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="7" />
   <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
   <Entry Key="Renderer.ColorFactor.Green" Value="1" />
   <Entry Key="Renderer.ColorFactor.Red" Value="1" />
   <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
   <Entry Key="Renderer.ColorGreyness" Value="0" />
   <Entry Key="Renderer.ColorInside" Value="1" />
   <Entry Key="Renderer.ColorIntensity" Value="1" />

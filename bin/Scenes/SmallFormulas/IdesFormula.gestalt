@@ -6,12 +6,13 @@
   <Entry Key="Formula.Static.jy" Value="0" />
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="// Ides Formula&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx = x*x;&#xA;    double yy = y*y;&#xA;    double zz = z*z;&#xA;    double r = xx + yy + zz;&#xA;    if (r&gt;5) return false;&#xA;    x = 2*x*y*z;&#xA;    y = yy - 0.5*(xx + zz);&#xA;    z = zz - 0.5*(xx + yy);&#xA;    if(r&gt;0)&#xA;    {&#xA;      additionalPointInfo.red+=xx/r;&#xA;      additionalPointInfo.green+=yy/r;&#xA;      additionalPointInfo.blue+=zz/r;&#xA;    }&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="// Ides Formula&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int i=1; i&lt;_cycles; i++)&#xA;  {&#xA;    double xx = x*x;&#xA;    double yy = y*y;&#xA;    double zz = z*z;&#xA;    double r = xx + yy + zz;&#xA;    if (r&gt;5) return false;&#xA;    x = 2*x*y*z;&#xA;    y = yy - (xx + zz)/2;&#xA;    z = zz - (xx + yy)/2;&#xA;    if(r&gt;0)&#xA;    {&#xA;      Red+=xx/r;&#xA;      Green+=yy/r;&#xA;      Blue+=zz/r;&#xA;    }&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="7" />
   <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
   <Entry Key="Renderer.ColorFactor.Green" Value="1" />
   <Entry Key="Renderer.ColorFactor.Red" Value="1" />
   <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
   <Entry Key="Renderer.ColorGreyness" Value="0" />
   <Entry Key="Renderer.ColorInside" Value="0" />
   <Entry Key="Renderer.ColorIntensity" Value="1" />

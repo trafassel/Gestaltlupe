@@ -137,7 +137,7 @@ namespace Fractrace
             lock (_smallPreviewCurrentDrawStepMutex)
             {
                 try { 
-                btnPreview.Enabled = false;
+                //btnPreview.Enabled = false;
                 } catch(InvalidOperationException ex)
                 {
                     lock (_inDrawingMutex)
@@ -347,7 +347,7 @@ namespace Fractrace
                     }
                 }
             }
-            btnPreview.Enabled = true;
+            //btnPreview.Enabled = true;
             lock (_inDrawingMutex)
                 _inDrawing = false;
             System.Diagnostics.Debug.WriteLine("_inDrawing = false (4)");

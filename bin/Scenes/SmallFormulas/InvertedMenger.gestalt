@@ -10,7 +10,7 @@
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.jzz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="public double boxSize=1.8;&#xA;public double holeSize=0.62;&#xA;public double scale=2;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n=1;n &lt; _cycles;  n++)&#xA;  {&#xA;    if(Math.Abs(x)&gt;=holeSize &amp;&amp;&#xA;    Math.Abs(y)&gt;=holeSize &amp;&amp;&#xA;    Math.Abs(z)&gt;=holeSize) return false;&#xA;    if(x&gt; holeSize) x-=scale*holeSize;&#xA;    if(x&lt;-holeSize) x+=scale*holeSize;&#xA;    if(y&gt; holeSize) y-=scale*holeSize;&#xA;    if(y&lt;-holeSize) y+=scale*holeSize;&#xA;    if(z&gt; holeSize) z-=scale*holeSize;&#xA;    if(z&lt;-holeSize) z+=scale*holeSize;&#xA;    x*=boxSize;&#xA;    y*=boxSize;&#xA;    z*=boxSize;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="public double boxSize=1.8;&#xA;public double holeSize=0.62;&#xA;public double scale=2;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  for (int n=1;n &lt; _cycles;  n++)&#xA;  {&#xA;    if(Math.Abs(x)&gt;=holeSize &amp;&amp;&#xA;    Math.Abs(y)&gt;=holeSize &amp;&amp;&#xA;    Math.Abs(z)&gt;=holeSize) return false;&#xA;    if(x&gt; holeSize) x-=scale*holeSize;&#xA;    else if(x&lt;-holeSize) x+=scale*holeSize;&#xA;    if(y&gt; holeSize) y-=scale*holeSize;&#xA;    else if(y&lt;-holeSize) y+=scale*holeSize;&#xA;    if(z&gt; holeSize) z-=scale*holeSize;&#xA;    else if(z&lt;-holeSize) z+=scale*holeSize;&#xA;    x*=boxSize;&#xA;    y*=boxSize;&#xA;    z*=boxSize;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="4" />
   <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
   <Entry Key="Renderer.ColorFactor.Green" Value="1" />
@@ -30,5 +30,4 @@
   <Entry Key="Transformation.Camera.AngleZ" Value="-15.6335199621586" />
   <Entry Key="Transformation.Camera.IsometricProjection" Value="1" />
   <Entry Key="Transformation.Camera.Position" Value="1" />
-  <Entry Key="View.DephAdd" Value="250" />
 </ParameterDict>

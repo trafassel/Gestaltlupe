@@ -117,11 +117,6 @@ namespace Fractrace.PictureArt
         // Green component of background color 
         private float _backColorGreen = (float)0.4;
 
-        /// <summary>
-        /// Difference between maximal and minimal y value in computing area
-        /// </summary>
-        private float _areaDeph = 0;
-
         private float _brightness = 1;
 
         private float _contrast = 1;
@@ -158,8 +153,6 @@ namespace Fractrace.PictureArt
             _lightRay.X = (float)_parameters.GetDouble(parameterNode + "Light.X");
             _lightRay.Y = (float)_parameters.GetDouble(parameterNode + "Light.Y");
             _lightRay.Z = (float)_parameters.GetDouble(parameterNode + "Light.Z");
-            //_areaDeph = (float)_parameters.GetDouble("Scene.Radius");
-            _areaDeph = 1;
 
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
