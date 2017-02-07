@@ -292,14 +292,15 @@ for (int n = 1; n < _cycles; n++)
 
             ParameterDict.Current["Renderer.ShadowGlow"] = "0.94";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
-            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.94 0.96 0.98 1";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.PlusButton"] = "0.001";
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Current["Renderer.ShadowNumber"] = "22";
-            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.Description"] = "Corresponds to the number of shadows.";
-            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.FixedButtons"] = "11 22";
-            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.PlusButton"] = "1";
+//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.Description"] = "Corresponds to the number of shadows.";
+//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.FixedButtons"] = "11 22";
+//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.PlusButton"] = "1";
+            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Intensity of the FieldOfView
             ParameterDict.Current["Renderer.AmbientIntensity"] = "0";

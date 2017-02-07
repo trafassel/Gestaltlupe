@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Fractrace.DataTypes;
 using Fractrace.Basic;
 using Fractrace.Geometry;
+using Fractrace.SceneGraph;
 
 namespace Fractrace
 {
@@ -1206,41 +1207,28 @@ namespace Fractrace
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            if (ResultImageView.PublicForm.LastPicturArt == null)
+            {
+                MessageBox.Show("No Surface Data available.");
+                return;
+            }
             btnExport.Enabled = false;
             try
             {
                 Application.DoEvents();
                 SaveFileDialog sd = new SaveFileDialog();
-                sd.Filter = "Web|*.xhtml|VRML|*.wrl|*.*|*.*";
+                AvailableExporters availableExporters = new AvailableExporters();
+                sd.Filter = availableExporters.FiledialogFilter;
                 if (sd.ShowDialog() == DialogResult.OK)
                 {
-                    if (ResultImageView.PublicForm.LastPicturArt == null)
+                    if (!availableExporters.Export(sd.FileName, ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData))
                     {
-                        MessageBox.Show("No Surface Data available.");
+                        System.Windows.Forms.MessageBox.Show("No exporter for given file type found.");
                         btnExport.Enabled = true;
                         return;
                     }
-                    if(sd.FileName.ToLower().EndsWith(".html"))
-                    {
-                        Fractrace.SceneGraph.WebGlExporter exporter = new SceneGraph.WebGlExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                        exporter.Export(sd.FileName);
-                    }
-                    else
-                    if (sd.FileName.ToLower().EndsWith(".xhtml"))
-                    {
-                        Fractrace.SceneGraph.X3DomExporter exporter = new SceneGraph.X3DomExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                        exporter.Init(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                        exporter.Update(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                        exporter.Export(sd.FileName);
-                    }
-                    else
-                    {
-                        Fractrace.SceneGraph.VrmlSceneExporter exporter = new SceneGraph.VrmlSceneExporter(ResultImageView.PublicForm.IterateForPictureArt, ResultImageView.PublicForm.LastPicturArt.PictureData);
-                    exporter.Export(sd.FileName);
-                    }
                     Fractrace.Gui.ExportResultDialog exportResultDialog = new Gui.ExportResultDialog(sd.FileName);
                     exportResultDialog.ShowDialog();
-
                     if(exportResultDialog.OpenInBrowser)
                     {
                         System.Diagnostics.Process.Start(sd.FileName);

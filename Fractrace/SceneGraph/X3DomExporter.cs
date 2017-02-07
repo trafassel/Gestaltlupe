@@ -20,6 +20,12 @@ namespace Fractrace.SceneGraph
 
         }
 
+        protected override string GetFileDescription() { return "Web|*.xhtml"; }
+
+        public override bool FileTypeIsSupported(string fileName)
+        {
+            return fileName.ToLower().EndsWith(".xhtml");
+        }
 
         MeshTool _meshTool = null;
 
@@ -52,6 +58,14 @@ namespace Fractrace.SceneGraph
 
         public override void Export(string fileName)
         {
+
+            Init(_iterate,_pictureData);
+            Update(_iterate, _pictureData);
+            UpdateExport(fileName);
+        }
+
+        public void UpdateExport(string fileName)
+        { 
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.
             _mesh.ComputeBoundingBox();
             float radiusx = _mesh.MaxBBox.X - _mesh.MinBBox.X;

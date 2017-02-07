@@ -18,6 +18,13 @@ namespace Fractrace.SceneGraph
 
         }
 
+        protected override string GetFileDescription() { return "WebGl|*.html"; }
+
+        public override bool FileTypeIsSupported(string fileName)
+        {
+            return fileName.ToLower().EndsWith(".html") || fileName.ToLower().EndsWith(".htm");
+        }
+
         protected override void CreateMesh()
         {
             MeshTool _meshTool = new MeshTool(_iterate, _pictureData);
@@ -212,6 +219,11 @@ var vertices = [
 </script>
 
 <script type = ""application/x-javascript"" >
+
+
+
+
+
   function Point(x, y)
         {
             this.x = x;

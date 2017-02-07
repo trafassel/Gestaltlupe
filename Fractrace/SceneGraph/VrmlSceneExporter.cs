@@ -24,7 +24,13 @@ namespace Fractrace.SceneGraph
         {
         }
 
-     
+        protected override string GetFileDescription() { return "VRML|*.wrl"; }
+
+        public override bool FileTypeIsSupported(string fileName)
+        {
+            return fileName.ToLower().EndsWith(".wrl");
+        }
+
         /// <summary>
         /// In VRML used number format.
         /// </summary>

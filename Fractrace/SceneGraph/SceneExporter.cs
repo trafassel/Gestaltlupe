@@ -19,6 +19,14 @@ namespace Fractrace.SceneGraph
             _pictureData = pictureData;    
         }
 
+        public string FileDescription { get { return GetFileDescription(); } }
+
+        protected virtual string GetFileDescription() { return ""; }
+
+        public virtual bool FileTypeIsSupported(string fileName)
+        {
+            return false;
+        }
 
         protected virtual void CreateMesh()
         {

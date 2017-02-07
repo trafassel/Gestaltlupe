@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:305-->
+<!--LastNote:296-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4090,11 +4090,13 @@ tbValue_TextChanged ausgelöst.<BR>
 <DT><A name="ne1vyy0LUxTBK3gkPyjoUA"></A>Shadow Number entfernen</DT>
 <!--property:icon_internal=bullet_red-->
 <!--property:date_created=1481453335-->
-<!--property:date_modified=1481453614-->
-<!--property:hash=71f795281e87dfc0a832a076c6960a8a84c449df-->
-<!--property:hash_html=71f795281e87dfc0a832a076c6960a8a84c449df-->
+<!--property:date_modified=1486222491-->
+<!--property:hash=009984ca78f8637ee72c1375e2d98d1a9c07cb64-->
+<!--property:hash_html=adbb53432d63b7efb9a2c7bd22a78e7fa94f34d8-->
 <DD>
-Zwischenrechnungen werden 
+... ausblenden.<BR>
+<BR>
+
 </DD>
 <DT><A name="mWDUy5vmSo59LnDQ2y4o8g"></A>Beim Druck auf Settings </DT>
 <!--property:icon_internal=bullet_white-->
@@ -4112,9 +4114,9 @@ sollen die zuletzten vom Nutzer eingestellten Settings ausgewählt werden.
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="He30fkF6bOm0FNX7A268xQ"></A>ShadowJustify hat keine Auswirkung</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1457780285-->
-<!--property:date_modified=1481979953-->
+<!--property:date_modified=1486222444-->
 <!--property:hash=4a96c4d755e63ca14ab91c61b8efd11832618e33-->
 <!--property:hash_html=455e192a319a874fb49b94296b14d16b84855737-->
 <DD>

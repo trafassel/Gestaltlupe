@@ -253,7 +253,7 @@ namespace Fractrace.Scheduler.BatchProcess
         protected void BatchEnds()
         {
             // TODO: let exporter write result file.
-            _exporter.Export(ExportFile);
+            _exporter.UpdateExport(ExportFile);
             // restore current ParameterDict.
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleX", _startAngleX);
             ParameterDict.Current.SetDouble("Transformation.Camera.AngleY", _startAngleY);
