@@ -70,7 +70,7 @@ namespace Fractrace.TomoGeometry
 
         public bool GetOrSetBool(string id, bool defaultValue = false, string description = "", bool showInfo = true)
         {
-            return ParameterDict.Current.GetOrSetBool("Formula.Parameters." + id, defaultValue, description, showInfo);
+            return ParameterDict.Current.GetOrSetBool("Formula.Parameters." + id, defaultValue, description);
         }
 
 

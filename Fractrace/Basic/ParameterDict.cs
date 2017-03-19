@@ -559,7 +559,6 @@ namespace Fractrace.Basic
             {
                 ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.FixedButtons", "0", false);
                 ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusButton", "0.1", false);
-                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusPlusButton", "0.001", false);
             }
             return GetDouble(key);
         }
@@ -567,7 +566,7 @@ namespace Fractrace.Basic
         /// <summary>
         /// Get bool entry. Set entry, if not exists.
         /// </summary>
-        public bool GetOrSetBool(string key, bool defaultValue = false, string description = "", bool addDefaultButtons = false)
+        public bool GetOrSetBool(string key, bool defaultValue = false, string description = "")
         {
             if (!_entries.ContainsKey(key))
             {
@@ -578,12 +577,6 @@ namespace Fractrace.Basic
                 ParameterDict.Current.SetValue(key + ".PARAMETERINFO.Description", description, false);
             }
             ParameterDict.Current.SetValue(key + ".PARAMETERINFO.Datatype", "Bool", false);
-            if (addDefaultButtons)
-            {
-                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.FixedButtons", "0", false);
-                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusButton", "0.1", false);
-                ParameterDict.Current.SetValue(key + ".PARAMETERINFO.VIEW.PlusPlusButton", "0.001", false);
-            }
             return GetBool(key);
         }
 

@@ -7,6 +7,9 @@ namespace Fractrace.Basic
 
         System.Windows.Forms.TextBox _tbValue = new System.Windows.Forms.TextBox();
 
+        // Used to scale the parameter changes if pus or minus button is pressed.
+        private double _amount = 1;
+
         protected override void PreInit()
         {
             _tbValue.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -116,21 +119,6 @@ namespace Fractrace.Basic
         {
             {
                 System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-                button.Text = "<";
-                button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                button.ForeColor = System.Drawing.Color.DarkGray;
-                button.FlatAppearance.BorderSize = 0;
-                button.Dock = System.Windows.Forms.DockStyle.Right;
-                button.Click += DecreaseAmount;
-                button.Width = 30;
-                _additionalButtonsWidth += button.Width;
-                _additionalButtonsWidth += tmpBtnSize;
-                this.pnlButtons.Width += 30;
-                this.pnlButtons.Controls.Add(button);
-            }
-            {
-                System.Windows.Forms.Button button = new System.Windows.Forms.Button();
                 button.Text = ">";
                 button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
                 button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -144,9 +132,22 @@ namespace Fractrace.Basic
                 this.pnlButtons.Width += 30;
                 this.pnlButtons.Controls.Add(button);
             }
+            {
+                System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+                button.Text = "<";
+                button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                button.ForeColor = System.Drawing.Color.DarkGray;
+                button.FlatAppearance.BorderSize = 0;
+                button.Dock = System.Windows.Forms.DockStyle.Right;
+                button.Click += DecreaseAmount;
+                button.Width = 30;
+                _additionalButtonsWidth += button.Width;
+                _additionalButtonsWidth += tmpBtnSize;
+                this.pnlButtons.Width += 30;
+                this.pnlButtons.Controls.Add(button);
+            }
         }
-
-        private double _amount = 1;
 
         private void IncreaseAmount(object sender, EventArgs e)
         {
@@ -156,24 +157,6 @@ namespace Fractrace.Basic
         private void DecreaseAmount(object sender, EventArgs e)
         {
             _amount /= 10.0;
-        }
-
-        public void AddPlusPlusButton(string value)
-        {
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-            button.Text = "+";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button.ForeColor = System.Drawing.Color.DarkGray;
-            button.FlatAppearance.BorderSize = 0;
-            button.Dock = System.Windows.Forms.DockStyle.Right;
-            button.Tag = value;
-            button.Click += PlusButton_Click;
-            button.Width = 30;
-            _additionalButtonsWidth += button.Width;
-            _additionalButtonsWidth += tmpBtnSize;
-            this.pnlButtons.Width += 30;
-            this.pnlButtons.Controls.Add(button);
         }
 
         System.Windows.Forms.Button fillRightButton = null;
@@ -219,25 +202,6 @@ namespace Fractrace.Basic
 
         public void AddMinusButton(string value)
         {
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-            button.Text = "-";
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button.ForeColor = System.Drawing.Color.DarkGray;
-            button.FlatAppearance.BorderSize = 0;
-            button.Dock = System.Windows.Forms.DockStyle.Right;
-            button.Tag = value;
-            button.Click += MinusButton_Click;
-            button.Width = 30;
-            _additionalButtonsWidth += button.Width;
-            _additionalButtonsWidth += tmpBtnSize;
-            this.pnlButtons.Width += 30;
-            this.pnlButtons.Controls.Add(button);
-        }
-
-        public void AddMinusMinusButton(string value)
-        {
-           
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "-";
             button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

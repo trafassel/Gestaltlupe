@@ -60,7 +60,7 @@
             this.pnlEdit.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEdit.Name = "pnlEdit";
             this.pnlEdit.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.pnlEdit.Size = new System.Drawing.Size(110, 79);
+            this.pnlEdit.Size = new System.Drawing.Size(139, 79);
             this.pnlEdit.TabIndex = 1;
             // 
             // pnlButtons
