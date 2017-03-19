@@ -27,6 +27,7 @@ namespace Fractrace.TomoGeometry
 
         public TomoFormula CreateFromString(string source)
         {
+            
             TomoFormula retVal = null;
             bool isCsharpCode = IsCsharpCode(source);
 
@@ -35,6 +36,8 @@ namespace Fractrace.TomoGeometry
                 Microsoft.CSharp.CSharpCodeProvider csProviderOnEarlyNodeCode = null;
                 CompileCS(source, out csProviderOnEarlyNodeCode);
                 if (csProviderOnEarlyNodeCode == null)
+                    return null;
+                if (results == null)
                     return null;
                 System.Reflection.Assembly mCAssembly = null;
                 mCAssembly = results.CompiledAssembly;

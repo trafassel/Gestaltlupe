@@ -42,6 +42,7 @@ namespace Fractrace.Basic
                     string buttonValue = ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusButton"];
                     stringElement.AddPlusButton(buttonValue.Trim());
                     stringElement.AddMinusButton(buttonValue.Trim());
+                    stringElement.AddAdjustButtons();
                     hasButtons = true;
                 }
                 if (ParameterDict.Current[name + ".PARAMETERINFO.VIEW.PlusPlusButton"] != "")

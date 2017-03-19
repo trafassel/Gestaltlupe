@@ -112,6 +112,52 @@ namespace Fractrace.Basic
             this.pnlButtons.Controls.Add(button);
         }
 
+        public void AddAdjustButtons()
+        {
+            {
+                System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+                button.Text = "<";
+                button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                button.ForeColor = System.Drawing.Color.DarkGray;
+                button.FlatAppearance.BorderSize = 0;
+                button.Dock = System.Windows.Forms.DockStyle.Right;
+                button.Click += DecreaseAmount;
+                button.Width = 30;
+                _additionalButtonsWidth += button.Width;
+                _additionalButtonsWidth += tmpBtnSize;
+                this.pnlButtons.Width += 30;
+                this.pnlButtons.Controls.Add(button);
+            }
+            {
+                System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+                button.Text = ">";
+                button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                button.ForeColor = System.Drawing.Color.DarkGray;
+                button.FlatAppearance.BorderSize = 0;
+                button.Dock = System.Windows.Forms.DockStyle.Right;
+                button.Click += IncreaseAmount;
+                button.Width = 30;
+                _additionalButtonsWidth += button.Width;
+                _additionalButtonsWidth += tmpBtnSize;
+                this.pnlButtons.Width += 30;
+                this.pnlButtons.Controls.Add(button);
+            }
+        }
+
+        private double _amount = 1;
+
+        private void IncreaseAmount(object sender, EventArgs e)
+        {
+            _amount *= 10.0;
+        }
+
+        private void DecreaseAmount(object sender, EventArgs e)
+        {
+            _amount /= 10.0;
+        }
+
         public void AddPlusPlusButton(string value)
         {
             System.Windows.Forms.Button button = new System.Windows.Forms.Button();
@@ -166,7 +212,7 @@ namespace Fractrace.Basic
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
             double currentValue = Double.Parse(this._tbValue.Text, ParameterDict.Culture);
             double valueToAdd= Double.Parse(button.Tag.ToString(), ParameterDict.Culture);
-            currentValue += valueToAdd;
+            currentValue += _amount*valueToAdd;
             this._tbValue.Text = currentValue.ToString(ParameterDict.Culture);
         }
 
@@ -213,7 +259,7 @@ namespace Fractrace.Basic
             System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender;
             double currentValue = Double.Parse(this._tbValue.Text, ParameterDict.Culture);
             double valueToSubtract = Double.Parse(button.Tag.ToString(), ParameterDict.Culture);
-            currentValue -= valueToSubtract;
+            currentValue -= _amount*valueToSubtract;
             this._tbValue.Text = currentValue.ToString(ParameterDict.Culture);
         }
 

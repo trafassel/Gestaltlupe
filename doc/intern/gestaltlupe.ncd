@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:296-->
+<!--LastNote:306-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4183,13 +4183,28 @@ Erstellt das farbige Bild aus den PictureArt Componenten.<BR>
 <DT><A name="cBbStWYKJhwnskuk3X7OBw"></A>zwei Ebenen in Renderer</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1484997813-->
-<!--property:date_modified=1484998021-->
-<!--property:hash=6abc08350cd9a26db665f403718238c34b523da9-->
-<!--property:hash_html=36f227ebac95ec05f2d457e510887b19c4f0f1ad-->
+<!--property:date_modified=1486813200-->
+<!--property:hash=fd4f8412e954d7f0d9ed71ef16138fd36e95ef61-->
+<!--property:hash_html=34587d9bb70b66ebbaa9503498e4d7e6778438f6-->
 <DD>
 Bisher werden Lücken mit keinem Punkt versehen.<BR>
 <BR>
 Zukünftig werden hier zwei Punkte verwendet. Der obere wird dann als Staub (also transparent) dargestellt.<BR>
+<BR>
+<BR>
+Wichtig: Punkte, die an der Grenze zwischen vorderen und hinteren Bereich liegen können damit schnell identifiziert werden.<BR>
+<BR>
+
+</DD>
+<DT><A name="nTGxQy3GE3crso6PgLkOxw"></A>Einstellmöglochkeit der Schrittweite der +/- Buttons</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1488102471-->
+<!--property:date_modified=1488131745-->
+<!--property:hash=d772d04606c76db34f2e00f10324bb01ae8a4485-->
+<!--property:hash_html=9add1cf45b54d7816ab8050e653640e497b7327e-->
+<DD>
+&lt; &gt; - Buttons.<BR>
+<BR>
 <BR>
 <BR>
 

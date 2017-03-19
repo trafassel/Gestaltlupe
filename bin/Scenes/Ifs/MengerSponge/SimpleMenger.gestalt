@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters.anglex" Value="0" />
+  <Entry Key="Formula.Parameters.angley" Value="0" />
+  <Entry Key="Formula.Parameters.anglez" Value="0" />
+  <Entry Key="Formula.Parameters.boxSize" Value="3" />
+  <Entry Key="Formula.Parameters.holeSize" Value="1" />
+  <Entry Key="Formula.Parameters.scalex" Value="1" />
+  <Entry Key="Formula.Parameters.scaley" Value="1" />
+  <Entry Key="Formula.Parameters.scalez" Value="1" />
+  <Entry Key="Formula.Static.Cycles" Value="8" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="public double boxSize;&#xA;public double holeSize;&#xA;public double scalex;&#xA;public double scaley;&#xA;public double scalez;&#xA;public double anglex=0;&#xA;public double angley=0;&#xA;public double anglez=0;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  double cosAngleX=Math.Cos(Math.PI/180.0*anglex);&#xA;  double cosAngleY=Math.Cos(Math.PI/180.0*angley);&#xA;  double cosAngleZ=Math.Cos(Math.PI/180.0*anglez);&#xA;  double sinAngleX=Math.Cos(Math.PI/180.0*anglex);&#xA;  double sinAngleY=Math.Sin(Math.PI/180.0*angley);&#xA;  double sinAngleZ=Math.Sin(Math.PI/180.0*anglez);&#xA;  double boxSizeScalex=boxSize*scalex;&#xA;  double boxSizeScaley=boxSize*scaley;&#xA;  double boxSizeScalez=boxSize*scalez;&#xA;  double holeSize2=2*holeSize;&#xA;  x*=boxSize;&#xA;  y*=boxSize;&#xA;  z*=boxSize;&#xA;  if(x&gt; boxSizeScalex)return false;&#xA;  if(y&gt; boxSizeScaley)return false;&#xA;  if(z&gt; boxSizeScalex)return false;&#xA;  if(x&lt;-boxSizeScalex)return false;&#xA;  if(y&lt;-boxSizeScaley)return false;&#xA;  if(z&lt;-boxSizeScalez)return false;&#xA;  for (int n=1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xa=Math.Abs(x);&#xA;    double ya=Math.Abs(y);&#xA;    double za=Math.Abs(z);&#xA;    int holeCount=0;&#xA;    if(xa&lt;holeSize)holeCount++;&#xA;    if(ya&lt;holeSize)holeCount++;&#xA;    if(za&lt;holeSize)holeCount++;&#xA;    if(holeCount&gt;=2)return false;&#xA;    if(x&gt; holeSize)&#xA;    {&#xA;      Red++;&#xA;      x-=holeSize2;&#xA;    }&#xA;    else if(x&lt;-holeSize)&#xA;    {&#xA;      Red--;&#xA;      x+=holeSize2;&#xA;    }&#xA;    if(y&gt; holeSize)&#xA;    {&#xA;      Blue++;&#xA;      y-=holeSize2;&#xA;    }&#xA;    else if(y&lt;-holeSize)&#xA;    {&#xA;      Blue--;&#xA;      y+=holeSize2;&#xA;    }&#xA;    if(z&gt; holeSize)&#xA;    {&#xA;      Green++;&#xA;      z-=holeSize2;&#xA;    }&#xA;    else if(z&lt;-holeSize)&#xA;    {&#xA;      Green--;&#xA;      z+=holeSize2;&#xA;    }&#xA;    x*=boxSizeScalex;&#xA;    y*=boxSizeScaley;&#xA;    z*=boxSizeScalez;&#xA;    if(anglex!=0)Rotate(sinAngleX,cosAngleX,ref y,ref z);&#xA;    if(angley!=0)Rotate(sinAngleY,cosAngleY,ref x,ref z);&#xA;    if(anglez!=0)Rotate(sinAngleZ,cosAngleZ,ref x,ref y);&#xA;  }&#xA;  return true;&#xA;}&#xA;void Rotate(double sinAngle,double cosAngle,ref double x,ref double y)&#xA;{&#xA;  double a=cosAngle * x-sinAngle * y;&#xA;  y=cosAngle * y+sinAngle * x;&#xA;  x=a;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="8" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="1.58752163997001" />
+  <Entry Key="Scene.CenterY" Value="1.03784162385783" />
+  <Entry Key="Scene.CenterZ" Value="0.711335124550741" />
+  <Entry Key="Scene.Radius" Value="2.33793293397657" />
+  <Entry Key="Transformation.Camera.AngleX" Value="10.2074451858821" />
+  <Entry Key="Transformation.Camera.AngleY" Value="-19.0315263881349" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="-53.2901631402185" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>
