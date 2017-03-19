@@ -15,33 +15,79 @@ namespace Fractrace.Gui
     {
 
         DataViewControlPage _rendererControl = null;
+        DataViewControlPage _lightControl = null;
+        DataViewControlPage _colorControl = null;
+        DataViewControlPage _backgroundControl = null;
+
         public MaterialControl()
         {
             InitializeComponent();
 
-            // test is for designer only
+            // Test if this control is openened in Visual Studio Designer:
             if (ParameterInput.MainParameterInput != null && ParameterInput.MainParameterInput.MainDataViewControl != null)
             {
                 _rendererControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
                 _rendererControl.Dock = DockStyle.Fill;
                 _rendererControl.Create(new string[]
                     {
+                    "Renderer.Brightness",
+                    "Renderer.Contrast",
+                    "Renderer.BrightLightLevel",
+                    "Renderer.ShadowGlow",
+                    "Renderer.ShadowJustify",
+                    "Renderer.AmbientIntensity",
+                    "Renderer.MinFieldOfView",
+                    "Renderer.MaxFieldOfView",
+                    "Renderer.Normalize",
+                    }
+                    );
+                pnlRenderer.Controls.Add(_rendererControl);
+
+                _lightControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _lightControl.Dock = DockStyle.Fill;
+                _lightControl.Create(new string[]
+                    {
+                    "Renderer.ShininessFactor",
+                    "Renderer.Shininess",
+                   "Renderer.Light.X",
+                     "Renderer.Light.Y",
+                     "Renderer.Light.Z",
+                    "Renderer.LightIntensity",
+                       "Renderer.UseLight",
+                    }
+                    );
+                pnlLight.Controls.Add(_lightControl);
+
+                _colorControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _colorControl.Dock = DockStyle.Fill;
+                _colorControl.Create(new string[]
+                    {
                     "Renderer.ColorInside",
                     "Renderer.ColorOutside",
                     "Renderer.ColorIntensity",
                     "Renderer.ColorGreyness",
-                    "Renderer.Brightness",
-                    "Renderer.Contrast",
-                    "Renderer.LightIntensity",
-                    "Renderer.BrightLightLevel",
-                    "Renderer.ShininessFactor",
-                    "Renderer.Shininess",
-                    "Renderer.ShadowJustify"
+                    "Renderer.ColorFactor.Red",
+                    "Renderer.ColorFactor.Green",
+                    "Renderer.ColorFactor.Blue",
+                    "Renderer.ColorFactor.Threshold",
                     }
                     );
-                pnlRenderer.Controls.Add(_rendererControl);
-            }
+                pnlColor.Controls.Add(_colorControl);
 
+                _backgroundControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
+                _backgroundControl.Dock = DockStyle.Fill;
+                _backgroundControl.Create(new string[]
+                    {
+                    "Renderer.UseDarken",
+                    "Renderer.BackColor.Red",
+                    "Renderer.BackColor.Green",
+                    "Renderer.BackColor.Blue",
+                    "Renderer.BackColor.Transparent"
+                    }
+                    );
+                pnlBackground.Controls.Add(_backgroundControl);
+
+            }
         }
 
 
@@ -211,6 +257,9 @@ namespace Fractrace.Gui
         public void UpdateFromChangeProperty()
         {
             _rendererControl.UpdateElements();
+            _lightControl.UpdateElements();
+            _colorControl.UpdateElements();
+            _backgroundControl.UpdateElements();
         }
 
 
