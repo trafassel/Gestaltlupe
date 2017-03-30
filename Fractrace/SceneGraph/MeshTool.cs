@@ -76,7 +76,7 @@ namespace Fractrace.SceneGraph
 
             int[,] pointIndex = new int[_pictureData.Width + 1, _pictureData.Height + 1];
 
-            int currentIndex = _mesh._coordinates.Count/3; // lenght of pointindex in _mesh??
+            int currentIndex = _mesh.Coordinates.Count/3; // lenght of pointindex in _mesh??
             for (int i = 0; i < _pictureData.Width; i++)
             {
                 for (int j = 0; j < _pictureData.Height; j++)
@@ -120,17 +120,17 @@ namespace Fractrace.SceneGraph
                         z = 1000.0 * pInfo.Coord.Z;
                     }
 
-                    _mesh._coordinates.Add((float)x);
-                    _mesh._coordinates.Add((float)y);
-                    _mesh._coordinates.Add((float)z);
+                    _mesh.Coordinates.Add((float)x);
+                    _mesh.Coordinates.Add((float)y);
+                    _mesh.Coordinates.Add((float)z);
 
                     double red = pInfo.AdditionalInfo.red2;
                     double green = pInfo.AdditionalInfo.green2;
                     double blue = pInfo.AdditionalInfo.blue2;
 
-                    _mesh._colors.Add((float)red);
-                    _mesh._colors.Add((float)green);
-                    _mesh._colors.Add((float)blue);
+                    _mesh.Colors.Add((float)red);
+                    _mesh.Colors.Add((float)green);
+                    _mesh.Colors.Add((float)blue);
 
                     // test for invalid data only
                     if (maxcol < red)
@@ -170,13 +170,13 @@ namespace Fractrace.SceneGraph
                                 }
                                 if (useTriangle)
                                 {
-                                    _mesh._faces.Add(pointIndex[i, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
 
-                                    _mesh._normales.Add((float)point1.Normal.X);
-                                    _mesh._normales.Add((float)point1.Normal.Y);
-                                    _mesh._normales.Add((float)point1.Normal.Z);
+                                    _mesh.Normales.Add((float)point1.Normal.X);
+                                    _mesh.Normales.Add((float)point1.Normal.Y);
+                                    _mesh.Normales.Add((float)point1.Normal.Z);
 
                                 }
                             }
@@ -193,13 +193,13 @@ namespace Fractrace.SceneGraph
                                 }
                                 if (useTriangle)
                                 {
-                                    _mesh._faces.Add(pointIndex[i, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j - 1]);
-                                    _mesh._faces.Add(pointIndex[i, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j - 1]);
 
-                                    _mesh._normales.Add((float)point1.Normal.X);
-                                    _mesh._normales.Add((float)point1.Normal.Y);
-                                    _mesh._normales.Add((float)point1.Normal.Z);
+                                    _mesh.Normales.Add((float)point1.Normal.X);
+                                    _mesh.Normales.Add((float)point1.Normal.Y);
+                                    _mesh.Normales.Add((float)point1.Normal.Z);
 
                                 }
                             }
@@ -403,17 +403,17 @@ namespace Fractrace.SceneGraph
                         z = 1000.0 * pInfo.Coord.Z;
                     }
 
-                    _mesh._coordinates.Add((float)x);
-                    _mesh._coordinates.Add((float)y);
-                    _mesh._coordinates.Add((float)z);
+                    _mesh.Coordinates.Add((float)x);
+                    _mesh.Coordinates.Add((float)y);
+                    _mesh.Coordinates.Add((float)z);
 
                     double red = pInfo.AdditionalInfo.red2;
                     double green = pInfo.AdditionalInfo.green2;
                     double blue = pInfo.AdditionalInfo.blue2;
 
-                    _mesh._colors.Add((float)red);
-                    _mesh._colors.Add((float)green);
-                    _mesh._colors.Add((float)blue);
+                    _mesh.Colors.Add((float)red);
+                    _mesh.Colors.Add((float)green);
+                    _mesh.Colors.Add((float)blue);
 
                     // test for invalid data only
                     if (maxcol < red)
@@ -454,13 +454,13 @@ namespace Fractrace.SceneGraph
                                 }
                                 if (useTriangle)
                                 {
-                                    _mesh._faces.Add(pointIndex[i, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
 
-                                    _mesh._normales.Add((float)point1.Normal.X);
-                                    _mesh._normales.Add((float)point1.Normal.Y);
-                                    _mesh._normales.Add((float)point1.Normal.Z);
+                                    _mesh.Normales.Add((float)point1.Normal.X);
+                                    _mesh.Normales.Add((float)point1.Normal.Y);
+                                    _mesh.Normales.Add((float)point1.Normal.Z);
 
                                 }
 
@@ -479,13 +479,13 @@ namespace Fractrace.SceneGraph
 
                                 if (useTriangle)
                                 {
-                                    _mesh._faces.Add(pointIndex[i, j]);
-                                    _mesh._faces.Add(pointIndex[i - 1, j - 1]);
-                                    _mesh._faces.Add(pointIndex[i, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j]);
+                                    _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
+                                    _mesh.Faces.Add(pointIndex[i, j - 1]);
 
-                                    _mesh._normales.Add((float)point1.Normal.X);
-                                    _mesh._normales.Add((float)point1.Normal.Y);
-                                    _mesh._normales.Add((float)point1.Normal.Z);
+                                    _mesh.Normales.Add((float)point1.Normal.X);
+                                    _mesh.Normales.Add((float)point1.Normal.Y);
+                                    _mesh.Normales.Add((float)point1.Normal.Z);
 
                                 }
 

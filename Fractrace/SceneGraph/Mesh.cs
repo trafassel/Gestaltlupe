@@ -9,44 +9,44 @@ namespace Fractrace.SceneGraph
     public class Mesh
     {
 
-        public List<float> _coordinates = new List<float>();
+        public List<float> Coordinates = new List<float>();
 
-        public List<float> _colors = new List<float>();
+        public List<float> Colors = new List<float>();
 
-        public List<int> _faces = new List<int>();
+        public List<int> Faces = new List<int>();
 
         // Normal per face
-        public List<float> _normales = new List<float>();
+        public List<float> Normales = new List<float>();
 
 
         float GetX(int i)
         {
-            return _coordinates[3 * i];
+            return Coordinates[3 * i];
         }
 
         float GetY(int i)
         {
-            return _coordinates[3 * i + 1];
+            return Coordinates[3 * i + 1];
         }
 
         float GetZ(int i)
         {
-            return _coordinates[3 * i + 2];
+            return Coordinates[3 * i + 2];
         }
 
         float GetRed(int i)
         {
-            return _colors[3 * i];
+            return Colors[3 * i];
         }
 
         float GetGreen(int i)
         {
-            return _colors[3 * i + 1];
+            return Colors[3 * i + 1];
         }
 
         float GetBlue(int i)
         {
-            return _colors[3 * i + 2];
+            return Colors[3 * i + 2];
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Fractrace.SceneGraph
         /// </summary>
         int GetPoint1(int i)
         {
-            return _faces[3 * i];
+            return Faces[3 * i];
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Fractrace.SceneGraph
         /// </summary>
         int GetPoint2(int i)
         {
-            return _faces[3 * i + 1];
+            return Faces[3 * i + 1];
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Fractrace.SceneGraph
         /// </summary>
         int GetPoint3(int i)
         {
-            return _faces[3 * i + 2];
+            return Faces[3 * i + 2];
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace Fractrace.SceneGraph
             float maxy = float.MinValue;
             float maxz = float.MinValue;
 
-            int noCoords = _coordinates.Count / 3;
+            int noCoords = Coordinates.Count / 3;
             for (int i = 0; i < noCoords; i++)
             {
                 int coordIndex = 3 * i;
-                float x = _coordinates[coordIndex];
-                float y = _coordinates[coordIndex + 1];
-                float z = _coordinates[coordIndex + 2];
+                float x = Coordinates[coordIndex];
+                float y = Coordinates[coordIndex + 1];
+                float z = Coordinates[coordIndex + 2];
 
                 if (minx > x)
                     minx = x;

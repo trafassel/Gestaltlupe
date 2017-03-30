@@ -111,7 +111,7 @@ namespace Fractrace.SceneGraph
 
             // coordindex
             int coordSubIndex = 0;
-            foreach (int face in _mesh._faces)
+            foreach (int face in _mesh.Faces)
             {
                 coordSubIndex++;
                 sw.WriteLine(face.ToString() + " ");
@@ -127,7 +127,7 @@ namespace Fractrace.SceneGraph
 
             // coords
             coordSubIndex = 0;
-            foreach (float coord in _mesh._coordinates)
+            foreach (float coord in _mesh.Coordinates)
             {
                 coordSubIndex++;
                 sw.WriteLine(coord.ToString(_numberFormatInfo) + " ");
@@ -144,20 +144,20 @@ namespace Fractrace.SceneGraph
             // colors
 
             // Color per face and normals
-            for (int faceIndex = 0; faceIndex < _mesh._faces.Count; faceIndex = faceIndex + 3)
+            for (int faceIndex = 0; faceIndex < _mesh.Faces.Count; faceIndex = faceIndex + 3)
             {
                 // use color of first point in face
-                int pointIndex = _mesh._faces[faceIndex];
+                int pointIndex = _mesh.Faces[faceIndex];
                 int colorIndex = 3 * pointIndex;
-                string line = _mesh._colors[colorIndex].ToString(_numberFormatInfo) + " " + _mesh._colors[colorIndex + 1].ToString(_numberFormatInfo) +
-                    " " + _mesh._colors[colorIndex + 2].ToString(_numberFormatInfo) + ", ";
+                string line = _mesh.Colors[colorIndex].ToString(_numberFormatInfo) + " " + _mesh.Colors[colorIndex + 1].ToString(_numberFormatInfo) +
+                    " " + _mesh.Colors[colorIndex + 2].ToString(_numberFormatInfo) + ", ";
                 // Mark errors with red color.
                 if (line.ToLower().Contains("nan"))
                     line = " 1 0 0, ";
                 sw.WriteLine(line);
                 
-                normalString.AppendLine(_mesh._normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh._normales[faceIndex + 1].ToString(_numberFormatInfo) +
-                        " " + _mesh._normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
+                normalString.AppendLine(_mesh.Normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
+                        " " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
                 int face = faceIndex / 3;
                 normalIndex.Append(face.ToString() + " ");
             }

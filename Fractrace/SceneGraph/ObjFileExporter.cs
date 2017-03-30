@@ -34,7 +34,7 @@ namespace Fractrace.SceneGraph
         }
 
         /// <summary>
-        /// In VRML used number format.
+        /// Used number format.
         /// </summary>
         protected static System.Globalization.NumberFormatInfo _numberFormatInfo = System.Globalization.CultureInfo.CreateSpecificCulture("en-US").NumberFormat;
 
@@ -55,7 +55,7 @@ namespace Fractrace.SceneGraph
 ");
             //  _mesh._coordinates
             int coordSubIndex = 0;
-            foreach (float coord in _mesh._coordinates)
+            foreach (float coord in _mesh.Coordinates)
             {
                 if (coordSubIndex == 0)
                 {
@@ -75,7 +75,7 @@ namespace Fractrace.SceneGraph
             usemtl mtlNONE
 ");
             coordSubIndex = 0;
-            foreach (int face in _mesh._faces)
+            foreach (int face in _mesh.Faces)
             {
                 if (coordSubIndex == 0)
                 {

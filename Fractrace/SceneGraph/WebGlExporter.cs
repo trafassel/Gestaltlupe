@@ -77,15 +77,15 @@ namespace Fractrace.SceneGraph
             StringBuilder sbVertices = new StringBuilder();
             StringBuilder sbNormales = new StringBuilder();
 
-            int noFaces = _mesh._faces.Count / 3;
+            int noFaces = _mesh.Faces.Count / 3;
             // Color per face:
-            for (int faceIndex = 0; faceIndex < _mesh._faces.Count; faceIndex = faceIndex + 3)
+            for (int faceIndex = 0; faceIndex < _mesh.Faces.Count; faceIndex = faceIndex + 3)
             {
                 // use color of first point in face
-                int pointIndex = _mesh._faces[faceIndex];
+                int pointIndex = _mesh.Faces[faceIndex];
                 int colorindex = 3 * pointIndex;
-                string line = _mesh._colors[colorindex].ToString(_numberFormatInfo) + ", " + _mesh._colors[colorindex + 1].ToString(_numberFormatInfo) +
-                    ", " + _mesh._colors[colorindex + 2].ToString(_numberFormatInfo) + ", 1,";
+                string line = _mesh.Colors[colorindex].ToString(_numberFormatInfo) + ", " + _mesh.Colors[colorindex + 1].ToString(_numberFormatInfo) +
+                    ", " + _mesh.Colors[colorindex + 2].ToString(_numberFormatInfo) + ", 1,";
                 // Mark errors with red color.
                 if (line.ToLower().Contains("nan"))
                     line = " 1, 0, 0, 1,";
@@ -95,11 +95,11 @@ namespace Fractrace.SceneGraph
 
                 for (int i=0;i<3;i++)
                 {
-                    int coordIndex = 3* _mesh._faces[faceIndex+i];
+                    int coordIndex = 3* _mesh.Faces[faceIndex+i];
 
-                    float x = _mesh._coordinates[coordIndex];
-                    float y = _mesh._coordinates[coordIndex+1];
-                    float z = _mesh._coordinates[coordIndex+2];
+                    float x = _mesh.Coordinates[coordIndex];
+                    float y = _mesh.Coordinates[coordIndex+1];
+                    float z = _mesh.Coordinates[coordIndex+2];
 
                     x = scale * (x - centerx);
                     y = scale * (y - centery);
@@ -111,8 +111,8 @@ namespace Fractrace.SceneGraph
                     );
                 }
 
-                line = _mesh._normales[faceIndex].ToString(_numberFormatInfo) + ", " + _mesh._normales[faceIndex + 1].ToString(_numberFormatInfo) +
-                      ", " + _mesh._normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ";
+                line = _mesh.Normales[faceIndex].ToString(_numberFormatInfo) + ", " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
+                      ", " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ";
                 sbNormales.AppendLine(line);
                 sbNormales.AppendLine(line);
                 sbNormales.AppendLine(line);

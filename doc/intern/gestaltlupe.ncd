@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:306-->
+<!--LastNote:308-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -85,6 +85,7 @@ class PictureData{<BR>
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281104-->
 <!--property:date_modified=1434281108-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -93,6 +94,7 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477955534-->
 <!--property:date_modified=1477955656-->
+<!--property:expanded-->
 <!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
 <!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
 <DD>
@@ -3654,9 +3656,9 @@ Hier gibt es Untertabs:<BR>
 Anbient intensity
 </DD>
 <DT><A name="4KdeMAt2qXUsTd8hC3BIvA"></A>High quality Preview.</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1455058382-->
-<!--property:date_modified=1455058679-->
+<!--property:date_modified=1490114126-->
 <!--property:hash=ce03376124fcb83ae8744a8e391c8bb73110915a-->
 <!--property:hash_html=7602bffb1a52c53cc0b776e3dd18103c578e96cb-->
 <DD>
@@ -4077,9 +4079,9 @@ tbValue_TextChanged ausgelöst.<BR>
 </DL>
 </DD>
 <DT><A name="GJ34G8WIqBMBWiOVcEjtDQ"></A>Textfelder sind zu klein</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1480617211-->
-<!--property:date_modified=1480617247-->
+<!--property:date_modified=1489926700-->
 <!--property:hash=eb80b16e5c1c427976c9e7689b17032a1c75861e-->
 <!--property:hash_html=de2dcaa7476b4ff73c75e0a077d304b318da2701-->
 <DD>
@@ -4088,9 +4090,9 @@ tbValue_TextChanged ausgelöst.<BR>
 
 </DD>
 <DT><A name="ne1vyy0LUxTBK3gkPyjoUA"></A>Shadow Number entfernen</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1481453335-->
-<!--property:date_modified=1486222491-->
+<!--property:date_modified=1489926500-->
 <!--property:hash=009984ca78f8637ee72c1375e2d98d1a9c07cb64-->
 <!--property:hash_html=adbb53432d63b7efb9a2c7bd22a78e7fa94f34d8-->
 <DD>
@@ -4108,9 +4110,9 @@ tbValue_TextChanged ausgelöst.<BR>
 sollen die zuletzten vom Nutzer eingestellten Settings ausgewählt werden.
 </DD>
 <DT><A name="gNAwtBe33mu0cXxpomR2fg"></A>Ungenutzte Formelparameter entfernen</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1481979793-->
-<!--property:date_modified=1481979820-->
+<!--property:date_modified=1489926457-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="He30fkF6bOm0FNX7A268xQ"></A>ShadowJustify hat keine Auswirkung</DT>
@@ -4124,9 +4126,9 @@ Doch, aber das hängt von der Szene ab. Wahrscheinlich ist es derselbe Effekt, d
 
 </DD>
 <DT><A name="tpCJFJyGIqmkow5ZJbaSHw"></A>Nicht verwendete Formelparameter löschen</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1481983374-->
-<!--property:date_modified=1481983395-->
+<!--property:date_modified=1489926447-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="FBkT6vHC4qJqVwg38h6TEg"></A>Formel im Hintergrund bei Textänderung aktualisieren</DT>
@@ -4197,18 +4199,73 @@ Wichtig: Punkte, die an der Grenze zwischen vorderen und hinteren Bereich liegen
 
 </DD>
 <DT><A name="nTGxQy3GE3crso6PgLkOxw"></A>Einstellmöglochkeit der Schrittweite der +/- Buttons</DT>
-<!--property:icon_internal=bullet_red-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1488102471-->
-<!--property:date_modified=1488131745-->
-<!--property:hash=d772d04606c76db34f2e00f10324bb01ae8a4485-->
-<!--property:hash_html=9add1cf45b54d7816ab8050e653640e497b7327e-->
+<!--property:date_modified=1489926437-->
+<!--property:hash=aea03cdb965e865f5cc8fc24e955aefc7038cf81-->
+<!--property:hash_html=e0400cd3da64d181408616fc16640641f7ef4569-->
 <DD>
 &lt; &gt; - Buttons.<BR>
 <BR>
 <BR>
+Info:<BR>
+<BR>
+&quot;PARAMETERINFO.VIEW.PlusButton&quot;<BR>
 <BR>
 
 </DD>
+<DT><A name="81hQ94GZerqasa23UN9gYA"></A>Reiter unter Material</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1489926776-->
+<!--property:date_modified=1489935138-->
+<!--property:hash=aefd0f843ff5830e8e70a018b91cc26c2bf49932-->
+<!--property:hash_html=b96f45eb53bdfb87a3bf953f9e5ad7f1aba5dfaa-->
+<DD>
+Renderer<BR>
+<BR>
+Light<BR>
+<BR>
+Color<BR>
+<BR>
+<BR>
+<BR>
+pnlGeneral<BR>
+pnlRenderer<BR>
+<BR>
+<BR>
+<BR>
+this.panel3.Controls.Add(this.pnlRenderer);<BR>
+<BR>
+<BR>
+<BR>
+pnlDefaults<BR>
+<BR>
+panel2<BR>
+<BR>
+<BR>
+<BR>
+_rendererControl<BR>
+<BR>
+
+</DD>
+<DT><A name="KMGbRx0WcSPWgBjxeyOqlg"></A>Farben im obj Exporter</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1489935144-->
+<!--property:date_modified=1489935354-->
+<!--property:hash=84be3b77e1010d430bac6b68b39253fd44a16ab7-->
+<!--property:hash_html=867c48fa50098840b638bc98231a81e198705a5a-->
+<DD>
+Siehe:<BR>
+<A href="http://gamedev.stackexchange.com/questions/21303/how-can-i-include-vertex-color-information-in-obj-files">http://gamedev.stackexchange.com/questions/21303/how-can-i-include-vertex-color-information-in-obj-files</A><BR>
+<BR>
+
+</DD>
+<DT><A name="cE2MserTIIUsF6jsaOB9ow"></A>Batch im obj Exporter</DT>
+<!--property:icon_internal=bullet_white-->
+<!--property:date_created=1489935157-->
+<!--property:date_modified=1489935178-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 </DL>
