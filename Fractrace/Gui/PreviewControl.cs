@@ -280,11 +280,14 @@ namespace Fractrace
                             {
                                 pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
                             }
-                            btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
-                            _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
-                            pArt.Paint(_graphics);
-                            Application.DoEvents();
-                            this.Refresh();
+                            if (!_iterate.Running)
+                            {
+                                btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
+                                _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+                                pArt.Paint(_graphics);
+                                Application.DoEvents();
+                                this.Refresh();
+                            }
                         }
                         else
                         {
@@ -295,20 +298,14 @@ namespace Fractrace
                         {
                             lock (_smallPreviewCurrentDrawStepMutex)
                             {
-                                // _smallPreviewCurrentDrawStep++;
-
                                 if (_smallPreviewCurrentDrawStep == 5)
 {
                                     _smallPreviewCurrentDrawStep = 1;
-
                                 }
                                 else if ( (_smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2) && _fixedRenderer == -1)
-
-                                //                  if (_smallPreviewCurrentDrawStep == 2 && _fixedRenderer == -1)
                                 {
                                     if (RenderingEnds != null)
                                         RenderingEnds();
-
                                     // Uncomment following line for more accurate small preview rendering in next iteration. 
                                     if (_smallPreviewCurrentDrawStep == 2 && _updateSteps>0)
                                     {
@@ -317,8 +314,6 @@ namespace Fractrace
                                             _smallPreviewCurrentDrawStep = 3;
                                             lock (_inDrawingMutex)
                                                 _inDrawing = false;
-                                            System.Diagnostics.Debug.WriteLine("_inDrawing = false (3)");
-
                                             StartDrawing();
                                         }
                                     }
@@ -331,8 +326,6 @@ namespace Fractrace
                                             RenderingEnds();
                                     }
                                 }
-                               // if (_smallPreviewCurrentDrawStep > 1)
-                               //     _smallPreviewCurrentDrawStep = 0;
                             }
                         }
                         else
@@ -347,7 +340,6 @@ namespace Fractrace
                     }
                 }
             }
-            //btnPreview.Enabled = true;
             lock (_inDrawingMutex)
                 _inDrawing = false;
             System.Diagnostics.Debug.WriteLine("_inDrawing = false (4)");
@@ -359,10 +351,7 @@ namespace Fractrace
                 StartDrawing();
         }
 
-        /// <summary>
-        /// Fortschritt in Prozent.
-        /// </summary>
-        /// <param name="progressInPercent"></param>
+        // progress in percent
         public override void Progress(double progressInPercent)
         {
             base.Progress(progressInPercent);
@@ -373,8 +362,7 @@ namespace Fractrace
 
         private void DrawFromView()
         {
-            Fractrace.PictureArt.Renderer pArt;
-            pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
+            Fractrace.PictureArt.Renderer pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
             pArt.Init(_iterate.LastUsedFormulas);
             btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
@@ -433,9 +421,7 @@ namespace Fractrace
 
 
         public void MoveBitmap(int x, int y)
-
         {
-            System.Diagnostics.Debug.WriteLine("MoveBitmap " + x.ToString() + " " + y.ToString());
             if (_baseBitmap == null)
             {
                 return;

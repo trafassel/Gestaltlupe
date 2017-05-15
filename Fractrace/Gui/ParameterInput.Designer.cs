@@ -45,7 +45,7 @@ namespace Fractrace {
             this.btnPause = new System.Windows.Forms.Button();
             this.tpAnimation = new System.Windows.Forms.TabPage();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            //this.button2 = new System.Windows.Forms.Button();
             this.btnSaveInHistory = new System.Windows.Forms.Button();
             this.panel25 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -426,7 +426,8 @@ namespace Fractrace {
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.button2);
+            //this.panel10.Controls.Add(this.button2);
+            /*
             this.panel10.Controls.Add(this.btnSaveInHistory);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 54);
@@ -435,18 +436,23 @@ namespace Fractrace {
             this.panel10.Padding = new System.Windows.Forms.Padding(5);
             this.panel10.Size = new System.Drawing.Size(329, 37);
             this.panel10.TabIndex = 2;
+            */
             // 
             // button2
             // 
+            
+            /*
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
             this.button2.Location = new System.Drawing.Point(131, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 27);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Add to Animation";
+            this.button2.Text = "Add to Animation .......";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            */
+
             // 
             // btnSaveInHistory
             // 
@@ -1752,7 +1758,6 @@ namespace Fractrace {
         private System.Windows.Forms.TabPage tpDoc;
         private System.Windows.Forms.Button btnShowDocumentation;
         private System.Windows.Forms.Button btnCreateCompleteBulk;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabPage tpSettings;
         private System.Windows.Forms.TabPage tpSpecial;
         private System.Windows.Forms.SplitContainer splitContainer3;

@@ -909,7 +909,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// User has click on Preview1 Control. 
+        /// User has clicked on Preview1 Control. 
         /// </summary>
         private void preview1_Clicked()
         {
@@ -921,7 +921,7 @@ namespace Fractrace
 
 
         /// <summary>
-        /// Berechnung anhalten
+        /// User has clicked on btnPause.
         /// </summary>
         private void btnPause_Click(object sender, EventArgs e)
         {
