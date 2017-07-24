@@ -33,14 +33,17 @@ namespace Fractrace.Basic
         /// </summary>
         public override void UpdateElements()
         {
-            string newValue = ParameterDict.Current.GetBool(_name).ToString();
-            if (_oldValue != newValue)
+            lock (_updateMutex)
             {
-                _value = newValue;
-                _dontRaiseElementChangedEvent = true;
-                this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
-                _dontRaiseElementChangedEvent = false;
-                _oldValue = newValue;
+                string newValue = ParameterDict.Current.GetBool(_name).ToString();
+                if (_oldValue != newValue)
+                {
+                    _value = newValue;
+                    _dontRaiseElementChangedEvent = true;
+                    this._cbValue.Checked = ParameterDict.Current.GetBool(_name);
+                    _dontRaiseElementChangedEvent = false;
+                    _oldValue = newValue;
+                }
             }
         }
 

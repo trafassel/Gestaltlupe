@@ -22,7 +22,6 @@ namespace Fractrace.Basic
         /// Return name of associated parameter.
         /// </summary>
         public string ParameterName { get { return _name; } }
-        /// <summary>Name of this element (should be equal to the name of the corresponding ParameterDict entry).</summary>
         protected string _name = "";
 
         /// <summary>
@@ -50,6 +49,7 @@ namespace Fractrace.Basic
         /// </summary>
         public event ElementChangedDelegate ElementChanged;
 
+        protected object _updateMutex = new object();
 
         private string DisplayName(string str)
         {
@@ -93,29 +93,18 @@ namespace Fractrace.Basic
                         break;
                     }
                     sName = sName.Substring(ppos + 1);
-                }
-               
+                }               
                 lblName.Text = DisplayName(sName);
             }
             if (description != string.Empty)
             {
                 ToolTip toolTip = new ToolTip();
-                toolTip.SetToolTip(lblName, description);
-                
+                toolTip.SetToolTip(lblName, description);                
             }
-            if ( (lblName.Text.Length <= 8 || lblName.Text== "Min Cycle") &&
-                lblName.Text!= "Contrast" &&
-                lblName.Text != "Angle" &&
-                lblName.Text != "Deph" &&
-                lblName.Text != "Deph Add" &&
-                lblName.Text != "Height" &&
-                lblName.Text != "Size" &&
-                lblName.Text != "Width" 
-                                )
-                panel1.Width = 70;
+            if (lblName.Text.Length > 8)
+                panel1.Width = 170;
             PreInit();
         }
-
 
         /// <summary>
         /// Corresponding string value is set from ParameterDict.Exemplar.
@@ -123,11 +112,14 @@ namespace Fractrace.Basic
         /// </summary>
         public virtual void UpdateElements()
         {
-            string newValue = ParameterDict.Current[_name];
-            if (_oldValue != newValue)
+            lock (_updateMutex)
             {
-                _value = newValue;
-                _oldValue = newValue;
+                string newValue = ParameterDict.Current[_name];
+                if (_oldValue != newValue)
+                {
+                    _value = newValue;
+                    _oldValue = newValue;
+                }
             }
         }
 
@@ -148,8 +140,6 @@ namespace Fractrace.Basic
         /// <summary>
         /// Has to be called in subclasses to raise ElementChanged event.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
         protected void CallElementChanged(string key, string value)
         {
             if(!_dontRaiseElementChangedEvent)

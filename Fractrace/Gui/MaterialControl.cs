@@ -49,11 +49,9 @@ namespace Fractrace.Gui
                     {
                     "Renderer.ShininessFactor",
                     "Renderer.Shininess",
-                   "Renderer.Light.X",
-                     "Renderer.Light.Y",
-                     "Renderer.Light.Z",
-                    "Renderer.LightIntensity",
-                       "Renderer.UseLight",
+                    "Renderer.Light.X",
+                    "Renderer.Light.Y",
+                    "Renderer.Light.Z",
                     }
                     );
                 pnlLight.Controls.Add(_lightControl);
