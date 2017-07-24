@@ -369,7 +369,7 @@ namespace Fractrace.Animation
 
             AnimationStepPreview stepInfo = new AnimationStepPreview();
             stepInfo.Width = _previewWidth;
-            stepInfo.Height = _previewHeight;
+            stepInfo.Height = 30; // _previewHeight;
             stepInfo.Location = new System.Drawing.Point(_previewWidth * _currentPreviewStep, _previewHeight);
             pnlPreview.Controls.Add(stepInfo);
             int steps=0;

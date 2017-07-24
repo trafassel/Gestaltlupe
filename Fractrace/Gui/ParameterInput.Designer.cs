@@ -44,7 +44,7 @@ namespace Fractrace {
             this.button4 = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.tpAnimation = new System.Windows.Forms.TabPage();
-            this.panel10 = new System.Windows.Forms.Panel();
+            //this.panel10 = new System.Windows.Forms.Panel();
             //this.button2 = new System.Windows.Forms.Button();
             this.btnSaveInHistory = new System.Windows.Forms.Button();
             this.panel25 = new System.Windows.Forms.Panel();
@@ -151,7 +151,7 @@ namespace Fractrace {
             this.panel35.SuspendLayout();
             this.panel12.SuspendLayout();
             this.tpAnimation.SuspendLayout();
-            this.panel10.SuspendLayout();
+            //this.panel10.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel16.SuspendLayout();
@@ -413,7 +413,7 @@ namespace Fractrace {
             // 
             // tpAnimation
             // 
-            this.tpAnimation.Controls.Add(this.panel10);
+            //this.tpAnimation.Controls.Add(this.panel10);
             this.tpAnimation.Controls.Add(this.panel25);
             this.tpAnimation.Controls.Add(this.panel23);
             this.tpAnimation.Location = new System.Drawing.Point(4, 28);
@@ -1617,7 +1617,7 @@ namespace Fractrace {
             this.panel35.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.tpAnimation.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
+            //this.panel10.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
             this.panel25.PerformLayout();
             this.panel14.ResumeLayout(false);
@@ -1714,7 +1714,7 @@ namespace Fractrace {
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label lblCurrentStep;
-        private System.Windows.Forms.Panel panel10;
+        //private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Data;

@@ -179,7 +179,7 @@
             this.pnlPreview.Location = new System.Drawing.Point(0, 0);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.Size = new System.Drawing.Size(478, 244);
+            this.pnlPreview.Size = new System.Drawing.Size(478, 157);
             this.pnlPreview.TabIndex = 2;
             // 
             // panel4
@@ -188,10 +188,10 @@
             this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.panel6);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 244);
+            this.panel4.Location = new System.Drawing.Point(0, 157);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(478, 195);
+            this.panel4.Size = new System.Drawing.Size(478, 182);
             this.panel4.TabIndex = 1;
             // 
             // panel3
@@ -201,7 +201,7 @@
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(4);
-            this.panel3.Size = new System.Drawing.Size(478, 33);
+            this.panel3.Size = new System.Drawing.Size(478, 120);
             this.panel3.TabIndex = 2;
             // 
             // panel7
@@ -209,7 +209,7 @@
             this.panel7.Controls.Add(this.panel11);
             this.panel7.Controls.Add(this.panel10);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 33);
+            this.panel7.Location = new System.Drawing.Point(0, 120);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(478, 30);
@@ -301,7 +301,7 @@
             this.panel6.Controls.Add(this.btnStop);
             this.panel6.Controls.Add(this.btnStart);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 63);
+            this.panel6.Location = new System.Drawing.Point(0, 150);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(4);
