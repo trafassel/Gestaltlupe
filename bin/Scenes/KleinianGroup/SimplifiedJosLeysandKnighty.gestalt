@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters.KleinR" Value="2.01" />
+  <Entry Key="Formula.Parameters.losYScale" Value="0.5" />
+  <Entry Key="Formula.Parameters.minBailout" Value="0.3" />
+  <Entry Key="Formula.Static.Cycles" Value="44" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="0.87" />
+  <Entry Key="Formula.Static.jy" Value="-0.08" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="public double KleinR;&#xA;public double minBailout;&#xA;public double losYScale;&#xA;// Escape time algorithm for Kleinian group limit sets from JosLeys and Knighty.&#xA;// http://www.fractalforums.com/index.php?topic=24728.0&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  for (int i = 0;i &lt; _cycles;  i++)&#xA;  {&#xA;    x = x-Math.Floor(x+0.5);&#xA;    z = z-Math.Floor(z+0.5);&#xA;    if ( y &gt;= losYScale*KleinR)&#xA;    {&#xA;      x = -x;&#xA;      y = KleinR-y;&#xA;      z = -z;&#xA;    }&#xA;    double r=x*x+y*y+z*z;&#xA;    if(r&gt;0)&#xA;    {&#xA;      x /= r;&#xA;      y /= r;&#xA;      z /= r;&#xA;      if(r&lt;minBailout) return false;&#xA;    }&#xA;    y = KleinR - y;&#xA;    z = -z;&#xA;    x+= _jx;&#xA;    y+= _jy;&#xA;    z+= _jz;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="8" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1.1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="0.14" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="0.6" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0.2" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="1" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="4.26303626375243" />
+  <Entry Key="Scene.CenterY" Value="0.82423797977863" />
+  <Entry Key="Scene.CenterZ" Value="0.898226517743364" />
+  <Entry Key="Scene.Radius" Value="0.122618795570712" />
+  <Entry Key="Transformation.Camera.AngleX" Value="98.0326840281192" />
+  <Entry Key="Transformation.Camera.AngleY" Value="0.764787253340281" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="179.005485875338" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

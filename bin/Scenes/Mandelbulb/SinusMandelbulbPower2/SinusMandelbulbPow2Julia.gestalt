@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters._power" Value="2" />
+  <Entry Key="Formula.Parameters.cutAtZ" Value="0" />
+  <Entry Key="Formula.Parameters.posSinVariant" Value="1" />
+  <Entry Key="Formula.Parameters.sinVariant" Value="1" />
+  <Entry Key="Formula.Static.Cycles" Value="75" />
+  <Entry Key="Formula.Static.Julia" Value="1" />
+  <Entry Key="Formula.Static.jx" Value="-0.6" />
+  <Entry Key="Formula.Static.jy" Value="0.44" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="double _bailout = 20;&#xA;public double _power = 8;&#xA;public bool sinVariant=true;&#xA;public bool posSinVariant=true;&#xA;public bool cutAtZ=false;&#xA;// Daniel Whites Mandelbulb&#xA;// http://www.skytopia.com/project/fractal/mandelbulb.html&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  if(cutAtZ &amp;&amp; z&gt;0) return false;&#xA;  double jx, jy, jz;&#xA;  double ar, ai, aj;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  double piAdd=0;&#xA;  if(sinVariant)&#xA;  piAdd+=Math.PI/2.0;&#xA;  if(posSinVariant)&#xA;  piAdd+=Math.PI;&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx = x * x;&#xA;    double yy = y * y;&#xA;    double zz = z * z;&#xA;    double r = Math.Sqrt(xx + yy + zz);&#xA;    if (r &gt; _bailout)&#xA;    {&#xA;      return false;&#xA;    }&#xA;    if (n &gt; _cycles / 3 &amp;&amp; n &lt; _cycles / 1.2)&#xA;    {&#xA;      additionalPointInfo.red += xx / r;&#xA;      additionalPointInfo.green += yy / r;&#xA;      additionalPointInfo.blue += zz / r;&#xA;    }&#xA;    double theta = Math.Atan2(Math.Sqrt(xx + yy), z);&#xA;    double phi = Math.Atan2(y, x);&#xA;    double r_n = Math.Pow(r, _power);&#xA;    double phi_pow = phi * _power;&#xA;    double theta_pow = theta * _power;&#xA;    double sin_theta_pow = Math.Sin(theta_pow+piAdd);&#xA;    double rn_sin_theta_pow = r_n * sin_theta_pow;&#xA;    x = rn_sin_theta_pow * Math.Cos(phi_pow) + jx;&#xA;    y = rn_sin_theta_pow * Math.Sin(phi_pow) + jy;&#xA;    z = r_n * Math.Cos(theta_pow+piAdd) + jz;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="8" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="-0.279348739973088" />
+  <Entry Key="Scene.CenterY" Value="0.184700649422415" />
+  <Entry Key="Scene.CenterZ" Value="0.0892366008656808" />
+  <Entry Key="Scene.Radius" Value="1.8" />
+  <Entry Key="Transformation.Camera.AngleX" Value="30.0949886360821" />
+  <Entry Key="Transformation.Camera.AngleY" Value="13.3900718195406" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="39.3094818530193" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

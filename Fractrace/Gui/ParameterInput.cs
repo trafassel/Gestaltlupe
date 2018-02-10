@@ -351,18 +351,18 @@ namespace Fractrace
 
         private void UpdateFrontView()
         {
-            if ( preview1.SmallPreviewCurrentDrawStep == 2 || preview1.SmallPreviewCurrentDrawStep == 1)
-            {                
-                if (preview1.GetProgress() >= 100 || ( (preview1.Iterate.Height<60) && (_rand.NextDouble()>0.85)   )  )
+            if (preview1.SmallPreviewCurrentDrawStep == 2 || preview1.SmallPreviewCurrentDrawStep == 1)
+            {
+                if (preview1.GetProgress() >= 100 || ((preview1.Iterate.Height < 60) && (_rand.NextDouble() > 0.85)))
                 {
                     preview2.InitLabelImage();
                     preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view
                 }
-                
+
             }
             else
             {
-                if (preview1.SmallPreviewCurrentDrawStep == 4 && preview1.GetProgress()>=100)
+                if (preview1.SmallPreviewCurrentDrawStep == 4 && (preview1.GetProgress() >= 100 ) || (_rand.NextDouble() > 0.85))
                 {
                     preview2.InitLabelImage();
                     preview2.Redraw(preview1.Iterate, 7); // Renderer 7 is able to display a front view

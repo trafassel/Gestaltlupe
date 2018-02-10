@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:308-->
+<!--LastNote:310-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -85,7 +85,6 @@ class PictureData{<BR>
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281104-->
 <!--property:date_modified=1434281108-->
-<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -94,7 +93,6 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477955534-->
 <!--property:date_modified=1477955656-->
-<!--property:expanded-->
 <!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
 <!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
 <DD>
@@ -4266,6 +4264,61 @@ Siehe:<BR>
 <!--property:date_modified=1489935178-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="ztrQn0N68hWnzrnXZRumHA"></A>Compatibilitätsmodus minCycle</DT>
+<!--property:icon_internal=bullet_red-->
+<!--property:date_created=1503229980-->
+<!--property:date_modified=1503230033-->
+<!--property:hash=15b5ec450a2f13c6bcb4e6684b9042f170070b50-->
+<!--property:hash_html=a8276d68f7396b5cf4545aa8920aec9918020b80-->
+<DD>
+Wen parameter minCycle existiert und gleich cycle ist, wird minCycle entfernt.<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
+<DT><A name="ijdxjmGAzSDvbWww6Tfg1w"></A>Projekte</DT>
+<!--property:icon_internal=flag_blue-->
+<!--property:date_created=1502894634-->
+<!--property:date_modified=1502894674-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="aYTe1RJjPwTcQn8MSSLYqw"></A>OpenGl Viewer</DT>
+<!--property:icon_internal=flag_blue-->
+<!--property:date_created=1502894679-->
+<!--property:date_modified=1502894694-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="nr7jjlCNm2ErpNJIf0EeGQ"></A>Info</DT>
+<!--property:icon_internal=book_open-->
+<!--property:date_created=1502894697-->
+<!--property:date_modified=1502895816-->
+<!--property:hash=4cace58a8a13b6fbd2ce681798e01bd5fba7e041-->
+<!--property:hash_html=213721eb309c886c118d70519e62f9c8dcb22780-->
+<DD>
+// Zu verwendende Bibliotheken:<BR>
+<BR>
+<A href="https://github.com/luca-piccioni/OpenGL.Net">https://github.com/luca-piccioni/OpenGL.Net</A> (MIT licence)<BR>
+<BR>
+// OpenTK<BR>
+<A href="https://www.codeproject.com/Articles/1167212/OpenGL-with-OpenTK-in-Csharp-Part-Initialize-the-G">https://www.codeproject.com/Articles/1167212/OpenGL-with-OpenTK-in-Csharp-Part-Initialize-the-G</A><BR>
+<A href="https://opentk.github.io/">https://opentk.github.io/</A><BR>
+<BR>
+<BR>
+// CSGL<BR>
+<A href="https://github.com/ThatOneCheetah/CSGL">https://github.com/ThatOneCheetah/CSGL</A><BR>
+<BR>
+<BR>
+
+</DD>
+</DL>
+</DD>
 </DL>
 </DD>
 </DL>
