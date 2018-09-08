@@ -351,7 +351,6 @@
     <Compile Include="InfoGenerator.cs" />
     <Compile Include="PictureArt\FastRenderingFilter.cs" />
     <Compile Include="PictureArt\FrontViewRenderer.cs" />
-    <Compile Include="PictureArt\PlasicRenderer.cs" />
     <Compile Include="PictureArt\RenderBase.cs" />
     <Compile Include="PictureArt\PictureArtFactory.cs" />
     <Compile Include="PictureArt\Renderer.cs" />

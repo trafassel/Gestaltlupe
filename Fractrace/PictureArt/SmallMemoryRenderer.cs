@@ -91,11 +91,6 @@ namespace Fractrace.PictureArt
                         floatPixelInfo.AdditionalInfo = pInfo.AdditionalInfo;
                         floatPixelInfo.IsInside = pInfo.IsInside;
 
-                        pInfo.Normal.Normalize();
-
-                        floatPixelInfo.Normal.X = (float)pInfo.Normal.X;
-                        floatPixelInfo.Normal.Y = (float)pInfo.Normal.Y;
-                        floatPixelInfo.Normal.Z = (float)pInfo.Normal.Z;
                         _pictureData.Points[i, j] = floatPixelInfo;
                     }
                 }

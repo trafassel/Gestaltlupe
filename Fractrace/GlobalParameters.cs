@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "8";
+            ParameterDict.Current["Intern.Version"] = "9";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -276,16 +276,6 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
-            // Color and light correction.
-            ParameterDict.Current["Renderer.Normalize"] = "0";
-            ParameterDict.Current["Renderer.Normalize.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["Renderer.Normalize.PARAMETERINFO.Description"] = "Color and light correction.";
-
-            // Activates Background darkening in PlasicRenderer
-            ParameterDict.Current["Renderer.UseDarken"] = "0";
-            ParameterDict.Current["Renderer.UseDarken.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["Renderer.UseDarken.PARAMETERINFO.Description"] = "Activates Background darkening.";
-
             ParameterDict.Current["Renderer.ShadowGlow"] = "0.94";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.94 0.96 0.98 1";
@@ -293,9 +283,6 @@ for (int n = 1; n < _cycles; n++)
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Current["Renderer.ShadowNumber"] = "22";
-//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.Description"] = "Corresponds to the number of shadows.";
-//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.FixedButtons"] = "11 22";
-//            ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.PlusButton"] = "1";
             ParameterDict.Current["Renderer.ShadowNumber.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Intensity of the FieldOfView
@@ -337,34 +324,11 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Description"] = "Color Surface";
 
-            // Use Light
-            ParameterDict.Current["Renderer.UseLight"] = "1";
-            ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Datatype"] = "Bool";
-            ParameterDict.Current["Renderer.UseLight.PARAMETERINFO.Description"] = "Use Light.";
-
-            // Light Level: light in bright areas
-            ParameterDict.Current["Renderer.BrightLightLevel"] = "0.2";
-            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.Description"] = "Light Level: light in bright areas.";
-            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.8 1";
-            ParameterDict.Current["Renderer.BrightLightLevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-
             // Shadow height factor
             ParameterDict.Current["Renderer.ShadowJustify"] = "1";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.Description"] = "Shadow height factor.";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 2 6";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-
-            // Shininess factor (0 ... 1)
-            ParameterDict.Current["Renderer.ShininessFactor"] = "0.5";
-            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.Description"] = "Shininess factor (0 ... 1).";
-            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.3 0.8 1";
-            ParameterDict.Current["Renderer.ShininessFactor.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-
-            // Shininess ( 0... 1000)
-            ParameterDict.Current["Renderer.Shininess"] = "28";
-            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.Description"] = "Shininess ( 0... 1000).";
-            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.FixedButtons"] = "9 14 28";
-            ParameterDict.Current["Renderer.Shininess.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Brightness (1 ...)
             ParameterDict.Current["Renderer.Brightness"] = "1.05";
@@ -377,12 +341,6 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-
-            // If Renderer.SmoothMormalLevel =1 : No Smooth Normals are computet
-            ParameterDict.Current["Renderer.SmoothNormalLevel"] = "8";
-            ParameterDict.Current["Renderer.SmoothNormalLevel.PARAMETERINFO.Description"] = "If Renderer.SmoothMormalLevel ==0 : Normals are not smoothed.";
-            ParameterDict.Current["Renderer.SmoothNormalLevel.PARAMETERINFO.VIEW.FixedButtons"] = "1 8 22";
-            ParameterDict.Current["Renderer.SmoothNormalLevel.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Normal of the light source
             ParameterDict.Current["Renderer.Light.X"] = "0.2";
@@ -400,11 +358,6 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Renderer.Light.Z.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
-            // Set to 1 to enable sharp shadow rendering (warning: time consuming) 
-            //ParameterDict.Current["Renderer.UseSharpShadow"] = "0";
-            //ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Datatype"] = "Bool";
-            //ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.Description"] = " Enable sharp shadow rendering (warning: time consuming) ";
-            ParameterDict.Current["Renderer.UseSharpShadow.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // To justify the color components 
             ParameterDict.Current["Renderer.ColorFactor.Red"] = "1";
@@ -432,6 +385,11 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.VIEW.FixedButtons"] = "0  1 1.2 1.4 1.6 3";
             ParameterDict.Current["Renderer.ColorFactor.Threshold.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
+
+            ParameterDict.Current["Renderer.UseDarken"] = "0";
+            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Description"] = "Fog";
+            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Datatype"] = "Bool";
+
             // Red component of background color 
             ParameterDict.Current["Renderer.BackColor.Red"] = "0";
             ParameterDict.Current["Renderer.BackColor.Red.PARAMETERINFO.Description"] = "Red component of background color (0, ...,1).";
@@ -455,13 +413,6 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.Description"] = "Blue component of background color (0, ...,1).";
             ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.VIEW.FixedButtons"] = "0";
             ParameterDict.Current["Renderer.BackColor.Blue.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
-
-            // If LightIntensity==1, no shadow renderers are used
-            // If LightIntensity==0, only shadow renderers are used
-            ParameterDict.Current["Renderer.LightIntensity"] = "0";
-            ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.Description"] = "If LightIntensity==1, no shadow renderers are used. If LightIntensity==0, only shadow renderers are used";
-            ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 1";
-            ParameterDict.Current["Renderer.LightIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Number of threads used in computation. The recommended value is the number of processors.
             ParameterDict.Current["Computation.NoOfThreads"] = Environment.ProcessorCount.ToString();

@@ -56,18 +56,18 @@ namespace Fractrace
         {
             get
             {
-                return mProjection;
+                return _projection;
             }
             set
             {
-                mProjection = value;
+                _projection = value;
             }
 
         }
-        protected Projection mProjection = null;
+        protected Projection _projection = null;
 
 
-        protected List<Transform3D> mTransforms = new List<Transform3D>();
+        protected List<Transform3D> _transforms = new List<Transform3D>();
 
         /// <summary>
         /// Zugriff auf die Liste der Zusatztransformationen, z.B. weitere Stauchungen
@@ -77,7 +77,7 @@ namespace Fractrace
         {
             get
             {
-                return mTransforms;
+                return _transforms;
             }
         }
 
@@ -774,18 +774,18 @@ namespace Fractrace
 
             try
             {
-                if (mProjection != null)
+                if (_projection != null)
                 {
-                    Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
+                    Vec3 projPoint = _projection.Transform(new Vec3(x, y, z));
                     x = projPoint.X;
                     y = projPoint.Y;
                     z = projPoint.Z;
                 }
 
-                if (mTransforms.Count > 0)
+                if (_transforms.Count > 0)
                 {
                     Vec3 vec = new Vec3(x, y, z);
-                    foreach (Transform3D trans in mTransforms)
+                    foreach (Transform3D trans in _transforms)
                     {
                         vec = trans.Transform(vec);
                     }
@@ -848,18 +848,18 @@ namespace Fractrace
             try
             {
 
-                if (mProjection != null)
+                if (_projection != null)
                 {
-                    Vec3 projPoint = mProjection.ReverseTransform(new Vec3(x, y, z));
+                    Vec3 projPoint = _projection.ReverseTransform(new Vec3(x, y, z));
                     x = projPoint.X;
                     y = projPoint.Y;
                     z = projPoint.Z;
                 }
 
-                if (mTransforms.Count > 0)
+                if (_transforms.Count > 0)
                 {
                     Vec3 vec = new Vec3(x, y, z);
-                    foreach (Transform3D trans in mTransforms)
+                    foreach (Transform3D trans in _transforms)
                     {
                         vec = trans.Transform(vec);
                     }
@@ -932,7 +932,7 @@ namespace Fractrace
                     we = 1;
                     if (mInternFormula != null)
                     {
-                        if(mInternFormula is GestaltFormula)
+                        if (mInternFormula is GestaltFormula)
                         {
                             if (mInternFormula.additionalPointInfo != null)
                                 mInternFormula.additionalPointInfo.Clear();
@@ -943,7 +943,7 @@ namespace Fractrace
                             if (inverse) { if (we == 0) we = 1; else we = 0; }
                         }
                         else
-                          we = mInternFormula.InSet(x, y, z, old_jx, old_jy, old_jz, old_jzz, old_zykl, inverse);
+                            we = mInternFormula.InSet(x, y, z, old_jx, old_jy, old_jz, old_jzz, old_zykl, inverse);
                     }
                     break;
 
@@ -963,7 +963,7 @@ namespace Fractrace
                             if (inverse) { if (we == 0) we = 1; else we = 0; }
                         }
                         else
-                          we = mInternFormula.InSet(old_jx, old_jy, old_jz, x, y, z, old_jzz, old_zykl, inverse);
+                            we = mInternFormula.InSet(old_jx, old_jy, old_jz, x, y, z, old_jzz, old_zykl, inverse);
                     }
                     break;
             }
@@ -1032,18 +1032,18 @@ namespace Fractrace
 
             try
             {
-                if (mProjection != null)
+                if (_projection != null)
                 {
-                    Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
+                    Vec3 projPoint = _projection.Transform(new Vec3(x, y, z));
                     x = projPoint.X;
                     y = projPoint.Y;
                     z = projPoint.Z;
                 }
 
-                if (mTransforms.Count > 0)
+                if (_transforms.Count > 0)
                 {
                     Vec3 vec = new Vec3(x, y, z);
-                    foreach (Transform3D trans in mTransforms)
+                    foreach (Transform3D trans in _transforms)
                     {
                         vec = trans.Transform(vec);
                     }
@@ -1096,7 +1096,7 @@ namespace Fractrace
                                 if (invers) { if (we == 0) we = 1; else we = 0; }
                             }
                             else
-                              we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
+                                we = mInternFormula.InSet(x, y, z, jx, jy, jz, jzz, zykl, invers);
                         }
                         break;
 
@@ -1116,7 +1116,7 @@ namespace Fractrace
                                 if (invers) { if (we == 0) we = 1; else we = 0; }
                             }
                             else
-                              we = mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
+                                we = mInternFormula.InSet(jx, jy, jz, x, y, z, zz, zykl, invers);
                         }
                         break;
 
@@ -1314,7 +1314,7 @@ namespace Fractrace
             }
             else
                 if (angle > 1)
-                    angle = 2 - angle;
+                angle = 2 - angle;
 
             return angle - 1;
         }
@@ -1354,524 +1354,9 @@ namespace Fractrace
 
 
 
-        /// <summary>
-        /// Im Gegensatz zu klasischen Funktion Winkel wird hier von vorn gerechnet,
-        /// die isometrische Ansicht entfällt.
-        /// </summary>
-        /// <param name="zykl"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="zz"></param>
-        /// <param name="xd"></param>
-        /// <param name="yd"></param>
-        /// <param name="zd"></param>
-        /// <param name="zzd"></param>
-        /// <param name="wix"></param>
-        /// <param name="wiy"></param>
-        /// <param name="wiz"></param>
-        /// <param name="jx"></param>
-        /// <param name="jy"></param>
-        /// <param name="jz"></param>
-        /// <param name="jzz"></param>
-        /// <param name="formula"></param>
-        /// <param name="use4Points">Hier wird unterschieden, ob nur dieser Punkt, oder auch seine Nachbarpixel 
-        /// betrachtet werden.</param>
-        /// <returns></returns>
-        public double FixPoint(long zykl, double x, double y, double z, double zz,
-        double xd, double yd, double zd, double zzd,
-        double wix, double wiy, double wiz,
-        double jx, double jy, double jz, double jzz, int formula, bool invers, int pixelX, int pixelY, bool use4Points)
-        {
-            if (zd == 0)
-            {
-                Console.WriteLine("Error in WinkelPerspective: zd==0");
-                return 0;
 
-            }
 
-            double m = 0;
-            double xv = 0, yv = 0, zv = 0, winkel = 0, yn = 0, diff = 0;
-            double xn = 0, zn = 0, zzn = 0, xm = 0, ym = 0, zm = 0, zzm = 0;
-            double ox = 0, oy = 0, oz = 0, rx = 0, ry = 0, rz = 0;
-            double[] tief = new double[5];
-            double[] xpos = new double[5];
-            double[] ypos = new double[5]; // Die ungenaue Variante von tief[]
-            double[] zpos = new double[5];
-
-            double startwert = 0;
-            int k = 0;
-            double wert = 0;
-            int pu = 0;
-
-            double distance = 0.09;
-
-            double xDistance = distance * 6.0;
-            double zDistance = distance * 6.0;
-
-            // Eventuell während der Berechnung entstehende Zusatzinfos für alle 4 Punkte.
-            AdditionalPointInfo[] pinfoSet = null;
-
-            // Use combination of all computed AdditionalPointInfo for smoother colors.
-            AdditionalPointInfo additionalPointInfoCombination = new AdditionalPointInfo();
-            additionalPointInfoCombination.blue = 0;
-            additionalPointInfoCombination.red = 0;
-            additionalPointInfoCombination.green = 0;
-
-
-            if (mInternFormula != null && mInternFormula.additionalPointInfo != null)
-            {
-                pinfoSet = new AdditionalPointInfo[5];
-            }
-
-            for (k = 4; k >= 0; k--)
-            {
-                switch (k)
-                {
-                    case 2:     /* oben */
-                        xn = x;
-                        yn = y;
-                        zn = z - zDistance * zd; zzn = zz + zDistance * zzd;
-                        break;
-                    case 1:     /* rechts  */
-                        xn = x + xDistance * xd;
-                        yn = y;
-                        zn = z; zzn = zz;
-                        break;
-                    case 0:     /* unten */
-                        xn = x;
-                        yn = y;
-                        zn = z + zDistance * zd; zzn = zz + zDistance * zzd;
-                        break;
-                    case 3:     /* links  */
-                        xn = x - xDistance * xd;
-                        yn = y;
-                        zn = z; zzn = zz;
-                        break;
-                    case 4:     /* mitte  */
-                        xn = x;
-                        yn = y;
-                        zn = z;
-                        zzn = zz;
-                        break;
-                }
-
-                xpos[k] = xn;
-                ypos[k] = yn;
-                zpos[k] = zn;
-
-                if (Rechne(xn, yn, zn, zzn, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
-                {
-                    for (m = 0; m >= -4.0; m -= 0.2)
-                    {
-                        zm = zn; xm = xn;
-                        ym = yn + m * yd; zzm = zzn;
-                        if (!(Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
-                            break;
-                    }
-                }
-                else
-                {
-                    for (m = 0; m <= 4.0; m += 0.2)
-                    {
-                        zm = zn; xm = xn;
-                        ym = yn + m * yd; zzm = zzn;
-                        if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0) { m -= 0.2; break; }
-                    }
-                }
-                if ((m > -3.9) && (m < 3.9))
-                {
-                    startwert = m + 0.2; diff = 0.1;
-                    while (diff >= 0.00001)
-                    {
-                        m = startwert - diff;
-                        zm = zn; xm = xn;
-                        ym = yn + m * yd; zzm = zzn;
-                        if (0L == Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers))
-                            startwert = m + diff;
-                        else startwert = m;
-                        diff /= 2.0;
-                    }
-                    tief[k] = m;
-                }
-                else
-                {
-
-                    // Fast Kopie der obigen Formeln
-                    if (Rechne(xn, yn, zn, zzn, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
-                    {
-                        for (m = 0; m >= -8.0; m -= 0.02)
-                        {
-                            zm = zn; xm = xn;
-                            ym = yn + m * yd; zzm = zzn;
-                            if (!(Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
-                            {
-                                if (!(Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    //   break;
-                                    // Staubzähler erhöhen
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (m = 0; m <= 8.0; m += 0.02)
-                        {
-                            zm = zn; xm = xn;
-                            ym = yn + m * yd; zzm = zzn;
-                            if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
-                            {
-                                if (Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
-                                {
-                                    m -= 0.02;
-                                    break;
-                                }
-                                else
-                                {
-                                    // Staubzähler erhöhen
-                                    //m -= 0.02;
-                                    //break;
-                                }
-                            }
-                        }
-                    }
-                    if ((m > -7.9) && (m < 7.9))
-                    {
-                        startwert = m + 0.02; diff = 0.01;
-                        while (diff >= 0.00001)
-                        {
-                            m = startwert - diff;
-                            zm = zn; xm = xn;
-                            ym = yn + m * yd; zzm = zzn;
-                            if (0L == Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers))
-                                startwert = m + diff;
-                            else startwert = m;
-                            diff /= 2.0;
-                        }
-                        tief[k] = m;
-                    }
-                    else
-                    {
-                        tief[k] = 20;
-                    }
-
-                    // Ende: Fast Kopie der obigen Formeln
-
-
-
-
-                }
-
-                if (pinfoSet != null)
-                {
-                    pinfoSet[k] = new AdditionalPointInfo(mInternFormula.additionalPointInfo);
-                }
-            }
-
-            // Die Normalen der 4 Randpunkte
-            Vec3[] normals = new Vec3[4];
-
-            for (k = 0; k < 4; k++)
-            {
-                pu = k + 1; if (k == 3) pu = 0;
-                /* Die drei Punkte entsprechen tief[4] tief[k] und tief[pu]   */
-                /* Zuerst wird tief abgezogen                                 */
-                if ((tief[k] < 19) && (tief[pu] < 19) && tief[4] < 19)
-                {
-
-
-                    Vec3 o1 = GetTransform(xpos[k], ypos[k] + tief[k] * yd, zpos[k]);
-                    Vec3 o2 = GetTransform(xpos[4], ypos[4] + tief[4] * yd, zpos[4]);
-                    Vec3 r1 = GetTransform(xpos[pu], ypos[pu] + tief[pu] * yd, zpos[pu]);
-                    Vec3 r2 = GetTransform(xpos[4], ypos[4] + tief[4] * yd, zpos[4]);
-
-                    /*
-                    ox = xpos[k] - xpos[4];
-                    oy = ypos[k] + tief[k] * yd - ypos[4] - tief[4] * yd;
-                    oz = zpos[k] - zpos[4];
-
-                    rx = xpos[pu] - xpos[4];
-                    ry = ypos[pu] + tief[pu] * yd - ypos[4] - tief[4] * yd;
-                    rz = zpos[pu] - zpos[4];
-                     */
-                    ox = o1.X - o2.X; oy = o1.Y - o2.Y; oz = o1.Z - o2.Z;
-                    rx = r1.X - r2.X; ry = r1.Y - r2.Y; rz = r1.Z - r2.Z;
-
-
-                    /*
-                    ox = xpos[k] - xpos[4];
-                    oy = ypos[k] + tief[k] * yd - ypos[4] - tief[4] * yd;
-                    oz = zpos[k] - zpos[4];
-
-                    rx = xpos[pu] - xpos[4];
-                    ry = ypos[pu] + tief[pu] * yd - ypos[4] - tief[4] * yd;
-                    rz = zpos[pu] - zpos[4];
-                     */
-
-                    // Apply Transformation
-                    /*        
-                 Vec3 ovec = GetTransform(ox, oy, oz);
-                 Vec3 rvec = GetTransform(rx, ry, rz);
-
-                 ox = ovec.X; oy = ovec.Y; oz = ovec.Z;
-                 rx = rvec.X; ry = rvec.Y; rz = rvec.Z;
-                    */
-
-
-                    /* Dann wird das Kreuzprodukt gebildet, um einen
-                       Vergleichsvektor zu haben.                                 */
-                    xv = oy * rz - oz * ry;
-                    yv = oz * rx - ox * rz;
-                    zv = ox * ry - oy * rx;
-
-                    normals[k] = new Vec3(xv, yv, zv);
-
-                    /* Der Winkel ist nun das Skalarprodukt mit (0,-1,0)= Lichtstrahl */
-                    /* mit Vergleichsvektor (Beide nachträglich normiert )             */
-                    winkel = Math.Acos((yv) / (Math.Sqrt(xv * xv + yv * yv + zv * zv)));
-                    winkel = 1 - winkel;
-
-                    if (winkel < 0)
-                        winkel = 0;
-                    if (winkel > 1)
-                        winkel = 1;
-
-                    wert = (256 - (256 * winkel));
-                    if (wert < 0) wert = 0;
-                    col[k] = 256 - wert;
-                    if (col[k] > 256 - 1) col[k] = 256 - 1;
-                    if (col[k] < 1) col[k] = 1;
-
-
-                    // Pixelposition im ausgegebenen Bild
-                    int indexX = 0, indexY = 0;
-                    if (use4Points)
-                    {
-
-                        switch (k)
-                        {
-                            case 0:
-                                indexX = pixelX + 1;
-                                indexY = pixelY;
-                                break;
-
-                            case 1:
-                                indexX = pixelX + 1;
-                                indexY = pixelY + 1;
-                                break;
-
-                            case 2:
-                                indexX = pixelX;
-                                indexY = pixelY + 1;
-                                break;
-
-                            case 3:
-                                indexX = pixelX;
-                                indexY = pixelY;
-                                break;
-
-                        }
-
-                        if (k == 3)
-                        {
-                            if (indexX < pData.Width && indexY < pData.Height)
-                            {
-                                if (pData.Points[indexX, indexY] == null)
-                                {
-                                    PixelInfo pInfo = new PixelInfo();
-                                    pInfo.Coord.X = xpos[k];
-                                    pInfo.Coord.Y = ypos[k] + tief[k] * yd;
-                                    pInfo.Coord.Z = zpos[k];
-                                    pInfo.Normal = normals[k];
-                                    pData.Points[indexX, indexY] = pInfo;
-                                    if (pinfoSet != null)
-                                        pInfo.AdditionalInfo = pinfoSet[k];
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        PixelInfo pInfo = null;
-                        if (pData.Points[pixelX, pixelY] == null)
-                        {
-                            // TODO: Später Querschnitt aus allen Einzelwinkeln bestimmen
-                            pInfo = new PixelInfo();
-                            pData.Points[pixelX, pixelY] = pInfo;
-                            pInfo.Coord.X = xpos[k];
-                            pInfo.Coord.Y = ypos[k] + tief[k] * yd;
-                            pInfo.Coord.Z = zpos[k];
-                        }
-                        else
-                        {
-                            pInfo = pData.Points[pixelX, pixelY];
-                        }
-                        pInfo.Normal = normals[k];
-                        if (pinfoSet != null)
-                            pInfo.AdditionalInfo = pinfoSet[k];
-                        // TODO: Auch die Normalen übertragen
-                    }
-
-                }
-                else
-                {
-
-                    int indexX = 0, indexY = 0;
-                    if (pixelX >= 0 && pixelY >= 0)
-                    {
-                        switch (k)
-                        {
-                            case 0:
-                                indexX = pixelX + 1;
-                                indexY = pixelY;
-                                break;
-
-                            case 1:
-                                indexX = pixelX + 1;
-                                indexY = pixelY + 1;
-                                break;
-
-                            case 2:
-                                indexX = pixelX;
-                                indexY = pixelY + 1;
-                                break;
-
-                            case 3:
-                                indexX = pixelX;
-                                indexY = pixelY;
-                                break;
-
-                        }
-                        if (indexX < pData.Width && indexY < pData.Height)
-                            pData.Points[indexX, indexY] = null;
-                    }
-                    col[k] = 0;
-                }
-            }
-
-            /*
-              // Oberflächenkrümmung bestimmen
-              double derivation = 0;
-              // Zentrum der 4 Randpunkte mit dem Mittelpunkt vergleichen.
-              double ycenter = 0;
-
-              if (tief[4] < 19) {
-                int pointsCount = 0;
-                double ymax = double.MinValue;
-                double ymin = double.MaxValue;
-                double currentY = 0;
-                for (k = 0; k < 4; k++) {
-                  if (tief[k] < 19) {
-                    currentY = ypos[k] + tief[k] * yd;
-                    ycenter += currentY;
-                    if (currentY > ymax)
-                      ymax = currentY;
-                    if (currentY < ymin)
-                      ymin = currentY;
-                    pointsCount++;
-                  }
-                }
-                if (pointsCount > 0)
-                  ycenter = ycenter / ((double)pointsCount);
-
-                
-                double maxdiff = Math.Max((yd + xd + zd) / 2.0, ymax - ymin);
-
-                  // derivation soll eigentlich die lokale Erhöhung anzeigen,
-                  // wird aber zur Zeit nicht mehr in PictureArt verwendet
-                derivation = 2.0 * (ypos[4] - ycenter) / (maxdiff);
-
-                // Dasselbe über die Normalen:
-                double winkel1 = 0;
-                double winkel2 = 0;
-                if (normals[0] != null && normals[2] != null)
-                  winkel1 = Math.Acos((normals[0].X * normals[2].X + normals[0].Y * normals[2].Y + normals[0].Z * normals[2].Z) /
-                      (Math.Sqrt(normals[0].X * normals[0].X + normals[0].Y * normals[0].Y + normals[0].Z * normals[0].Z) *
-                      Math.Sqrt(normals[2].X * normals[2].X + normals[2].Y * normals[2].Y + normals[2].Z * normals[2].Z)));
-                if (normals[1] != null && normals[3] != null)
-                  winkel2 = Math.Acos((normals[1].X * normals[3].X + normals[1].Y * normals[3].Y + normals[1].Z * normals[3].Z) /
-                      (Math.Sqrt(normals[1].X * normals[1].X + normals[1].Y * normals[1].Y + normals[1].Z * normals[1].Z) *
-                      Math.Sqrt(normals[3].X * normals[3].X + normals[3].Y * normals[3].Y + normals[3].Z * normals[3].Z)));
-
-                if (derivation < 0)
-                  derivation = -Math.Max(winkel, winkel2);
-                else
-                  derivation = Math.Max(winkel, winkel2);
-
-                if (pixelX >= 0 && pixelY >= 0) {
-                  if (pixelX < pData.Width && pixelY < pData.Height)
-                    if (pData.Points[pixelX, pixelY] != null)
-                      pData.Points[pixelX, pixelY].derivation = derivation;
-                  if (pixelX + 1 < pData.Width && pixelY < pData.Height)
-                    if (pData.Points[pixelX + 1, pixelY] != null)
-                      pData.Points[pixelX + 1, pixelY].derivation = derivation;
-                  if (pixelX < pData.Width && pixelY + 1 < pData.Height)
-                    if (pData.Points[pixelX, pixelY + 1] != null)
-                      pData.Points[pixelX, pixelY + 1].derivation = derivation;
-                  if (pixelX + 1 < pData.Width && pixelY + 1 < pData.Height)
-                    if (pData.Points[pixelX + 1, pixelY + 1] != null)
-                      pData.Points[pixelX + 1, pixelY + 1].derivation = derivation;
-                }
-
-               
-              } */
-
-            // Farben feiner machen:
-            if (pinfoSet != null)
-            {
-                PixelInfo pInfo = pData.Points[pixelX, pixelY];
-                if (pInfo != null)
-                {
-                    pInfo.AdditionalInfo = pinfoSet[0];
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        if (pInfo.AdditionalInfo != null && pinfoSet[i] != null)
-                        {
-                            pInfo.AdditionalInfo.red += pinfoSet[i].red;
-                            pInfo.AdditionalInfo.green += pinfoSet[i].green;
-                            pInfo.AdditionalInfo.blue += pinfoSet[i].blue;
-
-                        }
-                    }
-                    pInfo.IsInside = !invers;
-                }
-            }
-
-            return ((int)col[0]);
-        }
-
-
-
-        /// <summary>
-        /// Copy of fixpoint (no normals are computed).
-        /// </summary>
-        /// <param name="zykl"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="zz"></param>
-        /// <param name="xd"></param>
-        /// <param name="yd"></param>
-        /// <param name="zd"></param>
-        /// <param name="zzd"></param>
-        /// <param name="wix"></param>
-        /// <param name="wiy"></param>
-        /// <param name="wiz"></param>
-        /// <param name="jx"></param>
-        /// <param name="jy"></param>
-        /// <param name="jz"></param>
-        /// <param name="jzz"></param>
-        /// <param name="formula"></param>
-        /// <param name="invers"></param>
-        /// <param name="pixelX"></param>
-        /// <param name="pixelY"></param>
-        /// <param name="use4Points"></param>
-        /// <returns></returns>
+        // Raycast part.
         public double RayCastAt(long zykl, double x, double y, double z, double zz,
         double xd, double yd, double zd, double zzd,
         double wix, double wiy, double wiz,
@@ -1914,12 +1399,11 @@ namespace Fractrace
                 pinfoSet = new AdditionalPointInfo[5];
             }
 
-            //for (k = 4; k >= 0; k--)
             k = 0;
             {
-                        xn = x;
-                        yn = y;
-                        zn = z + zDistance * zd; zzn = zz + zDistance * zzd;
+                xn = x;
+                yn = y;
+                zn = z + zDistance * zd; zzn = zz + zDistance * zzd;
 
                 xpos[0] = xn;
                 ypos[0] = yn;
@@ -2013,10 +1497,7 @@ namespace Fractrace
                     {
                         tief[0] = 0;
                     }
-
-
                 }
-
                 if (pinfoSet != null)
                 {
                     pinfoSet[k] = new AdditionalPointInfo(mInternFormula.additionalPointInfo);
@@ -2024,30 +1505,24 @@ namespace Fractrace
             }
 
 
-            // Die Normalen der 4 Randpunkte
-            //Vec3[] normals = new Vec3[4];
+            PixelInfo pInfo = null;
+            if (pData.Points[pixelX, pixelY] == null)
+            {
+                pInfo = new PixelInfo();
+                pData.Points[pixelX, pixelY] = pInfo;
+                pInfo.Coord.X = xpos[0];
 
-          
-                        PixelInfo pInfo = null;
-                        if (pData.Points[pixelX, pixelY] == null)
-                        {
-                            // TODO: Später Querschnitt aus allen Einzelwinkeln bestimmen
-                            pInfo = new PixelInfo();
-                            pData.Points[pixelX, pixelY] = pInfo;
-                            pInfo.Coord.X = xpos[0];
-             
-                            pInfo.Coord.Y = ypos[0] + tief[0] * yd;
-                            pInfo.Coord.Z = zpos[0];
-                        }
-                        else
-                        {
-                            pInfo = pData.Points[pixelX, pixelY];
-                        }
-         
-                        if (pinfoSet != null)
-                            pInfo.AdditionalInfo = pinfoSet[0];
+                pInfo.Coord.Y = ypos[0] + tief[0] * yd;
+                pInfo.Coord.Z = zpos[0];
+            }
+            else
+            {
+                pInfo = pData.Points[pixelX, pixelY];
+            }
 
-            // Farben feiner machen:
+            if (pinfoSet != null)
+                pInfo.AdditionalInfo = pinfoSet[0];
+
             if (pinfoSet != null)
             {
                 if (pInfo != null)
@@ -2056,32 +1531,27 @@ namespace Fractrace
                     pInfo.IsInside = !invers;
                 }
             }
-            
+
             return ((int)col[0]);
         }
 
 
 
-        /// <summary>
-        /// Transformiert den angegebenen Punkt.
-        /// Die Rotationen um (0,0,0) werden dabei nicht beruecksichtigt (outdated).
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <returns></returns>
+        // Transform according to _projection and _transforms
         protected Vec3 Transform(double x, double y, double z)
         {
-            if (mProjection != null)
+            if (_projection != null)
             {
-                Vec3 projPoint = mProjection.Transform(new Vec3(x, y, z));
+                Vec3 projPoint = _projection.Transform(new Vec3(x, y, z));
                 x = projPoint.X;
                 y = projPoint.Y;
                 z = projPoint.Z;
             }
 
-            if (mTransforms.Count > 0)
+            if (_transforms.Count > 0)
             {
                 Vec3 vec = new Vec3(x, y, z);
-                foreach (Transform3D trans in mTransforms)
+                foreach (Transform3D trans in _transforms)
                 {
                     vec = trans.Transform(vec);
                 }

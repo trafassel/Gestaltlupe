@@ -74,25 +74,25 @@ namespace Fractrace.PictureArt
         private double _colorIntensity = 0.5;
 
         // if useLight==false, only the shades are computed. 
-        private bool _useLight = true;
+        //private bool _useLight = true;
 
         // Shadow height factor
         private float _shadowJustify = 1;
 
         // Influence of the shininess (0 <= shininessFactor <=1)
-        private float _shininessFactor = 0.7f;
+        //private float _shininessFactor = 0.7f;
 
         // Shininess ( 0... 1000)
-        private float _shininess = 8;
+        //private float _shininess = 8;
 
         // Normal of the light source     
-        private FloatVec3 _lightRay = new FloatVec3();
+        //private FloatVec3 _lightRay = new FloatVec3();
 
         private float _colorFactorRed = 1;
         private float _colorFactorGreen = 1;
         private float _colorFactorBlue = 1;
 
-        private float _lightIntensity = 0.5f;
+        //private float _lightIntensity = 0.5f;
 
         // If ColorGreyness=1, no color is rendered
         private float _colorGreyness = 0;
@@ -146,47 +146,24 @@ namespace Fractrace.PictureArt
             _colorIntensity = _parameters.GetDouble( "Renderer.ColorIntensity");
             _colorOutside = _parameters.GetBool("Renderer.ColorInside");
             _colorInside = _parameters.GetBool("Renderer.ColorOutside");
-            _useLight = _parameters.GetBool( "Renderer.UseLight");
             _shadowJustify = 0.1f*(float)_parameters.GetDouble( "Renderer.ShadowJustify");
-            _shininessFactor = (float)_parameters.GetDouble( "Renderer.ShininessFactor");
-            _shininess = (float)_parameters.GetDouble( "Renderer.Shininess");
-            _lightRay.X = (float)_parameters.GetDouble( "Renderer.Light.X");
-            _lightRay.Y = (float)_parameters.GetDouble( "Renderer.Light.Y");
-            _lightRay.Z = (float)_parameters.GetDouble( "Renderer.Light.Z");
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
 
             // Scale glow to get simmilaier results for different image sizes.
              _glow = 1 - (  300.0F/ (float)(pData.Width* pData.Width) * (1.0F - _glow));
 
-            // Apply projection to light vector.
-            Vec3 coord = formula.GetTransformWithoutProjection(0, 0, 0);
-            Vec3 tempcoord2 = formula.GetTransformWithoutProjection(_lightRay.X, _lightRay.Y, _lightRay.Z);
-            tempcoord2.X -= coord.X;
-            tempcoord2.Y -= coord.Y;
-            tempcoord2.Z -= coord.Z;
-            tempcoord2.Normalize();
-            _lightRay.X = (float)tempcoord2.X;
-            _lightRay.Y = (float)tempcoord2.Y;
-            _lightRay.Z = (float)tempcoord2.Z;
                  
             // Initialize color parameters.
             _colorFactorRed = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Red");
             _colorFactorGreen = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Green");
             _colorFactorBlue = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Blue");
-            _lightIntensity = (float)_parameters.GetDouble(parameterNode + "LightIntensity");
-            if (_lightIntensity >= 1.0)
-                _shadowNumber = 0;
             _colorGreyness = (float)_parameters.GetDouble(parameterNode + "ColorGreyness");
             _rgbType = _parameters.GetInt(parameterNode + "ColorFactor.RgbType");
             _backColorRed = (float)_parameters.GetDouble("Renderer.BackColor.Red");
             _backColorGreen = (float)_parameters.GetDouble("Renderer.BackColor.Green");
             _backColorBlue = (float)_parameters.GetDouble("Renderer.BackColor.Blue");
-            if (_lightIntensity > 1)
-                _lightIntensity = 1;
-            if (_lightIntensity < 0)
-                _lightIntensity = 0;
-
+          
             _picInfo = new int[pData.Width, pData.Height];
             for (int i = 0; i < pData.Width; i++)
             {
@@ -206,7 +183,6 @@ namespace Fractrace.PictureArt
                 for (int j = 0; j < pData.Height; j++)
                     _isBackground[i, j] = pData.Points[i, j] == null;
 
-            //CreateSmoothNormales();
             if (_stopRequest)
                 return;
             CreateHeightMap();
@@ -218,8 +194,6 @@ namespace Fractrace.PictureArt
             DrawPlane();
             if (_stopRequest)
                 return;
-            if (_parameters.GetBool(parameterNode + "Normalize"))
-                NormalizePlane();
             if (_stopRequest)
                 return;
             if (_parameters.GetBool(parameterNode + "UseDarken"))
@@ -314,60 +288,6 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
-        /// Bildpunkte, die auf Grund fehlender Informationen nicht geladen werden konnten, werden
-        /// aus den Umgebungsinformationen gemittelt.
-        /// </summary>
-        protected void SmoothEmptyPixel()
-        {
-            for (int i = 0; i < pData.Width; i++)
-            {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    PixelInfo pInfo = pData.Points[i, j];
-
-                    if (pInfo == null)
-                    { 
-                                         
-                        // Dieser Wert ist zu setzen
-                        // Aber nur, wenn es sich nicht um den Hintergrund handelt.
-                        FloatVec3 col = _rgbPlane[i, j];
-                        col.X = _backColorRed;
-                        col.Y = _backColorGreen;
-                        col.Z = _backColorBlue;
-                        float pixelCount = 0;
-                        for (int k = i - 1; k <= i + 1; k++)
-                        {
-                            for (int l = j - 1; l <= j + 1; l++)
-                            {
-                                if (k >= 0 && k < pData.Width && l >= 0 && l < pData.Height && k != i && l != j)
-                                {
-                                    PixelInfo pInfo2 = pData.Points[k, l];
-                                    if (pInfo2 != null)
-                                    {
-                                        pixelCount++;
-                                        FloatVec3 otherColor = _rgbPlane[k, l];
-                                        col.X += otherColor.X;
-                                        col.Y += otherColor.Y;
-                                        col.Z += otherColor.Z;
-                                    }
-                                }
-                            }
-                        }
-                        //pixelCount++; // Etwas dunkler sollte es schon werden
-                        if (pixelCount > 1)
-                        {
-                            col.X /= pixelCount;
-                            col.Y /= pixelCount;
-                            col.Z /= pixelCount;
-                            _isBackground[i, j] = false;
-                        }
-                    }
-                }
-            }
-        }
-
-
-        /// <summary>
         /// Get the color information of the bitmap at (x,y)
         /// </summary>
         protected Vec3 GetRgb(int x, int y)
@@ -380,64 +300,7 @@ namespace Fractrace.PictureArt
                 return new Vec3(_backColorRed, _backColorGreen, _backColorBlue);
             }
 
-            FloatVec3 light = new FloatVec3(0, 0, 0);
-            FloatVec3 normal = null;
-
-            normal = pInfo.Normal;
-            if (normal == null)
-                return new Vec3(0, 0, 0);
-
-            normal.Normalize();
-
-            if (pInfo.Normal != null)
-            {
-                light = GetLightF(normal);
-            }
-
-            retVal.X = light.X;
-            retVal.Y = light.Y;
-            retVal.Z = light.Z;
-
-
-            retVal.X = (float)(_lightIntensity * retVal.X + (1 - _lightIntensity) * (1 - _shadowPlane[x, y]));
-            retVal.Y = (float)(_lightIntensity * retVal.Y + (1 - _lightIntensity) * (1 - _shadowPlane[x, y]));
-            retVal.Z = (float)(_lightIntensity * retVal.Z + (1 - _lightIntensity) * (1 - _shadowPlane[x, y]));
-
-            if (retVal.X < 0)
-                retVal.X = 0;
-            if (retVal.Y < 0)
-                retVal.Y = 0;
-            if (retVal.Z < 0)
-                retVal.Z = 0;
-
-            if (retVal.X > 1)
-                retVal.X = 1;
-            if (retVal.Y > 1)
-                retVal.Y = 1;
-            if (retVal.Z > 1)
-                retVal.Z = 1;
-
-            float brightLightLevel = (float)_parameters.GetDouble("Renderer.BrightLightLevel");
-            if (brightLightLevel > 0)
-            {
-                retVal.X = (1 - brightLightLevel) * retVal.X + brightLightLevel * light.X * (1 - _shadowPlane[x, y]);
-                retVal.Y = (1 - brightLightLevel) * retVal.Y + brightLightLevel * light.Y * (1 - _shadowPlane[x, y]);
-                retVal.Z = (1 - brightLightLevel) * retVal.Z + brightLightLevel * light.Z * (1 - _shadowPlane[x, y]);
-            }
-
-            if (retVal.X < 0)
-                retVal.X = 0;
-            if (retVal.Y < 0)
-                retVal.Y = 0;
-            if (retVal.Z < 0)
-                retVal.Z = 0;
-
-            if (retVal.X > 1)
-                retVal.X = 1;
-            if (retVal.Y > 1)
-                retVal.Y = 1;
-            if (retVal.Z > 1)
-                retVal.Z = 1;
+            retVal.X = retVal.Y = retVal.Z =1- _shadowPlane[x, y];
 
             // Add surface color
             bool useAdditionalColorinfo = true;
@@ -649,52 +512,6 @@ namespace Fractrace.PictureArt
         }
 
 
-        /// <summary>
-        /// Surface color according to _shininessFactor and _shininess.
-        /// </summary>
-        protected virtual FloatVec3 GetLightF(FloatVec3 normal)
-        {
-
-            FloatVec3 retVal = new FloatVec3((float)_backColorRed, (float)_backColorGreen, (float)_backColorBlue);
-            if (!_useLight)
-            {
-                return new FloatVec3((float)0.5, (float)0.5, (float)0.5);
-            }
-            if (normal == null)
-                return retVal;
-
-            float weight_shini = (float)_shininessFactor;
-            float weight_diffuse = 1 - weight_shini;
-
-            float norm = (float)Math.Sqrt(normal.X * normal.X + normal.Y * normal.Y + normal.Z * normal.Z);
-            // Scalar product with (0,-1,0) light ray
-            float angle = 0;
-            if (norm == 0)
-                return retVal;
-
-            FloatVec3 lightVec = new FloatVec3((float)_lightRay.X, (float)_lightRay.Y, (float)_lightRay.Z);
-            lightVec.Normalize();
-            float norm2 = lightVec.Norm;
-            angle = (float)(Math.Acos((normal.X * lightVec.X + normal.Y * lightVec.Y + normal.Z * lightVec.Z) / (norm * norm2)) / (Math.PI / 2.0));
-
-            angle = 1 - angle;
-            if (angle < 0)
-                angle = 0;
-            if (angle > 1)
-                angle = 1;
-            float light = (float)(weight_diffuse * angle + weight_shini * Math.Pow(angle, _shininess));
-            if (light < 0)
-                light = 0;
-            if (light > 1)
-                light = 1;
-
-            retVal.X = light;
-            retVal.Y = light;
-            retVal.Z = light;
-
-            return retVal;
-        }
-
 
 
         protected virtual void CreateShadowInfo()
@@ -702,122 +519,6 @@ namespace Fractrace.PictureArt
             EnvironmentShadowRenderComponent shadowRenderer = new EnvironmentShadowRenderComponent(_pictureData, _parameters, _heightMap);
             _shadowPlane = shadowRenderer.CreateShadowPlane();
         }
-
-
-
-
-        /*
-        /// <summary>
-        /// Die Oberflächennormalen werden abgerundet.
-        /// </summary>
-        protected void CreateSmoothNormales()
-        {
-            _normalesSmooth1 = new FloatVec3[pData.Width, pData.Height];
-            _normalesSmooth2 = new FloatVec3[pData.Width, pData.Height];
-
-            // Normieren
-            for (int i = 0; i < pData.Width; i++)
-            {
-                for (int j = 0; j < pData.Height; j++)
-                {
-                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
-                    if (pInfo != null)
-                    {
-                        // pInfo.Normal.Normalize();
-                        _normalesSmooth1[i, j] = pInfo.Normal;
-                        _normalesSmooth1[i, j].Normalize();
-                    }
-                }
-            }
-
-            FloatVec3[,] currentSmooth = _normalesSmooth1;
-            FloatVec3[,] nextSmooth = _normalesSmooth2;
-            FloatVec3[,] tempSmooth;
-            float maxDist = _maxPoint.Dist(_minPoint);
-            float dGlobal = maxDist;
-            dGlobal /= 1500;
-
-            int smoothLevel = (int)_parameters.GetDouble("Renderer.SmoothNormalLevel");
-            for (int currentSmoothLevel = 0; currentSmoothLevel < smoothLevel; currentSmoothLevel++)
-            {
-
-                // create nextSmooth
-                for (int i = 0; i < pData.Width; i++)
-                {
-                    for (int j = 0; j < pData.Height; j++)
-                    {
-                        FloatVec3 center = null;
-                        center = currentSmooth[i, j];
-                        FloatPixelInfo pInfo = _pictureData.Points[i, j];
-                        // Test ohne smooth-Factor
-                        // Nachbarelemente zusammenrechnen
-                        FloatVec3 neighbors = new FloatVec3();
-                        int neighborFound = 0;
-                        for (int k = -1; k <= 1; k++)
-                        {
-                            for (int l = -1; l <= 1; l++)
-                            {
-                                int posX = i + k;
-                                int posY = j + l;
-                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
-                                {
-                                    FloatVec3 currentNormal = null;
-                                    currentNormal = currentSmooth[i + k, j + l];
-                                    FloatPixelInfo pInfo2 = _pictureData.Points[i + k, j + l];
-
-                                    if (currentNormal != null)
-                                    {
-                                        float amount = 1;
-                                        if (pInfo != null && pInfo2 != null)
-                                        {
-                                            float dist = pInfo.Coord.Dist(pInfo2.Coord);
-
-                                            if (dist < dGlobal)
-                                                amount = 1.0f;
-                                            else if (dist > dGlobal && dist < 5.0 * dGlobal)
-                                                amount = 1.0f - (dGlobal / dist / 5.0f);
-                                            else
-                                                amount = 0;
-                                        }
-
-                                        neighbors.Add(currentNormal.Mult(amount));
-                                        neighborFound++;
-                                    }
-                                }
-                            }
-                        }
-                        neighbors.Normalize();
-                        if (center != null)
-                        {
-                            nextSmooth[i, j] = center;
-                            if (center != null || neighborFound > 1)
-                            {
-                                FloatVec3 center2 = center;
-                                center2.Mult(200);
-                                neighbors.Add(center2.Mult(4));
-                                neighbors.Normalize();
-                                nextSmooth[i, j] = neighbors;
-                            }
-                        }
-                        else
-                        {
-                            if (neighborFound > 4)
-                            {
-                                nextSmooth[i, j] = neighbors;
-                            }
-                        }
-                    }
-                }
-
-                tempSmooth = currentSmooth;
-                currentSmooth = nextSmooth;
-                nextSmooth = tempSmooth;
-
-            }
-
-
-        }
-        */
 
 
         /// <summary>

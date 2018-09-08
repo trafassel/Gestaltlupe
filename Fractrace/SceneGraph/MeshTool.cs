@@ -174,9 +174,7 @@ namespace Fractrace.SceneGraph
                                     _mesh.Faces.Add(pointIndex[i - 1, j]);
                                     _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
 
-                                    _mesh.Normales.Add((float)point1.Normal.X);
-                                    _mesh.Normales.Add((float)point1.Normal.Y);
-                                    _mesh.Normales.Add((float)point1.Normal.Z);
+                                   
 
                                 }
                             }
@@ -197,9 +195,7 @@ namespace Fractrace.SceneGraph
                                     _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
                                     _mesh.Faces.Add(pointIndex[i, j - 1]);
 
-                                    _mesh.Normales.Add((float)point1.Normal.X);
-                                    _mesh.Normales.Add((float)point1.Normal.Y);
-                                    _mesh.Normales.Add((float)point1.Normal.Z);
+                                   
 
                                 }
                             }
@@ -458,9 +454,7 @@ namespace Fractrace.SceneGraph
                                     _mesh.Faces.Add(pointIndex[i - 1, j]);
                                     _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
 
-                                    _mesh.Normales.Add((float)point1.Normal.X);
-                                    _mesh.Normales.Add((float)point1.Normal.Y);
-                                    _mesh.Normales.Add((float)point1.Normal.Z);
+                                   
 
                                 }
 
@@ -483,9 +477,7 @@ namespace Fractrace.SceneGraph
                                     _mesh.Faces.Add(pointIndex[i - 1, j - 1]);
                                     _mesh.Faces.Add(pointIndex[i, j - 1]);
 
-                                    _mesh.Normales.Add((float)point1.Normal.X);
-                                    _mesh.Normales.Add((float)point1.Normal.Y);
-                                    _mesh.Normales.Add((float)point1.Normal.Z);
+                                 
 
                                 }
 
@@ -515,8 +507,7 @@ namespace Fractrace.SceneGraph
                     PixelInfo tempPoint = new PixelInfo();
                     tempPoint.Coord = vec;
                     tempPoint.AdditionalInfo = input.AdditionalInfo;
-                    // Transform normal??
-                    tempPoint.Normal = input.Normal;
+                   
                     return tempPoint;
                 }
             }

@@ -32,13 +32,13 @@ namespace Fractrace.Gui
                     {
                     "Renderer.Brightness",
                     "Renderer.Contrast",
-                    "Renderer.BrightLightLevel",
+//                    "Renderer.BrightLightLevel",
                     "Renderer.ShadowGlow",
                     "Renderer.ShadowJustify",
                     "Renderer.AmbientIntensity",
                     "Renderer.MinFieldOfView",
                     "Renderer.MaxFieldOfView",
-                    "Renderer.Normalize",
+  //                  "Renderer.Normalize",
                     }
                     );
                 pnlRenderer.Controls.Add(_rendererControl);
@@ -47,8 +47,8 @@ namespace Fractrace.Gui
                 _lightControl.Dock = DockStyle.Fill;
                 _lightControl.Create(new string[]
                     {
-                    "Renderer.ShininessFactor",
-                    "Renderer.Shininess",
+    //                "Renderer.ShininessFactor",
+    //                "Renderer.Shininess",
                     "Renderer.Light.X",
                     "Renderer.Light.Y",
                     "Renderer.Light.Z",

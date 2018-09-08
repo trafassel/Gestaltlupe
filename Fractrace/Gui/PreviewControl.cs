@@ -250,16 +250,7 @@ namespace Fractrace
                                    
                                     if (_smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2)
                                     {
-                                        if (_iterate.Height < 60)
-                                        {
-                                            pArt = new PictureArt.FastPreviewRenderer(_iterate.PictureData);
-                                            pArt.Init(_iterate.LastUsedFormulas);
-                                        }
-                                        else
-                                        {
-                                            pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
-                                        }
-                                        
+                                            pArt = PictureArt.PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());                                        
                                     }
 
                                     else if (_smallPreviewCurrentDrawStep == 4 || _smallPreviewCurrentDrawStep == 3)

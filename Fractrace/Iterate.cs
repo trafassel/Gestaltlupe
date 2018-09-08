@@ -285,7 +285,6 @@ namespace Fractrace
         /// <summary>
         /// Split computing in threads.
         /// </summary>
-        // public void StartAsync(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         public void StartAsync(FracValues act_val, int zyklen, double screensize, bool _isJulia, bool perspective)
         {
             _start = true;
@@ -364,8 +363,6 @@ namespace Fractrace
         /// <summary>
         /// Liefert true, wenn die angegebene z-Koordinate berechnet werden darf. Wird für die Synchronisation der asynchronen Prozesse verwendet.
         /// </summary>
-        /// <param name="y"></param>
-        /// <returns></returns>
         protected bool IsAvailable(int y)
         {
             if (_abort)
@@ -439,12 +436,7 @@ namespace Fractrace
             rotView.Init(centerX, centerY, centerZ, ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),
                 ParameterDict.Current.GetDouble("Transformation.Camera.AngleZ"));
             formulas.Transforms.Add(rotView);
-        
-            // TODO: only use in compatibility mode.   
-            Rotation rot = new Rotation();
-            rot.Init();
-            formulas.Transforms.Add(rot);
-           
+               
 
             if (_isRightView)
             {
@@ -553,7 +545,7 @@ namespace Fractrace
                         xx = xschl;
                         yy = _maxzIter - zschl;
                         if (double.IsNaN(x) )
-                            return ;
+                            break ;
 
                         // Used for better start values in update iteration
                         double yAdd = rand.NextDouble() * yd;
@@ -633,7 +625,7 @@ namespace Fractrace
                                         y = act_val.end_tupel.y - (double)yd * (_maxyIter - yschl);
                                         y += yAdd;
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
-                                            return;
+                                            break;
 
                                         int usedCycles = 0;
                                         bool inverse = false;
@@ -686,13 +678,14 @@ namespace Fractrace
                                             {// inner Point
                                                 if (inverse)
                                                 {                                                    
-                                                        if (IsSmallPreview() && _updateCount == 0)
+                                                       // if (IsSmallPreview() && _updateCount == 0)
                                                         {
                                                             formulas.RayCastAt(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
+                                                    /*
                                                         else
                                                         {
                                                            formulas.FixPoint(minCycle, x, y, z, 0,
@@ -700,17 +693,19 @@ namespace Fractrace
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
+                                                        */
                                                 }
                                                 else
                                                 {
                                                     
-                                                        if (IsSmallPreview() && _updateCount==0)
+                                                        //if (IsSmallPreview() && _updateCount==0)
                                                         {
                                                             formulas.RayCastAt(zyklen, x, y, z, 0,
                                    xd, yd, zd, 0,
                                    wix, wiy, wiz,
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
+                                                    /*
                                                         else
                                                         
                                                         {
@@ -719,7 +714,8 @@ namespace Fractrace
                                      wix, wiy, wiz,
                                      jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                           
-                                                        } 
+                                                        }
+                                                        */
                                                 }
                                             }
                                         }

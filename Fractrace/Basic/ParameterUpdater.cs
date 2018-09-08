@@ -16,10 +16,24 @@ namespace Fractrace.Basic
         public static void Update()
         {
 
+            if (ParameterDict.Current.Exists("Formula.Static.Formula")) // Version 7
+            {
+                ParameterDict.Current.RemoveProperty("Renderer.Normalize");
+                ParameterDict.Current.RemoveProperty("Renderer.UseLight");
+                ParameterDict.Current.RemoveProperty("Renderer.BrightLightLevel");
+                ParameterDict.Current.RemoveProperty("Renderer.ShininessFactor");
+                ParameterDict.Current.RemoveProperty("Renderer.Shininess");
+                ParameterDict.Current.RemoveProperty("Renderer.SmoothNormalLevel");
+                ParameterDict.Current.RemoveProperty("Renderer.UseSharpShadow");
+                ParameterDict.Current.RemoveProperty("Renderer.LightIntensity");
+            }
+
+
             if (ParameterDict.Current.Exists("Formula.Static.Formula")) // Version 5
             {
                 ParameterDict.Current.SetBool("Formula.Static.Julia", ParameterDict.Current.GetInt("Formula.Static.Formula") == -2);
                 ParameterDict.Current.RemoveProperty("Formula.Static.Formula");
+                ParameterDict.Current.RemoveProperty("View.Zoom");
             }
 
             if (ParameterDict.Current.Exists("Transformation.Perspective.Cameraposition")) // Version 4
@@ -80,7 +94,7 @@ namespace Fractrace.Basic
             }
             ParameterDict.Current["View.Pipeline.UpdatePreview"] = "1";
             ParameterDict.Current["View.Pipeline.Preview"] = "0";
-            ParameterDict.Current.RemoveProperty("View.Zoom");
+            ParameterDict.Current["Intern.Version"] = "9";
         }
 
 

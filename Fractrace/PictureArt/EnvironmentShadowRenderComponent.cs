@@ -50,7 +50,7 @@ namespace Fractrace.PictureArt
             // Die maximale Abweichung der Auftreffwinkel.
             float shadowlight1Range = 1;
             float shadowlight1Intensity = 0.2f;
-            float shadowlight2Val = 0.2f;
+            float shadowlight2Val = 2.5f;
             // Die maximale Abweichung der Auftreffwinkel.
             float shadowlight2Range = 2;
             float shadowlight2Intensity = 0.6f;
@@ -71,7 +71,7 @@ namespace Fractrace.PictureArt
 
             _shadowPlane = new float[pData.Width, pData.Height];
             float[,] shadowTempPlane = new float[pData.Width, pData.Height];
-            float diffy = _shadowJustify ;
+            float diffy = _shadowJustify;
 
             // Main Iteration:
             float yd = 0;
@@ -91,31 +91,32 @@ namespace Fractrace.PictureArt
             float shadowVal = 0.1f;
             int shadowTypeCount = 0;
             float shadowlight1Level = 0.25f;
-            float shadowlight2Level = 0.5f;
-            float shadowlight3Level = 0.25f;
+            float shadowlight2Level = 0.25f;
+            float shadowlight3Level = 0.5f;
             float currentIntensity = 1;
 
             for (int shadowMode = 0; shadowMode < 3; shadowMode++)
+            // int shadowMode = 0;
             {
                 switch (shadowMode)
                 {
 
                     case 0:
-                        diffy = _shadowJustify * shadowlight1Val ;
+                        diffy = _shadowJustify * shadowlight1Val;
                         shadowVal = shadowlight1Level;
                         currentShadowlightRange = shadowlight1Range;
                         currentIntensity = shadowlight1Intensity;
                         break;
 
                     case 1:
-                        diffy = _shadowJustify * shadowlight2Val ;
+                        diffy = _shadowJustify * shadowlight2Val;
                         shadowVal = shadowlight2Level;
                         currentShadowlightRange = shadowlight2Range;
                         currentIntensity = shadowlight2Intensity;
                         break;
 
                     case 2:
-                        diffy = _shadowJustify * shadowlight3Val ;
+                        diffy = _shadowJustify * shadowlight3Val;
                         shadowVal = shadowlight3Level;
                         currentShadowlightRange = shadowlight3Range;
                         currentIntensity = shadowlight3Intensity;
@@ -138,14 +139,7 @@ namespace Fractrace.PictureArt
                     ydv *= (1.0f + currentShadowlightRange * 1.2f * (float)shadowIter / (float)dShadowNumber);
                     ydh *= (1.0f + currentShadowlightRange * 1.2f * (float)shadowIter / (float)dShadowNumber);
 
-                    // Clean Plane
-                    for (int i = 0; i < pData.Width; i++)
-                    {
-                        for (int j = 0; j < pData.Height; j++)
-                        {
-                            shadowTempPlane[i, j] = 0;
-                        }
-                    }
+
 
                     // initialize shadowInfo00, ... shadowInfo11, shadowInfo00sharp, ... , shadowInfo11sharp
                     for (int i = 0; i < pData.Width; i++)
@@ -162,8 +156,7 @@ namespace Fractrace.PictureArt
                     int currentIntYval = 1;
 
                     shadowTypeCount++;
-                    if (shadowTypeCount > 11)
-                        shadowTypeCount = 1;
+                    shadowTypeCount = shadowTypeCount % 35;
 
                     switch (shadowTypeCount)
                     {
@@ -353,18 +346,29 @@ namespace Fractrace.PictureArt
 
                     }
 
+                    // Ititialize shadowInfo and shadowInfoSharp
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            shadowInfo[i, j] = _heightMap[i, j];
+                            shadowInfoSharp[i, j] = _heightMap[i, j];
+                        }
+                    }
+
+                    // Clean Plane
+                    for (int i = 0; i < pData.Width; i++)
+                    {
+                        for (int j = 0; j < pData.Height; j++)
+                        {
+                            shadowTempPlane[i, j] = 0;
+                        }
+                    }
+
                     // ***********  generate shadowplane ************
                     for (int k = 0; k < 4; k++)
                     {
-                        // Ititialize shadowInfo and shadowInfoSharp
-                        for (int i = 0; i < pData.Width; i++)
-                        {
-                            for (int j = 0; j < pData.Height; j++)
-                            {
-                                shadowInfo[i, j] = _heightMap[i, j];
-                                shadowInfoSharp[i, j] = _heightMap[i, j];
-                            }
-                        }
+
 
                         if (k == 0)
                         {
@@ -380,6 +384,7 @@ namespace Fractrace.PictureArt
                                         {
                                             shadowInfo[i, j] = localShadow;
                                         }
+
                                         localShadow = shadowInfoSharp[i + currentIntXval, j + currentIntYval] - sharpness * ydh;
                                         if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                         {
@@ -404,11 +409,13 @@ namespace Fractrace.PictureArt
                                         {
                                             shadowInfo[i, j] = localShadow;
                                         }
+
                                         localShadow = shadowInfoSharp[i + currentIntXval, j - currentIntYval] - sharpness * ydh;
                                         if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                         {
                                             shadowInfoSharp[i, j] = localShadow;
                                         }
+
                                     }
                                 }
                             }
@@ -426,9 +433,11 @@ namespace Fractrace.PictureArt
                                         float localShadow = shadowInfo[i - currentIntXval, j + currentIntYval] - ydv;
                                         if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfo[i, j] = localShadow;
+
                                         localShadow = shadowInfoSharp[i - currentIntXval, j + currentIntYval] - sharpness * ydv;
                                         if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfoSharp[i, j] = localShadow;
+
                                     }
                                 }
                             }
@@ -436,6 +445,7 @@ namespace Fractrace.PictureArt
 
                         if (k == 3)
                         {
+
                             for (int i = 0; i < pData.Width; i++)
                             {
                                 // *********  Fill shadowInfo00  ***********
@@ -446,9 +456,11 @@ namespace Fractrace.PictureArt
                                         float localShadow = shadowInfo[i - currentIntXval, j - currentIntYval] - ydh;
                                         if (localShadow > shadowInfo[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfo[i, j] = localShadow;
+
                                         localShadow = shadowInfoSharp[i - currentIntXval, j - currentIntYval] - sharpness * ydh;
                                         if (localShadow > shadowInfoSharp[i, j] && (rand.NextDouble() < _glow))
                                             shadowInfoSharp[i, j] = localShadow;
+
                                     }
                                 }
                             }
@@ -481,12 +493,9 @@ namespace Fractrace.PictureArt
 
                                 shadowMapEntry /= 16.0f;
                                 if (shadowMapEntry > 1)
-                                    shadowMapEntry = 1;
-                                shadowMapEntry += shadowTempPlane[i, j];
-                                shadowMapEntry /= 2.0f;
-                                if (shadowMapEntry > 1)
-                                    shadowMapEntry = 1;
-                                shadowTempPlane[i, j] = shadowMapEntry;
+                                    shadowMapEntry = 1;                       
+
+                                shadowTempPlane[i, j] += shadowMapEntry;
                             }
                         }
                     }

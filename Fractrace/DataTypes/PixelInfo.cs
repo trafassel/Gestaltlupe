@@ -30,7 +30,7 @@ namespace Fractrace.DataTypes
         /// <summary>
         /// Surface normal at given pixel.
         /// </summary>
-        public Vec3 Normal = new Vec3(0, 0, 0);
+      //  public Vec3 Normal = new Vec3(0, 0, 0);
 
 
         /// <summary>
@@ -44,9 +44,6 @@ namespace Fractrace.DataTypes
             retVal.Coord.X = Coord.X;
             retVal.Coord.Y = Coord.Y;
             retVal.Coord.Z = Coord.Z;
-            retVal.Normal.X = Normal.X;
-            retVal.Normal.Y = Normal.Y;
-            retVal.Normal.Z = Normal.Z;
             retVal.IsInside = IsInside;
             if (AdditionalInfo != null)
                 retVal.AdditionalInfo = AdditionalInfo.Clone();
