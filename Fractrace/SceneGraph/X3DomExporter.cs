@@ -155,9 +155,14 @@ namespace Fractrace.SceneGraph
                 if (line.ToLower().Contains("nan"))
                     line = " 1 0 0, ";
                 sw.WriteLine(line);
-                
+
+                /*
                 normalString.AppendLine(_mesh.Normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
                         " " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
+                        */
+                normalString.AppendLine("0" + " " + "1" +
+                        " " + "0" + ", ");
+
                 int face = faceIndex / 3;
                 normalIndex.Append(face.ToString() + " ");
             }

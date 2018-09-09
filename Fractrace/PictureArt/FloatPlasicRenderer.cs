@@ -1,13 +1,8 @@
-﻿
-
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Drawing;
 
 using Fractrace.DataTypes;
 using Fractrace.Basic;
-using Fractrace.PictureArt;
 using Fractrace.Geometry;
 
 namespace Fractrace.PictureArt
@@ -32,13 +27,13 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
-        /// Coordninate of the bottom, left, front point of the Boundingbox (in original Coordinates).  
+        /// Coordinate of the bottom, left, front point of the Boundingbox (in original Coordinates).  
         /// </summary>
         private FloatVec3 _minPoint = new FloatVec3(0, 0, 0);
 
 
         /// <summary>
-        /// Coordninate of the top, right, backside point of the Boundingbox (in original Coordinates).  
+        /// Coordinate of the top, right, backside point of the Boundingbox (in original Coordinates).  
         /// </summary>
         private FloatVec3 _maxPoint = new FloatVec3(0, 0, 0);
 
@@ -73,26 +68,12 @@ namespace Fractrace.PictureArt
         // Intensity of the Surface Color
         private double _colorIntensity = 0.5;
 
-        // if useLight==false, only the shades are computed. 
-        //private bool _useLight = true;
-
         // Shadow height factor
         private float _shadowJustify = 1;
-
-        // Influence of the shininess (0 <= shininessFactor <=1)
-        //private float _shininessFactor = 0.7f;
-
-        // Shininess ( 0... 1000)
-        //private float _shininess = 8;
-
-        // Normal of the light source     
-        //private FloatVec3 _lightRay = new FloatVec3();
 
         private float _colorFactorRed = 1;
         private float _colorFactorGreen = 1;
         private float _colorFactorBlue = 1;
-
-        //private float _lightIntensity = 0.5f;
 
         // If ColorGreyness=1, no color is rendered
         private float _colorGreyness = 0;
@@ -137,23 +118,30 @@ namespace Fractrace.PictureArt
         {
             string parameterNode = "Renderer.";
             _colorThreshold = _parameters.GetDouble("Renderer.ColorFactor.Threshold");
-            _shadowNumber = _parameters.GetInt( "Renderer.ShadowNumber");
-            _ambientIntensity = _parameters.GetInt( "Renderer.AmbientIntensity");
-            _minFieldOfView = (float)_parameters.GetDouble( "Renderer.MinFieldOfView");
-            _maxFieldOfView = (float)_parameters.GetDouble( "Renderer.MaxFieldOfView");
-            _brightness = (float)_parameters.GetDouble( "Renderer.Brightness");
-            _contrast = (float)_parameters.GetDouble( "Renderer.Contrast");
-            _colorIntensity = _parameters.GetDouble( "Renderer.ColorIntensity");
+            _shadowNumber = _parameters.GetInt("Renderer.ShadowNumber");
+            _ambientIntensity = _parameters.GetInt("Renderer.AmbientIntensity");
+            _minFieldOfView = (float)_parameters.GetDouble("Renderer.MinFieldOfView");
+            _maxFieldOfView = (float)_parameters.GetDouble("Renderer.MaxFieldOfView");
+            _brightness = (float)_parameters.GetDouble("Renderer.Brightness");
+            _contrast = (float)_parameters.GetDouble("Renderer.Contrast");
+            _colorIntensity = _parameters.GetDouble("Renderer.ColorIntensity");
             _colorOutside = _parameters.GetBool("Renderer.ColorInside");
             _colorInside = _parameters.GetBool("Renderer.ColorOutside");
-            _shadowJustify = 0.1f*(float)_parameters.GetDouble( "Renderer.ShadowJustify");
+            _shadowJustify = 0.1f * (float)_parameters.GetDouble("Renderer.ShadowJustify");
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
 
+            if (_glow > 1)
+                _glow = 1;
+            if (_glow < 0)
+                _glow = 0;
             // Scale glow to get simmilaier results for different image sizes.
-             _glow = 1 - (  300.0F/ (float)(pData.Width* pData.Width) * (1.0F - _glow));
+            double gt = 1 - _glow;
+            double gp = ((double)pData.Width) / 1000.0;
 
-                 
+            gt = Math.Pow(gt, gp);
+            _glow = (float)(1 - gt);
+
             // Initialize color parameters.
             _colorFactorRed = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Red");
             _colorFactorGreen = (float)_parameters.GetDouble(parameterNode + "ColorFactor.Green");
@@ -163,7 +151,7 @@ namespace Fractrace.PictureArt
             _backColorRed = (float)_parameters.GetDouble("Renderer.BackColor.Red");
             _backColorGreen = (float)_parameters.GetDouble("Renderer.BackColor.Green");
             _backColorBlue = (float)_parameters.GetDouble("Renderer.BackColor.Blue");
-          
+
             _picInfo = new int[pData.Width, pData.Height];
             for (int i = 0; i < pData.Width; i++)
             {
@@ -200,7 +188,6 @@ namespace Fractrace.PictureArt
                 DarkenPlane();
             if (_stopRequest)
                 return;
-            //SmoothEmptyPixel();
             if (_stopRequest)
                 return;
             SmoothPlane();
@@ -244,7 +231,6 @@ namespace Fractrace.PictureArt
             }
         }
 
-
         protected override Vec3 GetRgbAt(int x, int y)
         {
             FloatVec3 rgb = _rgbPlane[x, y];
@@ -257,10 +243,10 @@ namespace Fractrace.PictureArt
         protected override Color GetColor(int x, int y)
         {
             Color col = base.GetColor(x, y);
-            if(_transparentBackground)
+            if (_transparentBackground)
             {
-                if(_isBackground[x,y])
-                   col = Color.FromArgb(0, col);
+                if (_isBackground[x, y])
+                    col = Color.FromArgb(0, col);
             }
             return col;
         }
@@ -277,9 +263,9 @@ namespace Fractrace.PictureArt
                 for (int j = 0; j < pData.Height; j++)
                 {
                     Vec3 rgb = GetRgb(i, j);
-                    if(double.IsNaN(rgb.X)|| double.IsNaN(rgb.Y)|| double.IsNaN(rgb.Z))
+                    if (double.IsNaN(rgb.X) || double.IsNaN(rgb.Y) || double.IsNaN(rgb.Z))
                     {
-
+                        _rgbPlane[i, j] = new FloatVec3(1, 0, 0);
                     }
                     _rgbPlane[i, j] = new FloatVec3((float)rgb.X, (float)rgb.Y, (float)rgb.Z);
                 }
@@ -300,13 +286,13 @@ namespace Fractrace.PictureArt
                 return new Vec3(_backColorRed, _backColorGreen, _backColorBlue);
             }
 
-            retVal.X = retVal.Y = retVal.Z =1- _shadowPlane[x, y];
+            retVal.X = retVal.Y = retVal.Z = 1 - _shadowPlane[x, y];
 
             // Add surface color
             bool useAdditionalColorinfo = true;
             if (_colorIntensity <= 0)
                 useAdditionalColorinfo = false;
-            
+
             if (useAdditionalColorinfo && ((pInfo.IsInside && _colorInside) || (!pInfo.IsInside && _colorOutside)))
             {
                 if (pInfo != null && pInfo.AdditionalInfo != null)
@@ -511,9 +497,6 @@ namespace Fractrace.PictureArt
             return new Vec3(retVal.X, retVal.Y, retVal.Z);
         }
 
-
-
-
         protected virtual void CreateShadowInfo()
         {
             EnvironmentShadowRenderComponent shadowRenderer = new EnvironmentShadowRenderComponent(_pictureData, _parameters, _heightMap);
@@ -548,16 +531,19 @@ namespace Fractrace.PictureArt
                 }
             }
         }
-       
+
 
         /// <summary>
         /// Compute field of view.
         /// </summary>
         protected void SmoothPlane()
         {
+            System.Random rand = new Random();
             _rgbSmoothPlane1 = new FloatVec3[pData.Width, pData.Height];
             _rgbSmoothPlane2 = new FloatVec3[pData.Width, pData.Height];
             int intRange = 3;
+            float dGlobal = _maxPoint.Dist(_minPoint);
+            dGlobal /= 15;
             for (int i = 0; i < pData.Width; i++)
             {
                 for (int j = 0; j < pData.Height; j++)
@@ -577,102 +563,67 @@ namespace Fractrace.PictureArt
             // contain the result colors
             FloatVec3[,] resultPlane = _rgbSmoothPlane1;
 
-            for (int m = 0; m < _ambientIntensity; m++)
+            if (_stopRequest)
+                return;
+            for (int i = 0; i < pData.Width; i++)
             {
-                if (_stopRequest)
-                    return;
-                for (int i = 0; i < pData.Width; i++)
+                for (int j = 0; j < pData.Height; j++)
                 {
-                    for (int j = 0; j < pData.Height; j++)
+                    double neighborsFound = 0;
+                    float sumColor = 0;
+                    FloatVec3 nColor = new FloatVec3();
+                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
+
+                    float ydNormalized = (float)GetAmbientValue(_heightMap[i, j]);
+
+                    double ambientIntensity = (ydNormalized) * (double)_ambientIntensity;
+                    double ambientIntensitySquare = ambientIntensity * ambientIntensity;
+                    intRange = (int)ambientIntensity + 1;
+                    float am = (float)Math.Pow(ydNormalized, 0.1);
+
+                    if (pInfo != null)
                     {
-                        double neighborsFound = 0;
-                        FloatPixelInfo pInfo = _pictureData.Points[i, j];
-                        FloatVec3 nColor = new FloatVec3();
-                        float ydNormalized = (float)GetAmbientValue(_heightMap[i, j]);
-                        ydNormalized = (float)Math.Sqrt(ydNormalized);
-                        intRange = 1;
-                        if (intRange == 0)
-                        {
-                            nColor = currentPlane[i, j];
-                            neighborsFound = 1;
-                        }
-                        float sumColor = 0;
 
-                        //           if(pData.Points[i, j]!=null) {
-                        //if (true)
+
+                        for (int k = -intRange; k <= intRange; k++)
                         {
-                            for (int k = -intRange; k <= intRange; k++)
+                            for (int l = -intRange; l <= intRange; l++)
                             {
-                                for (int l = -intRange; l <= intRange; l++)
+                                int posX = i + k;
+                                int posY = j + l;
+                                if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
                                 {
-                                    // Center Pixel is also allowed
-                                    // if (k != 0 || l != 0) {
-                                    int posX = i + k;
-                                    int posY = j + l;
-                                    if (posX >= 0 && posX < pData.Width && posY >= 0 && posY < pData.Height)
+                                    FloatVec3 nColor1 = new FloatVec3();
+
+                                    int range = (k * k + l * l);
+                                    if (range < ambientIntensitySquare)
                                     {
-                                        FloatVec3 nColor1 = new FloatVec3();
-                                        if (true)
-                                        //   if ( (ylocalDiff > 0) ||(i==posX && j==posY))
-                                        //   if ((ylocalDiff < 0) || (i == posX && j == posY))
-                                        //   if(false)
+
+                                        FloatPixelInfo pInfo2 = _pictureData.Points[posX, posY];
+
+                                        float amount = 1;
+                                        if (pInfo != null && pInfo2 != null)
                                         {
-                                            //double range = (k * k + l * l) / (intRange * intRange);
-                                            int range = (k * k + l * l);
-                                            float mult = 1;
-
-                                            if (range == 0)
+                                            float dist = pInfo.Coord.Dist(pInfo2.Coord);
+                                            if (dist < dGlobal)
+                                                amount = 1.0f;
+                                            else
                                             {
-                                                // mult = 0.6;
-                                                mult = ydNormalized * 0.3f;
-                                                //mult = 0.2;
-                                            }
-                                            if (range == 1)
-                                            {
-                                                //mult = 0.25;
-                                                mult = (1.0f - ydNormalized) * 0.4f;
-                                                //mult = 0.45;
-                                            }
-                                            if (range == 2)
-                                            {
-                                                //mult=0.15;
-                                                mult = (1.0f - ydNormalized) * 0.3f;
-                                                //mult = 0.35;
-
-                                            }
-                                            // mult += 0.00001;
-
-
-                                            FloatPixelInfo pInfo2 = _pictureData.Points[posX, posY];
-
-                                            float amount = 1;
-                                            if (pInfo != null && pInfo2 != null)
-                                            {
-                                                float dist = pInfo.Coord.Dist(pInfo2.Coord);
-
-                                                float dGlobal = _maxPoint.Dist(_minPoint);
-                                                dGlobal /= 1500;
-                                                if (dist < dGlobal)
-                                                    amount = 1.0f;
+                                                if (rand.NextDouble() > ydNormalized)
+                                                    amount = 1f;
                                                 else
-                                                    //  else if (dist > dGlobal && dist < 10.0 * dGlobal)
-                                                    amount = 1.0f - (dGlobal / dist) / 10.0f;
-                                                // else
-                                                //     amount = 0.0;
+                                                    amount = 0.0f;
+
                                             }
+                                        }
 
-                                            mult *= amount;
-                                            //  mult *= 1.0/ydNormalized;
-
-
-                                            sumColor += mult;
-
+                                        if (amount > 0)
+                                        {
+                                            sumColor += amount;
                                             FloatVec3 currentColor = currentPlane[posX, posY];
                                             nColor1.X = currentColor.X;
                                             nColor1.Y = currentColor.Y;
                                             nColor1.Z = currentColor.Z;
-                                            nColor1 = nColor1.Mult(mult); // Scaling;
-
                                             nColor.Add(nColor1);
                                             neighborsFound++;
                                         }
@@ -680,23 +631,25 @@ namespace Fractrace.PictureArt
                                 }
                             }
                         }
-
-                        if (neighborsFound > 1)
-                        {
-                            nColor = nColor.Mult(1 / sumColor);
-                        }
-                        else
-                        {
-                            nColor = currentPlane[i, j];
-                        }
-                        nextPlane[i, j] = nColor;
                     }
-                }
 
-                resultPlane = nextPlane;
-                nextPlane = currentPlane;
-                currentPlane = resultPlane;
+
+                    if (neighborsFound > 1 && sumColor > 0)
+                    {
+                        nColor = currentPlane[i, j].Mult(1.0f - am).Sum(nColor.Mult(am / sumColor));
+                    }
+                    else
+                    {
+                        nColor = currentPlane[i, j];
+                    }
+                    nextPlane[i, j] = nColor;
+                }
             }
+
+            resultPlane = nextPlane;
+            nextPlane = currentPlane;
+            currentPlane = resultPlane;
+
 
             for (int i = 0; i < pData.Width; i++)
             {
@@ -710,7 +663,6 @@ namespace Fractrace.PictureArt
             _rgbSmoothPlane2 = null;
 
             return;
-
         }
 
 
@@ -747,23 +699,13 @@ namespace Fractrace.PictureArt
                 }
             }
 
-            if (maxDist != 0)
-            {
-                ydist = ydist / maxDist;
-            }
-
-            ydNormalized = 1.0 - ydist;
+            ydNormalized = ydist;
 
             if (ydNormalized > 1)
                 ydNormalized = 1;
 
             if (ydNormalized < 0)
                 ydNormalized = 0;
-
-            ydNormalized = Math.Sqrt(ydNormalized);
-            ydNormalized = Math.Sqrt(ydNormalized);
-            ydNormalized = Math.Sqrt(ydNormalized);
-            ydNormalized = Math.Sqrt(ydNormalized);
 
             return ydNormalized;
         }

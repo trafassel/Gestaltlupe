@@ -33,7 +33,6 @@ namespace Fractrace.PictureArt {
           break;
 
         default:
-                    //retVal = new PlasicRenderer(pdata.Clone());
                     retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
       }

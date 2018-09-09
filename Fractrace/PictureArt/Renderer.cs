@@ -15,9 +15,6 @@ namespace Fractrace.PictureArt {
 
         public delegate void PaintEndsDelegate();
 
-
-        //public event PaintEndsDelegate PaintEnds;
-
         public PictureData PictureData { get { return pData; } }
         protected PictureData pData = null;
 
@@ -39,8 +36,6 @@ namespace Fractrace.PictureArt {
         protected void CallPaintEnds()
         {
             paintHasEnded = true;
-            //if (PaintEnds != null)
-            //    PaintEnds();
         }
 
 

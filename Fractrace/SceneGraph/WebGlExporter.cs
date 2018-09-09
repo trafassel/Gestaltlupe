@@ -111,8 +111,11 @@ namespace Fractrace.SceneGraph
                     );
                 }
 
+                /*
                 line = _mesh.Normales[faceIndex].ToString(_numberFormatInfo) + ", " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
                       ", " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ";
+                      */
+                line= "0" + " " + "1" + " " + "0" + ", ";
                 sbNormales.AppendLine(line);
                 sbNormales.AppendLine(line);
                 sbNormales.AppendLine(line);

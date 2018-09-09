@@ -27,13 +27,7 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Surface normal at given pixel.
         /// </summary>
-        public FloatVec3 Normal = new FloatVec3(0, 0, 0);
-
-
-        /// <summary>
-        /// Iteration cout . Used for colorize cut.
-        /// </summary>
-        public double iterations = -1;
+        //public FloatVec3 Normal = new FloatVec3(0, 0, 0);
 
 
         /// <summary>

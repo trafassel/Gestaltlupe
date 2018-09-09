@@ -276,10 +276,10 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
-            ParameterDict.Current["Renderer.ShadowGlow"] = "0.94";
+            ParameterDict.Current["Renderer.ShadowGlow"] = "0.994";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
-            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.94 0.96 0.98 1";
-            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.94 0.96 0.98 0.99 1";
+            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
 
             // Corresponds to the number of shadows in PlasicRenderer
             ParameterDict.Current["Renderer.ShadowNumber"] = "22";
@@ -325,19 +325,19 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Description"] = "Color Surface";
 
             // Shadow height factor
-            ParameterDict.Current["Renderer.ShadowJustify"] = "1";
+            ParameterDict.Current["Renderer.ShadowJustify"] = "0.7";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.Description"] = "Shadow height factor.";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 2 6";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Brightness (1 ...)
-            ParameterDict.Current["Renderer.Brightness"] = "1.05";
+            ParameterDict.Current["Renderer.Brightness"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Contrast (0 ... 1 ...)
-            ParameterDict.Current["Renderer.Contrast"] = "1";
+            ParameterDict.Current["Renderer.Contrast"] = "2";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
