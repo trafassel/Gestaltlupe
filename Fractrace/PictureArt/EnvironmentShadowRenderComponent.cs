@@ -49,15 +49,15 @@ namespace Fractrace.PictureArt
             float shadowlight1Val = 0.1f;
             // Die maximale Abweichung der Auftreffwinkel.
             float shadowlight1Range = 1;
-            float shadowlight1Intensity = 0.2f;
+            float shadowlight1Intensity = 0.1f;
             float shadowlight2Val = 2.5f;
             // Die maximale Abweichung der Auftreffwinkel.
             float shadowlight2Range = 2;
-            float shadowlight2Intensity = 0.6f;
+            float shadowlight2Intensity = 0.5f;
             float shadowlight3Val = 1.5f;
             // Die maximale Abweichung der Auftreffwinkel.
             float shadowlight3Range = 0.05f;
-            float shadowlight3Intensity = 1;
+            float shadowlight3Intensity = 0.1f;
             float sharpness = 2.5f; // 
 
             // Beginnend von rechts oben werden die Bereiche, die im Dunklen liegen, berechnet.
@@ -346,15 +346,7 @@ namespace Fractrace.PictureArt
 
                     }
 
-                    // Ititialize shadowInfo and shadowInfoSharp
-                    for (int i = 0; i < pData.Width; i++)
-                    {
-                        for (int j = 0; j < pData.Height; j++)
-                        {
-                            shadowInfo[i, j] = _heightMap[i, j];
-                            shadowInfoSharp[i, j] = _heightMap[i, j];
-                        }
-                    }
+            
 
                     // Clean Plane
                     for (int i = 0; i < pData.Width; i++)
@@ -368,7 +360,15 @@ namespace Fractrace.PictureArt
                     // ***********  generate shadowplane ************
                     for (int k = 0; k < 4; k++)
                     {
-
+                        // Ititialize shadowInfo and shadowInfoSharp
+                        for (int i = 0; i < pData.Width; i++)
+                        {
+                            for (int j = 0; j < pData.Height; j++)
+                            {
+                                shadowInfo[i, j] = _heightMap[i, j];
+                                shadowInfoSharp[i, j] = _heightMap[i, j];
+                            }
+                        }
 
                         if (k == 0)
                         {
@@ -491,9 +491,9 @@ namespace Fractrace.PictureArt
                                     shadowMapEntry += currentShadowMapEntry;
                                 }
 
-                                shadowMapEntry /= 16.0f;
-                                if (shadowMapEntry > 1)
-                                    shadowMapEntry = 1;                       
+                               // shadowMapEntry /= 16.0f;
+                               // if (shadowMapEntry > 1)
+                               //     shadowMapEntry = 1;                       
 
                                 shadowTempPlane[i, j] += shadowMapEntry;
                             }
