@@ -605,7 +605,8 @@ namespace Fractrace.PictureArt
                                         if (pInfo != null && pInfo2 != null)
                                         {
                                             float dist = pInfo.Coord.Dist(pInfo2.Coord);
-                                            if (dist < dGlobal)
+                                            
+                                            if (dist < dGlobal || _heightMap[posX, posY]<= _heightMap[i, j]+0.1*dGlobal)
                                                 amount = 1.0f;
                                             else
                                             {
@@ -615,6 +616,7 @@ namespace Fractrace.PictureArt
                                                     amount = 0.0f;
 
                                             }
+                                            
                                         }
 
                                         if (amount > 0)

@@ -68,7 +68,8 @@ namespace Fractrace.SceneGraph
         { 
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.
             _mesh.ComputeBoundingBox();
-            float radiusx = _mesh.MaxBBox.X - _mesh.MinBBox.X;
+            bool useNormals = _mesh.Normales.Count > 0;
+           float radiusx = _mesh.MaxBBox.X - _mesh.MinBBox.X;
             float radiusy = _mesh.MaxBBox.Y - _mesh.MinBBox.Y;
             float radiusz = _mesh.MaxBBox.Z - _mesh.MinBBox.Z;
             float radius = radiusx;
@@ -156,10 +157,10 @@ namespace Fractrace.SceneGraph
                     line = " 1 0 0, ";
                 sw.WriteLine(line);
 
-                /*
+                if(useNormals)
                 normalString.AppendLine(_mesh.Normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
                         " " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
-                        */
+                        else
                 normalString.AppendLine("0" + " " + "1" +
                         " " + "0" + ", ");
 

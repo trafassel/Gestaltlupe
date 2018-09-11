@@ -41,6 +41,7 @@ namespace Fractrace.SceneGraph
         public override void Export(string fileName)
         {
             CreateMesh();
+            bool useNormals = _mesh.Normales.Count > 0;
             StringBuilder normalString = new StringBuilder();
             StringBuilder normalIndex = new StringBuilder();
 
@@ -105,10 +106,10 @@ color [
                         line = " 1 0 0, ";
                     sw.WriteLine(line);
 
-                /*
+                if(useNormals)
                 normalString.AppendLine(_mesh.Normales[faceIndex].ToString(_numberFormatInfo) + " " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
-                        " " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");*/
-
+                        " " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ");
+                 else
                 normalString.AppendLine("0" + " " + "1" +
                      " " + "0" + ", ");
 

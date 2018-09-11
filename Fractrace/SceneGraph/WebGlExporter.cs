@@ -45,7 +45,7 @@ namespace Fractrace.SceneGraph
         public override void Export(string fileName)
         {
             CreateMesh();
-
+            bool useNormals = _mesh.Normales.Count > 0;
             float size = 6;
             // scale resultmesh to fit into [-size,-size,-size]-[size,size,size] box.
             _mesh.ComputeBoundingBox();
@@ -111,10 +111,10 @@ namespace Fractrace.SceneGraph
                     );
                 }
 
-                /*
+                if(useNormals)
                 line = _mesh.Normales[faceIndex].ToString(_numberFormatInfo) + ", " + _mesh.Normales[faceIndex + 1].ToString(_numberFormatInfo) +
                       ", " + _mesh.Normales[faceIndex + 2].ToString(_numberFormatInfo) + ", ";
-                      */
+                      else
                 line= "0" + " " + "1" + " " + "0" + ", ";
                 sbNormales.AppendLine(line);
                 sbNormales.AppendLine(line);

@@ -25,6 +25,9 @@ namespace Fractrace
 
         protected bool _abort = false;
 
+        // If _highQuality is set, the surface normals are computed.
+        bool _highQuality = false; 
+
         /// <summary>
         /// True while running iteration.
         /// </summary>
@@ -298,6 +301,9 @@ namespace Fractrace
             _perspective = perspective;
             _availableY = 0;
 
+         _highQuality =  ParameterDict.Current.GetBool("View.HighQuality");
+
+
             int noOfThreads = ParameterDict.Current.GetInt("Computation.NoOfThreads");
             if (noOfThreads == 1)
             {
@@ -521,7 +527,10 @@ namespace Fractrace
             // Start der Iteration in der Reihenfolge: z,x,y (y entspricht der Tiefe)
             z = act_val.end_tupel.z + zd;
 
-            for (zschl = (int)(_maxzIter); zschl >= (MINZ_ITER); zschl -= 1)
+            bool computeNormals = !(IsSmallPreview() && _updateCount == 0) && _highQuality;
+
+
+                for (zschl = (int)(_maxzIter); zschl >= (MINZ_ITER); zschl -= 1)
             {
 
                 // Nur wenn der Scheduler die Erlaubnis gibt, zschl zu benutzen,
@@ -678,14 +687,13 @@ namespace Fractrace
                                             {// inner Point
                                                 if (inverse)
                                                 {                                                    
-                                                       // if (IsSmallPreview() && _updateCount == 0)
+                                                       if (!computeNormals)
                                                         {
                                                             formulas.RayCastAt(minCycle, x, y, z, 0,
                                                            xd, yd, zd, 0,
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
-                                                    /*
                                                         else
                                                         {
                                                            formulas.FixPoint(minCycle, x, y, z, 0,
@@ -693,19 +701,18 @@ namespace Fractrace
                                                            wix, wiy, wiz,
                                                            jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
-                                                        */
                                                 }
                                                 else
                                                 {
-                                                    
-                                                        //if (IsSmallPreview() && _updateCount==0)
-                                                        {
+
+                                                    if (!computeNormals)
+                                                    {
                                                             formulas.RayCastAt(zyklen, x, y, z, 0,
                                    xd, yd, zd, 0,
                                    wix, wiy, wiz,
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                         }
-                                                    /*
+                                                    
                                                         else
                                                         
                                                         {
@@ -715,7 +722,7 @@ namespace Fractrace
                                      jx, jy, jz, jzz, formula, inverse, xx, yy, true);
                                                           
                                                         }
-                                                        */
+                                                       
                                                 }
                                             }
                                         }

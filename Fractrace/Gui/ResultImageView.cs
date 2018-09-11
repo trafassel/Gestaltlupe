@@ -223,6 +223,7 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Current.GetHash("View.Width"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Height"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Deph"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.HighQuality"));
             tempHash.Append(ParameterDict.Current.GetHash("View.DephAdd"));
             tempHash.Append(ParameterDict.Current.GetHash("Scene"));
             tempHash.Append(ParameterDict.Current.GetHash("Transformation"));

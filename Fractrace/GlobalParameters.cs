@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "9";
+            ParameterDict.Current["Intern.Version"] = "10";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -215,6 +215,12 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Height"] = "1200";
             ParameterDict.Current["View.Height.PARAMETERINFO.Description"] = "View.Size*View.Height == height of the rendered bitmap.";
             ParameterDict.Current["View.Height.PARAMETERINFO.VIEW.FixedButtons"] = "1200 720 1080";
+
+            // If High Quality is set, the normals are computed, but rendering time increase by factor 4.
+            ParameterDict.Current["View.HighQuality"] = "0";
+            ParameterDict.Current["View.HighQuality"] = "If High Quality is set, the normals are computed, but rendering time increase by factor 4.";
+            ParameterDict.Current["View.HighQuality.PARAMETERINFO.Datatype"] = "Bool";
+
 
             // Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but 
             // more time consuming.
