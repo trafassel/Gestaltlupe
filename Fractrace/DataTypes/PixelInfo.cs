@@ -32,6 +32,11 @@ namespace Fractrace.DataTypes
         /// </summary>
         public Vec3 Normal = new Vec3(0, 0, 0);
 
+        /// <summary>
+        /// 0 no dust, 1 maxvalue for dust-
+        /// </summary>
+        public double dustlevel = 0;
+
 
         /// <summary>
         /// True, if the corresponding pixel is part of the inside view
@@ -49,6 +54,7 @@ namespace Fractrace.DataTypes
             retVal.Normal.Z = Normal.Z;
 
             retVal.IsInside = IsInside;
+            retVal.dustlevel = dustlevel;
             if (AdditionalInfo != null)
                 retVal.AdditionalInfo = AdditionalInfo.Clone();
             return retVal;

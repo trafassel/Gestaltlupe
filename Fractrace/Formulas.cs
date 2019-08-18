@@ -705,6 +705,9 @@ namespace Fractrace
             additionalPointInfoCombination.red = 0;
             additionalPointInfoCombination.green = 0;
 
+            var lastColor = mInternFormula.additionalPointInfo;
+            AdditionalPointInfo[] lastinfoSet = new AdditionalPointInfo[5];
+
 
             if (mInternFormula != null && mInternFormula.additionalPointInfo != null)
             {
@@ -740,6 +743,14 @@ namespace Fractrace
                         if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0) { m -= 0.2; break; }
                     }
                 }
+                if (mInternFormula.additionalPointInfo.isEmpty())
+                {
+                }
+                else
+                {
+                    lastColor = mInternFormula.additionalPointInfo.Clone();
+                }
+
                 if ((m > -3.9) && (m < 3.9))
                 {
                     startwert = m + 0.2; diff = 0.1;
@@ -812,7 +823,7 @@ namespace Fractrace
                 }
                 if (pinfoSet != null)
                 {
-                    pinfoSet[k] = new AdditionalPointInfo(mInternFormula.additionalPointInfo);
+                    pinfoSet[k] = new AdditionalPointInfo(lastColor);
                 }
             }
 
@@ -911,6 +922,9 @@ namespace Fractrace
                 return 0;
 
             }
+
+            double dust = 0;
+            double dustCount = 0;
 
             double m = 0;
             double xv = 0, yv = 0, zv = 0, winkel = 0, yn = 0, diff = 0;
@@ -1028,6 +1042,7 @@ namespace Fractrace
                             ym = yn + m * yd; zzm = zzn;
                             if (!(Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
                             {
+                                //dustCount += 1;
                                 if (!(Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0))
                                 {
                                     break;
@@ -1035,6 +1050,8 @@ namespace Fractrace
                                 else
                                 {
                                     //   break;
+                                    //dust += 1;
+
                                     // Staubzähler erhöhen
                                 }
                             }
@@ -1048,6 +1065,7 @@ namespace Fractrace
                             ym = yn + m * yd; zzm = zzn;
                             if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
                             {
+                                //dustCount += 1;
                                 if (Rechne(xm, ym + yd / 2.0, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0)
                                 {
                                     m -= 0.02;
@@ -1055,6 +1073,7 @@ namespace Fractrace
                                 }
                                 else
                                 {
+                                   // dust += 1;
                                     // Staubzähler erhöhen
                                     //m -= 0.02;
                                     //break;
@@ -1062,6 +1081,7 @@ namespace Fractrace
                             }
                         }
                     }
+                    //dustCount += 1;
                     if ((m > -7.9) && (m < 7.9))
                     {
                         startwert = m + 0.02; diff = 0.01;
@@ -1079,6 +1099,7 @@ namespace Fractrace
                     }
                     else
                     {
+                        //dust += 1;
                         tief[k] = 20;
                     }
 
@@ -1100,6 +1121,9 @@ namespace Fractrace
 
             for (k = 0; k < 4; k++)
             {
+                dustCount += 1;
+                if (tief[k] > 19)
+                    dust++;
                 pu = k + 1; if (k == 3) pu = 0;
                 /* Die drei Punkte entsprechen tief[4] tief[k] und tief[pu]   */
                 /* Zuerst wird tief abgezogen                                 */
@@ -1363,6 +1387,28 @@ namespace Fractrace
                     pInfo.IsInside = !invers;
                 }
             }
+
+            if (pData.Points[pixelX, pixelY] == null)
+            {
+                PixelInfo pInfo = new PixelInfo();
+                pInfo.Coord.X = xpos[k];
+                pInfo.Coord.Y = ypos[k] + tief[k] * yd;
+                pInfo.Coord.Z = zpos[k];
+                // pInfo.Normal = normals[k];
+                pData.Points[pixelX, pixelY] = pInfo;
+                if (pinfoSet != null)
+                    pInfo.AdditionalInfo = pinfoSet[k];
+            }
+
+            PixelInfo pInfo2 = pData.Points[pixelX, pixelY];
+            if (pInfo2 != null)
+            {
+                pInfo2.dustlevel = dustCount > 0 ? dust / dustCount : 0;
+            }
+
+            //           if (pData.Points[pixelX, pixelY]!=null)
+            //        pData.Points[pixelX, pixelY].dustlevel= dustCount > 0 ? dust / dustCount : 0;
+
 
             return ((int)col[0]);
         }

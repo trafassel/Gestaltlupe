@@ -102,6 +102,8 @@ namespace Fractrace.PictureArt
 
         private float _contrast = 1;
 
+        private float _dustlevel = 1;
+
         bool _colorOutside = false;
         bool _colorInside = false;
         bool _transparentBackground = false;
@@ -130,6 +132,7 @@ namespace Fractrace.PictureArt
             _shadowJustify = 0.1f * (float)_parameters.GetDouble("Renderer.ShadowJustify");
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
+            _dustlevel= (float)_parameters.GetDouble("Renderer.Dustlevel");
 
             if (_glow > 1)
                 _glow = 1;
@@ -530,6 +533,31 @@ namespace Fractrace.PictureArt
                     }
                 }
             }
+
+            // Set heightmap of dust to its lowest neighbour
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatPixelInfo pInfo = _pictureData.Points[i, j];
+                  
+
+                    if (pInfo != null)
+                    {
+                        if (pInfo.dustlevel > _dustlevel)
+                        {
+                            _heightMap[i, j] = _minY;
+                        }
+                    }
+                    else
+                    {
+                       // _heightMap[i, j] = float.MinValue;
+                    }
+                }
+            }
+
+
+
         }
 
 

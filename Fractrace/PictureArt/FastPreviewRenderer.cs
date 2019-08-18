@@ -49,8 +49,8 @@ namespace Fractrace.PictureArt
         /// </summary>
         private int[,] picInfo = null;
 
-        private Vec3[,] normalesSmooth2 = null;
-        private double[,] sharpShadow = null;
+        //private Vec3[,] normalesSmooth2 = null;
+        //private double[,] sharpShadow = null;
 
         private double[,] shadowInfo11 = null;
         private double[,] shadowInfo10 = null;
@@ -221,15 +221,10 @@ namespace Fractrace.PictureArt
             DrawPlane();
             if (_stopRequest)
                 return;
-            //if (ParameterDict.Exemplar.GetBool(parameterNode + "Normalize"))
-                NormalizePlane();
             if (_stopRequest)
                 return;
-            //if (ParameterDict.Exemplar.GetBool(parameterNode + "UseDarken"))
-            //    DarkenPlane();
             if (_stopRequest)
                 return;
-         //   SmoothEmptyPixel();
             if (_stopRequest)
                 return;
             SmoothPlane();

@@ -453,7 +453,7 @@ namespace Fractrace
 
             _maxxIter = _width;
             _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
-            if(IsSmallPreview() && _updateCount == 0)
+            if(IsSmallPreview() && _updateCount == 0 &&_maxyIter>1)
                 _maxyIter = _maxxIter;    
             _maxzIter = _height;
               
@@ -482,7 +482,10 @@ namespace Fractrace
             wiz = act_val.arc.z;
 
             xd = (act_val.end_tupel.x - act_val.start_tupel.x) / (_maxxIter - MINX_ITER);
-            yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (_maxyIter - MINY_ITER);
+            if (_maxyIter == 0)
+                yd = 0;
+            else
+                 yd = (act_val.end_tupel.y - act_val.start_tupel.y) / (_maxyIter - MINY_ITER);
             zd = (act_val.end_tupel.z - act_val.start_tupel.z) / (_maxzIter - MINZ_ITER);
            
             if (_oldData != null)
@@ -538,7 +541,7 @@ namespace Fractrace
                 if (IsAvailable(_maxzIter - zschl))
                 {
 
-                    System.Windows.Forms.Application.DoEvents();
+                    //System.Windows.Forms.Application.DoEvents();
                     z = act_val.end_tupel.z - (double)zd * (_maxzIter - zschl);
 
                     for (xschl = (int)(MINX_ITER); xschl <= _maxxIter; xschl += 1)
@@ -618,7 +621,7 @@ namespace Fractrace
                             }
                         }
 
-                        if (needComputing)
+                        if (needComputing || _maxyIter == 0)
                         {
                             // yadd cannot be easy handled (because of inside rendering).
                             for (yschl = (int)(_maxyIter); yschl >= MINY_ITER - dephAdd; yschl -= 1)
@@ -631,8 +634,12 @@ namespace Fractrace
                                     if ((_gData.Picture)[xx, yy] == 0 || (_gData.Picture)[xx, yy] == 2)
                                     { // aha, noch zeichnen
                                         // Test, ob Schnitt mit Begrenzung vorliegt  
+                                        if (_maxyIter == 0)
+                                            y = 0.5* (act_val.start_tupel.y+ act_val.end_tupel.y);
+                                        else
                                         y = act_val.end_tupel.y - (double)yd * (_maxyIter - yschl);
-                                        y += yAdd;
+                                        if (_maxyIter > 0)
+                                            y += yAdd;
                                         if (double.IsNaN(x) || double.IsNaN(y) || double.IsNaN(z))
                                             break;
 
@@ -678,10 +685,29 @@ namespace Fractrace
                                             */
                                             if (isYborder)
                                             { 
-                                                if (formulas.Rechne(x, y, z, 0, zyklen,
+                                                if (_maxyIter == 0)
+                                                {
+                                                    (_gData.Picture)[xx, yy] = 1;
+
+                                                    _pData.Points[xx, yy] = new PixelInfo();
+                                                    _pData.Points[xx, yy].Coord.X = xx;
+                                                    _pData.Points[xx, yy].Coord.Y = yy;
+                                                    _pData.Points[xx, yy].Coord.Z = 0;
+
+
+                                                    _pData.Points[xx, yy].Coord.X = x;
+                                                    _pData.Points[xx, yy].Coord.Y = y;
+                                                    _pData.Points[xx, yy].Coord.Z = 0;
+
+                                                    _pData.Points[xx, yy].AdditionalInfo = formulas.InternFormula.additionalPointInfo.Clone();
+                                                }
+                                                else
+                                                {
+                                                    if (formulas.Rechne(x, y, z, 0, zyklen,
                                                  wix, wiy, wiz,
                                                  jx, jy, jz, jzz, formula, false)==0)
                                                     (_gData.Picture)[xx, yy] = 2; // Mark point as not set.
+                                                }
                                             }
                                             else
                                             {// inner Point
@@ -707,13 +733,20 @@ namespace Fractrace
 
                                                     if (!computeNormals)
                                                     {
+                                                        if (_maxyIter>0)
                                                             formulas.RayCastAt(zyklen, x, y, z, 0,
                                    xd, yd, zd, 0,
                                    wix, wiy, wiz,
                                    jx, jy, jz, jzz, formula, inverse, xx, yy, true);
-                                                        }
-                                                    
-                                                        else
+                                                        if (_maxyIter == 0)
+                                                            if (formulas.Rechne(x, y, z, 0, zyklen,
+                                                 wix, wiy, wiz,
+                                                 jx, jy, jz, jzz, formula, false) == 0)
+                                                                (_gData.Picture)[xx, yy] = 1; // Mark point as set.
+
+                                                    }
+
+                                                    else
                                                         
                                                         {
                                                             formulas.FixPoint(zyklen, x, y, z, 0,

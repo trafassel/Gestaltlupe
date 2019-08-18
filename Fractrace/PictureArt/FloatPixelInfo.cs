@@ -25,6 +25,11 @@ namespace Fractrace.PictureArt
 
 
         /// <summary>
+        /// 0 no dust, 1 maxvalue for dust-
+        /// </summary>
+        public float dustlevel = 0;
+
+        /// <summary>
         /// Surface normal at given pixel.
         /// </summary>
         //public FloatVec3 Normal = new FloatVec3(0, 0, 0);

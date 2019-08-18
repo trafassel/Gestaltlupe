@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "10";
+            ParameterDict.Current["Intern.Version"] = "11";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -347,6 +347,13 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
+            // Dustlevel (0 ... 1 ...)
+            ParameterDict.Current["Renderer.Dustlevel"] = "0.7";
+            ParameterDict.Current["Renderer.Dustlevel.PARAMETERINFO.Description"] = "Dustlevel (0 ... 1) All points with roughness above this value are displayed as dust.";
+            ParameterDict.Current["Renderer.Dustlevel.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.3 0.5 0.6 0.75 1";
+            ParameterDict.Current["Renderer.Dustlevel.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
 
             // Normal of the light source
             ParameterDict.Current["Renderer.Light.X"] = "0.2";

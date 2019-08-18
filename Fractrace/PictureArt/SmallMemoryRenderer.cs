@@ -90,6 +90,7 @@ namespace Fractrace.PictureArt
                         floatPixelInfo.Coord.Z = (float)((pInfo.Coord.Z - center.Z) / radius);
                         floatPixelInfo.AdditionalInfo = pInfo.AdditionalInfo;
                         floatPixelInfo.IsInside = pInfo.IsInside;
+                        floatPixelInfo.dustlevel = (float)pInfo.dustlevel;
 
                         _pictureData.Points[i, j] = floatPixelInfo;
                     }

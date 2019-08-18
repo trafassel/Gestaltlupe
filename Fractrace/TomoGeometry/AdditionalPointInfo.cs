@@ -53,6 +53,12 @@ namespace Fractrace.TomoGeometry
             return retVal;
         }
 
+        public bool isEmpty()
+        {
+            return red == 0 && green == 0 && blue == 0;
+
+        }
+
 
     }
 }

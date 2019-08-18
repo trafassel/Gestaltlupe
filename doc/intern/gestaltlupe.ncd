@@ -1,14 +1,15 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:310-->
+<!--LastNote:311-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
-<meta name="generator" content="NoteCase Pro 4.1.1">
-<meta name="format_version" content="4.0.8">
+<meta name="generator" content="NoteCase Pro 4.4.0">
+<meta name="format_version" content="4.3.8">
 </HEAD>
 <BODY>
 <!--property:UID=3Vk0CcyOg6GcpCq6tOxESw-->
 <!--property:prop_modified=0-->
+<!--property:note_count=322-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -23,6 +24,7 @@
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281074-->
 <!--property:date_modified=1434281082-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -85,6 +87,7 @@ class PictureData{<BR>
 <!--property:icon_internal=book_open-->
 <!--property:date_created=1434281104-->
 <!--property:date_modified=1434281108-->
+<!--property:expanded-->
 <!--property:hash=-->
 <!--property:hash_html=-->
 <DD>
@@ -93,6 +96,7 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477955534-->
 <!--property:date_modified=1477955656-->
+<!--property:expanded-->
 <!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
 <!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
 <DD>
@@ -4275,6 +4279,16 @@ Wen parameter minCycle existiert und gleich cycle ist, wird minCycle entfernt.<B
 <BR>
 
 </DD>
+<DT><A name="GzLhCxs2YG8FmJvF2eSjRw"></A>komplexe Potenz einer komplexen Zahl</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1561315987-->
+<!--property:date_modified=1565647881-->
+<!--property:hash=706863d3d91b230e5f8c1dac2d532624181867ed-->
+<!--property:hash_html=a878cbf47f934fa5fc2be6c07a5a43ea36d304d6-->
+<DD>
+komplexe Potenz einer komplexen Zahl.<BR>
+
+</DD>
 </DL>
 </DD>
 <DT><A name="ijdxjmGAzSDvbWww6Tfg1w"></A>Projekte</DT>
@@ -4290,7 +4304,6 @@ Wen parameter minCycle existiert und gleich cycle ist, wird minCycle entfernt.<B
 <!--property:icon_internal=flag_blue-->
 <!--property:date_created=1502894679-->
 <!--property:date_modified=1502894694-->
-<!--property:expanded-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DD>
@@ -4318,6 +4331,33 @@ Wen parameter minCycle existiert und gleich cycle ist, wird minCycle entfernt.<B
 
 </DD>
 </DL>
+</DD>
+<DT><A name="AAQdIi3DXG6PJyWxPVzhhw"></A>VR</DT>
+<!--property:date_created=1557054943-->
+<!--property:date_modified=1557227918-->
+<!--property:hash=4efa01ad493f7a126a254d260249f6287f191d36-->
+<!--property:hash_html=8bb01b59e0f3e0e080e23232ba4c85a67260e406-->
+<DD>
+c#<BR>
+<A href="https://docs.godotengine.org/en/3.1/tutorials/vr/vr_starter_tutorial.html">https://docs.godotengine.org/en/3.1/tutorials/vr/vr_starter_tutorial.html</A><BR>
+<BR>
+<BR>
+c++<BR>
+Valve<BR>
+<A href="https://github.com/ValveSoftware/openvr">https://github.com/ValveSoftware/openvr</A><BR>
+<BR>
+<BR>
+c# mit oculus platform sdk<BR>
+<A href="http://luminaryapps.com/blog/oculus-platform/">http://luminaryapps.com/blog/oculus-platform/</A><BR>
+<BR>
+webvr<BR>
+<A href="https://www.developer.com/open/open-development-kits-for-virtual-reality.html">https://www.developer.com/open/open-development-kits-for-virtual-reality.html</A><BR>
+<BR>
+webvr aframe<BR>
+<A href="https://github.com/aframevr/aframe">https://github.com/aframevr/aframe</A><BR>
+C:\Users\per\Downloads\aframe-master\aframe-master<BR>
+<BR>
+
 </DD>
 </DL>
 </DD>

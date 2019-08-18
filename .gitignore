@@ -1,0 +1,6 @@
+Fractrace/obj
+bin/*.exe
+.vs/
+*.csproj.user
+/settings/animation/
+/settings/anims/
