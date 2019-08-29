@@ -16,7 +16,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "11";
+            ParameterDict.Current["Intern.Version"] = "12";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -192,6 +192,10 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Raster"] = "2";
             ParameterDict.Current["View.Raster.PARAMETERINFO.VIEW.Invisible"] = "1";
 
+            ParameterDict.Current["View.Renderer"] = "3d";
+            ParameterDict.Current["View.Renderer.PARAMETERINFO.VIEW.FixedButtons"] = "2d 3d front";
+
+
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Current["View.Size"] = "1";
             ParameterDict.Current["View.Size.PARAMETERINFO.Description"] = "View.Size*View.Width == width of the rendered bitmap";
@@ -226,7 +230,7 @@ for (int n = 1; n < _cycles; n++)
             // more time consuming.
             ParameterDict.Current["View.Deph"] = "400";
             ParameterDict.Current["View.Deph.PARAMETERINFO.Description"] = "Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but more time consuming.";
-            ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "300 450 800";
+            ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 300 450 800";
 
             // Additional voxel space (removes black background parts of the rendered image).
             ParameterDict.Current["View.DephAdd"] = "0";

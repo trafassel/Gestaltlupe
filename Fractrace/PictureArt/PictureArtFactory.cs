@@ -18,13 +18,32 @@ namespace Fractrace.PictureArt {
     public static Renderer Create(PictureData pdata,Formulas formula, ParameterDict dict) {
         Renderer retVal = null;
 
-      switch (ParameterDict.Current["Composite.Renderer"]) {
+            switch (ParameterDict.Current["View.Renderer"])
+            {
+                case "front":
+                    retVal = new FrontViewRenderer(pdata.Clone());
+                    break;
+
+                case "3d":
+                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
+                    break;
+
+                default:
+                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
+                    break;
+
+            }
+
+         
+            /*
+            switch (ParameterDict.Current["Composite.Renderer"]) {
 
         case "":
         case "PlasicRenderer":
         case "6":
                     //retVal = new PlasicRenderer(pdata.Clone());
-                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
+                    retVal = new FrontViewRenderer(pdata.Clone());
+                 //   retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
 
         case "FastPreviewRenderer":
@@ -36,6 +55,7 @@ namespace Fractrace.PictureArt {
                     retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
       }
+      */
 
       if (retVal != null) 
           retVal.Init(formula);

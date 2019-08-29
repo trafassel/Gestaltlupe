@@ -72,6 +72,8 @@ namespace Fractrace.PictureArt
                     }
                 }
             }
+            if(_height>150)
+            CallPaintEnds();
         }
 
 
