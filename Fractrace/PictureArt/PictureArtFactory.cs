@@ -28,34 +28,21 @@ namespace Fractrace.PictureArt {
                     retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
 
+
+                case "dust":
+                    retVal = new DustRenderer(pdata.Clone(), dict);
+                    break;
+
+                case "2d":
+                    retVal = new FlatRenderer(pdata.Clone(), dict);
+                    break;
+
                 default:
                     retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
                     break;
 
             }
 
-         
-            /*
-            switch (ParameterDict.Current["Composite.Renderer"]) {
-
-        case "":
-        case "PlasicRenderer":
-        case "6":
-                    //retVal = new PlasicRenderer(pdata.Clone());
-                    retVal = new FrontViewRenderer(pdata.Clone());
-                 //   retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
-                    break;
-
-        case "FastPreviewRenderer":
-        case "8":
-          retVal = new FastPreviewRenderer(pdata.Clone());
-          break;
-
-        default:
-                    retVal = new FloatPlasicRenderer(pdata.Clone(), dict);
-                    break;
-      }
-      */
 
       if (retVal != null) 
           retVal.Init(formula);

@@ -12,7 +12,7 @@ namespace Fractrace.DataTypes
     {
 
         public PixelInfo[,] Points = null;
-
+        public PixelInfo[,] SolidPoints = null;
 
         /// <summary>
         /// Width in pixel
@@ -46,11 +46,13 @@ namespace Fractrace.DataTypes
             _width = width;
             _height = height;
             Points = new PixelInfo[width + 1, height + 1];
+            SolidPoints = new PixelInfo[width + 1, height + 1];
             for (int i = 0; i <= width; i++)
             {
                 for (int j = 0; j <= height; j++)
                 {
                     Points[i, j] = null;
+                    SolidPoints[i, j] = null;
                 }
             }
         }
@@ -61,6 +63,7 @@ namespace Fractrace.DataTypes
         {
             PictureData retVal = new PictureData(_width, _height);
             retVal.Points = new PixelInfo[_width + 1, _height + 1];
+            retVal.SolidPoints = new PixelInfo[_width + 1, _height + 1];
             for (int i = 0; i <= _width; i++)
             {
                 for (int j = 0; j <= _height; j++)
@@ -68,6 +71,10 @@ namespace Fractrace.DataTypes
                     if (Points[i, j] != null)
                     {
                         retVal.Points[i, j] = Points[i, j].Clone();
+                    }
+                    if (SolidPoints[i, j] != null)
+                    {
+                        retVal.SolidPoints[i, j] = SolidPoints[i, j].Clone();
                     }
                 }
             }
