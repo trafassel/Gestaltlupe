@@ -783,7 +783,14 @@ namespace Fractrace
                                     {
                                         if (_pData.Points[xx, yy].Coord.Y < _oldPictureData.Points[xx, yy].Coord.Y)
                                         {
+                                            if (_pData.SolidPoints[xx, yy] == null || _pData.SolidPoints[xx, yy].Coord.Y > _pData.Points[xx, yy].Coord.Y)
+                                                _pData.SolidPoints[xx, yy] = _pData.Points[xx, yy];
                                             _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
+                                        }
+                                        else
+                                        {
+                                            if (_pData.SolidPoints[xx, yy] == null || _pData.SolidPoints[xx, yy].Coord.Y > _oldPictureData.Points[xx, yy].Coord.Y)
+                                                _pData.SolidPoints[xx, yy] = _oldPictureData.Points[xx, yy];
                                         }
                                     }
                                 }

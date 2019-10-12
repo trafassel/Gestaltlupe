@@ -10,7 +10,7 @@ namespace Fractrace.PictureArt
     public class FloatPictureData
     {
         public FloatPixelInfo[,] Points = null;
-
+        public FloatPixelInfo[,] SolidPoints = null;
 
         /// <summary>
         /// Width in pixel
@@ -44,11 +44,13 @@ namespace Fractrace.PictureArt
             mWidth = width;
             mHeight = height;
             Points = new FloatPixelInfo[width + 1, height + 1];
+            SolidPoints = new FloatPixelInfo[width + 1, height + 1];
             for (int i = 0; i <= width; i++)
             {
                 for (int j = 0; j <= height; j++)
                 {
                     Points[i, j] = null;
+                    SolidPoints[i, j] = null;
                 }
             }
         }

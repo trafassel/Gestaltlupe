@@ -75,7 +75,9 @@ namespace Fractrace.Scheduler
             System.Diagnostics.Debug.WriteLine("PaintJob.Run " + updateSteps.ToString());
             _parameters = ParameterDict.Current.Clone();
             _updateSteps = updateSteps;
-            _currentProgressd = 100.0 / (double)(_updateSteps);
+            if (_updateSteps == 0)
+                _updateSteps = 1;
+                _currentProgressd = 100.0 / (double)(_updateSteps);
             for (int i = 0; i < _updateSteps; i++)
             {               
                 if (_abort)
@@ -95,11 +97,19 @@ namespace Fractrace.Scheduler
                 _currentProgress += _currentProgressd;
                 _master.Progress(_currentProgress);
             }
+            if (_iterate ==null)
+            {
+            }
+else
+            {
+
             Renderer renderer = PictureArtFactory.Create(_iterate.PictureData, _iterate.LastUsedFormulas, ParameterDict.Current.Clone());
             renderer.Paint(_graphics);
             if (_abort)
                 return;
             _master.Progress(0);
+            }
+
         }
 
 

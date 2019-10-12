@@ -81,7 +81,8 @@ namespace Fractrace.PictureArt
             {
                 for (int j = 0; j < pData.Height; j++)
                 {
-                    PixelInfo pInfo = pData.Points[i, j];
+                    {
+                        PixelInfo pInfo = pData.Points[i, j];
                     if (pInfo != null)
                     {
                         FloatPixelInfo floatPixelInfo = new FloatPixelInfo();
@@ -93,7 +94,26 @@ namespace Fractrace.PictureArt
                         floatPixelInfo.dustlevel = (float)pInfo.dustlevel;
 
                         _pictureData.Points[i, j] = floatPixelInfo;
+                        }
                     }
+
+                    {
+                        PixelInfo pInfo = pData.SolidPoints[i, j];
+                        if (pInfo != null)
+                        {
+                            FloatPixelInfo floatPixelInfo = new FloatPixelInfo();
+                            floatPixelInfo.Coord.X = (float)((pInfo.Coord.X - center.X) / radius);
+                            floatPixelInfo.Coord.Y = (float)((pInfo.Coord.Y - center.Y) / radius);
+                            floatPixelInfo.Coord.Z = (float)((pInfo.Coord.Z - center.Z) / radius);
+
+                            floatPixelInfo.AdditionalInfo = pInfo.AdditionalInfo;
+                            floatPixelInfo.IsInside = pInfo.IsInside;
+                            floatPixelInfo.dustlevel = (float)pInfo.dustlevel;
+
+                            _pictureData.SolidPoints[i, j] = floatPixelInfo;
+                        }
+                    }
+
                 }
             }
         }
