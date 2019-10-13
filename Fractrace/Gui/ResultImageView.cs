@@ -252,8 +252,8 @@ namespace Fractrace
                 _paras.Assign();
                 if (_oldParameterHashWithoutPictureArt == tempParameterHash)
                 {
-                    // Update last render for better quality
-                    _currentUpdateStep++;
+                        // Update last render for better quality
+                        _currentUpdateStep++;
                     DataTypes.GraphicData oldData = null;
                     DataTypes.PictureData oldPictureData = null;
                     if (_iterate != null && !_iterate.InAbort)
@@ -261,6 +261,13 @@ namespace Fractrace
                         oldData = _iterate.GraphicInfo;
                         oldPictureData = _iterate.PictureData;
                     }
+
+                    if (ParameterDict.Current["View.Renderer"] == "2d")
+                    {
+                        int _quality = ParameterDict.Current.GetInt("Renderer.2D.Quality");
+                        _iterate = new Iterate2d(_quality * _width, _quality * _height, this, false);
+                    }
+                    else
                     _iterate = new Iterate(_width, _height, this, false);
                     _updateCount++;
                     _iterate.SetOldData(oldData, oldPictureData, _updateCount);
@@ -289,7 +296,15 @@ namespace Fractrace
                         _oldParameterHashWithoutPictureArt = tempParameterHash;
                         _paras.Assign();
                         _updateCount = 1;
-                        _iterate = new Iterate(_width, _height, this, false);
+
+                        if (ParameterDict.Current["View.Renderer"] == "2d")
+                        {
+                            int _quality = ParameterDict.Current.GetInt("Renderer.2D.Quality");
+                            _iterate = new Iterate2d(_quality * _width, _quality * _height, this, false);
+                        }
+                        else
+                            _iterate = new Iterate(_width, _height, this, false);
+
                         _iterate._oneStepProgress = false;
                         _iterate.StartAsync(_paras.Parameter, _paras.Cycles, _paras.ScreenSize, _paras.Formula == -2, !ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"));
                     }
@@ -401,20 +416,34 @@ namespace Fractrace
                 double maxY = double.MinValue;
                 double maxZ = double.MinValue;
 
-                if (_zoomX2 - _zoomX1 < 4)
+                int width = _width;
+                int height = _height;
+
+                if (ParameterDict.Current["View.Renderer"] == "2d")
                 {
-                    _zoomX1 -= _width / 10;
-                    _zoomX2 += _width / 10;
+                    int _quality = ParameterDict.Current.GetInt("Renderer.2D.Quality");
+                    width *= _quality;
+                    height *= _quality;
+                     _zoomX1 *= _quality; 
+                     _zoomX2 *= _quality;
+                     _zoomY1 *= _quality;
+                     _zoomY2 *= _quality;
+                }
+
+                    if (_zoomX2 - _zoomX1 < 4)
+                {
+                    _zoomX1 -= width / 10;
+                    _zoomX2 += width / 10;
                     if (_zoomX1 < 0)
                         _zoomX1 = 0;
-                    if (_zoomX2 >= _width)
-                        _zoomX2 = _width - 1;
-                    _zoomY1 -= _height / 10;
-                    _zoomY2 += _height / 10;
+                    if (_zoomX2 >= width)
+                        _zoomX2 = width - 1;
+                    _zoomY1 -= height / 10;
+                    _zoomY2 += height / 10;
                     if (_zoomY1 < 0)
                         _zoomY1 = 0;
-                    if (_zoomY2 >= _height)
-                        _zoomY2 = _height - 1;
+                    if (_zoomY2 >= height)
+                        _zoomY2 = height - 1;
                 }
 
                 //  iter.PictureData.Points

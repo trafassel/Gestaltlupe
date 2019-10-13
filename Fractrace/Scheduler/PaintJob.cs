@@ -82,6 +82,11 @@ namespace Fractrace.Scheduler
             {               
                 if (_abort)
                     return;
+                if (_parameters["View.Renderer"] == "2d")
+                {
+                    _iterate = new Iterate2d(_parameters, this, false);
+                }
+                else
                 _iterate = new Iterate(_parameters, this, false);
                 if (_lastIterate != null)
                 {

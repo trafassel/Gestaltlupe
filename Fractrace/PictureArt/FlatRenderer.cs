@@ -116,6 +116,9 @@ namespace Fractrace.PictureArt
         // Renderer.ColorFactor.Threshold
         double _colorThreshold = 0;
 
+        int _quality = 1;
+
+
         /// <summary>
         /// Set fields from _parameters.
         /// </summary>
@@ -138,6 +141,10 @@ namespace Fractrace.PictureArt
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
             _dustlevel = (float)_parameters.GetDouble("Renderer.Dustlevel");
+            _quality=_parameters.GetInt("Renderer.2D.Quality");
+
+            if (pData.Width < 150 && pData.Height < 150)
+                _quality = 1;
 
             if (_glow > 1)
                 _glow = 1;
@@ -159,6 +166,7 @@ namespace Fractrace.PictureArt
             _backColorRed = (float)_parameters.GetDouble("Renderer.BackColor.Red");
             _backColorGreen = (float)_parameters.GetDouble("Renderer.BackColor.Green");
             _backColorBlue = (float)_parameters.GetDouble("Renderer.BackColor.Blue");
+
 
             _picInfo = new int[pData.Width, pData.Height];
             for (int i = 0; i < pData.Width; i++)
@@ -216,7 +224,10 @@ namespace Fractrace.PictureArt
         protected override Vec3 GetRgbAt(int x, int y)
         {
             FloatVec3 rgb = _rgbPlane[x, y];
+
             return new Vec3(rgb.X, rgb.Y, rgb.Z);
+
+
         }
 
         /// <summary>
@@ -224,13 +235,46 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override Color GetColor(int x, int y)
         {
-            Color col = base.GetColor(x, y);
+            float count = 0;
+//            Color col;
+            double red = 0;
+            double green = 0;
+            double blue = 0;
+
+            for (int i = 0; i < _quality; i++)
+                for (int j = 0; j < _quality; j++)
+                {
+                    count++;
+  //                  Color col = base.GetColor(x, y);
+
+                    int newx = _quality * x+i;
+                    int newy = _quality * y+j;
+
+                    if (newx >= _width)
+                        return Color.Red;
+                    if (newy >= _height)
+                        return Color.Red;
+
+                    Color col = base.GetColor(newx, newy);
+                    //                    FloatVec3 color = _rgbPlane[newx, newy];
+                    //                   rgb.Add(color);
+                    red += col.R;
+                    green += col.G;
+                    blue += col.B;
+                }
+            if (count == 0)
+                return Color.Red;
+
+            Color retVal = Color.FromArgb((int)(red/count), (int)(green/count), (int)(blue/count));
+
+
+//            Color col = base.GetColor(x, y);
             if (_transparentBackground)
             {
                 if (_isBackground[x, y])
-                    col = Color.FromArgb(0, col);
+                    return Color.FromArgb(0, retVal);
             }
-            return col;
+            return retVal;
         }
 
 

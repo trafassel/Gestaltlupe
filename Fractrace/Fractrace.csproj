@@ -309,6 +309,7 @@
     <Compile Include="Gui\SettingsControl.Designer.cs">
       <DependentUpon>SettingsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Iterate2d.cs" />
     <Compile Include="PictureArt\DustRenderer.cs" />
     <Compile Include="PictureArt\EnvironmentShadowRenderComponent.cs" />
     <Compile Include="PictureArt\FastPreviewRenderer.cs" />

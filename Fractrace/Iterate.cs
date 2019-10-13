@@ -19,14 +19,14 @@ namespace Fractrace
     {
 
 
-        GraphicData _gData = null;
+        protected GraphicData _gData = null;
 
-        PictureData _pData = null;
+        protected PictureData _pData = null;
 
         protected bool _abort = false;
 
         // If _highQuality is set, the surface normals are computed.
-        bool _highQuality = false; 
+        protected bool _highQuality = false; 
 
         /// <summary>
         /// True while running iteration.
@@ -111,22 +111,22 @@ namespace Fractrace
         /// <summary>
         /// Control which startet this iteration.
         /// </summary>
-        IAsyncComputationStarter _starter = null;
+        protected IAsyncComputationStarter _starter = null;
 
         /// <summary>
         /// GraphicData of previous iteration. Used for update.
         /// </summary>
-        DataTypes.GraphicData _oldData = null;
+        protected DataTypes.GraphicData _oldData = null;
 
         /// <summary>
         /// PictureData of previous iteration. Used for update.
         /// </summary>
-        DataTypes.PictureData _oldPictureData = null;
+        protected DataTypes.PictureData _oldPictureData = null;
 
         /// <summary>
         /// Count the number of update steps.
         /// </summary>
-        int _updateCount = 0;
+        protected int _updateCount = 0;
 
         protected int _availableY = 0;
 
@@ -188,7 +188,7 @@ namespace Fractrace
         public Formulas LastUsedFormulas { get { return _lastUsedFormulas; } }
         protected Formulas _lastUsedFormulas = null;
 
-        int _maxUpdateSteps = 1;
+        protected int _maxUpdateSteps = 1;
 
         public Iterate()
         {
@@ -411,7 +411,7 @@ namespace Fractrace
         /// <summary>
         /// Compute surface data.
         /// </summary>
-        protected void Generate(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
+        virtual protected void Generate(FracValues act_val, int zyklen, double screensize, int formula, bool perspective)
         {
             Random rand = new Random();
             _maxUpdateSteps = ParameterDict.Current.GetInt("View.UpdateSteps");

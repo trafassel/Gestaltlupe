@@ -10,13 +10,10 @@ namespace Fractrace
     {
 
 
-        /// <summary>
-        /// Hier können vom Programm aus globale Parameter hinzugefügt werden.
-        /// </summary>
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "13";
+            ParameterDict.Current["Intern.Version"] = "14";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -285,6 +282,10 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Size.PARAMETERINFO.Description"] = "Used istead View.Size while creating animation. ";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
+            ParameterDict.Current["Renderer.2D.Quality"] = "1";
+            ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.FixedButtons"] = "1 2 3 4";
+            ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             ParameterDict.Current["Renderer.ShadowGlow"] = "0.994";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";

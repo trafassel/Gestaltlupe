@@ -94,7 +94,23 @@ namespace Fractrace.Basic
             }
             ParameterDict.Current["View.Pipeline.UpdatePreview"] = "1";
             ParameterDict.Current["View.Pipeline.Preview"] = "0";
-            ParameterDict.Current["Intern.Version"] = "9";
+
+
+
+            int version = ParameterDict.Current.GetInt("Intern.Version");
+
+            if (version < 14)
+            {
+                if (ParameterDict.Current["Renderer.2D.Quality"] == string.Empty)
+                {
+                    ParameterDict.Current["Renderer.2D.Quality"] = "1";
+                    ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.FixedButtons"] = "1 2 3 4";
+                    ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
+                }
+            }
+
+            ParameterDict.Current["Intern.Version"] = "14";
         }
 
 
