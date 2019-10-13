@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters.itskip" Value="200" />
+  <Entry Key="Formula.Parameters.maxbail" Value="0" />
+  <Entry Key="Formula.Parameters.minbail" Value="0.0002" />
+  <Entry Key="Formula.Parameters.minbail2" Value="0.00001" />
+  <Entry Key="Formula.Parameters.yd" Value="1" />
+  <Entry Key="Formula.Static.Cycles" Value="43020" />
+  <Entry Key="Formula.Static.Julia" Value="0" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="public double maxbail;&#xA;public double minbail;&#xA;public double minbail2;&#xA;public double itskip;&#xA;public double yd;&#xA;// Zeta&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  y*=yd;&#xA;  var z0=Complex.Zero;&#xA;  var z1=Complex.Zero;&#xA;  var s=new Complex(x,y);&#xA;  double a=x;&#xA;  double b=y;&#xA;  double t=-y;&#xA;  double a0=x;&#xA;  double xx,yy,zz,r;&#xA;  for (double n = 1.0;n &lt; _cycles;  n++)&#xA;  {&#xA;    var direction=n%2==0 ?Math.PI:0;&#xA;    var newTerm=Complex.Exp(new Complex(-Math.Log(n)*a0, -Math.Log(n)*t+direction));&#xA;    //    var nt2=1.0/(s-1.0)*(n/(Complex.Pow((n+1.0),s))-(n-s)/n*n);&#xA;    var nt2=1.0/(1.0-2.0*(1.0-s))&#xA;    *Complex.Pow((-1.0),(n-1.0))/Complex.Pow(n,s);&#xA;    z1+=nt2;&#xA;    z0+=newTerm;&#xA;    {&#xA;      if(n&gt;itskip)&#xA;      {&#xA;        if(minbail!=0 &amp;&amp; z0.Magnitude&lt;minbail)&#xA;        {&#xA;          Red+=0.5+1.0/(_cycles+1.0-n);&#xA;          Green=0;&#xA;          Blue=0;&#xA;          Red=1;&#xA;          return true;&#xA;        }&#xA;        if(minbail2!=0 &amp;&amp; z1.Magnitude&lt;minbail2)&#xA;        {&#xA;          Red=0;&#xA;          Green=0;&#xA;          Blue+=0.5+1.0/(_cycles+1.0-n);;&#xA;          Blue=1;&#xA;          return true;&#xA;        }&#xA;      }&#xA;    }&#xA;  }&#xA;  //  Red+=1;&#xA;  // Green+=1;&#xA;  //  Blue+=1;&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="9" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="1" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="0.501857638889089" />
+  <Entry Key="Scene.CenterY" Value="14.1317274305554" />
+  <Entry Key="Scene.CenterZ" Value="4.83676988705903E-19" />
+  <Entry Key="Scene.Radius" Value="0.0692708333333343" />
+  <Entry Key="Transformation.Camera.AngleX" Value="-90" />
+  <Entry Key="Transformation.Camera.AngleY" Value="90" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="0" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="1" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

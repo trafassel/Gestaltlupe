@@ -121,6 +121,8 @@ namespace Fractrace.PictureArt
         /// </summary>
         protected override void PreCalculate()
         {
+
+
             string parameterNode = "Renderer.";
             _colorThreshold = _parameters.GetDouble("Renderer.ColorFactor.Threshold");
             _shadowNumber = _parameters.GetInt("Renderer.ShadowNumber");

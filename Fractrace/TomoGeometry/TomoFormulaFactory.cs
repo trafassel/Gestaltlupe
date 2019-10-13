@@ -161,7 +161,7 @@ End Class
             parameters.TreatWarningsAsErrors = false;
             parameters.WarningLevel = 4;
 
-            string[] refs = { "System.dll", System.Reflection.Assembly.GetExecutingAssembly().Location };
+            string[] refs = { "System.dll", System.Reflection.Assembly.GetExecutingAssembly().Location ,"System.Numerics.dll"};
 
             parameters.ReferencedAssemblies.AddRange(refs);
             provider = new Microsoft.CSharp.CSharpCodeProvider();
@@ -194,13 +194,16 @@ End Class
                 }
 
             }
-            
+            var t = new System.Numerics.Complex(1, 1);
+            var a = t.Magnitude;
+            var a1 = t.Magnitude;
+
             string tomoSource = @"
 using System;
 using Fractrace;
 using Fractrace.TomoGeometry;
 using Fractrace.Geometry;
-
+using System.Numerics;
 public class CSTomoFormula : " + GuessFormulaClass(code) + @" {
 
     " + code + @"
