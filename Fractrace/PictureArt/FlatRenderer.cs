@@ -277,6 +277,231 @@ namespace Fractrace.PictureArt
             return retVal;
         }
 
+        /// <summary>
+        /// Get the color information of the bitmap at (x,y)
+        /// </summary>
+        protected Vec3 GetRgb(int x, int y)
+        {
+
+            FloatVec3 retVal = new FloatVec3(0, 0, 1); // blau
+            FloatPixelInfo pInfo = _pictureData.Points[x, y];
+            if (pInfo == null)
+            {
+                return new Vec3(_backColorRed, _backColorGreen, _backColorBlue);
+            }
+
+            retVal.X = retVal.Y = retVal.Z = 1;
+
+            // Add surface color
+            bool useAdditionalColorinfo = true;
+            if (_colorIntensity <= 0)
+                useAdditionalColorinfo = false;
+
+            if (useAdditionalColorinfo && ((pInfo.IsInside && _colorInside) || (!pInfo.IsInside && _colorOutside)))
+            {
+                if (pInfo != null && pInfo.AdditionalInfo != null)
+                {
+                    if (double.IsNaN(pInfo.AdditionalInfo.red))
+                        pInfo.AdditionalInfo.red = 0;
+                    if (double.IsNaN(pInfo.AdditionalInfo.green))
+                        pInfo.AdditionalInfo.green = 0;
+                    if (double.IsNaN(pInfo.AdditionalInfo.blue))
+                        pInfo.AdditionalInfo.blue = 0;
+
+                    if (pInfo.AdditionalInfo.red < 0)
+                    {
+                        pInfo.AdditionalInfo.green -= pInfo.AdditionalInfo.red;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.red;
+                        pInfo.AdditionalInfo.red = 0;
+                    }
+                    if (pInfo.AdditionalInfo.green < 0)
+                    {
+                        pInfo.AdditionalInfo.red -= pInfo.AdditionalInfo.green;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.green;
+                        pInfo.AdditionalInfo.green = 0;
+                    }
+                    if (pInfo.AdditionalInfo.blue < 0)
+                    {
+                        pInfo.AdditionalInfo.red -= pInfo.AdditionalInfo.blue;
+                        pInfo.AdditionalInfo.blue -= pInfo.AdditionalInfo.blue;
+                        pInfo.AdditionalInfo.blue = 0;
+                    }
+
+
+                    // Normalise;
+                    float r1 = (float)(_colorFactorRed * Math.Pow(pInfo.AdditionalInfo.red, _colorIntensity));
+                    float g1 = (float)(_colorFactorGreen * Math.Pow(pInfo.AdditionalInfo.green, _colorIntensity));
+                    float b1 = (float)(_colorFactorBlue * Math.Pow(pInfo.AdditionalInfo.blue, _colorIntensity));
+                    if (r1 < 0)
+                        r1 = -r1;
+                    if (g1 < 0)
+                        g1 = -g1;
+                    if (b1 < 0)
+                        b1 = -b1;
+
+                    // Normalize:
+                    float norm = (float)(Math.Sqrt(r1 * r1 + g1 * g1 + b1 * b1) / Math.Sqrt(2.5));
+                    if (norm > 0)
+                    {
+                        r1 = r1 / norm;
+                        g1 = g1 / norm;
+                        b1 = b1 / norm;
+
+                        if (_colorThreshold > 0)
+                        {
+                            double thresholdIndicator = Math.Max(Math.Abs(r1 - b1), Math.Max(Math.Abs(r1 - g1), Math.Abs(g1 - b1)));
+                            float lowerThresholdFactor = (float)0.7;
+                            if (thresholdIndicator < _colorThreshold * lowerThresholdFactor)
+                            {
+                                r1 = (float)1;
+                                g1 = (float)1;
+                                b1 = (float)1;
+                            }
+                            else if (thresholdIndicator < _colorThreshold)
+                            {
+                                r1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + r1;
+                                g1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + g1;
+                                b1 = (float)(_colorThreshold - thresholdIndicator) * (float)0.5 / lowerThresholdFactor + b1;
+                            }
+                        }
+
+                    }
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (r1 > 1)
+                        {
+                            b1 += (r1 - 1) / (float)2.0;
+                            g1 += (r1 - 1) / (float)2.0;
+                            r1 = 1;
+                        }
+                        if (b1 > 1)
+                        {
+
+                            r1 += (b1 - 1) / (float)2.0;
+                            g1 += (b1 - 1) / (float)2.0;
+                            b1 = 1;
+
+                        }
+                        if (g1 > 1)
+                        {
+
+                            r1 += (g1 - 1) / (float)2.0;
+                            b1 += (g1 - 1) / (float)2.0;
+                            g1 = 1;
+                        }
+                    }
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
+
+                    if (_colorGreyness > 0)
+                    {
+                        r1 = (float)(_colorGreyness + (1 - _colorGreyness) * r1);
+                        g1 = (float)(_colorGreyness + (1 - _colorGreyness) * g1);
+                        b1 = (float)(_colorGreyness + (1 - _colorGreyness) * b1);
+                    }
+
+                    if (r1 > 1)
+                        r1 = 1;
+                    if (b1 > 1)
+                        b1 = 1;
+                    if (g1 > 1)
+                        g1 = 1;
+
+                    if (norm != 0)
+                    {
+                        switch (_rgbType)
+                        {
+                            case 1:
+                                retVal.X *= r1;
+                                retVal.Y *= g1;
+                                retVal.Z *= b1;
+                                break;
+
+                            case 2:
+                                retVal.X *= r1;
+                                retVal.Y *= b1;
+                                retVal.Z *= g1;
+                                break;
+
+                            case 3:
+                                retVal.X *= g1;
+                                retVal.Y *= r1;
+                                retVal.Z *= b1;
+                                break;
+
+                            case 4:
+                                retVal.X *= g1;
+                                retVal.Y *= b1;
+                                retVal.Z *= r1;
+                                break;
+
+                            case 5:
+                                retVal.X *= b1;
+                                retVal.Y *= r1;
+                                retVal.Z *= g1;
+                                break;
+
+                            case 6:
+                                retVal.X *= b1;
+                                retVal.Y *= g1;
+                                retVal.Z *= r1;
+                                break;
+
+                            default:
+                                retVal.X *= r1;
+                                retVal.Y *= g1;
+                                retVal.Z *= b1;
+                                break;
+
+                        }
+                    }
+                }
+            }
+
+            if (_contrast != 1)
+            {
+                retVal.X = (float)Math.Pow(retVal.X, _contrast);
+                retVal.Y = (float)Math.Pow(retVal.Y, _contrast);
+                retVal.Z = (float)Math.Pow(retVal.Z, _contrast);
+            }
+
+            if (_brightness > 1)
+            {
+                retVal.X *= _brightness;
+                retVal.Y *= _brightness;
+                retVal.Z *= _brightness;
+            }
+
+            if (retVal.X < 0)
+                retVal.X = 0;
+            if (retVal.X > 1)
+                retVal.X = 1;
+            if (retVal.Y < 0)
+                retVal.Y = 0;
+            if (retVal.Z < 0)
+                retVal.Z = 0;
+            if (retVal.Y > 1)
+                retVal.Y = 1;
+            if (retVal.Z > 1)
+                retVal.Z = 1;
+
+            if (pInfo != null && pInfo.AdditionalInfo != null)
+            {
+                pInfo.AdditionalInfo.red2 = retVal.X;
+                pInfo.AdditionalInfo.green2 = retVal.Y;
+                pInfo.AdditionalInfo.blue2 = retVal.Z;
+            }
+
+            return new Vec3(retVal.X, retVal.Y, retVal.Z);
+        }
+
+
 
         /// <summary>
         /// Create rgb image.
@@ -302,7 +527,7 @@ namespace Fractrace.PictureArt
         /// <summary>
         /// Get the color information of the bitmap at (x,y)
         /// </summary>
-        protected Vec3 GetRgb(int x, int y)
+        protected Vec3 GetRgbOld(int x, int y)
         {
 
             FloatVec3 retVal = new FloatVec3(0, 0, 1); // blau

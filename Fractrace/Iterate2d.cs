@@ -266,13 +266,6 @@ namespace Fractrace
                                 }
                                 isYborder = false;
                             }
-                            if ((_gData.Picture)[xx, yy] == 0 || (_gData.Picture)[xx, yy] == 2)
-                            {
-                                if (_oldPictureData != null)
-                                {
-                                    _pData.Points[xx, yy] = _oldPictureData.Points[xx, yy];
-                                }
-                            }
 
                         }
                     }
