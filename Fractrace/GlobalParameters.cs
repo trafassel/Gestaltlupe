@@ -190,13 +190,13 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Raster.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             ParameterDict.Current["View.Renderer"] = "3d";
-            ParameterDict.Current["View.Renderer.PARAMETERINFO.VIEW.FixedButtons"] = "2d 3d front dust";
+            ParameterDict.Current["View.Renderer.PARAMETERINFO.VIEW.FixedButtons"] = "2d 3d front dust center";
 
 
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Current["View.Size"] = "1";
             ParameterDict.Current["View.Size.PARAMETERINFO.Description"] = "View.Size*View.Width == width of the rendered bitmap";
-            ParameterDict.Current["View.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
+            ParameterDict.Current["View.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2 3 4";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Switch between 3D view and parallel view.
@@ -210,12 +210,12 @@ for (int n = 1; n < _cycles; n++)
             // View.Size*View.Width == width of the rendered bitmap.
             ParameterDict.Current["View.Width"] = "1200";
             ParameterDict.Current["View.Width.PARAMETERINFO.Description"] = "View.Size*View.Width == width of the rendered bitmap.";
-            ParameterDict.Current["View.Width.PARAMETERINFO.VIEW.FixedButtons"] = "1200 1280 1920";
+            ParameterDict.Current["View.Width.PARAMETERINFO.VIEW.FixedButtons"] = "1000 1200 1280 1920";
 
             // View.Size*View.Height == height of the rendered bitmap.
             ParameterDict.Current["View.Height"] = "1200";
             ParameterDict.Current["View.Height.PARAMETERINFO.Description"] = "View.Size*View.Height == height of the rendered bitmap.";
-            ParameterDict.Current["View.Height.PARAMETERINFO.VIEW.FixedButtons"] = "1200 720 1080";
+            ParameterDict.Current["View.Height.PARAMETERINFO.VIEW.FixedButtons"] = "1000 1200 720 1080";
 
             // If High Quality is set, the normals are computed, but rendering time increase by factor 4.
             ParameterDict.Current["View.HighQuality"] = "0";
@@ -232,19 +232,19 @@ for (int n = 1; n < _cycles; n++)
             // Additional voxel space (removes black background parts of the rendered image).
             ParameterDict.Current["View.DephAdd"] = "0";
             ParameterDict.Current["View.DephAdd.PARAMETERINFO.Description"] = "Additional voxel space (removes black background parts of the rendered image)";
-            ParameterDict.Current["View.DephAdd.PARAMETERINFO.VIEW.FixedButtons"] = "0 250 1000";
+            ParameterDict.Current["View.DephAdd.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 250 400 1000";
             ParameterDict.Current["View.DephAdd.PARAMETERINFO.VIEW.PlusButton"] = "100";
 
             // Used internally in creating a poster.
             // PosterX=-1: Render the bitmap left the given bounds.
             // PosterX=1: Render the bitmap right the given bounds.
             ParameterDict.Current["View.PosterX"] = "0";
-            ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.Invisible"] = "1";
+  //          ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.Invisible"] = "1";
             // Used internaly in creating of a poster.
             // PosterZ=-1: Render the bitmap above the given bounds.
             // PosterZ=1: Render the bitmap under the given bounds.
             ParameterDict.Current["View.PosterZ"] = "0";
-            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.Invisible"] = "1";     
+//            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.Invisible"] = "1";     
 
             // Number of update steps for better rendering quality.  
             ParameterDict.Current["View.UpdateSteps"] = "3";

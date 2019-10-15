@@ -25,6 +25,9 @@ namespace Fractrace
 
         protected bool _abort = false;
 
+        // if set, rendering starts at center.
+        bool _centeronly = false;
+
         // If _highQuality is set, the surface normals are computed.
         protected bool _highQuality = false; 
 
@@ -290,6 +293,10 @@ namespace Fractrace
         /// </summary>
         public void StartAsync(FracValues act_val, int zyklen, double screensize, bool _isJulia, bool perspective)
         {
+            if (ParameterDict.Current["View.Renderer"] == "center")
+                _centeronly = true;
+
+
             _start = true;
             System.Diagnostics.Debug.WriteLine("Iter start");
             _actVal = act_val;
@@ -623,9 +630,16 @@ namespace Fractrace
 
                         if (needComputing || _maxyIter == 0)
                         {
-                            // yadd cannot be easy handled (because of inside rendering).
-                            for (yschl = (int)(_maxyIter); yschl >= MINY_ITER - dephAdd; yschl -= 1)
+                            int ycenteradd = 0;
+                            if (_centeronly)
                             {
+                                ycenteradd = -(int)((_maxyIter + MINY_ITER)/2);
+                            }
+
+                            // yadd cannot be easy handled (because of inside rendering).
+                            for (yschl = (int)(_maxyIter)+ ycenteradd; yschl >= MINY_ITER - dephAdd; yschl -= 1)
+                            {
+
                                 if (_abort)
                                     return;
 

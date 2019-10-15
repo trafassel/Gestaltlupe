@@ -76,7 +76,7 @@ namespace Fractrace
             }
 
             _maxxIter = _width;
-            _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
+            _maxyIter = 0;
             if (IsSmallPreview() && _updateCount == 0 && _maxyIter > 1)
                 _maxyIter = _maxxIter;
             _maxzIter = _height;

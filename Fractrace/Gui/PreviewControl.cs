@@ -147,13 +147,21 @@ namespace Fractrace
                 }
                 if (_smallPreviewCurrentDrawStep == 0 || _smallPreviewCurrentDrawStep == 1 || _smallPreviewCurrentDrawStep == 2 || _smallPreviewCurrentDrawStep == 4)
                 {
+                    if (ParameterDict.Current["View.Renderer"] == "2d")
+                        _iterate = new Iterate2d(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
+else
                     _iterate = new Iterate(btnPreview.Width / 2, btnPreview.Height / 2, this, false);
                     _smallPreviewCurrentDrawStep = 2;
                 }
 
                 else if (_smallPreviewCurrentDrawStep == 3)
                 {
-                    _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
+                    if (ParameterDict.Current["View.Renderer"] == "2d")
+             
+                        _iterate = new Iterate2d(btnPreview.Width, btnPreview.Height, this, false);
+
+                    else
+                        _iterate = new Iterate(btnPreview.Width, btnPreview.Height, this, false);
                     _iterate.SetOldData(null, null, 2);
                     _smallPreviewCurrentDrawStep = 4;
                 }
