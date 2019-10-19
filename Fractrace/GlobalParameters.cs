@@ -31,24 +31,24 @@ namespace Fractrace
 
             ParameterDict.Current["Scene.Radius"] = "1.8";
             ParameterDict.Current["Scene.Radius.PARAMETERINFO.Description"] = "Size of Scene";
-            ParameterDict.Current["Scene.Radius.PARAMETERINFO.VIEW.FixedButtons"] = "0.1 0.5 1 2 5 10 100";
+            ParameterDict.Current["Scene.Radius.PARAMETERINFO.VIEW.FixedButtons"] = "0.001 0.1 0.5 1 2 5 10 100";
 
             // Rotation angle (in degree) for axis x (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleX"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis x (rotation center is center of the given bounds).";
-            ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 45 90 135 180";
+            ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 90 180";
             ParameterDict.Current["Transformation.Camera.AngleX.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Rotation angle (in degree) for axis y (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleY"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis y (rotation center is center of the given bounds).";
-            ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 45 90 135 180";
+            ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 90 180";
             ParameterDict.Current["Transformation.Camera.AngleY.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Rotation angle (in degree) for axis z (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleZ"] = "0";
             ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.Description"] = "Rotation angle (in degree) for axis z (rotation center is center of the given bounds).";
-            ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 45 90 135 180";
+            ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.VIEW.FixedButtons"] = "-135 -90 -45 0 90 180";
             ParameterDict.Current["Transformation.Camera.AngleZ.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Distance to the virtual screen. Small values gives a more 3D effect. Large values
@@ -225,7 +225,7 @@ for (int n = 1; n < _cycles; n++)
 
             // Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but 
             // more time consuming.
-            ParameterDict.Current["View.Deph"] = "400";
+            ParameterDict.Current["View.Deph"] = "300";
             ParameterDict.Current["View.Deph.PARAMETERINFO.Description"] = "Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but more time consuming.";
             ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 300 450 800";
 
@@ -249,7 +249,7 @@ for (int n = 1; n < _cycles; n++)
             // Number of update steps for better rendering quality.  
             ParameterDict.Current["View.UpdateSteps"] = "3";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.Description"] = " Number of update steps for better rendering quality.";
-            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "1 3 7 12";
+            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 3 7 12";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Start Preview Rendering just after small render display finishes
@@ -289,7 +289,7 @@ for (int n = 1; n < _cycles; n++)
 
             ParameterDict.Current["Renderer.ShadowGlow"] = "0.994";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.Description"] = "Used to light dark areas in shadow computing. If set to 1, no light falls through walls.";
-            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.94 0.96 0.98 0.99 1";
+            ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.FixedButtons"] = "0.8 0.9 0.96 0.98 0.99 1";
             ParameterDict.Current["Renderer.ShadowGlow.PARAMETERINFO.VIEW.PlusButton"] = "0.01";
 
             // Corresponds to the number of shadows in PlasicRenderer
@@ -345,7 +345,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Brightness"] = "1";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.Description"] = "Brightness (1 ...)";
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.FixedButtons"] = "1";
-            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "1";
+            ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Contrast (0 ... 1 ...)
             ParameterDict.Current["Renderer.Contrast"] = "2";
@@ -410,8 +410,8 @@ for (int n = 1; n < _cycles; n++)
 
 
             ParameterDict.Current["Renderer.UseDarken"] = "0";
-            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Description"] = "Fog";
-            ParameterDict.Current["Renderer.BackColor.Transparent.PARAMETERINFO.Datatype"] = "Bool";
+            ParameterDict.Current["Renderer.UseDarken.PARAMETERINFO.Description"] = "Fog";
+            ParameterDict.Current["Renderer.UseDarken.PARAMETERINFO.Datatype"] = "Bool";
 
             // Red component of background color 
             ParameterDict.Current["Renderer.BackColor.Red"] = "0";

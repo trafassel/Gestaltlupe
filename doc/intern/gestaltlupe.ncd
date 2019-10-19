@@ -1,15 +1,14 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:311-->
+<!--LastNote:312-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
-<meta name="generator" content="NoteCase Pro 4.4.0">
-<meta name="format_version" content="4.3.8">
+<meta name="generator" content="NoteCase Pro 4.2.6">
+<meta name="format_version" content="4.1.5">
 </HEAD>
 <BODY>
 <!--property:UID=3Vk0CcyOg6GcpCq6tOxESw-->
 <!--property:prop_modified=0-->
-<!--property:note_count=322-->
 <DL>
 <DT><A name="oZQ07Gy41xAlxKBb7xssDA"></A>Gestaltlupe</DT>
 <!--property:icon_internal=bullet_black-->
@@ -4289,6 +4288,12 @@ Wen parameter minCycle existiert und gleich cycle ist, wird minCycle entfernt.<B
 komplexe Potenz einer komplexen Zahl.<BR>
 
 </DD>
+<DT><A name="xpeJxT7dQZblXZsXA0vkPQ"></A>Breite der Controls</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1571494929-->
+<!--property:date_modified=1571494945-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>
 </DD>
 <DT><A name="ijdxjmGAzSDvbWww6Tfg1w"></A>Projekte</DT>

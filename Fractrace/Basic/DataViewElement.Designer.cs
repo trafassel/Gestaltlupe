@@ -65,11 +65,11 @@
             // 
             // pnlButtons
             // 
-            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlButtons.Location = new System.Drawing.Point(260, 0);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(2);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(0, 79);
+            this.pnlButtons.Size = new System.Drawing.Size(0, 9);
             this.pnlButtons.TabIndex = 1;
             // 
             // panel1FillRight
