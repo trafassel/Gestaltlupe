@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:312-->
+<!--LastNote:311-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4289,9 +4289,24 @@ komplexe Potenz einer komplexen Zahl.<BR>
 
 </DD>
 <DT><A name="xpeJxT7dQZblXZsXA0vkPQ"></A>Breite der Controls</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1571494929-->
-<!--property:date_modified=1571494945-->
+<!--property:date_modified=1571513719-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="U5m6YFxiuqxzCYLNzecQ4A"></A>Neuzeichnen, auch wenn Parameter in View geändert werden</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1571513723-->
+<!--property:date_modified=1571523564-->
+<!--property:hash=71fe5e0f2bee78469b20c4db199684b84da168dd-->
+<!--property:hash_html=71fe5e0f2bee78469b20c4db199684b84da168dd-->
+<DD>
+Wenn sich Parameter auf die Erstellung der  
+</DD>
+<DT><A name="HvMeS7C4sRhaT0oC4pYyPg"></A>Frontrenderer übermalt das alte bild</DT>
+<!--property:icon_internal=bullet_green-->
+<!--property:date_created=1571516306-->
+<!--property:date_modified=1571523573-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 </DL>

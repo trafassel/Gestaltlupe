@@ -113,6 +113,7 @@ namespace Fractrace.PictureArt
         // Renderer.ColorFactor.Threshold
         double _colorThreshold = 0;
 
+        bool _normalizeColor=false;
         /// <summary>
         /// Set fields from _parameters.
         /// </summary>
@@ -133,6 +134,7 @@ namespace Fractrace.PictureArt
             _transparentBackground = _parameters.GetBool("Renderer.BackColor.Transparent");
             _glow = (float)_parameters.GetDouble("Renderer.ShadowGlow");
             _dustlevel= (float)_parameters.GetDouble("Renderer.Dustlevel");
+            _normalizeColor = _parameters.GetBool("Renderer.NormalizeColor");
 
             if (_glow > 1)
                 _glow = 1;
@@ -184,6 +186,11 @@ namespace Fractrace.PictureArt
                 return;
             DrawPlane();
             if (_stopRequest)
+                return;
+
+            if (_normalizeColor)
+                NormalizeColor();
+                if (_stopRequest)
                 return;
             if (_stopRequest)
                 return;
@@ -738,6 +745,91 @@ namespace Fractrace.PictureArt
                 ydNormalized = 0;
 
             return ydNormalized;
+        }
+
+        void NormalizeColor()
+        {
+            float maxRed = 0;
+            float maxGreen = 0;
+            float maxBlue = 0;
+            float minRed = float.MaxValue;
+            float minGreen = float.MaxValue;
+            float minBlue = float.MaxValue;
+
+            for (int i = 0; i < pData.Width ; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    /*
+                    if ((_picInfo[i, j] == 0) && (_picInfo[i + 1, j] == 0) && (_picInfo[i - 1, j] == 0) && (_picInfo[i, j - 1] == 0) &&
+                        (_picInfo[i, j + 1] == 0) && (_picInfo[i - 1, j - 1] == 0) && (_picInfo[i - 1, j + 1] == 0) && (_picInfo[i + 1, j - 1] == 0) &&
+                        (_picInfo[i - 1, j + 1] == 0))
+                    */
+                    if (_picInfo[i, j] == 0)
+                    {
+                            FloatVec3 col = _rgbPlane[i, j];
+                        if (col.X != 0)
+                        {
+                            if (col.X > maxRed)
+                                maxRed = col.X;
+                            if (col.X < minRed)
+                                minRed = col.X;
+
+                        }
+                        if (col.Y != 0)
+                        {
+
+                            if (col.Y > maxGreen)
+                                maxGreen = col.Y;
+                            if (col.Y < minGreen)
+                                minGreen = col.Y;
+
+                        }
+                        if (col.Z != 0)
+                        {
+                            if (col.Z > maxBlue)
+                                maxBlue = col.Z;
+                            if (col.Z < minBlue)
+                                minBlue = col.Z;
+                        }
+
+                    }
+                }
+            }
+            float reddiff = maxRed - minRed;
+            float greendiff = maxGreen - minGreen;
+            float bluediff = maxBlue - minBlue;
+
+            for (int i = 0; i < pData.Width; i++)
+            {
+                for (int j = 0; j < pData.Height; j++)
+                {
+                    FloatVec3 col = _rgbPlane[i, j];
+                    if (_picInfo[i, j] == 0)
+                    {
+
+                        if (maxRed > 0 && col.X!=0)
+                            col.X = (col.X-minRed)/reddiff;
+                        if (maxGreen > 0 && col.Y != 0)
+                            col.Y = (col.Y - minGreen) / greendiff;
+                        if (maxBlue > 0 && col.Z != 0)
+                            col.Z = (col.Z - minBlue) / bluediff;
+                    }
+                    if (col.X < 0)
+                        col.X = 0;
+                    if (col.X > 1)
+                        col.X = 1;
+                    if (col.Y < 0)
+                        col.Y = 0;
+                    if (col.Y > 1)
+                        col.Y = 1;
+                    if (col.Z < 0)
+                        col.Z = 0;
+                    if (col.Z > 1)
+                        col.Z = 1;
+
+                }
+            }
         }
 
 

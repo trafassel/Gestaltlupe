@@ -69,6 +69,7 @@ namespace Fractrace.Gui
                     "Renderer.ColorFactor.Green",
                     "Renderer.ColorFactor.Blue",
                     "Renderer.ColorFactor.Threshold",
+                    "Renderer.NormalizeColor"
                     }
                     );
                 pnlColor.Controls.Add(_colorControl);

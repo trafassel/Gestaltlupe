@@ -229,6 +229,11 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Current.GetHash("Transformation"));
             tempHash.Append(ParameterDict.Current.GetHash("Formula"));
             tempHash.Append(ParameterDict.Current.GetHash("Intern.Formula"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Renderer"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.PosterX"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.HighQuality"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.PosterZ"));
+            tempHash.Append(ParameterDict.Current.GetHash("Renderer.2D.Quality"));
             return tempHash.ToString();
         }
 

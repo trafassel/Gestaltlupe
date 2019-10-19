@@ -46,7 +46,7 @@ namespace Fractrace.PictureArt
             {
                 for (int j = 0; j < _height; j++)
                 {
-                    Pen p = new Pen(Color.Transparent);
+                    Pen p = new Pen(Color.White);
                     grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
                 }
             }

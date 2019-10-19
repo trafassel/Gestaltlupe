@@ -13,7 +13,7 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "14";
+            ParameterDict.Current["Intern.Version"] = "15";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
@@ -320,6 +320,14 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
+            // Intensity of the Surface Color
+            ParameterDict.Current["Renderer.NormalizeColor"] = "0";
+            ParameterDict.Current["Renderer.NormalizeColor.PARAMETERINFO.Datatype"] = "Bool";
+
+            ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.Description"] = "Intensity of the Surface Color.";
+            ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
 
             // If ColorGreyness=1, no color is rendered
             ParameterDict.Current["Renderer.ColorGreyness"] = "0";
@@ -474,7 +482,11 @@ for (int n = 1; n < _cycles; n++)
         public static bool IsSceneProperty(string name)
         {
             return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" ||
-                name.StartsWith("Transformation.Camera.") || name.StartsWith("Formula.") || name== "View.DephAdd");
+                name.StartsWith("Transformation.Camera.") || name.StartsWith("Formula.")
+                || name== "View.DephAdd" || name == "View.Renderer" || name == "View.PosterX" 
+                || name == "View.HighQuality" || name == "View.PosterZ" || name == "View.DephAdd");
+
+
         }
 
 

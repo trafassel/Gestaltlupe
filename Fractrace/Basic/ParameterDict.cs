@@ -675,9 +675,12 @@ namespace Fractrace.Basic
         public ParameterDict Clone()
         {
             ParameterDict retVal = new ParameterDict();
-            foreach (KeyValuePair<string, string> entry in _entries)
+            lock (_entries)
             {
-                retVal._entries[entry.Key] = entry.Value;
+                foreach (KeyValuePair<string, string> entry in _entries)
+                {
+                    retVal._entries[entry.Key] = entry.Value;
+                }
             }
             return retVal;
         }
