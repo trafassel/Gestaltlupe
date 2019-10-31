@@ -106,8 +106,8 @@ namespace Fractrace
         /// </summary>
         public void InitLabelImage()
         {
-            Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
-            btnPreview.BackgroundImage = labelImage;
+      //      Image labelImage = new Bitmap((int)(btnPreview.Width), (int)(btnPreview.Height));
+      //      btnPreview.BackgroundImage = labelImage;
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
         }
 
@@ -363,7 +363,37 @@ else
         {
             Fractrace.PictureArt.Renderer pArt = new PictureArt.FrontViewRenderer(_iterate.PictureData);
             pArt.Init(_iterate.LastUsedFormulas);
-            btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
+
+            if (_iterate.Width > 100 && btnPreview.BackgroundImage.Width < 100)
+            {
+                var graphicsold = Graphics.FromImage(btnPreview.BackgroundImage);
+                Bitmap imageold = (Bitmap)btnPreview.BackgroundImage;
+                {
+                    btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
+                    _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
+                    for (int i = 0; i < (int)(_iterate.Width) - 1; i++)
+                    {
+                        for (int j = 0; j < (int)(_iterate.Height) - 1; j++)
+                        {
+                            int ih = i / 2, jh = j / 2;
+                            try
+                            {
+                                Pen p = new Pen(Color.White);
+                                Color pixel = imageold.GetPixel(ih, jh);
+                                if (pixel != Color.FromArgb(0, 0, 0, 0))
+                                    p = new Pen(Color.Gray);
+                                _graphics.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            if (_iterate.Width < 100)
+                btnPreview.BackgroundImage = new Bitmap((int)(_iterate.Width), (int)(_iterate.Height));
             _graphics = Graphics.FromImage(btnPreview.BackgroundImage);
             pArt.Paint(_graphics);
             Application.DoEvents();

@@ -42,12 +42,16 @@ namespace Fractrace.PictureArt
             _width = pData.Width;
             _height = pData.Height;
             PreCalculate();
-            for (int i = 0; i < _width; i++)
+
+            if (_width + _height > 300)
             {
-                for (int j = 0; j < _height; j++)
+                for (int i = 0; i < _width; i++)
                 {
-                    Pen p = new Pen(Color.White);
-                    grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+                    for (int j = 0; j < _height; j++)
+                    {
+                        Pen p = new Pen(Color.White);
+                        grLabel.DrawRectangle(p, i, j, (float)0.5, (float)0.5);
+                    }
                 }
             }
             // ?? Eigentlich sollte width==grLabel.VisibleClipBounds.Width gelten.

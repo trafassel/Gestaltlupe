@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:311-->
+<!--LastNote:316-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -223,6 +223,25 @@ if (n &gt; _cycles / 3 &amp;&amp; n &lt; _cycles / 1.2 &amp;&amp; r&gt;0)<BR>
     additionalPointInfo.green += yy / r;<BR>
     additionalPointInfo.blue += zz / r;<BR>
   }<BR>
+
+</DD>
+<DT><A name="gyAOg2ILn3ZkmlqIfqKsQw"></A>Mandelbox</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1572348362-->
+<!--property:date_modified=1572348449-->
+<!--property:hash=7b135225c8d24db7857d9f1eebab9381b271ad4a-->
+<!--property:hash_html=979ff1472fe9555c8fedb5097974abc3e057b97c-->
+<DD>
+Folding<BR>
+<BR>
+at 0.5<BR>
+    x=x%2;<BR>
+    while(Math.Abs(x)&gt;0.5)<BR>
+    {<BR>
+      if(x&gt;0.5) x = 1-x;<BR>
+      if(x&lt;-0.5) x = -1-x;<BR>
+    }<BR>
+<BR>
 
 </DD>
 </DL>
@@ -4309,6 +4328,17 @@ Wenn sich Parameter auf die Erstellung der
 <!--property:date_modified=1571523573-->
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DT><A name="aV2193yKfY50uuaf5kgsNw"></A>übermalen in smallpreview zulassen</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1572528187-->
+<!--property:date_modified=1572528255-->
+<!--property:hash=29269118b1faf91cb48c7ec36fc09ef53cb1ea34-->
+<!--property:hash_html=1bea92c8c09377384fe34d1c6b9a1ebede4d5e4c-->
+<DD>
+evtl auch update des 3d renderns<BR>
+<BR>
+
+</DD>
 </DL>
 </DD>
 <DT><A name="ijdxjmGAzSDvbWww6Tfg1w"></A>Projekte</DT>
