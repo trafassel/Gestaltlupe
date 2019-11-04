@@ -288,6 +288,7 @@ namespace Fractrace
             }
         }
 
+        double _dustlevel = 0;
         /// <summary>
         /// Split computing in threads.
         /// </summary>
@@ -295,7 +296,8 @@ namespace Fractrace
         {
             if (ParameterDict.Current["View.Renderer"] == "center")
                 _centeronly = true;
-
+            //             ParameterDict.Current["Renderer.Dustlevel"] = "0.7";
+            _dustlevel = ParameterDict.Current.GetDouble("View.Dustsize");
 
             _start = true;
             System.Diagnostics.Debug.WriteLine("Iter start");
@@ -665,9 +667,19 @@ namespace Fractrace
                                             return;
                                         }
                                         if ((_gData.Picture)[xx, yy] == 0)
+                                        {
                                             usedCycles = formulas.Rechne(x, y, z, 0, zyklen,
                                                   wix, wiy, wiz,
                                                   jx, jy, jz, jzz, formula, inverse);
+                                            
+                                            if(usedCycles==0 && _dustlevel>0)
+                                            {
+                                                usedCycles = formulas.Rechne(x, y+ yd*_dustlevel, z, 0, zyklen,
+                                                      wix, wiy, wiz,
+                                                      jx, jy, jz, jzz, formula, inverse);
+
+                                            }
+                                        }
 
                                         if ((_gData.Picture)[xx, yy] == 2)
                                         {// Inverse computing
@@ -675,6 +687,16 @@ namespace Fractrace
                                             usedCycles = formulas.Rechne(x, y, z, 0, minCycle,
                                                   wix, wiy, wiz,
                                                   jx, jy, jz, jzz, formula, inverse);
+                                            
+                                            if (usedCycles == 0 && _dustlevel > 0)
+                                            {
+                                                usedCycles = formulas.Rechne(x, y + yd * _dustlevel, z, 0, zyklen,
+                                                      wix, wiy, wiz,
+                                                      jx, jy, jz, jzz, formula, inverse);
+
+                                            }
+                                            
+
                                         }
 
                                         if (usedCycles == 0)

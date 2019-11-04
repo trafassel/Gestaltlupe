@@ -230,6 +230,7 @@ namespace Fractrace
             tempHash.Append(ParameterDict.Current.GetHash("Formula"));
             tempHash.Append(ParameterDict.Current.GetHash("Intern.Formula"));
             tempHash.Append(ParameterDict.Current.GetHash("View.Renderer"));
+            tempHash.Append(ParameterDict.Current.GetHash("View.Dustsize"));
             tempHash.Append(ParameterDict.Current.GetHash("View.PosterX"));
             tempHash.Append(ParameterDict.Current.GetHash("View.HighQuality"));
             tempHash.Append(ParameterDict.Current.GetHash("View.PosterZ"));

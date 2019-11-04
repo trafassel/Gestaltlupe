@@ -724,17 +724,17 @@ namespace Fractrace
         {
             if (x != 0 || y != 0)
             {
-                System.Diagnostics.Debug.WriteLine("MoveScene: " + x.ToString() + " " + y.ToString());
+                double factor = 12;
 
                 {
                     UpdateCenterDiff();
                     Vec3 trans = SolveEqusyst(new Vec3(((double)x) / -10, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
                     if (trans.X != 0)
-                        SlideX(trans.X / mFactor);
+                        SlideX(trans.X / factor);
                     if (trans.Y != 0)
-                        SlideY(trans.Y / mFactor);
+                        SlideY(trans.Y / factor);
                     if (trans.Z != 0)
-                        SlideZ(trans.Z / mFactor);
+                        SlideZ(trans.Z / factor);
                 }
 
 
@@ -743,11 +743,11 @@ namespace Fractrace
                     UpdateCenterDiff();
                     Vec3 trans = SolveEqusyst(new Vec3(0, ((double)y) / -10, 0), centerDiffX, centerDiffY, centerDiffZ);
                     if (trans.X != 0)
-                        SlideX(trans.X / mFactor);
+                        SlideX(trans.X / factor);
                     if (trans.Y != 0)
-                        SlideY(trans.Y / mFactor);
+                        SlideY(trans.Y / factor);
                     if (trans.Z != 0)
-                        SlideZ(trans.Z / mFactor);
+                        SlideZ(trans.Z / factor);
                 }
                 
 
@@ -761,28 +761,30 @@ namespace Fractrace
         {
             if(x!=0 || y !=0)
             {
-                System.Diagnostics.Debug.WriteLine("MoveScene: " + x.ToString() + " " + y.ToString());
+                double factor = 12;
+                if(!ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"))
+                    factor = 10* ParameterDict.Current.GetDouble("Transformation.Camera.Position");
 
                 {
                     UpdateCenterDiff();
                     Vec3 trans = SolveEqusyst(new Vec3(((double)x) / -10, 0, 0), centerDiffX, centerDiffY, centerDiffZ);
                     if (trans.X != 0)
-                        SlideX(trans.X / mFactor);
+                        SlideX(trans.X / factor);
                     if (trans.Y != 0)
-                        SlideY(trans.Y / mFactor);
+                        SlideY(trans.Y / factor);
                     if (trans.Z != 0)
-                        SlideZ(trans.Z / mFactor);
+                        SlideZ(trans.Z / factor);
                 }
                
                 {
                     UpdateCenterDiff();
                     Vec3 trans = SolveEqusyst(new Vec3(0, 0, ((double)y) / -10), centerDiffX, centerDiffY, centerDiffZ);
                     if (trans.X != 0)
-                        SlideX(trans.X / mFactor);
+                        SlideX(trans.X / factor);
                     if (trans.Y != 0)
-                        SlideY(trans.Y / mFactor);
+                        SlideY(trans.Y / factor);
                     if (trans.Z != 0)
-                        SlideZ(trans.Z / mFactor);
+                        SlideZ(trans.Z / factor);
                 }               
             }
         }

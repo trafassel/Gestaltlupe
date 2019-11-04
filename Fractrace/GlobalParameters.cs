@@ -19,19 +19,22 @@ namespace Fractrace
             ParameterDict.Current["Scene.CenterX"] = "0";
             ParameterDict.Current["Scene.CenterX.PARAMETERINFO.Description"] = "X Coordinate of Scene Center";
             ParameterDict.Current["Scene.CenterX.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Scene.CenterX.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Scene.CenterY"] = "0.66";
             ParameterDict.Current["Scene.CenterY.PARAMETERINFO.Description"] = "Y Coordinate of Scene Center";
-            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
+            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
+
 
             ParameterDict.Current["Scene.CenterZ"] = "0";
             ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.Description"] = "Z Coordinate of Scene Center";
             ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.VIEW.FixedButtons"] = "0";
+            ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Scene.Radius"] = "1.8";
             ParameterDict.Current["Scene.Radius.PARAMETERINFO.Description"] = "Size of Scene";
-            ParameterDict.Current["Scene.Radius.PARAMETERINFO.VIEW.FixedButtons"] = "0.001 0.1 0.5 1 2 5 10 100";
+            ParameterDict.Current["Scene.Radius.PARAMETERINFO.VIEW.FixedButtons"] = "0.001 0.01 0.1 0.5 1 2 5 10 100";
 
             // Rotation angle (in degree) for axis x (rotation center is center of the given bounds).
             ParameterDict.Current["Transformation.Camera.AngleX"] = "0";
@@ -57,7 +60,7 @@ namespace Fractrace
             //ParameterDict.Current["Transformation.Perspective.Cameraposition.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
             ParameterDict.Current["Transformation.Camera.Position"] = "1";
             ParameterDict.Current["Transformation.Camera.Position.PARAMETERINFO.Description"] = "Distance to the virtual screen. Small values gives a more 3D effect. Large values gives the scene a parallel projection view.";
-            ParameterDict.Current["Transformation.Camera.Position.PARAMETERINFO.VIEW.FixedButtons"] = "1";
+            ParameterDict.Current["Transformation.Camera.Position.PARAMETERINFO.VIEW.FixedButtons"] = "0.1 0.3 0.5 1";
 
             // X-component of the Julia Seed, if the formula is in julia mode.
             // X-component of the start value , if the formula is in mandelbrot mode.
@@ -228,6 +231,10 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Deph"] = "300";
             ParameterDict.Current["View.Deph.PARAMETERINFO.Description"] = "Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but more time consuming.";
             ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 300 450 800";
+
+            ParameterDict.Current["View.Dustsize"] = "0";
+            ParameterDict.Current["View.Dustsize.PARAMETERINFO.Description"] = "If dust width is smaller than dustsize, it will be ignored.";
+            ParameterDict.Current["View.Dustsize.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.5 1 2 4";
 
             // Additional voxel space (removes black background parts of the rendered image).
             ParameterDict.Current["View.DephAdd"] = "0";
@@ -483,7 +490,7 @@ for (int n = 1; n < _cycles; n++)
         {
             return (name.StartsWith("Scene.") || name.StartsWith("View.Width") || name=="View.Height" ||
                 name.StartsWith("Transformation.Camera.") || name.StartsWith("Formula.")
-                || name== "View.DephAdd" || name == "View.Renderer" || name == "View.PosterX" 
+                || name== "View.DephAdd" || name == "View.Renderer" || name == "View.Dustsize" || name == "View.PosterX" 
                 || name == "View.HighQuality" || name == "View.PosterZ" || name == "View.DephAdd");
 
 

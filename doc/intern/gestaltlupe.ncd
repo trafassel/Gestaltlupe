@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:316-->
+<!--LastNote:318-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -4329,15 +4329,37 @@ Wenn sich Parameter auf die Erstellung der
 <!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
 <DT><A name="aV2193yKfY50uuaf5kgsNw"></A>übermalen in smallpreview zulassen</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1572528187-->
-<!--property:date_modified=1572528255-->
+<!--property:date_modified=1572616013-->
 <!--property:hash=29269118b1faf91cb48c7ec36fc09ef53cb1ea34-->
 <!--property:hash_html=1bea92c8c09377384fe34d1c6b9a1ebede4d5e4c-->
 <DD>
 evtl auch update des 3d renderns<BR>
 <BR>
 
+</DD>
+<DT><A name="pgGY19hP1xW0xoKZtHhGKQ"></A>Verschieben mit der Maus</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1572616016-->
+<!--property:date_modified=1572616063-->
+<!--property:hash=b2533a510c0632e481cb1d65cc0b1da61ada4e35-->
+<!--property:hash_html=eae2786a9ff7c323e14e6948967939f6b06e009c-->
+<DD>
+... nicht von der Verschiebegröße anhängig machen.<BR>
+<BR>
+
+</DD>
+<DT><A name="O8xnM1LZbkOycVcjkxy0kg"></A>Dustsize</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1572818473-->
+<!--property:date_modified=1572818548-->
+<!--property:hash=8953271c3a1444584aa3131eaa5a555a6810042b-->
+<!--property:hash_html=d215b9c9e89d63097eec3512c380e9a00b292f34-->
+<DD>
+<span style="font: Consolas, 9">&quot;View.Dustsize&quot;<BR>
+<BR>
+</span><span style="font: Consolas, 9">&quot;View.Renderer&quot;</span>
 </DD>
 </DL>
 </DD>
