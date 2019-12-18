@@ -743,6 +743,7 @@ namespace Fractrace
                         if (Rechne(xm, ym, zm, zzm, zykl, wix, wiy, wiz, jx, jy, jz, jzz, formula, invers) > 0) { m -= 0.2; break; }
                     }
                 }
+                if(mInternFormula.additionalPointInfo!=null)
                 if (mInternFormula.additionalPointInfo.isEmpty())
                 {
                 }

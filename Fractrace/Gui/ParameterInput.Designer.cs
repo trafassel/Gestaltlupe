@@ -298,7 +298,7 @@ namespace Fractrace {
             this.btnAnimation.Name = "btnAnimation";
             this.btnAnimation.Size = new System.Drawing.Size(114, 23);
             this.btnAnimation.TabIndex = 2;
-            this.btnAnimation.Text = "Show Animation Tab";
+            this.btnAnimation.Text = "Animation";
             this.btnAnimation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAnimation.UseVisualStyleBackColor = true;
             this.btnAnimation.Click += new System.EventHandler(this.btnAnimation_Click);
@@ -312,7 +312,7 @@ namespace Fractrace {
             this.btnExtras.Name = "btnExtras";
             this.btnExtras.Size = new System.Drawing.Size(114, 23);
             this.btnExtras.TabIndex = 1;
-            this.btnExtras.Text = "Show Extras Tab";
+            this.btnExtras.Text = "Extras";
             this.btnExtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExtras.UseVisualStyleBackColor = true;
             this.btnExtras.Click += new System.EventHandler(this.btnExtras_Click);
@@ -326,7 +326,7 @@ namespace Fractrace {
             this.btnSettings.Name = "btnExtras";
             this.btnSettings.Size = new System.Drawing.Size(114, 23);
             this.btnSettings.TabIndex = 1;
-            this.btnSettings.Text = "Show Settings Tab";
+            this.btnSettings.Text = "Settings";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += BtnSettings_Click;
@@ -341,7 +341,7 @@ namespace Fractrace {
             this.btnDocumentation.Name = "btnDocumentation";
             this.btnDocumentation.Size = new System.Drawing.Size(114, 22);
             this.btnDocumentation.TabIndex = 0;
-            this.btnDocumentation.Text = "Show Documentation Tab";
+            this.btnDocumentation.Text = "Documentation";
             this.btnDocumentation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDocumentation.UseVisualStyleBackColor = true;
             this.btnDocumentation.Click += new System.EventHandler(this.btnDocumentation_Click);

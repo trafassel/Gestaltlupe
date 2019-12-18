@@ -110,7 +110,7 @@ namespace Fractrace.Basic
                 }
             }
 
-            ParameterDict.Current["Intern.Version"] = "14";
+            ParameterDict.Current["Intern.Version"] = "16";
         }
 
 

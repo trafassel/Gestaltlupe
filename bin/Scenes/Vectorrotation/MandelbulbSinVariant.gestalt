@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters._sin" Value="1" />
+  <Entry Key="Formula.Parameters._usespin" Value="1" />
+  <Entry Key="Formula.Parameters._zd" Value="0" />
+  <Entry Key="Formula.Parameters.bailout" Value="5" />
+  <Entry Key="Formula.Parameters.inverse" Value="0" />
+  <Entry Key="Formula.Parameters.is2d" Value="0" />
+  <Entry Key="Formula.Static.Cycles" Value="226" />
+  <Entry Key="Formula.Static.Julia" Value="0" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="51" />
+  <Entry Key="Intern.Formula.Source" Value="public bool _sin;&#xA;public bool _usespin;&#xA;public double _zd;&#xA;public bool inverse;&#xA;public bool is2d;&#xA;public double bailout;&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  if(_zd!=0 &amp;&amp; Math.Abs(z)&gt;_zd) return inverse;&#xA;  if(!_sin)&#xA;  {&#xA;    y=-y;&#xA;  }&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  double re=0,im=0,a=0;&#xA;  double theta =0;&#xA;  bool spin=false;&#xA;  for (int n = 1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double phi = Math.Atan2(y, x);&#xA;    if(!_sin)&#xA;    {&#xA;      phi+=Math.PI;&#xA;    }&#xA;    if(spin)&#xA;    {&#xA;      phi+=Math.PI;&#xA;    //  y=-y;&#xA;     // z=-z;&#xA;    }&#xA;    double x1=x;&#xA;    // rotation 1:&#xA;    x = Math.Cos(-phi) * x - Math.Sin(-phi) * y;&#xA;    y=0;&#xA;    // rotation 2&#xA;    theta = Math.Atan2(z, x);&#xA;    if(_usespin)if(spin) theta=theta+Math.PI;&#xA;    double x2=x;&#xA;    re = Math.Cos(theta );&#xA;    im = Math.Sin(theta );&#xA;    a = re * x - im * z;&#xA;    z = re * z + im * x;&#xA;    x = a;&#xA;    if(_usespin)&#xA;    {&#xA;      if(x2*x&lt;0) spin=!spin;&#xA;    }&#xA;    // rotation 3&#xA;    re = Math.Cos(2*phi);&#xA;    im = Math.Sin(2*phi);&#xA;    a = re * x - im * y;&#xA;    y = re * y + im * x;&#xA;    x = a;&#xA;    double xx = x * x,yy = y * y,zz = z * z;&#xA;    double r = xx + yy +zz;&#xA;    if (r &gt; bailout) return is2d;&#xA;    if (r&gt;0)&#xA;    {&#xA;      Red += xx / r;&#xA;      Green += yy / r;&#xA;      Blue += zz / r;&#xA;    }&#xA;    r=Math.Sqrt(r);&#xA;    x *= r;&#xA;    y *= r;&#xA;    z *= r;&#xA;    y += jy;&#xA;    x += jx;&#xA;    z += jz;&#xA;  }&#xA;  return (true);&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="14" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="2" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="0.4" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="1" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="1" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="0.3372870679934" />
+  <Entry Key="Scene.CenterY" Value="-0.070095519208429" />
+  <Entry Key="Scene.CenterZ" Value="-0.00123367980615341" />
+  <Entry Key="Scene.Radius" Value="0.00406319466925873" />
+  <Entry Key="Transformation.Camera.AngleX" Value="180" />
+  <Entry Key="Transformation.Camera.AngleY" Value="40.0000000000001" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="90" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

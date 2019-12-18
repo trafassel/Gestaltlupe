@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:318-->
+<!--LastNote:10-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -194,7 +194,7 @@ bool Bailout()<BR>
 <DT><A name="lRaa2znk1xuUgoFKRaghyw"></A>Julia/Mandelbrot</DT>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1479555206-->
-<!--property:date_modified=1479555315-->
+<!--property:date_modified=1575965665-->
 <!--property:hash=d119bdd70e027ccf5f196c8bff98650032572937-->
 <!--property:hash_html=58fa7259569e753a1da38f25eae0ca452984d520-->
 <DD>
@@ -4351,9 +4351,9 @@ evtl auch update des 3d renderns<BR>
 
 </DD>
 <DT><A name="O8xnM1LZbkOycVcjkxy0kg"></A>Dustsize</DT>
-<!--property:icon_internal=bullet_black-->
+<!--property:icon_internal=bullet_green-->
 <!--property:date_created=1572818473-->
-<!--property:date_modified=1572818548-->
+<!--property:date_modified=1574868487-->
 <!--property:hash=8953271c3a1444584aa3131eaa5a555a6810042b-->
 <!--property:hash_html=d215b9c9e89d63097eec3512c380e9a00b292f34-->
 <DD>

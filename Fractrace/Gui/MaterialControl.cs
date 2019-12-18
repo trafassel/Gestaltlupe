@@ -55,7 +55,6 @@ namespace Fractrace.Gui
                     "Renderer.Light.Z",
                     }
                     );
-                pnlLight.Controls.Add(_lightControl);
 
                 _colorControl = new DataViewControlPage(ParameterInput.MainParameterInput.MainDataViewControl);
                 _colorControl.Dock = DockStyle.Fill;

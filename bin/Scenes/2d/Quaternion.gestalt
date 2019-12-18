@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ParameterDict>
-  <Entry Key="Formula.Parameters.bailout" Value="1E+200" />
+  <Entry Key="Formula.Parameters._jq" Value="0" />
+  <Entry Key="Formula.Parameters._q" Value="0" />
+  <Entry Key="Formula.Parameters.bailout" Value="1E+210" />
   <Entry Key="Formula.Parameters.is2d" Value="1" />
-  <Entry Key="Formula.Static.Cycles" Value="375" />
+  <Entry Key="Formula.Static.Cycles" Value="275" />
   <Entry Key="Formula.Static.Julia" Value="0" />
   <Entry Key="Formula.Static.jx" Value="0" />
   <Entry Key="Formula.Static.jy" Value="0" />
   <Entry Key="Formula.Static.jz" Value="0" />
   <Entry Key="Formula.Static.MinCycle" Value="0" />
-  <Entry Key="Intern.Formula.Source" Value="public double bailout;&#xA;public bool is2d;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  for (int n=1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x,yy=y*y;&#xA;double r=xx+yy;&#xA;if(r&gt;0)&#xA;{&#xA;Red+=xx/r;&#xA;Green+=yy/r;&#xA;Blue+=1;&#xA;&#xA;}&#xA;    if (r &gt; bailout)return is2d;&#xA;    y=2.0*x*y+jx;&#xA;    x=xx-yy+jy;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Formula.Source" Value="public double bailout;&#xA;public bool is2d;&#xA;public double _q;&#xA;public double _jq;&#xA;public override bool GetBool(double x,double y,double z)&#xA;{&#xA;  double jx, jy, jz;&#xA;  double q=_q;&#xA;  double jq=_jq;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  for (int n=1;n &lt; _cycles;  n++)&#xA;  {&#xA;    double xx=x*x,yy=y*y,zz=z*z,qq=q*q;&#xA;    double r=xx+yy+zz+qq;&#xA;    if(r&gt;0)&#xA;    {&#xA;      Red+=xx/r;&#xA;      Green+=yy/r;&#xA;      Blue+=zz/r;&#xA;    }&#xA;    if (r &gt; bailout)return is2d;&#xA;    y=2*x*y+jy;&#xA;    z=2*x*z+jz;&#xA;    q=2*x*q+jq;&#xA;    x=xx-yy-zz-qq+jx;&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
   <Entry Key="Intern.Version" Value="16" />
   <Entry Key="Renderer.2D.Quality" Value="2" />
   <Entry Key="Renderer.ColorFactor.Blue" Value="0.1" />
@@ -20,11 +22,11 @@
   <Entry Key="Renderer.ColorInside" Value="1" />
   <Entry Key="Renderer.ColorIntensity" Value="1" />
   <Entry Key="Renderer.ColorOutside" Value="0" />
-  <Entry Key="Scene.CenterX" Value="0" />
-  <Entry Key="Scene.CenterY" Value="-1" />
-  <Entry Key="Scene.CenterZ" Value="0" />
-  <Entry Key="Scene.Radius" Value="2.88" />
-  <Entry Key="Transformation.Camera.AngleX" Value="90" />
+  <Entry Key="Scene.CenterX" Value="-0.610150000000005" />
+  <Entry Key="Scene.CenterY" Value="0" />
+  <Entry Key="Scene.CenterZ" Value="0.0500000000000001" />
+  <Entry Key="Scene.Radius" Value="2.1218" />
+  <Entry Key="Transformation.Camera.AngleX" Value="0" />
   <Entry Key="Transformation.Camera.AngleY" Value="0" />
   <Entry Key="Transformation.Camera.AngleZ" Value="0" />
   <Entry Key="Transformation.Camera.IsometricProjection" Value="1" />

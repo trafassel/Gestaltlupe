@@ -289,6 +289,8 @@ namespace Fractrace
         }
 
         double _dustlevel = 0;
+
+        double _dyscale = 1.01;
         /// <summary>
         /// Split computing in threads.
         /// </summary>
@@ -296,7 +298,6 @@ namespace Fractrace
         {
             if (ParameterDict.Current["View.Renderer"] == "center")
                 _centeronly = true;
-            //             ParameterDict.Current["Renderer.Dustlevel"] = "0.7";
             _dustlevel = ParameterDict.Current.GetDouble("View.Dustsize");
 
             _start = true;
@@ -462,8 +463,24 @@ namespace Fractrace
 
             _maxxIter = _width;
             _maxyIter = (int)(ParameterDict.Current.GetDouble("View.Deph") * screensize);
-            if(IsSmallPreview() && _updateCount == 0 &&_maxyIter>1)
-                _maxyIter = _maxxIter;    
+            if (IsSmallPreview() && _updateCount == 0 && _maxyIter > 1)
+            {
+                double ddxy=((double)_maxxIter)/((double)_maxyIter);
+                _maxyIter = _maxxIter;
+                dephAdd *= ddxy;
+            }
+            else
+            {
+                /*
+                if (IsSmallPreview())
+                    {
+                    double ddxy = ((double)_maxxIter) /( (double)_maxyIter);
+                    _maxyIter = _maxxIter;
+                    dephAdd *= ddxy;
+
+                }
+                */
+            }
             _maxzIter = _height;
               
             int MINX_ITER = 0;
@@ -642,6 +659,9 @@ namespace Fractrace
                             for (yschl = (int)(_maxyIter)+ ycenteradd; yschl >= MINY_ITER - dephAdd; yschl -= 1)
                             {
 
+
+
+
                                 if (_abort)
                                     return;
 
@@ -798,6 +818,35 @@ namespace Fractrace
                                     }
                                 }
                                 isYborder = false;
+                                if (dephAdd > 0)
+                                {
+
+                                    int dephAddd = (int)(dephAdd / 250.0);
+                                    if (dephAddd < 1)
+                                        dephAddd = 1;
+
+
+                                    if (yschl < MINY_ITER)
+                                    {
+                                        yschl -= 1;
+                                        if (yschl < MINY_ITER - dephAdd / 6)
+                                        {
+                                            yschl -= dephAddd;
+                                            if (yschl < MINY_ITER - dephAdd / 4)
+                                            {
+                                                yschl -= 1 * dephAddd;
+
+                                                if (yschl < MINY_ITER - dephAdd / 2.0)
+                                                {
+                                                    yschl -= 3 * dephAddd;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+
+
                             }
                             if ((_gData.Picture)[xx, yy] == 0 || (_gData.Picture)[xx, yy] == 2)
                             {

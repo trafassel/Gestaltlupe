@@ -1131,6 +1131,11 @@ namespace Fractrace
                 formulaSettingCategories.Add("Intern.Formula");
                 formulaSettingCategories.Add("Intern.Version");
                 formulaSettingCategories.Add("Renderer.Color");
+                formulaSettingCategories.Add("View.Renderer");
+                formulaSettingCategories.Add("View.Deph");
+                formulaSettingCategories.Add("Renderer.2D.Quality");
+                formulaSettingCategories.Add("View.DephAdd");
+                formulaSettingCategories.Add("View.UpdateSteps");
                 ParameterDict.Current.Save(sd.FileName, formulaSettingCategories);
             } 
         }

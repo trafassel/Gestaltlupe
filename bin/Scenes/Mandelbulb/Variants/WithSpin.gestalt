@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ParameterDict>
+  <Entry Key="Formula.Parameters._sin" Value="1" />
+  <Entry Key="Formula.Parameters._usespin" Value="1" />
+  <Entry Key="Formula.Static.Cycles" Value="258" />
+  <Entry Key="Formula.Static.Julia" Value="0" />
+  <Entry Key="Formula.Static.jx" Value="0" />
+  <Entry Key="Formula.Static.jy" Value="0" />
+  <Entry Key="Formula.Static.jz" Value="0" />
+  <Entry Key="Formula.Static.jzz" Value="0" />
+  <Entry Key="Formula.Static.MinCycle" Value="0" />
+  <Entry Key="Intern.Formula.Source" Value="public bool _sin;&#xA;public bool _usespin;&#xA;public override bool GetBool(double x, double y, double z)&#xA;{&#xA;  double jx, jy, jz;&#xA;  if (_isJulia)&#xA;  {&#xA;    jx = _jx;&#xA;    jy = _jy;&#xA;    jz = _jz;&#xA;  }&#xA;  else&#xA;  {&#xA;    jx = x;&#xA;    jy = y;&#xA;    jz = z;&#xA;    x = _jx;&#xA;    y = _jy;&#xA;    z = _jz;&#xA;  }&#xA;  double piAdd=Math.PI/2.0;&#xA;  if(_sin) piAdd+=Math.PI;&#xA;  bool spin=false;&#xA;  double pi1p5=Math.PI/2.0+Math.PI;&#xA;  double pi0p5=Math.PI/2.0;&#xA;  double pi0p25=Math.PI/4.0;&#xA;  for (int i = 1;i &lt; _cycles;  i++)&#xA;  {&#xA;    double xx=x*x,yy=y*y,zz=z*z;&#xA;    double r=xx+yy+zz;&#xA;    if (r &gt; 5 ) return false;&#xA;    if(r&gt;0)&#xA;    {&#xA;      Red+=xx/r;&#xA;      Green+=yy/r;&#xA;      Blue+=zz/r;&#xA;    }&#xA;    double theta = Math.Atan2(z,Math.Sqrt(xx + yy));&#xA;    double phi = Math.Atan2(y, x);&#xA;    double thetatemp=theta;&#xA;    if(_usespin)if(spin)&#xA;    {&#xA;      theta=-theta;&#xA;      if(theta&gt;0)&#xA;      {&#xA;        theta=-pi1p5+theta;&#xA;      }&#xA;      else&#xA;      {&#xA;        double alpha=pi0p5+theta;&#xA;        theta=Math.PI+alpha;&#xA;      }&#xA;      theta=theta+Math.PI;&#xA;    }&#xA;    double phi_pow=2.0*phi+Math.PI;&#xA;    double theta_pow=theta+thetatemp+piAdd;&#xA;    double rn_sin_theta_pow=r* Math.Sin(theta_pow);&#xA;    x =  rn_sin_theta_pow * Math.Cos(phi_pow)+jx;&#xA;    y = rn_sin_theta_pow * Math.Sin(phi_pow)+jy;&#xA;    z = r * Math.Cos(theta_pow)+jz;&#xA;    if(_usespin)&#xA;    {&#xA;      if(spin)&#xA;      {&#xA;        theta+=thetatemp-piAdd;&#xA;        if(theta&gt;pi1p5) spin=!spin;&#xA;        else&#xA;        {&#xA;          if(theta&lt;pi0p5) spin=!spin;&#xA;        }&#xA;      }&#xA;      else&#xA;      {&#xA;        if(theta&gt;pi0p25) spin=!spin;&#xA;        else if(theta&lt;-pi0p25) spin=!spin;&#xA;      }&#xA;    }&#xA;  }&#xA;  return true;&#xA;}&#xA;" />
+  <Entry Key="Intern.Version" Value="14" />
+  <Entry Key="Renderer.ColorFactor.Blue" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Green" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Red" Value="1" />
+  <Entry Key="Renderer.ColorFactor.RgbType" Value="1" />
+  <Entry Key="Renderer.ColorFactor.Threshold" Value="0" />
+  <Entry Key="Renderer.ColorGreyness" Value="0" />
+  <Entry Key="Renderer.ColorInside" Value="0" />
+  <Entry Key="Renderer.ColorIntensity" Value="1" />
+  <Entry Key="Renderer.ColorOutside" Value="0" />
+  <Entry Key="Scene.CenterX" Value="0.280771805705491" />
+  <Entry Key="Scene.CenterY" Value="-0.0104126054094803" />
+  <Entry Key="Scene.CenterZ" Value="0.000691322694656711" />
+  <Entry Key="Scene.Radius" Value="0.00232568039361377" />
+  <Entry Key="Transformation.Camera.AngleX" Value="-47.9154875589888" />
+  <Entry Key="Transformation.Camera.AngleY" Value="41.4034797883553" />
+  <Entry Key="Transformation.Camera.AngleZ" Value="179.212181558349" />
+  <Entry Key="Transformation.Camera.IsometricProjection" Value="0" />
+  <Entry Key="Transformation.Camera.Position" Value="1" />
+</ParameterDict>

@@ -13,24 +13,24 @@ namespace Fractrace
         public static void SetGlobalParameters()
         {
 
-            ParameterDict.Current["Intern.Version"] = "15";
+            ParameterDict.Current["Intern.Version"] = "16";
 
             // Scene
             ParameterDict.Current["Scene.CenterX"] = "0";
             ParameterDict.Current["Scene.CenterX.PARAMETERINFO.Description"] = "X Coordinate of Scene Center";
             ParameterDict.Current["Scene.CenterX.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Scene.CenterX.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Scene.CenterX.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Scene.CenterY"] = "0.66";
             ParameterDict.Current["Scene.CenterY.PARAMETERINFO.Description"] = "Y Coordinate of Scene Center";
             ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
-            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Scene.CenterY.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
 
             ParameterDict.Current["Scene.CenterZ"] = "0";
             ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.Description"] = "Z Coordinate of Scene Center";
             ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.VIEW.FixedButtons"] = "0";
-            ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.VIEW.VIEW.PlusButton"] = "0.1";
+            ParameterDict.Current["Scene.CenterZ.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             ParameterDict.Current["Scene.Radius"] = "1.8";
             ParameterDict.Current["Scene.Radius.PARAMETERINFO.Description"] = "Size of Scene";
@@ -88,7 +88,7 @@ namespace Fractrace
             ParameterDict.Current["Formula.Static.jzz.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             // Number of iterations used in the formula.
-            ParameterDict.Current["Formula.Static.Cycles"] = "8";
+            ParameterDict.Current["Formula.Static.Cycles"] = "18";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.Description"] = "Number of iterations used in the formula.";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.BUTTON"] = "forward,backward,";
             ParameterDict.Current["Formula.Static.Cycles.PARAMETERINFO.VIEW.PlusButton"] = "1";
@@ -193,7 +193,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["View.Raster.PARAMETERINFO.VIEW.Invisible"] = "1";
 
             ParameterDict.Current["View.Renderer"] = "3d";
-            ParameterDict.Current["View.Renderer.PARAMETERINFO.VIEW.FixedButtons"] = "2d 3d front dust center";
+            ParameterDict.Current["View.Renderer.PARAMETERINFO.VIEW.FixedButtons"] = "2d 3d front center";
 
 
             // View.Size*View.Width == width of the rendered bitmap.
@@ -230,11 +230,13 @@ for (int n = 1; n < _cycles; n++)
             // more time consuming.
             ParameterDict.Current["View.Deph"] = "300";
             ParameterDict.Current["View.Deph.PARAMETERINFO.Description"] = "Virtual voxel space at the y-coordinate. Higher values :-> more accurate rendering, but more time consuming.";
-            ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 300 450 800";
+            ParameterDict.Current["View.Deph.PARAMETERINFO.VIEW.FixedButtons"] = "0 100 200 300 450 800";
 
             ParameterDict.Current["View.Dustsize"] = "0";
             ParameterDict.Current["View.Dustsize.PARAMETERINFO.Description"] = "If dust width is smaller than dustsize, it will be ignored.";
-            ParameterDict.Current["View.Dustsize.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.5 1 2 4";
+            ParameterDict.Current["View.Dustsize.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.1 0.5 1 2 4";
+            ParameterDict.Current["View.Dustsize.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
+
 
             // Additional voxel space (removes black background parts of the rendered image).
             ParameterDict.Current["View.DephAdd"] = "0";
@@ -246,17 +248,23 @@ for (int n = 1; n < _cycles; n++)
             // PosterX=-1: Render the bitmap left the given bounds.
             // PosterX=1: Render the bitmap right the given bounds.
             ParameterDict.Current["View.PosterX"] = "0";
-  //          ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.Invisible"] = "1";
+            ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.FixedButtons"] = "-1 0 1";
+            ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
+            //          ParameterDict.Current["View.PosterX.PARAMETERINFO.VIEW.Invisible"] = "1";
             // Used internaly in creating of a poster.
             // PosterZ=-1: Render the bitmap above the given bounds.
             // PosterZ=1: Render the bitmap under the given bounds.
             ParameterDict.Current["View.PosterZ"] = "0";
-//            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.Invisible"] = "1";     
+            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.FixedButtons"] = "-1 0 1";
+            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.PlusButton"] = "1";
+
+            //            ParameterDict.Current["View.PosterZ.PARAMETERINFO.VIEW.Invisible"] = "1";     
 
             // Number of update steps for better rendering quality.  
             ParameterDict.Current["View.UpdateSteps"] = "3";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.Description"] = " Number of update steps for better rendering quality.";
-            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 3 7 12";
+            ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 2 3 7 12";
             ParameterDict.Current["View.UpdateSteps.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Start Preview Rendering just after small render display finishes
@@ -281,8 +289,6 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Smooth"] = "0";
             ParameterDict.Current["Animation.Smooth.PARAMETERINFO.Datatype"] = "Bool";
             ParameterDict.Current["Animation.Smooth.PARAMETERINFO.Description"] = "If set, animation is smooth.";
-            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.VIEW.FixedButtons"] = "1 15 30";
-            ParameterDict.Current["Animation.Smooth.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Used istead View.Size while creating animation. 
             ParameterDict.Current["Animation.Size"] = "1";
@@ -306,13 +312,13 @@ for (int n = 1; n < _cycles; n++)
             // Intensity of the FieldOfView
             ParameterDict.Current["Renderer.AmbientIntensity"] = "0";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.Description"] = "Intensity of the FieldOfView.";
-            ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 5 22";
+            ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 5 1122";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Minimal value of FieldOfView
             ParameterDict.Current["Renderer.MinFieldOfView"] = "0.4";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.Description"] = "Minimal value of FieldOfView.";
-            ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.5";
+            ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.FixedButtons"] = "0 0.2 0.5 0.7 ";
             ParameterDict.Current["Renderer.MinFieldOfView.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Maximal value of FieldOfView
@@ -330,7 +336,6 @@ for (int n = 1; n < _cycles; n++)
             // Intensity of the Surface Color
             ParameterDict.Current["Renderer.NormalizeColor"] = "0";
             ParameterDict.Current["Renderer.NormalizeColor.PARAMETERINFO.Datatype"] = "Bool";
-
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.Description"] = "Intensity of the Surface Color.";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1";
             ParameterDict.Current["Renderer.ColorIntensity.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -351,7 +356,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.ColorOutside.PARAMETERINFO.Description"] = "Color Surface";
 
             // Shadow height factor
-            ParameterDict.Current["Renderer.ShadowJustify"] = "0.7";
+            ParameterDict.Current["Renderer.ShadowJustify"] = "0.4";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.Description"] = "Shadow height factor.";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 2 6";
             ParameterDict.Current["Renderer.ShadowJustify.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
@@ -363,7 +368,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Renderer.Brightness.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
             // Contrast (0 ... 1 ...)
-            ParameterDict.Current["Renderer.Contrast"] = "2";
+            ParameterDict.Current["Renderer.Contrast"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.Description"] = "Contrast (0 ... 1 ...)";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.FixedButtons"] = "1";
             ParameterDict.Current["Renderer.Contrast.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
