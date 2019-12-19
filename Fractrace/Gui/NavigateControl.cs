@@ -724,7 +724,12 @@ namespace Fractrace
         {
             if (x != 0 || y != 0)
             {
-                double factor = 12;
+                double factor = 28;
+
+                if (!ParameterDict.Current.GetBool("Transformation.Camera.IsometricProjection"))
+                    factor = 10 * Math.Sqrt(ParameterDict.Current.GetDouble("Transformation.Camera.Position"));
+                else
+                    x *= 3;
 
                 {
                     UpdateCenterDiff();

@@ -296,7 +296,7 @@ for (int n = 1; n < _cycles; n++)
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.FixedButtons"] = "0.3 0.5 1 1.5 2";
             ParameterDict.Current["Animation.Size.PARAMETERINFO.VIEW.PlusButton"] = "0.1";
 
-            ParameterDict.Current["Renderer.2D.Quality"] = "1";
+            ParameterDict.Current["Renderer.2D.Quality"] = "2";
             ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.FixedButtons"] = "1 2 3 4";
             ParameterDict.Current["Renderer.2D.Quality.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
@@ -312,7 +312,7 @@ for (int n = 1; n < _cycles; n++)
             // Intensity of the FieldOfView
             ParameterDict.Current["Renderer.AmbientIntensity"] = "0";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.Description"] = "Intensity of the FieldOfView.";
-            ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 5 1122";
+            ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.FixedButtons"] = "0 1 5 11 22";
             ParameterDict.Current["Renderer.AmbientIntensity.PARAMETERINFO.VIEW.PlusButton"] = "1";
 
             // Minimal value of FieldOfView

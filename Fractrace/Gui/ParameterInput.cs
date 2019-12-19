@@ -223,7 +223,7 @@ namespace Fractrace
                 _mouseXBottomView = e.X;
                 _mouseYBottomView = e.Y;
                 navigateControl1.UpdateFromChangeProperty();
-                System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
+       //         System.Diagnostics.Debug.WriteLine("PreviewButton_MouseMove1 Ende" + e.X.ToString() + " " + e.Y.ToString());
                 preview2.MoveBitmap((e.X - _mouseXStartBottomView), (e.Y - _mouseYStartBottomView));
             }
 
