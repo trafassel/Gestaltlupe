@@ -200,6 +200,7 @@ End Class
 
             string tomoSource = @"
 using System;
+using static System.Math;
 using Fractrace;
 using Fractrace.TomoGeometry;
 using Fractrace.Geometry;

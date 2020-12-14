@@ -120,7 +120,7 @@ namespace Fractrace
         {
 
             // For Zerotest
-            double minDoubleVal = 0.0000000000000001;
+            double minDoubleVal = 1E-120;
 
             Rotation rotView = new Rotation();
             rotView.Init(0, 0, 0, -ParameterDict.Current.GetDouble("Transformation.Camera.AngleX"), ParameterDict.Current.GetDouble("Transformation.Camera.AngleY"),

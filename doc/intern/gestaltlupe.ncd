@@ -1,5 +1,5 @@
 <!DOCTYPE NoteCase-File>
-<!--LastNote:10-->
+<!--LastNote:15-->
 <HTML>
 <HEAD>
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -95,7 +95,6 @@ class PictureData{<BR>
 <!--property:icon_internal=bullet_white-->
 <!--property:date_created=1477955534-->
 <!--property:date_modified=1477955656-->
-<!--property:expanded-->
 <!--property:hash=7c338ed2840d2bf55f9f5e4eed04f66c80840eb3-->
 <!--property:hash_html=81281319ebf976617d6805eebfb9c15a15762ec6-->
 <DD>
@@ -243,6 +242,169 @@ at 0.5<BR>
     }<BR>
 <BR>
 
+</DD>
+</DL>
+</DD>
+<DT><A name="Hf6xLE3Xx0N7RzDj3NGDmw"></A>Formeln</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1593965319-->
+<!--property:date_modified=1593965325-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="znhRBC5WvwORfd8SRyQzUQ"></A>Mandelbox</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1593965326-->
+<!--property:date_modified=1593965333-->
+<!--property:expanded-->
+<!--property:hash=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<!--property:hash_html=da39a3ee5e6b4b0d3255bfef95601890afd80709-->
+<DD>
+<DL>
+<DT><A name="oOpGz3oQgf3kAIJqsKOQig"></A>size 0.5</DT>
+<!--property:icon_internal=bullet_black-->
+<!--property:date_created=1593965337-->
+<!--property:date_modified=1593965390-->
+<!--property:hash=877cdbc4f0d2c491150394b59b9073a3105218ae-->
+<!--property:hash_html=85310b3e3820758f8108cbafe8c0f208c112275e-->
+<DD>
+<span style="font: Courier New, 10">public bool invyz;<BR>
+public double bailout;<BR>
+ double minbail;<BR>
+public double maxr;<BR>
+public bool foldy;<BR>
+public bool foldz;<BR>
+public bool is2d;<BR>
+ bool inverse;<BR>
+public bool variant1;<BR>
+public double jx2;<BR>
+public double jy2;<BR>
+public double jz2;<BR>
+public double _jk;<BR>
+public double _jk2;<BR>
+public double _k;<BR>
+// Mandelbox with fold at 0.5 and scale = 1<BR>
+public override bool GetBool(double x, double y, double z)<BR>
+{<BR>
+  double jx, jy, jz;<BR>
+  double jk;<BR>
+  double jk2;<BR>
+  double k;<BR>
+  if (_isJulia)<BR>
+  {<BR>
+    jx = _jx;<BR>
+    jy = _jy;<BR>
+    jz = _jz;<BR>
+    k=_k;<BR>
+    jk=_jk;<BR>
+    jk2=_jk2;<BR>
+  }<BR>
+  else<BR>
+  {<BR>
+    jx = x;<BR>
+    jy = y;<BR>
+    jz = z;<BR>
+    x = _jx;<BR>
+    y = _jy;<BR>
+    z = _jz;<BR>
+    k=_jk;<BR>
+    jk=_k;<BR>
+    jk2=_jk2;<BR>
+  }<BR>
+  double xx = x * x;<BR>
+  double yy = y * y;<BR>
+  double zz = z * z;<BR>
+  double kk = k * k;<BR>
+  double r = Math.Sqrt(xx + yy + zz+kk);<BR>
+  for (int n = 1;n &lt; _cycles;  n++)<BR>
+  {<BR>
+    x=x%2;<BR>
+    while(Math.Abs(x)&gt;0.5)<BR>
+    {<BR>
+      if(x&gt;0.5) x = 1-x;<BR>
+      if(x&lt;-0.5) x = -1-x;<BR>
+    }<BR>
+    if(foldy)<BR>
+    {<BR>
+      if (y &gt; 0.5)    y = 1.0 - y;<BR>
+      else<BR>
+      if (y &lt; -0.5) y = -1.0 - y;<BR>
+    }<BR>
+    if(foldz)<BR>
+    {<BR>
+      z=z%2;<BR>
+      while(Math.Abs(z)&gt;0.5)<BR>
+      {<BR>
+        if(z&gt;0.5) z = 1-z;<BR>
+        if(z&lt;-0.5) z = -1-z;<BR>
+      }<BR>
+    }<BR>
+    else<BR>
+    {<BR>
+      if (z &gt; 0.5)   z = 1.0 - z;<BR>
+      else<BR>
+      if (z &lt; -0.5) z = -1.0 - z;<BR>
+    }<BR>
+    {<BR>
+      k=k%2;<BR>
+      while(Math.Abs(k)&gt;0.5)<BR>
+      {<BR>
+        if(k&gt;0.5) k = 1-k;<BR>
+        if(k&lt;-0.5) k = -1-k;<BR>
+      }<BR>
+    }<BR>
+    xx=x*x;<BR>
+    yy=y*y;<BR>
+    zz=z*z;<BR>
+    kk=k*k;<BR>
+    r = xx + yy + zz+kk;<BR>
+    if(r!=0)<BR>
+    {<BR>
+      Red+=xx/r;<BR>
+      Green+=yy/r;<BR>
+      Blue+=zz/r+Math.Abs(x-y)/r;<BR>
+      if(maxr==0 || r&lt;maxr)<BR>
+      {<BR>
+        x/=r;<BR>
+        y/=r;<BR>
+        z/=r;<BR>
+        k/=r;<BR>
+      }<BR>
+    }<BR>
+    if (bailout &gt;0 &amp;&amp; r &gt; bailout)<BR>
+    {<BR>
+      return is2d;<BR>
+    }<BR>
+    if(minbail&gt;0 &amp;&amp; r&lt;minbail)<BR>
+    return is2d&amp;inverse;<BR>
+    if(invyz)<BR>
+    {<BR>
+      y=-y;<BR>
+      z=-z;<BR>
+    }<BR>
+    if(n%2==0 || !variant1)<BR>
+    {<BR>
+      x+=jx;<BR>
+      y+=jy;<BR>
+      z+=jz;<BR>
+      k+=jk;<BR>
+    }<BR>
+    else<BR>
+    {<BR>
+      x+=jx2;<BR>
+      y+=jy2;<BR>
+      z+=jz2;<BR>
+      k+=jk2;<BR>
+    }<BR>
+  }<BR>
+  return true;<BR>
+}<BR>
+<BR>
+</span></span><span style="font: Courier New, 10"><span style="font: Courier New, 10">
+</DD>
+</DL>
 </DD>
 </DL>
 </DD>
